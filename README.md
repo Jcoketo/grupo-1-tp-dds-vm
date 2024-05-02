@@ -5,7 +5,7 @@
 María Lucía Gandur  
 Joaquín Menazzi  
 Agustin Sosa  
-Augusto Adrian Gil Tolentino
+Augusto Adrian Gil Tolentino   
 Sofía Marques  
 Gianlucca Santucho  
 Candela Bergé
