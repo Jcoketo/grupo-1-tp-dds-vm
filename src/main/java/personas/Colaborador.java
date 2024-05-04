@@ -18,7 +18,7 @@ public class Colaborador {
         ArrayList<Colaboracion> colaboraciones = new ArrayList<>();
 
     }
-
+    
     public void colaborar(Colaboracion colaboracion) {
         colaboraciones.add(colaboracion);
     }
