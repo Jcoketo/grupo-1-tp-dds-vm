@@ -21663,6 +21663,19 @@
 							"width": 169,
 							"height": 51,
 							"text": "interface, porque puede haber varias formas de notificar por MAIL"
+						},
+						{
+							"_type": "UMLTextView",
+							"_id": "AAAAAAGPU7Jb9Nbm6xQ=",
+							"_parent": {
+								"$ref": "AAAAAAGPNdGfFl+mRO0="
+							},
+							"font": "Arial;13;0",
+							"left": 696,
+							"top": 104,
+							"width": 273,
+							"height": 51,
+							"text": "Todavia no esta implementado el Notificable, ahora simplemente enviamos un mensaje"
 						}
 					]
 				},
@@ -22814,7 +22827,8 @@
 									"_parent": {
 										"$ref": "AAAAAAGPRVqbeJyij9U="
 									},
-									"name": "tipoEvento"
+									"name": "tipoEvento",
+									"type": ""
 								},
 								{
 									"_type": "UMLParameter",
@@ -22822,7 +22836,8 @@
 									"_parent": {
 										"$ref": "AAAAAAGPRVqbeJyij9U="
 									},
-									"name": "Heladera"
+									"name": "Heladera",
+									"type": ""
 								}
 							]
 						}
@@ -22892,7 +22907,8 @@
 									"_parent": {
 										"$ref": "AAAAAAGPRWnv1IKelBU="
 									},
-									"name": "Colaborador"
+									"name": "Colaborador",
+									"type": ""
 								},
 								{
 									"_type": "UMLParameter",
