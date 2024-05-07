@@ -2,23 +2,34 @@ package personas;
 
 import colaboraciones.Colaboracion;
 import enums.MedioContacto;
+import lombok.Getter;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Colaborador {
+    @Getter
     protected List<MedioContacto> contacto;
+    @Getter
+    protected String email;
+    //TODO
+    //hay que evaluar si tenemos un atributo email, o ponemos un diccionario de medio de contacto e info
+    // porque como lo teniamos modelado, nunca guardamos el mail, el numero, etc
     protected String direccion;
     protected List<Colaboracion> colaboraciones;
     protected Integer puntaje;
 
-    public Colaborador(List<MedioContacto> contacto, String direccion ) {
+    public Colaborador(List<MedioContacto> contacto, String direccion, String email ) {
         this.contacto = contacto;
         this.direccion = direccion;
         ArrayList<Colaboracion> colaboraciones = new ArrayList<>();
-
+        this.email = email;
     }
-    
+
+    public void agregarContacto(MedioContacto contacto) {
+        this.contacto.add(contacto);
+    }
+
     public void colaborar(Colaboracion colaboracion) {
         colaboraciones.add(colaboracion);
     }

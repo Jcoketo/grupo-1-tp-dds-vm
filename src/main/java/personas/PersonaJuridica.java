@@ -12,8 +12,8 @@ public class PersonaJuridica extends Colaborador{
     private String rubro;
 
 
-    public PersonaJuridica(List<MedioContacto> contacto, String direccion, String razonSocial, TipoJuridica tipo, String rubro) {
-        super(contacto, direccion);
+    public PersonaJuridica(List<MedioContacto> contacto, String direccion, String razonSocial, TipoJuridica tipo, String rubro, String email) {
+        super(contacto, direccion, email);
         this.razonSocial = razonSocial;
         this.tipo = tipo;
         this.rubro = rubro;
