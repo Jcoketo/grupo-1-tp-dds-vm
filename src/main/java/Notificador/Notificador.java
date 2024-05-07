@@ -2,6 +2,7 @@ package Notificador;
 
 import Notificador.MAIL.ApacheCommonsEmail;
 import Notificador.MAIL.StrategyMAIL;
+import enums.MedioContacto;
 import lombok.Getter;
 import personas.Colaborador;
 
@@ -11,34 +12,31 @@ import java.util.Map;
 
 public class Notificador {
     @Getter
-    private static Map<String, StrategyNotificacion> estrategias;
+    private static Map<MedioContacto, StrategyNotificacion> estrategias;
 
     static {
-        estrategias = new HashMap<String, StrategyNotificacion>();
-        StrategyWPP wpp = new StrategyWPP();
-        wpp.setAdapter(new WhatsappTwilio());
-        estrategias.put("WPP", wpp);
+        estrategias = new HashMap<MedioContacto, StrategyNotificacion>();
 
         StrategyMAIL mail = new StrategyMAIL();
         mail.setAdapter(new ApacheCommonsEmail());
-        estrategias.put("MAIL", mail);
-    }
-    hogar.
-
-    public static void agregarEstrategia(String nombre, StrategyNotificacion estrategia){
-        estrategias.put(nombre, estrategia);
+        estrategias.put(MedioContacto.MAIL, mail);
     }
 
-    public static void notificar(Notificable notificable, Colaborador persona) {
-        notificar(notificable.getInfo(), persona);
+    public static void agregarEstrategia(MedioContacto medio, StrategyNotificacion estrategia){
+        estrategias.put(medio, estrategia);
     }
 
-    public static void notificar(String mensaje, Colaborador persona) {
-        String metodo = persona.getMetodoNotificacion();
-        if(estrategias.containsKey(metodo)){
-            estrategias.get(metodo).enviarNotificacion(mensaje, persona);
+    public void notificar(String mensaje, Colaborador persona) {
+        if(persona.getContacto().isEmpty()){
+            throw new NoTieneMetodoExcepcion();
+        }
+        MedioContacto contacto = persona.getContacto().get(0);
+        if(estrategias.containsKey(contacto)){
+            estrategias.get(contacto).enviarNotificacion(mensaje, persona);
         }else{
             throw new NoExisteMetodoExcepcion();
         }
+
+        // de aca se llama al StrategyNotificacion correspondiente
     }
 }

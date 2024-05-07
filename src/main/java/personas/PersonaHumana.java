@@ -12,8 +12,8 @@ public class PersonaHumana extends Colaborador{
     private LocalDateTime fechaNacimiento;
 
 
-    public PersonaHumana(List<MedioContacto> contacto, String direccion, String nombre, String apellido, LocalDateTime fechaNacimiento) {
-        super(contacto, direccion);
+    public PersonaHumana(List<MedioContacto> contacto, String direccion, String nombre, String apellido, LocalDateTime fechaNacimiento, String email) {
+        super(contacto, direccion, email);
         this.nombre = nombre;
         this.apellido = apellido;
         this.fechaNacimiento = fechaNacimiento;
