@@ -42,24 +42,35 @@ public class ImportCSV {
                     continue;
                 }
 
+                PersonaHumana persona = buscarPersona(documento, tipoDoc);
+
+                //Busca una personsa. Si la encuentra la retorna, sino retorna null
+                //Si es null, entonces la persona no existe y hay que crearla
+
                 //TODO EXISTE USUARIO?
-                if ( TRUE ){
-                    PersonaHumana persona = buscarPersona(documento, tipoDoc);
+                if ( persona == null ){
+                    persona = new PersonaHumana(nombre, apellido, mail, Integer.parseInt(documento), tipoDoc);
+                    // si es nueva, tiene que entrar y verificar datos, entonces como hacemos para saber
+                    // si un usuario esta completamente registrado o no
 
                 }
+
+                /* Esto ya no hiria
                 else{
-                    PersonaHumana persona = new PersonaHumana(nombre, apellido, mail, Integer.parseInt(documento), tipoDoc);
+                    //PersonaHumana persona = new PersonaHumana(nombre, apellido, mail, Integer.parseInt(documento), tipoDoc);
                     // si es nueva, tiene que entrar y verificar datos, entonces como hacemos para saber
                     // si un usuario esta completamente registrado o no
                     //TODO
                 }
+                */
+
 
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"); // Define el formato de la fecha
                 LocalDateTime fechaColaboracionAux = LocalDateTime.parse(fecha, formatter); // Convierte el texto a LocalDateTime
                 //TODO
                 switch (formaColaboracion) {
                     case "DINERO":
-                        DonarDinero donacionDinero = new DonarDinero(persona.getTipo(), cantidad, fechaColaboracionAux);
+                        DonarDinero donacionDinero = new DonarDinero(persona.getTipo(), Double.parseDouble(cantidad), fechaColaboracionAux); //cantidad es un Double
                         persona.colaborar(donacionDinero);
                         break;
                     case "DONACION_VIANDAS":
@@ -93,5 +104,13 @@ public class ImportCSV {
                 System.out.println("cantidad: " + cantidad);
             }
         }
+    }
+
+    public static PersonaHumana buscarPersona(String documento, String tipoDoc){
+        //TODO
+        //Buscar persona en la lista de personas o Base de datos del sistema??
+        //Si la encuentra, retornarla
+        //Si no la encuentra, retornar null
+        return null;
     }
 }
