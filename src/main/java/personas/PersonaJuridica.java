@@ -3,6 +3,7 @@ package personas;
 import colaboraciones.Colaboracion;
 import enums.MedioContacto;
 import enums.TipoJuridica;
+import enums.TipoPersona;
 
 import java.util.List;
 
@@ -23,5 +24,9 @@ public class PersonaJuridica extends Colaborador{
     public void colaborar(Colaboracion colaboracion) {
         colaboraciones.add(colaboracion);
         //TODO
+    }
+
+    public TipoPersona getTipo() {
+        return TipoPersona.PJ;
     }
 }
