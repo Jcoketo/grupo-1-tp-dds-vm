@@ -4,16 +4,27 @@ import elementos.Heladera;
 import elementos.Vianda;
 import enums.TipoPersona;
 
+import java.time.LocalDateTime;
+
 public class DonarVianda extends Colaboracion{
     private Vianda vianda;
     private Heladera heladera;
+
+    static {
+        personasHabilitadas.add(TipoPersona.PH);
+    }
 
     public DonarVianda(Vianda vianda, Heladera heladera, TipoPersona persona) {
         this.vianda = vianda;
         this.heladera = heladera;
 
         this.persona = persona;
-        super.personasHabilitadas.add(TipoPersona.PH);
+        //TODO
+    }
+
+    public DonarVianda(TipoPersona persona, LocalDateTime fechaDonacion) {
+        this.persona = persona;
+        this.fechaDonacion = fechaDonacion;
         //TODO
     }
 
