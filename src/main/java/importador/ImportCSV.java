@@ -12,6 +12,7 @@ import java.io.FileReader;
 import java.io.Reader;
 import java.io.IOException;
 import java.lang.invoke.SwitchPoint;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -65,8 +66,9 @@ public class ImportCSV {
                 */
 
 
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"); // Define el formato de la fecha
-                LocalDateTime fechaColaboracionAux = LocalDateTime.parse(fecha, formatter); // Convierte el texto a LocalDateTime
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy"); // Va ese formato para la fecha que levanta del CSV
+                LocalDateTime fechaColaboracionAux = LocalDate.parse(fecha, formatter).atStartOfDay(); // Levanta este formato dd/MM/yyyy y lo convierte a LocalDateTime agregandole la hora 00:00:00
+
                 //TODO
                 switch (formaColaboracion) {
                     case "DINERO":
