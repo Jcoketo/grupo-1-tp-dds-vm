@@ -9,16 +9,17 @@ import java.time.LocalDateTime;
 public class DonarDinero extends Colaboracion{
     @Getter
     private Double monto;
-    private LocalDateTime fechaDonacion;
     private FrecuenciaDonacion frecuenciaDonacion;
+
+    static {
+        personasHabilitadas.add(TipoPersona.PH);
+        personasHabilitadas.add(TipoPersona.PJ);
+    }
 
     public DonarDinero(TipoPersona persona, Double monto, LocalDateTime fechaDonacion, FrecuenciaDonacion frecuenciaDonacion) {
         this.monto = monto;
         this.fechaDonacion = fechaDonacion;
         this.frecuenciaDonacion = frecuenciaDonacion;
-
-        super.personasHabilitadas.add(TipoPersona.PH);
-        super.personasHabilitadas.add(TipoPersona.PJ);
 
         this.persona = persona;
     }

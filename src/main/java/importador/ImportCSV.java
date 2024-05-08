@@ -1,6 +1,8 @@
 package importador;
 
+import colaboraciones.DistribucionDeViandas;
 import colaboraciones.DonarDinero;
+import colaboraciones.DonarVianda;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
@@ -54,14 +56,21 @@ public class ImportCSV {
 
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"); // Define el formato de la fecha
                 LocalDateTime fechaColaboracionAux = LocalDateTime.parse(fecha, formatter); // Convierte el texto a LocalDateTime
-
+                //TODO
                 switch (formaColaboracion) {
                     case "DINERO":
-                        DonarDinero donacion = new DonarDinero(persona.getTipo(), cantidad, fechaColaboracionAux);
+                        DonarDinero donacionDinero = new DonarDinero(persona.getTipo(), cantidad, fechaColaboracionAux);
+                        persona.colaborar(donacionDinero);
                         break;
                     case "DONACION_VIANDAS":
+                        // que hacemos con la cantidad?
+                        DonarVianda donacionVianda = new DonarVianda(persona.getTipo(), fechaColaboracionAux);
+                        persona.colaborar(donacionVianda);
                         break;
                     case "REDISTRIBUCION_VIANDAS":
+                        // que hacemos con cantidad
+                        DistribucionDeViandas donacionDistribucion = new DistribucionDeViandas(persona.getTipo(), fechaColaboracionAux);
+                        persona.colaborar(donacionDistribucion);
                         break;
                     case "ENTREGA_TARJETAS":
                         break;

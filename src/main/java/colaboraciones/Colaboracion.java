@@ -2,11 +2,13 @@ package colaboraciones;
 
 import enums.TipoPersona;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 public abstract class Colaboracion {
-    protected List<TipoPersona> personasHabilitadas;
+    protected static List<TipoPersona> personasHabilitadas;
     protected TipoPersona persona;
+    protected LocalDateTime fechaDonacion;
 
     public abstract void hacerColaboracion();
 

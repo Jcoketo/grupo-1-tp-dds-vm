@@ -13,6 +13,10 @@ public class DistribucionDeViandas extends Colaboracion{
     private MotivoDistribucion motivoDistribucion;
     private LocalDateTime fechaDistribucion;
 
+    static {
+        personasHabilitadas.add(TipoPersona.PH);
+    }
+
     public DistribucionDeViandas(TipoPersona persona, Integer cantidadViandas, Heladera heladeraOrigen, Heladera heladeraDestino, MotivoDistribucion motivoDistribucion, LocalDateTime fechaDistribucion) {
         this.cantidadViandas = cantidadViandas;
         this.heladeraOrigen = heladeraOrigen;
@@ -20,9 +24,11 @@ public class DistribucionDeViandas extends Colaboracion{
         this.motivoDistribucion = motivoDistribucion;
         this.fechaDistribucion = LocalDateTime.now();
 
-        super.personasHabilitadas.add(TipoPersona.PH);
-
         this.persona = persona;
+    }
+    public DistribucionDeViandas(TipoPersona persona, LocalDateTime fechaDonacion){
+        this.persona = persona;
+        this.fechaDonacion = fechaDonacion;
     }
 
     @Override
