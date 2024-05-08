@@ -19,6 +19,12 @@ public class Colaborador {
     protected List<Colaboracion> colaboraciones;
     protected Integer puntaje;
 
+    public Colaborador(String email){
+        this.email = email;
+        this.contacto = new ArrayList<>();
+        this.colaboraciones = new ArrayList<>();
+    }
+
     public Colaborador(List<MedioContacto> contacto, String direccion, String email ) {
         this.contacto = contacto;
         this.direccion = direccion;
@@ -72,4 +78,5 @@ public class Colaborador {
 
         return puntaje;
     }
+
 }

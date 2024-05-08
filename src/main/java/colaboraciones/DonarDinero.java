@@ -23,6 +23,16 @@ public class DonarDinero extends Colaboracion{
         this.persona = persona;
     }
 
+    public DonarDinero(TipoPersona persona, Double monto, LocalDateTime fechaDonacion) {
+        this.monto = monto;
+        this.fechaDonacion = fechaDonacion;
+
+        super.personasHabilitadas.add(TipoPersona.PH);
+        super.personasHabilitadas.add(TipoPersona.PJ);
+
+        this.persona = persona;
+    }
+
     @Override
     public void hacerColaboracion() {
         try {

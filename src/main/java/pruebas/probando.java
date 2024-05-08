@@ -1,14 +1,19 @@
 package pruebas;
 
+import importador.ImportCSV;
 import personas.Colaborador;
 import enums.MedioContacto;
 import Notificador.Notificador;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class probandoNotificador {
-    public static void main(String[] args) {
+public class probando {
+    public static void main(String[] args) throws IOException {
+
+        /* ----------- PROBAR NOTIFICAR ----------- */
+        /*
         // Crear un colaborador de prueba
         List<MedioContacto> contactos = new ArrayList<>();
         contactos.add(MedioContacto.MAIL);
@@ -24,5 +29,10 @@ public class probandoNotificador {
         Notificador notificador = new Notificador();
         // Llamar al método notificar
         notificador.notificar(mensaje, colaborador);
+        */
+
+        /* ----------- PROBAR IMPORTAR SCV ----------- */
+        ImportCSV.importCSV();
+
     }
 }
