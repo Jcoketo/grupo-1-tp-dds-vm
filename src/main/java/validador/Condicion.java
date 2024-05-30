@@ -1,6 +1,6 @@
 package validador;
 
 public interface Condicion {
-    public abstract boolean verificar(String username, String constrasenia);
+    public abstract boolean verificarContrasenia(String username, String constrasenia);
 
 }

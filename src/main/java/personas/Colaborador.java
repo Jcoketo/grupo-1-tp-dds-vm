@@ -2,6 +2,7 @@ package personas;
 
 import colaboraciones.Colaboracion;
 import enums.MedioContacto;
+import enums.TipoPersona;
 import lombok.Getter;
 
 import java.util.ArrayList;
@@ -18,6 +19,7 @@ public class Colaborador {
     protected String direccion;
     protected List<Colaboracion> colaboraciones;
     protected Integer puntaje;
+    protected TipoPersona tipo;
 
     public Colaborador(String email){
         this.email = email;

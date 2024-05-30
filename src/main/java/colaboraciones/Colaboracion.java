@@ -1,16 +1,17 @@
 package colaboraciones;
 
+import elementos.Vianda;
 import enums.TipoPersona;
+import personas.Colaborador;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
 public abstract class Colaboracion {
     protected static List<TipoPersona> personasHabilitadas;
-    protected TipoPersona persona;
-    protected LocalDateTime fechaDonacion;
+    protected int coeficiente;
 
-    public abstract void hacerColaboracion();
+    public abstract void hacerColaboracion(Colaborador colaborador);
 
     public String getTipo() {
         return null;
@@ -21,7 +22,7 @@ public abstract class Colaboracion {
     }
 
 
-    public Boolean validarPersona(TipoPersona persona) throws Exception {
+    public Boolean puedeHacerColaboracion(TipoPersona persona) throws Exception {
         if (!personasHabilitadas.contains(persona)) {
             throw new Exception("Tipo de persona no habilitada para esta colaboración");
         }

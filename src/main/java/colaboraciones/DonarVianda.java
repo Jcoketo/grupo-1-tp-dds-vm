@@ -3,6 +3,7 @@ package colaboraciones;
 import elementos.Heladera;
 import elementos.Vianda;
 import enums.TipoPersona;
+import personas.Colaborador;
 
 import java.time.LocalDateTime;
 
@@ -13,28 +14,26 @@ public class DonarVianda extends Colaboracion{
     static {
         personasHabilitadas.add(TipoPersona.PH);
     }
-
+    //CONSTRUCTOR
     public DonarVianda(Vianda vianda, Heladera heladera, TipoPersona persona) {
         this.vianda = vianda;
         this.heladera = heladera;
 
-        this.persona = persona;
+        //this.persona = persona;
         //TODO
     }
 
     public DonarVianda(TipoPersona persona, LocalDateTime fechaDonacion) {
-        this.persona = persona;
-        this.fechaDonacion = fechaDonacion;
+
+        if (persona == TipoPersona.PH) {
+            //this.fechaDonacion = fechaDonacion;
+        }
+
         //TODO
     }
 
     @Override
-    public void hacerColaboracion() {
-        try {
-            this.validarPersona(persona);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    public void hacerColaboracion(Colaborador colaborador) {
 
         heladera.agregarVianda(vianda);
 

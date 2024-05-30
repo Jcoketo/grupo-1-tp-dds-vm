@@ -11,12 +11,12 @@ public class PersonaHumana extends Colaborador{
     private String nombre;
     private String apellido;
     private LocalDateTime fechaNacimiento;
-    private Integer nroDocumento;
+    private String nroDocumento;
     private String tipoDocumento;
 
 
     // Constructor para importacion
-    public PersonaHumana(String nombre, String apellido, String email, Integer nroDocumento, String tipoDocumento) {
+    public PersonaHumana(String nombre, String apellido, String email, String nroDocumento, String tipoDocumento) {
         super(email);
         this.nombre = nombre;
         this.apellido = apellido;
