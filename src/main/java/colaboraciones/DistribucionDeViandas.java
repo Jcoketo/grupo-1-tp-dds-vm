@@ -3,13 +3,14 @@ package colaboraciones;
 import elementos.Heladera;
 import enums.MotivoDistribucion;
 import enums.TipoPersona;
+import personas.Colaborador;
 
 import java.time.LocalDateTime;
 
-public class DistribucionDeViandas extends Colaboracion{
-    private Integer cantidadViandas;
+public class DistribucionDeViandas extends Colaboracion {
     private Heladera heladeraOrigen;
     private Heladera heladeraDestino;
+    private int cantidadViandas;
     private MotivoDistribucion motivoDistribucion;
     private LocalDateTime fechaDistribucion;
 
@@ -24,21 +25,10 @@ public class DistribucionDeViandas extends Colaboracion{
         this.motivoDistribucion = motivoDistribucion;
         this.fechaDistribucion = LocalDateTime.now();
 
-        this.persona = persona;
-    }
-    public DistribucionDeViandas(TipoPersona persona, LocalDateTime fechaDonacion){
-        this.persona = persona;
-        this.fechaDonacion = fechaDonacion;
     }
 
     @Override
-    public void hacerColaboracion() {
-        try {
-            this.validarPersona(persona);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
+    public void hacerColaboracion(Colaborador colaborador) {
         //TODO
     }
 }

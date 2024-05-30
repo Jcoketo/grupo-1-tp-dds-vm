@@ -33,7 +33,7 @@ public class Top10000 implements Condicion {
     }
 
     @Override
-    public boolean verificar(String username, String constrasenia){
+    public boolean verificarContrasenia(String username, String constrasenia){
         boolean esValida = !this.buscarPalabraEn(constrasenia, archivo10000);
 
         if(!esValida){

@@ -4,7 +4,7 @@ import validador.Condicion;
 
 public class Credencial implements Condicion {
 
-    public boolean verificar(String username, String constrasenia){
+    public boolean verificarContrasenia(String username, String constrasenia){
         boolean esValida = !(constrasenia.contains(username));
         if(!esValida){
             System.out.println(

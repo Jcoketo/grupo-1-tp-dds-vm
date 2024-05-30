@@ -13,8 +13,10 @@ public class Heladera {
     @Getter
     private LocalDateTime fechaFuncionamiento;
     private String nombre;
-    private Integer viandasMaximas;
+    private int viandasMaximas;
     private Boolean activa;
+    private  Float temperaturaMaxima;
+    private  Float temperaturaMinima;
 
     public void agregarVianda(Vianda... viandas) {
         this.viandas.addAll(Arrays.asList(viandas));

@@ -11,7 +11,7 @@ public class Longitud implements Condicion {
     }
 
     @Override
-    public boolean verificar(String username, String constrasenia){
+    public boolean verificarContrasenia(String username, String constrasenia){
         boolean esValida =
                 this.between(constrasenia.length(), minValueInclusive, maxValueInclusive);
 

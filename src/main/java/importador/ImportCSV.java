@@ -50,20 +50,11 @@ public class ImportCSV {
 
                 //TODO EXISTE USUARIO?
                 if ( persona == null ){
-                    persona = new PersonaHumana(nombre, apellido, mail, Integer.parseInt(documento), tipoDoc);
+                    persona = new PersonaHumana(nombre, apellido, mail,documento, tipoDoc);
                     // si es nueva, tiene que entrar y verificar datos, entonces como hacemos para saber
                     // si un usuario esta completamente registrado o no
 
                 }
-
-                /* Esto ya no hiria
-                else{
-                    //PersonaHumana persona = new PersonaHumana(nombre, apellido, mail, Integer.parseInt(documento), tipoDoc);
-                    // si es nueva, tiene que entrar y verificar datos, entonces como hacemos para saber
-                    // si un usuario esta completamente registrado o no
-                    //TODO
-                }
-                */
 
 
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy"); // Va ese formato para la fecha que levanta del CSV
@@ -82,8 +73,8 @@ public class ImportCSV {
                         break;
                     case "REDISTRIBUCION_VIANDAS":
                         // que hacemos con cantidad
-                        DistribucionDeViandas donacionDistribucion = new DistribucionDeViandas(persona.getTipo(), fechaColaboracionAux);
-                        persona.colaborar(donacionDistribucion);
+                        //DistribucionDeViandas donacionDistribucion = new DistribucionDeViandas(persona.getTipo(), fechaColaboracionAux);
+                        //persona.colaborar(donacionDistribucion);
                         break;
                     case "ENTREGA_TARJETAS":
                         break;
