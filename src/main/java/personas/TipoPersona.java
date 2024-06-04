@@ -1,4 +1,4 @@
-package enums;
+package personas;
 
 public enum TipoPersona {
     PH,

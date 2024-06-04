@@ -1,7 +1,7 @@
 package elementos;
 
+import colaboracion.Vianda;
 import lombok.Getter;
-import ubicacion.Ubicacion;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;

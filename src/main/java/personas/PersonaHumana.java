@@ -1,8 +1,6 @@
 package personas;
 
-import colaboraciones.Colaboracion;
-import enums.MedioContacto;
-import enums.TipoPersona;
+import colaboracion.Colaboracion;
 
 import java.time.LocalDateTime;
 import java.util.List;

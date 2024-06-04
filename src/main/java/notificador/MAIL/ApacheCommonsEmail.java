@@ -1,4 +1,4 @@
-package Notificador.MAIL;
+package notificador.MAIL;
 
 import org.apache.commons.mail.DefaultAuthenticator;
 import org.apache.commons.mail.Email;

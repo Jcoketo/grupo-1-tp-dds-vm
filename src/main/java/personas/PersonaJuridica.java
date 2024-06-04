@@ -1,19 +1,16 @@
 package personas;
 
-import colaboraciones.Colaboracion;
-import enums.MedioContacto;
-import enums.TipoJuridica;
-import enums.TipoPersona;
+import colaboracion.Colaboracion;
 
 import java.util.List;
 
 public class PersonaJuridica extends Colaborador{
     private String razonSocial;
     private TipoJuridica tipo;
-    private String rubro;
+    private Rubro rubro;
 
 
-    public PersonaJuridica(List<MedioContacto> contacto, String direccion, String razonSocial, TipoJuridica tipo, String rubro, String email) {
+    public PersonaJuridica(List<MedioContacto> contacto, String direccion, String razonSocial, TipoJuridica tipo, Rubro rubro, String email) {
         super(contacto, direccion, email);
         this.razonSocial = razonSocial;
         this.tipo = tipo;

@@ -1,4 +1,4 @@
-package Notificador;
+package notificador;
 
 public class NoExisteMetodoExcepcion extends RuntimeException {
     public NoExisteMetodoExcepcion() {

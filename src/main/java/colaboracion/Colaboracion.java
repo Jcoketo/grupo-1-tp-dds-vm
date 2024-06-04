@@ -1,10 +1,8 @@
-package colaboraciones;
+package colaboracion;
 
-import elementos.Vianda;
-import enums.TipoPersona;
+import personas.TipoPersona;
 import personas.Colaborador;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 public abstract class Colaboracion {

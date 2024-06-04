@@ -1,4 +1,4 @@
-package enums;
+package colaboracion;
 
 public enum MotivoDistribucion {
     DESPERFECTO,

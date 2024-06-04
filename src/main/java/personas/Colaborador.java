@@ -1,8 +1,6 @@
 package personas;
 
-import colaboraciones.Colaboracion;
-import enums.MedioContacto;
-import enums.TipoPersona;
+import colaboracion.Colaboracion;
 import lombok.Getter;
 
 import java.util.ArrayList;
