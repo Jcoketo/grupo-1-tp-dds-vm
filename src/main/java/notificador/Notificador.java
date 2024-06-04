@@ -1,8 +1,8 @@
-package Notificador;
+package notificador;
 
-import Notificador.MAIL.ApacheCommonsEmail;
-import Notificador.MAIL.StrategyMAIL;
-import enums.MedioContacto;
+import notificador.MAIL.ApacheCommonsEmail;
+import notificador.MAIL.StrategyMAIL;
+import personas.MedioContacto;
 import lombok.Getter;
 import personas.Colaborador;
 

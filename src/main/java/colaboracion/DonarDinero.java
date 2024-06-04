@@ -1,7 +1,6 @@
-package colaboraciones;
+package colaboracion;
 
-import enums.FrecuenciaDonacion;
-import enums.TipoPersona;
+import personas.TipoPersona;
 import lombok.Getter;
 import personas.Colaborador;
 

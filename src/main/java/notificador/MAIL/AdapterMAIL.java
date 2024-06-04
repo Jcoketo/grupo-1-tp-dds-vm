@@ -1,4 +1,4 @@
-package Notificador.MAIL;
+package notificador.MAIL;
 
 public interface AdapterMAIL {
 

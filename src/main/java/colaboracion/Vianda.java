@@ -1,5 +1,6 @@
-package elementos;
+package colaboracion;
 
+import elementos.Heladera;
 import personas.Colaborador;
 
 import java.time.LocalDateTime;

@@ -12312,7 +12312,7 @@
 											"top": 1239,
 											"width": 353.69775390625,
 											"height": 13,
-											"text": "Notificador"
+											"text": "notificador"
 										},
 										{
 											"_type": "LabelView",
@@ -22870,7 +22870,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
 					},
-					"name": "Notificador",
+					"name": "notificador",
 					"ownedElements": [
 						{
 							"_type": "UMLAssociation",

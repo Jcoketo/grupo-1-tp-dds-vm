@@ -1,4 +1,4 @@
-package colaboraciones;
+package colaboracion;
 
 public class HacerseCargoHeladera {
 }

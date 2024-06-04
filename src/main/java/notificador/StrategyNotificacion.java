@@ -1,4 +1,4 @@
-package Notificador;
+package notificador;
 
 import personas.Colaborador;
 

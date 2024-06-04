@@ -3,7 +3,6 @@ package personas;
 import java.time.LocalDate;
 
 import elementos.TarjetaPlastica;
-import enums.TipoPersona;
 
 public class PersonaVulnerable {
     private String nombre;

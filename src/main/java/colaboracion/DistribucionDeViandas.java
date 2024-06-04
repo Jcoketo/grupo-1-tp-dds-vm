@@ -1,8 +1,7 @@
-package colaboraciones;
+package colaboracion;
 
 import elementos.Heladera;
-import enums.MotivoDistribucion;
-import enums.TipoPersona;
+import personas.TipoPersona;
 import personas.Colaborador;
 
 import java.time.LocalDateTime;

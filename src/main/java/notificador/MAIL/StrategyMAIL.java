@@ -1,6 +1,6 @@
-package Notificador.MAIL;
+package notificador.MAIL;
 
-import Notificador.StrategyNotificacion;
+import notificador.StrategyNotificacion;
 import personas.Colaborador;
 
 public class StrategyMAIL implements StrategyNotificacion {
