@@ -4,20 +4,17 @@ import personas.TipoPersona;
 import lombok.Getter;
 import personas.Colaborador;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Arrays;
 
 public class DonarDinero extends Colaboracion{
-    @Getter
-    private Double monto;
+    private LocalDate fechaDonacion;
+    @Getter private Double monto;
     private FrecuenciaDonacion frecuenciaDonacion;
 
-    /*COMENTE PORQUE ME TIRABA ERRORES EN EL TEST VER QUE ONDA
-    static {
-        personasHabilitadas.add(TipoPersona.PH);
-        personasHabilitadas.add(TipoPersona.PJ);
-    }
-    */
-    public DonarDinero(TipoPersona persona, Double monto, LocalDateTime fechaDonacion, FrecuenciaDonacion frecuenciaDonacion) {
+    public DonarDinero(Double monto, LocalDateTime fechaDonacion, FrecuenciaDonacion frecuenciaDonacion) {
+        this.tiposPersonasHabilitadas = Arrays.asList(TipoPersona.PJ, TipoPersona.PH);
         this.monto = monto;
         //this.fechaDonacion = fechaDonacion;
         this.frecuenciaDonacion = frecuenciaDonacion;
@@ -26,6 +23,7 @@ public class DonarDinero extends Colaboracion{
     }
 
     public DonarDinero(TipoPersona persona, Double monto, LocalDateTime fechaDonacion) {
+        this.tiposPersonasHabilitadas = Arrays.asList(TipoPersona.PJ, TipoPersona.PH);
         this.monto = monto;
         //this.fechaDonacion = fechaDonacion;
 
@@ -38,11 +36,21 @@ public class DonarDinero extends Colaboracion{
     @Override
     public void hacerColaboracion(Colaborador colaborador) {
         //TODO
-        // A DONDE SE DONA?
     }
 
+    @Override
+    public boolean validar(Colaborador colaborador){
+        //TODO
+        return true;
+    }
 
+    @Override
+    public void incrementarPuntos(Colaborador colaborador){
+        //TODO
+    }
+
+    /*
     public String getTipo() {
         return "DONAR_DINERO";
-    }
+    }*/
 }

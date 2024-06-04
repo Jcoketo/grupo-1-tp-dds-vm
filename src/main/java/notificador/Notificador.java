@@ -2,9 +2,8 @@ package notificador;
 
 import notificador.MAIL.ApacheCommonsEmail;
 import notificador.MAIL.StrategyMAIL;
-import personas.MedioContacto;
+import personas.TipoMedioDeContacto;
 import lombok.Getter;
-import personas.Colaborador;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -12,25 +11,36 @@ import java.util.Map;
 
 public class Notificador {
     @Getter
-    private static Map<MedioContacto, StrategyNotificacion> estrategias;
+    private static Map<TipoMedioDeContacto, StrategyNotificacion> estrategias;
 
     static {
-        estrategias = new HashMap<MedioContacto, StrategyNotificacion>();
+        estrategias = new HashMap<TipoMedioDeContacto, StrategyNotificacion>();
 
         StrategyMAIL mail = new StrategyMAIL();
         mail.setAdapter(new ApacheCommonsEmail());
-        estrategias.put(MedioContacto.MAIL, mail);
+        estrategias.put(TipoMedioDeContacto.MAIL, mail);
     }
 
-    public static void agregarEstrategia(MedioContacto medio, StrategyNotificacion estrategia){
+    public static void agregarEstrategia(TipoMedioDeContacto medio, StrategyNotificacion estrategia){
         estrategias.put(medio, estrategia);
     }
 
-    public void notificar(String mensaje, Colaborador persona) {
-        if(persona.getContacto().isEmpty()){
-            throw new NoTieneMetodoExcepcion();
+    //TODO
+
+    /*public void notificar(String mensaje, Colaborador persona) {
+
+        TipoMedioContacto tipo = persona;
+        String email = persona.getEmail();
+
+        if (estrategias.containsKey(contacto)) {
+            estrategias.get(contacto).enviarNotificacion(mensaje, persona);
+        } else {
+            throw new NoExisteMetodoExcepcion();
         }
-        MedioContacto contacto = persona.getContacto().get(0);
+    }*/
+
+    /*
+        TipoMedioContacto contacto = persona.getContacto().get(0);
         if(estrategias.containsKey(contacto)){
             estrategias.get(contacto).enviarNotificacion(mensaje, persona);
         }else{
@@ -39,4 +49,6 @@ public class Notificador {
 
         // de aca se llama al StrategyNotificacion correspondiente
     }
+    */
+
 }

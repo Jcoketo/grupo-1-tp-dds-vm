@@ -1,7 +1,7 @@
 package elementos;
 
 public class Ubicacion {
-    private Float latitud;
-    private Float longitud;
+    private Double latitud;
+    private Double longitud;
     private String direccion;
 }

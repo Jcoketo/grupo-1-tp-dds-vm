@@ -4,11 +4,7 @@ import validador.Condicion;
 
 public class Longitud implements Condicion {
     private int minValueInclusive = 8;
-    int maxValueInclusive = 64;
-
-    public boolean between(int variable, int minValueInclusive, int maxValueInclusive) {
-        return variable >= minValueInclusive && variable <= maxValueInclusive;
-    }
+    private int maxValueInclusive = 64;
 
     @Override
     public boolean verificarContrasenia(String username, String constrasenia){
@@ -19,7 +15,10 @@ public class Longitud implements Condicion {
             System.out.println(
                     "La contraseña debe tener entr 8 y 64 caracteres. Intente con otra contraseña");
         }
-
         return esValida;
+    }
+
+    public boolean between(int variable, int minValueInclusive, int maxValueInclusive) {
+        return variable >= minValueInclusive && variable <= maxValueInclusive;
     }
 }
