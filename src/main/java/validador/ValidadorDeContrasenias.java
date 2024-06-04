@@ -6,13 +6,13 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-public class ValidadorDeContraseñas {
-    List<Condicion> validaciones = Arrays.asList(new Longitud(), new Credencial(), new Top10000());
+public class ValidadorDeContrasenias {
+    private List<Condicion> condicionesContrasenia = Arrays.asList(new Longitud(), new Credencial(), new TopPeores10000());
 
     public boolean validarContrasenia(String username, String contrasenia) {
-        String password = SanitizadorDeContraseñas.eliminarMultiplesEspacios(contrasenia);
+        String password = SanitizadorDeContrasenias.eliminarMultiplesEspacios(contrasenia);
         boolean esValida =
-                this.validaciones.stream().allMatch(
+                this.condicionesContrasenia.stream().allMatch(
                         condicion -> condicion.verificarContrasenia(username, password));
 
         if (esValida) {
@@ -22,7 +22,7 @@ public class ValidadorDeContraseñas {
     }
 
     public void agregarCondiciones (Condicion ... condiciones) {
-        Collections.addAll(this.validaciones, condiciones);
+        Collections.addAll(this.condicionesContrasenia, condiciones);
     }
 }
 // Esta clase se encarga de validar la contraseña pasada por parámetro según cada una de las condiciones establecidas.

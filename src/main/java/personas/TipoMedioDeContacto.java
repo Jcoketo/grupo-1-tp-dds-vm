@@ -1,6 +1,6 @@
 package personas;
 
-public enum MedioContacto {
+public enum TipoMedioDeContacto {
     MAIL,
     WHATSAPP,
     TELEFONO

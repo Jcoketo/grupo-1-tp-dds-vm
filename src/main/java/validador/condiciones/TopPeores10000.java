@@ -7,8 +7,19 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 
-public class Top10000 implements Condicion {
+public class TopPeores10000 implements Condicion {
     private File archivo10000 = new File(Config.RUTA_EXPORTACION);
+
+    @Override
+    public boolean verificarContrasenia(String username, String constrasenia){
+        boolean esValida = !this.buscarPalabraEn(constrasenia, archivo10000);
+
+        if(!esValida){
+            System.out.println(
+                "La contraseña esta en la lista de las peores contraseñas. Intente con otra contraseña");
+        }
+        return esValida;
+    }
 
     public boolean buscarPalabraEn(String password, File archivo) {
         boolean estaEnElArchivo = false;
@@ -30,17 +41,5 @@ public class Top10000 implements Condicion {
             System.out.println("Error al buscar el archivo.");
         }
         return estaEnElArchivo;
-    }
-
-    @Override
-    public boolean verificarContrasenia(String username, String constrasenia){
-        boolean esValida = !this.buscarPalabraEn(constrasenia, archivo10000);
-
-        if(!esValida){
-            System.out.println(
-                    "La contraseña esta en la lista de las peores contraseñas. Intente con otra contraseña");
-        }
-
-        return esValida;
     }
 }

@@ -2,39 +2,28 @@ package personas;
 
 import colaboracion.Colaboracion;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
 public class PersonaHumana extends Colaborador{
     private String nombre;
     private String apellido;
-    private LocalDateTime fechaNacimiento;
-    private String nroDocumento;
-    private String tipoDocumento;
+    private LocalDate fechaNacimiento;
+    private List<Colaboracion> colaboracionesPosibles;
+    private Documento documento;
 
-
-    // Constructor para importacion
-    public PersonaHumana(String nombre, String apellido, String email, String nroDocumento, String tipoDocumento) {
-        super(email);
+    // En el Constructor deben ir solo los datos obligatorios! Hay que arreglarlo.
+    public PersonaHumana(String nombre, String apellido, String email, String nroDocumento, TipoDocumento tipoDocumento, List<MedioDeContacto> mediosDeContacto, String direccion) {
+        super(mediosDeContacto, direccion);
         this.nombre = nombre;
         this.apellido = apellido;
-        this.nroDocumento = nroDocumento;
-        this.tipoDocumento = tipoDocumento;
-    }
-
-    public PersonaHumana(List<MedioContacto> contacto, String direccion, String nombre, String apellido, LocalDateTime fechaNacimiento, String email) {
-        super(contacto, direccion, email);
-        this.nombre = nombre;
-        this.apellido = apellido;
-        this.fechaNacimiento = fechaNacimiento;
+        this.documento = new Documento(nroDocumento,tipoDocumento);
+        this.tipo = TipoPersona.PH; // Obligatorio
     }
 
     public void colaborar(Colaboracion colaboracion) {
-        colaboraciones.add(colaboracion);
+        this.colaboracionesPosibles.add(colaboracion);
         //TODO
-    }
-
-    public TipoPersona getTipo() {
-        return TipoPersona.PH;
     }
 }

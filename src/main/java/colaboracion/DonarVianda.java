@@ -5,43 +5,48 @@ import personas.TipoPersona;
 import personas.Colaborador;
 
 import java.time.LocalDateTime;
+import java.util.Arrays;
 
 public class DonarVianda extends Colaboracion{
     private Vianda vianda;
     private Heladera heladera;
 
-    static {
-        personasHabilitadas.add(TipoPersona.PH);
-    }
     //CONSTRUCTOR
-    public DonarVianda(Vianda vianda, Heladera heladera, TipoPersona persona) {
+    /*
+    public DonarVianda(Vianda vianda, Heladera heladera) {
+        this.tiposPersonasHabilitadas = Arrays.asList(TipoPersona.PH);
         this.vianda = vianda;
         this.heladera = heladera;
-
         //this.persona = persona;
         //TODO
-    }
+    }*/
 
-    public DonarVianda(TipoPersona persona, LocalDateTime fechaDonacion) {
-
-        if (persona == TipoPersona.PH) {
+    public DonarVianda(TipoPersona tipoDePersona, LocalDateTime fechaDonacion) {
+        if(this.tiposPersonasHabilitadas.contains(tipoDePersona)) {
             //this.fechaDonacion = fechaDonacion;
         }
-
         //TODO
     }
 
     @Override
     public void hacerColaboracion(Colaborador colaborador) {
-
-        heladera.agregarVianda(vianda);
-
         //TODO
     }
 
     @Override
-    public String getTipo() {
-        return "DONAR_VIANDA";
+    public boolean validar(Colaborador colaborador){
+        //TODO
+        return true;
     }
 
+    @Override
+    public void incrementarPuntos(Colaborador colaborador){
+        //TODO
+    }
+
+    /*
+    @Override
+    public String getTipo() {
+        return "DONAR_VIANDA";
+    }*/
 }

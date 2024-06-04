@@ -1,83 +1,60 @@
 package personas;
 
 import colaboracion.Colaboracion;
+import colaboracion.Oferta;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class Colaborador {
-    @Getter
-    protected List<MedioContacto> contacto;
-    @Getter
-    protected String email;
-    //TODO
-    //hay que evaluar si tenemos un atributo email, o ponemos un diccionario de medio de contacto e info
-    // porque como lo teniamos modelado, nunca guardamos el mail, el numero, etc
+    @Getter protected List<MedioDeContacto> mediosDeContacto;
     protected String direccion;
-    protected List<Colaboracion> colaboraciones;
-    protected Integer puntaje;
-    protected TipoPersona tipo;
+    protected List<Colaboracion> colaboracionesRealizadas;
+    protected Float puntaje;
+    protected List<Oferta> canjesRealizados;
+    protected Boolean validada;
+    @Getter @Setter protected TipoPersona tipo;
 
-    public Colaborador(String email){
-        this.email = email;
-        this.contacto = new ArrayList<>();
-        this.colaboraciones = new ArrayList<>();
-    }
-
-    public Colaborador(List<MedioContacto> contacto, String direccion, String email ) {
-        this.contacto = contacto;
+    public Colaborador(List<MedioDeContacto> mediosDeContacto, String direccion) {
+        agregarMediosDeContacto(mediosDeContacto);
         this.direccion = direccion;
-        ArrayList<Colaboracion> colaboraciones = new ArrayList<>();
-        this.email = email;
+        this.colaboracionesRealizadas = new ArrayList<>();
     }
 
-    public void agregarContacto(MedioContacto contacto) {
-        this.contacto.add(contacto);
+    public void agregarMediosDeContacto(List<MedioDeContacto> nuevosMedios) throws IllegalArgumentException {
+        if (nuevosMedios.isEmpty()) {
+            throw new IllegalArgumentException("La lista de contactos no puede estar vacía.");
+        }
+        this.mediosDeContacto.addAll(nuevosMedios);
     }
 
     public void colaborar(Colaboracion colaboracion) {
-        colaboraciones.add(colaboracion);
+        colaboracionesRealizadas.add(colaboracion);
     }
 
-    public Integer calcularPuntaje() {
-        this.puntaje = 0;
-        Double pesosDonados = (double) 0;
-        Integer viandasDonadas = 0;
-        Integer viandasDistribuidas = 0;
-        Integer tarjetasRepartidas = 0;
-        Integer cantidadHeladeras = 0;
+    public void canjerPuntos(Oferta oferta){
 
-        for (Colaboracion colaboracion : colaboraciones) {
-            switch (colaboracion.getTipo()) {
-                case "DONAR_VIANDA":
-                    viandasDonadas += 1;
-                    break;
-                case "DONAR_DINERO":
-                    Double pesos = colaboracion.getMonto();
-                    pesosDonados = pesosDonados + pesos;
-                    break;
-                case "DISTRIBUCION_VIANDA":
-                    viandasDistribuidas += 1;
-                    break;
-                case "TARJETAS_REPARTIDAS":
-                    tarjetasRepartidas += 1;
-                    break;
-                case "HACERSE_CARGO_HELADERA":
-                    //TODO
-                    Integer puntosHeladeras = 0;
-                    break;
+    }
+
+    public void validarDatos(){
+        //TODO COMPLETAR DATOS CUANDO SE CREA SU USUARIO X CARGA MASIVA
+
+        this.validada = Boolean.TRUE;
+    }
+
+    protected void iniciarSesion() {
+        //TODO
+    }
+
+    /*
+    public String getEmail(){
+        for (MedioDeContacto contactoAux : this.mediosDeContacto)
+            if ( contactoAux.getMedio() == TipoMedioDeContacto.MAIL ){
+                return contactoAux.getContacto();
             }
-
-        }
-
-        puntaje = (int)(viandasDonadas * 1.5)
-                    + viandasDistribuidas
-                            + (tarjetasRepartidas * 2) ;
-                            // + cantidadHeladeras;
-
-        return puntaje;
     }
-
+     */
 }
+

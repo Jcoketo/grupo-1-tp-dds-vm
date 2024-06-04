@@ -46,7 +46,7 @@ public class ImportCSV {
 
                 //TODO EXISTE USUARIO?
                 if ( persona == null ){
-                    persona = new PersonaHumana(nombre, apellido, mail,documento, tipoDoc);
+                    //persona = new PersonaHumana(nombre, apellido, mail, nroDocumento, tipoDocumento); <-CORREGIR
                     // si es nueva, tiene que entrar y verificar datos, entonces como hacemos para saber
                     // si un usuario esta completamente registrado o no
 

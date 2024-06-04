@@ -7,14 +7,14 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public class Vianda{
-    private Float peso;
-    private Float calorias;
     private List<String> tipoComida;
-    private LocalDateTime fechaDonacion;
     private LocalDateTime fechaCaducidad;
-    private Boolean entregado;
+    private LocalDateTime fechaDonacion;
     private Colaborador colaborador;
     private Heladera disponibleEn;
+    private Float calorias;
+    private Float peso;
+    private Boolean entregada;
 
     public Vianda(Float peso, Float calorias, List<String> tipoComida, LocalDateTime fechaCaducidad, Colaborador colaborador, Heladera heladera) {
         this.peso = peso;
@@ -22,7 +22,7 @@ public class Vianda{
         this.tipoComida = tipoComida;
         this.fechaDonacion = LocalDateTime.now();
         this.fechaCaducidad = fechaCaducidad;
-        this.entregado = false;
+        this.entregada = false;
         this.colaborador = colaborador;
         this.disponibleEn = heladera;
     }
