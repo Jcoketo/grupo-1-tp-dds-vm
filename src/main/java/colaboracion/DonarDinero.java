@@ -23,13 +23,17 @@ public class DonarDinero extends Colaboracion{
 
         //this.persona = persona;
     }
-
-    public DonarDinero(TipoPersona persona, Double monto, LocalDateTime fechaDonacion) {
+    // CONSTRUCTOR PARA EL IMPORTDOR DE SCV
+    public DonarDinero(Double monto, LocalDateTime fechaDonacion) {
         this.tiposPersonasHabilitadas = Arrays.asList(TipoPersona.PJ, TipoPersona.PH);
         this.monto = monto;
         this.fechaDonacion = fechaDonacion;
         this.frecuenciaDonacion = FrecuenciaDonacion.UNICA; // es unica? TODO
+
     }
+
+    @Override
+    public void incrementarPuntos(Colaborador colaborador){ colaborador.incrementarPuntaje((float) (monto*0.5));}
 
     @Override
     public void hacerColaboracion(Colaborador colaborador) {
@@ -38,13 +42,7 @@ public class DonarDinero extends Colaboracion{
 
     @Override
     public boolean validar(Colaborador colaborador){
-        //TODO
-        return true;
-    }
-
-    @Override
-    public void incrementarPuntos(Colaborador colaborador){
-        //TODO
+        return this.tiposPersonasHabilitadas.contains(colaborador.getTipo());
     }
 
     /*

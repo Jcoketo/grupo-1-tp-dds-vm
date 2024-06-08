@@ -23,8 +23,8 @@ public class DistribucionDeViandas extends Colaboracion {
         this.motivoDistribucion = motivoDistribucion;
         this.fechaDistribucion = LocalDateTime.now();
     }
-
-    public DistribucionDeViandas(TipoPersona persona, LocalDateTime fechaDistribucion, Integer cantidadViandas)
+    // CONSTRUCTOR PARA EL IMPORTADOR DE SCV
+    public DistribucionDeViandas(LocalDateTime fechaDistribucion, Integer cantidadViandas)
     {
         this.tiposPersonasHabilitadas = Arrays.asList(TipoPersona.PH);
         this.fechaDonacion  = fechaDistribucion;
@@ -44,12 +44,12 @@ public class DistribucionDeViandas extends Colaboracion {
 
     @Override
     public boolean validar(Colaborador colaborador){
-        //TODO
-        return true;
+        return this.tiposPersonasHabilitadas.contains(colaborador.getTipo());
     }
 
     @Override
-    public void incrementarPuntos(Colaborador colaborador){
-        //TODO
-    }
+    public void incrementarPuntos(Colaborador colaborador){ colaborador.incrementarPuntaje((float) this.cantidadViandas); }
+
+
 }
+

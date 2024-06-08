@@ -24,4 +24,6 @@ public abstract class Colaboracion {
         }
         return true;
     }*/
+
+
 }

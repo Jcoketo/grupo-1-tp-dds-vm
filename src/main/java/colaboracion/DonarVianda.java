@@ -21,7 +21,7 @@ public class DonarVianda extends Colaboracion{
         //TODO
     }*/
 
-    public DonarVianda(TipoPersona tipoDePersona, LocalDateTime fechaDonacion) {
+    public DonarVianda(LocalDateTime fechaDonacion) {
         this.tiposPersonasHabilitadas = Arrays.asList(TipoPersona.PH);
         this.fechaDonacion = fechaDonacion;
     }
@@ -33,15 +33,13 @@ public class DonarVianda extends Colaboracion{
 
     @Override
     public boolean validar(Colaborador colaborador){
-        //TODO
-        return true;
+        return this.tiposPersonasHabilitadas.contains(colaborador.getTipo());
     }
 
     @Override
-    public void incrementarPuntos(Colaborador colaborador){
-        //TODO
-    }
+    public void incrementarPuntos(Colaborador colaborador){ colaborador.incrementarPuntaje(1.5F);}
 
+    // se va a incrementar en 1,5 puntos por cada donacion de vianda
     /*
     @Override
     public String getTipo() {

@@ -2,6 +2,7 @@ package notificador;
 
 import notificador.MAIL.ApacheCommonsEmail;
 import notificador.MAIL.StrategyMAIL;
+import personas.Colaborador;
 import personas.TipoMedioDeContacto;
 import lombok.Getter;
 
@@ -26,6 +27,33 @@ public class Notificador {
     }
 
     //TODO
+/*
+    public void notificarXNuevoUsuario(String mensaje, Colaborador persona) {
+
+        if (persona.getEmail() == null) {
+            throw new IllegalArgumentException("El colaborador no tiene un email asignado.");
+        }
+
+        if (estrategias.containsKey(TipoMedioDeContacto.MAIL)) {
+            estrategias.get(TipoMedioDeContacto.MAIL).enviarNotificacion(mensaje, persona, "Bienvenido");
+        } else {
+            throw new NoExisteMetodoExcepcion();
+        }
+    }*/
+
+    public static void notificarXNuevoUsuario(String mensaje, Colaborador persona) {
+
+        if (persona.getEmail() == null) {
+            throw new IllegalArgumentException("El colaborador no tiene un email asignado.");
+        }
+
+        if (estrategias.containsKey(TipoMedioDeContacto.MAIL)) {
+            estrategias.get(TipoMedioDeContacto.MAIL).enviarNotificacion(mensaje, persona, "Bienvenido");
+        } else {
+            throw new NoExisteMetodoExcepcion();
+        }
+    }
+}
 
     /*public void notificar(String mensaje, Colaborador persona) {
 
@@ -51,4 +79,3 @@ public class Notificador {
     }
     */
 
-}
