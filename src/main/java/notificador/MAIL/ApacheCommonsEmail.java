@@ -12,7 +12,7 @@ public class ApacheCommonsEmail implements AdapterMAIL{
     private String password = "cjncgybotmgefepg";
 
     @Override
-    public void enviarMAIL(String mensaje, String destinatario) {
+    public void enviarMAIL(String mensaje, String destinatario, String asunto) {
         try{
             Email email = new SimpleEmail();
             email.setHostName(this.hostName);
@@ -20,7 +20,7 @@ public class ApacheCommonsEmail implements AdapterMAIL{
             email.setAuthenticator(new DefaultAuthenticator(this.username, this.password));
             email.setSSLOnConnect(true);
             email.setFrom("jmenazzibaldini@frba.utn.edu.ar");
-            email.setSubject("Email de prueba");
+            email.setSubject(asunto);
             email.setMsg(mensaje);
             email.addTo(destinatario);
             email.send();

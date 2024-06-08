@@ -30,7 +30,11 @@ public class Colaborador {
     }
 
     public void colaborar(Colaboracion colaboracion) {
-        colaboracionesRealizadas.add(colaboracion);
+        agregarColaboracion(colaboracion);
+    }
+
+    public void agregarColaboracion(Colaboracion colaboracion){
+        this.colaboracionesRealizadas.add(colaboracion);
     }
 
     public void canjerPuntos(Oferta oferta){
@@ -47,14 +51,15 @@ public class Colaborador {
         //TODO
     }
 
-    /*
+
     public String getEmail(){
-        for (MedioDeContacto contactoAux : this.mediosDeContacto)
+        for ( MedioDeContacto contactoAux : this.mediosDeContacto )
             if ( contactoAux.getMedio() == TipoMedioDeContacto.MAIL ){
                 return contactoAux.getContacto();
             }
+        return null;
     }
-     */
+
 
     public String getUniqueIdentifier() {
 
@@ -68,6 +73,10 @@ public class Colaborador {
 
         return null;
 
+    }
+
+    public void incrementarPuntaje(Float puntaje){
+        this.puntaje += puntaje;
     }
 }
 

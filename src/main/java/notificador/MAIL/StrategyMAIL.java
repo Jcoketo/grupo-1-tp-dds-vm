@@ -11,8 +11,8 @@ public class StrategyMAIL implements StrategyNotificacion {
     }
 
     @Override
-    public void enviarNotificacion(String mensaje, Colaborador persona) {
-        this.adapter.enviarMAIL(mensaje, persona.getEmail());
+    public void enviarNotificacion(String mensaje, Colaborador persona, String asunto) {
+        this.adapter.enviarMAIL(mensaje, persona.getEmail(), asunto);
     }
 
 

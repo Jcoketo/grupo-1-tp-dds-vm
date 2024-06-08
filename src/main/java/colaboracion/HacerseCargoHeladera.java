@@ -20,12 +20,12 @@ public class HacerseCargoHeladera extends Colaboracion{
 
     @Override
     public boolean validar(Colaborador colaborador){
-        //TODO
-        return true;
+        return this.tiposPersonasHabilitadas.contains(colaborador.getTipo());
     }
 
     @Override
     public void incrementarPuntos(Colaborador colaborador){
         //TODO
     }
+
 }
