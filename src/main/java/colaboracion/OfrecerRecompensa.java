@@ -22,8 +22,6 @@ public class OfrecerRecompensa extends Colaboracion{
     }
 
     @Override
-    public void incrementarPuntos(Colaborador colaborador){
-        //TODO
-    }
+    public void incrementarPuntos(Colaborador colaborador){}
 
 }

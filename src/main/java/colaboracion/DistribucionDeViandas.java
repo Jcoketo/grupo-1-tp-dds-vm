@@ -40,6 +40,7 @@ public class DistribucionDeViandas extends Colaboracion {
     @Override
     public void hacerColaboracion(Colaborador colaborador) {
         //TODO
+        incrementarPuntos(colaborador);
     }
 
     @Override

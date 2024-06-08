@@ -26,6 +26,9 @@ public class HacerseCargoHeladera extends Colaboracion{
     @Override
     public void incrementarPuntos(Colaborador colaborador){
         //TODO
+        // ENTIENDO QUE LA CRONE TASK DEBERIA LLAMAR A ESTE METODO POR CADA HELADERA QUE SE HACE CARGO
+        // ENTONCES VA A INCREMENTAR 5 PUNTOS POR CADA HELADERA QUE SE HACE CARGO
+        colaborador.incrementarPuntaje(5F);
     }
 
 }

@@ -37,6 +37,7 @@ public class DonarDinero extends Colaboracion{
 
     @Override
     public void hacerColaboracion(Colaborador colaborador) {
+        incrementarPuntos(colaborador);
         //TODO
     }
 
