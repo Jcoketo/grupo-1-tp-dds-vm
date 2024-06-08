@@ -22,10 +22,8 @@ public class DonarVianda extends Colaboracion{
     }*/
 
     public DonarVianda(TipoPersona tipoDePersona, LocalDateTime fechaDonacion) {
-        if(this.tiposPersonasHabilitadas.contains(tipoDePersona)) {
-            //this.fechaDonacion = fechaDonacion;
-        }
-        //TODO
+        this.tiposPersonasHabilitadas = Arrays.asList(TipoPersona.PH);
+        this.fechaDonacion = fechaDonacion;
     }
 
     @Override
