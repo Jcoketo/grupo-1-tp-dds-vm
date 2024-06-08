@@ -4,6 +4,7 @@ import personas.Colaborador;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class RepositorioColaboradores {
     private static RepositorioColaboradores instancia = null;
@@ -20,9 +21,17 @@ public class RepositorioColaboradores {
         return instancia;
     }
 
-    public Boolean conocerExistencia(Colaborador colaborador) {
-        //TODO
-        return false;
+    public Colaborador existeColaborador(String uniqueIdentifier) {
+
+        for (Colaborador colab : colaboradores) {
+            String currentDocumento = colab.getUniqueIdentifier();
+
+            if (Objects.equals(currentDocumento, uniqueIdentifier)) {
+                return colab;  // deuelve el colaborador
+            }
+        }
+
+        return null;  // Devuelve null si no se encuentra un colaborador con el mismo tipo y número de documento
     }
 
     public void agregar(Colaborador colaborador) {

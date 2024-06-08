@@ -15,11 +15,10 @@ public class Colaborador {
     protected Float puntaje;
     protected List<Oferta> canjesRealizados;
     protected Boolean validada;
-    @Getter @Setter protected TipoPersona tipo;
+    @Getter protected TipoPersona tipo;
 
-    public Colaborador(List<MedioDeContacto> mediosDeContacto, String direccion) {
+    public Colaborador(List<MedioDeContacto> mediosDeContacto) {
         agregarMediosDeContacto(mediosDeContacto);
-        this.direccion = direccion;
         this.colaboracionesRealizadas = new ArrayList<>();
     }
 
@@ -56,5 +55,19 @@ public class Colaborador {
             }
     }
      */
+
+    public String getUniqueIdentifier() {
+
+        if(this.tipo == TipoPersona.PH){
+            return ((PersonaHumana)this).getDocumento().getUniqueIdentifier();
+        }
+        /*
+        if(this.tipo == TipoPersona.PJ){
+            return ((PersonaJuridica)this).cuit;
+        }*/
+
+        return null;
+
+    }
 }
 

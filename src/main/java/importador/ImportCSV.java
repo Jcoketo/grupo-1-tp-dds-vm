@@ -1,11 +1,14 @@
 package importador;
 
+import colaboracion.DistribucionDeViandas;
 import colaboracion.DonarDinero;
 import colaboracion.DonarVianda;
+import notificador.Notificador;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
-import personas.PersonaHumana;
+import personas.*;
+import repositorios.RepositorioColaboradores;
 
 import java.io.FileReader;
 import java.io.Reader;
@@ -13,6 +16,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 
 public class ImportCSV {
     public static void importCSV() throws IOException {
@@ -34,23 +38,51 @@ public class ImportCSV {
                                         || apellido.length() > 50 || mail.length() > 50
                                         || fecha.length() > 10 || formaColaboracion.length() > 22
                                         || cantidad.length() > 7 ){
+                    System.out.println(" ---------------------- ");
                     System.out.println("Error de carga en archivo CSV en linea: " + record.getRecordNumber());
                     System.out.println("Uno o mas campos exceden la longitud permitida");
+                    System.out.println(" ---------------------- ");
                     continue;
                 }
 
-                PersonaHumana persona = buscarPersona(documento, tipoDoc);
+                TipoDocumento tipoDocumento = null;
+                switch (tipoDoc) {
+                    case "DNI":
+                        tipoDocumento = TipoDocumento.DNI;
+                        break;
+                    case "LC":
+                        tipoDocumento = TipoDocumento.LC;
+                        break;
+                    case "LE":
+                        tipoDocumento = TipoDocumento.LE;
+                        break;
+                    default:
+                        System.out.println(" ---------------------- ");
+                        System.out.println("Error de carga en archivo CSV en linea: " + record.getRecordNumber());
+                        System.out.println("Tipo de documento no valido");
+                        System.out.println(" ---------------------- ");
+                        continue; // busca el siguiente registro
+                }
 
-                //Busca una personsa. Si la encuentra la retorna, sino retorna null
-                //Si es null, entonces la persona no existe y hay que crearla
+                String identificadorUnico = tipoDocumento + documento;
 
-                //TODO EXISTE USUARIO?
-                if ( persona == null ){
-                    //persona = new PersonaHumana(nombre, apellido, mail, nroDocumento, tipoDocumento); <-CORREGIR
-                    // si es nueva, tiene que entrar y verificar datos, entonces como hacemos para saber
-                    // si un usuario esta completamente registrado o no
+                RepositorioColaboradores repoColaboradores = RepositorioColaboradores.getInstancia();
+                Colaborador colaborador = repoColaboradores.existeColaborador(identificadorUnico);
+
+                if (colaborador == null){ // NO EXISTE COLABORADOR
+                    MedioDeContacto medioDeContacto = new MedioDeContacto(TipoMedioDeContacto.MAIL, mail);
+                    ArrayList<MedioDeContacto> mediosDeContacto = new ArrayList<>();
+                    mediosDeContacto.add(medioDeContacto);
+
+                    PersonaHumana persona = new PersonaHumana(tipoDocumento, documento, nombre, apellido, mail, mediosDeContacto);
+
+                    repoColaboradores.agregar(persona);
+
+                    // TODO
+                    // NOTIFICAR
 
                 }
+
 
 
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy"); // Va ese formato para la fecha que levanta del CSV
@@ -59,18 +91,17 @@ public class ImportCSV {
                 //TODO
                 switch (formaColaboracion) {
                     case "DINERO":
-                        DonarDinero donacionDinero = new DonarDinero(persona.getTipo(), Double.parseDouble(cantidad), fechaColaboracionAux); //cantidad es un Double
-                        persona.colaborar(donacionDinero);
+                        DonarDinero donacionDinero = new DonarDinero(colaborador.getTipo(), Double.parseDouble(cantidad), fechaColaboracionAux); //cantidad es un Double
+                        colaborador.colaborar(donacionDinero);
                         break;
                     case "DONACION_VIANDAS":
                         // que hacemos con la cantidad?
-                        DonarVianda donacionVianda = new DonarVianda(persona.getTipo(), fechaColaboracionAux);
-                        persona.colaborar(donacionVianda);
+                        DonarVianda donacionVianda = new DonarVianda(colaborador.getTipo(), fechaColaboracionAux);
+                        colaborador.colaborar(donacionVianda);
                         break;
                     case "REDISTRIBUCION_VIANDAS":
-                        // que hacemos con cantidad
-                        //DistribucionDeViandas donacionDistribucion = new DistribucionDeViandas(persona.getTipo(), fechaColaboracionAux);
-                        //persona.colaborar(donacionDistribucion);
+                        DistribucionDeViandas donacionDistribucion = new DistribucionDeViandas(colaborador.getTipo(), fechaColaboracionAux, Integer.parseInt(cantidad));
+                        colaborador.colaborar(donacionDistribucion);
                         break;
                     case "ENTREGA_TARJETAS":
                         break;

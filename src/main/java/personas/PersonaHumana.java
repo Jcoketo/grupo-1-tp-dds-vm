@@ -1,6 +1,7 @@
 package personas;
 
 import colaboracion.Colaboracion;
+import lombok.Getter;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -11,11 +12,14 @@ public class PersonaHumana extends Colaborador{
     private String apellido;
     private LocalDate fechaNacimiento;
     private List<Colaboracion> colaboracionesPosibles;
-    private Documento documento;
+
+    @Getter private Documento documento;
 
     // En el Constructor deben ir solo los datos obligatorios! Hay que arreglarlo.
-    public PersonaHumana(String nombre, String apellido, String email, String nroDocumento, TipoDocumento tipoDocumento, List<MedioDeContacto> mediosDeContacto, String direccion) {
-        super(mediosDeContacto, direccion);
+    public PersonaHumana(TipoDocumento tipoDocumento, String nroDocumento, String nombre, String apellido, String email,
+                         List<MedioDeContacto> mediosDeContacto) {
+
+        super(mediosDeContacto);
         this.nombre = nombre;
         this.apellido = apellido;
         this.documento = new Documento(nroDocumento,tipoDocumento);
