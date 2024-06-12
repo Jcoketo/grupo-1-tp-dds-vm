@@ -1,4 +1,4 @@
-package apiMock.dtos;
+package recomendadorDePuntos.apiMock.dtos;
 
 public class PuntoEstrategico {
     private Double latitud;

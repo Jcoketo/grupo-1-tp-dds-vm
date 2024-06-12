@@ -17,7 +17,7 @@ public class Colaborador {
     protected Boolean validada;
     @Getter protected TipoPersona tipo;
 
-    public Colaborador(List<MedioDeContacto> mediosDeContacto) {
+    public Colaborador(List<MedioDeContacto> mediosDeContacto, String direccion) {
         agregarMediosDeContacto(mediosDeContacto);
         this.colaboracionesRealizadas = new ArrayList<>();
     }
