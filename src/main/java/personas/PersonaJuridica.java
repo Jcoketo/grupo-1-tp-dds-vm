@@ -15,11 +15,13 @@ public class PersonaJuridica extends Colaborador{
     private List<Colaboracion> colaboracionesPosibles;
     private List<Heladera> heladeras;
 
-    public PersonaJuridica(List<MedioDeContacto> contacto, String direccion, String razonSocial, Rubro rubro, String email) {
-        super(contacto, direccion);
+    public PersonaJuridica(List<MedioDeContacto> contacto, TipoJuridica tipoJuridico, String direccion, String razonSocial, Rubro rubro, String email) {
+        super(contacto);
+        this.tipoJuridico = tipoJuridico;
         this.razonSocial = razonSocial;
-        this.tipo = TipoPersona.PJ;
         this.rubro = rubro;
+        this.tipo = TipoPersona.PJ;
+        this.direccion = direccion;
     }
 
     @Override

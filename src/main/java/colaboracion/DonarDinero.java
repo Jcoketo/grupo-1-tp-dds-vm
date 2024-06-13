@@ -12,24 +12,20 @@ public class DonarDinero extends Colaboracion{
     @Getter private Double monto;
     private FrecuenciaDonacion frecuenciaDonacion;
 
-    {
+    // CONSTRUCTOR PRINCIPAL
+    public DonarDinero(LocalDateTime fechaDonacion, Double monto, FrecuenciaDonacion frecuenciaDonacion) {
         this.tiposPersonasHabilitadas = Arrays.asList(TipoPersona.PJ, TipoPersona.PH);
-    }
-
-    public DonarDinero(Double monto, LocalDateTime fechaDonacion, FrecuenciaDonacion frecuenciaDonacion) {
-        this.tiposPersonasHabilitadas = Arrays.asList(TipoPersona.PJ, TipoPersona.PH);
+        this.fechaColaboracion = fechaDonacion;
         this.monto = monto;
         this.frecuenciaDonacion = frecuenciaDonacion;
-
-        //this.persona = persona;
     }
-    // CONSTRUCTOR PARA EL IMPORTDOR DE SCV
-    public DonarDinero(Double monto, LocalDateTime fechaDonacion) {
-        this.tiposPersonasHabilitadas = Arrays.asList(TipoPersona.PJ, TipoPersona.PH);
-        this.monto = monto;
-        this.fechaDonacion = fechaDonacion;
-        this.frecuenciaDonacion = FrecuenciaDonacion.UNICA; // es unica? TODO
 
+    // CONSTRUCTOR PARA IMPORTADOR CSV
+    public DonarDinero(LocalDateTime fechaDonacion, Double monto) {
+        this.tiposPersonasHabilitadas = Arrays.asList(TipoPersona.PJ, TipoPersona.PH);
+        this.fechaColaboracion = fechaDonacion;
+        this.monto = monto;
+        this.frecuenciaDonacion = FrecuenciaDonacion.UNICA; // es unica? TODO
     }
 
     @Override

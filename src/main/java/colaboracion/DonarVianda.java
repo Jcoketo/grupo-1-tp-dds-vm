@@ -11,19 +11,17 @@ public class DonarVianda extends Colaboracion{
     private Vianda vianda;
     private Heladera heladera;
 
-    //CONSTRUCTOR
-    /*
+    //CONSTRUCTOR PRINCIPAL
     public DonarVianda(Vianda vianda, Heladera heladera) {
         this.tiposPersonasHabilitadas = Arrays.asList(TipoPersona.PH);
         this.vianda = vianda;
         this.heladera = heladera;
-        //this.persona = persona;
-        //TODO
-    }*/
+    };
 
+    // CONSTRUCTOR PARA IMPORTADOR CSV
     public DonarVianda(LocalDateTime fechaDonacion) {
         this.tiposPersonasHabilitadas = Arrays.asList(TipoPersona.PH);
-        this.fechaDonacion = fechaDonacion;
+        this.fechaColaboracion = fechaDonacion;
     }
 
     @Override

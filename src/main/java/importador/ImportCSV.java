@@ -91,7 +91,7 @@ public class ImportCSV {
 
                 switch (formaColaboracion) {
                     case "DINERO":
-                        DonarDinero donacionDinero = new DonarDinero(Double.parseDouble(cantidad), fechaColaboracionAux); //cantidad es un Double
+                        DonarDinero donacionDinero = new DonarDinero(fechaColaboracionAux, Double.parseDouble(cantidad)); //cantidad es un Double
                         colaborador.agregarColaboracion(donacionDinero);
                         donacionDinero.incrementarPuntos(colaborador);
 

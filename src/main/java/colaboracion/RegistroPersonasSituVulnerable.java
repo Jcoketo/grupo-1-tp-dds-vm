@@ -32,7 +32,7 @@ public class RegistroPersonasSituVulnerable extends Colaboracion{
         this.tarjetasRepartidas = new ArrayList<TarjetaPlastica>();
 
         this.cantidadTarjetas = cantidadTarjetas;
-        this.fechaDonacion = fechaDonacion;
+        this.fechaColaboracion = fechaDonacion;
     }
 
     @Override
