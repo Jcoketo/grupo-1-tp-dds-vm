@@ -3,56 +3,59 @@ package personas;
 import colaboracion.Colaboracion;
 import colaboracion.Oferta;
 import lombok.Getter;
-import lombok.Setter;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Colaborador {
     @Getter protected List<MedioDeContacto> mediosDeContacto;
-    protected String direccion;
+    @Getter protected String direccion;
     protected List<Colaboracion> colaboracionesRealizadas;
-    protected Float puntaje;
+    protected Double puntaje;
     protected List<Oferta> canjesRealizados;
     protected Boolean validada;
     @Getter protected TipoPersona tipo;
-
 
     public Colaborador(MedioDeContacto medioDeContacto) {
         this.mediosDeContacto = new ArrayList<MedioDeContacto>();
         this.mediosDeContacto.add(medioDeContacto);
         this.colaboracionesRealizadas = new ArrayList<>();
+        this.puntaje = 0.0;
     }
 
-    public void agregarMediosDeContacto(List<MedioDeContacto> nuevosMedios) throws IllegalArgumentException {
-        if (nuevosMedios.isEmpty()) {
-            throw new IllegalArgumentException("La lista de contactos no puede estar vacía.");
-        }
-        this.mediosDeContacto.addAll(nuevosMedios);
-    }
-
-    public void colaborar(Colaboracion colaboracion) {
-        agregarColaboracion(colaboracion);
+    public void agregarMediosDeContacto(MedioDeContacto ... medioDeContactos) {
+        Collections.addAll(this.mediosDeContacto, medioDeContactos);
     }
 
     public void agregarColaboracion(Colaboracion colaboracion){
         this.colaboracionesRealizadas.add(colaboracion);
     }
 
-    public void canjerPuntos(Oferta oferta){
+    public void incrementarPuntaje(Double puntaje){
+        this.puntaje += puntaje;
+    }
 
+    public void canjearPuntos(Oferta oferta){
+        Double puntosNecesarios = oferta.getPuntosNecesarios();
+        if(puntaje > puntosNecesarios){
+            puntaje -= puntosNecesarios;
+            this.canjesRealizados.add(oferta);
+        }
+        else {
+            System.out.println("Esta persona no posee los puntos necesarios para canjear esa oferta!");
+        }
     }
 
     public void validarDatos(){
-        //TODO COMPLETAR DATOS CUANDO SE CREA SU USUARIO X CARGA MASIVA
-
+        // Este método valida que la cuenta ya tiene usuario y contraseña.
+        // En caso afirmativo, cambia el valor del atributo en TRUE.
         this.validada = Boolean.TRUE;
     }
 
     protected void iniciarSesion() {
         //TODO
     }
-
 
     public String getEmail(){
         for ( MedioDeContacto contactoAux : this.mediosDeContacto )
@@ -61,7 +64,6 @@ public class Colaborador {
             }
         return null;
     }
-
 
     public String getUniqueIdentifier() {
 
@@ -75,9 +77,5 @@ public class Colaborador {
 
         return null;
 
-    }
-
-    public void incrementarPuntaje(Float puntaje){
-        this.puntaje += puntaje;
     }
 }

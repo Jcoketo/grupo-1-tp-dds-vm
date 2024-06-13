@@ -8,6 +8,7 @@ import java.util.Arrays;
 
 public class HacerseCargoHeladera extends Colaboracion{
     private Heladera heladera;
+    private static Double coeficiente = 5.0;
 
     public HacerseCargoHeladera(Heladera heladera) {
         this.tiposPersonasHabilitadas = Arrays.asList(TipoPersona.PJ);
@@ -16,7 +17,14 @@ public class HacerseCargoHeladera extends Colaboracion{
 
     @Override
     public void hacerColaboracion(Colaborador colaborador) {
-        //TODO
+        if(validar(colaborador)){
+            incrementarPuntos(colaborador);
+            colaborador.agregarColaboracion(this);
+        }
+        else {
+            System.out.println("Error!!!");
+            System.out.println("Ese Tipo de Persona no puede realizar este tipo de Colaboración!");
+        }
     }
 
     @Override
@@ -26,10 +34,9 @@ public class HacerseCargoHeladera extends Colaboracion{
 
     @Override
     public void incrementarPuntos(Colaborador colaborador){
-        //TODO
-        // ENTIENDO QUE LA CRONE TASK DEBERIA LLAMAR A ESTE METODO POR CADA HELADERA QUE SE HACE CARGO
-        // ENTONCES VA A INCREMENTAR 5 PUNTOS POR CADA HELADERA QUE SE HACE CARGO
-        colaborador.incrementarPuntaje(5F);
+        //TODO: este método se ejecutaría de manera CRON-TASK cada 30 días o una vez por mes (en un día determinado).
+        // Por lo tanto incrementa el puntaje del colaborador en 5, en cada una de las heladeras que la Persona se hizo cargo.
+        colaborador.incrementarPuntaje(coeficiente);
     }
 
 }

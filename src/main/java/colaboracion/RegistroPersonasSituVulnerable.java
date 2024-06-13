@@ -6,7 +6,6 @@ import personas.PersonaVulnerable;
 import personas.TipoPersona;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -15,6 +14,7 @@ public class RegistroPersonasSituVulnerable extends Colaboracion{
     private Integer cantidadTarjetas;
     private List<TarjetaPlastica> tarjetasDisponibles;
     private List<TarjetaPlastica> tarjetasRepartidas;
+    private static Double coeficiente = 2.0;
 
 
     // Interpreto que en el constructor recibimos la cantidad de tarjetas a repartir
@@ -27,7 +27,7 @@ public class RegistroPersonasSituVulnerable extends Colaboracion{
         this.cantidadTarjetas = cantidadTarjetas;
     }
     // CONSTRUCTOR PARA IMPORTADOR SCV
-    public RegistroPersonasSituVulnerable(Integer cantidadTarjetas, LocalDate fechaDonacion) {
+    public RegistroPersonasSituVulnerable(LocalDate fechaDonacion, Integer cantidadTarjetas) {
         this.tiposPersonasHabilitadas = Arrays.asList(TipoPersona.PH);
         this.tarjetasDisponibles = new ArrayList<TarjetaPlastica>();
         this.tarjetasRepartidas = new ArrayList<TarjetaPlastica>();
@@ -38,19 +38,30 @@ public class RegistroPersonasSituVulnerable extends Colaboracion{
 
     @Override
     public void hacerColaboracion(Colaborador colaborador) {
-        //TODO
-        // Hay que validar que la persona tenga direccion/domicilio!
+        if(validar(colaborador)){
+            incrementarPuntos(colaborador);
+            colaborador.agregarColaboracion(this);
+        }
+        else {
+            System.out.println("Error!!!");
+            if(colaborador.getDireccion() != null) {
+                System.out.println("Esa Persona no tiene una dirección!");
+            }
+            else {
+                System.out.println("Ese Tipo de Persona no puede realizar este tipo de Colaboración!");
+            }
+        }
     }
 
     @Override
     public boolean validar(Colaborador colaborador){
-        return this.tiposPersonasHabilitadas.contains(colaborador.getTipo());
+        return this.tiposPersonasHabilitadas.contains(colaborador.getTipo()) && colaborador.getDireccion() != null;
     }
 
     @Override
     public void incrementarPuntos(Colaborador colaborador){
-        colaborador.incrementarPuntaje((float) this.cantidadTarjetas);
-    } //entiendo que ya fueron repartidas
+        colaborador.incrementarPuntaje((double) this.cantidadTarjetas * coeficiente);
+    } // Nosotros entendemos que las tarjetas ya fueron repartidas.
 
     public void darAltaPersonaVulnerable(){
         //TODO

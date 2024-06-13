@@ -5,7 +5,6 @@ import personas.TipoPersona;
 import personas.Colaborador;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.Arrays;
 
 public class DistribucionDeViandas extends Colaboracion {
@@ -13,16 +12,18 @@ public class DistribucionDeViandas extends Colaboracion {
     private Heladera heladeraDestino;
     private int cantidadViandas;
     private MotivoDistribucion motivoDistribucion;
+    private static Double coeficiente = 1.0;
 
 
     // CONSTRUCTOR PRINCIPAL
     public DistribucionDeViandas(TipoPersona persona, Integer cantidadViandas, Heladera heladeraOrigen, Heladera heladeraDestino, MotivoDistribucion motivoDistribucion, LocalDate fechaDistribucion) {
         this.tiposPersonasHabilitadas = Arrays.asList(TipoPersona.PH);
+        this.fechaColaboracion = fechaDistribucion;
+
         this.heladeraOrigen = heladeraOrigen;
         this.heladeraDestino = heladeraDestino;
         this.cantidadViandas = cantidadViandas;
         this.motivoDistribucion = motivoDistribucion;
-        this.fechaColaboracion = fechaDistribucion;
     }
 
     // CONSTRUCTOR PARA IMPORTADOR CSV
@@ -40,8 +41,14 @@ public class DistribucionDeViandas extends Colaboracion {
 
     @Override
     public void hacerColaboracion(Colaborador colaborador) {
-        //TODO
-        incrementarPuntos(colaborador);
+        if(validar(colaborador)){
+            incrementarPuntos(colaborador);
+            colaborador.agregarColaboracion(this);
+        }
+        else {
+            System.out.println("Error!!!");
+            System.out.println("Ese Tipo de Persona no puede realizar este tipo de Colaboración!");
+        }
     }
 
     @Override
@@ -50,8 +57,8 @@ public class DistribucionDeViandas extends Colaboracion {
     }
 
     @Override
-    public void incrementarPuntos(Colaborador colaborador){ colaborador.incrementarPuntaje((float) this.cantidadViandas); }
-
+    public void incrementarPuntos(Colaborador colaborador) {
+        colaborador.incrementarPuntaje((double) this.cantidadViandas * coeficiente);
+    }
 
 }
-

@@ -13,7 +13,14 @@ public class OfrecerRecompensa extends Colaboracion{
     }
     @Override
     public void hacerColaboracion(Colaborador colaborador) {
-        //TODO
+        if(validar(colaborador)){
+            incrementarPuntos(colaborador);
+            colaborador.agregarColaboracion(this);
+        }
+        else {
+            System.out.println("Error!!!");
+            System.out.println("Ese Tipo de Persona no puede realizar este tipo de Colaboración!");
+        }
     }
 
     @Override
@@ -22,6 +29,8 @@ public class OfrecerRecompensa extends Colaboracion{
     }
 
     @Override
-    public void incrementarPuntos(Colaborador colaborador){}
+    public void incrementarPuntos(Colaborador colaborador){
+        // No especifica cuantos puntos gana el colaborador...
+    }
 
 }

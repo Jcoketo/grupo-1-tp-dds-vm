@@ -4,12 +4,10 @@ import personas.TipoPersona;
 import personas.Colaborador;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 
 public abstract class Colaboracion {
     protected List<TipoPersona> tiposPersonasHabilitadas;
-    protected int coeficiente;
     protected LocalDate fechaColaboracion;
 
     public abstract void hacerColaboracion(Colaborador colaborador);
@@ -25,6 +23,5 @@ public abstract class Colaboracion {
         }
         return true;
     }*/
-
 
 }

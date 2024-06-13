@@ -5,12 +5,12 @@ import personas.TipoPersona;
 import personas.Colaborador;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.Arrays;
 
 public class DonarVianda extends Colaboracion{
     private Vianda vianda;
     private Heladera heladera;
+    private static Double coeficiente = 1.5;
 
     //CONSTRUCTOR PRINCIPAL
     public DonarVianda(Vianda vianda, Heladera heladera) {
@@ -27,22 +27,24 @@ public class DonarVianda extends Colaboracion{
 
     @Override
     public void hacerColaboracion(Colaborador colaborador) {
-        //TODO
-        incrementarPuntos(colaborador);
+        if(validar(colaborador)){
+            incrementarPuntos(colaborador);
+            colaborador.agregarColaboracion(this);
+        }
+        else {
+            System.out.println("Error!!!");
+            System.out.println("Ese Tipo de Persona no puede realizar este tipo de Colaboración!");
+        }
     }
 
     @Override
-    public boolean validar(Colaborador colaborador){
+    public boolean validar(Colaborador colaborador) {
         return this.tiposPersonasHabilitadas.contains(colaborador.getTipo());
     }
 
     @Override
-    public void incrementarPuntos(Colaborador colaborador){ colaborador.incrementarPuntaje(1.5F);}
+    public void incrementarPuntos(Colaborador colaborador) {
+        colaborador.incrementarPuntaje(coeficiente);
+    }
 
-    // se va a incrementar en 1,5 puntos por cada donacion de vianda
-    /*
-    @Override
-    public String getTipo() {
-        return "DONAR_VIANDA";
-    }*/
 }

@@ -1,23 +1,23 @@
 package colaboracion;
 
-import personas.TipoPersona;
 import lombok.Getter;
+import personas.TipoPersona;
 import personas.Colaborador;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.Arrays;
 
 public class DonarDinero extends Colaboracion{
     @Getter private Double monto;
-    private FrecuenciaDonacion frecuenciaDonacion;
+    private FrecuenciaDonacion frecuencia;
+    private static Double coeficiente = 1.5;
 
     // CONSTRUCTOR PRINCIPAL
     public DonarDinero(LocalDate fechaDonacion, Double monto, FrecuenciaDonacion frecuenciaDonacion) {
         this.tiposPersonasHabilitadas = Arrays.asList(TipoPersona.PJ, TipoPersona.PH);
         this.fechaColaboracion = fechaDonacion;
         this.monto = monto;
-        this.frecuenciaDonacion = frecuenciaDonacion;
+        this.frecuencia = frecuenciaDonacion;
     }
 
     // CONSTRUCTOR PARA IMPORTADOR CSV
@@ -25,16 +25,19 @@ public class DonarDinero extends Colaboracion{
         this.tiposPersonasHabilitadas = Arrays.asList(TipoPersona.PJ, TipoPersona.PH);
         this.fechaColaboracion = fechaDonacion;
         this.monto = monto;
-        this.frecuenciaDonacion = FrecuenciaDonacion.UNICA; // es unica? TODO
+        this.frecuencia = FrecuenciaDonacion.UNICA; // Es unica? TODO
     }
 
     @Override
-    public void incrementarPuntos(Colaborador colaborador){ colaborador.incrementarPuntaje((float) (monto*0.5));}
-
-    @Override
     public void hacerColaboracion(Colaborador colaborador) {
-        incrementarPuntos(colaborador);
-        //TODO
+        if(validar(colaborador)){
+            incrementarPuntos(colaborador);
+            colaborador.agregarColaboracion(this);
+        }
+        else {
+            System.out.println("Error!!!");
+            System.out.println("Ese Tipo de Persona no puede realizar este tipo de Colaboración!");
+        }
     }
 
     @Override
@@ -42,8 +45,9 @@ public class DonarDinero extends Colaboracion{
         return this.tiposPersonasHabilitadas.contains(colaborador.getTipo());
     }
 
-    /*
-    public String getTipo() {
-        return "DONAR_DINERO";
-    }*/
+    @Override
+    public void incrementarPuntos(Colaborador colaborador){
+        colaborador.incrementarPuntaje(this.monto * coeficiente);
+    }
+
 }

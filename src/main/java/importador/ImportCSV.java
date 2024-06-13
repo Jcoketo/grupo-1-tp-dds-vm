@@ -92,13 +92,13 @@ public class ImportCSV {
                         DonarDinero donacionDinero = new DonarDinero(fechaColaboracionAux, Double.parseDouble(cantidad)); //cantidad es un Double
                         colaborador.agregarColaboracion(donacionDinero);
                         donacionDinero.incrementarPuntos(colaborador);
-
                         break;
                     case "DONACION_VIANDAS":
-                        // que hacemos con la cantidad?
                         DonarVianda donacionVianda = new DonarVianda(fechaColaboracionAux);
                         colaborador.agregarColaboracion(donacionVianda);
-                        donacionVianda.incrementarPuntos(colaborador);
+                        for(int i=0; i < Integer.parseInt(cantidad); i++) {
+                            donacionVianda.incrementarPuntos(colaborador);
+                        }
                         break;
                     case "REDISTRIBUCION_VIANDAS":
                         DistribucionDeViandas donacionDistribucion = new DistribucionDeViandas(fechaColaboracionAux, Integer.parseInt(cantidad));
@@ -106,7 +106,7 @@ public class ImportCSV {
                         donacionDistribucion.incrementarPuntos(colaborador);
                         break;
                     case "ENTREGA_TARJETAS":
-                        RegistroPersonasSituVulnerable registroPersonasSituVulnerable = new RegistroPersonasSituVulnerable(Integer.parseInt(cantidad), fechaColaboracionAux);
+                        RegistroPersonasSituVulnerable registroPersonasSituVulnerable = new RegistroPersonasSituVulnerable(fechaColaboracionAux, Integer.parseInt(cantidad));
                         colaborador.agregarColaboracion(registroPersonasSituVulnerable);
                         registroPersonasSituVulnerable.incrementarPuntos(colaborador);
                         break;

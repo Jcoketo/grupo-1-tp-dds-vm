@@ -1,15 +1,16 @@
 package colaboracion;
 
+import lombok.Getter;
 import personas.Rubro;
 
 public class Oferta {
     private String nombre;
     private TipoOferta tipoOferta;
     private Rubro rubro;
-    private Float puntosNecesarios;
+    @Getter private Double puntosNecesarios;
     private String imagen;
 
-    public Oferta(String nombre, Float puntosNecesarios) {
+    public Oferta(String nombre, Double puntosNecesarios) {
         this.nombre = nombre;
         this.puntosNecesarios = puntosNecesarios;
     }

@@ -4,8 +4,6 @@ import colaboracion.Colaboracion;
 import lombok.Getter;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 public class PersonaHumana extends Colaborador{
@@ -29,11 +27,7 @@ public class PersonaHumana extends Colaborador{
         this.nombre = nombre;
         this.apellido = apellido;
         this.documento = new Documento(nroDocumento,tipoDocumento);
-        this.tipo = TipoPersona.PH; // Obligatorio
+        this.tipo = TipoPersona.PH;
     }
 
-    public void colaborar(Colaboracion colaboracion) {
-        this.colaboracionesPosibles.add(colaboracion);
-        //TODO
-    }
 }
