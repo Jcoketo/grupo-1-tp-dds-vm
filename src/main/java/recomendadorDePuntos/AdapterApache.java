@@ -1,9 +1,11 @@
 package recomendadorDePuntos;
 
+import elementos.PuntoEstrategico;
 import recomendadorDePuntos.apiMock.ApiMockCall;
-import recomendadorDePuntos.apiMock.dtos.PuntoEstrategico;
+import recomendadorDePuntos.apiMock.dtos.PuntoDeColocacion;
 import lombok.SneakyThrows;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -11,8 +13,20 @@ public class AdapterApache implements AdapterRecomendador{
     private ApiMockCall servicioApache = ApiMockCall.getInstancia();
 
     @SneakyThrows // Esto es para catchear la Exception.
-    public List<PuntoEstrategico> obtenerPuntosIdeales(Double latitud, Double longitud, Double radio) {
-        PuntoEstrategico[] puntosEstrategicos = servicioApache.obtenerPuntosEstrategicos(latitud, longitud, radio);
-        return Arrays.stream(puntosEstrategicos).toList(); // Chequear esto.
+    public List<PuntoEstrategico> obtenerPuntosDeColocacion(Double latitud, Double longitud, Double radio) {
+        PuntoDeColocacion[] puntos = servicioApache.obtenerPuntosDeColocacion(latitud, longitud, radio);
+        List<PuntoDeColocacion> puntosDeColocacion = Arrays.stream(puntos).toList();
+
+        return this.convertirEnPuntosEstrategicos(puntosDeColocacion);
+    };
+
+    private List<PuntoEstrategico> convertirEnPuntosEstrategicos (List<PuntoDeColocacion> puntosDeColocacion) {
+        List<PuntoEstrategico> puntosEstrategicos = new ArrayList<PuntoEstrategico>();
+        for(PuntoDeColocacion punto : puntosDeColocacion) {
+            PuntoEstrategico puntoEstrategico = new PuntoEstrategico(punto.getLatitud(), punto.getLongitud());
+            puntosEstrategicos.add(puntoEstrategico);
+        }
+
+        return puntosEstrategicos;
     };
 }

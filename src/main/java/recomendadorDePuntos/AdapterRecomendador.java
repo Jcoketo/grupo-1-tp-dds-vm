@@ -1,9 +1,10 @@
 package recomendadorDePuntos;
 
-import recomendadorDePuntos.apiMock.dtos.PuntoEstrategico;
+import elementos.PuntoEstrategico;
+import recomendadorDePuntos.apiMock.dtos.PuntoDeColocacion;
 
 import java.util.List;
 
 public interface AdapterRecomendador {
-    List<PuntoEstrategico> obtenerPuntosIdeales(Double latitud, Double longitud, Double radio);
+    List<PuntoEstrategico> obtenerPuntosDeColocacion(Double latitud, Double longitud, Double radio);
 }

@@ -8,7 +8,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Heladera {
-    private Ubicacion ubicacion;
+    private PuntoEstrategico puntoEstrategico;
     private String nombre;
     private int viandasMaximas;
     private List<Vianda> viandas;

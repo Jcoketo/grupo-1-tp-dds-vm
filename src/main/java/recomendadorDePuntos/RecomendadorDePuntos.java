@@ -1,6 +1,7 @@
 package recomendadorDePuntos;
 
-import recomendadorDePuntos.apiMock.dtos.PuntoEstrategico;
+import elementos.PuntoEstrategico;
+import recomendadorDePuntos.apiMock.dtos.PuntoDeColocacion;
 
 import java.util.List;
 
@@ -19,7 +20,7 @@ public class RecomendadorDePuntos {
         adapter = new AdapterApache();
     }
 
-    public List<PuntoEstrategico> obtenerPuntosIdeales(Double latitud, Double longitud, Double radio) {
-        return adapter.obtenerPuntosIdeales(latitud, longitud, radio);
+    public List<PuntoEstrategico> obtenerPuntosRecomendados(Double latitud, Double longitud, Double radio) {
+        return adapter.obtenerPuntosDeColocacion(latitud, longitud, radio);
     }
 }
