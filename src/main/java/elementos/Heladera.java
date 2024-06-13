@@ -15,7 +15,7 @@ public class Heladera {
     @Setter private int viandasMaximas;
     private List<Vianda> viandas;
     @Getter private LocalDate fechaFuncionamiento;
-    @Setter private Boolean activa;
+    @Getter @Setter private Boolean activa;
     @Getter @Setter private Float temperaturaMaxima;
     @Getter @Setter private Float temperaturaMinima;
 

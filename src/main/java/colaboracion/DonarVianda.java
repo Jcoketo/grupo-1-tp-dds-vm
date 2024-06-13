@@ -4,6 +4,7 @@ import elementos.Heladera;
 import personas.TipoPersona;
 import personas.Colaborador;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 
@@ -19,7 +20,7 @@ public class DonarVianda extends Colaboracion{
     };
 
     // CONSTRUCTOR PARA IMPORTADOR CSV
-    public DonarVianda(LocalDateTime fechaDonacion) {
+    public DonarVianda(LocalDate fechaDonacion) {
         this.tiposPersonasHabilitadas = Arrays.asList(TipoPersona.PH);
         this.fechaColaboracion = fechaDonacion;
     }

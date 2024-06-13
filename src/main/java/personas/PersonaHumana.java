@@ -5,6 +5,7 @@ import lombok.Getter;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 public class PersonaHumana extends Colaborador{
@@ -12,12 +13,19 @@ public class PersonaHumana extends Colaborador{
     private String apellido;
     private LocalDate fechaNacimiento;
     private List<Colaboracion> colaboracionesPosibles;
-
     @Getter private Documento documento;
 
-    // En el Constructor deben ir solo los datos obligatorios! Hay que arreglarlo.
-    public PersonaHumana(TipoDocumento tipoDocumento, String nroDocumento, String nombre, String apellido, String email, List<MedioDeContacto> mediosDeContacto) {
-        super(mediosDeContacto);
+    // CONSTRUCTOR PRINCIPAL
+    public PersonaHumana(String nombre, String apellido, MedioDeContacto medioDeContacto) {
+        super(medioDeContacto);
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.tipo = TipoPersona.PH;
+    }
+
+    // COSNTRUCTOR PARA IMPORTADOR CSV
+    public PersonaHumana(TipoDocumento tipoDocumento, String nroDocumento, String nombre, String apellido, MedioDeContacto medioDeContacto) {
+        super(medioDeContacto);
         this.nombre = nombre;
         this.apellido = apellido;
         this.documento = new Documento(nroDocumento,tipoDocumento);

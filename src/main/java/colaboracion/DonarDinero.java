@@ -13,7 +13,7 @@ public class DonarDinero extends Colaboracion{
     private FrecuenciaDonacion frecuenciaDonacion;
 
     // CONSTRUCTOR PRINCIPAL
-    public DonarDinero(LocalDateTime fechaDonacion, Double monto, FrecuenciaDonacion frecuenciaDonacion) {
+    public DonarDinero(LocalDate fechaDonacion, Double monto, FrecuenciaDonacion frecuenciaDonacion) {
         this.tiposPersonasHabilitadas = Arrays.asList(TipoPersona.PJ, TipoPersona.PH);
         this.fechaColaboracion = fechaDonacion;
         this.monto = monto;
@@ -21,7 +21,7 @@ public class DonarDinero extends Colaboracion{
     }
 
     // CONSTRUCTOR PARA IMPORTADOR CSV
-    public DonarDinero(LocalDateTime fechaDonacion, Double monto) {
+    public DonarDinero(LocalDate fechaDonacion, Double monto) {
         this.tiposPersonasHabilitadas = Arrays.asList(TipoPersona.PJ, TipoPersona.PH);
         this.fechaColaboracion = fechaDonacion;
         this.monto = monto;
