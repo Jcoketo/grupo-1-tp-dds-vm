@@ -16,7 +16,7 @@ public class DistribucionDeViandas extends Colaboracion {
 
 
     // CONSTRUCTOR PRINCIPAL
-    public DistribucionDeViandas(TipoPersona persona, Integer cantidadViandas, Heladera heladeraOrigen, Heladera heladeraDestino, MotivoDistribucion motivoDistribucion, LocalDateTime fechaDistribucion) {
+    public DistribucionDeViandas(TipoPersona persona, Integer cantidadViandas, Heladera heladeraOrigen, Heladera heladeraDestino, MotivoDistribucion motivoDistribucion, LocalDate fechaDistribucion) {
         this.tiposPersonasHabilitadas = Arrays.asList(TipoPersona.PH);
         this.heladeraOrigen = heladeraOrigen;
         this.heladeraDestino = heladeraDestino;
@@ -26,7 +26,7 @@ public class DistribucionDeViandas extends Colaboracion {
     }
 
     // CONSTRUCTOR PARA IMPORTADOR CSV
-    public DistribucionDeViandas(LocalDateTime fechaDistribucion, Integer cantidadViandas)
+    public DistribucionDeViandas(LocalDate fechaDistribucion, Integer cantidadViandas)
     {
         this.tiposPersonasHabilitadas = Arrays.asList(TipoPersona.PH);
         this.fechaColaboracion  = fechaDistribucion;

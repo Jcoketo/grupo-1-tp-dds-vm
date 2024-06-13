@@ -27,7 +27,7 @@ public class ImportCSV {
                     .parse(reader);
             for (CSVRecord record : csvParser) {
                 String tipoDoc = record.get(0);
-                String documento = record.get(1);
+                String nroDocumento = record.get(1);
                 String nombre = record.get(2);
                 String apellido = record.get(3);
                 String mail = record.get(4);
@@ -35,7 +35,7 @@ public class ImportCSV {
                 String formaColaboracion = record.get(6);
                 String cantidad = record.get(7);
 
-                if (tipoDoc.length() > 3 || documento.length() > 10 || nombre.length() > 50
+                if (tipoDoc.length() > 3 || nroDocumento.length() > 10 || nombre.length() > 50
                         || apellido.length() > 50 || mail.length() > 50
                         || fecha.length() > 10 || formaColaboracion.length() > 22
                         || cantidad.length() > 7) {
@@ -65,17 +65,15 @@ public class ImportCSV {
                         continue; // busca el siguiente registro
                 }
 
-                String identificadorUnico = tipoDocumento + documento;
+                String identificadorUnico = tipoDocumento + nroDocumento;
 
                 RepositorioColaboradores repoColaboradores = RepositorioColaboradores.getInstancia();
                 Colaborador colaborador = repoColaboradores.existeColaborador(identificadorUnico);
 
                 if (colaborador == null) { // NO EXISTE COLABORADOR
                     MedioDeContacto medioDeContacto = new MedioDeContacto(TipoMedioDeContacto.MAIL, mail);
-                    ArrayList<MedioDeContacto> mediosDeContacto = new ArrayList<>();
-                    mediosDeContacto.add(medioDeContacto);
 
-                    colaborador = new PersonaHumana(tipoDocumento, documento, nombre, apellido, mail, mediosDeContacto);
+                    colaborador = new PersonaHumana(tipoDocumento, nroDocumento, nombre, apellido, medioDeContacto);
                     repoColaboradores.agregar(colaborador);
 
                     String password = PasswordGenerator.generatePassword();
@@ -87,7 +85,7 @@ public class ImportCSV {
                 }
 
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy"); // Va ese formato para la fecha que levanta del CSV
-                LocalDateTime fechaColaboracionAux = LocalDate.parse(fecha, formatter).atStartOfDay(); // Levanta este formato dd/MM/yyyy y lo convierte a LocalDateTime agregandole la hora 00:00:00
+                LocalDate fechaColaboracionAux = LocalDate.parse(fecha, formatter); // Levanta este formato dd/MM/yyyy y lo convierte a LocalDate.
 
                 switch (formaColaboracion) {
                     case "DINERO":
@@ -122,7 +120,7 @@ public class ImportCSV {
                 /* IMPRIME LOS DATOS LEVANTADOS DEL CSV X PANTALLA
                 System.out.println("Record No - " + record.getRecordNumber());
                 System.out.println("TipoDoc: " + tipoDoc);
-                System.out.println("Documento: " + documento);
+                System.out.println("Documento: " + nroDocumento);
                 System.out.println("Nombre: " + nombre);
                 System.out.println("Apellido: " + apellido);
                 System.out.println("mail: " + mail);

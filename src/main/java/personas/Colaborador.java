@@ -17,9 +17,11 @@ public class Colaborador {
     protected Boolean validada;
     @Getter protected TipoPersona tipo;
 
-    public Colaborador(List<MedioDeContacto> mediosDeContacto) {
+
+    public Colaborador(MedioDeContacto medioDeContacto) {
+        this.mediosDeContacto = new ArrayList<MedioDeContacto>();
+        this.mediosDeContacto.add(medioDeContacto);
         this.colaboracionesRealizadas = new ArrayList<>();
-        agregarMediosDeContacto(mediosDeContacto);
     }
 
     public void agregarMediosDeContacto(List<MedioDeContacto> nuevosMedios) throws IllegalArgumentException {
@@ -79,4 +81,3 @@ public class Colaborador {
         this.puntaje += puntaje;
     }
 }
-
