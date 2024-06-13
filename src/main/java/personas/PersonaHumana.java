@@ -16,9 +16,7 @@ public class PersonaHumana extends Colaborador{
     @Getter private Documento documento;
 
     // En el Constructor deben ir solo los datos obligatorios! Hay que arreglarlo.
-    public PersonaHumana(TipoDocumento tipoDocumento, String nroDocumento, String nombre, String apellido, String email,
-                         List<MedioDeContacto> mediosDeContacto) {
-
+    public PersonaHumana(TipoDocumento tipoDocumento, String nroDocumento, String nombre, String apellido, String email, List<MedioDeContacto> mediosDeContacto) {
         super(mediosDeContacto);
         this.nombre = nombre;
         this.apellido = apellido;

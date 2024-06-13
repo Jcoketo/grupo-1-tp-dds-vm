@@ -9,7 +9,7 @@ import java.util.List;
 public abstract class Colaboracion {
     protected List<TipoPersona> tiposPersonasHabilitadas;
     protected int coeficiente;
-    protected LocalDateTime fechaDonacion;
+    protected LocalDateTime fechaColaboracion;
 
     public abstract void hacerColaboracion(Colaborador colaborador);
 

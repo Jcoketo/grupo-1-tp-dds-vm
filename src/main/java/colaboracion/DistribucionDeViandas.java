@@ -13,22 +13,23 @@ public class DistribucionDeViandas extends Colaboracion {
     private Heladera heladeraDestino;
     private int cantidadViandas;
     private MotivoDistribucion motivoDistribucion;
-    private LocalDateTime fechaDistribucion;
 
-    public DistribucionDeViandas(TipoPersona persona, Integer cantidadViandas, Heladera heladeraOrigen, Heladera heladeraDestino, MotivoDistribucion motivoDistribucion) {
+
+    // CONSTRUCTOR PRINCIPAL
+    public DistribucionDeViandas(TipoPersona persona, Integer cantidadViandas, Heladera heladeraOrigen, Heladera heladeraDestino, MotivoDistribucion motivoDistribucion, LocalDateTime fechaDistribucion) {
         this.tiposPersonasHabilitadas = Arrays.asList(TipoPersona.PH);
-        this.cantidadViandas = cantidadViandas;
         this.heladeraOrigen = heladeraOrigen;
         this.heladeraDestino = heladeraDestino;
+        this.cantidadViandas = cantidadViandas;
         this.motivoDistribucion = motivoDistribucion;
-        this.fechaDistribucion = LocalDateTime.now();
+        this.fechaColaboracion = fechaDistribucion;
     }
-    // CONSTRUCTOR PARA EL IMPORTADOR DE SCV
+
+    // CONSTRUCTOR PARA IMPORTADOR CSV
     public DistribucionDeViandas(LocalDateTime fechaDistribucion, Integer cantidadViandas)
     {
         this.tiposPersonasHabilitadas = Arrays.asList(TipoPersona.PH);
-        this.fechaDonacion  = fechaDistribucion;
-        this.fechaDistribucion = fechaDistribucion;
+        this.fechaColaboracion  = fechaDistribucion;
         this.cantidadViandas = cantidadViandas;
 
         this.heladeraDestino = null;

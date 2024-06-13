@@ -9,8 +9,9 @@ import java.util.Arrays;
 public class HacerseCargoHeladera extends Colaboracion{
     private Heladera heladera;
 
-    public HacerseCargoHeladera() {
+    public HacerseCargoHeladera(Heladera heladera) {
         this.tiposPersonasHabilitadas = Arrays.asList(TipoPersona.PJ);
+        this.heladera = heladera;
     }
 
     @Override
