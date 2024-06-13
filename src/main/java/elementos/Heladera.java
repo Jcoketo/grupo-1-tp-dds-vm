@@ -6,7 +6,7 @@ import lombok.Setter;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class Heladera {
@@ -16,8 +16,8 @@ public class Heladera {
     private List<Vianda> viandas;
     @Getter private LocalDate fechaFuncionamiento;
     @Getter @Setter private Boolean activa;
-    @Getter @Setter private Float temperaturaMaxima;
-    @Getter @Setter private Float temperaturaMinima;
+    @Getter private Float temperaturaMaxima;
+    @Getter private Float temperaturaMinima;
 
     public Heladera(int capacidadMaxima, LocalDate fechaFuncionamiento){
         this.viandas = new ArrayList<Vianda>();
@@ -27,7 +27,7 @@ public class Heladera {
     }
 
     public void agregarVianda(Vianda... viandas) {
-        this.viandas.addAll(Arrays.asList(viandas));
+        Collections.addAll(this.viandas, viandas);
     }
 
     public void setTempMaxima(Float temperatura){
