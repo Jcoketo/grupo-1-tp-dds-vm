@@ -1,5 +1,6 @@
 package colaboracion;
 
+import lombok.Setter;
 import elementos.Heladera;
 import personas.TipoPersona;
 import personas.Colaborador;
@@ -10,7 +11,7 @@ import java.util.Arrays;
 public class DonarVianda extends Colaboracion{
     private Vianda vianda;
     private Heladera heladera;
-    private static Double coeficiente = 1.5;
+    @Setter private static Double coeficiente = 1.5;
 
     //CONSTRUCTOR PRINCIPAL
     public DonarVianda(Vianda vianda, Heladera heladera) {

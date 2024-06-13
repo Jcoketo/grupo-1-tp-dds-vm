@@ -1,5 +1,6 @@
 package colaboracion;
 
+import lombok.Setter;
 import elementos.Heladera;
 import personas.TipoPersona;
 import personas.Colaborador;
@@ -12,7 +13,7 @@ public class DistribucionDeViandas extends Colaboracion {
     private Heladera heladeraDestino;
     private int cantidadViandas;
     private MotivoDistribucion motivoDistribucion;
-    private static Double coeficiente = 1.0;
+    @Setter private static Double coeficiente = 1.0;
 
 
     // CONSTRUCTOR PRINCIPAL
