@@ -1,6 +1,7 @@
 package colaboracion;
 
 import lombok.Getter;
+import lombok.Setter;
 import personas.TipoPersona;
 import personas.Colaborador;
 
@@ -10,7 +11,7 @@ import java.util.Arrays;
 public class DonarDinero extends Colaboracion{
     @Getter private Double monto;
     private FrecuenciaDonacion frecuencia;
-    private static Double coeficiente = 1.5;
+    @Setter private static Double coeficiente = 1.5;
 
     // CONSTRUCTOR PRINCIPAL
     public DonarDinero(LocalDate fechaDonacion, Double monto, FrecuenciaDonacion frecuenciaDonacion) {

@@ -1,5 +1,6 @@
 package colaboracion;
 
+import lombok.Setter;
 import elementos.Heladera;
 import personas.Colaborador;
 import personas.TipoPersona;
@@ -8,7 +9,7 @@ import java.util.Arrays;
 
 public class HacerseCargoHeladera extends Colaboracion{
     private Heladera heladera;
-    private static Double coeficiente = 5.0;
+    @Setter private static Double coeficiente = 5.0;
 
     public HacerseCargoHeladera(Heladera heladera) {
         this.tiposPersonasHabilitadas = Arrays.asList(TipoPersona.PJ);

@@ -1,5 +1,6 @@
 package colaboracion;
 
+import lombok.Setter;
 import elementos.TarjetaPlastica;
 import personas.Colaborador;
 import personas.PersonaVulnerable;
@@ -14,7 +15,7 @@ public class RegistroPersonasSituVulnerable extends Colaboracion{
     private Integer cantidadTarjetas;
     private List<TarjetaPlastica> tarjetasDisponibles;
     private List<TarjetaPlastica> tarjetasRepartidas;
-    private static Double coeficiente = 2.0;
+    @Setter private static Double coeficiente = 2.0;
 
 
     // Interpreto que en el constructor recibimos la cantidad de tarjetas a repartir
