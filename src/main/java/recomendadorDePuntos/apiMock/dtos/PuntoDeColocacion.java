@@ -1,16 +1,17 @@
 package recomendadorDePuntos.apiMock.dtos;
 
-public class PuntoEstrategico {
-    private Double latitud;
-    private Double longitud;
+import lombok.Getter;
 
+public class PuntoDeColocacion {
+    @Getter private Double latitud;
+    @Getter private Double longitud;
 
     public Double getLatitud() {
-        return latitud;
+        return this.latitud;
     }
 
     public Double getLongitud() {
-        return longitud;
+        return this.longitud;
     }
 
     public void setLatitud(Double latitud) {
@@ -21,4 +22,3 @@ public class PuntoEstrategico {
         this.longitud = longitud;
     }
 }
-

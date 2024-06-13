@@ -1,6 +1,6 @@
 package recomendadorDePuntos.apiMock;
 
-import recomendadorDePuntos.apiMock.dtos.PuntoEstrategico;
+import recomendadorDePuntos.apiMock.dtos.PuntoDeColocacion;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -18,7 +18,7 @@ public class ApiMockCall {
         return instancia;
     }
 
-    public PuntoEstrategico[] obtenerPuntosEstrategicos(Double latitud, Double longitud, Double radio) throws Exception {
+    public PuntoDeColocacion[] obtenerPuntosDeColocacion(Double latitud, Double longitud, Double radio) throws Exception {
         WebClient clientUsers = WebClient.create("https://05fdedf2-260a-4266-a358-c85cb1f7e468.mock.pstmn.io/api/puntosEstrategicos");
 
         ObjectMapper objectMapper = new ObjectMapper();
@@ -29,8 +29,8 @@ public class ApiMockCall {
         int status = response.getStatus();
         String responseBody = response.readEntity(String.class);
         if (status == 200) {
-            PuntoEstrategico[] puntosEstrategicos = objectMapper.readValue(responseBody, PuntoEstrategico[].class);
-            return puntosEstrategicos;
+            PuntoDeColocacion[] puntosDeColocacion = objectMapper.readValue(responseBody, PuntoDeColocacion[].class);
+            return puntosDeColocacion;
 
         } else {
             System.out.println("Error response = " + responseBody);

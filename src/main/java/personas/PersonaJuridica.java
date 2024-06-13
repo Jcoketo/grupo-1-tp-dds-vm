@@ -1,6 +1,7 @@
 package personas;
 
-import recomendadorDePuntos.apiMock.dtos.PuntoEstrategico;
+import elementos.PuntoEstrategico;
+import recomendadorDePuntos.apiMock.dtos.PuntoDeColocacion;
 import colaboracion.Colaboracion;
 import elementos.Heladera;
 import recomendadorDePuntos.RecomendadorDePuntos;
@@ -27,8 +28,8 @@ public class PersonaJuridica extends Colaborador{
         //TODO
     }
 
-    public List<PuntoEstrategico> obtenerRecomendaciones(Double latitud, Double longitud, Double radio) {
-        return RecomendadorDePuntos.getInstancia().obtenerPuntosIdeales(latitud, longitud, radio);
+    public List<PuntoEstrategico> obtenerPuntosRecomendados(Double latitud, Double longitud, Double radio) {
+        return RecomendadorDePuntos.getInstancia().obtenerPuntosRecomendados(latitud, longitud, radio);
     }
 
     public void sumarPuntosHeladeras() {
