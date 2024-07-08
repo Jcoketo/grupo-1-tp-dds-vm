@@ -9,23 +9,18 @@ import java.util.Collections;
 import java.util.List;
 
 public class Colaborador {
-    @Getter protected List<MedioDeContacto> mediosDeContacto;
+ 
     @Getter protected String direccion;
     protected List<Colaboracion> colaboracionesRealizadas;
     protected Double puntaje;
     protected List<Oferta> canjesRealizados;
     protected Boolean validada;
-    @Getter protected TipoPersona tipo;
+    protected Persona persona;
+  
 
-    public Colaborador(MedioDeContacto medioDeContacto) {
-        this.mediosDeContacto = new ArrayList<MedioDeContacto>();
-        this.mediosDeContacto.add(medioDeContacto);
+    public Colaborador() {
         this.colaboracionesRealizadas = new ArrayList<>();
         this.puntaje = 0.0;
-    }
-
-    public void agregarMediosDeContacto(MedioDeContacto ... medioDeContactos) {
-        Collections.addAll(this.mediosDeContacto, medioDeContactos);
     }
 
     public void agregarColaboracion(Colaboracion colaboracion){
@@ -57,25 +52,4 @@ public class Colaborador {
         //TODO
     }
 
-    public String getEmail(){
-        for ( MedioDeContacto contactoAux : this.mediosDeContacto )
-            if ( contactoAux.getMedio() == TipoMedioDeContacto.MAIL ){
-                return contactoAux.getContacto();
-            }
-        return null;
-    }
-
-    public String getUniqueIdentifier() {
-
-        if(this.tipo == TipoPersona.PH){
-            return ((PersonaHumana)this).getDocumento().getUniqueIdentifier();
-        }
-        /*
-        if(this.tipo == TipoPersona.PJ){
-            return ((PersonaJuridica)this).cuit;
-        }*/
-
-        return null;
-
-    }
 }

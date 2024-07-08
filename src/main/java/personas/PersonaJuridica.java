@@ -7,11 +7,10 @@ import recomendadorDePuntos.RecomendadorDePuntos;
 
 import java.util.List;
 
-public class PersonaJuridica extends Colaborador{
+public class PersonaJuridica extends Persona{
     private String razonSocial;
     private TipoJuridica tipoJuridico;
     private Rubro rubro;
-    private List<Colaboracion> colaboracionesPosibles;
     private List<Heladera> heladeras;
 
     public PersonaJuridica(String razonSocial, TipoJuridica tipoJuridico, Rubro rubro, MedioDeContacto medioDeContacto){
@@ -19,7 +18,7 @@ public class PersonaJuridica extends Colaborador{
         this.razonSocial = razonSocial;
         this.tipoJuridico = tipoJuridico;
         this.rubro = rubro;
-        this.tipo = TipoPersona.PJ;
+        this.tipoPersona = TipoPersona.PJ;
     }
 
     public List<PuntoEstrategico> solicitarPuntosRecomendados(Double latitud, Double longitud, Double radio) {
