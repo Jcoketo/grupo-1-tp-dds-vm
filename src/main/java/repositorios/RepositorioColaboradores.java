@@ -27,7 +27,7 @@ public class RepositorioColaboradores {
             String currentDocumento = colab.getUniqueIdentifier();
 
             if (Objects.equals(currentDocumento, uniqueIdentifier)) {
-                return colab;  // devvuelve el colaborador
+                return colab;  // devuelve el colaborador
             }
         }
 
@@ -36,6 +36,10 @@ public class RepositorioColaboradores {
 
     public void agregar(Colaborador colaborador) {
         colaboradores.add(colaborador);
+    }
+
+    public void darDeBaja(Colaborador colaborador) {
+        colaboradores.remove(colaborador);
     }
 
 }
