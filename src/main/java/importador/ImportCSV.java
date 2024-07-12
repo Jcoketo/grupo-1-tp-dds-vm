@@ -15,9 +15,11 @@ import java.io.FileReader;
 import java.io.Reader;
 import java.io.IOException;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
+
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class ImportCSV {
     public static void importCSV() throws IOException {
@@ -35,100 +37,129 @@ public class ImportCSV {
                 String formaColaboracion = record.get(6);
                 String cantidad = record.get(7);
 
-                if (tipoDoc.length() > 3 || nroDocumento.length() > 10 || nombre.length() > 50
-                        || apellido.length() > 50 || mail.length() > 50
-                        || fecha.length() > 10 || formaColaboracion.length() > 22
-                        || cantidad.length() > 7) {
-                    System.out.println(" ---------------------- ");
-                    System.out.println("Error de carga en archivo CSV en linea: " + record.getRecordNumber());
-                    System.out.println("Uno o mas campos exceden la longitud permitida");
-                    System.out.println(" ---------------------- ");
-                    continue;
+                /* **************************************************************************** */
+                /*  I N I C I A   E L   P R O C E S O   DE   I M P O R T A R   U N   C S V      */
+                /* **************************************************************************** */
+
+                boolean errorEnLongitud = validarLongitudes(tipoDoc, nroDocumento, nombre, apellido, mail, fecha, formaColaboracion, cantidad);
+                if (errorEnLongitud) {
+                    String mensajeError = "Error en Sintaxis.         Linea: " + record.getRecordNumber();
+                    escribirMensajeError(mensajeError);
+                    continue; // busca el siguiente registro
                 }
 
-                TipoDocumento tipoDocumento = null;
-                switch (tipoDoc) {
-                    case "DNI":
-                        tipoDocumento = TipoDocumento.DNI;
-                        break;
-                    case "LC":
-                        tipoDocumento = TipoDocumento.LC;
-                        break;
-                    case "LE":
-                        tipoDocumento = TipoDocumento.LE;
-                        break;
-                    default:
-                        System.out.println(" ---------------------- ");
-                        System.out.println("Error de carga en archivo CSV en linea: " + record.getRecordNumber());
-                        System.out.println("Tipo de documento no valido");
-                        System.out.println(" ---------------------- ");
-                        continue; // busca el siguiente registro
+                boolean errorEnTipoDonacion = verificarTipoDonacion(formaColaboracion);
+                if (errorEnTipoDonacion) {
+                    String mensajeError = "Tipo de Donacion Invalida. Linea: " + record.getRecordNumber();
+                    escribirMensajeError(mensajeError);
+                    continue; // busca el siguiente registro
                 }
 
-                String identificadorUnico = tipoDocumento + nroDocumento;
-
-                RepositorioColaboradores repoColaboradores = RepositorioColaboradores.getInstancia();
-                Colaborador colaborador = repoColaboradores.existeColaborador(identificadorUnico);
-
-                if (colaborador == null) { // NO EXISTE COLABORADOR
-                    MedioDeContacto medioDeContacto = new MedioDeContacto(TipoMedioDeContacto.MAIL, mail);
-
-                    colaborador = new PersonaHumana(tipoDocumento, nroDocumento, nombre, apellido, medioDeContacto);
-                    repoColaboradores.agregar(colaborador);
-
-                    String password = PasswordGenerator.generatePassword();
-                    // TODO ACA IRIA EL CODIGO PARA ALMACENAR EN LA BD LAS CREDENCIALES
-                    String mensajeMasCredenciales = "Bienvenido a la plataforma. Su usuario es: " + identificadorUnico + " y su contraseña es: " + password;
-
-                    Notificador.notificarXNuevoUsuario(mensajeMasCredenciales, colaborador);
-
+                TipoDocumento tipoDocumento = validarTipoDocumento(tipoDoc);
+                if (tipoDocumento == null) {
+                    String mensajeError = "Tipo de Documento Invalido. Linea: " + record.getRecordNumber();
+                    escribirMensajeError(mensajeError);
+                    continue; // busca el siguiente registro
                 }
 
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy"); // Va ese formato para la fecha que levanta del CSV
-                LocalDate fechaColaboracionAux = LocalDate.parse(fecha, formatter); // Levanta este formato dd/MM/yyyy y lo convierte a LocalDate.
+                Colaborador colaborador = crearColaborador(tipoDocumento, nroDocumento, nombre, apellido, mail);
 
-                switch (formaColaboracion) {
-                    case "DINERO":
-                        DonarDinero donacionDinero = new DonarDinero(fechaColaboracionAux, Double.parseDouble(cantidad)); //cantidad es un Double
-                        colaborador.agregarColaboracion(donacionDinero);
-                        donacionDinero.incrementarPuntos(colaborador);
-                        break;
-                    case "DONACION_VIANDAS":
-                        DonarVianda donacionVianda = new DonarVianda(fechaColaboracionAux);
-                        colaborador.agregarColaboracion(donacionVianda);
-                        for(int i=0; i < Integer.parseInt(cantidad); i++) {
-                            donacionVianda.incrementarPuntos(colaborador);
-                        }
-                        break;
-                    case "REDISTRIBUCION_VIANDAS":
-                        DistribucionDeViandas donacionDistribucion = new DistribucionDeViandas(fechaColaboracionAux, Integer.parseInt(cantidad));
-                        colaborador.agregarColaboracion(donacionDistribucion);
-                        donacionDistribucion.incrementarPuntos(colaborador);
-                        break;
-                    case "ENTREGA_TARJETAS":
-                        RegistroPersonasSituVulnerable registroPersonasSituVulnerable = new RegistroPersonasSituVulnerable(fechaColaboracionAux, Integer.parseInt(cantidad));
-                        colaborador.agregarColaboracion(registroPersonasSituVulnerable);
-                        registroPersonasSituVulnerable.incrementarPuntos(colaborador);
-                        break;
-                    default:
-                        System.out.println(" ---------------------- ");
-                        System.out.println("Error de carga en archivo CSV en linea: " + record.getRecordNumber());
-                        System.out.println("Forma de colaboracion no valida");
-                        System.out.println(" ---------------------- ");
-                        continue;
-                }
-                /* IMPRIME LOS DATOS LEVANTADOS DEL CSV X PANTALLA
-                System.out.println("Record No - " + record.getRecordNumber());
-                System.out.println("TipoDoc: " + tipoDoc);
-                System.out.println("Documento: " + nroDocumento);
-                System.out.println("Nombre: " + nombre);
-                System.out.println("Apellido: " + apellido);
-                System.out.println("mail: " + mail);
-                System.out.println("fecha colaboracion: " + fecha);
-                System.out.println("forma de colaboracion: " + formaColaboracion);
-                System.out.println("cantidad: " + cantidad);
-                */
+                agregarColaboracion(colaborador, fecha, formaColaboracion, cantidad);
+
+                /* ********************************************************************** */
+                /*  F I N   D E   P R O C E S O   DE   I M P O R T A R   U N   C S V      */
+                /* ********************************************************************** */
+
             }
+        }
+    }
+
+    private static boolean verificarTipoDonacion(String formaColaboracion) {
+        return switch (formaColaboracion) {
+            case "DINERO" -> false;
+            case "DONACION_VIANDAS" -> false;
+            case "REDISTRIBUCION_VIANDAS" -> false;
+            case "ENTREGA_TARJETAS" -> false;
+            default -> true;
+        };
+    }
+
+    private static void agregarColaboracion(Colaborador colaborador, String fecha, String formaColaboracion, String cantidad) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy"); // Va ese formato para la fecha que levanta del CSV
+        LocalDate fechaColaboracionAux = LocalDate.parse(fecha, formatter); // Levanta este formato dd/MM/yyyy y lo convierte a LocalDate.
+
+        switch (formaColaboracion) {
+            case "DINERO":
+                DonarDinero donacionDinero = new DonarDinero(fechaColaboracionAux, Double.parseDouble(cantidad)); //cantidad es un Double
+                colaborador.agregarColaboracion(donacionDinero);
+                donacionDinero.incrementarPuntos(colaborador);
+                break;
+            case "DONACION_VIANDAS":
+                DonarVianda donacionVianda = new DonarVianda(fechaColaboracionAux);
+                colaborador.agregarColaboracion(donacionVianda);
+                for(int i=0; i < Integer.parseInt(cantidad); i++) {
+                    donacionVianda.incrementarPuntos(colaborador);
+                }
+                break;
+            case "REDISTRIBUCION_VIANDAS":
+                DistribucionDeViandas donacionDistribucion = new DistribucionDeViandas(fechaColaboracionAux, Integer.parseInt(cantidad));
+                colaborador.agregarColaboracion(donacionDistribucion);
+                donacionDistribucion.incrementarPuntos(colaborador);
+                break;
+            case "ENTREGA_TARJETAS":
+                RegistroPersonasSituVulnerable registroPersonasSituVulnerable = new RegistroPersonasSituVulnerable(fechaColaboracionAux, Integer.parseInt(cantidad));
+                colaborador.agregarColaboracion(registroPersonasSituVulnerable);
+                registroPersonasSituVulnerable.incrementarPuntos(colaborador);
+                break;
+            default:
+                break;
+        }
+    }
+
+    private static Colaborador crearColaborador(TipoDocumento tipoDocumento, String nroDocumento, String nombre, String apellido, String mail) {
+        String identificadorUnico = tipoDocumento + nroDocumento;
+
+        RepositorioColaboradores repoColaboradores = RepositorioColaboradores.getInstancia();
+        Colaborador colaborador = repoColaboradores.existeColaborador(identificadorUnico);
+
+        if (colaborador == null) { // NO EXISTE COLABORADOR
+            MedioDeContacto medioDeContacto = new MedioDeContacto(TipoMedioDeContacto.MAIL, mail);
+
+            colaborador = new PersonaHumana(tipoDocumento, nroDocumento, nombre, apellido, medioDeContacto);
+            repoColaboradores.agregar(colaborador);
+
+            String password = PasswordGenerator.generatePassword();
+            // TODO ACA IRIA EL CODIGO PARA ALMACENAR EN LA BD LAS CREDENCIALES
+            String mensajeMasCredenciales = "Bienvenido a la plataforma. Su usuario es: " + identificadorUnico + " y su contraseña es: " + password;
+
+            Notificador.notificarXNuevoUsuario(mensajeMasCredenciales, colaborador);
+
+        }
+        return colaborador;
+    }
+
+    private static Boolean validarLongitudes(String tipoDoc, String nroDocumento, String nombre, String apellido, String mail, String fecha, String formaColaboracion, String cantidad) {
+        return tipoDoc.length() > 3 || nroDocumento.length() > 10 || nombre.length() > 50
+                || apellido.length() > 50 || mail.length() > 50
+                || fecha.length() > 10 || formaColaboracion.length() > 22
+                || cantidad.length() > 7;
+    }
+
+    public static TipoDocumento validarTipoDocumento(String tipoDoc) {
+        return switch (tipoDoc) {
+            case "DNI" -> TipoDocumento.DNI;
+            case "LC" -> TipoDocumento.LC;
+            case "LE" -> TipoDocumento.LE;
+            default -> null;
+        };
+    }
+
+    public static void escribirMensajeError(String mensajeError) {
+        String nombreArchivo = "src/main/resources/logErrores.txt";
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(nombreArchivo, true))) {
+            writer.write(mensajeError + "\n");
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
