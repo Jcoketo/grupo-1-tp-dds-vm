@@ -1,11 +1,3 @@
-Tipo de Donacion Invalida. Linea: 2
-Error de longitud en línea: 3
-Tipo de Donacion Invalida. Linea: 5
-Tipo de Donacion Invalida. Linea: 6
-Tipo de Donacion Invalida. Linea: 2
-Error en Sintaxis.         Linea: 3
-Tipo de Donacion Invalida. Linea: 5
-Tipo de Donacion Invalida. Linea: 6
 Tipo de Donacion Invalida. Linea: 3
 Error en Sintaxis.         Linea: 4
 Tipo de Donacion Invalida. Linea: 6
