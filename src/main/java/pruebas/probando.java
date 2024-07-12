@@ -1,6 +1,7 @@
 package pruebas;
 
 import importador.ImportCSV;
+import personas.PersonaJuridica;
 
 import java.io.IOException;
 
@@ -27,7 +28,13 @@ public class probando {
         */
 
         /* ----------- PROBAR IMPORTAR SCV ----------- */
-        ImportCSV.importCSV();
+        //ImportCSV.importCSV();
+
+        /* ----------- PROBAR RECOMENDADOR DE PUNTOS ----------- */
+        //recomendadorDePuntos.RecomendadorDePuntos recomendador = recomendadorDePuntos.RecomendadorDePuntos.getInstancia();
+        //System.out.println(recomendador.obtenerPuntosRecomendados(-34.603722, -58.381592, 1000.0));
+
+
 
     }
 }

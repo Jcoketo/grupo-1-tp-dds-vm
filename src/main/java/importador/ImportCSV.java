@@ -19,7 +19,6 @@ import java.time.format.DateTimeFormatter;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
-import java.io.IOException;
 
 public class ImportCSV {
     public static void importCSV() throws IOException {
