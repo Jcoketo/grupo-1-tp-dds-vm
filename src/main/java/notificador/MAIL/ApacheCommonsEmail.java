@@ -5,6 +5,8 @@ import org.apache.commons.mail.Email;
 import org.apache.commons.mail.EmailException;
 import org.apache.commons.mail.SimpleEmail;
 
+import static importador.EscribirLogError.escribirMensajeError;
+
 public class ApacheCommonsEmail implements AdapterMAIL{
     private String hostName = "smtp.gmail.com";
     private int smtpPort = 587;
@@ -29,7 +31,9 @@ public class ApacheCommonsEmail implements AdapterMAIL{
             System.out.println("Se envió el mensaje: "+mensaje);
             System.out.println("Al mail: "+ destinatario);
         } catch (EmailException e){
-            System.out.println("Ocurrió un error al enviar el mail.");
+            String mensajeError = "Error al enviar mail a " + destinatario + ": " + e.getMessage();
+            escribirMensajeError(mensajeError);
+
         }
     }
 }

@@ -6,7 +6,10 @@ Tipo de Donacion Invalida. Linea: 3
 Error en Sintaxis.         Linea: 4
 Tipo de Donacion Invalida. Linea: 6
 Tipo de Donacion Invalida. Linea: 7
+Error al enviar mail a joaquinmenazzi@hotmail.com: Sending the email to the following server failed : smtp.gmail.com:465
+Error al enviar mail a mgurruchaga@frba.utn.edu.ar: Sending the email to the following server failed : smtp.gmail.com:465
 Tipo de Donacion Invalida. Linea: 3
 Error en Sintaxis.         Linea: 4
+Error al enviar mail a marta.fernandez@example.com: Sending the email to the following server failed : smtp.gmail.com:465
 Tipo de Donacion Invalida. Linea: 6
 Tipo de Donacion Invalida. Linea: 7
