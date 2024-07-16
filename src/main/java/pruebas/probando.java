@@ -3,6 +3,7 @@ package pruebas;
 import importador.CargarCSV;
 import importador.ProcesarCSV;
 import importador.RegistroLeido;
+import personas.PersonaJuridica;
 import repositorios.RepositorioArchivos;
 
 import java.io.IOException;
@@ -36,6 +37,7 @@ public class probando {
         //System.out.println(recomendador.obtenerPuntosRecomendados(-34.603722, -58.381592, 1000.0));
 
         /* ----------- PROBAR CSV ----------- */
+
 
         CargarCSV.CargarSCV();
 
