@@ -3,6 +3,7 @@ package elementos;
 import colaboracion.Vianda;
 import lombok.Getter;
 import lombok.Setter;
+import personas.Colaborador;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -18,6 +19,11 @@ public class Heladera {
     @Getter @Setter private Boolean activa;
     @Getter private Float temperaturaMaxima;
     @Getter private Float temperaturaMinima;
+    List<Colaborador> colaboradoresSucriptos;
+    Integer contadorFallas;
+    Integer contadorViandasRetiradas;
+    Integer contadorViandasColocadas;
+
 
     public Heladera(int capacidadMaxima, LocalDate fechaFuncionamiento){
         this.viandas = new ArrayList<Vianda>();
@@ -36,5 +42,19 @@ public class Heladera {
 
     public void setTempMinima(Float temperatura){
         this.temperaturaMinima = temperatura;
+    }
+
+    public void evaluarCasoParaNotificar(){
+        //TODO
+    }
+
+    public void reportarIncidente(Incidente incidente){
+        //TODO, falta registrar fecha y hora del mismo, en qué heladera ocurrió y el tipo
+        this.marcarComoInactiva();
+
+    }
+
+    public void marcarComoInactiva(){
+        this.activa = false;
     }
 }
