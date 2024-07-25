@@ -2,6 +2,8 @@ package personas;
 
 import colaboracion.Colaboracion;
 import colaboracion.Oferta;
+import elementos.Heladera;
+import elementos.TarjetaPlastica;
 import lombok.Getter;
 
 import java.util.ArrayList;
@@ -15,6 +17,8 @@ public class Colaborador {
     protected Double puntaje;
     protected List<Oferta> canjesRealizados;
     protected Boolean validada;
+    protected TarjetaPlastica tarjeta;
+
     @Getter protected TipoPersona tipo;
 
     public Colaborador(MedioDeContacto medioDeContacto) {
@@ -22,6 +26,10 @@ public class Colaborador {
         this.mediosDeContacto.add(medioDeContacto);
         this.colaboracionesRealizadas = new ArrayList<>();
         this.puntaje = 0.0;
+    }
+
+    public void setTarjeta(TarjetaPlastica tarjeta) {
+        this.tarjeta = tarjeta;
     }
 
     public void agregarMediosDeContacto(MedioDeContacto ... medioDeContactos) {
@@ -78,4 +86,15 @@ public class Colaborador {
         return null;
 
     }
+
+
+    public void realizarSuscripcion(Heladera heladera, Integer cantidadViandasLimite, CasoNotificacion casoNotificacion){
+        //TODO
+    }
+
+    public void solicitarAperturaHeladera(Heladera heladera){
+        //TODO
+    }
+
+
 }
