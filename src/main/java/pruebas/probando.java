@@ -1,8 +1,13 @@
 package pruebas;
 
-import importador.ImportCSV;
+import importador.CargarCSV;
+import importador.ProcesarCSV;
+import importador.RegistroLeido;
+import personas.PersonaJuridica;
+import repositorios.RepositorioArchivos;
 
 import java.io.IOException;
+import java.util.List;
 
 public class probando {
     public static void main(String[] args) throws IOException {
@@ -26,8 +31,27 @@ public class probando {
         notificador.notificar(mensaje, colaborador);
         */
 
-        /* ----------- PROBAR IMPORTAR SCV ----------- */
-        ImportCSV.importCSV();
+
+        /* ----------- PROBAR RECOMENDADOR DE PUNTOS ----------- */
+        //recomendadorDePuntos.RecomendadorDePuntos recomendador = recomendadorDePuntos.RecomendadorDePuntos.getInstancia();
+        //System.out.println(recomendador.obtenerPuntosRecomendados(-34.603722, -58.381592, 1000.0));
+
+        /* ----------- PROBAR CSV ----------- */
+
+
+        CargarCSV.CargarSCV();
+
+        // en caso de enviarle por parametro el path
+        //CargarCSV.cargarCSV("src/main/resources/cargaMasivaNuevosUsuarios.csv");
+
+        RepositorioArchivos repositorio = RepositorioArchivos.getInstancia();
+
+        List<RegistroLeido> registros = repositorio.tomarPorIndice(0);
+
+        ProcesarCSV.ProcesarCSV(registros);
+
+        repositorio.cambiarEstadoAProcesado(registros);
+
 
     }
 }

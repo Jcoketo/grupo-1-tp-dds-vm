@@ -2,6 +2,8 @@ package personas;
 
 import colaboracion.Colaboracion;
 import colaboracion.Oferta;
+import elementos.Heladera;
+import elementos.TarjetaPlastica;
 import lombok.Getter;
 
 import java.util.ArrayList;
@@ -17,10 +19,21 @@ public class Colaborador {
     protected Boolean validada;
     protected Persona persona;
   
+    protected TarjetaPlastica tarjeta;
+
+   // @Getter protected TipoPersona tipo;
 
     public Colaborador() {
         this.colaboracionesRealizadas = new ArrayList<>();
         this.puntaje = 0.0;
+    }
+
+    public void setTarjeta(TarjetaPlastica tarjeta) {
+        this.tarjeta = tarjeta;
+    }
+
+    public void agregarMediosDeContacto(MedioDeContacto ... medioDeContactos) {
+        Collections.addAll(this.mediosDeContacto, medioDeContactos);
     }
 
     public void agregarColaboracion(Colaboracion colaboracion){
@@ -51,5 +64,39 @@ public class Colaborador {
     protected void iniciarSesion() {
         //TODO
     }
+
+
+    public String getEmail(){
+        for ( MedioDeContacto contactoAux : this.mediosDeContacto )
+            if ( contactoAux.getMedio() == TipoMedioDeContacto.MAIL ){
+                return contactoAux.getContacto();
+            }
+        return null;
+    }
+
+    public String getUniqueIdentifier() {
+
+        if(this.tipo == TipoPersona.PH){
+            return ((PersonaHumana)this).getDocumento().getUniqueIdentifier();
+        }
+        /*
+        if(this.tipo == TipoPersona.PJ){
+            return ((PersonaJuridica)this).cuit;
+        }*/
+
+        return null;
+
+    }
+
+
+    public void realizarSuscripcion(Heladera heladera, Integer cantidadViandasLimite, CasoNotificacion casoNotificacion){
+        //TODO
+    }
+
+    public void solicitarAperturaHeladera(Heladera heladera){
+        //TODO
+    }
+
+
 
 }
