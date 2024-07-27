@@ -1,7 +1,7 @@
 package elementos;
 
 public enum TipoAlerta {
-    TEMPERATURA,
+    FALLA_TEMPERATURA,
     FRAUDE,
     FALLA_EN_CONEXION
 }

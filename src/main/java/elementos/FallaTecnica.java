@@ -10,7 +10,7 @@ public class FallaTecnica extends Incidente{
     String URLfoto;
 
     public FallaTecnica(Heladera heladera, Colaborador colaborador, String descripcion, String URLfoto) {
-        this.heladera = heladera;
+        super(heladera);
         this.colaborador = colaborador;
         this.descripcion = descripcion;
         this.URLfoto = URLfoto;

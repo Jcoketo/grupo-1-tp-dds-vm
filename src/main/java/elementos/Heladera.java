@@ -80,21 +80,26 @@ public class Heladera {
 
     public void reportarFalla(Colaborador colab, String motivo, String foto){
         this.marcarComoInactiva();
-        // TODO
-        // CANCELAR EL PERMITIR INGRESO
         this.contadorFallas++;
 
-        FallaTecnica falla = new FallaTecnica(this, colab, motivo,foto);
+        FallaTecnica falla = new FallaTecnica(this, colab, motivo, foto);
 
         RepositorioIncidentes repo = RepositorioIncidentes.getInstancia();
         repo.agregar(falla);
 
     }
 
-    public void marcarComoInactiva(){
+    void marcarComoInactiva() {
         this.activa = false;
-        // TODO APAGAR EL PERMITIR INGRESO
+        this.detenerTareaPeriodica(); // CANCELAR EL PERMITIR INGRESO
+    }
 
+
+    public void detenerTareaPeriodica() {
+        if (scheduler != null && !scheduler.isShutdown()) {
+            scheduler.shutdown();
+            System.out.println("Scheduler detenido");
+        }
     }
 
     public void permitirIngreso() {
