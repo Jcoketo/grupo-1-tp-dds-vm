@@ -3,8 +3,11 @@ package personas;
 import colaboracion.Colaboracion;
 import colaboracion.Oferta;
 import elementos.Heladera;
+import elementos.SeguimientoApertura;
 import elementos.TarjetaPlastica;
+import elementos.TipoSolicitud;
 import lombok.Getter;
+import repositorios.RepositorioSolicitudes;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -23,9 +26,22 @@ public class Colaborador {
 
    // @Getter protected TipoPersona tipo;
 
+    public TipoPersona getTipoPersona(){
+        return persona.tipoPersona;
+    }
+
     public Colaborador() {
         this.colaboracionesRealizadas = new ArrayList<>();
         this.puntaje = 0.0;
+    }
+
+    public Colaborador(Persona persona) {
+        this.persona = persona;
+        this.colaboracionesRealizadas = new ArrayList<>();
+        this.puntaje = 0.0;
+        this.validada = Boolean.FALSE;
+        this.canjesRealizados = new ArrayList<>();
+        //this.contadorViandas = 0;
     }
 
     public void setTarjeta(TarjetaPlastica tarjeta) {
@@ -33,7 +49,7 @@ public class Colaborador {
     }
 
     public void agregarMediosDeContacto(MedioDeContacto ... medioDeContactos) {
-        Collections.addAll(this.mediosDeContacto, medioDeContactos);
+        Collections.addAll(persona.mediosDeContacto, medioDeContactos);
     }
 
     public void agregarColaboracion(Colaboracion colaboracion){
@@ -67,7 +83,7 @@ public class Colaborador {
 
 
     public String getEmail(){
-        for ( MedioDeContacto contactoAux : this.mediosDeContacto )
+        for ( MedioDeContacto contactoAux : persona.mediosDeContacto )
             if ( contactoAux.getMedio() == TipoMedioDeContacto.MAIL ){
                 return contactoAux.getContacto();
             }
@@ -76,8 +92,8 @@ public class Colaborador {
 
     public String getUniqueIdentifier() {
 
-        if(this.tipo == TipoPersona.PH){
-            return ((PersonaHumana)this).getDocumento().getUniqueIdentifier();
+        if(persona.tipoPersona == TipoPersona.PH){
+            return ((PersonaHumana)persona).getDocumento().getUniqueIdentifier();
         }
         /*
         if(this.tipo == TipoPersona.PJ){
@@ -94,7 +110,14 @@ public class Colaborador {
     }
 
     public void solicitarAperturaHeladera(Heladera heladera){
-        //TODO
+        heladera.permitirIngreso();
+        SeguimientoApertura seguimientoApertura = new SeguimientoApertura(heladera,this, TipoSolicitud.SOLICITUD_APERTURA);
+        RepositorioSolicitudes repositorioSolicitudes = RepositorioSolicitudes.getInstancia();
+        repositorioSolicitudes.agregarSolicitud(seguimientoApertura);
+    }
+
+    public void reportarFalla(Heladera heladera, String motivo, String foto){
+        heladera.reportarFalla(this, motivo, foto);
     }
 
 

@@ -16,6 +16,8 @@ public class ReceptorTemperatura {
 
     public void leerSensoreo(){
         //TODO
+        // cuando lee uno nuevo, corrobora que la hora no sea igual a la ultima registrada
+        // en caso que sea igual, se reporta una FALLA DE CONEXION
     }
 
     public String getTipo(){

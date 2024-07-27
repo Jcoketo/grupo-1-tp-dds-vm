@@ -54,14 +54,20 @@ public class AsignarColaborador {
         if (colaborador == null) { // NO EXISTE COLABORADOR
             MedioDeContacto medioDeContacto = new MedioDeContacto(TipoMedioDeContacto.MAIL, mail);
 
-            colaborador = new PersonaHumana(tipoDocumento, nroDocumento, nombre, apellido, medioDeContacto);
-            repoColaboradores.agregar(colaborador);
+            PersonaHumana persona = new PersonaHumana(tipoDocumento, nroDocumento, nombre, apellido, medioDeContacto);
+
+            Colaborador colaboradoraux = new Colaborador(persona);
+
+            //colaborador = new PersonaHumana(tipoDocumento, nroDocumento, nombre, apellido, medioDeContacto);
+            repoColaboradores.agregar(colaboradoraux);
 
             String password = PasswordGenerator.generatePassword();
             // TODO ACA IRIA EL CODIGO PARA ALMACENAR EN LA BD LAS CREDENCIALES
             String mensajeMasCredenciales = "Bienvenido a la plataforma. Su usuario es: " + identificadorUnico + " y su contraseña es: " + password;
 
-            Notificador.notificarXNuevoUsuario(mensajeMasCredenciales, colaborador);
+            Notificador.notificarXNuevoUsuario(mensajeMasCredenciales, colaboradoraux);
+
+            return colaboradoraux;
 
         }
         return colaborador;

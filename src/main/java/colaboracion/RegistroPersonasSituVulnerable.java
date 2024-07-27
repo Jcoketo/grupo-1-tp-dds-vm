@@ -39,24 +39,25 @@ public class RegistroPersonasSituVulnerable extends Colaboracion{
 
     @Override
     public void hacerColaboracion(Colaborador colaborador) {
-        if(validar(colaborador)){
+        String text = validar(colaborador);
+        if(text == null){
             incrementarPuntos(colaborador);
             colaborador.agregarColaboracion(this);
         }
         else {
             System.out.println("Error!!!");
-            if(colaborador.getDireccion() != null) {
-                System.out.println("Esa Persona no tiene una dirección!");
-            }
-            else {
-                System.out.println("Ese Tipo de Persona no puede realizar este tipo de Colaboración!");
-            }
+            System.out.println(text);
         }
     }
 
     @Override
-    public boolean validar(Colaborador colaborador){
-        return this.tiposPersonasHabilitadas.contains(colaborador.getTipo()) && colaborador.getDireccion() != null;
+    public String validar(Colaborador colaborador) {
+        if(!this.tiposPersonasHabilitadas.contains(colaborador.getTipoPersona())){
+            return "Ese Tipo de Persona no puede realizar este tipo de Colaboración!";
+        } else if (colaborador.getDireccion() == null) {
+            return "Esa Persona no tiene una dirección!";
+        }
+        return null;
     }
 
     @Override

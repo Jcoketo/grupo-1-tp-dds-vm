@@ -8,9 +8,14 @@ import repositorios.RepositorioArchivos;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 public class probando {
     public static void main(String[] args) throws IOException {
+
+
 
         /* ----------- PROBAR NOTIFICAR ----------- */
         /*
@@ -39,18 +44,30 @@ public class probando {
         /* ----------- PROBAR CSV ----------- */
 
 
-        CargarCSV.CargarSCV();
+        //CargarCSV.CargarSCV();
 
         // en caso de enviarle por parametro el path
         //CargarCSV.cargarCSV("src/main/resources/cargaMasivaNuevosUsuarios.csv");
 
-        RepositorioArchivos repositorio = RepositorioArchivos.getInstancia();
+        //RepositorioArchivos repositorio = RepositorioArchivos.getInstancia();
 
-        List<RegistroLeido> registros = repositorio.tomarPorIndice(0);
+        //List<RegistroLeido> registros = repositorio.tomarPorIndice(0);
 
-        ProcesarCSV.ProcesarCSV(registros);
+        //ProcesarCSV.ProcesarCSV(registros);
 
-        repositorio.cambiarEstadoAProcesado(registros);
+        ///repositorio.cambiarEstadoAProcesado(registros);
+
+
+        /* ----------- PRUEBA DE CRONE TASK ----------- */
+        /*
+        ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
+        System.out.println("Permitiendo ingreso de viandas por 3 horas...");
+        scheduler.schedule(() -> {
+            System.out.println("El tiempo de ingreso de viandas ha terminado.");
+            scheduler.shutdown();
+            // Aquí puedes agregar la lógica que debe ejecutarse después de 3 horas
+        }, 3, TimeUnit.SECONDS);
+        */
 
 
     }

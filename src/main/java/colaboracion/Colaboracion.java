@@ -12,7 +12,7 @@ public abstract class Colaboracion {
 
     public abstract void hacerColaboracion(Colaborador colaborador);
 
-    public abstract boolean validar(Colaborador colaborador);
+    public abstract String validar(Colaborador colaborador);
 
     public abstract void incrementarPuntos(Colaborador colaborador);
 

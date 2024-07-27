@@ -1,9 +1,12 @@
 package colaboracion;
 
+import elementos.SeguimientoApertura;
+import elementos.TipoSolicitud;
 import lombok.Setter;
 import elementos.Heladera;
 import personas.TipoPersona;
 import personas.Colaborador;
+import repositorios.RepositorioSolicitudes;
 
 import java.time.LocalDate;
 import java.util.Arrays;
@@ -28,19 +31,35 @@ public class DonarVianda extends Colaboracion{
 
     @Override
     public void hacerColaboracion(Colaborador colaborador) {
-        if(validar(colaborador)){
+        String text = validar(colaborador);
+        if(text == null){
             incrementarPuntos(colaborador);
             colaborador.agregarColaboracion(this);
+            RepositorioSolicitudes repo = RepositorioSolicitudes.getInstancia();
+            repo.agregarSolicitud(new SeguimientoApertura(this.heladera, colaborador, TipoSolicitud.APERTURA));
+
+            heladera.agregarVianda(this.vianda);
         }
         else {
             System.out.println("Error!!!");
-            System.out.println("Ese Tipo de Persona no puede realizar este tipo de Colaboración!");
+            System.out.println(text);
         }
+
     }
 
     @Override
-    public boolean validar(Colaborador colaborador) {
-        return this.tiposPersonasHabilitadas.contains(colaborador.getTipo());
+    public String validar(Colaborador colaborador) {
+        if(heladera.getHabilitado() && heladera.getActiva() && this.tiposPersonasHabilitadas.contains(colaborador.getTipoPersona())){
+            return null;
+        }
+        else if(heladera.getHabilitado()){
+            return "La heladera no está habilitada";
+        }
+        else if(heladera.getActiva()){
+            return "La heladera no está activa";
+        } else {
+            return "Ese Tipo de Persona no puede realizar este tipo de Colaboración!";
+        }
     }
 
     @Override

@@ -1,13 +1,27 @@
 package repositorios;
 
-import elementos.Incidente;
-import elementos.SolicitudApertura;
+import elementos.SeguimientoApertura;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class RepositorioSolicitudes {
-    public List<SolicitudApertura> solicitudes;
+    private static RepositorioSolicitudes instancia = null;
 
-    public void agregar(SolicitudApertura solicitud){
+    private static List<SeguimientoApertura> solicitudes;
+
+    RepositorioSolicitudes() {
+        solicitudes = new ArrayList<SeguimientoApertura>();
+    }
+
+    public static RepositorioSolicitudes getInstancia() {
+        if(instancia == null) {
+            instancia = new RepositorioSolicitudes();
+        }
+        return instancia;
+    }
+
+    public void agregarSolicitud(SeguimientoApertura solicitud){
         solicitudes.add(solicitud);
     }
 }
