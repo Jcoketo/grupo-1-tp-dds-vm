@@ -23,6 +23,9 @@ public class RepositorioIncidentes {
     }
     public void agregar(Incidente incidente){
         incidentes.add(incidente);
+        // notificar a los tecnicos
+        // TODO API
+
     }
 
 

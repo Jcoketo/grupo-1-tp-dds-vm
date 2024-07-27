@@ -29,6 +29,8 @@ public class DonarVianda extends Colaboracion{
         this.fechaColaboracion = fechaDonacion;
     }
 
+    //public void hacerVianda(parametros de vinda)
+
     @Override
     public void hacerColaboracion(Colaborador colaborador) {
         String text = validar(colaborador);

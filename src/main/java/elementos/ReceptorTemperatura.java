@@ -1,18 +1,35 @@
 package elementos;
 
+import broker.Suscriptor;
+import broker.brokers.SensoreoBroker;
 import repositorios.RepositorioIncidentes;
 
-public class ReceptorTemperatura {
+public class ReceptorTemperatura implements Suscriptor {
     private Heladera heladera;
     private Sensoreo ultimoRegistro;
+    private SensoreoBroker broker = new SensoreoBroker();
+
+    public ReceptorTemperatura(Heladera heladera){
+        this.heladera = heladera;
+        broker.registrar(this);
+    }
 
     public void evaluar(Sensoreo sensor){ //TODO:TERMINAR
-        if(sensor.getTempRegistrada() < heladera.getTemperaturaMaxima()
-            && sensor.getTempRegistrada() > heladera.getTemperaturaMinima()){
-            // No hacemos nada si la temperatura se encuentra dentro de los límites.
+
+        if ( sensor.getFechaYhora().toLocalDate() != ultimoRegistro.getFechaYhora().toLocalDate() ){
+            // Se reporta una FALLA DE CONEXION
+            heladera.marcarComoInactiva();
+            Alerta alerta = new Alerta(TipoAlerta.FALLA_EN_CONEXION, heladera);
+            RepositorioIncidentes repo = RepositorioIncidentes.getInstancia();
+            repo.agregar(alerta);
+            return;
+        }
+
+        if(sensor.getTempRegistrada() <= heladera.getTemperaturaMaxima()
+            && sensor.getTempRegistrada() >= heladera.getTemperaturaMinima()){
+            return;
         }
         else {
-            // No sé aclara qué hacer en caso de que la temperatura registrada esté fuera de los límites.
             heladera.marcarComoInactiva();
             Alerta alerta = new Alerta(TipoAlerta.FALLA_TEMPERATURA, heladera);
             RepositorioIncidentes repo = RepositorioIncidentes.getInstancia();
@@ -20,11 +37,17 @@ public class ReceptorTemperatura {
         }
     }
 
-    public void leerSensoreo(String path){
+   /* public void leerSensoreo(String path){
         // recibirlo desde el broker
         //TODO
         // cuando lee uno nuevo, corrobora que la hora no sea igual a la ultima registrada
         // en caso que sea igual, se reporta una FALLA DE CONEXION
+    }*/
+
+    @Override
+    public void actualizar(Sensoreo sensor) {
+        this.ultimoRegistro = sensor;
+        evaluar(sensor);
     }
 
 
