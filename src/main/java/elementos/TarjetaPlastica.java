@@ -6,8 +6,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TarjetaPlastica {
-    private String id;
+public class TarjetaPlastica extends Tarjeta {
     private int usosDisponibles;
     private int usosConsumidos;
     private PersonaVulnerable asociado;
@@ -17,8 +16,9 @@ public class TarjetaPlastica {
         this.historialDeUsos = new ArrayList<UsoTarjetaPlastica>();
     }
 
-    public void registrarUso(Heladera heladera, LocalDateTime fechaYhora) {
-        this.historialDeUsos.add(new UsoTarjetaPlastica(heladera, fechaYhora));
+    @Override
+    public void registrarUso(Heladera heladera) {
+        this.historialDeUsos.add(new UsoTarjetaPlastica(heladera, LocalDateTime.now()));
         this.usosConsumidos += 1;
     }
 }

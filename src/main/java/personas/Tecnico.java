@@ -6,7 +6,7 @@ public class Tecnico {
     private String nroCUIL;
     private String areaCobertura;
     private PersonaHumana persona;
-}
+
 
     public void registrarVisita(Heladera heladera, String descripcion, String URLfoto, Boolean incidenteSolucionado){
         //TODO
