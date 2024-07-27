@@ -25,7 +25,7 @@ public class Heladera {
     @Getter @Setter private Boolean activa;
     @Getter private Float temperaturaMaxima;
     @Getter private Float temperaturaMinima;
-    private List<Colaborador> colaboradoresSucriptos;
+    private List<ColaboradorSuscripto> colaboradoresSucriptos;
     private Integer contadorFallas;
     private Integer contadorViandasRetiradas;
     private Integer contadorViandasColocadas;
@@ -124,5 +124,9 @@ public class Heladera {
 
     public Boolean hayLugar(){
         return this.viandas.size() < this.viandasMaximas;
+    }
+
+    public void marcarComoActiva() {
+        this.activa = true;
     }
 }

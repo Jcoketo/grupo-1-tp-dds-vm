@@ -1,8 +1,9 @@
 package elementos;
 
+import broker.Suscriptor;
 import repositorios.RepositorioIncidentes;
 
-public class ReceptorMovimiento {
+public class ReceptorMovimiento implements Suscriptor {
     private Heladera heladera;
 
     public void recibirAlerta(){
@@ -12,4 +13,8 @@ public class ReceptorMovimiento {
         repo.agregar(alerta);
     }
 
+    @Override
+    public void actualizar(Sensoreo sensor) {
+
+    }
 }
