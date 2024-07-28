@@ -4,17 +4,14 @@ import colaboracion.Vianda;
 import lombok.Getter;
 import lombok.Setter;
 import personas.Colaborador;
-import repositorios.RepositorioColaboradores;
 import repositorios.RepositorioIncidentes;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 
 public class Heladera {
     private PuntoEstrategico puntoEstrategico;
@@ -30,6 +27,7 @@ public class Heladera {
     private Integer contadorViandasRetiradas;
     private Integer contadorViandasColocadas;
     @Getter private Boolean habilitado;
+    private List<Visita> visitas;
 
     private Integer tiempoActivo;
 
@@ -128,5 +126,9 @@ public class Heladera {
 
     public void marcarComoActiva() {
         this.activa = true;
+    }
+
+    public void agregarVisita(Visita visita) {
+        this.visitas.add(visita);
     }
 }
