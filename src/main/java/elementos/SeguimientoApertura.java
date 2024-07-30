@@ -1,14 +1,18 @@
 package elementos;
 
+import lombok.Setter;
 import personas.Colaborador;
 import java.time.LocalDateTime;
 
 public class SeguimientoApertura {
     //EstadoSolicitud estadoSolicitud;
-    Heladera heladera;
-    Colaborador solicitanteApertura;
-    LocalDateTime fechaSolicitud;
-    TipoSolicitud tipoSolicitud;
+    private Heladera heladera;
+    private Colaborador solicitanteApertura;
+    private LocalDateTime fechaSolicitud;
+    private TipoSolicitud tipoSolicitud;
+    @Setter
+    private LocalDateTime aperturaFehaciente;
+
 
     public SeguimientoApertura(Heladera heladera, Colaborador solicitanteApertura, TipoSolicitud tipoSolicitud) {
         this.heladera = heladera;

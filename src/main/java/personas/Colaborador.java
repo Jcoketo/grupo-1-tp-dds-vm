@@ -2,10 +2,7 @@ package personas;
 
 import colaboracion.Colaboracion;
 import colaboracion.Oferta;
-import elementos.Heladera;
-import elementos.SeguimientoApertura;
-import elementos.TarjetaPlastica;
-import elementos.TipoSolicitud;
+import elementos.*;
 import lombok.Getter;
 import repositorios.RepositorioSolicitudes;
 
@@ -21,8 +18,8 @@ public class Colaborador {
     protected List<Oferta> canjesRealizados;
     protected Boolean validada;
     protected Persona persona;
-  
-    protected TarjetaPlastica tarjeta;
+    @Getter protected Tarjeta tarjeta;
+
 
    // @Getter protected TipoPersona tipo;
 
@@ -109,12 +106,7 @@ public class Colaborador {
         //TODO
     }
 
-    public void solicitarAperturaHeladera(Heladera heladera){
-        heladera.permitirIngreso();
-        SeguimientoApertura seguimientoApertura = new SeguimientoApertura(heladera,this, TipoSolicitud.SOLICITUD_APERTURA);
-        RepositorioSolicitudes repositorioSolicitudes = RepositorioSolicitudes.getInstancia();
-        repositorioSolicitudes.agregarSolicitud(seguimientoApertura);
-    }
+
 
     public void reportarFalla(Heladera heladera, String motivo, String foto){
         heladera.reportarFalla(this, motivo, foto);
