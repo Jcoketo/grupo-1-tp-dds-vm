@@ -10,15 +10,18 @@ public class TarjetaPlastica extends Tarjeta {
     private int usosDisponibles;
     private int usosConsumidos;
     private PersonaVulnerable asociado;
-    private List<UsoTarjetaPlastica> historialDeUsos;
 
-    public TarjetaPlastica() {
-        this.historialDeUsos = new ArrayList<UsoTarjetaPlastica>();
+    public TarjetaPlastica(PersonaVulnerable asociado) {
+        super();
+        this.usosDisponibles = 4 + ( 2 * asociado.getMenoresACargo() );
+        this.usosConsumidos = 0;
+        this.asociado = asociado;
+
     }
 
     @Override
     public void registrarUso(Heladera heladera) {
-        this.historialDeUsos.add(new UsoTarjetaPlastica(heladera, LocalDateTime.now()));
+        super.registrarUso(heladera);
         this.usosConsumidos += 1;
     }
 }

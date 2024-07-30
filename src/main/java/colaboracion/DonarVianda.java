@@ -8,6 +8,7 @@ import personas.TipoPersona;
 import personas.Colaborador;
 import repositorios.RepositorioSolicitudes;
 
+import java.time.Duration;
 import java.time.LocalDate;
 import java.util.Arrays;
 
@@ -15,6 +16,8 @@ public class DonarVianda extends Colaboracion{
     private Vianda vianda;
     private Heladera heladera;
     @Setter private static Double coeficiente = 1.5;
+    private SeguimientoApertura solicitud;
+
 
     //CONSTRUCTOR PRINCIPAL
     public DonarVianda(Vianda vianda, Heladera heladera) {
@@ -32,20 +35,39 @@ public class DonarVianda extends Colaboracion{
     //public void hacerVianda(parametros de vinda)+
 
     public void efectuarApertura(Colaborador colaborador){
-        RepositorioSolicitudes repo = RepositorioSolicitudes.getInstancia();
-        repo.agregarSolicitud(new SeguimientoApertura(this.heladera, colaborador, TipoSolicitud.APERTURA));
-        // REGISTRAR EL USO EN LA TARJETA
+        if(this.solicitud != null){
+            RepositorioSolicitudes repositorioSolicitudes = RepositorioSolicitudes.getInstancia();
+            repositorioSolicitudes.cambiarEstadoAFehaciente(this.solicitud);
+        }
+        else {
+            System.out.println("No se ha solicitado la apertura de la heladera");
+            return;
+        }
     }
 
     public void solicitarAperturaHeladera(Colaborador colaborador, Heladera heladera){
-        heladera.permitirIngreso();
+        if( !heladera.permitirIngreso() ) {
+            System.out.println("La heladera ya se encuentra inhabilitada");
+            return;
+        }
         SeguimientoApertura seguimientoApertura = new SeguimientoApertura(heladera, colaborador, TipoSolicitud.SOLICITUD_APERTURA);
         RepositorioSolicitudes repositorioSolicitudes = RepositorioSolicitudes.getInstancia();
         repositorioSolicitudes.agregarSolicitud(seguimientoApertura);
+        this.solicitud = seguimientoApertura;
+
+        if (colaborador.getTarjeta() == null) {
+            colaborador.solicitarTarjeta();
+        }
+
     }
 
     @Override
     public void hacerColaboracion(Colaborador colaborador) {
+        if ( Duration.between(this.solicitud.getFechaSolicitud(), this.solicitud.getAperturaFehaciente()).toHours() > this.solicitud.getHorasDeApertura()){
+            System.out.println("El usuario carece de permisos para realizar dicha acción.");
+            return;
+        }
+        this.efectuarApertura(colaborador);
         String text = validar(colaborador);
         if(text == null){
             incrementarPuntos(colaborador);

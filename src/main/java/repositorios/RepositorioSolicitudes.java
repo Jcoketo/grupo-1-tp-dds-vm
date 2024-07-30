@@ -1,7 +1,6 @@
 package repositorios;
 
 import elementos.SeguimientoApertura;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,6 +24,8 @@ public class RepositorioSolicitudes {
         solicitudes.add(solicitud);
     }
 
-    public SeguimientoApertura buscarSolicitud()
+    public void cambiarEstadoAFehaciente(SeguimientoApertura solicitud){
+        solicitud.setAperturaFehaciente();
+    }
 
 }

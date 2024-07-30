@@ -1,4 +1,4 @@
-package notificador.MAIL;
+package notificador.mail;
 
 import notificador.StrategyNotificacion;
 import personas.Colaborador;

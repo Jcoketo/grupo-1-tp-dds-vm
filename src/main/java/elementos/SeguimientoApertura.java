@@ -1,17 +1,22 @@
 package elementos;
 
+import lombok.Getter;
 import lombok.Setter;
 import personas.Colaborador;
+
+import javax.ws.rs.GET;
 import java.time.LocalDateTime;
 
 public class SeguimientoApertura {
     //EstadoSolicitud estadoSolicitud;
     private Heladera heladera;
     private Colaborador solicitanteApertura;
-    private LocalDateTime fechaSolicitud;
+    @Getter private LocalDateTime fechaSolicitud;
     private TipoSolicitud tipoSolicitud;
     @Setter
-    private LocalDateTime aperturaFehaciente;
+    @Getter private LocalDateTime aperturaFehaciente;
+
+    @Getter private static Integer horasDeApertura = 3;
 
 
     public SeguimientoApertura(Heladera heladera, Colaborador solicitanteApertura, TipoSolicitud tipoSolicitud) {
@@ -21,4 +26,10 @@ public class SeguimientoApertura {
         this.tipoSolicitud = tipoSolicitud;
         //this.estadoSolicitud = EstadoSolicitud.PENDIENTE;
     }
+
+    public void setAperturaFehaciente(){
+        this.aperturaFehaciente = LocalDateTime.now();
+    }
+
+
 }

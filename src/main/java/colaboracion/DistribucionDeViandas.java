@@ -8,6 +8,7 @@ import personas.TipoPersona;
 import personas.Colaborador;
 import repositorios.RepositorioSolicitudes;
 
+import java.time.Duration;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -19,7 +20,10 @@ public class DistribucionDeViandas extends Colaboracion {
     private List<Vianda>viandas;
     private MotivoDistribucion motivoDistribucion;
     @Setter private static Double coeficiente = 1.0;
-    int viandasDistribuidas;
+    private int viandasDistribuidas;
+
+    private SeguimientoApertura solicitud;
+
 
 
     // CONSTRUCTOR PRINCIPAL
@@ -47,13 +51,42 @@ public class DistribucionDeViandas extends Colaboracion {
 
     }
 
+    public void efectuarApertura(Colaborador colaborador){
+        if(this.solicitud != null){
+            RepositorioSolicitudes repositorioSolicitudes = RepositorioSolicitudes.getInstancia();
+            repositorioSolicitudes.cambiarEstadoAFehaciente(this.solicitud);
+        }
+        else {
+            System.out.println("No se ha solicitado la apertura de la heladera");
+            return;
+        }
+    }
+
+    public void solicitarAperturaHeladera(Colaborador colaborador, Heladera heladera){
+        if( !heladera.permitirIngreso() ) {
+            System.out.println("La heladera ya se encuentra inhabilitada");
+            return;
+        }
+        SeguimientoApertura seguimientoApertura = new SeguimientoApertura(heladera, colaborador, TipoSolicitud.SOLICITUD_APERTURA);
+        RepositorioSolicitudes repositorioSolicitudes = RepositorioSolicitudes.getInstancia();
+        repositorioSolicitudes.agregarSolicitud(seguimientoApertura);
+        this.solicitud = seguimientoApertura;
+
+        if( colaborador.getTarjeta() == null ){
+            colaborador.solicitarTarjeta();
+        }
+    }
+
     @Override
     public void hacerColaboracion(Colaborador colaborador) {
+        if ( Duration.between(this.solicitud.getFechaSolicitud(), this.solicitud.getAperturaFehaciente()).toHours() > this.solicitud.getHorasDeApertura()){
+            System.out.println("El usuario carece de permisos para realizar dicha acción.");
+            return;
+        }
+        this.efectuarApertura(colaborador);
         String text = validar(colaborador);
         if(text == null){
             colaborador.agregarColaboracion(this);
-            RepositorioSolicitudes repo = RepositorioSolicitudes.getInstancia();
-            repo.agregarSolicitud(new SeguimientoApertura(this.heladeraOrigen, colaborador, TipoSolicitud.APERTURA));
 
             switch (motivoDistribucion) {
                 case DESPERFECTO:

@@ -1,13 +1,27 @@
 package elementos;
 
-import java.time.LocalDateTime;
+import repositorios.RepositorioTarjetas;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Tarjeta {
-    private String id;
+    protected String id;
+    protected List<UsoTarjetaPlastica> historialDeUsos;
+    protected Boolean recibida;
+
+    public Tarjeta(){
+        RepositorioTarjetas repositorioTarjetas = RepositorioTarjetas.getInstancia();
+        this.id = repositorioTarjetas.generarIdTarjeta();
+        this.historialDeUsos = new ArrayList<UsoTarjetaPlastica>();
+        this.recibida = false;
+    }
 
     public void registrarUso(Heladera heladera){
-        // TODO
-        // ACA TENEMOS QUE DAR AVISO AL SISTEMA
-        // AVISAR A LA HELADERA QUE TIENE QUE ESTAR ABIERTA DE ACA A 3 HORAS
+        this.historialDeUsos.add(new UsoTarjetaPlastica(heladera));
+    }
+
+    public void recibida(){
+        this.recibida = true;
     }
 }

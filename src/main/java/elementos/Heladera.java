@@ -9,12 +9,11 @@ import repositorios.RepositorioIncidentes;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 
 public class Heladera {
-    private PuntoEstrategico puntoEstrategico;
+    @Getter private PuntoEstrategico puntoEstrategico;
     @Setter private String nombre;
     @Setter private int viandasMaximas;
     @Getter private List<Vianda> viandas;
@@ -43,6 +42,13 @@ public class Heladera {
     public void agregarVianda(Vianda vianda) {
         if (this.viandas.size() < this.viandasMaximas) { // si es menor significa que por lo menos hay n - 1 viandas
             this.viandas.add(vianda);
+            if ( ( this.viandasMaximas - this.viandas.size() ) <= 5 ) // no damos posibilidad a que el numero sea mayor ya que sino es muy poco performante
+                                                                     //  si quedan 30 lugares libres va a hacer siempre este bloque de codigo
+            {
+                this.colaboradoresSucriptos.stream().filter(colab -> colab.getTipoSuscripcion() == TipoSuscripcion.POCO_ESPACIO
+                                && colab.getLimiteViandasMaximas() == (this.viandasMaximas - this.viandas.size()))
+                                .forEach(colab -> colab.notificarmeAlerta());
+            }
         } else {
             // TODO no deberia ser una excepcion, deberia ser un mensaje de error
             throw new IndexOutOfBoundsException("No se pueden agregar más viandas");
@@ -51,6 +57,11 @@ public class Heladera {
 
     public Vianda retirarVianda(Integer indice){
         if (indice >= 0 && indice < this.viandas.size()) {
+            if ( ( this.viandas.size() ) <= 5 ) {
+                this.colaboradoresSucriptos.stream().filter(colab -> colab.getTipoSuscripcion() == TipoSuscripcion.QUEDAN_POCAS
+                                && colab.getLimiteViandasMinimas() == this.viandas.size())
+                                .forEach(colab -> colab.notificarmeAlerta());
+            }
             return this.viandas.remove((int)indice);
         } else {
             // TODO no deberia ser una excepcion, deberia ser un mensaje de error
@@ -87,21 +98,27 @@ public class Heladera {
 
     }
 
-    void marcarComoInactiva() {
+    void marcarComoInactiva(){
         this.activa = false;
-        this.detenerTareaPeriodica(); // CANCELAR EL PERMITIR INGRESO
+        this.colaboradoresSucriptos.stream().filter(colab -> colab.getTipoSuscripcion() == TipoSuscripcion.DESPERFECTO).forEach(colab -> colab.notificarmeAlerta());
+        //this.detenerTareaPeriodica(); // CANCELAR EL PERMITIR INGRESO
     }
 
 
-    public void detenerTareaPeriodica() {
+    /*public void detenerTareaPeriodica() {
         if (scheduler != null && !scheduler.isShutdown()) {
             scheduler.shutdown();
             System.out.println("Scheduler detenido");
         }
+    }*/
+
+    public void agregarSuscriptor(ColaboradorSuscripto colaboradorSuscripto){
+        this.colaboradoresSucriptos.add(colaboradorSuscripto);
     }
 
-    public void permitirIngreso() {
+    public Boolean permitirIngreso() {
         if (this.activa) {
+            /*
             this.habilitado = true;
             scheduler.schedule(() -> {
 
@@ -109,9 +126,14 @@ public class Heladera {
                 scheduler.shutdown();
 
             }, tiempoActivo, TimeUnit.HOURS);
+
+             */
+
+            return Boolean.TRUE;
         }
         else {
             System.out.println("La heladera no está activa");
+            return Boolean.FALSE;
             }
     }
 
