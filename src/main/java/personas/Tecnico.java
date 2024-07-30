@@ -1,28 +1,32 @@
 package personas;
 
+import elementos.Alerta;
+import elementos.Areas;
 import elementos.Heladera;
 import elementos.Visita;
+import lombok.Getter;
 import repositorios.RepositorioVisitas;
-
 import java.util.List;
 
 public class Tecnico {
     private String nroCUIL;
-    private String areaCobertura;
+    @Getter private Areas areaCobertura;
     private PersonaHumana persona;
     private List<Visita> visitas;
 
-    public Tecnico(String nroCUIL, String areaCobertura, PersonaHumana persona) {
+    public Tecnico(String nroCUIL, Areas areaCobertura, PersonaHumana persona) {
         this.nroCUIL = nroCUIL;
         this.areaCobertura = areaCobertura;
         this.persona = persona;
     }
 
     public void registrarVisita(Heladera heladera, String descripcion, String URLfoto, Boolean incidenteSolucionado){
-        //TODO
         Visita visita = new Visita(heladera, descripcion, URLfoto, incidenteSolucionado);
+
+        /* ALTERNATIVA CON REPO:
         RepositorioVisitas repo = RepositorioVisitas.getInstancia();
-        repo.agregar(visita);
+        repo.agregar(visita); */
+
         this.visitas.add(visita);
         heladera.agregarVisita(visita);
 
@@ -30,5 +34,11 @@ public class Tecnico {
             heladera.marcarComoActiva();
         }
 
+    }
+
+    public void notificarFalla(Heladera heladera, Alerta alerta) {
+        //TODO
+        // enviar notificacion al tecnico
+        // enviar notificacion al area de mantenimiento
     }
 }

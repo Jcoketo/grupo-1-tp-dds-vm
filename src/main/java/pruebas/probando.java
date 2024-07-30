@@ -7,7 +7,10 @@ import personas.PersonaJuridica;
 import repositorios.RepositorioArchivos;
 
 import java.io.IOException;
+import java.time.Duration;
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.UUID;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -68,6 +71,14 @@ public class probando {
             // Aquí puedes agregar la lógica que debe ejecutarse después de 3 horas
         }, 3, TimeUnit.SECONDS);
         */
+
+        //System.out.println (UUID.randomUUID().toString().toUpperCase().subSequence(0,11));
+
+        // genera una prueba para verificar el beetwen de la fecha de solicitud y la fecha de apertura
+        LocalDateTime start = LocalDateTime.of(2023, 10, 1, 14, 30);
+        LocalDateTime end = LocalDateTime.of(2023, 10, 2, 18, 45);
+
+        System.out.println(Duration.between(start, end).toHours());
 
 
     }

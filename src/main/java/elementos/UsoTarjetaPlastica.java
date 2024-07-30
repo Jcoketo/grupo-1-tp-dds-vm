@@ -6,8 +6,8 @@ public class UsoTarjetaPlastica {
     private Heladera heladera;
     private LocalDateTime fechaYHora;
 
-    public UsoTarjetaPlastica(Heladera heladera, LocalDateTime fechaYHora) {
+    public UsoTarjetaPlastica(Heladera heladera) {
         this.heladera = heladera;
-        this.fechaYHora = fechaYHora;
+        this.fechaYHora = LocalDateTime.now();
     }
 }

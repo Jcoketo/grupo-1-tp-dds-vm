@@ -20,10 +20,10 @@ public class FraudeBroker extends Broker {
         suscriptores.remove(suscriptor);
     }
 
-    public void notificarSuscriptores() {
+    /*public void notificarSuscriptores() {
         for (Suscriptor suscriptor : suscriptores) {
             suscriptor.actualizar();
         }
-    }
+    }*/
 }
 

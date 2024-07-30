@@ -1,7 +1,7 @@
 package notificador;
 
-import notificador.MAIL.ApacheCommonsEmail;
-import notificador.MAIL.StrategyMAIL;
+import notificador.mail.ApacheCommonsEmail;
+import notificador.mail.StrategyMAIL;
 import personas.Colaborador;
 import personas.TipoMedioDeContacto;
 import lombok.Getter;

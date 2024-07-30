@@ -6,6 +6,7 @@ import elementos.*;
 import lombok.Getter;
 import repositorios.RepositorioSolicitudes;
 
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -19,9 +20,10 @@ public class Colaborador {
     protected Boolean validada;
     protected Persona persona;
     @Getter protected Tarjeta tarjeta;
+    private List<ColaboradorSuscripto> suscripciones;
 
 
-   // @Getter protected TipoPersona tipo;
+    // @Getter protected TipoPersona tipo;
 
     public TipoPersona getTipoPersona(){
         return persona.tipoPersona;
@@ -41,8 +43,8 @@ public class Colaborador {
         //this.contadorViandas = 0;
     }
 
-    public void setTarjeta(TarjetaPlastica tarjeta) {
-        this.tarjeta = tarjeta;
+    public void recibiMiTarjeta(){
+        this.tarjeta.recibida();
     }
 
     public void agregarMediosDeContacto(MedioDeContacto ... medioDeContactos) {
@@ -102,8 +104,18 @@ public class Colaborador {
     }
 
 
-    public void realizarSuscripcion(Heladera heladera, Integer cantidadViandasLimite, CasoNotificacion casoNotificacion){
-        //TODO
+    public void realizarSuscripcionXFalla(Heladera heladera){
+        SuscriptoFalla suscripcion = new SuscriptoFalla(heladera, this, TipoSuscripcion.DESPERFECTO);
+        heladera.agregarSuscriptor(suscripcion);
+        this.suscripciones.add(suscripcion);
+    }
+
+    public void realizarSuscripcionXCantidad(Heladera heladera, Integer n, TipoSuscripcion tipo){
+
+        if (tipo == TipoSuscripcion.QUEDAN_POCAS){
+            heladera.agregarSuscriptor(suscripcion);
+        }
+
     }
 
 
@@ -112,6 +124,10 @@ public class Colaborador {
         heladera.reportarFalla(this, motivo, foto);
     }
 
+    public void solicitarTarjeta(){
+        Tarjeta tarjeta = new Tarjeta();
+        this.tarjeta = tarjeta;
+    }
 
 
 }
