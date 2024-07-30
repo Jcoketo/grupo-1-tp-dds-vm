@@ -29,7 +29,20 @@ public class DonarVianda extends Colaboracion{
         this.fechaColaboracion = fechaDonacion;
     }
 
-    //public void hacerVianda(parametros de vinda)
+    //public void hacerVianda(parametros de vinda)+
+
+    public void efectuarApertura(Colaborador colaborador){
+        RepositorioSolicitudes repo = RepositorioSolicitudes.getInstancia();
+        repo.agregarSolicitud(new SeguimientoApertura(this.heladera, colaborador, TipoSolicitud.APERTURA));
+        // REGISTRAR EL USO EN LA TARJETA
+    }
+
+    public void solicitarAperturaHeladera(Colaborador colaborador, Heladera heladera){
+        heladera.permitirIngreso();
+        SeguimientoApertura seguimientoApertura = new SeguimientoApertura(heladera, colaborador, TipoSolicitud.SOLICITUD_APERTURA);
+        RepositorioSolicitudes repositorioSolicitudes = RepositorioSolicitudes.getInstancia();
+        repositorioSolicitudes.agregarSolicitud(seguimientoApertura);
+    }
 
     @Override
     public void hacerColaboracion(Colaborador colaborador) {
@@ -37,8 +50,6 @@ public class DonarVianda extends Colaboracion{
         if(text == null){
             incrementarPuntos(colaborador);
             colaborador.agregarColaboracion(this);
-            RepositorioSolicitudes repo = RepositorioSolicitudes.getInstancia();
-            repo.agregarSolicitud(new SeguimientoApertura(this.heladera, colaborador, TipoSolicitud.APERTURA));
 
             heladera.agregarVianda(this.vianda);
         }

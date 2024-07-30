@@ -24,4 +24,7 @@ public class RepositorioSolicitudes {
     public void agregarSolicitud(SeguimientoApertura solicitud){
         solicitudes.add(solicitud);
     }
+
+    public SeguimientoApertura buscarSolicitud()
+
 }
