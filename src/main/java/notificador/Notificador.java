@@ -30,9 +30,7 @@ public class Notificador {
         StrategyTelegram telegram = new StrategyTelegram();
 
         agregarEstrategia(TipoMedioDeContacto.TELEGRAM, telegram);
-
         agregarEstrategia(TipoMedioDeContacto.WHATSAPP, whatsApp);
-
         agregarEstrategia(TipoMedioDeContacto.MAIL, mail);
     }
 
@@ -40,10 +38,7 @@ public class Notificador {
         estrategias.put(medio, estrategia);
     }
 
-    //TODO
-/*
-    public void notificarXNuevoUsuario(String mensaje, Colaborador persona) {
-
+    public static void notificarXNuevoUsuario(String mensaje, Colaborador persona) {
         if (persona.getEmail() == null) {
             throw new IllegalArgumentException("El colaborador no tiene un email asignado.");
         }
@@ -53,43 +48,13 @@ public class Notificador {
         } else {
             throw new NoExisteMetodoExcepcion();
         }
-    }*/
+    }
 
-    public static void notificarXNuevoUsuario(String mensaje, Colaborador persona) {
-
-        if (persona.getEmail() == null) {
-            throw new IllegalArgumentException("El colaborador no tiene un email asignado.");
-        }
-
-        if (estrategias.containsKey(TipoMedioDeContacto.MAIL)) {
-            estrategias.get(TipoMedioDeContacto.MAIL).enviarNotificacion(mensaje, persona, "Bienvenido");
-        } else {
+    public static void notificar(String mensaje, String asunto, Colaborador persona, TipoMedioDeContacto contacto) {
+        if(estrategias.containsKey(contacto)){
+            estrategias.get(contacto).enviarNotificacion(mensaje, persona, asunto);
+        }else{
             throw new NoExisteMetodoExcepcion();
         }
     }
 }
-
-    /*public void notificar(String mensaje, Colaborador persona) {
-
-        TipoMedioContacto tipo = persona;
-        String email = persona.getEmail();
-
-        if (estrategias.containsKey(contacto)) {
-            estrategias.get(contacto).enviarNotificacion(mensaje, persona);
-        } else {
-            throw new NoExisteMetodoExcepcion();
-        }
-    }*/
-
-    /*
-        TipoMedioContacto contacto = persona.getContacto().get(0);
-        if(estrategias.containsKey(contacto)){
-            estrategias.get(contacto).enviarNotificacion(mensaje, persona);
-        }else{
-            throw new NoExisteMetodoExcepcion();
-        }
-
-        // de aca se llama al StrategyNotificacion correspondiente
-    }
-    */
-

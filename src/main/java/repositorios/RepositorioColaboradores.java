@@ -1,5 +1,6 @@
 package repositorios;
 
+import lombok.Getter;
 import personas.Colaborador;
 
 import java.util.ArrayList;
@@ -9,6 +10,7 @@ import java.util.Objects;
 public class RepositorioColaboradores {
     private static RepositorioColaboradores instancia = null;
 
+    @Getter
     private static List<Colaborador> colaboradores;
 
     private RepositorioColaboradores() {

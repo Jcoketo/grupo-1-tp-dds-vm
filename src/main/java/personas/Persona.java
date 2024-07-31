@@ -12,6 +12,7 @@ public class Persona {
     @Getter protected List<MedioDeContacto> mediosDeContacto;
     @Getter protected TipoPersona tipoPersona;
 
+
     public Persona(MedioDeContacto medioDeContacto) {
         this.mediosDeContacto = new ArrayList<MedioDeContacto>();
         this.mediosDeContacto.add(medioDeContacto);
@@ -39,6 +40,14 @@ public class Persona {
             return ((PersonaJuridica)this).cuit;
         }*/
 
+        return null;
+    }
+
+    public String devolerMedioDeContacto(TipoMedioDeContacto tipo){
+        for ( MedioDeContacto contactoAux : this.mediosDeContacto )
+            if ( contactoAux.getMedio() == tipo ){
+                return contactoAux.getContacto();
+            }
         return null;
     }
 }

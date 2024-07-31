@@ -4,13 +4,15 @@ import colaboracion.Vianda;
 import lombok.Getter;
 import lombok.Setter;
 import personas.Colaborador;
+import personas.Tecnico;
 import repositorios.RepositorioIncidentes;
+import repositorios.RepositoriosTecnicos;
+import suscripcion.ColaboradorSuscripto;
+import suscripcion.TipoSuscripcion;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
 
 public class Heladera {
     @Getter private PuntoEstrategico puntoEstrategico;
@@ -22,15 +24,13 @@ public class Heladera {
     @Getter private Float temperaturaMaxima;
     @Getter private Float temperaturaMinima;
     private List<ColaboradorSuscripto> colaboradoresSucriptos;
-    private Integer contadorFallas;
-    private Integer contadorViandasRetiradas;
-    private Integer contadorViandasColocadas;
+    @Getter private Integer contadorFallasSemanal;
+    @Getter private Integer contadorViandasRetiradas;
+    @Getter private Integer contadorViandasColocadas;
     @Getter private Boolean habilitado;
     private List<Visita> visitas;
 
     private Integer tiempoActivo;
-
-    private ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
 
     public Heladera(int capacidadMaxima, LocalDate fechaFuncionamiento){
         this.viandas = new ArrayList<Vianda>();
@@ -42,10 +42,10 @@ public class Heladera {
     public void agregarVianda(Vianda vianda) {
         if (this.viandas.size() < this.viandasMaximas) { // si es menor significa que por lo menos hay n - 1 viandas
             this.viandas.add(vianda);
+            this.contadorViandasColocadas++;
             if ( ( this.viandasMaximas - this.viandas.size() ) <= 5 ) // no damos posibilidad a que el numero sea mayor ya que sino es muy poco performante
                                                                      //  si quedan 30 lugares libres va a hacer siempre este bloque de codigo
-            {
-                this.colaboradoresSucriptos.stream().filter(colab -> colab.getTipoSuscripcion() == TipoSuscripcion.POCO_ESPACIO
+            { this.colaboradoresSucriptos.stream().filter(colab -> colab.getTipoSuscripcion() == TipoSuscripcion.POCO_ESPACIO
                                 && colab.getLimiteViandasMaximas() == (this.viandasMaximas - this.viandas.size()))
                                 .forEach(colab -> colab.notificarmeAlerta());
             }
@@ -57,6 +57,7 @@ public class Heladera {
 
     public Vianda retirarVianda(Integer indice){
         if (indice >= 0 && indice < this.viandas.size()) {
+            this.contadorViandasRetiradas++;
             if ( ( this.viandas.size() ) <= 5 ) {
                 this.colaboradoresSucriptos.stream().filter(colab -> colab.getTipoSuscripcion() == TipoSuscripcion.QUEDAN_POCAS
                                 && colab.getLimiteViandasMinimas() == this.viandas.size())
@@ -69,6 +70,21 @@ public class Heladera {
         }
     }
 
+    public void resetearContador(String tipo){
+        switch (tipo){
+            case "colocadas":
+                this.contadorViandasColocadas = 0;
+                break;
+            case "retiradas":
+                this.contadorViandasRetiradas = 0;
+                break;
+            case "fallas":
+                this.contadorFallasSemanal = 0;
+                break;
+        }
+
+    }
+
     public void setTempMaxima(Float temperatura){
         this.temperaturaMaxima = temperatura;
     }
@@ -77,25 +93,18 @@ public class Heladera {
         this.temperaturaMinima = temperatura;
     }
 
-    public void evaluarCasoParaNotificar(){
-        //TODO
-    }
-
-    public void reportarIncidente(Incidente incidente){
-        //TODO, falta registrar fecha y hora del mismo, en qué heladera ocurrió y el tipo
-        this.marcarComoInactiva();
-
-    }
-
     public void reportarFalla(Colaborador colab, String motivo, String foto){
         this.marcarComoInactiva();
-        this.contadorFallas++;
+        this.contadorFallasSemanal++;
 
         FallaTecnica falla = new FallaTecnica(this, colab, motivo, foto);
 
         RepositorioIncidentes repo = RepositorioIncidentes.getInstancia();
         repo.agregar(falla);
 
+        RepositoriosTecnicos tecnicos = RepositoriosTecnicos.getInstancia();
+        Tecnico tecnico = tecnicos.obtenerTecnicoCercano(this.getPuntoEstrategico().getAreas());
+        tecnico.notificarFalla(this, falla);
     }
 
     void marcarComoInactiva(){
@@ -138,9 +147,10 @@ public class Heladera {
     }
 
 
-    public void setearTiempoActivo(Integer tiempoActivo){
+    /*public void setearTiempoActivo(Integer tiempoActivo){
         this.tiempoActivo = tiempoActivo;
-    }
+    }*/
+    //TODO este tiempo ahora esta en la solicitud
 
     public Boolean hayLugar(){
         return this.viandas.size() < this.viandasMaximas;

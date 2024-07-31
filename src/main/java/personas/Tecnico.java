@@ -1,9 +1,6 @@
 package personas;
 
-import elementos.Alerta;
-import elementos.Areas;
-import elementos.Heladera;
-import elementos.Visita;
+import elementos.*;
 import lombok.Getter;
 import repositorios.RepositorioVisitas;
 import java.util.List;
@@ -36,7 +33,7 @@ public class Tecnico {
 
     }
 
-    public void notificarFalla(Heladera heladera, Alerta alerta) {
+    public void notificarFalla(Heladera heladera, Incidente incidente) {
         //TODO
         // enviar notificacion al tecnico
         // enviar notificacion al area de mantenimiento

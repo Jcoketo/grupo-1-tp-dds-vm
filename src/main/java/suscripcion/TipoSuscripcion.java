@@ -1,4 +1,4 @@
-package elementos;
+package suscripcion;
 
 public enum TipoSuscripcion {
     QUEDAN_POCAS,
