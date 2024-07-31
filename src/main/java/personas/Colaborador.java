@@ -112,9 +112,8 @@ public class Colaborador {
 
     public void realizarSuscripcionXCantidad(Heladera heladera, Integer n, TipoSuscripcion tipo){
 
-        if (tipo == TipoSuscripcion.QUEDAN_POCAS){
-            heladera.agregarSuscriptor(suscripcion);
-        }
+        SuscriptoCantidad suscripcion = new SuscriptoCantidad(heladera, this,tipo,n);
+        heladera.agregarSuscriptor(suscripcion);
 
     }
 
