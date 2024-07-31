@@ -2,6 +2,10 @@ package notificador;
 
 import notificador.mail.ApacheCommonsEmail;
 import notificador.mail.StrategyMAIL;
+import notificador.telegram.StrategyTelegram;
+import notificador.whatsApp.AdapterWhatsApp;
+import notificador.whatsApp.NotificadorWhatsApp;
+import notificador.whatsApp.StrategyWhatsApp;
 import personas.Colaborador;
 import personas.TipoMedioDeContacto;
 import lombok.Getter;
@@ -19,7 +23,17 @@ public class Notificador {
 
         StrategyMAIL mail = new StrategyMAIL();
         mail.setAdapter(new ApacheCommonsEmail());
-        estrategias.put(TipoMedioDeContacto.MAIL, mail);
+
+        StrategyWhatsApp whatsApp = new StrategyWhatsApp();
+        whatsApp.setAdapter(new NotificadorWhatsApp());
+
+        StrategyTelegram telegram = new StrategyTelegram();
+
+        agregarEstrategia(TipoMedioDeContacto.TELEGRAM, telegram);
+
+        agregarEstrategia(TipoMedioDeContacto.WHATSAPP, whatsApp);
+
+        agregarEstrategia(TipoMedioDeContacto.MAIL, mail);
     }
 
     public static void agregarEstrategia(TipoMedioDeContacto medio, StrategyNotificacion estrategia){
