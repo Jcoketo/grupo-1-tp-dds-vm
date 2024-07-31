@@ -4,9 +4,11 @@ import colaboracion.Colaboracion;
 import colaboracion.Oferta;
 import elementos.*;
 import lombok.Getter;
-import repositorios.RepositorioSolicitudes;
+import suscripcion.ColaboradorSuscripto;
+import suscripcion.SuscriptoCantidad;
+import suscripcion.SuscriptoFalla;
+import suscripcion.TipoSuscripcion;
 
-import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -18,12 +20,10 @@ public class Colaborador {
     protected Double puntaje;
     protected List<Oferta> canjesRealizados;
     protected Boolean validada;
-    protected Persona persona;
+    @Getter protected Persona persona;
     @Getter protected Tarjeta tarjeta;
     private List<ColaboradorSuscripto> suscripciones;
-
-
-    // @Getter protected TipoPersona tipo;
+    @Getter protected Integer contadorViandasDonadasSemanal;
 
     public TipoPersona getTipoPersona(){
         return persona.tipoPersona;
@@ -41,6 +41,14 @@ public class Colaborador {
         this.validada = Boolean.FALSE;
         this.canjesRealizados = new ArrayList<>();
         //this.contadorViandas = 0;
+    }
+
+    public void resetearContadorViadasSemanales(){
+        this.contadorViandasDonadasSemanal = 0;
+    }
+
+    public void aumentarCantidadDonacion(){
+        this.contadorViandasDonadasSemanal += 1;
     }
 
     public void recibiMiTarjeta(){
@@ -103,21 +111,17 @@ public class Colaborador {
 
     }
 
-
-    public void realizarSuscripcionXFalla(Heladera heladera){
-        SuscriptoFalla suscripcion = new SuscriptoFalla(heladera, this, TipoSuscripcion.DESPERFECTO);
+    public void realizarSuscripcionXFalla(Heladera heladera, TipoMedioDeContacto medio){
+        SuscriptoFalla suscripcion = new SuscriptoFalla(heladera, this, TipoSuscripcion.DESPERFECTO, medio);
         heladera.agregarSuscriptor(suscripcion);
         this.suscripciones.add(suscripcion);
     }
 
-    public void realizarSuscripcionXCantidad(Heladera heladera, Integer n, TipoSuscripcion tipo){
-
-        SuscriptoCantidad suscripcion = new SuscriptoCantidad(heladera, this,tipo,n);
+    public void realizarSuscripcionXCantidad(Heladera heladera, Integer n, TipoSuscripcion tipo, TipoMedioDeContacto medio){
+        SuscriptoCantidad suscripcion = new SuscriptoCantidad(heladera, this,tipo,n, medio);
         heladera.agregarSuscriptor(suscripcion);
         this.suscripciones.add(suscripcion);
     }
-
-
 
     public void reportarFalla(Heladera heladera, String motivo, String foto){
         heladera.reportarFalla(this, motivo, foto);
@@ -126,6 +130,10 @@ public class Colaborador {
     public void solicitarTarjeta(){
         Tarjeta tarjeta = new Tarjeta();
         this.tarjeta = tarjeta;
+    }
+
+    public void notificarme(String mensaje){
+      //TODO
     }
 
 

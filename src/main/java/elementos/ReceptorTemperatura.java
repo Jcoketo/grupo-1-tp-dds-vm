@@ -26,7 +26,6 @@ public class ReceptorTemperatura implements Suscriptor {
             repo.agregar(alerta);
             RepositoriosTecnicos tecnicos = RepositoriosTecnicos.getInstancia();
             Tecnico tecnico = tecnicos.obtenerTecnicoCercano(heladera.getPuntoEstrategico().getAreas());
-
             tecnico.notificarFalla(heladera, alerta);
 
             return;

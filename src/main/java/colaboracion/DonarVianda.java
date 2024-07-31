@@ -68,6 +68,7 @@ public class DonarVianda extends Colaboracion{
             return;
         }
         this.efectuarApertura(colaborador);
+        colaborador.aumentarCantidadDonacion();
         String text = validar(colaborador);
         if(text == null){
             incrementarPuntos(colaborador);
