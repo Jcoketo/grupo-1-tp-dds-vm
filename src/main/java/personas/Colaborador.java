@@ -114,7 +114,7 @@ public class Colaborador {
 
         SuscriptoCantidad suscripcion = new SuscriptoCantidad(heladera, this,tipo,n);
         heladera.agregarSuscriptor(suscripcion);
-
+        this.suscripciones.add(suscripcion);
     }
 
 
