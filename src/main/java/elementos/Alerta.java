@@ -1,7 +1,9 @@
 package elementos;
 
+import lombok.Getter;
+
 public class Alerta extends Incidente{
-    private TipoAlerta tipoAlerta;
+    @Getter private TipoAlerta tipoAlerta;
 
     public Alerta(TipoAlerta tipoAlerta, Heladera heladera){
         super(heladera);

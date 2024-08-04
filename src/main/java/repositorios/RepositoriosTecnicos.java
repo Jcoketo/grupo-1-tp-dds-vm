@@ -1,12 +1,13 @@
 package repositorios;
 
 import elementos.Areas;
+import java.util.ArrayList;
 import personas.Tecnico;
 import java.util.List;
 
 public class RepositoriosTecnicos{
     private static RepositoriosTecnicos instancia = null;
-    private List<Tecnico> tecnicos;
+    private List<Tecnico> tecnicos = new ArrayList<>();
 
     public void agregar(Tecnico tecnico){
         tecnicos.add(tecnico);
@@ -40,6 +41,10 @@ public class RepositoriosTecnicos{
         this.agregar(tecnicoCercano);
         return tecnicoCercano;
 
+    }
+
+    public boolean hayTecnicos(){
+        return !tecnicos.isEmpty();
     }
 
   }

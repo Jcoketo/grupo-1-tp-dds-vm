@@ -6,13 +6,13 @@ import org.junit.jupiter.api.Test;
 import java.time.LocalDate;
 import static org.junit.jupiter.api.Assertions.*;
 
-public class HelaTest{
+public class HeladeraTest {
 
     @Test
     public void testRetirarVianda() {
         // Arrange
-        Heladera heladera = new Heladera(10, LocalDate.now());
-        Heladera heladera2 = new Heladera(10, LocalDate.now());
+        Heladera heladera = new Heladera(10, LocalDate.now(), null);
+        Heladera heladera2 = new Heladera(10, LocalDate.now(), null);
         Vianda vianda1 = new Vianda("Vianda1", LocalDate.now(), LocalDate.now(), null, heladera, false);
         Vianda vianda2 = new Vianda("Vianda2", LocalDate.now(), LocalDate.now(), null, heladera, false);
 
