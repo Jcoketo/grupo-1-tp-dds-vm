@@ -40,7 +40,7 @@ public abstract class ColaboradorSuscripto {
             case DESPERFECTO:
                 Sugerencia sugerencia = new Sugerencia(heladera);
                 texto = sugerencia.devolerMensajeSugerencia();
-                asunto = "Hubo un Despesfecto!";
+                asunto = "Hubo un Desperfecto!";
                 Notificador.notificar(texto, asunto, colaborador, medioDeContacto.getMedio());
                 break;
             default:

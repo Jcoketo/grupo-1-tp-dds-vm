@@ -9,7 +9,7 @@ public class RepositorioSolicitudes {
 
     private static List<SeguimientoApertura> solicitudes;
 
-    RepositorioSolicitudes() {
+    public RepositorioSolicitudes() {
         solicitudes = new ArrayList<SeguimientoApertura>();
     }
 

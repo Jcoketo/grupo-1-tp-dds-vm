@@ -9,7 +9,7 @@ import java.util.List;
 public class RepositorioIncidentes {
     private static RepositorioIncidentes instancia = null;
 
-    private static List<Incidente> incidentes;
+    public static List<Incidente> incidentes;
 
     private RepositorioIncidentes() {
         incidentes = new ArrayList<Incidente>();

@@ -2,6 +2,7 @@ package colaboracion;
 
 import elementos.SeguimientoApertura;
 import elementos.TipoSolicitud;
+import lombok.Getter;
 import lombok.Setter;
 import elementos.Heladera;
 import personas.TipoPersona;
@@ -22,7 +23,7 @@ public class DistribucionDeViandas extends Colaboracion {
     @Setter private static Double coeficiente = 1.0;
     private int viandasDistribuidas;
 
-    private SeguimientoApertura solicitud;
+    @Getter private SeguimientoApertura solicitud;
 
 
 
@@ -76,10 +77,12 @@ public class DistribucionDeViandas extends Colaboracion {
             colaborador.solicitarTarjeta();
         }
     }
-
     @Override
     public void hacerColaboracion(Colaborador colaborador) {
-        if ( Duration.between(this.solicitud.getFechaSolicitud(), this.solicitud.getAperturaFehaciente()).toHours() > this.solicitud.getHorasDeApertura()){
+        if(this.solicitud.getAperturaFehaciente() == null){
+            System.out.println("No se ha solicitado la apertura de la heladera destino");
+            return;
+        }else if ( Duration.between(this.solicitud.getFechaSolicitud(), this.solicitud.getAperturaFehaciente()).toHours() >= this.solicitud.getHorasDeApertura()){
             System.out.println("El usuario carece de permisos para realizar dicha acción.");
             return;
         }
@@ -105,15 +108,15 @@ public class DistribucionDeViandas extends Colaboracion {
                     if(!heladeraDestino.hayLugar()){
                         System.out.println("No hay lugar en la heladera destino");
                         break; // salgo del for
+                    }else {
+                        for (Vianda vianda : viandas) {
+                            heladeraOrigen.retirarVianda(heladeraOrigen.getViandas().indexOf(vianda));
+                            heladeraDestino.agregarVianda(vianda);
+                            viandasDistribuidas += 1;
+                        }
+                        break;
                     }
-                    for (Vianda vianda : viandas) {
-                        heladeraOrigen.retirarVianda(heladeraOrigen.getViandas().indexOf(vianda));
-                        heladeraDestino.agregarVianda(vianda);
-                        viandasDistribuidas += 1;
-                    }
-                    break;
                 default:
-
                     break;
             }
 

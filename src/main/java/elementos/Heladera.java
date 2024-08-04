@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Heladera {
-    @Getter private PuntoEstrategico puntoEstrategico;
+    @Getter @Setter private PuntoEstrategico puntoEstrategico;
     @Setter private String nombre;
     @Setter private int viandasMaximas;
     @Getter private List<Vianda> viandas;
@@ -23,27 +23,28 @@ public class Heladera {
     @Getter @Setter private Boolean activa;
     @Getter private Float temperaturaMaxima;
     @Getter private Float temperaturaMinima;
-    private List<ColaboradorSuscripto> colaboradoresSucriptos;
-    @Getter private Integer contadorFallasSemanal;
-    @Getter private Integer contadorViandasRetiradas;
-    @Getter private Integer contadorViandasColocadas;
-    @Getter private Boolean habilitado;
-    private List<Visita> visitas;
+    @Getter private List<ColaboradorSuscripto> colaboradoresSucriptos = new ArrayList<>();
+    @Getter private Integer contadorFallasSemanal = 0;
+    @Getter private Integer contadorViandasRetiradas = 0;
+    @Getter private Integer contadorViandasColocadas = 0;
+    @Getter @Setter private Boolean habilitado;
+    private List<Visita> visitas = new ArrayList<>();
 
     private Integer tiempoActivo;
 
-    public Heladera(int capacidadMaxima, LocalDate fechaFuncionamiento){
+    public Heladera(int capacidadMaxima, LocalDate fechaFuncionamiento, PuntoEstrategico puntoEstrategico) {
         this.viandas = new ArrayList<Vianda>();
         this.viandasMaximas = capacidadMaxima;
         this.fechaFuncionamiento = fechaFuncionamiento;
         this.activa = true;
+        this.puntoEstrategico = puntoEstrategico;
     }
 
     public void agregarVianda(Vianda vianda) {
         if (this.viandas.size() < this.viandasMaximas) { // si es menor significa que por lo menos hay n - 1 viandas
             this.viandas.add(vianda);
             this.contadorViandasColocadas++;
-            if ( ( this.viandasMaximas - this.viandas.size() ) <= 5 ) // no damos posibilidad a que el numero sea mayor ya que sino es muy poco performante
+            if ( ( this.viandasMaximas - this.viandas.size() ) <= 5 && this.colaboradoresSucriptos != null) // no damos posibilidad a que el numero sea mayor ya que sino es muy poco performante
                                                                      //  si quedan 30 lugares libres va a hacer siempre este bloque de codigo
             { this.colaboradoresSucriptos.stream().filter(colab -> colab.getTipoSuscripcion() == TipoSuscripcion.POCO_ESPACIO
                                 && colab.getLimiteViandasMaximas() == (this.viandasMaximas - this.viandas.size()))
@@ -58,7 +59,7 @@ public class Heladera {
     public Vianda retirarVianda(Integer indice){
         if (indice >= 0 && indice < this.viandas.size()) {
             this.contadorViandasRetiradas++;
-            if ( ( this.viandas.size() ) <= 5 ) {
+            if ( ( this.viandas.size() ) <= 5  && this.colaboradoresSucriptos != null) {
                 this.colaboradoresSucriptos.stream().filter(colab -> colab.getTipoSuscripcion() == TipoSuscripcion.QUEDAN_POCAS
                                 && colab.getLimiteViandasMinimas() == this.viandas.size())
                                 .forEach(colab -> colab.notificarmeAlerta());
@@ -103,13 +104,18 @@ public class Heladera {
         repo.agregar(falla);
 
         RepositoriosTecnicos tecnicos = RepositoriosTecnicos.getInstancia();
-        Tecnico tecnico = tecnicos.obtenerTecnicoCercano(this.getPuntoEstrategico().getAreas());
-        tecnico.notificarFalla(this, falla);
+        if(!tecnicos.hayTecnicos()){
+            System.out.println("No hay técnicos disponibles");
+        }else {
+            Tecnico tecnico = tecnicos.obtenerTecnicoCercano(this.getPuntoEstrategico().getAreas());
+            tecnico.notificarFalla(this, falla);
+        }
     }
 
     void marcarComoInactiva(){
         this.activa = false;
-        this.colaboradoresSucriptos.stream().filter(colab -> colab.getTipoSuscripcion() == TipoSuscripcion.DESPERFECTO).forEach(colab -> colab.notificarmeAlerta());
+        if(this.colaboradoresSucriptos != null)
+            this.colaboradoresSucriptos.stream().filter(colab -> colab.getTipoSuscripcion() == TipoSuscripcion.DESPERFECTO).forEach(colab -> colab.notificarmeAlerta());
         //this.detenerTareaPeriodica(); // CANCELAR EL PERMITIR INGRESO
     }
 

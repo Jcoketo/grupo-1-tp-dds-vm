@@ -1,6 +1,7 @@
 package personas;
 
 import elementos.*;
+import java.util.ArrayList;
 import lombok.Getter;
 import repositorios.RepositorioVisitas;
 import java.util.List;
@@ -9,7 +10,7 @@ public class Tecnico {
     private String nroCUIL;
     @Getter private Areas areaCobertura;
     private PersonaHumana persona;
-    private List<Visita> visitas;
+    private List<Visita> visitas = new ArrayList<>();
 
     public Tecnico(String nroCUIL, Areas areaCobertura, PersonaHumana persona) {
         this.nroCUIL = nroCUIL;
