@@ -22,10 +22,7 @@ public class DistribucionDeViandas extends Colaboracion {
     private MotivoDistribucion motivoDistribucion;
     @Setter private static Double coeficiente = 1.0;
     private int viandasDistribuidas;
-
     @Getter private SeguimientoApertura solicitud;
-
-
 
     // CONSTRUCTOR PRINCIPAL
     public DistribucionDeViandas(TipoPersona persona, Integer cantidadViandas, Heladera heladeraOrigen, Heladera heladeraDestino, MotivoDistribucion motivoDistribucion, LocalDate fechaDistribucion) {

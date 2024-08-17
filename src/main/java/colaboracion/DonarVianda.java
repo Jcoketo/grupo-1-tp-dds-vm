@@ -32,8 +32,6 @@ public class DonarVianda extends Colaboracion{
         this.fechaColaboracion = fechaDonacion;
     }
 
-    //public void hacerVianda(parametros de vinda)+
-
     public void efectuarApertura(Colaborador colaborador){
         if(this.solicitud != null){
             RepositorioSolicitudes repositorioSolicitudes = RepositorioSolicitudes.getInstancia();
