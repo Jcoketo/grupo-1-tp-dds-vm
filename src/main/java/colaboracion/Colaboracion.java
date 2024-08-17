@@ -16,12 +16,4 @@ public abstract class Colaboracion {
 
     public abstract void incrementarPuntos(Colaborador colaborador);
 
-    /*
-    public Boolean puedeHacerColaboracion(TipoPersona tipoDePersona) throws Exception {
-        if (!tiposPersonasHabilitadas.contains(tipoDePersona)) {
-            throw new Exception("Tipo de persona no habilitada para esta colaboración");
-        }
-        return true;
-    }*/
-
 }

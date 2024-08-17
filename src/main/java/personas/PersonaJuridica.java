@@ -25,4 +25,10 @@ public class PersonaJuridica extends Persona{
         return RecomendadorDePuntos.getInstancia().obtenerPuntosRecomendados(latitud, longitud, radio);
     }
 
+    public void incrementarPuntosXHeladera(){
+        //TODO en el controller tiene que haber una crone mensual que le sume a los colaboradores juridicos
+        // 5 puntos por cada heladera que tengan a cargo
+        // [CANTIDAD_HELADERAS_ACTIVAS] * [∑ MESES_ACTIVAS] * 5
+    }
+
 }
