@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro Persona Jurídica</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            background-color: #f5f5f5;
+        }
+
+        header, footer {
+            background-color: #e0e0e0;
+            padding: 20px 50px;
+            text-align: center;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header nav a {
+            margin-left: 20px;
+            text-decoration: none;
+            color: black;
+        }
+
+        .btn-donar {
+            background-color: black;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+        }
+
+        .back-arrow {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 14px;
+            text-decoration: none;
+            color: black;
+        }
+
+        main {
+            flex-grow: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .register-container {
+            text-align: center;
+            background-color: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            width: 100%;
+        }
+
+        .register-container h2 {
+            margin-bottom: 20px;
+        }
+
+        .register-container input, .register-container select {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .register-container button {
+            width: 100%;
+            padding: 15px;
+            background-color: black;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+
+        .register-container label {
+            display: block;
+            text-align: left;
+            margin-bottom: 5px;
+        }
+
+        .register-container .terms {
+            margin-top: 10px;
+            text-align: left;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .register-container .terms input[type="checkbox"] {
+            margin: 0;
+        }
+
+        footer {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        footer div {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        footer div a {
+            margin-top: 10px;
+            text-decoration: none;
+            color: black;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <div><img src="logo.png" alt="Logo" style="max-height: 50px;"></div>
+    <nav>
+        <a href="#">Sobre nosotros</a>
+        <a href="#">Donar</a>
+        <a href="#">Heladeras</a>
+        <a href="#" class="btn-donar">Donar</a>
+    </nav>
+</header>
+
+<main>
+    <a href="javascript:history.back()" class="back-arrow">← volver atrás</a>
+    <div class="register-container">
+        <h2>Registro Persona Jurídica</h2>
+        <form>
+            <label for="razon-social">Razón Social</label>
+            <input type="text" id="razon-social" name="razon-social" required>
+
+            <label for="tipo">Tipo</label>
+            <select id="tipo" name="tipo" required>
+                <option value="" disabled selected>Selecciona un tipo</option>
+                <option value="sociedades">Sociedades civiles y comerciales</option>
+                <option value="corporaciones">Corporaciones y fundaciones</option>
+            </select>
+
+            <label for="rubro">Rubro</label>
+            <input type="text" id="rubro" name="rubro" required>
+
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="telefono-representante">Número de Teléfono del Representante</label>
+            <input type="tel" id="telefono-representante" name="telefono-representante" required>
+
+            <div class="terms">
+                <input type="checkbox" id="terms" name="terms" required>
+                <label for="terms">Acepto los <a href="#">términos de política de privacidad</a> y <a href="#">términos de uso</a></label>
+            </div>
+
+            <button type="submit">Registrarse</button>
+        </form>
+    </div>
+</main>
+
+<footer>
+    <div>
+        <p><img src="logo.png" alt="Logo" style="max-height: 50px;"></p>
+        <div>
+            <a href="#">Facebook</a>
+            <a href="#">Instagram</a>
+            <a href="#">YouTube</a>
+        </div>
+    </div>
+    <div>
+        <h4>Más información</h4>
+        <a href="#">Contactanos</a>
+        <a href="#">Sobre nosotros</a>
+        <a href="#">Sobre el proyecto</a>
+    </div>
+    <div>
+        <h4>Donar</h4>
+        <a href="#">Donar vianda</a>
+        <a href="#">Ver mapa</a>
+        <a href="#">Donar dinero</a>
+    </div>
+</footer>
+</body>
+</html>
