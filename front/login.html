@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar sesión</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            background-color: #f5f5f5;
+        }
+
+        header, footer {
+            background-color: #e0e0e0;
+            padding: 20px 50px;
+            text-align: center;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header nav a {
+            margin-left: 20px;
+            text-decoration: none;
+            color: black;
+        }
+
+        .btn-donar {
+            background-color: black;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+        }
+
+        main {
+            flex-grow: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .login-container {
+            text-align: center;
+            background-color: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .login-container input[type="email"],
+        .login-container input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        .login-container input.invalid {
+            border-color: red;
+        }
+
+        .login-container button {
+            width: 100%;
+            padding: 10px;
+            background-color: black;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .login-container a {
+            display: block;
+            margin-top: 20px;
+            color: gray;
+            text-decoration: none;
+        }
+
+        .login-container p:last-child {
+            margin-top: 20px;
+            font-size: 14px;
+            color: gray;
+        }
+
+        .login-container p:last-child a {
+            margin-left: 5px;
+            text-decoration: none;
+            color: black;
+        }
+
+        footer {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        footer div {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        footer div a {
+            margin-top: 10px;
+            text-decoration: none;
+            color: black;
+        }
+
+        /* Esconder el campo de contraseña por defecto */
+        .password-container {
+            display: none;
+        }
+
+        /* Mensaje de error */
+        .error-message {
+            color: red;
+            font-size: 14px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <div>Nombre + Logo</div>
+    <nav>
+        <a href="#">Sobre nosotros</a>
+        <a href="#">Donar</a>
+        <a href="#">Heladeras</a>
+        <a href="#" class="btn-donar">Donar</a>
+    </nav>
+</header>
+
+<main>
+    <div class="login-container">
+        <h2>Iniciar sesión</h2>
+        <p>Ingresa tu correo electrónico</p>
+        <input type="email" id="email" placeholder="correo@dominio.com" required>
+        <p id="error-message" class="error-message">El correo no existe.</p>
+
+        <!-- Contenedor para el campo de contraseña -->
+        <div class="password-container" id="password-container">
+            <input type="password" id="password" placeholder="Ingresa tu contraseña" required>
+        </div>
+
+        <button id="continue-button">Continuar</button>
+
+        <!-- Redirigir a otra interfaz al crear cuenta -->
+        <a href="elegirRegistroCuenta.html">¿No tenés una cuenta? Crear cuenta</a>
+
+        <p>Al hacer clic en continuar, estás aceptando nuestra <a href="#">política de privacidad y términos de uso</a>.</p>
+    </div>
+</main>
+
+<footer>
+    <div>
+        <p>Logo</p>
+        <div>
+            <a href="#">Facebook</a>
+            <a href="#">Instagram</a>
+            <a href="#">YouTube</a>
+        </div>
+    </div>
+    <div>
+        <h4>Más información</h4>
+        <a href="#">Contactanos</a>
+        <a href="#">Sobre nosotros</a>
+        <a href="#">Sobre el proyecto</a>
+    </div>
+    <div>
+        <h4>Donar</h4>
+        <a href="#">Donar vianda</a>
+        <a href="#">Ver mapa</a>
+        <a href="#">Donar dinero</a>
+    </div>
+</footer>
+
+<script>
+    // Simular un conjunto de correos válidos (esto debería ser una validación del servidor en una app real)
+    const validEmails = ["usuario@dominio.com", "ejemplo@dominio.com", "test@dominio.com"];
+
+    // Mostrar el campo de contraseña cuando se introduce un correo válido
+    document.getElementById('email').addEventListener('input', function() {
+        var email = this.value;
+        var passwordContainer = document.getElementById('password-container');
+        var errorMessage = document.getElementById('error-message');
+        var emailInput = this;
+
+        if (email.includes('@') && email.includes('.')) {
+            if (validEmails.includes(email)) {
+                passwordContainer.style.display = 'block';
+                emailInput.classList.remove('invalid');
+                errorMessage.style.display = 'none';
+            } else {
+                passwordContainer.style.display = 'none';
+                emailInput.classList.add('invalid');
+                errorMessage.style.display = 'block';
+            }
+        } else {
+            passwordContainer.style.display = 'none';
+            emailInput.classList.remove('invalid');
+            errorMessage.style.display = 'none';
+        }
+    });
+
+    // Simular la validación al hacer clic en el botón continuar
+    document.getElementById('continue-button').addEventListener('click', function(event) {
+        var email = document.getElementById('email').value;
+        var errorMessage = document.getElementById('error-message');
+
+        if (!validEmails.includes(email)) {
+            event.preventDefault(); // Evitar el envío del formulario si el correo no es válido
+            errorMessage.style.display = 'block';
+            document.getElementById('email').classList.add('invalid');
+        }
+    });
+</script>
+</body>
+</html>
