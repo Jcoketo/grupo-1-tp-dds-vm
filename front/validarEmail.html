@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registro</title>
+    <title>Valida tu mail</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -40,24 +40,14 @@
             text-decoration: none;
         }
 
-        .back-arrow {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            font-size: 14px;
-            text-decoration: none;
-            color: black;
-        }
-
         main {
             flex-grow: 1;
             display: flex;
             justify-content: center;
             align-items: center;
-            position: relative;
         }
 
-        .register-container {
+        .validation-container {
             text-align: center;
             background-color: white;
             padding: 40px;
@@ -65,16 +55,15 @@
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
 
-        .register-container button {
-            width: 100%;
-            padding: 15px;
-            background-color: black;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 16px;
+        h1 {
+            font-size: 24px;
             margin-bottom: 20px;
+            color: #333;
+        }
+
+        p {
+            font-size: 16px;
+            color: #666;
         }
 
         footer {
@@ -107,34 +96,10 @@
 </header>
 
 <main>
-    <a href="javascript:history.back()" class="back-arrow">← volver atrás</a>
-    <div class="register-container">
-        <button onclick="location.href='crearCuentaJuridica.html'">Registrarse como Persona Jurídica</button>
-        <button onclick="location.href='crearCuentaFisica.html'">Registrarse como Persona Física</button>
+    <div class="validation-container">
+        <h1>Valida tu mail</h1>
+        <p>Te enviamos un email para que podamos verificar tu casilla de correo.</p>
     </div>
 </main>
-
-<footer>
-    <div>
-        <p><img src="logo.png" alt="Logo" style="max-height: 50px;"></p>
-        <div>
-            <a href="#">Facebook</a>
-            <a href="#">Instagram</a>
-            <a href="#">YouTube</a>
-        </div>
-    </div>
-    <div>
-        <h4>Más información</h4>
-        <a href="#">Contactanos</a>
-        <a href="#">Sobre nosotros</a>
-        <a href="#">Sobre el proyecto</a>
-    </div>
-    <div>
-        <h4>Donar</h4>
-        <a href="#">Donar vianda</a>
-        <a href="#">Ver mapa</a>
-        <a href="#">Donar dinero</a>
-    </div>
-</footer>
 </body>
 </html>
