@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar sesión</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            background-color: #f5f5f5;
+        }
+
+        header, footer {
+            background-color: #e0e0e0;
+            padding: 20px 50px;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header nav a {
+            margin-left: 20px;
+            text-decoration: none;
+            color: black;
+        }
+
+
+        main {
+            flex-grow: 1;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 50px;
+            background-color: white;
+        }
+
+        .main-content {
+            max-width: 50%;
+        }
+
+        .main-content h1 {
+            font-size: 48px;
+            margin: 0;
+        }
+
+        .main-content p {
+            font-size: 20px;
+            color: #666;
+        }
+
+        .image-placeholder {
+            width: 40%;
+            height: 300px;
+            background-color: #ccc;
+            border-radius: 8px;
+            text-align: center;
+            line-height: 300px;
+            color: #666;
+        }
+
+        footer {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        footer div {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        footer div a {
+            margin-top: 10px;
+            text-decoration: none;
+            color: black;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .social-icons img {
+            width: 24px;
+            height: 24px;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <div><img src="logo.png" alt="Logo" style="max-height: 50px;"></div>
+    <nav>
+        <a href="#">Sobre nosotros</a>
+        <a href="#">Donar</a>
+        <a href="#">Heladeras</a>
+        <a href="login.html" class="btn-iniciar-sesion">Nombre_usuario</a>
+    </nav>
+</header>
+
+<main>
+    <div class="main-content">
+        <h1>Titulo</h1>
+        <p>Subtitulo que incite a realizar una donacion</p>
+        <a href="#" class="btn-donar">Donar</a>
+    </div>
+    <div class="image-placeholder">
+        <img src="image.png" alt="Imagen" style="max-width: 100%; max-height: 100%; border-radius: 8px;">
+    </div>
+</main>
+
+<footer>
+    <div>
+        <p><img src="logo.png" alt="Logo" style="max-height: 50px;"></p>
+        <div>
+            <a href="#">Facebook</a>
+            <a href="#">Instagram</a>
+            <a href="#">YouTube</a>
+        </div>
+    </div>
+    <div>
+        <h4>Más información</h4>
+        <a href="#">Contactanos</a>
+        <a href="#">Sobre nosotros</a>
+        <a href="#">Sobre el proyecto</a>
+    </div>
+    <div>
+        <h4>Donar</h4>
+        <a href="#">Donar vianda</a>
+        <a href="#">Ver mapa</a>
+        <a href="#">Donar dinero</a>
+    </div>
+</footer>
+</body>
+</html>
