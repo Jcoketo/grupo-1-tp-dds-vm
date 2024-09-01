@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar sesión</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            background-color: #f5f5f5;
+        }
+
+        header, footer {
+            background-color: #e0e0e0;
+            padding: 20px 50px;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header nav a {
+            margin-left: 20px;
+            text-decoration: none;
+            color: black;
+        }
+
+        .btn-donar {
+            background-color: black;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+        }
+
+        main {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            padding: 50px;
+            background-color: white;
+            height: calc(100vh - 160px); /* Ajusta el tamaño del main teniendo en cuenta el header y footer */
+        }
+
+        @media (min-width: 768px) {
+            main {
+                flex-direction: row;
+            }
+        }
+
+        .map-container {
+            flex: 1;
+            background-color: #ccc;
+            border-radius: 8px;
+            position: relative;
+            margin-right: 20px;
+            padding: 10px; /* Agrega un poco de espacio interno */
+            height: 80%; /* Ajusta la altura del contenedor del mapa */
+            /*box-shadow: 0 0 0 rgba(0, 0, 0, 0); /* Elimina el borde gris si está presente */
+        }
+
+        #map {
+            width: 100%;
+            height: 92%;
+            border: none;
+            border-radius: 8px;
+        }
+
+        .search-bar-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .search-bar {
+            position: relative;
+            background: white;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            padding: 10px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+            margin-top: 20px;
+        }
+
+        .search-bar input {
+            width: 100%;
+            padding: 8px;
+            border: none;
+            outline: none;
+        }
+
+        .main-content {
+            max-width: 100%;
+        }
+
+        .main-content h1 {
+            font-size: 48px;
+            margin: 0;
+        }
+
+        .main-content p {
+            font-size: 20px;
+            color: #666;
+        }
+
+        footer {
+            display: flex;
+            justify-content: space-between;
+            background-color: #e0e0e0;
+            padding: 20px 50px;
+        }
+
+        footer div {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        footer div a {
+            margin-top: 10px;
+            text-decoration: none;
+            color: black;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .social-icons img {
+            width: 24px;
+            height: 24px;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <div><img src="logo.png" alt="Logo" style="max-height: 50px;"></div>
+    <nav>
+        <a href="#">Sobre nosotros</a>
+        <a href="#">Donar</a>
+        <a href="#">Heladeras</a>
+        <a href="login.html" class="btn-iniciar-sesion">Iniciar Sesión</a>
+    </nav>
+</header>
+
+<main>
+    <div class="map-container">
+        <h2 class="text-3xl font-bold text-gray-900">Ubicación</h2>
+        <p class="mt-6 text-gray-600"></p>
+        <iframe id="map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2284.4221350130347!2d-70.6528564107316!3d-33.44266473660229!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9662c5a12dc61457%3A0x5ba71bb8cd01a8a!2sNueva%20York%2053%2C%208320320%20Santiago%2C%20Regi%C3%B3n%20Metropolitana%2C%20Chile!5e0!3m2!1ses-419!2sar!4v1716948246411!5m2!1ses-419!2sar" style="border:0; border-radius: 8px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+    <div class="search-bar-container">
+        <div class="search-bar">
+            <input type="text" placeholder="Buscar heladeras...">
+        </div>
+    </div>
+</main>
+
+<footer>
+    <div>
+        <p><img src="logo.png" alt="Logo" style="max-height: 50px;"></p>
+        <div>
+            <a href="#">Facebook</a>
+            <a href="#">Instagram</a>
+            <a href="#">YouTube</a>
+        </div>
+    </div>
+    <div>
+        <h4>Más información</h4>
+        <a href="#">Contactanos</a>
+        <a href="#">Sobre nosotros</a>
+        <a href="#">Sobre el proyecto</a>
+    </div>
+    <div>
+        <h4>Donar</h4>
+        <a href="#">Donar vianda</a>
+        <a href="#">Ver mapa</a>
+        <a href="#">Donar dinero</a>
+    </div>
+</footer>
+</body>
+</html>
