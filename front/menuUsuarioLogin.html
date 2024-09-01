@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Iniciar sesión</title>
+    <title>Desplegable en el Header</title>
+    <!-- Enlace a CSS de Bootstrap -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -26,12 +28,41 @@
             align-items: center;
         }
 
+        
+
         header nav a {
             margin-left: 20px;
             text-decoration: none;
             color: black;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 16px; /* Ajusta el tamaño de fuente */
+            font-weight: normal; /* Ajusta el peso de la fuente */
         }
 
+        
+        /* Estilo personalizado para el menú desplegable */
+        .navbar-light .navbar-nav .nav-link,
+        .navbar-light .dropdown-menu {
+            background-color: #e0e0e0; /* Mismo color que el header */
+            color: black; /* Color del texto */
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 16px; /* Ajusta el tamaño de fuente */
+            font-weight: normal; /* Ajusta el peso de la fuente */
+        }
+
+        .navbar-light .dropdown-menu
+
+
+        .navbar-light .dropdown-menu a.dropdown-item {
+            color: black; /* Color de los items del menú */
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 16px; /* Ajusta el tamaño de fuente */
+            font-weight: normal; /* Ajusta el peso de la fuente */
+        }
+
+        .navbar-light .dropdown-menu a.dropdown-item:hover {
+            background-color: #cdcdcd; /* Color al pasar el mouse por encima */
+        }
 
         main {
             flex-grow: 1;
@@ -42,13 +73,22 @@
             background-color: white;
         }
 
+        .btn-donar {
+            background-color: black;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+        }
+
         .main-content {
             max-width: 50%;
         }
 
         .main-content h1 {
-            font-size: 48px;
+            font-size: 50px;
             margin: 0;
+            font-weight: bold;
+
         }
 
         .main-content p {
@@ -97,11 +137,36 @@
 <body>
 <header>
     <div><img src="logo.png" alt="Logo" style="max-height: 50px;"></div>
-    <nav>
-        <a href="#">Sobre nosotros</a>
-        <a href="#">Donar</a>
-        <a href="#">Heladeras</a>
-        <a href="login.html" class="btn-iniciar-sesion">Nombre_usuario</a>
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Sobre nosotros</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Donar</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Heladeras</a>
+                </li>
+                <!-- Menú desplegable -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Nombre del usuario
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="login.html">Mi perfil</a>
+                        <a class="dropdown-item" href="#">Mis donaciones</a>
+                        <a class="dropdown-item" href="#">Mi puntaje</a>
+                        <a class="dropdown-item" href="#">Configuración</a>
+                        <a class="dropdown-item" href="#">Cerrar sesión</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
     </nav>
 </header>
 
@@ -138,5 +203,10 @@
         <a href="#">Donar dinero</a>
     </div>
 </footer>
+
+<!-- Scripts de Bootstrap y jQuery -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
