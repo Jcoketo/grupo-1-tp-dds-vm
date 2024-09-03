@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Iniciar sesión</title>
     <style>
+        /* Estilos previos */
         body {
             font-family: Arial, sans-serif;
             margin: 0;
@@ -62,7 +63,6 @@
             margin-right: 20px;
             padding: 10px; /* Agrega un poco de espacio interno */
             height: 80%; /* Ajusta la altura del contenedor del mapa */
-            /*box-shadow: 0 0 0 rgba(0, 0, 0, 0); /* Elimina el borde gris si está presente */
         }
 
         #map {
@@ -96,18 +96,28 @@
             outline: none;
         }
 
-        .main-content {
-            max-width: 100%;
+        .results {
+            margin-top: 10px;
+            background: white;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            display: none;
+            position: absolute;
+            width: 100%;
+            max-height: 150px;
+            overflow-y: auto;
+            z-index: 1000;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
         }
 
-        .main-content h1 {
-            font-size: 48px;
-            margin: 0;
+        .results li {
+            padding: 8px;
+            list-style-type: none;
+            cursor: pointer;
         }
 
-        .main-content p {
-            font-size: 20px;
-            color: #666;
+        .results li:hover {
+            background-color: #f0f0f0;
         }
 
         footer {
@@ -159,7 +169,8 @@
     </div>
     <div class="search-bar-container">
         <div class="search-bar">
-            <input type="text" placeholder="Buscar heladeras...">
+            <input type="text" id="search-input" placeholder="Buscar heladeras...">
+            <ul class="results" id="results-list"></ul>
         </div>
     </div>
 </main>
@@ -186,5 +197,70 @@
         <a href="#">Donar dinero</a>
     </div>
 </footer>
+
+<script>
+    // Lista de heladeras con sus direcciones (coordenadas)
+    const heladeras = [
+        { name: "Heladera Samsung RT38K5932S8", lat: -33.4426647, lng: -70.6528564 },
+        { name: "Heladera Whirlpool WRX735SDBM", lat: -34.603722, lng: -58.381592 },
+        { name: "Heladera LG GL-C292RLBN", lat: -34.6158526, lng: -58.433298 },
+        { name: "Heladera Electrolux TF39", lat: -34.611778, lng: -58.417308 },
+        { name: "Heladera Gafa HGF387AW", lat: -31.420083, lng: -64.188776 }
+    ];
+
+    // Elementos del DOM
+    const searchInput = document.getElementById('search-input');
+    const resultsList = document.getElementById('results-list');
+    const mapFrame = document.getElementById('map');
+
+    // Función para filtrar las heladeras
+    function filterHeladeras(query) {
+        // Filtrar las heladeras que coinciden con la búsqueda, limitar a 3 resultados
+        return heladeras.filter(heladera => heladera.name.toLowerCase().includes(query.toLowerCase())).slice(0, 3);
+    }
+
+    // Evento cuando se escribe en la barra de búsqueda
+    searchInput.addEventListener('input', function() {
+        const query = this.value.trim();
+        const results = filterHeladeras(query);
+
+        // Limpiar resultados anteriores
+        resultsList.innerHTML = '';
+
+        // Si hay resultados y hay algo escrito, mostrarlos
+        if (results.length > 0 && query.length > 0) {
+            resultsList.style.display = 'block';
+            results.forEach(result => {
+                const li = document.createElement('li');
+                li.textContent = result.name;
+                li.dataset.lat = result.lat;
+                li.dataset.lng = result.lng;
+                resultsList.appendChild(li);
+            });
+        } else {
+            resultsList.style.display = 'none';
+        }
+    });
+
+    // Evento para seleccionar una heladera de la lista
+    resultsList.addEventListener('click', function(e) {
+        if (e.target.tagName === 'LI') {
+            const selectedHeladera = e.target.textContent;
+           
+            // Obtener las coordenadas de la heladera seleccionada
+            const lat = e.target.dataset.lat;
+            const lng = e.target.dataset.lng;
+
+            // Actualizar el mapa con las coordenadas seleccionadas
+            const newSrc = `https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d2284.4221350130347!2d${lng}!3d${lat}!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9662c5a12dc61457%3A0x5ba71bb8cd01a8a!2sNueva%20York%2053%2C%208320320%20Santiago%2C%20Regi%C3%B3n%20Metropolitana%2C%20Chile!5e0!3m2!1ses-419!2sar!4v1716948246411!5m2!1ses-419!2sar`;
+
+            mapFrame.src = newSrc;
+
+            // Ocultar la lista de resultados
+            resultsList.style.display = 'none';
+        }
+    });
+</script>
+
 </body>
 </html>
