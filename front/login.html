@@ -212,16 +212,26 @@
         }
     });
 
-    // Simular la validación al hacer clic en el botón continuar
     document.getElementById('continue-button').addEventListener('click', function(event) {
-        var email = document.getElementById('email').value;
-        var errorMessage = document.getElementById('error-message');
+    var email = document.getElementById('email').value;
+    var password = document.getElementById('password').value;
+    var errorMessage = document.getElementById('error-message');
 
-        if (!validEmails.includes(email)) {
-            event.preventDefault(); // Evitar el envío del formulario si el correo no es válido
+    if (!validEmails.includes(email)) {
+        event.preventDefault(); // Evitar el envío del formulario si el correo no es válido
+        errorMessage.style.display = 'block';
+        document.getElementById('email').classList.add('invalid');
+    } else {
+        // en el siguiente if deberiamos ir al servidor a validar usuario y clave
+        if (password === "1234") {  
+            window.location.href = 'menuUsuarioLogin.html';
+        } else {
+            event.preventDefault(); // Evitar la redirección si la contraseña es incorrecta
+            errorMessage.textContent = 'Usuario y/o contraseña incorrecta.';
             errorMessage.style.display = 'block';
-            document.getElementById('email').classList.add('invalid');
+            document.getElementById('password').classList.add('invalid');
         }
+    }
     });
 </script>
 </body>
