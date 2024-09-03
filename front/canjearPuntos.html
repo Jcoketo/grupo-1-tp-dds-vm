@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inicio</title>
+    <title>Mi puntaje</title>
     <!-- Enlace a CSS de Bootstrap -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
@@ -132,6 +132,59 @@
             width: 24px;
             height: 24px;
         }
+
+        .puntaje {
+            background-color: #ebece3;
+            padding: 20px;
+            text-align:left;
+            border-radius: 20px;
+            margin-bottom: 20px;
+        }
+
+        .catalog-item {
+            background-color: #ebece3;
+            padding: 20px;
+            text-align: center;
+            border-radius: 20px;
+            margin-bottom: 20px;
+        }
+
+        .catalog-item img {
+            max-width: 90%;
+            height: auto;
+            margin-bottom: 10px;
+        }
+
+        .view-more {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #ebece3;
+            height: 50%;
+            text-align: center;
+            border-radius: 5px;
+        }
+
+        .view-more a {
+            text-decoration: none;
+            font-weight: bold;
+            color: black;
+        }
+        .header-title {
+            font-weight: 800; /* Más grosor */
+        }
+        .sub-header {
+            font-weight: 600; /* Aumento moderado del grosor */
+        }
+        
+        .puntaje-column {
+            display: flex;
+            flex-direction: column;
+            align-items: left;
+            margin-right: auto;
+        }
+
+
     </style>
 </head>
 <body>
@@ -171,14 +224,81 @@
 </header>
 
 <main>
-    <div class="main-content">
-        <h1>Titulo</h1>
-        <p>Subtitulo que incite a realizar una donacion</p>
-        <a href="#" class="btn-donar">Donar</a>
+
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-3 puntaje-column">
+                <h3 class="header-title">Mi puntaje</h3>
+                <div class="puntaje">
+                    <p class="sub-header">Puntos acumulados</p>
+                    <h4>1580 pts.</h4>
+                </div>
+            </div>
+            <div class="col-md-9">
+                <h3 class="header-title">Catálogo</h3>
+                <div class="row">
+                    <!-- Elemento del catálogo -->
+                    <div class="col-md-3">
+                        <div class="catalog-item">
+                            <img src="https://via.placeholder.com/150" alt="Descripción">
+                            <p>Descripción</p>
+                            <p>1,540 puntos</p>
+                        </div>
+                    </div>
+                    <!-- Repite este bloque para cada elemento del catálogo -->
+                    <div class="col-md-3">
+                        <div class="catalog-item">
+                            <img src="https://via.placeholder.com/150" alt="Descripción">
+                            <p>Descripción</p>
+                            <p>1,540 puntos</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="catalog-item">
+                            <img src="https://via.placeholder.com/150" alt="Descripción">
+                            <p>Descripción</p>
+                            <p>1,540 puntos</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="catalog-item">
+                            <img src="https://via.placeholder.com/150" alt="Descripción">
+                            <p>Descripción</p>
+                            <p>1,540 puntos</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="catalog-item">
+                            <img src="https://via.placeholder.com/150" alt="Descripción">
+                            <p>Descripción</p>
+                            <p>1,540 puntos</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="catalog-item">
+                            <img src="https://via.placeholder.com/150" alt="Descripción">
+                            <p>Descripción</p>
+                            <p>1,540 puntos</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="catalog-item">
+                            <img src="https://via.placeholder.com/150" alt="Descripción">
+                            <p>Descripción</p>
+                            <p>1,540 puntos</p>
+                        </div>
+                    </div>
+                    <!-- Enlace "Ver más" -->
+                    <div class="col-md-3">
+                        <div class="view-more">
+                            <a href="#">Ver más</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="image-placeholder">
-        <img src="image.png" alt="Imagen" style="max-width: 100%; max-height: 100%; border-radius: 8px;">
-    </div>
+    
 </main>
 
 <footer>
@@ -208,5 +328,6 @@
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 </body>
 </html>
