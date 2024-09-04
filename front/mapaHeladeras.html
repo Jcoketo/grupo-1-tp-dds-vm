@@ -199,25 +199,20 @@
 </footer>
 
 <script>
-    // Lista de heladeras con sus direcciones (coordenadas)
     const heladeras = [
-        { name: "Heladera Samsung RT38K5932S8", lat: -33.4426647, lng: -70.6528564 },
-        { name: "Heladera Whirlpool WRX735SDBM", lat: -34.603722, lng: -58.381592 },
-        { name: "Heladera LG GL-C292RLBN", lat: -34.6158526, lng: -58.433298 },
-        { name: "Heladera Electrolux TF39", lat: -34.611778, lng: -58.417308 },
-        { name: "Heladera Gafa HGF387AW", lat: -31.420083, lng: -64.188776 }
+        { name: 'Heladera 1', lat: -33.4489, lng: -70.6693 },
+        { name: 'Heladera 2', lat: -34.6037, lng: -58.3816 },
+        { name: 'Heladera 3', lat: -32.9257, lng: -68.8272 }
     ];
 
-    // Elementos del DOM
-    const searchInput = document.getElementById('search-input');
-    const resultsList = document.getElementById('results-list');
-    const mapFrame = document.getElementById('map');
-
-    // Función para filtrar las heladeras
     function filterHeladeras(query) {
         // Filtrar las heladeras que coinciden con la búsqueda, limitar a 3 resultados
         return heladeras.filter(heladera => heladera.name.toLowerCase().includes(query.toLowerCase())).slice(0, 3);
     }
+
+    const searchInput = document.getElementById('searchInput');
+    const resultsList = document.getElementById('resultsList');
+    const mapFrame = document.getElementById('mapFrame');
 
     // Evento cuando se escribe en la barra de búsqueda
     searchInput.addEventListener('input', function() {
@@ -246,7 +241,7 @@
     resultsList.addEventListener('click', function(e) {
         if (e.target.tagName === 'LI') {
             const selectedHeladera = e.target.textContent;
-           
+
             // Obtener las coordenadas de la heladera seleccionada
             const lat = e.target.dataset.lat;
             const lng = e.target.dataset.lng;
