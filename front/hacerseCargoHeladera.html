@@ -218,10 +218,15 @@
                                     <label for="temp-min">Temperatura Mínima (°C)</label>
                                     <input type="number" id="temp-min" name="temp-min" class="form-control" step="0.1" required>
                                 </div>
-                                <div class="form-group">
-                                    <label for="direccion-heladera">Dirección de la Heladera</label>
-                                    <input type="text" id="direccion-heladera" name="direccion-heladera" class="form-control" required>
+                                <div class="form-group" style="display: flex; gap: 10px; align-items: flex-end;">
+                                    <div style="flex: 1;">
+                                        <label for="direccion-heladera">Dirección de la Heladera</label>
+                                        <input type="text" id="direccion-heladera" name="direccion-heladera" class="form-control" required>
+                                    </div>
+                                    <a href="#" type="button" class="btn btn-secondary btn-sm " style="height: 38px;">Recomendar ubicación</a>
+                                    <!-- Botón para abrir el mapa y seleccionar la ubicación -->
                                 </div>
+                                
                                 <button type="submit" class="btn btn-primary">Registrar Heladera</button>
                             </form>
                         </div>
