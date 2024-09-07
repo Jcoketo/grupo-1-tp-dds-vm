@@ -34,6 +34,38 @@
             color: black;
         }
 
+        h1 {
+            font-size: 22px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        p {
+            margin-bottom: 20px;
+        }
+
+        .info {
+            margin-bottom: 15px;
+        }
+
+        .info span {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .action-link {
+            display: block;
+            color: black;
+            text-decoration: none;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        .action-link::after {
+            content: ">";
+            padding-left: 5px;
+        }
+
         main {
             flex-grow: 1;
             padding: 20px;
@@ -98,9 +130,26 @@
             <div id="map"></div>
         </div>
         <div class="col-md-5 mt-4 mt-md-0">
-            <h3>Heladeras</h3>
-            <ul id="heladeras-list" class="list-group">
-                <!-- Lista de heladeras se llenará dinámicamente -->
+            <h1>Heladera Medrano UTN</h1>
+    <p>Avenida Medrano 1234</p>
+
+    <div class="info">
+        <span>Estado</span>
+        Activa
+    </div>
+
+    <div class="info">
+        <span>Disponibilidad</span>
+        2 viandas
+    </div>
+
+    <div class="info">
+        <span>Fecha de inicio de funcionamiento</span>
+        10/03/2023
+    </div>
+
+    <a href="visualizarAlertas.html" class="action-link">Alertas</a>
+    <a href="visualizarFallasTecnicas.html" class="action-link">Fallas técnicas</a>
             </ul>
         </div>
     </div>
@@ -108,13 +157,6 @@
 <!-- AIzaSyBb5mC9pmmrsoAdUAxHfvE4Z2iW260tlUY -->
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBb5mC9pmmrsoAdUAxHfvE4Z2iW260tlUY"></script>
 <script>
-    const heladeras = [
-        { name: "Heladera Medrano UTN", lat: -34.5986, lng: -58.4208, date: "12/5/2024", status: "Activa" },
-        { name: "Heladera Alto Palermo", lat: -34.5895, lng: -58.4063, date: "21/9/2023", status: "Activa" },
-        { name: "Heladera Patio Bullrich", lat: -34.5925, lng: -58.3801, date: "8/12/2023", status: "Activa" },
-        { name: "Heladera Facultad de Medicina UBA", lat: -34.5989, lng: -58.4012, date: "5/10/2023", status: "Activa" },
-        { name: "Heladera Campus UTN FRBA", lat: -34.5967, lng: -58.3731, date: "12/5/2021", status: "Activa" }
-    ];
 
     let map;
     let markers = [];

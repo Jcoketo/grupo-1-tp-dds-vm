@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visualiza las heladeras con viandas</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            background-color: #f5f5f5;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header, footer {
+            background-color: #e0e0e0;
+            padding: 20px 50px;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header nav a {
+            margin-left: 20px;
+            text-decoration: none;
+            color: black;
+        }
+
+        main {
+            flex-grow: 1;
+            padding: 20px;
+            background-color: white;
+        }
+
+        footer {
+            display: flex;
+            justify-content: space-between;
+            background-color: #e0e0e0;
+            padding: 20px 50px;
+        }
+
+        footer div {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        footer div a {
+            margin-top: 10px;
+            text-decoration: none;
+            color: black;
+        }
+        h2 {
+            font-size: 22px;
+            margin-bottom: 20px;
+        }
+        #map {
+            width: 100%;
+            height: 400px;
+            background-color: #ddd;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .technical-issues {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .technical-issues h3 {
+            margin-top: 0;
+            font-size: 18px;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #e0e0e0;
+            padding-bottom: 10px;
+        }
+        .issue-item {
+            padding: 10px 0;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        .issue-item p {
+            margin: 5px 0;
+            font-size: 16px;
+        }
+        .issue-item:last-child {
+            border-bottom: none;
+        }
+        .report-button {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            color: #ffffff;
+            background-color: #ff5e00;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+        }
+        .report-button:hover {
+            background-color: #ed680f;
+        }
+        footer {
+            background-color: #E0E0E0;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        footer div {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        footer a {
+            text-decoration: none;
+            color: #333;
+        }
+        .back-to-top {
+            position: absolute;
+            top: -30px;
+            right: 20px;
+            width: 30px;
+            height: 30px;
+            background-color: #007BFF;
+            color: #ffffff;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            text-decoration: none;
+            font-weight: bold;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        .back-to-top:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div><img src="logo.png" alt="Logo" style="max-height: 50px;"></div>
+        <nav>
+            <a href="#">Sobre nosotros</a>
+            <a href="#">Donar</a>
+            <a href="#">Heladeras</a>
+            <a href="login.html" class="">Iniciar Sesión</a>
+        </nav>
+    </header>
+
+<main>
+  
+    <
+   
+    <div class="technical-issues">
+        <a href="nuevoMapaHeladeras.html" class="btn btn-primary ml-3"></a>
+            <i class="fas fa-arrow-left"></i> Volver
+        </a>
+
+        <h2>Fallas técnicas</h2>
+        <div class="issue-item">
+            <p><strong>Puerta de heladera rota</strong></p>
+            <p>Fecha: 12/10/2023</p>
+        </div>
+        <a href="#" class="report-button">+ Reportar falla técnica</a>
+    </div>
+</main>
+
+<footer>
+    <div>
+        <p><img src="logo.png" alt="Logo" style="max-height: 50px;"></p>
+        <div>
+            <a href="#">Facebook</a>
+            <a href="#">Instagram</a>
+            <a href="#">YouTube</a>
+        </div>
+    </div>
+    <div>
+        <h4>Más información</h4>
+        <a href="#">Contactanos</a>
+        <a href="#">Sobre nosotros</a>
+        <a href="#">Sobre el proyecto</a>
+    </div>
+    <div>
+        <h4>Donar</h4>
+        <a href="#">Donar vianda</a>
+        <a href="#">Ver mapa</a>
+        <a href="#">Donar dinero</a>
+    </div>
+</footer>
+</body>
+</html>
