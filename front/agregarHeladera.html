@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Agregar Productos</title>
+    <title>Agregar Heladera</title>
     <!-- Enlace a CSS de Bootstrap -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
@@ -104,7 +104,7 @@
 
         .card {
             width: 100%;
-            max-width: 300px;
+            max-width: 600px;
             margin: 0 auto;
         }
 
@@ -115,6 +115,51 @@
         .placeholder-img {
             background-color: gray;
             height: 150px;
+        }
+
+        .form-group label {
+            font-weight: bold;
+        }
+
+        .form-group input {
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            padding: 10px;
+            width: 100%;
+        }
+
+        .form-group button {
+            background-color: black;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .checkbox-container {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 10px;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin-top: 50px;
+        }
+        .btn-custom {
+            width: 100%;
+            padding: 10px;
+            font-weight: bold;
+        }
+        .btn-light-custom {
+            background-color: #e0e0e0;
+        }
+        .form-control {
+            height: 45px;
         }
 
         @media (max-width: 768px) {
@@ -164,35 +209,55 @@
     </header>
 
     <main>
-        <div class="container">
-            <div class="row justify-content-center align-items-center text-center">
-                <div class="col-md-3">
-                    <div class="card">
-                        <a href="agregarHeladera.html">
-                        <div class="placeholder-img"></div>
-                        </a>
-                        <div class="card-body">
-                            <a href="agregarHeladera.html" class="text-dark">
-                                <h5 class="card-title">Agregar Heladera</h5>
-                            </a>
-                            <p class="card-text">Hazte cargo de una nueva heladera para disponer alimento.</p>
-                        </div>
+        <div class="container bg-white p-4 shadow-sm rounded">
+            <h2 class="mb-4">Agregar heladera</h2>
+            <form>
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="nombre" class="form-label">Nombre</label>
+                        <input type="text" class="form-control" id="nombre" placeholder="Heladera Campus UTN">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="fechaInicio" class="form-label">Fecha de inicio de funcionamiento</label>
+                        <input type="date" class="form-control" id="fechaInicio">
                     </div>
                 </div>
-                <div class="col-md-3">
-                    <div class="card">
-                        <a href="donarDinero.html">
-                        <div class="placeholder-img"></div>
-                        </a>
-                        <div class="card-body">
-                            <a href="donarDinero.html" class="text-dark">
-                                <h5 class="card-title">Donar Dinero</h5>
-                            </a>
-                            <p class="card-text">Ayuda a las organizaciones a brindar un mejor servicio.</p>
-                        </div>
+                
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="capacidad" class="form-label">Capacidad (cant. de viandas)</label>
+                        <input type="number" class="form-control" id="capacidad" placeholder="18">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="activa" class="form-label">¿Está activa?</label>
+                        <select class="form-select" id="activa">
+                            <option>Sí</option>
+                            <option>No</option>
+                        </select>
                     </div>
                 </div>
-            </div>
+                
+                <div class="mb-3">
+                    <label for="ubicacion" class="form-label">Punto de colocación</label>
+                    <select class="form-select" id="ubicacion">
+                        <option selected disabled>Seleccione una ubicación</option>
+                        <option value="Mozart 2300, CABA">Mozart 2300, CABA</option>
+                        <option value="Av. Rivadavia 3456, CABA">Av. Rivadavia 3456, CABA</option>
+                        <option value="Parque Centenario, CABA">Parque Centenario, CABA</option>
+                        <option value="Campus UTN, CABA">Campus UTN, CABA</option>
+                    </select>
+                </div>
+                
+                
+                <div class="row">
+                    <div class="col-md-6">
+                        <button type="button" class="btn btn-light btn-custom btn-light-custom">Cancelar</button>
+                    </div>
+                    <div class="col-md-6">
+                        <button type="submit" class="btn btn-dark btn-custom">Agregar</button>
+                    </div>
+                </div>
+            </form>
         </div>
     </main>
 

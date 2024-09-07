@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Agregar Productos</title>
+    <title>Donar Vianda</title>
     <!-- Enlace a CSS de Bootstrap -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
@@ -63,7 +63,8 @@
         main {
             flex-grow: 1;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
+            justify-content: flex-start;
             align-items: center;
             padding: 50px;
             background-color: white;
@@ -97,33 +98,86 @@
             height: 24px;
         }
 
-        .btn-agregar-producto {
-            background-color: rgb(59, 170, 59);
-            color: white;
-        }
-
-        .card {
-            width: 100%;
-            max-width: 300px;
-            margin: 0 auto;
-        }
-
-        .card-body {
-            text-align: center;
-        }
-
-        .placeholder-img {
-            background-color: gray;
-            height: 150px;
-        }
 
         @media (max-width: 768px) {
             .card {
                 max-width: 100%;
             }
         }
+        .collaboration-container {
+            display: flex;
+            flex-direction: column;
+            width: 80%; /* Asegúrate de que el contenedor ocupe todo el ancho disponible */
+            margin: 50px;
+        }
+
+        .collaboration {
+        background-color: #ddd;
+        padding: 30px; 
+        margin-bottom: 10px;
+        display: flex;
+        justify-content: space-between;
+        border-radius: 5px;
+        min-height: 80px;
+        width: 100%; 
+
+    }
+        .collaboration-info {
+            display: flex;
+            flex-direction: column;
+        }
+        .dropdown {
+            position: relative;
+            display: inline-block; 
+           /*  display: flex; /* Usa Flexbox para alinear los elementos */
+            /*justify-content: flex-end; /* Alinea el contenido al final (a la derecha) */ 
+            width: 10%; /* Asegúrate de que el contenedor ocupe todo el ancho disponible */
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+            z-index: 1;
+            right: 0;
+        }
+        .dropdown-content a, .dropdown-content label {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+        .dropdown-content a:hover, .dropdown-content label:hover {
+            background-color: #f1f1f1;
+        }
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        .add-button {
+            background-color: #333;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center; /* Centra el texto del botón */
+            width: 120px; /* Ajusta el ancho del botón al valor deseado (por ejemplo, 120px) */
+            white-space: nowrap; /* Asegúrate de que el texto no se envuelva */
+            display: inline-block; /* Asegúrate de que el botón se ajuste al tamaño del contenido */
+        }
+
+        .add-button:hover {
+            background-color: #555;
+        }
+        .right-arrow {
+            font-size: 1.5em;
+            color: #333;
+            align-self: center;
+        }
     </style>
 </head>
+
 
 <body>
     <header>
@@ -164,36 +218,61 @@
     </header>
 
     <main>
-        <div class="container">
-            <div class="row justify-content-center align-items-center text-center">
-                <div class="col-md-3">
-                    <div class="card">
-                        <a href="agregarHeladera.html">
-                        <div class="placeholder-img"></div>
-                        </a>
-                        <div class="card-body">
-                            <a href="agregarHeladera.html" class="text-dark">
-                                <h5 class="card-title">Agregar Heladera</h5>
-                            </a>
-                            <p class="card-text">Hazte cargo de una nueva heladera para disponer alimento.</p>
-                        </div>
-                    </div>
+
+        <div class="collaboration-container">
+            <h2>Mis colaboraciones</h2>
+        
+            <div class="collaboration">
+                <div class="collaboration-info">
+                    <strong>Donación vianda</strong>
+                    <span>Info</span>
+                    <span>fecha</span>
                 </div>
-                <div class="col-md-3">
-                    <div class="card">
-                        <a href="donarDinero.html">
-                        <div class="placeholder-img"></div>
-                        </a>
-                        <div class="card-body">
-                            <a href="donarDinero.html" class="text-dark">
-                                <h5 class="card-title">Donar Dinero</h5>
-                            </a>
-                            <p class="card-text">Ayuda a las organizaciones a brindar un mejor servicio.</p>
-                        </div>
-                    </div>
+                <div class="right-arrow">➔</div>
+            </div>
+        
+            <div class="collaboration">
+                <div class="collaboration-info">
+                    <strong>Donación dinero</strong>
+                    <span>Info</span>
+                    <span>fecha</span>
+                </div>
+                <div class="right-arrow">➔</div>
+            </div>
+        
+            <div class="collaboration">
+                <div class="collaboration-info">
+                    <strong>Donación vianda</strong>
+                    <span>Info</span>
+                    <span>fecha</span>
+                </div>
+                <div class="right-arrow">➔</div>
+            </div>
+        
+            <div class="collaboration">
+                <div class="collaboration-info">
+                    <strong>Entrega tarjeta</strong>
+                    <span>Info</span>
+                    <span>fecha</span>
+                </div>
+                <div class="right-arrow">➔</div>
+            </div>
+        
+            <div class="dropdown">
+                <button class="add-button">Agregar ▾</button>
+                <div class="dropdown-content">
+                    <a href="#">Agregar colaboración</a>
+                    <label for="csvInput">Cargar CSV</label>
+                    <input type="file" id="csvInput" accept=".csv" style="display:none;">
                 </div>
             </div>
         </div>
+        
+        <script>
+            document.querySelector('label[for="csvInput"]').addEventListener('click', function() {
+                document.getElementById('csvInput').click();
+            });
+        </script>
     </main>
 
     <footer>
@@ -223,5 +302,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
+
+
 
 </html>
