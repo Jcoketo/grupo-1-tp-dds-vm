@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Visualización de Heladeras</title>
+    <title> Alertas </title>
     <!-- Incluye Bootstrap -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
@@ -33,6 +33,9 @@
             margin-left: 20px;
             text-decoration: none;
             color: black;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 16px;
+            font-weight: normal;
         }
 
         main {
@@ -52,6 +55,7 @@
             display: flex;
             flex-direction: column;
             align-items: flex-start;
+            margin-right: 30px;
         }
 
         footer div a {
@@ -62,8 +66,8 @@
         
         .alertas-container {
             max-width: 2000px;
-            margin: 100px auto; /* Margen superior e inferior de 100px y centrado horizontal */
-    width: 90%; /* Ocupa el 70% del ancho del contenedor padre */
+            margin: 50px auto; 
+            width: 90%; 
         }
 
         h1 {
@@ -77,7 +81,7 @@
             border-radius: 10px;
             margin-bottom: 10px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            text-align: left; /* Alineación a la izquierda */
+            text-align: left;
 
         }
 
@@ -86,42 +90,101 @@
             font-size: 18px;
         }
 
-        .alerta p {
+         .alerta p {
             margin: 5px 0;
             color: #555;
         }
-
-        .alerta strong {
-            font-weight: bold;
-        }
-        .alertas-header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-        .alertas-header .btn {
-            margin-left: 15px;
+        
+        .volver-container {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
         }
 
+        .volver-link {
+        margin-bottom: 10px;
+        color: #3b559d;
+        }
+
+        .btn {
+        width: auto;
+        }
+
+        .navbar-light .navbar-nav .nav-link,
+        .navbar-light .dropdown-menu {
+            background-color: #e0e0e0;
+            color: black;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 16px;
+            font-weight: normal;
+            padding: 10px 15px; 
+        }
+
+        .navbar-light .dropdown-menu {
+            width: 200px;      
+        }
+        .navbar-light .dropdown-menu a.dropdown-item {
+            color: black;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 16px;
+            font-weight: normal;
+            width: 200px; 
+            
+        }
+
+        .navbar-light .dropdown-menu a.dropdown-item:hover {
+            background-color: #cdcdcd;
+            margin: 0; 
+            width: 200px;
+        }
     </style>
 </head>
 <body>
 
     <header>
         <div><img src="logo.png" alt="Logo" style="max-height: 50px;"></div>
-        <nav>
-            <a href="#">Sobre nosotros</a>
-            <a href="#">Donar</a>
-            <a href="#">Heladeras</a>
-            <a href="login.html" class="">Iniciar Sesión</a>
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Sobre nosotros</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Donar</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Heladeras</a>
+                    </li>
+                    <!-- Menú desplegable -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Nombre del usuario
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item" href="login.html">Mi perfil</a>
+                            <a class="dropdown-item" href="#">Mis donaciones</a>
+                            <a class="dropdown-item" href="canjearPuntos.html">Mi puntaje</a>
+                            <a class="dropdown-item" href="#">Configuración</a>
+                            <a class="dropdown-item" href="#">Cerrar sesión</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
         </nav>
     </header>
     <div class="alertas-container">
+        <div class="volver-container">
+            <a href="mapaHeladeras.html" class="volver-link">
+                <i class="fas fa-arrow-left"></i> Volver
+            </a>
+        </div>
         <h1>Alertas</h1>
-        <a href="nuevoMapaHeladeras.html" class="btn btn-primary ml-3"></a>
-            <i class="fas fa-arrow-left"></i> Volver
-        </a>
-
+       
         <div class="alerta">
             <h2>Fraude</h2>
             <p>Fecha: 12/10/2023</p>
@@ -162,11 +225,8 @@
             <a href="#">Donar dinero</a>
         </div>
     </footer>
-    
-    <!-- Incluye Bootstrap JS y sus dependencias -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    
     </body>
     </html>

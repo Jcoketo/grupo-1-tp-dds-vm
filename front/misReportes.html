@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Visualiza las heladeras con viandas</title>
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>Mis reportes</title>
+    <title>Mis Reportes</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
@@ -37,7 +37,6 @@
             font-size: 16px;
             font-weight: normal;
         }
-
         main {
             flex-grow: 1;
             padding: 20px;
@@ -64,7 +63,7 @@
             color: black;
         }
 
-        .fallas-container {
+        .reportes-container {
             max-width: 2000px;
             margin: 50px auto; 
             width: 90%; 
@@ -75,61 +74,40 @@
             margin-bottom: 20px;
         }
 
-        .falla {
-            background-color: #f0f1eb;
+        .reporte {
+            background-color: #d3d3d3;
             padding: 15px;
-            border-radius: 10px;
+            border-radius: 8px;
             margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            text-align: left;
         }
 
-        .falla h2 {
-            margin: 0 0 5px 0;
-            font-size: 18px;
-        }
-
-        .falla p {
-            margin: 5px 0;
-            color: #555;
-        }
-        
-        .volver-container {
+        .reporte-info {
             display: flex;
             flex-direction: column;
-            align-items: flex-start;
         }
 
-        .volver-link {
-            margin-bottom: 10px;
-            color: #3b559d;
+        .reporte-info p {
+            margin: 0;
+            font-size: 14px;
+            color: #555;
         }
 
-        .btn {
-            width: auto;
+        .reporte-info h2 {
+            font-size: 18px;
+            margin: 0;
+        }
+
+        .download-icon {
+            font-size: 18px;
+            color: black;
+            cursor: pointer;
+            margin-right: 15px;
         }
         
-        .report-button {
-            display: inline-block;
-            margin-top: 15px;
-            padding: 10px 20px;
-            font-size: 16px;
-            font-weight: bold;
-            color: #ffffff;
-            background-color: #3b559d;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-            text-align: center;
-            text-decoration: none;
-        }
-        .report-button:hover {
-            background-color: #1d2561;
-            color:#ffffff;
-        }
-        .button-container {
-            text-align: right;
-        }
         .navbar-light .navbar-nav .nav-link,
         .navbar-light .dropdown-menu {
             background-color: #e0e0e0;
@@ -138,7 +116,7 @@
             font-size: 16px;
             font-weight: normal;                        
         }
-        
+
         .navbar-light .dropdown-menu {
             width: 200px;      
         }
@@ -157,7 +135,7 @@
             width: 200px;
         }
 
-            </style>
+    </style>
 </head>
 <body>
 
@@ -199,29 +177,43 @@
     </header>
 
 <main>
-    <div class="fallas-container">
-        <div class="volver-container">
-            <a href="mapaHeladeras.html" class="volver-link">
-                <i class="fas fa-arrow-left"></i> Volver
-            </a>
+   
+    <div class="reportes-container">
+        <h1>Mis reportes</h1>
+
+        <div class="reporte">
+            <div class="reporte-info">
+                <h2>Reporte 12/11/2023</h2>
+                <p>Info</p>
+            </div>
+            <i class="fas fa-download download-icon"></i>
         </div>
 
-        <h1>Fallas Técnicas</h1>
-
-        <div class="falla">
-            <h2>Puerta de heladera rota</h2>
-            <p>Fecha: 12/10/2023</p>
+        <div class="reporte">
+            <div class="reporte-info">
+                <h2>Reporte 2/11/2023</h2>
+                <p>Info</p>
+            </div>
+            <i class="fas fa-download download-icon"></i>
         </div>
 
-        <div class="falla">
-            <h2>Falla en el compresor</h2>
-            <p>Fecha: 15/10/2023</p>
+        <div class="reporte">
+            <div class="reporte-info">
+                <h2>Reporte 26/10/2023</h2>
+                <p>Info</p>
+            </div>
+            <i class="fas fa-download download-icon"></i>
         </div>
 
-        <div class="button-container">
-            <a href="#" class="report-button">+ Reportar falla técnica</a>
+        <div class="reporte">
+            <div class="reporte-info">
+                <h2>Reporte 16/10/2023</h2>
+                <p>Info</p>
+            </div>
+            <i class="fas fa-download download-icon"></i>
         </div>
     </div>
+
 </main>
 
 <footer>
