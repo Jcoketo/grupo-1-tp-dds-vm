@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agregar Productos</title>
+    <!-- Enlace a CSS de Bootstrap -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Enlace a Font Awesome para el ícono de lupa -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            background-color: #f5f5f5;
+        }
+
+        header,
+        footer {
+            background-color: #e0e0e0;
+            padding: 20px 50px;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header nav a {
+            margin-left: 20px;
+            text-decoration: none;
+            color: black;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 16px;
+            font-weight: normal;
+        }
+
+        .navbar-light .navbar-nav .nav-link,
+        .navbar-light .dropdown-menu {
+            background-color: #e0e0e0;
+            color: black;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 16px;
+            font-weight: normal;
+        }
+
+        .navbar-light .dropdown-menu {
+            width: 200px;
+        }
+
+        .navbar-light .dropdown-menu a.dropdown-item {
+            color: black;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 16px;
+            font-weight: normal;
+            width: 200px;
+        }
+
+        .navbar-light .dropdown-menu a.dropdown-item:hover {
+            background-color: #cdcdcd;
+            margin: 0;
+            width: 200px;
+        }
+
+        main {
+            flex-grow: 1;
+            padding: 50px;
+            background-color: white;
+        }
+
+        .btn-donar {
+            background-color: black;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+        }
+
+        .header-title {
+            font-weight: 800;
+        }
+
+        .sub-header {
+            font-weight: 600;
+        }
+
+        .puntaje-column {
+            display: flex;
+            flex-direction: column;
+            align-items: left;
+            margin-right: auto;
+        }
+
+        .catalog-item {
+            background-color: #ebece3;
+            padding: 20px;
+            text-align: center;
+            border-radius: 20px;
+            margin-bottom: 30px;
+        }
+
+        .catalog-item img {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 10px;
+        }
+
+        .search-bar {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            margin-bottom: 20px;
+
+        }
+
+        .input-group {
+            max-width: 300px; /*ancho de la search bar*/
+        }
+
+        .search-bar input {
+            border-radius: 30px;
+            padding: 10px 20px;
+            width: 100%;
+        }
+
+        .input-group-append .input-group-text {
+            border: none;
+            background-color: white;
+            border-radius: 0;
+        }
+
+        .catalog-grid {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .catalog-item-container {
+            flex-basis: calc(20% - 10px);
+            margin-right: 5px;
+            margin-bottom: 20px;
+        }
+
+        .catalog-item-container:nth-child(5n) {
+            margin-right: 0;
+        }
+
+        .add-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #28a745;
+            color: white;
+            width: 200px;
+            height: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 16px;
+            text-align: center;
+            border-radius: 30px;
+            z-index: 1000;
+            text-decoration: none;
+        }
+
+        .add-button i {
+            margin-right: 10px;
+        }
+
+        footer {
+            display: flex;
+            justify-content: space-between;
+            margin-top: auto;
+        }
+
+        footer div {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            margin-right: 30px;
+        }
+
+        footer div a {
+            margin-top: 10px;
+            text-decoration: none;
+            color: black;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .social-icons img {
+            width: 24px;
+            height: 24px;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div><img src="logo.png" alt="Logo" style="max-height: 50px;"></div>
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Sobre nosotros</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Donar</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Heladeras</a>
+                    </li>
+                    <!-- Menú desplegable -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Nombre del usuario
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item" href="login.html">Mi perfil</a>
+                            <a class="dropdown-item" href="#">Mis donaciones</a>
+                            <a class="dropdown-item" href="canjearPuntos.html">Mi puntaje</a>
+                            <a class="dropdown-item" href="#">Configuración</a>
+                            <a class="dropdown-item" href="#">Cerrar sesión</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <div class="container mt-5">
+            <div class="row">
+                <div class="col-md-12">
+                    <h3 class="header-title">Catálogo</h3>
+                </div>
+            </div>
+            <div class="row search-bar">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Buscar producto">
+                    <div class="input-group-append">
+                        <span class="input-group-text"><i class="fas fa-search"></i></span>
+                    </div>
+                </div>
+            </div>
+            <div class="row catalog-grid">
+                <!-- Elementos del catálogo -->
+                <div class="catalog-item-container">
+                    <div class="catalog-item">
+                        <img src="https://via.placeholder.com/150" alt="Descripción">
+                        <p>Descripción</p>
+                        <p>1540 puntos <span>&gt;</span></p>
+                    </div>
+                </div>
+                <div class="catalog-item-container">
+                    <div class="catalog-item">
+                        <img src="https://via.placeholder.com/150" alt="Descripción">
+                        <p>Descripción</p>
+                        <p>1540 puntos <span>&gt;</span></p>
+                    </div>
+                </div>
+                <div class="catalog-item-container">
+                    <div class="catalog-item">
+                        <img src="https://via.placeholder.com/150" alt="Descripción">
+                        <p>Descripción</p>
+                        <p>1540 puntos <span>&gt;</span></p>
+                    </div>
+                </div>
+                <div class="catalog-item-container">
+                    <div class="catalog-item">
+                        <img src="https://via.placeholder.com/150" alt="Descripción">
+                        <p>Descripción</p>
+                        <p>1540 puntos <span>&gt;</span></p>
+                    </div>
+                </div>
+                <div class="catalog-item-container">
+                    <div class="catalog-item">
+                        <img src="https://via.placeholder.com/150" alt="Descripción">
+                        <p>Descripción</p>
+                        <p>1540 puntos <span>&gt;</span></p>
+                    </div>
+                </div>
+                <div class="catalog-item-container">
+                    <div class="catalog-item">
+                        <img src="https://via.placeholder.com/150" alt="Descripción">
+                        <p>Descripción</p>
+                        <p>1540 puntos <span>&gt;</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- botón flotante -->
+    <a class="add-button" href="agregarProductosEmpresa.html">
+        <i class="fas fa-plus"></i> Agregar Producto
+    </a>
+
+    <footer>
+        <div>
+            <p><img src="logo.png" alt="Logo" style="max-height: 50px;"></p>
+            <div>
+                <a href="#">Facebook</a>
+                <a href="#">Instagram</a>
+                <a href="#">YouTube</a>
+            </div>
+        </div>
+        <div>
+            <h4>Más información</h4>
+            <a href="#">Contáctanos</a>
+            <a href="#">Sobre nosotros</a>
+            <a href="#">Sobre el proyecto</a>
+        </div>
+        <div>
+            <h4>Donar</h4>
+            <a href="#">Donar vianda</a>
+            <a href="#">Ver mapa</a>
+        </div>
+    </footer>
+
+    <!-- Scripts de Bootstrap -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>

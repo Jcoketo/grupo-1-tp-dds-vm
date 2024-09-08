@@ -35,34 +35,31 @@
         }
 
         main {
-            flex-grow: 1;
-            padding: 20px;
-            background-color: white;
-        }
-
-        footer {
-            display: flex;
-            justify-content: space-between;
-            background-color: #e0e0e0;
-            padding: 20px 50px;
-        }
-
-        footer div {
+            flex: 1; /* Esto hace que el contenido principal crezca para llenar el espacio restante */
             display: flex;
             flex-direction: column;
-            align-items: flex-start;
-            margin-right: 30px;
+            margin-bottom: 100px; /* Espaciado adicional para asegurar que el footer no se superponga */
         }
 
-        footer div a {
-            margin-top: 10px;
-            text-decoration: none;
-            color: black;
+        .content {
+            flex: 1; /* Esto hace que el contenedor de la fila ocupe el espacio disponible */
+            display: flex;
+            gap: 20px; /* Espaciado entre el mapa y la lista de heladeras */
+        }
+
+        .map-container, .list-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .map-container {
+            margin-bottom: 20px; /* Espaciado adicional entre el mapa y el footer */
         }
 
         #map {
             width: 100%;
-            height: 600px;
+            height: 100%;
             border-radius: 10px;
         }
 
@@ -78,30 +75,26 @@
         .list-group-item:hover {
             background-color: #e2e6ea;
         }
-        .navbar-light .navbar-nav .nav-link,
-        .navbar-light .dropdown-menu {
+
+        footer {
+            display: flex;
+            justify-content: space-between;
             background-color: #e0e0e0;
-            color: black;
-            font-family: Arial, Helvetica, sans-serif;
-            font-size: 16px;
-            font-weight: normal;                        
-        }
-        .navbar-light .dropdown-menu {
-            width: 200px;      
-        }
-        .navbar-light .dropdown-menu a.dropdown-item {
-            color: black;
-            font-family: Arial, Helvetica, sans-serif;
-            font-size: 16px;
-            font-weight: normal;
-            width: 200px; 
-            
+            padding: 20px 50px;
+            margin-top: 20px; /* Espaciado adicional antes del footer */
         }
 
-        .navbar-light .dropdown-menu a.dropdown-item:hover {
-            background-color: #cdcdcd;
-            margin: 0; 
-            width: 200px;
+        footer div {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            margin-right: 30px;
+        }
+
+        footer div a {
+            margin-top: 10px;
+            text-decoration: none;
+            color: black;
         }
     </style>
 </head>
@@ -109,48 +102,48 @@
 
 <header>
     <div><img src="logo.png" alt="Logo" style="max-height: 50px;"></div>
-        <nav class="navbar navbar-expand-lg navbar-light">
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
-                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Sobre nosotros</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Donar</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Heladeras</a>
-                    </li>
-                    <!-- Menú desplegable -->
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Nombre del usuario
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <a class="dropdown-item" href="login.html">Mi perfil</a>
-                            <a class="dropdown-item" href="#">Mis donaciones</a>
-                            <a class="dropdown-item" href="canjearPuntos.html">Mi puntaje</a>
-                            <a class="dropdown-item" href="#">Configuración</a>
-                            <a class="dropdown-item" href="#">Cerrar sesión</a>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </nav>
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Sobre nosotros</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Donar</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Heladeras</a>
+                </li>
+                <!-- Menú desplegable -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Nombre del usuario
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="login.html">Mi perfil</a>
+                        <a class="dropdown-item" href="#">Mis donaciones</a>
+                        <a class="dropdown-item" href="canjearPuntos.html">Mi puntaje</a>
+                        <a class="dropdown-item" href="#">Configuración</a>
+                        <a class="dropdown-item" href="#">Cerrar sesión</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
 </header>
 
 <main class="container-fluid">
     <h3 class="my-4">Visualización de heladeras</h3>
-    <div class="row">
-        <div class="col-md-7">
+    <div class="content">
+        <div class="map-container">
             <div id="map"></div>
         </div>
-        <div class="col-md-5 mt-4 mt-md-0">
+        <div class="list-container">
             <h3>Heladeras</h3>
             <ul id="heladeras-list" class="list-group">
                 <!-- Lista de heladeras se llenará dinámicamente -->
@@ -158,7 +151,35 @@
         </div>
     </div>
 </main>
-<!-- AIzaSyBb5mC9pmmrsoAdUAxHfvE4Z2iW260tlUY -->
+
+<footer>
+    <div>
+        <p><img src="logo.png" alt="Logo" style="max-height: 50px;"></p>
+        <div>
+            <a href="#">Facebook</a>
+            <a href="#">Instagram</a>
+            <a href="#">YouTube</a>
+        </div>
+    </div>
+    <div>
+        <h4>Más información</h4>
+        <a href="#">Contactanos</a>
+        <a href="#">Sobre nosotros</a>
+        <a href="#">Sobre el proyecto</a>
+    </div>
+    <div>
+        <h4>Donar</h4>
+        <a href="#">Donar vianda</a>
+        <a href="#">Ver mapa</a>
+        <a href="#">Donar dinero</a>
+    </div>
+</footer>
+
+<!-- Incluye Bootstrap JS y sus dependencias -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBb5mC9pmmrsoAdUAxHfvE4Z2iW260tlUY"></script>
 <script>
     const heladeras = [
@@ -193,7 +214,10 @@
                 <div>
                     <strong>${heladera.name}</strong><br>
                     <small>En funcionamiento desde: ${heladera.date}</small><br>
-                    <small>${heladera.status}</small>
+                    <small>${heladera.status}</small><br>
+                    <small>
+                            <a href="visualizarDetalleHeladera.html?name=${heladera.name}" class="text-primary" style="text-decoration: underline;">Detalles</a>
+                    </small>
                 </div>
             `;
             listItem.addEventListener('click', () => {
@@ -209,33 +233,6 @@
     document.addEventListener("DOMContentLoaded", initMap);
 </script>
 
-<footer>
-    <div>
-        <p><img src="logo.png" alt="Logo" style="max-height: 50px;"></p>
-        <div>
-            <a href="#">Facebook</a>
-            <a href="#">Instagram</a>
-            <a href="#">YouTube</a>
-        </div>
-    </div>
-    <div>
-        <h4>Más información</h4>
-        <a href="#">Contactanos</a>
-        <a href="#">Sobre nosotros</a>
-        <a href="#">Sobre el proyecto</a>
-    </div>
-    <div>
-        <h4>Donar</h4>
-        <a href="#">Donar vianda</a>
-        <a href="#">Ver mapa</a>
-        <a href="#">Donar dinero</a>
-    </div>
-</footer>
-
-<!-- Incluye Bootstrap JS y sus dependencias -->
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
 </body>
 </html>
+

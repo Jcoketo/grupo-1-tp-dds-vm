@@ -253,6 +253,25 @@
     document.addEventListener("DOMContentLoaded", initMap);
 </script>
 
+<script>
+    // Función para obtener el valor de un parámetro de la URL
+    function getParameterByName(name) {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get(name);
+    }
+
+    // Obtener el nombre de la heladera de la URL
+    const heladeraName = getParameterByName('name');
+
+    // Mostrar los detalles de la heladera
+    document.getElementById('heladeraDetails').innerText = `Mostrando detalles para la heladera: ${heladeraName}`;
+
+    // Redirigir al archivo de fallas técnicas con el nombre de la heladera
+    document.getElementById('fallasTecnicasBtn').addEventListener('click', function() {
+        window.location.href = `visualizarFallasTecnicas.html?name=${heladeraName}`;
+    });
+</script>
+
 <footer>
     <div>
         <p><img src="logo.png" alt="Logo" style="max-height: 50px;"></p>

@@ -33,43 +33,36 @@
             text-decoration: none;
             color: black;
             font-family: Arial, Helvetica, sans-serif;
-            font-size: 16px; /* Ajusta el tamaño de fuente */
-            font-weight: normal; /* Ajusta el peso de la fuente */
+            font-size: 16px;
+            font-weight: normal;
         }
 
-        
-        /* Estilo personalizado para el menú desplegable */
         .navbar-light .navbar-nav .nav-link,
         .navbar-light .dropdown-menu {
-            background-color: #e0e0e0; /* Mismo color que el header */
-            color: black; /* Color del texto */
+            background-color: #e0e0e0;
+            color: black;
             font-family: Arial, Helvetica, sans-serif;
-            font-size: 16px; /* Ajusta el tamaño de fuente */
-            font-weight: normal; /* Ajusta el peso de la fuente */
+            font-size: 16px;
+            font-weight: normal;
         }
 
         .navbar-light .dropdown-menu {
             width: 200px;      
         }
+
         .navbar-light .dropdown-menu a.dropdown-item {
             color: black;
             font-family: Arial, Helvetica, sans-serif;
             font-size: 16px;
             font-weight: normal;
-            width: 200px; 
-            
         }
 
         .navbar-light .dropdown-menu a.dropdown-item:hover {
             background-color: #cdcdcd;
-            margin: 0; 
-            width: 200px;
         }
+
         main {
             flex-grow: 1;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
             padding: 50px;
             background-color: white;
         }
@@ -85,11 +78,10 @@
             max-width: 50%;
         }
 
-        .main-content h1 {
-            font-size: 50px;
-            margin: 0;
+        h1 {
+            font-size: 24px;
             font-weight: bold;
-
+            margin-bottom: 20px;
         }
 
         .main-content p {
@@ -116,15 +108,12 @@
             display: flex;
             flex-direction: column;
             align-items: flex-start;
-            
-            
         }
 
         footer div a {
             margin-top: 10px;
             text-decoration: none;
             color: black;
-            margin-right: 30px;
         }
 
         .social-icons {
@@ -145,28 +134,27 @@
             margin-bottom: 20px;
         }
 
-        .catalog-item {
+        .catalog-item, .view-more {
             background-color: #ebece3;
-            padding: 20px;
+            padding: 10px; 
             text-align: center;
             border-radius: 20px;
             margin-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center; 
+            height: auto; 
+            max-width: 200px; 
+            min-height: 250px; 
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1); 
         }
 
-        .catalog-item img {
-            max-width: 90%;
+        .catalog-item img, .view-more img {
+            width: 90%; 
             height: auto;
             margin-bottom: 10px;
-        }
-
-        .view-more {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-color: #ebece3;
-            height: 50%;
-            text-align: center;
-            border-radius: 5px;
+            border-radius: 8px;
         }
 
         .view-more a {
@@ -174,13 +162,15 @@
             font-weight: bold;
             color: black;
         }
+
         .header-title {
-            font-weight: 800; /* Más grosor */
+            font-weight: 800;
         }
+
         .sub-header {
-            font-weight: 600; /* Aumento moderado del grosor */
+            font-weight: 600;
         }
-        
+
         .puntaje-column {
             display: flex;
             flex-direction: column;
@@ -188,6 +178,11 @@
             margin-right: auto;
         }
 
+        .catalog-row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
 
     </style>
 </head>
@@ -209,7 +204,6 @@
                 <li class="nav-item">
                     <a class="nav-link" href="#">Heladeras</a>
                 </li>
-                <!-- Menú desplegable -->
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Nombre del usuario
@@ -228,28 +222,19 @@
 </header>
 
 <main>
-
     <div class="container mt-5">
         <div class="row">
             <div class="col-md-3 puntaje-column">
-                <h3 class="header-title">Mi puntaje</h3>
+                <h1>Mi puntaje</h1>
                 <div class="puntaje">
                     <p class="sub-header">Puntos acumulados</p>
                     <h4>1580 pts.</h4>
                 </div>
             </div>
             <div class="col-md-9">
-                <h3 class="header-title">Catálogo</h3>
-                <div class="row">
-                    <!-- Elemento del catálogo -->
-                    <div class="col-md-3">
-                        <div class="catalog-item">
-                            <img src="https://via.placeholder.com/150" alt="Descripción">
-                            <p>Descripción</p>
-                            <p>1,540 puntos</p>
-                        </div>
-                    </div>
-                    <!-- Repite este bloque para cada elemento del catálogo -->
+                <h1>Catálogo</h1>
+                <div class="catalog-row">
+                    <!-- Elementos del catálogo -->
                     <div class="col-md-3">
                         <div class="catalog-item">
                             <img src="https://via.placeholder.com/150" alt="Descripción">
@@ -278,6 +263,7 @@
                             <p>1,540 puntos</p>
                         </div>
                     </div>
+                    <!-- Segunda fila de elementos del catálogo -->
                     <div class="col-md-3">
                         <div class="catalog-item">
                             <img src="https://via.placeholder.com/150" alt="Descripción">
@@ -292,17 +278,22 @@
                             <p>1,540 puntos</p>
                         </div>
                     </div>
-                    <!-- Enlace "Ver más" -->
+                    <div class="col-md-3">
+                        <div class="catalog-item">
+                            <img src="https://via.placeholder.com/150" alt="Descripción">
+                            <p>Descripción</p>
+                            <p>1,540 puntos</p>
+                        </div>
+                    </div>
                     <div class="col-md-3">
                         <div class="view-more">
-                            <a href="#">Ver más</a>
+                            <a href="catalogoProductos.html">Ver más</a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    
 </main>
 
 <footer>
@@ -332,6 +323,5 @@
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 </body>
 </html>
