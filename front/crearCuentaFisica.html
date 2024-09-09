@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro Persona Física</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -41,30 +43,29 @@
         }
 
         .back-arrow {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            font-size: 14px;
+            display: flex;
+            align-items: center;
+            font-size: 16px;
             text-decoration: none;
             color: black;
+            margin: 20px;
         }
 
         main {
             flex-grow: 1;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            position: relative;
+            padding: 20px;
+            background-color: white;
         }
 
         .register-container {
-            text-align: center;
+            max-width: 600px;
+            margin: 50px auto;
+            width: 100%;
             background-color: white;
             padding: 40px;
-            border-radius: 8px;
+            border-radius: 20px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            max-width: 600px;
-            width: 100%;
+            text-align: center;
         }
 
         .register-container h2 {
@@ -76,19 +77,23 @@
             padding: 10px;
             margin: 10px 0;
             border: 1px solid #ccc;
-            border-radius: 4px;
+            border-radius: 10px;
         }
 
         .register-container button {
             width: 100%;
             padding: 15px;
-            background-color: black;
+            background-color: #3b559d;
             color: white;
             border: none;
-            border-radius: 4px;
+            border-radius: 10px;
             cursor: pointer;
             font-size: 16px;
             margin-top: 10px;
+        }
+
+        .register-container button:hover {
+            background-color: #2e4372;
         }
 
         .register-container label {
@@ -143,16 +148,44 @@
 <body>
 <header>
     <div><img src="logo.png" alt="Logo" style="max-height: 50px;"></div>
-    <nav>
-        <a href="#">Sobre nosotros</a>
-        <a href="#">Donar</a>
-        <a href="#">Heladeras</a>
-        <a href="#" class="btn-donar">Donar</a>
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Sobre nosotros</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="elegirDonacionFisica.html">Donar</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="mapaHeladeras.html">Heladeras</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Nombre del usuario
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="login.html">Mi perfil</a>
+                        <a class="dropdown-item" href="misColaboraciones.html">Mis colaboraciones</a>
+                        <a class="dropdown-item" href="canjearPuntos.html">Mi puntaje</a>
+                        <a class="dropdown-item" href="#">Configuración</a>
+                        <a class="dropdown-item" href="#">Cerrar sesión</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
     </nav>
 </header>
 
 <main>
-    <a href="javascript:history.back()" class="back-arrow">← volver atrás</a>
+    <a href="javascript:history.back()" class="back-arrow">
+        <i class="fas fa-arrow-left"></i> Volver
+    </a>
     <div class="register-container">
         <h2>Registro Persona Física</h2>
         <form>
@@ -216,9 +249,7 @@
                 <label for="terms">Acepto los <a href="#">términos de política de privacidad</a> y <a href="#">términos de uso</a></label>
             </div>
 
-            <form action="validarEmail.html" method="get">
-                <button type="submit">Registrarse</button>
-            </form>
+            <button type="submit">Registrarse</button>
         </form>
     </div>
 </main>
@@ -236,14 +267,13 @@
         <h4>Más información</h4>
         <a href="#">Contactanos</a>
         <a href="#">Sobre nosotros</a>
-        <a href="#">Sobre el proyecto</a>
-    </div>
-    <div>
-        <h4>Donar</h4>
-        <a href="#">Donar vianda</a>
-        <a href="#">Ver mapa</a>
-        <a href="#">Donar dinero</a>
+        <a href="#">Política de privacidad</a>
+        <a href="#">Términos de uso</a>
     </div>
 </footer>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

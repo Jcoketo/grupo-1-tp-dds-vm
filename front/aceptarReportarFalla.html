@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registro</title>
+    <title>Falla técnica reportada</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -45,27 +46,41 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            position: relative;
         }
 
-        .register-container {
+        .validation-container {
             text-align: center;
             background-color: white;
             padding: 40px;
-            border-radius: 10px;
+            border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
 
-        .register-container button {
-            width: 100%;
-            padding: 15px;
-            background-color: #3b559d;
-            color: white;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-            font-size: 16px;
+        h1 {
+            font-size: 24px;
             margin-bottom: 20px;
+            color: #333;
+        }
+
+        p {
+            font-size: 16px;
+            color: #666;
+        }
+
+        .btn-volver {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            color: #ffffff;
+            background-color: #3b559d;
+            border-radius: 10px;
+            text-decoration: none;
+        }
+
+        .btn-volver:hover {
+            background-color: #274597;
         }
 
         footer {
@@ -85,47 +100,50 @@
             text-decoration: none;
             color: black;
         }
+
     </style>
 </head>
+
 <body>
-<header>
-    <div><img src="logo.png" alt="Logo" style="max-height: 50px;"></div>
-    <nav>
-        <a href="#">Sobre nosotros</a>
-        <a href="#">Donar</a>
-        <a href="#">Heladeras</a>
-        <a href="#" class="btn-donar">Donar</a>
-    </nav>
-</header>
+    <header>
+        <div><img src="logo.png" alt="Logo" style="max-height: 50px;"></div>
+        <nav>
+            <a href="#">Sobre nosotros</a>
+            <a href="elegirDonacionFisica.html">Donar</a>
+            <a href="mapaHeladeras.html">Heladeras</a>
+            <a href="#" class="btn-donar">Donar</a>
+        </nav>
+    </header>
 
-<main>
-        <div class="register-container">
-        <button onclick="location.href='crearCuentaJuridica.html'">Registrarse como Persona Jurídica</button>
-        <button onclick="location.href='crearCuentaFisica.html'">Registrarse como Persona Física</button>
-    </div>
-</main>
-
-<footer>
-    <div>
-        <p><img src="logo.png" alt="Logo" style="max-height: 50px;"></p>
-        <div>
-            <a href="#">Facebook</a>
-            <a href="#">Instagram</a>
-            <a href="#">YouTube</a>
+    <main>
+        <div class="validation-container">
+            <h1>Falla técnica reportada</h1>
+            <a href="visualizarFallasTecnicas.html" class="btn-volver">Volver a listado de fallas</a>
         </div>
-    </div>
-    <div>
-        <h4>Más información</h4>
-        <a href="#">Contactanos</a>
-        <a href="#">Sobre nosotros</a>
-        <a href="#">Sobre el proyecto</a>
-    </div>
-    <div>
-        <h4>Donar</h4>
-        <a href="#">Donar vianda</a>
-        <a href="#">Ver mapa</a>
-        <a href="#">Donar dinero</a>
-    </div>
-</footer>
+    </main>
+
+    <footer>
+        <div>
+            <p><img src="logo.png" alt="Logo" style="max-height: 50px;"></p>
+            <div>
+                <a href="#">Facebook</a>
+                <a href="#">Instagram</a>
+                <a href="#">YouTube</a>
+            </div>
+        </div>
+        <div>
+            <h4>Más información</h4>
+            <a href="#">Contáctanos</a>
+            <a href="#">Sobre nosotros</a>
+            <a href="#">Sobre el proyecto</a>
+        </div>
+        <div>
+            <h4>Donar</h4>
+            <a href="#">Donar vianda</a>
+            <a href="#">Ver mapa</a>
+        </div>
+    </footer>
+
 </body>
+
 </html>
