@@ -42,27 +42,32 @@
 
         main {
             flex-grow: 1;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            padding: 20px;
+            background-color: white;
         }
 
         .login-container {
-            text-align: center;
+            max-width: 600px;
+            margin: 50px auto;
+            width: 100%;
             background-color: white;
             padding: 40px;
-            border-radius: 8px;
+            border-radius: 20px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .login-container h2 {
+            margin-bottom: 20px;
         }
 
         .login-container input[type="email"],
         .login-container input[type="password"] {
-            width: 100%;
+            width: calc(100% - 20px);
             padding: 10px;
-            margin-bottom: 20px;
+            margin: 10px 0;
             border: 1px solid #ccc;
-            border-radius: 4px;
-            box-sizing: border-box;
+            border-radius: 10px;
         }
 
         .login-container input.invalid {
@@ -71,13 +76,18 @@
 
         .login-container button {
             width: 100%;
-            padding: 10px;
-            background-color: black;
+            padding: 15px;
+            background-color: #3b559d;
             color: white;
             border: none;
-            border-radius: 4px;
+            border-radius: 10px;
             cursor: pointer;
             font-size: 16px;
+            margin-top: 10px;
+        }
+
+        .login-container button:hover {
+            background-color: #2e4372;
         }
 
         .login-container a {
@@ -99,6 +109,16 @@
             color: black;
         }
 
+        .password-container {
+            display: none;
+        }
+
+        .error-message {
+            color: red;
+            font-size: 14px;
+            display: none;
+        }
+
         footer {
             display: flex;
             justify-content: space-between;
@@ -116,18 +136,6 @@
             text-decoration: none;
             color: black;
         }
-
-        /* Esconder el campo de contraseña por defecto */
-        .password-container {
-            display: none;
-        }
-
-        /* Mensaje de error */
-        .error-message {
-            color: red;
-            font-size: 14px;
-            display: none;
-        }
     </style>
 </head>
 <body>
@@ -142,20 +150,18 @@
 </header>
 
 <main>
-    <div class="login-container"> 
+    <div class="login-container">
         <h2>Iniciar sesión</h2>
         <p>Ingresa tu correo electrónico</p>
         <input type="email" id="email" placeholder="correo@dominio.com" required>
         <p id="error-message" class="error-message">El correo no existe.</p>
 
-        <!-- Contenedor para el campo de contraseña -->
         <div class="password-container" id="password-container">
             <input type="password" id="password" placeholder="Ingresa tu contraseña" required>
         </div>
 
         <button id="continue-button">Continuar</button>
 
-        <!-- Redirigir a otra interfaz al crear cuenta -->
         <a href="elegirRegistroCuenta.html">¿No tenés una cuenta? Crear cuenta</a>
 
         <p>Al hacer clic en continuar, estás aceptando nuestra <a href="#">política de privacidad y términos de uso</a>.</p>
@@ -186,10 +192,8 @@
 </footer>
 
 <script>
-    // Simular un conjunto de correos válidos (esto debería ser una validación del servidor en una app real)
     const validEmails = ["usuario@dominio.com", "ejemplo@dominio.com", "test@dominio.com"];
 
-    // Mostrar el campo de contraseña cuando se introduce un correo válido
     document.getElementById('email').addEventListener('input', function() {
         var email = this.value;
         var passwordContainer = document.getElementById('password-container');
@@ -214,25 +218,15 @@
     });
 
     document.getElementById('continue-button').addEventListener('click', function(event) {
-    var email = document.getElementById('email').value;
-    var password = document.getElementById('password').value;
-    var errorMessage = document.getElementById('error-message');
-
-    if (!validEmails.includes(email)) {
-        event.preventDefault(); // Evitar el envío del formulario si el correo no es válido
-        errorMessage.style.display = 'block';
-        document.getElementById('email').classList.add('invalid');
-    } else {
-        // en el siguiente if deberiamos ir al servidor a validar usuario y clave
-        if (password === "1234") {  
-            window.location.href = 'menuUsuarioLogin.html';
-        } else {
-            event.preventDefault(); // Evitar la redirección si la contraseña es incorrecta
-            errorMessage.textContent = 'Usuario y/o contraseña incorrecta.';
-            errorMessage.style.display = 'block';
-            document.getElementById('password').classList.add('invalid');
+        var email = document.getElementById('email').value;
+        var password = document.getElementById('password').value;
+        if (!validEmails.includes(email)) {
+            event.preventDefault();
+            alert("El correo no es válido.");
+        } else if (password === '') {
+            event.preventDefault();
+            alert("Por favor ingresa una contraseña.");
         }
-    }
     });
 </script>
 </body>

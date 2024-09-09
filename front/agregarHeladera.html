@@ -39,7 +39,6 @@
             font-weight: normal;
         }
 
-        /* Estilo personalizado para el menú desplegable */
         .navbar-light .navbar-nav .nav-link,
         .navbar-light .dropdown-menu {
             background-color: #e0e0e0;
@@ -50,20 +49,20 @@
         }
 
         .navbar-light .dropdown-menu {
-            width: 200px;      
+            width: 200px;
         }
+
         .navbar-light .dropdown-menu a.dropdown-item {
             color: black;
             font-family: Arial, Helvetica, sans-serif;
             font-size: 16px;
             font-weight: normal;
-            width: 200px; 
-            
+            width: 200px;
         }
 
         .navbar-light .dropdown-menu a.dropdown-item:hover {
             background-color: #cdcdcd;
-            margin: 0; 
+            margin: 0;
             width: 200px;
         }
 
@@ -76,10 +75,62 @@
             background-color: white;
         }
 
+        form {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            font-weight: bold;
+        }
+
+        .form-control {
+            border-radius: 5px;
+        }
+
+        .btn-group {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .btn-cancelar,
+        .btn-agregar {
+            border: none;
+            padding: 10px 90px;
+            border-radius: 5px;
+            font-size: 16px;
+            margin: 0 15px;
+            width: 30%;
+        }
+
+        .btn-cancelar {
+            background-color: #e0e0e0;
+            color: black;
+        }
+
+        .btn-agregar {
+            background-color: #3b559d;
+            color: white;
+        }
+
+        .btn-agregar:hover {
+            background-color: #274597;
+            color: white;
+        }
+
         footer {
             display: flex;
             justify-content: space-between;
             margin-top: auto;
+            padding: 20px 50px;
         }
 
         footer div {
@@ -104,77 +155,6 @@
             width: 24px;
             height: 24px;
         }
-
-        .btn-agregar-producto {
-            background-color: rgb(59, 170, 59);
-            color: white;
-        }
-
-        .card {
-            width: 100%;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .card-body {
-            text-align: center;
-        }
-
-        .placeholder-img {
-            background-color: gray;
-            height: 150px;
-        }
-
-        .form-group label {
-            font-weight: bold;
-        }
-
-        .form-group input {
-            border-radius: 4px;
-            border: 1px solid #ccc;
-            padding: 10px;
-            width: 100%;
-        }
-
-        .form-group button {
-            background-color: black;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 16px;
-        }
-
-        .checkbox-container {
-            display: grid;
-            grid-template-columns: auto 1fr;
-            gap: 10px;
-            align-items: center;
-            margin-bottom: 15px;
-        }
-
-        .container {
-            max-width: 600px;
-            margin-top: 50px;
-        }
-        .btn-custom {
-            width: 100%;
-            padding: 10px;
-            font-weight: bold;
-        }
-        .btn-light-custom {
-            background-color: #e0e0e0;
-        }
-        .form-control {
-            height: 45px;
-        }
-
-        @media (max-width: 768px) {
-            .card {
-                max-width: 100%;
-            }
-        }
     </style>
 </head>
 
@@ -192,12 +172,11 @@
                         <a class="nav-link" href="#">Sobre nosotros</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Donar</a>
+                        <a class="nav-link" href="elegirDonacionFisica.html">Donar</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Heladeras</a>
+                        <a class="nav-link" href="mapaHeladeras.html">Heladeras</a>
                     </li>
-                    <!-- Menú desplegable -->
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -205,7 +184,7 @@
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                             <a class="dropdown-item" href="login.html">Mi perfil</a>
-                            <a class="dropdown-item" href="#">Mis donaciones</a>
+                            <a class="dropdown-item" href="misColaboraciones.html">Mis colaboraciones</a>
                             <a class="dropdown-item" href="canjearPuntos.html">Mi puntaje</a>
                             <a class="dropdown-item" href="#">Configuración</a>
                             <a class="dropdown-item" href="#">Cerrar sesión</a>
@@ -217,8 +196,8 @@
     </header>
 
     <main>
-        <div class="container bg-white p-4 shadow-sm rounded">
-            <h2 class="mb-4">Agregar heladera</h2>
+        <div class="container">
+            <h1>Agregar heladera</h1>
             <form>
                 <div class="row mb-3">
                     <div class="col-md-6">
@@ -237,8 +216,10 @@
                         <input type="number" class="form-control" id="capacidad" placeholder="18">
                     </div>
                     <div class="col-md-6">
-                        <label for="activa" class="form-label">¿Está activa?</label>
-                        <select class="form-select" id="activa">
+                        <div>
+                            <label for="activa" class="form-label">¿Está activa?</label>
+                        </div>
+                        <select class="form-select form-control" id="activa">
                             <option>Sí</option>
                             <option>No</option>
                         </select>
@@ -246,8 +227,10 @@
                 </div>
                 
                 <div class="mb-3">
-                    <label for="ubicacion" class="form-label">Punto de colocación</label>
-                    <select class="form-select" id="ubicacion">
+                    <div>
+                        <label for="ubicacion" class="form-label">Punto de colocación</label>
+                    </div>
+                    <select class="form-select form-control" id="ubicacion">
                         <option selected disabled>Seleccione una ubicación</option>
                         <option value="Mozart 2300, CABA">Mozart 2300, CABA</option>
                         <option value="Av. Rivadavia 3456, CABA">Av. Rivadavia 3456, CABA</option>
@@ -256,14 +239,9 @@
                     </select>
                 </div>
                 
-                
-                <div class="row">
-                    <div class="col-md-6">
-                        <button type="button" class="btn btn-light btn-custom btn-light-custom">Cancelar</button>
-                    </div>
-                    <div class="col-md-6">
-                        <button type="submit" class="btn btn-dark btn-custom">Agregar</button>
-                    </div>
+                <div class="btn-group">
+                    <a href="mapaHeladeras.html" class="btn-cancelar">Cancelar</a>
+                    <a href="aceptarAgregarHeladera.html" class="btn-agregar">Agregar</a>
                 </div>
             </form>
         </div>

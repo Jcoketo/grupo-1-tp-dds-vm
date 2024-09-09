@@ -50,28 +50,29 @@
         }
 
         .navbar-light .dropdown-menu {
-            width: 200px;      
+            width: 200px;
         }
+
         .navbar-light .dropdown-menu a.dropdown-item {
             color: black;
             font-family: Arial, Helvetica, sans-serif;
             font-size: 16px;
             font-weight: normal;
-            width: 200px; 
-            
+            width: 200px;
         }
 
         .navbar-light .dropdown-menu a.dropdown-item:hover {
             background-color: #cdcdcd;
-            margin: 0; 
+            margin: 0;
             width: 200px;
         }
+
         main {
             flex-grow: 1;
+            padding: 50px;
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 50px;
             background-color: white;
         }
 
@@ -104,58 +105,62 @@
             height: 24px;
         }
 
-        .btn-agregar-producto {
-            background-color: rgb(59, 170, 59);
+        .btn-donar {
+            background-color: #3b559d;
             color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+        }
+
+        .btn-donar:hover {
+            background-color: #2e4372;
         }
 
         .card {
             width: 100%;
             max-width: 600px;
             margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
 
         .card-body {
             text-align: center;
         }
 
-        .placeholder-img {
-            background-color: gray;
-            height: 150px;
-        }
-
         .form-group label {
             font-weight: bold;
+            text-align: left;
         }
 
         .form-group input {
-            border-radius: 4px;
+            border-radius: 10px;
             border: 1px solid #ccc;
             padding: 10px;
             width: 100%;
         }
 
-        .form-group button {
-            background-color: black;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 16px;
+        .form-group input[type="checkbox"] {
+            margin-right: 10px;
         }
 
         .checkbox-container {
-            display: grid;
-            grid-template-columns: auto 1fr;
-            gap: 10px;
+            display: flex;
             align-items: center;
-            margin-bottom: 15px;
+            gap: 10px;
+            margin-bottom: 20px;
         }
 
         @media (max-width: 768px) {
             .card {
                 max-width: 100%;
+                padding: 15px;
             }
         }
     </style>
@@ -175,10 +180,10 @@
                         <a class="nav-link" href="#">Sobre nosotros</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Donar</a>
+                        <a class="nav-link" href="elegirDonacionFisica.html">Donar</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Heladeras</a>
+                        <a class="nav-link" href="mapaHeladeras.html">Heladeras</a>
                     </li>
                     <!-- Menú desplegable -->
                     <li class="nav-item dropdown">
@@ -188,7 +193,7 @@
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                             <a class="dropdown-item" href="login.html">Mi perfil</a>
-                            <a class="dropdown-item" href="#">Mis donaciones</a>
+                            <a class="dropdown-item" href="misColaboraciones.html">Mis colaboraciones</a>
                             <a class="dropdown-item" href="canjearPuntos.html">Mi puntaje</a>
                             <a class="dropdown-item" href="#">Configuración</a>
                             <a class="dropdown-item" href="#">Cerrar sesión</a>
@@ -227,11 +232,11 @@
                                     <label for="cvv">CVV</label>
                                     <input type="text" id="cvv" name="cvv" class="form-control" required>
                                 </div>
-                                <div class="form-group checkbox-container">
+                                <div class="checkbox-container">
                                     <input type="checkbox" id="guardar-datos" name="guardar-datos">
                                     <label for="guardar-datos">Guardar los datos de la tarjeta para futuras donaciones</label>
                                 </div>
-                                <button type="submit" class="btn btn-primary">Donar</button>
+                                <button type="submit" class="btn-donar">Donar</button>
                             </form>
                         </div>
                     </div>

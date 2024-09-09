@@ -34,6 +34,13 @@
             color: black;
         }
 
+        h1 {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 40px;
+            margin-top: 40px;
+        }
+
         main {
             flex: 1; /* Esto hace que el contenido principal crezca para llenar el espacio restante */
             display: flex;
@@ -113,10 +120,10 @@
                     <a class="nav-link" href="#">Sobre nosotros</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Donar</a>
+                    <a class="nav-link" href="elegirDonacionFisica.html">Donar</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Heladeras</a>
+                    <a class="nav-link" href="mapaHeladeras.html">Heladeras</a>
                 </li>
                 <!-- Menú desplegable -->
                 <li class="nav-item dropdown">
@@ -126,7 +133,7 @@
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                         <a class="dropdown-item" href="login.html">Mi perfil</a>
-                        <a class="dropdown-item" href="#">Mis donaciones</a>
+                        <a class="dropdown-item" href="#">Mis colaboraciones</a>
                         <a class="dropdown-item" href="canjearPuntos.html">Mi puntaje</a>
                         <a class="dropdown-item" href="#">Configuración</a>
                         <a class="dropdown-item" href="#">Cerrar sesión</a>
@@ -138,7 +145,7 @@
 </header>
 
 <main class="container-fluid">
-    <h3 class="my-4">Visualización de heladeras</h3>
+    <h1>Visualización de heladeras</h1>
     <div class="content">
         <div class="map-container">
             <div id="map"></div>
