@@ -28,40 +28,45 @@
             align-items: center;
         }
 
-        
+        .navbar-nav .nav-item {
+            margin-left: 20px; 
+        }
 
-        header nav a {
-            margin-left: 20px;
-            text-decoration: none;
+        .navbar {
+            flex-grow: 1;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .navbar-nav {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .nav-link {
             color: black;
             font-family: Arial, Helvetica, sans-serif;
-            font-size: 16px; /* Ajusta el tamaño de fuente */
-            font-weight: normal; /* Ajusta el peso de la fuente */
+            font-size: 16px;
+            font-weight: normal;
         }
 
-        
-        /* Estilo personalizado para el menú desplegable */
-        .navbar-light .navbar-nav .nav-link,
+        /* Menú desplegable */
         .navbar-light .dropdown-menu {
-            background-color: #e0e0e0; 
-            color: black; 
-            font-family: Arial, Helvetica, sans-serif;
-            font-size: 16px; 
-            font-weight: normal; 
+            background-color: #e0e0e0;
+            width: 200px;
+            margin-top: 0; /* Añadido para eliminar el margen superior */
         }
-
-        .navbar-light .dropdown-menu
-
 
         .navbar-light .dropdown-menu a.dropdown-item {
-            color: black; 
-            font-family: Arial, Helvetica, sans-serif;
+            color: black;
             font-size: 16px;
-            font-weight: normal; 
+            font-weight: normal;
+            width: 200px;
         }
 
         .navbar-light .dropdown-menu a.dropdown-item:hover {
-            background-color: #cdcdcd; 
+            background-color: #cdcdcd;
         }
 
         main {
@@ -89,7 +94,6 @@
             font-size: 50px;
             margin: 0;
             font-weight: bold;
-
         }
 
         .main-content p {
@@ -137,46 +141,49 @@
     </style>
 </head>
 <body>
-<header>
-    <div><img src="logo.png" alt="Logo" style="max-height: 50px;"></div>
-    <nav class="navbar navbar-expand-lg navbar-light">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNavDropdown">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Sobre nosotros</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="elegirDonacionFisica.html">Donar</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="mapaHeladeras.html">Heladeras</a>
-                </li>
-                <!-- Menú desplegable -->
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Nombre del usuario
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <a class="dropdown-item" href="login.html">Mi perfil</a>
-                        <a class="dropdown-item" href="#">Mis colaboraciones</a>
-                        <a class="dropdown-item" href="canjearPuntos.html">Mi puntaje</a>
-                        <a class="dropdown-item" href="#">Configuración</a>
-                        <a class="dropdown-item" href="#">Cerrar sesión</a>
-                    </div>
-                </li>
-            </ul>
-        </div>
-    </nav>
-</header>
+    <header>
+        <div><img src="logo.png" alt="Logo" style="max-height: 50px;"></div>
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Sobre nosotros</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="elegirDonacionFisica.html">Donar</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="mapaHeladeras.html">Heladeras</a>
+                    </li>
+                    <!-- Menú desplegable -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Nombre del usuario
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item" href="login.html">Mi perfil</a>
+                            <a class="dropdown-item" href="#">Mis colaboraciones</a>
+                            <a class="dropdown-item" href="canjearPuntos.html">Mi puntaje</a>
+                            <a class="dropdown-item" href="#">Configuración</a>
+                            <a class="dropdown-item" href="#">Cerrar sesión</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
 
 <main>
     <div class="main-content">
         <h1>Titulo</h1>
         <p>Subtitulo que incite a realizar una donacion</p>
-        <a href="#" class="btn-donar">Donar</a>
+        <a href="elegirDonacionFisica.html" class="btn-donar">Donar</a>
     </div>
     <div class="image-placeholder">
         <img src="image.png" alt="Imagen" style="max-width: 100%; max-height: 100%; border-radius: 8px;">
@@ -186,11 +193,11 @@
 <footer>
     <div>
         <p><img src="logo.png" alt="Logo" style="max-height: 50px;"></p>
-        <div>
-            <a href="#">Facebook</a>
-            <a href="#">Instagram</a>
-            <a href="#">YouTube</a>
-        </div>
+            <div class="social-icons">
+                <a href="#"><img src="facebook-icon.png" alt="Facebook"></a>
+                <a href="#"><img src="instagram-icon.png" alt="Instagram"></a>
+                <a href="#"><img src="twitter-icon.png" alt="Twitter"></a>
+            </div>
     </div>
     <div>
         <h4>Más información</h4>

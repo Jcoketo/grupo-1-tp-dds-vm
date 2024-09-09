@@ -8,6 +8,15 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
+        .social-icons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .social-icons img {
+            width: 24px;
+            height: 24px;
+        }
         body {
             font-family: Arial, sans-serif;
             margin: 0;
@@ -29,13 +38,8 @@
             align-items: center;
         }
 
-        header nav a {
-            margin-left: 20px;
-            text-decoration: none;
-            color: black;
-            font-family: Arial, Helvetica, sans-serif;
-            font-size: 16px;
-            font-weight: normal;
+        .navbar-nav .nav-item {
+            margin-left: 20px; 
         }
 
         main {
@@ -206,10 +210,10 @@
     <footer>
         <div>
             <p><img src="logo.png" alt="Logo" style="max-height: 50px;"></p>
-            <div>
-                <a href="#">Facebook</a>
-                <a href="#">Instagram</a>
-                <a href="#">YouTube</a>
+            <div class="social-icons">
+                <a href="#"><img src="facebook-icon.png" alt="Facebook"></a>
+                <a href="#"><img src="instagram-icon.png" alt="Instagram"></a>
+                <a href="#"><img src="twitter-icon.png" alt="Twitter"></a>
             </div>
         </div>
         <div>
