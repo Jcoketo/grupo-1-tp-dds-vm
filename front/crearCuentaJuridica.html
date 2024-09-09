@@ -8,6 +8,15 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
+        .social-icons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .social-icons img {
+            width: 24px;
+            height: 24px;
+        }
         body {
             font-family: Arial, sans-serif;
             margin: 0;
@@ -36,11 +45,17 @@
             color: black;
         }
 
+
+        .navbar-nav .nav-item {
+            margin-left: 20px; 
+        }
+
         .btn-donar {
-            background-color: black;
+            background-color: #3b559d;
             color: white;
             padding: 10px 20px;
             text-decoration: none;
+            border-radius: 10px;
         }
 
         main {
@@ -168,43 +183,16 @@
 
 <header>
     <div><img src="logo.png" alt="Logo" style="max-height: 50px;"></div>
-    <nav class="navbar navbar-expand-lg navbar-light">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
-            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNavDropdown">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Sobre nosotros</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="elegirDonacionFisica.html">Donar</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="mapaHeladeras.html">Heladeras</a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Nombre del usuario
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <a class="dropdown-item" href="login.html">Mi perfil</a>
-                        <a class="dropdown-item" href="misColaboraciones.html">Mis colaboraciones</a>
-                        <a class="dropdown-item" href="canjearPuntos.html">Mi puntaje</a>
-                        <a class="dropdown-item" href="#">Configuración</a>
-                        <a class="dropdown-item" href="#">Cerrar sesión</a>
-                    </div>
-                </li>
-            </ul>
-        </div>
+    <nav>
+        <a href="#">Sobre nosotros</a>
+        <a href="mapaHeladeras.html">Heladeras</a>
+        <a href="elegirDonacionJuridica.html" class="btn-donar">Donar</a>
     </nav>
 </header>
 
 <main>
     <div class="volver-container">
-        <a href="javascript:history.back()" class="volver-link">
+        <a href="elegirRegistroCuenta.html" class="volver-link">
             <i class="fas fa-arrow-left"></i> Volver
         </a>
     </div>
@@ -246,11 +234,11 @@
 <footer>
     <div>
         <p><img src="logo.png" alt="Logo" style="max-height: 50px;"></p>
-        <div>
-            <a href="#">Facebook</a>
-            <a href="#">Instagram</a>
-            <a href="#">YouTube</a>
-        </div>
+            <div class="social-icons">
+                <a href="#"><img src="facebook-icon.png" alt="Facebook"></a>
+                <a href="#"><img src="instagram-icon.png" alt="Instagram"></a>
+                <a href="#"><img src="twitter-icon.png" alt="Twitter"></a>
+            </div>
     </div>
     <div>
         <h4>Más información</h4>

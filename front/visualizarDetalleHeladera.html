@@ -7,6 +7,15 @@
     <!-- Incluye Bootstrap -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
+        .social-icons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .social-icons img {
+            width: 24px;
+            height: 24px;
+        }
         body {
             font-family: Arial, sans-serif;
             margin: 0;
@@ -28,16 +37,16 @@
             align-items: center;
         }
 
-        header nav a {
-            margin-left: 20px;
-            text-decoration: none;
-            color: black;
+        .navbar-nav .nav-item {
+            margin-left: 20px; 
         }
 
         h1 {
-            font-size: 22px;
+            font-size: 24px;
             font-weight: bold;
-            margin-bottom: 10px;
+            margin-bottom: 30px;
+            margin-top: 30px;
+
         }
         p {
             margin-bottom: 20px;
@@ -179,13 +188,13 @@
 </header>
 
 <main class="container-fluid">
-    <h3 class="my-4">Visualización de heladeras</h3>
+    <h1>Visualización de heladeras</h1>
     <div class="row">
         <div class="col-md-7">
             <div id="map"></div>
         </div>
         <div class="col-md-5 mt-4 mt-md-0">
-            <h1>Heladera Medrano UTN</h1>
+            <h3>Heladera Medrano UTN</h3>
     <p>Avenida Medrano 1234</p>
 
     <div class="info">
@@ -275,11 +284,11 @@
 <footer>
     <div>
         <p><img src="logo.png" alt="Logo" style="max-height: 50px;"></p>
-        <div>
-            <a href="#">Facebook</a>
-            <a href="#">Instagram</a>
-            <a href="#">YouTube</a>
-        </div>
+            <div class="social-icons">
+                <a href="#"><img src="facebook-icon.png" alt="Facebook"></a>
+                <a href="#"><img src="instagram-icon.png" alt="Instagram"></a>
+                <a href="#"><img src="twitter-icon.png" alt="Twitter"></a>
+            </div>
     </div>
     <div>
         <h4>Más información</h4>
