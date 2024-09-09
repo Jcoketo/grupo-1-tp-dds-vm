@@ -20,7 +20,7 @@
 
         header,
         footer {
-            background-color: #e0e0e0;
+            background-color: #d3d3d3;
             padding: 20px 50px;
         }
 
@@ -30,40 +30,40 @@
             align-items: center;
         }
 
-        header nav a {
-            margin-left: 20px;
-            text-decoration: none;
-            color: black;
-            font-family: Arial, Helvetica, sans-serif;
-            font-size: 16px;
-            font-weight: normal;
+        .navbar {
+            flex-grow: 1;
+            display: flex;
+            justify-content: flex-end;
         }
 
-        .navbar-light .navbar-nav .nav-link,
-        .navbar-light .dropdown-menu {
-            background-color: #e0e0e0;
-            color: black;
+        .navbar-nav {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .nav-link {
+            color: black; /* Color de texto negro */
             font-family: Arial, Helvetica, sans-serif;
             font-size: 16px;
-            font-weight: normal;
+            font-weight: bold; /* Texto en negrita */
         }
 
         .navbar-light .dropdown-menu {
-            width: 200px;
+            background-color: #d3d3d3;
         }
 
         .navbar-light .dropdown-menu a.dropdown-item {
-            color: black;
-            font-family: Arial, Helvetica, sans-serif;
-            font-size: 16px;
-            font-weight: normal;
-            width: 200px;
+            color: black; /* Color de texto negro en el dropdown */
+            font-weight: bold; /* Texto en negrita en el dropdown */
         }
 
         .navbar-light .dropdown-menu a.dropdown-item:hover {
             background-color: #cdcdcd;
-            margin: 0;
-            width: 200px;
+        }
+
+        .dropdown-menu {
+            margin-top: 0; /* Alinea el dropdown directamente debajo del nombre de usuario */
         }
 
         main {
@@ -78,7 +78,7 @@
         footer {
             display: flex;
             justify-content: space-between;
-            margin-top: auto;
+            padding: 20px 50px;
         }
 
         footer div {
@@ -118,10 +118,18 @@
         .collaboration-container {
             width: 100%;
             max-width: 1000px;
+            position: relative;
+        }
+
+        .collaboration-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
         }
 
         .collaboration {
-            background-color: #f0f1eb;
+            background-color: #e0e0e0;
             padding: 15px;
             border-radius: 10px;
             margin-bottom: 10px;
@@ -138,10 +146,7 @@
         }
 
         .dropdown {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-top: 20px;
+            position: relative;
         }
 
         .dropdown-content {
@@ -161,6 +166,7 @@
             padding: 12px 16px;
             text-decoration: none;
             display: block;
+            font-weight: bold; /* Texto en negrita */
         }
 
         .dropdown-content a:hover,
@@ -236,8 +242,21 @@
     <main>
         <div class="collaboration-wrapper">
             <div class="collaboration-container">
-                <h1>Mis colaboraciones</h1>
+                <div class="collaboration-header">
+                    <h1>Mis colaboraciones</h1>
 
+                    <!-- Botón de agregar alineado a la derecha -->
+                    <div class="dropdown">
+                        <button class="add-button">Agregar ▾</button>
+                        <div class="dropdown-content">
+                            <a href="elegirDonacionFisica.html">Agregar colaboración</a>
+                            <label for="csvInput">Cargar CSV</label>
+                            <input type="file" id="csvInput" accept=".csv" style="display:none;">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Colaboraciones -->
                 <div class="collaboration">
                     <div class="collaboration-info">
                         <strong>Donación vianda</strong>
@@ -270,15 +289,6 @@
                     </div>
                 </div>
             </div>
-
-            <div class="dropdown">
-                <button class="add-button">Agregar ▾</button>
-                <div class="dropdown-content">
-                    <a href="elegirDonacionFisica.html">Agregar colaboración</a>
-                    <label for="csvInput">Cargar CSV</label>
-                    <input type="file" id="csvInput" accept=".csv" style="display:none;">
-                </div>
-            </div>
         </div>
     </main>
 
@@ -293,17 +303,19 @@
         </div>
         <div>
             <h4>Más información</h4>
-            <a href="#">Contáctanos</a>
+            <a href="#">Contactanos</a>
             <a href="#">Sobre nosotros</a>
+            <a href="#">Sobre el proyecto</a>
         </div>
         <div>
             <h4>Donar</h4>
             <a href="#">Donar vianda</a>
             <a href="#">Ver mapa</a>
+            <a href="#">Donar dinero</a>
         </div>
     </footer>
 
-    <!-- Scripts de Bootstrap y jQuery -->
+    <!-- Enlace a JavaScript de Bootstrap -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
