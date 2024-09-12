@@ -19,15 +19,13 @@ public class HeladeraTest {
         heladera.agregarVianda(vianda1);
         heladera.agregarVianda(vianda2);
 
-        // Act
-        Vianda retirada = heladera.retirarVianda(5);
+        Vianda retirada = heladera.retirarVianda(1); //elimina vianda2
 
         heladera2.agregarVianda(retirada);
 
-        // Assert
-        assertEquals(vianda1, retirada);
+        assertEquals(vianda2, retirada);
         assertEquals(1, heladera.getViandas().size());
-        assertFalse(heladera.getViandas().contains(vianda1));
+        assertTrue(heladera.getViandas().contains(vianda1));
 
         assertEquals(1, heladera2.getViandas().size());
 
