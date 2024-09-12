@@ -28,6 +28,9 @@ public class IncidentesTest {
 
   @BeforeEach
   public void setUp() {
+
+    RepositorioIncidentes.getInstancia().incidentes.clear();
+
     // Crear entidades
     PersonaHumana personaHumana = new PersonaHumana("Juan", "Perez", new MedioDeContacto(TipoMedioDeContacto.MAIL, "juanperez@gmail.com"));
     colaborador = new Colaborador(personaHumana);
