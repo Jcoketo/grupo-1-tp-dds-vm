@@ -1,10 +1,11 @@
-package reportador;
-
+package reportes;
 import elementos.Heladera;
+import org.mockito.MockedStatic;
 import personas.Colaborador;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
+import reportador.GenerarReporte;
 import repositorios.RepositorioColaboradores;
 import repositorios.RepositorioHeladeras;
 
@@ -15,7 +16,7 @@ import java.util.Map;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-class GenerarReporteTest {
+class GenerarReportesTest {
 
     private GenerarReporte generarReporte;
 
@@ -28,11 +29,11 @@ class GenerarReporteTest {
     void testObtenerFallasXHeladera() {
         Heladera heladera1 = mock(Heladera.class);
         Heladera heladera2 = mock(Heladera.class);
-        
+
         when(RepositorioHeladeras.getHeladeras()).thenReturn(Arrays.asList(heladera1, heladera2));
         when(heladera1.getContadorFallasSemanal()).thenReturn(3);
         when(heladera2.getContadorFallasSemanal()).thenReturn(5);
-        
+
         Map<Heladera, Integer> fallas = generarReporte.obtenerFallasXHeladera();
 
         assertEquals(3, fallas.get(heladera1));
