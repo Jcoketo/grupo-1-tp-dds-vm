@@ -1,6 +1,5 @@
 package repositorios;
 
-import elementos.SeguimientoApertura;
 import elementos.Tarjeta;
 import pruebas.IdGenerator;
 

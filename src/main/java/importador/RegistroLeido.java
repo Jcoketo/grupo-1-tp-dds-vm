@@ -14,7 +14,7 @@ public class RegistroLeido {
     @Getter
     private String mail;
     @Getter
-    private String fecha;
+    private String fechaDonacion;
     @Getter
     private String formaColaboracion;
     @Getter
@@ -28,7 +28,7 @@ public class RegistroLeido {
         this.nombre = nombre;
         this.apellido = apellido;
         this.mail = mail;
-        this.fecha = fecha;
+        this.fechaDonacion = fecha;
         this.formaColaboracion = formaColaboracion;
         this.cantidad = cantidad;
         this.record = Math.toIntExact(recordNumber);

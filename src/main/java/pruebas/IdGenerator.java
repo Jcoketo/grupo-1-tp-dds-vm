@@ -1,11 +1,5 @@
 package pruebas;
 
-import elementos.SeguimientoApertura;
-import repositorios.RepositorioSolicitudes;
-
-import java.util.ArrayList;
-import java.util.List;
-
 public class IdGenerator {
     private static final int LENGTH = 11;
 
