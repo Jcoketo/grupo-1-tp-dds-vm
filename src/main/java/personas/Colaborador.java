@@ -43,7 +43,7 @@ public class Colaborador {
         //this.contadorViandas = 0;
     }
 
-    public void resetearContadorViadasSemanales(){
+    public void resetearContadorViandasSemanales(){
         this.contadorViandasDonadasSemanal = 0;
     }
 
@@ -123,9 +123,9 @@ public class Colaborador {
         this.suscripciones.add(suscripcion);
     }
 
-    public void reportarFalla(Heladera heladera, String motivo, String foto){
+    /*public void reportarFalla(Heladera heladera, String motivo, String foto){
         heladera.reportarFalla(this, motivo, foto);
-    }
+    }*/
 
     public void solicitarTarjeta(){
         Tarjeta tarjeta = new Tarjeta();
