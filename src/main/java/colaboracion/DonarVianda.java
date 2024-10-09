@@ -1,7 +1,6 @@
 package colaboracion;
 
-import elementos.SeguimientoApertura;
-import elementos.TipoSolicitud;
+import elementos.SolicitudApertura;
 import lombok.Setter;
 import elementos.Heladera;
 import personas.TipoPersona;
@@ -16,7 +15,7 @@ public class DonarVianda extends Colaboracion{
     private Vianda vianda;
     private Heladera heladera;
     @Setter private static Double coeficiente = 1.5;
-    private SeguimientoApertura solicitud;
+    private SolicitudApertura solicitud;
 
 
     //CONSTRUCTOR PRINCIPAL
@@ -48,7 +47,7 @@ public class DonarVianda extends Colaboracion{
             System.out.println("La heladera ya se encuentra inhabilitada");
             return;
         }
-        SeguimientoApertura seguimientoApertura = new SeguimientoApertura(heladera, colaborador, TipoSolicitud.SOLICITUD_APERTURA);
+        SolicitudApertura seguimientoApertura = new SolicitudApertura(heladera, colaborador);
         RepositorioSolicitudes repositorioSolicitudes = RepositorioSolicitudes.getInstancia();
         repositorioSolicitudes.agregarSolicitud(seguimientoApertura);
         this.solicitud = seguimientoApertura;

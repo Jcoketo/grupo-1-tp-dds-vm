@@ -21,6 +21,14 @@ public abstract class ColaboradorSuscripto {
         this.colaborador = colaborador;
         this.tipoSuscripcion = tipo;
         this.medioDeContacto = new MedioDeContacto(medio, colaborador.getPersona().devolerMedioDeContacto(medio));
+        this.validarExistenciaMedioDeContacto();
+    }
+
+    // esta validacion debe hacerse en el controller
+    public void validarExistenciaMedioDeContacto() {
+        if (this.medioDeContacto.getContacto() == null) {
+            throw new RuntimeException("No se puede notificar al colaborador, no tiene cargado el medio de contacto");
+        }
     }
 
     public void notificarmeAlerta() {

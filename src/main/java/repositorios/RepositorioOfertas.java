@@ -33,7 +33,6 @@ public class RepositorioOfertas {
     }
 
     public List<Oferta> conocerOfertasDisponibles() {
-        //TODO
-        return null;
+        return ofertasDisponibles;
     }
 }

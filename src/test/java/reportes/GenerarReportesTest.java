@@ -1,17 +1,17 @@
 package reportes;
+
 import elementos.Heladera;
-import org.mockito.MockedStatic;
 import personas.Colaborador;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 import reportador.GenerarReporte;
+import reportador.ReporteHeladera;
+import reportador.ReporteColaborador;
 import repositorios.RepositorioColaboradores;
 import repositorios.RepositorioHeladeras;
 
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -34,10 +34,14 @@ class GenerarReportesTest {
         when(heladera1.getContadorFallasSemanal()).thenReturn(3);
         when(heladera2.getContadorFallasSemanal()).thenReturn(5);
 
-        Map<Heladera, Integer> fallas = generarReporte.obtenerFallasXHeladera();
+        List<ReporteHeladera> fallas = generarReporte.obtenerFallasXHeladera();
 
-        assertEquals(3, fallas.get(heladera1));
-        assertEquals(5, fallas.get(heladera2));
+        assertEquals(3, fallas.get(0).getCantidad());
+        assertEquals(heladera1, fallas.get(0).getHeladera());
+
+        assertEquals(5, fallas.get(1).getCantidad());
+        assertEquals(heladera2, fallas.get(1).getHeladera());
+
         verify(heladera1).resetearContador("fallas");
         verify(heladera2).resetearContador("fallas");
     }
@@ -51,10 +55,14 @@ class GenerarReportesTest {
         when(heladera1.getContadorViandasColocadas()).thenReturn(10);
         when(heladera2.getContadorViandasColocadas()).thenReturn(15);
 
-        Map<Heladera, Integer> viandasColocadas = generarReporte.obtenerViandasColocadasXHeladera();
+        List<ReporteHeladera> viandasColocadas = generarReporte.obtenerViandasColocadasXHeladera();
 
-        assertEquals(10, viandasColocadas.get(heladera1));
-        assertEquals(15, viandasColocadas.get(heladera2));
+        assertEquals(10, viandasColocadas.get(0).getCantidad());
+        assertEquals(heladera1, viandasColocadas.get(0).getHeladera());
+
+        assertEquals(15, viandasColocadas.get(1).getCantidad());
+        assertEquals(heladera2, viandasColocadas.get(1).getHeladera());
+
         verify(heladera1).resetearContador("colocadas");
         verify(heladera2).resetearContador("colocadas");
     }
@@ -68,10 +76,14 @@ class GenerarReportesTest {
         when(heladera1.getContadorViandasRetiradas()).thenReturn(7);
         when(heladera2.getContadorViandasRetiradas()).thenReturn(12);
 
-        Map<Heladera, Integer> viandasRetiradas = generarReporte.obtenerViandasRetiradasXHeladera();
+        List<ReporteHeladera> viandasRetiradas = generarReporte.obtenerViandasRetiradasXHeladera();
 
-        assertEquals(7, viandasRetiradas.get(heladera1));
-        assertEquals(12, viandasRetiradas.get(heladera2));
+        assertEquals(7, viandasRetiradas.get(0).getCantidad());
+        assertEquals(heladera1, viandasRetiradas.get(0).getHeladera());
+
+        assertEquals(12, viandasRetiradas.get(1).getCantidad());
+        assertEquals(heladera2, viandasRetiradas.get(1).getHeladera());
+
         verify(heladera1).resetearContador("retiradas");
         verify(heladera2).resetearContador("retiradas");
     }
@@ -85,11 +97,15 @@ class GenerarReportesTest {
         when(colaborador1.getContadorViandasDonadasSemanal()).thenReturn(20);
         when(colaborador2.getContadorViandasDonadasSemanal()).thenReturn(30);
 
-        Map<Colaborador, Integer> viandasXColaborador = generarReporte.obtenerViandasXColaborador();
+        List<ReporteColaborador> viandasXColaborador = generarReporte.obtenerViandasXColaborador();
 
-        assertEquals(20, viandasXColaborador.get(colaborador1));
-        assertEquals(30, viandasXColaborador.get(colaborador2));
-        verify(colaborador1).resetearContadorViadasSemanales();
-        verify(colaborador2).resetearContadorViadasSemanales();
+        assertEquals(20, viandasXColaborador.get(0).getCantidadViandas());
+        assertEquals(colaborador1, viandasXColaborador.get(0).getColaborador());
+
+        assertEquals(30, viandasXColaborador.get(1).getCantidadViandas());
+        assertEquals(colaborador2, viandasXColaborador.get(1).getColaborador());
+
+        verify(colaborador1).resetearContadorViandasSemanales();
+        verify(colaborador2).resetearContadorViandasSemanales();
     }
 }
