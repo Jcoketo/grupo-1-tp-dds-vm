@@ -1,8 +1,8 @@
-package repositorios;
+package persistencia;
 
-import elementos.Areas;
+import modelo.elementos.Areas;
 import java.util.ArrayList;
-import personas.Tecnico;
+import modelo.personas.Tecnico;
 import java.util.List;
 
 public class RepositoriosTecnicos{

@@ -1,7 +1,7 @@
 package Elementos;
 
-import elementos.Heladera;
-import colaboracion.Vianda;
+import modelo.elementos.Heladera;
+import modelo.colaboracion.Vianda;
 import org.junit.jupiter.api.Test;
 import java.time.LocalDate;
 import static org.junit.jupiter.api.Assertions.*;

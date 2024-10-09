@@ -1,7 +1,6 @@
-package repositorios;
+package persistencia;
 
-import elementos.FallaTecnica;
-import elementos.Incidente;
+import modelo.elementos.Incidente;
 
 import java.util.ArrayList;
 import java.util.List;

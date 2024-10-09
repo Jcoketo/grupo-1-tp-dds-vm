@@ -1,7 +1,7 @@
 package validaciones;
 
-import validador.ValidadorDeContrasenias;
-import validador.SanitizadorDeContrasenias;
+import modelo.validador.ValidadorDeContrasenias;
+import modelo.validador.SanitizadorDeContrasenias;
 
 import org.junit.Test;
 import org.junit.jupiter.api.DisplayName;

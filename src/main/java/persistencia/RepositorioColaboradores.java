@@ -1,7 +1,7 @@
-package repositorios;
+package persistencia;
 
 import lombok.Getter;
-import personas.Colaborador;
+import modelo.personas.Colaborador;
 
 import java.util.ArrayList;
 import java.util.List;

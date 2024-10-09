@@ -1,14 +1,14 @@
 package personas;
 
-import elementos.Areas;
-import elementos.Heladera;
-import elementos.PuntoEstrategico;
+import modelo.elementos.Areas;
+import modelo.elementos.Heladera;
+import modelo.elementos.PuntoEstrategico;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import personas.MedioDeContacto;
-import personas.PersonaHumana;
-import personas.Tecnico;
-import personas.TipoMedioDeContacto;
+import modelo.personas.MedioDeContacto;
+import modelo.personas.PersonaHumana;
+import modelo.personas.Tecnico;
+import modelo.personas.TipoMedioDeContacto;
 
 import java.time.LocalDate;
 

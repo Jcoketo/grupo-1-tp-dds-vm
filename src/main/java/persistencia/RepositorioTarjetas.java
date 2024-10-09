@@ -1,6 +1,6 @@
-package repositorios;
+package persistencia;
 
-import elementos.Tarjeta;
+import modelo.elementos.Tarjeta;
 import pruebas.IdGenerator;
 
 import java.util.ArrayList;

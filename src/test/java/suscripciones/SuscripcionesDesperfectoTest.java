@@ -1,21 +1,21 @@
 package suscripciones;
 
-import elementos.Heladera;
-import elementos.PuntoEstrategico;
-import elementos.ReceptorMovimiento;
-import notificador.Notificador;
-import notificador.StrategyNotificacion;
+import modelo.elementos.Heladera;
+import modelo.elementos.PuntoEstrategico;
+import modelo.elementos.ReceptorMovimiento;
+import modelo.notificador.Notificador;
+import modelo.notificador.StrategyNotificacion;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
-import suscripcion.ColaboradorSuscripto;
+import modelo.suscripcion.ColaboradorSuscripto;
 import java.time.LocalDate;
-import personas.Colaborador;
-import personas.MedioDeContacto;
-import personas.PersonaHumana;
-import personas.TipoMedioDeContacto;
-import suscripcion.SuscriptoFalla;
-import suscripcion.TipoSuscripcion;
+import modelo.personas.Colaborador;
+import modelo.personas.MedioDeContacto;
+import modelo.personas.PersonaHumana;
+import modelo.personas.TipoMedioDeContacto;
+import modelo.suscripcion.SuscriptoFalla;
+import modelo.suscripcion.TipoSuscripcion;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;

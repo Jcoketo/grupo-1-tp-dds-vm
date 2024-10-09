@@ -1,6 +1,6 @@
-package repositorios;
+package persistencia;
 
-import importador.RegistroLeido;
+import modelo.importador.RegistroLeido;
 import java.util.ArrayList;
 import java.util.List;
 

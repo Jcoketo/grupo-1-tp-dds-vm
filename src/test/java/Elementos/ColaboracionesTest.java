@@ -1,18 +1,18 @@
 package Elementos;
 
-import colaboracion.DistribucionDeViandas;
-import colaboracion.Vianda;
-import elementos.Heladera;
+import modelo.colaboracion.DistribucionDeViandas;
+import modelo.colaboracion.Vianda;
+import modelo.elementos.Heladera;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import personas.Colaborador;
-import personas.MedioDeContacto;
-import personas.PersonaHumana;
-import personas.TipoMedioDeContacto;
-import personas.TipoPersona;
-import colaboracion.MotivoDistribucion;
+import modelo.personas.Colaborador;
+import modelo.personas.MedioDeContacto;
+import modelo.personas.PersonaHumana;
+import modelo.personas.TipoMedioDeContacto;
+import modelo.personas.TipoPersona;
+import modelo.colaboracion.MotivoDistribucion;
 
 import java.time.LocalDate;
 

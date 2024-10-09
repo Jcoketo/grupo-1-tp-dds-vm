@@ -1,14 +1,14 @@
 package reportes;
 
-import elementos.Heladera;
-import personas.Colaborador;
+import modelo.elementos.Heladera;
+import modelo.personas.Colaborador;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import reportador.GenerarReporte;
-import reportador.ReporteHeladera;
-import reportador.ReporteColaborador;
-import repositorios.RepositorioColaboradores;
-import repositorios.RepositorioHeladeras;
+import modelo.reportador.GenerarReporte;
+import modelo.reportador.ReporteHeladera;
+import modelo.reportador.ReporteColaborador;
+import persistencia.RepositorioColaboradores;
+import persistencia.RepositorioHeladeras;
 
 import java.util.Arrays;
 import java.util.List;

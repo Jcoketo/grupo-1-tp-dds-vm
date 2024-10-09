@@ -1,8 +1,8 @@
-package repositorios;
+package persistencia;
 
 import java.util.ArrayList;
 import java.util.List;
-import reportador.Reporte;
+import modelo.reportador.Reporte;
 
 public class RepositorioReportes {
     private List<Reporte> reportes;
