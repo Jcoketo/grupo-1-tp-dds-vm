@@ -1,6 +1,6 @@
-package repositorios;
+package persistencia;
 
-import elementos.Visita;
+import modelo.elementos.Visita;
 import java.util.ArrayList;
 import java.util.List;
 

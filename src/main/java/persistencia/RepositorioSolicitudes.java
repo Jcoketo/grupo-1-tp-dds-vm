@@ -1,6 +1,6 @@
-package repositorios;
+package persistencia;
 
-import elementos.SolicitudApertura;
+import modelo.elementos.SolicitudApertura;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,7 +1,7 @@
 package notificaciones;
 
-import notificador.telegram.TelegramBot;
-import notificador.whatsApp.NotificadorWhatsApp;
+import modelo.notificador.telegram.TelegramBot;
+import modelo.notificador.whatsApp.NotificadorWhatsApp;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;

@@ -1,6 +1,6 @@
-package repositorios;
+package persistencia;
 
-import elementos.Heladera;
+import modelo.elementos.Heladera;
 import lombok.Getter;
 
 import java.util.ArrayList;

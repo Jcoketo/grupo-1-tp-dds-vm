@@ -1,6 +1,6 @@
-package repositorios;
+package persistencia;
 
-import colaboracion.Oferta;
+import modelo.colaboracion.Oferta;
 
 
 import java.util.ArrayList;

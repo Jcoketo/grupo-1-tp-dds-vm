@@ -1,21 +1,21 @@
 package Elementos;
 
-import elementos.Alerta;
-import elementos.Areas;
-    import elementos.Heladera;
-    import elementos.PuntoEstrategico;
-import elementos.ReceptorMovimiento;
-import elementos.TipoAlerta;
+import modelo.elementos.Alerta;
+import modelo.elementos.Areas;
+    import modelo.elementos.Heladera;
+    import modelo.elementos.PuntoEstrategico;
+import modelo.elementos.ReceptorMovimiento;
+import modelo.elementos.TipoAlerta;
 import java.time.LocalDate;
     import org.junit.jupiter.api.BeforeEach;
     import org.junit.jupiter.api.Test;
-    import personas.Colaborador;
-    import personas.MedioDeContacto;
-    import personas.PersonaHumana;
-    import personas.Tecnico;
-    import personas.TipoMedioDeContacto;
-import repositorios.RepositorioIncidentes;
-import repositorios.RepositoriosTecnicos;
+    import modelo.personas.Colaborador;
+    import modelo.personas.MedioDeContacto;
+    import modelo.personas.PersonaHumana;
+    import modelo.personas.Tecnico;
+    import modelo.personas.TipoMedioDeContacto;
+import persistencia.RepositorioIncidentes;
+import persistencia.RepositoriosTecnicos;
 
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;

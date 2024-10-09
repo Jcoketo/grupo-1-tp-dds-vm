@@ -1,19 +1,8 @@
 package pruebas;
 
-import importador.CargarCSV;
-import importador.ProcesarCSV;
-import importador.RegistroLeido;
-import personas.PersonaJuridica;
-import repositorios.RepositorioArchivos;
-
 import java.io.IOException;
 import java.time.Duration;
 import java.time.LocalDateTime;
-import java.util.List;
-import java.util.UUID;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 
 public class probando {
     public static void main(String[] args) throws IOException {
@@ -41,7 +30,7 @@ public class probando {
 
 
         /* ----------- PROBAR RECOMENDADOR DE PUNTOS ----------- */
-        //recomendadorDePuntos.RecomendadorDePuntos recomendador = recomendadorDePuntos.RecomendadorDePuntos.getInstancia();
+        //modelo.recomendadorDePuntos.RecomendadorDePuntos recomendador = modelo.recomendadorDePuntos.RecomendadorDePuntos.getInstancia();
         //System.out.println(recomendador.obtenerPuntosRecomendados(-34.603722, -58.381592, 1000.0));
 
         /* ----------- PROBAR CSV ----------- */
