@@ -4,8 +4,11 @@ import elementos.Heladera;
 import personas.Colaborador;
 import repositorios.RepositorioColaboradores;
 import repositorios.RepositorioHeladeras;
+import repositorios.RepositorioReportes;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -22,43 +25,68 @@ public class GenerarReporte{
                                             obtenerViandasRetiradasXHeladera());
 
         reporteSemanal.generarTXT();
+
+        RepositorioReportes.getInstancia().agregarReporte(reporteSemanal);
+
     }
 
-    public Map<Heladera, Integer> obtenerFallasXHeladera(){
-        Map<Heladera, Integer> map = new HashMap<>();
+    public List<ReporteHeladera> obtenerFallasXHeladera() {
+        List<ReporteHeladera> reportes = new ArrayList<>();
+
         for (Heladera heladera : RepositorioHeladeras.getHeladeras()) {
-            map.put(heladera, heladera.getContadorFallasSemanal());
+            ReporteHeladera reporte = new ReporteHeladera();
+            reporte.setHeladera(heladera);
+            reporte.setCantidad(heladera.getContadorFallasSemanal());
+            reportes.add(reporte);
             heladera.resetearContador("fallas");
         }
-        return map;
+
+
+        return reportes;
     }
 
-    public Map<Heladera, Integer> obtenerViandasColocadasXHeladera(){
-        Map<Heladera, Integer> map = new HashMap<>();
+    public List<ReporteHeladera> obtenerViandasColocadasXHeladera() {
+        List<ReporteHeladera> reportes = new ArrayList<>();
+
         for (Heladera heladera : RepositorioHeladeras.getHeladeras()) {
-            map.put(heladera, heladera.getContadorViandasColocadas());
+            ReporteHeladera reporte = new ReporteHeladera();
+            reporte.setHeladera(heladera);
+            reporte.setCantidad(heladera.getContadorViandasColocadas());
+            reportes.add(reporte);
             heladera.resetearContador("colocadas");
         }
-        return map;
+
+        return reportes;
     }
 
-    public Map<Heladera, Integer> obtenerViandasRetiradasXHeladera() {
-        Map<Heladera, Integer> map = new HashMap<>();
+    public List<ReporteHeladera> obtenerViandasRetiradasXHeladera() {
+        List<ReporteHeladera> reportes = new ArrayList<>();
+
         for (Heladera heladera : RepositorioHeladeras.getHeladeras()) {
-            map.put(heladera, heladera.getContadorViandasRetiradas());
+            ReporteHeladera reporte = new ReporteHeladera();
+            reporte.setHeladera(heladera);
+            reporte.setCantidad(heladera.getContadorViandasRetiradas());
+            reportes.add(reporte);
             heladera.resetearContador("retiradas");
         }
-        return map;
+
+        return reportes;
     }
 
-    public Map<Colaborador, Integer> obtenerViandasXColaborador(){
-        Map<Colaborador, Integer> map = new HashMap<>();
+    public List<ReporteColaborador> obtenerViandasXColaborador() {
+        List<ReporteColaborador> reportes = new ArrayList<>();
+
         for (Colaborador colab : RepositorioColaboradores.getColaboradores()) {
-            map.put(colab, colab.getContadorViandasDonadasSemanal());
-            colab.resetearContadorViadasSemanales();
+            ReporteColaborador reporte = new ReporteColaborador();
+            reporte.setColaborador(colab);
+            reporte.setCantidadViandas(colab.getContadorViandasDonadasSemanal());
+            reportes.add(reporte);
+            colab.resetearContadorViandasSemanales();
         }
-        return map;
+
+        return reportes;
     }
+
 
     public void iniciarProgramacion() {
         scheduler.scheduleAtFixedRate(this::generarReporte, 0, 7, TimeUnit.DAYS);
