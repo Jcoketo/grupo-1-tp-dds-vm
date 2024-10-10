@@ -21,7 +21,7 @@ public class ProcesarCSV {
             String nombre = registro.getNombre();
             String apellido = registro.getApellido();
             String mail = registro.getMail();
-            String fecha = registro.getFecha();
+            String fecha = registro.getFechaDonacion();
             String formaColaboracion = registro.getFormaColaboracion();
             String cantidad = registro.getCantidad();
             Integer record = registro.getRecord();

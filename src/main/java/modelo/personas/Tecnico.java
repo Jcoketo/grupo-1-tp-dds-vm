@@ -1,6 +1,5 @@
 package modelo.personas;
 
-import elementos.*;
 import java.util.ArrayList;
 import lombok.Getter;
 import modelo.elementos.Areas;
