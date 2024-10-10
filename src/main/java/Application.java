@@ -1,7 +1,6 @@
 import io.javalin.Javalin;
 import persistencia.RepositorioColaboradores;
-import presentacion.ProcessLoginController;
-import presentacion.ShowLoginController;
+import presentacion.*;
 
 public class Application {
 
@@ -24,7 +23,13 @@ public class Application {
         app.get("/login", new ShowLoginController());
         app.post("/login", new ProcessLoginController(repoColab));
 
-        app.get("/ini", new InicioController());
+        app.get("/inicio-sinLog", new InicioController());
+        app.get("/inicio-conLog", new InicioLogeadoController());
+        app.get("/elegirRegistroCuenta", new ElegirRegistroCuentaController());
+        app.get("/crearCuentaJuridica", new CrearCuentaJuridicaController());
+        app.get("/crearCuentaFisica", new CrearCuentaFisicaController());
+        app.post("/crearCuentaFisica", new CuentaFisicaCreadaController());
+        app.post("/crearCuentaJuridica", new CuentaJuridicaCreadaController());
 
         // http://localhost:8080/home
 
