@@ -3,7 +3,6 @@ package modelo.validador;
 import modelo.validador.condiciones.Credencial;
 import modelo.validador.condiciones.Longitud;
 import modelo.validador.condiciones.TopPeores10000;
-import validador.condiciones.*;
 
 import java.util.Arrays;
 import java.util.Collections;

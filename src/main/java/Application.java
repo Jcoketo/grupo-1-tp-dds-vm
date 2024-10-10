@@ -12,8 +12,10 @@ public class Application {
                 }
 
             )
-            .get("/", ctx -> ctx.result("Hello World"))
+            .get("/home", ctx -> ctx.result("Hello World"))
             .start(8080);
+
+        // http://localhost:8080/home
 
         // API REST
         //app.get("/api/mascotas", new GetMascotasHandler());

@@ -6,7 +6,6 @@ import modelo.colaboracion.DonarVianda;
 import modelo.colaboracion.RegistroPersonasSituVulnerable;
 import modelo.notificador.Notificador;
 import modelo.personas.*;
-import personas.*;
 import persistencia.RepositorioColaboradores;
 
 import java.time.LocalDate;

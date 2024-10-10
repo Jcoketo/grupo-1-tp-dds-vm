@@ -2,7 +2,7 @@ package modelo.personas;
 
 import modelo.colaboracion.Colaboracion;
 import modelo.colaboracion.Oferta;
-import elementos.*;
+//import elementos.*;
 import lombok.Getter;
 import modelo.elementos.Heladera;
 import modelo.elementos.Tarjeta;
