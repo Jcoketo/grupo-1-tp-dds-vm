@@ -1,8 +1,12 @@
 import io.javalin.Javalin;
+import persistencia.RepositorioColaboradores;
+import presentacion.ProcessLoginController;
+import presentacion.ShowLoginController;
 
 public class Application {
 
     public static void main(String[] args) {
+
         Javalin app = Javalin.create(javalinConfig -> {
                     javalinConfig.plugins.enableCors(cors -> {
                         cors.add(it -> it.anyHost());
@@ -14,6 +18,13 @@ public class Application {
             )
             .get("/home", ctx -> ctx.result("Hello World"))
             .start(8080);
+
+        RepositorioColaboradores repoColab = RepositorioColaboradores.getInstancia();
+
+        app.get("/login", new ShowLoginController());
+        app.post("/login", new ProcessLoginController(repoColab));
+
+        app.get("/ini", new InicioController());
 
         // http://localhost:8080/home
 
