@@ -24,7 +24,7 @@ public class ProcessLoginController implements Handler {
 
         Map<String, Object> model = new HashMap<>();
         if (authenticateUser(email, password)) {
-            context.redirect("/ini");
+            context.redirect("/inicio-conLog");
         } else {
             model.put("error", "Invalid email or password");
             context.render("templates/login.mustache", model);

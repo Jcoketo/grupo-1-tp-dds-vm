@@ -123,10 +123,6 @@
             color: black;
         }
 
-        .password-container {
-            display: none;
-        }
-
         .error-message {
             color: red;
             font-size: 14px;
@@ -154,7 +150,7 @@
 </head>
 <body>
 <header>
-    <div><img src="logo.png" alt="Logo" style="max-height: 50px;"></div>
+    <div><img src="/static/logo.png" alt="Logo" style="max-height: 50px;"></div>
     <nav>
         <a href="#">Sobre nosotros</a>
         <a href="mapaHeladeras.html">Heladeras</a>
@@ -166,29 +162,27 @@
     <div class="login-container">
         <h2>Iniciar sesión</h2>
         {{#error}}
-            <p class="error-message">{{error}}</p>
+        <p class="error-message">{{error}}</p>
         {{/error}}
         <form action="/login" method="post">
             <p>Ingresa tu correo electrónico</p>
             <input type="email" name="email" placeholder="correo@dominio.com" required>
-            <div class="password-container" id="password-container">
-                <p>Ingresa tu contraseña</p>
-                <input type="password" name="password" placeholder="Ingresa tu contraseña" required>
-            </div>
+            <p>Ingresa tu contraseña</p>
+            <input type="password" name="password" placeholder="Ingresa tu contraseña" required>
             <button type="submit">Continuar</button>
         </form>
-        <a href="elegirRegistroCuenta.html">¿No tenés una cuenta? Crear cuenta</a>
+        <a href="/elegirRegistroCuenta" class="btn btn-primary">¿No tenés una cuenta? Crear cuenta</a>
         <p>Al hacer clic en continuar, estás aceptando nuestra <a href="#">política de privacidad y términos de uso</a>.</p>
     </div>
 </main>
 
 <footer>
     <div>
-        <p><img src="logo.png" alt="Logo" style="max-height: 50px;"></p>
+        <p><img src="/static/logo.png" alt="Logo" style="max-height: 50px;"></p>
         <div class="social-icons">
-            <a href="#"><img src="facebook-icon.png" alt="Facebook"></a>
-            <a href="#"><img src="instagram-icon.png" alt="Instagram"></a>
-            <a href="#"><img src="twitter-icon.png" alt="Twitter"></a>
+            <a href="#"><img src="/static/facebook-icon.png" alt="Facebook"></a>
+            <a href="#"><img src="/static/instagram-icon.png" alt="Instagram"></a>
+            <a href="#"><img src="/static/twitter-icon.png" alt="Twitter"></a>
         </div>
     </div>
     <div>
@@ -204,5 +198,7 @@
         <a href="#">Donar dinero</a>
     </div>
 </footer>
+
+
 </body>
 </html>

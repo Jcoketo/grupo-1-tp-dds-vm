@@ -3,8 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Iniciar sesión</title>
+    <title>Registro</title>
     <style>
+        .social-icons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .social-icons img {
+            width: 24px;
+            height: 24px;
+        }
         body {
             font-family: Arial, sans-serif;
             margin: 0;
@@ -18,6 +27,7 @@
         header, footer {
             background-color: #e0e0e0;
             padding: 20px 50px;
+            text-align: center;
         }
 
         header {
@@ -31,45 +41,44 @@
             text-decoration: none;
             color: black;
         }
+        .navbar-nav .nav-item {
+            margin-left: 20px;
+        }
 
-        .btn-iniciar-sesion {
-            background-color: black;
+        .btn-donar {
+            background-color: #3b559d;
             color: white;
             padding: 10px 20px;
             text-decoration: none;
+            border-radius: 10px;
         }
 
         main {
             flex-grow: 1;
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
             align-items: center;
-            padding: 50px;
-            background-color: white;
+            position: relative;
         }
 
-        .main-content {
-            max-width: 50%;
-        }
-
-        .main-content h1 {
-            font-size: 48px;
-            margin: 0;
-        }
-
-        .main-content p {
-            font-size: 20px;
-            color: #666;
-        }
-
-        .image-placeholder {
-            width: 40%;
-            height: 300px;
-            background-color: #ccc;
-            border-radius: 8px;
+        .register-container {
             text-align: center;
-            line-height: 300px;
-            color: #666;
+            background-color: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .register-container button {
+            width: 100%;
+            padding: 15px;
+            background-color: #3b559d;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-bottom: 20px;
         }
 
         footer {
@@ -89,48 +98,33 @@
             text-decoration: none;
             color: black;
         }
-
-        .social-icons {
-            display: flex;
-            gap: 10px;
-        }
-
-        .social-icons img {
-            width: 24px;
-            height: 24px;
-        }
     </style>
 </head>
 <body>
 <header>
-    <div><img src="/static/logo.png" alt="Logo" style="max-height: 50px;"></div>
+    <div><img src="logo.png" alt="Logo" style="max-height: 50px;"></div>
     <nav>
         <a href="#">Sobre nosotros</a>
-        <a href="#">Donar</a>
-        <a href="#">Heladeras</a>
-        <a href="login.html" class="btn-iniciar-sesion">Iniciar Sesión</a>
+        <a href="mapaHeladeras.html">Heladeras</a>
+        <a href="elegirDonacionJuridica.html" class="btn-donar">Donar</a>
     </nav>
 </header>
 
 <main>
-    <div class="main-content">
-        <h1>Titulo</h1>
-        <p>Subtitulo que incite a realizar una donacion</p>
-        <a href="#" class="btn-donar">Donar</a>
-    </div>
-    <div class="image-placeholder">
-        <img src="/static/image.png" alt="Imagen" style="max-width: 100%; max-height: 100%; border-radius: 8px;">
+        <div class="register-container">
+        <button onclick="location.href='/crearCuentaJuridica'">Registrarse como Persona Jurídica</button>
+        <button onclick="location.href='/crearCuentaFisica'">Registrarse como Persona Física</button>
     </div>
 </main>
 
 <footer>
     <div>
-        <p><img src="/static/logo.png" alt="Logo" style="max-height: 50px;"></p>
-        <div class="social-icons">
-            <a href="#"><img src="/static/facebook-icon.png" alt="Facebook"></a>
-            <a href="#"><img src="/static/instagram-icon.png" alt="Instagram"></a>
-            <a href="#"><img src="/static/twitter-icon.png" alt="Twitter"></a>
-        </div>
+        <p><img src="logo.png" alt="Logo" style="max-height: 50px;"></p>
+            <div class="social-icons">
+                <a href="#"><img src="facebook-icon.png" alt="Facebook"></a>
+                <a href="#"><img src="instagram-icon.png" alt="Instagram"></a>
+                <a href="#"><img src="twitter-icon.png" alt="Twitter"></a>
+            </div>
     </div>
     <div>
         <h4>Más información</h4>

@@ -43,7 +43,7 @@
         }
 
         .navbar-nav .nav-item {
-            margin-left: 20px; 
+            margin-left: 20px;
         }
 
         .btn-donar {
@@ -123,10 +123,6 @@
             color: black;
         }
 
-        .password-container {
-            display: none;
-        }
-
         .error-message {
             color: red;
             font-size: 14px;
@@ -154,7 +150,7 @@
 </head>
 <body>
 <header>
-    <div><img src="logo.png" alt="Logo" style="max-height: 50px;"></div>
+    <div><img src="/static/logo.png" alt="Logo" style="max-height: 50px;"></div>
     <nav>
         <a href="#">Sobre nosotros</a>
         <a href="mapaHeladeras.html">Heladeras</a>
@@ -183,12 +179,12 @@
 
 <footer>
     <div>
-        <p><img src="logo.png" alt="Logo" style="max-height: 50px;"></p>
-            <div class="social-icons">
-                <a href="#"><img src="facebook-icon.png" alt="Facebook"></a>
-                <a href="#"><img src="instagram-icon.png" alt="Instagram"></a>
-                <a href="#"><img src="twitter-icon.png" alt="Twitter"></a>
-            </div>
+        <p><img src="/static/logo.png" alt="Logo" style="max-height: 50px;"></p>
+        <div class="social-icons">
+            <a href="#"><img src="/static/facebook-icon.png" alt="Facebook"></a>
+            <a href="#"><img src="/static/instagram-icon.png" alt="Instagram"></a>
+            <a href="#"><img src="/static/twitter-icon.png" alt="Twitter"></a>
+        </div>
     </div>
     <div>
         <h4>Más información</h4>
@@ -204,43 +200,5 @@
     </div>
 </footer>
 
-<script>
-    const validEmails = ["usuario@dominio.com", "ejemplo@dominio.com", "test@dominio.com"];
-
-    document.getElementById('email').addEventListener('input', function() {
-        var email = this.value;
-        var passwordContainer = document.getElementById('password-container');
-        var errorMessage = document.getElementById('error-message');
-        var emailInput = this;
-
-        if (email.includes('@') && email.includes('.')) {
-            if (validEmails.includes(email)) {
-                passwordContainer.style.display = 'block';
-                emailInput.classList.remove('invalid');
-                errorMessage.style.display = 'none';
-            } else {
-                passwordContainer.style.display = 'none';
-                emailInput.classList.add('invalid');
-                errorMessage.style.display = 'block';
-            }
-        } else {
-            passwordContainer.style.display = 'none';
-            emailInput.classList.remove('invalid');
-            errorMessage.style.display = 'none';
-        }
-    });
-
-    document.getElementById('continue-button').addEventListener('click', function(event) {
-        var email = document.getElementById('email').value;
-        var password = document.getElementById('password').value;
-        if (!validEmails.includes(email)) {
-            event.preventDefault();
-            alert("El correo no es válido.");
-        } else if (password === '') {
-            event.preventDefault();
-            alert("Por favor ingresa una contraseña.");
-        }
-    });
-</script>
 </body>
 </html>

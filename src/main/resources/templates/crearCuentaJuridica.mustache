@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro Persona Jurídica</title>
+    <!-- Incluye Bootstrap -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .social-icons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .social-icons img {
+            width: 24px;
+            height: 24px;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            background-color: #f5f5f5;
+        }
+
+        header, footer {
+            background-color: #e0e0e0;
+            padding: 20px 50px;
+            text-align: center;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header nav a {
+            margin-left: 20px;
+            text-decoration: none;
+            color: black;
+        }
+
+
+        .navbar-nav .nav-item {
+            margin-left: 20px;
+        }
+
+        .btn-donar {
+            background-color: #3b559d;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 10px;
+        }
+
+        main {
+            flex-grow: 1;
+            padding: 20px;
+            background-color: white;
+        }
+
+        footer {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        footer div {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            margin-right: 30px;
+        }
+
+        footer div a {
+            margin-top: 10px;
+            text-decoration: none;
+            color: black;
+        }
+
+        .register-container {
+            max-width: 600px;
+            margin: 50px auto;
+            width: 100%;
+            background-color: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .register-container h2 {
+            margin-bottom: 20px;
+        }
+
+        .register-container input, .register-container select {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+        }
+
+        .register-container button {
+            width: 100%;
+            padding: 15px;
+            background-color: #3b559d;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+        .register-container button:hover {
+            background-color: #2e4372;
+        }
+
+        .register-container label {
+            display: block;
+            text-align: left;
+            margin-bottom: 5px;
+        }
+
+        .register-container .terms {
+            margin-top: 10px;
+            text-align: left;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .register-container .terms input[type="checkbox"] {
+            margin: 0;
+        }
+
+        .volver-container {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            margin-bottom: 20px;
+            margin-left: 20px;
+            margin-top: 20px;
+        }
+
+        .volver-link {
+            color: #3b559d;
+        }
+
+        .navbar-light .navbar-nav .nav-link,
+        .navbar-light .dropdown-menu {
+            background-color: #e0e0e0;
+            color: black;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 16px;
+            font-weight: normal;
+        }
+
+        .navbar-light .dropdown-menu {
+            width: 200px;
+        }
+
+        .navbar-light .dropdown-menu a.dropdown-item {
+            color: black;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 16px;
+            font-weight: normal;
+            width: 200px;
+        }
+
+        .navbar-light .dropdown-menu a.dropdown-item:hover {
+            background-color: #cdcdcd;
+            margin: 0;
+            width: 200px;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div><img src="logo.png" alt="Logo" style="max-height: 50px;"></div>
+    <nav>
+        <a href="#">Sobre nosotros</a>
+        <a href="mapaHeladeras.html">Heladeras</a>
+        <a href="elegirDonacionJuridica.html" class="btn-donar">Donar</a>
+    </nav>
+</header>
+
+<main>
+    <div class="volver-container">
+        <a href="elegirRegistroCuenta.html" class="volver-link">
+            <i class="fas fa-arrow-left"></i> Volver
+        </a>
+    </div>
+    <div class="register-container">
+        <h2>Registro Persona Jurídica</h2>
+        <form action="/crearCuentaJuridica" method = "post">
+            <label for="razon-social">Razón Social</label>
+            <input type="text" id="razon-social" name="razon-social" required>
+
+            <label for="tipo">Tipo</label>
+            <select id="tipo" name="tipo" required>
+                <option value="" disabled selected>Selecciona un tipo</option>
+                <option value="sociedades">Sociedades civiles y comerciales</option>
+                <option value="corporaciones">Corporaciones y fundaciones</option>
+            </select>
+
+            <label for="rubro">Rubro</label>
+            <input type="text" id="rubro" name="rubro" required>
+
+            <label for="telefono-representante">Número de Teléfono del Representante</label>
+            <input type="tel" id="telefono-representante" name="telefono-representante" required>
+
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="password">Contraseña</label>
+            <input type="password" id="password" name="password" required>
+
+            <div class="terms">
+                <input type="checkbox" id="terms" name="terms" required>
+                <label for="terms">Acepto los <a href="#">términos de política de privacidad</a> y <a href="#">términos de uso</a></label>
+            </div>
+
+            <button type="submit">Registrarse</button>
+        </form>
+    </div>
+</main>
+
+<footer>
+    <div>
+        <p><img src="logo.png" alt="Logo" style="max-height: 50px;"></p>
+            <div class="social-icons">
+                <a href="#"><img src="facebook-icon.png" alt="Facebook"></a>
+                <a href="#"><img src="instagram-icon.png" alt="Instagram"></a>
+                <a href="#"><img src="twitter-icon.png" alt="Twitter"></a>
+            </div>
+    </div>
+    <div>
+        <h4>Más información</h4>
+        <a href="#">Contactanos</a>
+        <a href="#">Sobre nosotros</a>
+        <a href="#">Sobre el proyecto</a>
+    </div>
+    <div>
+        <h4>Donar</h4>
+        <a href="#">Donar vianda</a>
+        <a href="#">Ver mapa</a>
+        <a href="#">Donar dinero</a>
+    </div>
+</footer>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
