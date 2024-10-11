@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Agregar Productos</title>
+    <title>Agregar Heladera</title>
     <!-- Enlace a CSS de Bootstrap -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
@@ -31,10 +31,9 @@
         }
 
         .navbar-nav .nav-item {
-            margin-left: 20px; 
+            margin-left: 20px;
         }
 
-        /* Estilo personalizado para el menú desplegable */
         .navbar-light .navbar-nav .nav-link,
         .navbar-light .dropdown-menu {
             background-color: #e0e0e0;
@@ -45,21 +44,23 @@
         }
 
         .navbar-light .dropdown-menu {
-            width: 200px;      
+            width: 200px;
         }
+
         .navbar-light .dropdown-menu a.dropdown-item {
             color: black;
             font-family: Arial, Helvetica, sans-serif;
             font-size: 16px;
             font-weight: normal;
-            width: 200px;   
+            width: 200px;
         }
 
         .navbar-light .dropdown-menu a.dropdown-item:hover {
             background-color: #cdcdcd;
-            margin: 0; 
+            margin: 0;
             width: 200px;
         }
+
         main {
             flex-grow: 1;
             display: flex;
@@ -69,10 +70,62 @@
             background-color: white;
         }
 
+        form {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            font-weight: bold;
+        }
+
+        .form-control {
+            border-radius: 5px;
+        }
+
+        .btn-group {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .btn-cancelar,
+        .btn-agregar {
+            border: none;
+            padding: 10px 90px;
+            border-radius: 5px;
+            font-size: 16px;
+            margin: 0 15px;
+            width: 30%;
+        }
+
+        .btn-cancelar {
+            background-color: #e0e0e0;
+            color: black;
+        }
+
+        .btn-agregar {
+            background-color: #3b559d;
+            color: white;
+        }
+
+        .btn-agregar:hover {
+            background-color: #274597;
+            color: white;
+        }
+
         footer {
             display: flex;
             justify-content: space-between;
             margin-top: auto;
+            padding: 20px 50px;
         }
 
         footer div {
@@ -97,32 +150,6 @@
             width: 24px;
             height: 24px;
         }
-
-        .btn-agregar-producto {
-            background-color:#3b559d;
-            color: white;
-        }
-
-        .card {
-            width: 100%;
-            max-width: 300px;
-            margin: 0 auto;
-        }
-
-        .card-body {
-            text-align: center;
-        }
-
-        .placeholder-img {
-            background-color: gray;
-            height: 150px;
-        }
-
-        @media (max-width: 768px) {
-            .card {
-                max-width: 100%;
-            }
-        }
     </style>
 </head>
 
@@ -145,7 +172,6 @@
                     <li class="nav-item">
                         <a class="nav-link" href="mapaHeladeras.html">Heladeras</a>
                     </li>
-                    <!-- Menú desplegable -->
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -166,44 +192,63 @@
 
     <main>
         <div class="container">
-            <div class="row justify-content-center align-items-center text-center">
-                <div class="col-md-3">
-                    <div class="card">
-                        <a href="agregarHeladera.html">
-                        <div class="placeholder-img"></div>
-                        </a>
-                        <div class="card-body">
-                            <a href="agregarHeladera.html" class="text-dark">
-                                <h5 class="card-title">Agregar Heladera</h5>
-                            </a>
-                            <p class="card-text">Hazte cargo de una nueva heladera para disponer alimento.</p>
-                        </div>
+            <h1>Agregar heladera</h1>
+            <form>
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="nombre" class="form-label">Nombre</label>
+                        <input type="text" class="form-control" id="nombre" placeholder="Heladera Campus UTN">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="fechaInicio" class="form-label">Fecha de inicio de funcionamiento</label>
+                        <input type="date" class="form-control" id="fechaInicio">
                     </div>
                 </div>
-                <div class="col-md-3">
-                    <div class="card">
-                        <a href="donarDinero.html">
-                        <div class="placeholder-img"></div>
-                        </a>
-                        <div class="card-body">
-                            <a href="donarDinero.html" class="text-dark">
-                                <h5 class="card-title">Donar Dinero</h5>
-                            </a>
-                            <p class="card-text">Ayuda a las organizaciones a brindar un mejor servicio.</p>
+
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="capacidad" class="form-label">Capacidad (cant. de viandas)</label>
+                        <input type="number" class="form-control" id="capacidad" placeholder="18">
+                    </div>
+                    <div class="col-md-6">
+                        <div>
+                            <label for="activa" class="form-label">¿Está activa?</label>
                         </div>
+                        <select class="form-select form-control" id="activa">
+                            <option>Sí</option>
+                            <option>No</option>
+                        </select>
                     </div>
                 </div>
-            </div>
+
+                <div class="mb-3">
+                    <div>
+                        <label for="ubicacion" class="form-label">Punto de colocación</label>
+                    </div>
+                    <select class="form-select form-control" id="ubicacion">
+                        <option selected disabled>Seleccione una ubicación</option>
+                        <option value="Mozart 2300, CABA">Mozart 2300, CABA</option>
+                        <option value="Av. Rivadavia 3456, CABA">Av. Rivadavia 3456, CABA</option>
+                        <option value="Parque Centenario, CABA">Parque Centenario, CABA</option>
+                        <option value="Campus UTN, CABA">Campus UTN, CABA</option>
+                    </select>
+                </div>
+
+                <div class="btn-group">
+                    <a href="mapaHeladeras.html" class="btn-cancelar">Cancelar</a>
+                    <a href="aceptarAgregarHeladera.html" class="btn-agregar">Agregar</a>
+                </div>
+            </form>
         </div>
     </main>
 
     <footer>
         <div>
-            <p><img src="logo.png" alt="Logo" style="max-height: 50px;"></p>
+            <p><img src="/static/logo.png" alt="Logo" style="max-height: 50px;"></p>
             <div class="social-icons">
-                <a href="#"><img src="facebook-icon.png" alt="Facebook"></a>
-                <a href="#"><img src="instagram-icon.png" alt="Instagram"></a>
-                <a href="#"><img src="twitter-icon.png" alt="Twitter"></a>
+                <a href="#"><img src="/static/facebook-icon.png" alt="Facebook"></a>
+                <a href="#"><img src="/static/instagram-icon.png" alt="Instagram"></a>
+                <a href="#"><img src="/static/twitter-icon.png" alt="Twitter"></a>
             </div>
         </div>
         <div>
