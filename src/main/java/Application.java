@@ -69,7 +69,7 @@ public class Application {
         app.get("/elegirDonacionJuridica", new ElegirDonacionJuridicaController());
 
         app.get("/donarVianda", new DonarViandaController());
-        //app.post("/donarVianda", new DonarViandaRealizadaController());
+        app.post("/donarVianda", new DonarViandaRealizadaController(repoHeladeras));
 
         app.get("/donarDinero", new DonarDineroController());
         //app.post("/donarDinero", new DonarDineroRealizadaController());
