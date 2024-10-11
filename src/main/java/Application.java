@@ -1,5 +1,6 @@
 import accessManagment.Roles;
 import io.javalin.Javalin;
+import io.javalin.http.Context;
 import io.javalin.http.Handler;
 import io.javalin.security.RouteRole;
 import persistencia.RepositorioColaboradores;
@@ -17,22 +18,38 @@ public class Application {
                     }); // para poder hacer requests de un dominio a otro
 
                     javalinConfig.staticFiles.add("/"); //recursos estaticos (HTML, CSS, JS, IMG)
+
+                    /*
+                    javalinConfig.accessManager((handler, ctx, routeRoles) -> {
+                        Roles userRole = getUserRole(ctx);
+                        if (routeRoles.contains(userRole)) {
+                            handler.handle(ctx);
+                        }
+                        else {
+                            ctx.status(401).result("Unauthorized");
+                            //ctx.redirect("/login");
+                        }
+                    });*/
                 }
 
             )
-            .get("/", ctx -> ctx.redirect("/inicio-sinLog"))
+            .get("/", ctx -> {
+                //ctx.sessionAttribute("rolUsuario", Roles.SIN_PERMISOS);  // Set session role attribute
+                ctx.redirect("/inicio-sinLog");  // Redirect to a non-logged-in start page
+            })
             .start(8080);
 
         RepositorioColaboradores repoColab = RepositorioColaboradores.getInstancia();
 
 
-        app.get("/login", new ShowLoginController());
+        app.get("/login", new ShowLoginController()/*, (RouteRole) Set.of(Roles.SIN_PERMISOS)*/);
         app.post("/login", new ProcessLoginController(repoColab));
 
         app.get("/inicio-sinLog", new InicioController());
         app.get("/inicio-conLog", new InicioLogeadoController());
 
-        //app.get("/elegirRegistroCuenta", new ElegirRegistroCuentaController(), (RouteRole) Set.of(Roles.SIN_PERMISOS));
+        // Routa para probar los Roles
+        // app.get("/elegirRegistroCuenta", new ElegirRegistroCuentaController(), (RouteRole) Set.of(Roles.SIN_PERMISOS));
         app.get("/elegirRegistroCuenta", new ElegirRegistroCuentaController());
 
         app.get("/crearCuentaJuridica", new CrearCuentaJuridicaController());
@@ -47,7 +64,7 @@ public class Application {
         // TODO FALTA INSERTAR LAS IMAGENES EN LOS BOTONES DE ELEGIR DONACION (en mustache)
         app.get("/elegirDonacion", new ElegirDonacionController());
         app.get("/elegirDonacionFisica", new ElegirDonacionFisicaController());
-        //app.get("/elegirDonacionJuridica", new ElegirDonacionJuridicaController());
+        app.get("/elegirDonacionJuridica", new ElegirDonacionJuridicaController());
 
         app.get("/donarVianda", new DonarViandaController());
         //app.post("/donarVianda", new DonarViandaRealizadaController());
@@ -61,6 +78,8 @@ public class Application {
         app.get("/donarEntregarTarjetas", new DonarEntregarTarjetasController());
         //app.post("/donarEntregarTarjetas", new DonarEntregarTarjetasRealizadaController());
 
+
+        app.get("/agregarHeladera", new AgregarHeladeraController());
         //app.get("/verHeladeras", new VerHeladerasController());
 
 
@@ -86,4 +105,8 @@ public class Application {
         });
 
     }
+
+    /*private static Roles getUserRole(Context ctx) {
+        return Roles.SIN_PERMISOS;//ctx.sessionAttribute("rolUsuario");
+    }*/
 }
