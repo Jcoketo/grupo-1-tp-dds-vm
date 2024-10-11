@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donar Vianda</title>
+    <!-- Enlace a CSS de Bootstrap -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Enlace a Font Awesome para el ícono de lupa -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            background-color: #ffffff;
+        }
+
+        header,
+        footer {
+            background-color: #e0e0e0;
+            padding: 20px 50px;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        h1 {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        main {
+            flex-grow: 1;
+            padding: 50px;
+            background-color: white;
+        }
+
+        .heladera-list {
+            background-color: #f5f5f5;
+            padding: 10px;
+            border-radius: 8px;
+            max-height: 200px;
+        }
+
+        .heladera-item {
+            border: 1px solid #ddd;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            max-height: 180px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .heladera-item h5 {
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .heladera-item p {
+            font-size: 16px;
+            line-height: 0.9;
+        }
+
+
+        .btn-subscribe {
+            background-color: #3b559d;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 8px;
+            margin-left: 380px;
+            font-size: 15px;
+            font-weight: bold;
+        }
+
+
+        .form-donation {
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        .form-group label {
+            font-weight: bold;
+        }
+
+        .form-group input {
+            border-radius: 8px;
+            padding: 8px;
+        }
+
+        .btn-add,
+        .btn-donate {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .btn-add {
+            background-color: #ffffff;
+            border: none;
+        }
+
+        .btn-donate {
+            background-color: #3b559d;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 8px;
+        }
+        .btn-donate:hover, .btn-subscribe:hover
+        {
+            background-color: #274597;
+            color: white;
+        }
+
+        footer {
+            display: flex;
+            justify-content: space-between;
+            margin-top: auto;
+        }
+
+        footer div {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            margin-right: 30px;
+        }
+
+        footer div a {
+            margin-top: 10px;
+            text-decoration: none;
+            color: black;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .social-icons img {
+            width: 24px;
+            height: 24px;
+        }
+
+        @media (max-width: 768px) {
+            .card {
+                max-width: 100%;
+            }
+        }
+
+        .navbar-nav .nav-item {
+            margin-left: 20px;
+        }
+
+        .navbar {
+            flex-grow: 1;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .navbar-nav {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .nav-link {
+            color: black;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 16px;
+            font-weight: normal;
+        }
+
+        .navbar-light .dropdown-menu {
+            background-color: #e0e0e0;
+            width: 200px;
+        }
+
+        .navbar-light .dropdown-menu a.dropdown-item {
+            color: black;
+            font-size: 16px;
+            font-weight: normal;
+            width: 200px;
+        }
+
+        .navbar-light .dropdown-menu a.dropdown-item:hover {
+            background-color: #cdcdcd;
+            width: 200px;
+        }
+
+        .dropdown-menu {
+            margin-top: 0;
+        }
+
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+            right: 0;
+            top: 100%;
+            min-width: 160px;
+        }
+
+        .dropdown-content a,
+        .dropdown-content label {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            font-weight: normal;
+        }
+
+        .dropdown-content a:hover,
+        .dropdown-content label:hover {
+            background-color: #f1f1f1;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+<header>
+    <div><img src="/static/logo.png" alt="Logo" style="max-height: 50px;"></div>
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Sobre nosotros</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="elegirDonacionFisica.html">Donar</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="mapaHeladeras.html">Heladeras</a>
+                </li>
+                <!-- Menú desplegable -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Nombre del usuario
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="login.html">Mi perfil</a>
+                        <a class="dropdown-item" href="#">Mis colaboraciones</a>
+                        <a class="dropdown-item" href="canjearPuntos.html">Mi puntaje</a>
+                        <a class="dropdown-item" href="#">Configuración</a>
+                        <a class="dropdown-item" href="#">Cerrar sesión</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>
+<main class="container my-5">
+    <div class="row">
+        <!-- Sección izquierda (Lista de heladeras) -->
+        <div class="col-md-6">
+            <h1>Donar vianda</h1>
+            <div class="form-group">
+                <div class="input-group">
+                    <a href="/ruta-a-la-lista-de-heladeras" class="btn btn-outline-secondary">
+                        Elegir otra heladera
+                    </a>
+                </div>
+            </div>
+
+            <div class="heladera-list">
+                <div class="heladera-item">
+                    <h5>Heladera Medrano UTN</h5>
+                    <p>Avenida Medrano 1234</p>
+                    <p><strong>Estado:</strong> Activa</p>
+                    <p><strong>Disponibilidad:</strong> 2 viandas</p>
+                    <button class="btn-subscribe">Suscribirse</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sección derecha (Formulario de donación) -->
+        <div class="col-md-6">
+            <form class="form-donation" action="/tu-endpoint" method="POST">
+                <h5>Vianda a donar</h5>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="vianda1">Vianda a donar</label>
+                        <input type="text" class="form-control" id="vianda1" name="vianda1" placeholder="Arroz con pollo">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="fechaCaducidad1">Fecha de caducidad</label>
+                        <input type="date" class="form-control" id="fechaCaducidad1" name="fechaCaducidad1" value="2024-10-06">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="pesoVianda1">Peso de la vianda</label>
+                        <input type="text" class="form-control" id="pesoVianda1" name="pesoVianda1" placeholder="500 gr">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="caloriasVianda1">Calorías de la vianda</label>
+                        <input type="text" class="form-control" id="caloriasVianda1" name="caloriasVianda1" placeholder="1200 gr">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="fechaDonacion1">Fecha de donación</label>
+                        <input type="date" class="form-control" id="fechaDonacion1" name="fechaDonacion1" value="2024-10-06">
+                    </div>
+                </div>
+
+                <div id="extra-vianda" style="display: none;">
+                    <hr>
+                    <h5>Vianda a donar (2)</h5>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="vianda2">Vianda a donar</label>
+                            <input type="text" class="form-control" id="vianda2" name="vianda2" placeholder="Tarta de verduras">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="fechaCaducidad2">Fecha de caducidad</label>
+                            <input type="date" class="form-control" id="fechaCaducidad2" name="fechaCaducidad2" value="2024-10-06">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="pesoVianda2">Peso de la vianda</label>
+                            <input type="text" class="form-control" id="pesoVianda2" name="pesoVianda2" placeholder="500 gr">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="caloriasVianda2">Calorías de la vianda</label>
+                            <input type="text" class="form-control" id="caloriasVianda2" name="caloriasVianda2" placeholder="1200 gr">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="fechaDonacion2">Fecha de donación</label>
+                            <input type="date" class="form-control" id="fechaDonacion2" name="fechaDonacion2" value="2024-10-06">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <button type="button" class="btn-add" onclick="mostrarSegundaVianda()">+ Añadir otra vianda</button>
+                </div>
+
+                <div class="form-group">
+                    <button type="submit" class="btn-donate">Donar viandas</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</main>
+<script>
+    function mostrarSegundaVianda() {
+        document.getElementById('extra-vianda').style.display = 'block';
+    }
+</script>
+
+<footer>
+    <div>
+        <h5>Contactos</h5>
+        <a href="#">Contacto</a>
+        <a href="#">Sobre nosotros</a>
+    </div>
+    <div>
+        <h5>Soporte</h5>
+        <a href="#">FAQ</a>
+        <a href="#">Política de privacidad</a>
+        <a href="#">Términos y condiciones</a>
+    </div>
+    <div class="social-icons">
+        <a href="#"><img src="/static/facebook-icon.png" alt="Facebook"></a>
+        <a href="#"><img src="/static/instagram-icon.png" alt="Instagram"></a>
+        <a href="#"><img src="/static/twitter-icon.png" alt="Twitter"></a>
+    </div>
+</footer>
+<!-- Enlace a JavaScript de Bootstrap -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>
+

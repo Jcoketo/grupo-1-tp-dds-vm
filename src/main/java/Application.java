@@ -1,6 +1,11 @@
+import accessManagment.Roles;
 import io.javalin.Javalin;
+import io.javalin.http.Handler;
+import io.javalin.security.RouteRole;
 import persistencia.RepositorioColaboradores;
 import presentacion.*;
+
+import java.util.Set;
 
 public class Application {
 
@@ -20,12 +25,14 @@ public class Application {
 
         RepositorioColaboradores repoColab = RepositorioColaboradores.getInstancia();
 
+
         app.get("/login", new ShowLoginController());
         app.post("/login", new ProcessLoginController(repoColab));
 
         app.get("/inicio-sinLog", new InicioController());
         app.get("/inicio-conLog", new InicioLogeadoController());
 
+        //app.get("/elegirRegistroCuenta", new ElegirRegistroCuentaController(), (RouteRole) Set.of(Roles.SIN_PERMISOS));
         app.get("/elegirRegistroCuenta", new ElegirRegistroCuentaController());
 
         app.get("/crearCuentaJuridica", new CrearCuentaJuridicaController());
@@ -33,8 +40,28 @@ public class Application {
 
         app.post("/crearCuentaFisica", new CuentaFisicaCreadaController(repoColab));
         app.post("/crearCuentaJuridica", new CuentaJuridicaCreadaController(repoColab));
+        app.get("/cuentaCreada", new CuentaCreadaController());
 
+
+        //TODO todos los botones que redireccionen a DONAR tienen que venir a este GET
+        // TODO FALTA INSERTAR LAS IMAGENES EN LOS BOTONES DE ELEGIR DONACION (en mustache)
+        app.get("/elegirDonacion", new ElegirDonacionController());
         app.get("/elegirDonacionFisica", new ElegirDonacionFisicaController());
+        //app.get("/elegirDonacionJuridica", new ElegirDonacionJuridicaController());
+
+        app.get("/donarVianda", new DonarViandaController());
+        //app.post("/donarVianda", new DonarViandaRealizadaController());
+
+        app.get("/donarDinero", new DonarDineroController());
+        //app.post("/donarDinero", new DonarDineroRealizadaController());
+
+        app.get("/donarDistribuirViandas", new DonarDistribucionViandaController());
+        //app.post("/donarDistribuirViandas", new DonarDistribucionViandaRealizadaController());
+
+        app.get("/donarEntregarTarjetas", new DonarEntregarTarjetasController());
+        //app.post("/donarEntregarTarjetas", new DonarEntregarTarjetasRealizadaController());
+
+        //app.get("/verHeladeras", new VerHeladerasController());
 
 
 

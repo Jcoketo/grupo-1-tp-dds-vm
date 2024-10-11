@@ -1,7 +1,9 @@
 package persistencia;
 
+import accessManagment.Roles;
 import lombok.Getter;
 import modelo.personas.Colaborador;
+import modelo.personas.TipoPersona;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,5 +46,18 @@ public class RepositorioColaboradores {
         colaboradores.remove(colaborador);
     }
 
+    public TipoPersona devolverTipoPersona(String email) {
+        for (Colaborador colab : colaboradores) {
+            if (colab.getEmail().equals(email)) {
+                return colab.getTipoPersona();
+            }
+        }
+        return null;
+    }
+
+    public Roles devolverRol(String email) {
+        //TODO
+        return null;
+    }
 }
 
