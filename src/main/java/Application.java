@@ -84,7 +84,13 @@ public class Application {
         app.post("/heladeraAgregada", new HeladeraAgregadaController(repoHeladeras));
         //app.get("/verHeladeras", new VerHeladerasController());
 
+        app.get("/mapaHeladeras", new mapaHeladerasController());
 
+        app.get("/visualizarDetalleHeladera", new visualizarDetalleHeladeraController());
+
+        app.get("/visualizarAlertas", new visualizarAlertasController());
+
+        app.get("/visualizarFallasTecnicas", new visualizarFallasTecnicasController());
 
         // http://localhost:8080/home
 
