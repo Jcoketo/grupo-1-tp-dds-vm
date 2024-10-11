@@ -1,7 +1,9 @@
 package presentacion;
 
+import accessManagment.Roles;
 import io.javalin.http.Context;
 import io.javalin.http.Handler;
+import modelo.personas.TipoPersona;
 import org.jetbrains.annotations.NotNull;
 import persistencia.RepositorioColaboradores;
 
@@ -24,12 +26,27 @@ public class ProcessLoginController implements Handler {
 
         Map<String, Object> model = new HashMap<>();
         if (authenticateUser(email, password)) {
-            context.sessionAttribute("isLogged", true);
+            context.sessionAttribute("logueado", true);
             context.redirect("/inicio-conLog");
+
+            TipoPersona tipoPer = obtenerTipoUsuario(email);
+            context.sessionAttribute("tipoPersona", tipoPer);
+
+            Roles userRole = obtenerRolUsuario(email);
+            context.sessionAttribute("rolUsuario", userRole);
+
         } else {
             model.put("error", "Invalid email or password");
             context.render("templates/login.mustache", model);
         }
+    }
+
+    public Roles obtenerRolUsuario(String email) {
+        return repoColab.devolverRol(email);
+    }
+
+    public TipoPersona obtenerTipoUsuario(String email) {
+        return repoColab.devolverTipoPersona(email);
     }
 
     private boolean authenticateUser(String email, String password) {

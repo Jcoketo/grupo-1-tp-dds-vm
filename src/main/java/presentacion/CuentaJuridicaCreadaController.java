@@ -38,6 +38,6 @@ public class CuentaJuridicaCreadaController implements Handler {
         //todo
 
         // crear la cuenta y enviar a
-        // context.render("templates/cuentaCreada.mustache", model);
+        context.redirect("/cuentaCreada");
     }
 }
