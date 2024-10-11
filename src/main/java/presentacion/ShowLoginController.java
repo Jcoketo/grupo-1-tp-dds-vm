@@ -17,5 +17,6 @@ public class ShowLoginController implements Handler {
     public void handle(@NotNull Context context) throws Exception {
         Map<String, Object> model = new HashMap<>();
         context.render("templates/login.mustache", model);
+
     }
 }

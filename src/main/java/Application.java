@@ -15,7 +15,7 @@ public class Application {
                 }
 
             )
-            .get("/home", ctx -> ctx.result("Hello World"))
+            .get("/", ctx -> ctx.redirect("/inicio-sinLog"))
             .start(8080);
 
         RepositorioColaboradores repoColab = RepositorioColaboradores.getInstancia();
@@ -25,11 +25,18 @@ public class Application {
 
         app.get("/inicio-sinLog", new InicioController());
         app.get("/inicio-conLog", new InicioLogeadoController());
+
         app.get("/elegirRegistroCuenta", new ElegirRegistroCuentaController());
+
         app.get("/crearCuentaJuridica", new CrearCuentaJuridicaController());
         app.get("/crearCuentaFisica", new CrearCuentaFisicaController());
-        app.post("/crearCuentaFisica", new CuentaFisicaCreadaController());
-        app.post("/crearCuentaJuridica", new CuentaJuridicaCreadaController());
+
+        app.post("/crearCuentaFisica", new CuentaFisicaCreadaController(repoColab));
+        app.post("/crearCuentaJuridica", new CuentaJuridicaCreadaController(repoColab));
+
+        app.get("/elegirDonacionFisica", new ElegirDonacionFisicaController());
+
+
 
         // http://localhost:8080/home
 
