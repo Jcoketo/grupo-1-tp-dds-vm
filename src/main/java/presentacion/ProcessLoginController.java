@@ -24,6 +24,7 @@ public class ProcessLoginController implements Handler {
 
         Map<String, Object> model = new HashMap<>();
         if (authenticateUser(email, password)) {
+            context.sessionAttribute("isLogged", true);
             context.redirect("/inicio-conLog");
         } else {
             model.put("error", "Invalid email or password");
