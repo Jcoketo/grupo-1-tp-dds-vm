@@ -4,6 +4,7 @@ import io.javalin.http.Context;
 import io.javalin.http.Handler;
 import io.javalin.security.RouteRole;
 import persistencia.RepositorioColaboradores;
+import persistencia.RepositorioHeladeras;
 import presentacion.*;
 
 import java.util.Set;
@@ -19,8 +20,8 @@ public class Application {
 
                     javalinConfig.staticFiles.add("/"); //recursos estaticos (HTML, CSS, JS, IMG)
 
-                    /*
-                    javalinConfig.accessManager((handler, ctx, routeRoles) -> {
+
+                    /*javalinConfig.accessManager((handler, ctx, routeRoles) -> {
                         Roles userRole = getUserRole(ctx);
                         if (routeRoles.contains(userRole)) {
                             handler.handle(ctx);
@@ -40,6 +41,7 @@ public class Application {
             .start(8080);
 
         RepositorioColaboradores repoColab = RepositorioColaboradores.getInstancia();
+        RepositorioHeladeras repoHeladeras = RepositorioHeladeras.getInstancia();
 
 
         app.get("/login", new ShowLoginController()/*, (RouteRole) Set.of(Roles.SIN_PERMISOS)*/);
@@ -78,8 +80,8 @@ public class Application {
         app.get("/donarEntregarTarjetas", new DonarEntregarTarjetasController());
         //app.post("/donarEntregarTarjetas", new DonarEntregarTarjetasRealizadaController());
 
-
         app.get("/agregarHeladera", new AgregarHeladeraController());
+        app.post("/heladeraAgregada", new HeladeraAgregadaController(repoHeladeras));
         //app.get("/verHeladeras", new VerHeladerasController());
 
 
@@ -106,7 +108,8 @@ public class Application {
 
     }
 
-    /*private static Roles getUserRole(Context ctx) {
-        return Roles.SIN_PERMISOS;//ctx.sessionAttribute("rolUsuario");
+    /*
+    private static Roles getUserRole(Context ctx) {
+        return Roles.CON_PERMISOS;//ctx.sessionAttribute("rolUsuario");
     }*/
 }
