@@ -64,6 +64,7 @@ public class Application {
         app.get("/elegirDonacionJuridica", new ElegirDonacionJuridicaController());
 
         app.get("/donarVianda", new DonarViandaController());
+        //app.get("/donarVianda/{name}&{adress}&{status}&{date}", new DonarViandaController());
         app.post("/donarVianda", new DonarViandaRealizadaController(repoHeladeras));
 
         app.get("/donarDinero", new DonarDineroController());
@@ -79,7 +80,7 @@ public class Application {
         app.post("/heladeraAgregada", new HeladeraAgregadaController(repoHeladeras));
 
 
-        app.get("/mapaHeladeras", new MapaHeladerasController());
+        app.get("/mapaHeladeras", new MapaHeladerasController(repoHeladeras));
 
         app.get("/visualizarDetalleHeladera", new VisualizarDetalleHeladeraController());
 
