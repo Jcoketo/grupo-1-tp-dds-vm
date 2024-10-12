@@ -12,20 +12,21 @@ import java.util.Map;
 
 public class MapaHeladerasController implements Handler {
 
-    private RepositorioHeladeras repoHeladeras;
+    private RepositorioHeladeras repositorioHeladeras;
 
     public MapaHeladerasController(RepositorioHeladeras repo) {
         super();
-        this.repoHeladeras = repo;
+        this.repositorioHeladeras = repo;
     }
 
     @Override
     public void handle(@NotNull Context context) throws Exception {
-        Map<String, Object> model = new HashMap<>();
-        List<Heladera> heladerasAMostrar = this.repoHeladeras.obtenerHeladeras(5);
-        model.put("listaHeladeras", heladerasAMostrar);
+        // Obtén las heladeras del repositorio
+        List<Heladera> heladeras = this.repositorioHeladeras.obtenerHeladeras(5);
 
-        context.render("templates/mapaHeladeras.mustache", model);
+        // Devuelve las heladeras en formato JSON
+        context.json(heladeras);
     }
+
 
 }

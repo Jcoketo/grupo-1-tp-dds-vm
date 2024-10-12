@@ -1,8 +1,12 @@
 import io.javalin.Javalin;
+import modelo.elementos.Heladera;
+import modelo.elementos.PuntoEstrategico;
 import persistencia.RepositorioColaboradores;
 import persistencia.RepositorioHeladeras;
 import persistencia.RepositorioPersonasVulnerables;
 import presentacion.*;
+
+import java.time.LocalDate;
 
 public class Application {
 
@@ -91,7 +95,26 @@ public class Application {
         app.post("/heladeraAgregada", new HeladeraAgregadaController(repoHeladeras));
 
 
-        app.get("/mapaHeladeras", new MapaHeladerasController(repoHeladeras));
+        /* Agrego una heladera de prueba */
+        /* *************************************************************************** */
+
+        PuntoEstrategico puntoEstrategico = new PuntoEstrategico(-34.5986, -58.4208);
+
+        puntoEstrategico.setDireccion("Medrano");
+
+        LocalDate fecha = LocalDate.now();
+
+        Heladera heladeraPrueba = new Heladera(1,fecha, puntoEstrategico);
+
+        repoHeladeras.agregarHeladera(heladeraPrueba);
+
+        /* *************************************************************************** */
+
+
+        app.get("/mapaHeladeras", new MapaHeladeraVistaController());
+
+
+        app.get("/mapaHeladerasRequest", new MapaHeladerasController(repoHeladeras));
 
         app.get("/visualizarDetalleHeladera", new VisualizarDetalleHeladeraController());
 
