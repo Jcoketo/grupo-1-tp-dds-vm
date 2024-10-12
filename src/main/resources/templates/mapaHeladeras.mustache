@@ -161,6 +161,7 @@
             <h3>Heladeras</h3>
             <ul id="heladeras-list" class="list-group">
                 <!-- Lista de heladeras se llenará dinámicamente -->
+
             </ul>
         </div>
     </div>
@@ -196,6 +197,8 @@
 
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBb5mC9pmmrsoAdUAxHfvE4Z2iW260tlUY"></script>
 <script>
+
+
     const heladeras = [
         { name: "Heladera Medrano UTN", lat: -34.5986, lng: -58.4208, date: "12/5/2024", status: "Activa" },
         { name: "Heladera Alto Palermo", lat: -34.5895, lng: -58.4063, date: "21/9/2023", status: "Activa" },
@@ -232,6 +235,7 @@
                    <small>
                        <a href="/visualizarDetalleHeladera?name=${heladera.name}" class="text-primary" style="text-decoration: underline;">Detalles</a>
                        <button onclick="window.location.href='/donarVianda'" class="btn" style="margin-left: 10px; background-color: #3657A6; color: white; padding: 5px 15px; font-size: 14px; border-radius: 5px;">Donar Vianda</button>
+                       <!-- <button onclick="window.location.href='/donarVianda?name=${heladera.name}&address=${heladera.address}&status=${heladera.status}&date=${heladera.date}" class="btn" style="margin-left: 10px; background-color: #3657A6; color: white; padding: 5px 15px; font-size: 14px; border-radius: 5px;">Donar Vianda</button> -->
                    </small>
                </div>
             `;

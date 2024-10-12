@@ -42,4 +42,9 @@ public class RepositorioHeladeras {
 
         return heladerasCercanas;
     }
+
+    public List<Heladera> obtenerHeladeras(Integer cantidadHeladeras) {
+        List<Heladera> heladerasATraer = heladeras.subList(0, Math.min(5, heladeras.size()));
+        return heladerasATraer;
+    }
 }
