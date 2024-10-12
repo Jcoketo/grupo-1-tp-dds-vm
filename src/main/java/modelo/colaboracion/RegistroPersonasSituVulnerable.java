@@ -5,6 +5,7 @@ import modelo.elementos.TarjetaPlastica;
 import modelo.personas.Colaborador;
 import modelo.personas.PersonaVulnerable;
 import modelo.personas.TipoPersona;
+import persistencia.RepositorioPersonasVulnerables;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -65,9 +66,9 @@ public class RegistroPersonasSituVulnerable extends Colaboracion{
         colaborador.incrementarPuntaje((double) this.cantidadTarjetas * coeficiente);
     } // Nosotros entendemos que las tarjetas ya fueron repartidas.
 
-    public void darAltaPersonaVulnerable(){
-        //TODO
-    }
+   /* public void darAltaPersonaVulnerable(){
+        RepositorioPersonasVulnerables.getInstancia().agregarPersonaVulnerable(persona);
+    }*/
 
     public void entregarTarjeta(List<PersonaVulnerable> personas){
         //TODO
