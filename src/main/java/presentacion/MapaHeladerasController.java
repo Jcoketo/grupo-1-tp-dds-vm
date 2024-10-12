@@ -7,13 +7,16 @@ import org.jetbrains.annotations.NotNull;
 import java.util.HashMap;
 import java.util.Map;
 
-public class visualizarDetalleHeladeraController implements Handler{
+public class MapaHeladerasController implements Handler {
+
+    public MapaHeladerasController() {
+        super();
+    }
+
     @Override
     public void handle(@NotNull Context context) throws Exception {
         Map<String, Object> model = new HashMap<>();
-        context.render("templates/visualizarDetalleHeladera.mustache", model);
-
-
-
+        context.render("templates/mapaHeladeras.mustache", model);
     }
+
 }

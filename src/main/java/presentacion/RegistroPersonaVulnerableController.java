@@ -7,7 +7,11 @@ import org.jetbrains.annotations.NotNull;
 import java.util.HashMap;
 import java.util.Map;
 
-public class registroPersonaVulnerableController implements Handler {
+public class RegistroPersonaVulnerableController implements Handler {
+
+    public RegistroPersonaVulnerableController() {
+        super();
+    }
 
     @Override
     public void handle(@NotNull Context context) throws Exception {
