@@ -11,4 +11,14 @@ public class PersonaVulnerable {
     private TarjetaPlastica tarjeta;
     private PersonaHumana dioAlta;
     private PersonaHumana persona;
+
+
+    public PersonaVulnerable(LocalDate fechaRegistro, int menoresACargo, TarjetaPlastica tarjeta, PersonaHumana dioAlta, PersonaHumana persona){
+        this.fechaRegistro = fechaRegistro;
+        this.menoresACargo = menoresACargo;
+        this.tarjeta = tarjeta;
+        this.dioAlta = dioAlta;
+        this.persona = persona;
+    }
+
 }

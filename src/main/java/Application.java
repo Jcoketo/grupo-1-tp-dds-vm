@@ -5,6 +5,7 @@ import io.javalin.http.Handler;
 import io.javalin.security.RouteRole;
 import persistencia.RepositorioColaboradores;
 import persistencia.RepositorioHeladeras;
+import persistencia.RepositorioPersonasVulnerables;
 import presentacion.*;
 
 import java.util.Set;
@@ -42,7 +43,7 @@ public class Application {
 
         RepositorioColaboradores repoColab = RepositorioColaboradores.getInstancia();
         RepositorioHeladeras repoHeladeras = RepositorioHeladeras.getInstancia();
-
+        RepositorioPersonasVulnerables repoPersonas = RepositorioPersonasVulnerables.getInstancia();
 
         app.get("/login", new ShowLoginController()/*, (RouteRole) Set.of(Roles.SIN_PERMISOS)*/);
         app.post("/login", new ProcessLoginController(repoColab));
@@ -82,7 +83,7 @@ public class Application {
 
         app.get("/agregarHeladera", new AgregarHeladeraController());
         app.post("/heladeraAgregada", new HeladeraAgregadaController(repoHeladeras));
-        //app.get("/verHeladeras", new VerHeladerasController());
+
 
         app.get("/mapaHeladeras", new mapaHeladerasController());
 
@@ -91,6 +92,11 @@ public class Application {
         app.get("/visualizarAlertas", new visualizarAlertasController());
 
         app.get("/visualizarFallasTecnicas", new visualizarFallasTecnicasController());
+
+        app.get("/registroPersonaVulnerable", new registroPersonaVulnerableController());
+        app.post("/registroPersonaVulnerable", new registroPersonaVulnerableRealizadaController(repoPersonas));
+
+        app.get("/registroPersonaVulnerableFinal", new registroPersonaVulnerableFinalController());
 
         // http://localhost:8080/home
 
