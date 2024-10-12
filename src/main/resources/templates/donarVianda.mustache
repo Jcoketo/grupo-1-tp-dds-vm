@@ -304,6 +304,9 @@
         <!-- Sección derecha (Formulario de donación) -->
         <div class="col-md-6">
             <form class="form-donation" action="/donarVianda" method="POST">
+
+                <input id= "haySegundaVianda" type="hidden" name="haySegundaVianda" value="0">
+
                 <h5>Vianda a donar</h5>
                 <div class="form-row">
                     <div class="form-group col-md-6">
@@ -319,11 +322,11 @@
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="pesoVianda1">Peso de la vianda</label>
-                        <input type="text" class="form-control" id="pesoVianda1" name="pesoVianda1" placeholder="500 gr">
+                        <input type="number" class="form-control" id="pesoVianda1" name="pesoVianda1" placeholder="500 gr">
                     </div>
                     <div class="form-group col-md-6">
                         <label for="caloriasVianda1">Calorías de la vianda</label>
-                        <input type="text" class="form-control" id="caloriasVianda1" name="caloriasVianda1" placeholder="1200 gr">
+                        <input type="number" class="form-control" id="caloriasVianda1" name="caloriasVianda1" placeholder="1200 gr">
                     </div>
                 </div>
 
@@ -351,11 +354,11 @@
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="pesoVianda2">Peso de la vianda</label>
-                            <input type="text" class="form-control" id="pesoVianda2" name="pesoVianda2" placeholder="500 gr">
+                            <input type="number" class="form-control" id="pesoVianda2" name="pesoVianda2" placeholder="500 gr">
                         </div>
                         <div class="form-group col-md-6">
                             <label for="caloriasVianda2">Calorías de la vianda</label>
-                            <input type="text" class="form-control" id="caloriasVianda2" name="caloriasVianda2" placeholder="1200 gr">
+                            <input type="number" class="form-control" id="caloriasVianda2" name="caloriasVianda2" placeholder="1200 gr">
                         </div>
                     </div>
 
@@ -368,7 +371,11 @@
                 </div>
 
                 <div class="form-group">
-                    <button type="button" class="btn-add" onclick="mostrarSegundaVianda()">+ Añadir otra vianda</button>
+                    <button type="button" class="btn-add" id="botonAgregar" onclick="mostrarSegundaVianda()">+ Añadir otra vianda</button>
+                </div>
+
+                <div class="form-group">
+                    <button type="button" class="btn-add" style= "display: none" id="botonAgregar2" onclick="esconderVianda()">Eliminar Vianda</button>
                 </div>
 
                 <div class="form-group">
@@ -381,7 +388,18 @@
 <script>
     function mostrarSegundaVianda() {
         document.getElementById('extra-vianda').style.display = 'block';
+        document.getElementById('botonAgregar').style.display = 'none';
+        document.getElementById('botonAgregar2').style.display = 'block';
+        document.getElementById('haySegundaVianda').value = 1;
     }
+
+    function esconderVianda() {
+        document.getElementById('extra-vianda').style.display = 'none';
+        document.getElementById('botonAgregar2').style.display = 'none';
+        document.getElementById('botonAgregar').style.display = 'block';
+        document.getElementById('haySegundaVianda').value = 0;
+    }
+
 </script>
 
 <footer>

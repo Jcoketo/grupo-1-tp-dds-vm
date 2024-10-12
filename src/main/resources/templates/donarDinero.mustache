@@ -203,10 +203,10 @@
                 <div class="card">
                     <div class="card-body">
                         <h3 class="card-title">Donar Dinero</h3>
-                        <form action="graciasDonacion.html" method="post">
+                        <form action="/donarDinero" method="POST">
                             <div class="form-group">
                                 <label for="monto">Monto</label>
-                                <input type="number" id="monto" name="monto" class="form-control" required>
+                                <input type="number" max="9999999999" id="monto" name="monto" class="form-control" required>
                             </div>
                             <div class="form-group">
                                 <label for="nombre">Nombre en la Tarjeta</label>
@@ -218,11 +218,11 @@
                             </div>
                             <div class="form-group">
                                 <label for="fecha-expiracion">Fecha de Expiración</label>
-                                <input type="text" id="fecha-expiracion" name="fecha-expiracion" class="form-control" placeholder="MM/AA" required>
+                                <input type="month" id="fecha-expiracion" name="fecha-expiracion" class="form-control" placeholder="MM/AA" required>
                             </div>
                             <div class="form-group">
                                 <label for="cvv">CVV</label>
-                                <input type="text" id="cvv" name="cvv" class="form-control" required>
+                                <input type="number" id="cvv" name="cvv" class="form-control" required>
                             </div>
                             <div class="form-group checkbox-container">
                                 <input type="checkbox" id="guardar-datos" name="guardar-datos">

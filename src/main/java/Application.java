@@ -1,14 +1,8 @@
-import accessManagment.Roles;
 import io.javalin.Javalin;
-import io.javalin.http.Context;
-import io.javalin.http.Handler;
-import io.javalin.security.RouteRole;
 import persistencia.RepositorioColaboradores;
 import persistencia.RepositorioHeladeras;
 import persistencia.RepositorioPersonasVulnerables;
 import presentacion.*;
-
-import java.util.Set;
 
 public class Application {
 
@@ -43,7 +37,7 @@ public class Application {
 
         RepositorioColaboradores repoColab = RepositorioColaboradores.getInstancia();
         RepositorioHeladeras repoHeladeras = RepositorioHeladeras.getInstancia();
-        RepositorioPersonasVulnerables repoPersonas = RepositorioPersonasVulnerables.getInstancia();
+        RepositorioPersonasVulnerables repoPersonasVulnerable = RepositorioPersonasVulnerables.getInstancia();
 
         app.get("/login", new ShowLoginController()/*, (RouteRole) Set.of(Roles.SIN_PERMISOS)*/);
         app.post("/login", new ProcessLoginController(repoColab));
@@ -73,7 +67,7 @@ public class Application {
         app.post("/donarVianda", new DonarViandaRealizadaController(repoHeladeras));
 
         app.get("/donarDinero", new DonarDineroController());
-        //app.post("/donarDinero", new DonarDineroRealizadaController());
+        app.post("/donarDinero", new DonarDineroRealizadaController());
 
         app.get("/donarDistribuirViandas", new DonarDistribucionViandaController());
         //app.post("/donarDistribuirViandas", new DonarDistribucionViandaRealizadaController());
@@ -85,18 +79,18 @@ public class Application {
         app.post("/heladeraAgregada", new HeladeraAgregadaController(repoHeladeras));
 
 
-        app.get("/mapaHeladeras", new mapaHeladerasController());
+        app.get("/mapaHeladeras", new MapaHeladerasController());
 
-        app.get("/visualizarDetalleHeladera", new visualizarDetalleHeladeraController());
+        app.get("/visualizarDetalleHeladera", new VisualizarDetalleHeladeraController());
 
-        app.get("/visualizarAlertas", new visualizarAlertasController());
+        app.get("/visualizarAlertas", new VisualizarAlertasController());
 
-        app.get("/visualizarFallasTecnicas", new visualizarFallasTecnicasController());
+        app.get("/visualizarFallasTecnicas", new VisualizarFallasTecnicasController());
 
-        app.get("/registroPersonaVulnerable", new registroPersonaVulnerableController());
-        app.post("/registroPersonaVulnerable", new registroPersonaVulnerableRealizadaController(repoPersonas));
+        app.get("/registroPersonaVulnerable", new RegistroPersonaVulnerableController());
+        app.post("/registroPersonaVulnerable", new RegistroPersonaVulnerableRealizadaController(repoPersonasVulnerable));
 
-        app.get("/registroPersonaVulnerableFinal", new registroPersonaVulnerableFinalController());
+        app.get("/registroPersonaVulnerableFinal", new RegistroPersonaVulnerableFinalController());
 
         // http://localhost:8080/home
 

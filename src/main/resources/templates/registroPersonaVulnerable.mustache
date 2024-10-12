@@ -306,7 +306,7 @@
 
         <!-- Contenedor del formulario -->
         <div class="form-container">
-            <form action="/registroPersonaVulnerable" method="post">
+            <form action="/registroPersonaVulnerable" method="POST">
                 <div class="form-group">
                     <label for="nombre">Nombre de Persona Vulnerable</label>
                     <input type="text" id="nombre" name="nombre" required>
@@ -327,7 +327,7 @@
 
                 <div class="form-group">
                     <label for="numero-documento">Número de documento</label>
-                    <input type="text" id="numero-documento" name="numero-documento">
+                    <input type="number" maxlength="8" id="numero-documento" name="numero-documento">
                 </div>
 
                 <div class="form-group">
@@ -345,7 +345,7 @@
 
                 <div class="form-group full-width">
                     <label for="tarjeta">Número de tarjeta asociada</label>
-                    <input type="text" id="tarjeta" name="tarjeta">
+                    <input type="number" maxlength="16" id="tarjeta" name="tarjeta">
                 </div>
 
                 <div class="form-group">

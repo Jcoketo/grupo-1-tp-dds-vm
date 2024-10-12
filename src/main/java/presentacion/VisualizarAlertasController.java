@@ -7,7 +7,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.HashMap;
 import java.util.Map;
 
-public class visualizarAlertasController implements Handler {
+public class VisualizarAlertasController implements Handler {
 
     @Override
     public void handle(@NotNull Context context) throws Exception {
