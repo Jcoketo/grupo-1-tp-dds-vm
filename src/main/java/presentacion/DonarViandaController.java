@@ -12,16 +12,16 @@ public class DonarViandaController implements Handler {
 
     @Override
     public void handle(@NotNull Context context) throws Exception {
-        String name = context.queryParam("name");
-        String address = context.queryParam("address");
-        String status = context.queryParam("status");
-        String date = context.queryParam("date");
+        String name = context.queryParam("nombre");
+        String address = context.queryParam("direccion");
+        String status = context.queryParam("estado");
+        String availability = context.queryParam("disponibilidad");
 
         Map<String, Object> model = new HashMap<>();
-        model.put("name", name);
-        model.put("address", address);
-        model.put("status", status);
-        model.put("date", date);
+        model.put("nombre", name);
+        model.put("direccion", address);
+        model.put("estado", status);
+        model.put("disponibilidad", availability);
 
         context.render("templates/donarVianda.mustache", model);
     }

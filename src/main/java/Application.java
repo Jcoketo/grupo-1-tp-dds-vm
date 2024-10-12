@@ -63,8 +63,19 @@ public class Application {
         app.get("/elegirDonacionFisica", new ElegirDonacionFisicaController());
         app.get("/elegirDonacionJuridica", new ElegirDonacionJuridicaController());
 
-        app.get("/donarVianda", new DonarViandaController());
-        //app.get("/donarVianda/{name}&{adress}&{status}&{date}", new DonarViandaController());
+        //app.get("/donarVianda/{nombre}&{direccion}&{estado}&{disponibilidad}", new DonarViandaController());
+        app.get("/donarVianda", ctx -> {
+            String nombre = ctx.queryParam("nombre");
+            String direccion = ctx.queryParam("direccion");
+            String estado = ctx.queryParam("estado");
+            String disponibilidad = ctx.queryParam("disponibilidad");
+
+            // Llama al controlador y pásale los parámetros
+            new DonarViandaController().handle(ctx);
+
+            // Responde con la vista o un mensaje
+            ctx.result("Solicitud de donar vianda recibida.");
+        });
         app.post("/donarVianda", new DonarViandaRealizadaController(repoHeladeras));
 
         app.get("/donarDinero", new DonarDineroController());
