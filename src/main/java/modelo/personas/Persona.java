@@ -8,7 +8,7 @@ import lombok.Getter;
 
 public class Persona {
 
-    private String direccion;
+    @Getter private String direccion;
     @Getter protected List<MedioDeContacto> mediosDeContacto;
     @Getter protected TipoPersona tipoPersona;
 

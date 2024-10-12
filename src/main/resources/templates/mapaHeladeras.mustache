@@ -225,9 +225,11 @@
 
         fetchHeladeras().then(heladeras => {
             heladeras.forEach(heladera => {
+                const nombre = heladera.nombre;
                 const punto = heladera.puntoEstrategico;
                 const fecha = formatFecha(heladera.fechaFuncionamiento);
                 const estado = heladera.activa ? "Activa" : "Inactiva";
+                const cantidadViandas = heladera.viandas.length;
 
                 const marker = new google.maps.Marker({
                     position: { lat: punto.latitud, lng: punto.longitud },
@@ -241,12 +243,13 @@
                 listItem.className = "list-group-item";
                 listItem.innerHTML = `
                    <div>
-                       <strong>Heladera en ${punto.direccion || 'Ubicación desconocida'}</strong><br>
+                       <strong>${nombre || 'Ubicación desconocida'}</strong><br>
+                       <small>Direccion: ${punto.direccion || 'Ubicación desconocida'}</small><br>
                        <small>En funcionamiento desde: ${fecha}</small><br>
                        <small>${estado}</small><br>
                        <small>
                            <a href="/visualizarDetalleHeladera?lat=${punto.latitud}&lng=${punto.longitud}" class="text-primary" style="text-decoration: underline;">Detalles</a>
-                           <button onclick="window.location.href='/donarVianda'" class="btn" style="margin-left: 10px; background-color: #3657A6; color: white; padding: 5px 15px; font-size: 14px; border-radius: 5px;">Donar Vianda</button>
+                           <button onclick="window.location.href='/donarVianda?nombre=${nombre}&direccion=${punto.direccion}&estado=${estado} &disponibilidad=${cantidadViandas}'" class="btn" style="margin-left: 10px; background-color: #3657A6; color: white; padding: 5px 15px; font-size: 14px; border-radius: 5px;">Donar Vianda</button>
                        </small>
                    </div>
                 `;

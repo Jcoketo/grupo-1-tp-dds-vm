@@ -24,13 +24,8 @@ public class RegistroPersonaVulnerableRealizadaController implements Handler{
 
     @Override
     public void handle(@NotNull Context context) throws Exception {
-        String nombre = Objects.requireNonNull(context.formParam("nombre"));
-        String fechaNacimientoStr = Objects.requireNonNull(context.formParam("fecha"));
-        Long numeroDocumentoStr = Long.parseLong(Objects.requireNonNull(context.formParam("numero-documento")));
-        String direccion = context.formParam("direccion");
-        Long tarjeta = Long.parseLong(Objects.requireNonNull(context.formParam("tarjeta")));
-        Integer cantidadMenoresStr = Integer.parseInt(Objects.requireNonNull(context.formParam("cantidad-menores")));
 
+        St
 
         context.redirect("/registroPersonaVulnerableFinal");
    }

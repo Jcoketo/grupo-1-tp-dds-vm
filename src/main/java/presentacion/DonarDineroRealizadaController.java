@@ -20,7 +20,14 @@ public class DonarDineroRealizadaController implements Handler {
         String nombre = context.formParam("nombre");
         Long numeroTarjeta = Long.parseLong(Objects.requireNonNull(context.formParam("numero-tarjeta")));
         String fechaVencimiento = context.formParam("fecha-expiracion");
-        Integer codigoSeguridad = Integer.parseInt(Objects.requireNonNull(context.formParam("codigo-seguridad")));
+        Integer codigoSeguridad = Integer.parseInt(Objects.requireNonNull(context.formParam("cvv")));
+
+        // todo el chequeo de los datos de la tarjeta de credito
+        // y descontar el dinero
+
+
+
+        context.redirect("/graciasPorDonar");
 
 
     }

@@ -16,8 +16,10 @@ import java.util.Collections;
 import java.util.List;
 
 public class Colaborador {
+
+    @Getter protected Integer idUnico;
  
-    @Getter protected String direccion;
+    //@Getter protected String direccion;
     protected List<Colaboracion> colaboracionesRealizadas;
     protected Double puntaje;
     protected List<Oferta> canjesRealizados;
