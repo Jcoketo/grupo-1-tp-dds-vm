@@ -4,6 +4,7 @@ import modelo.colaboracion.DistribucionDeViandas;
 import modelo.colaboracion.DonarDinero;
 import modelo.colaboracion.DonarVianda;
 import modelo.colaboracion.RegistroPersonasSituVulnerable;
+import modelo.contraseña.PasswordGenerator;
 import modelo.notificador.Notificador;
 import modelo.personas.*;
 import persistencia.RepositorioColaboradores;
@@ -49,8 +50,8 @@ public class AsignarColaborador {
         String identificadorUnico = tipoDocumento + nroDocumento;
 
         RepositorioColaboradores repoColaboradores = RepositorioColaboradores.getInstancia();
-        Colaborador colaborador = repoColaboradores.existeColaborador(identificadorUnico);
-
+        Colaborador colaborador = repoColaboradores.existeColaborador(1);
+        //TODO VERIFICAR TODO IMPORTADOR - CAMBIE IDENTIFICADOR UNICO
         if (colaborador == null) { // NO EXISTE COLABORADOR
             MedioDeContacto medioDeContacto = new MedioDeContacto(TipoMedioDeContacto.MAIL, mail);
 

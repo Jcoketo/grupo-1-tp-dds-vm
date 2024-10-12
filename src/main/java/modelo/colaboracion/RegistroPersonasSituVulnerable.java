@@ -55,7 +55,7 @@ public class RegistroPersonasSituVulnerable extends Colaboracion{
     public String validar(Colaborador colaborador) {
         if(!this.tiposPersonasHabilitadas.contains(colaborador.getTipoPersona())){
             return "Ese Tipo de Persona no puede realizar este tipo de Colaboración!";
-        } else if (colaborador.getDireccion() == null) {
+        } else if (colaborador.getPersona().getDireccion() == null) {
             return "Esa Persona no tiene una dirección!";
         }
         return null;

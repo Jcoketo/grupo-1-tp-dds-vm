@@ -1,24 +1,22 @@
 import io.javalin.Javalin;
-import modelo.elementos.Heladera;
-import modelo.elementos.PuntoEstrategico;
-import persistencia.RepositorioColaboradores;
-import persistencia.RepositorioHeladeras;
-import persistencia.RepositorioPersonasVulnerables;
-import presentacion.*;
 
-import java.time.LocalDate;
 
 public class Application {
+    private static Javalin app = null;
+
+    public static Javalin app() {
+        if(app == null)
+            throw new RuntimeException("App no inicializada");
+        return app;
+    }
 
     public static void main(String[] args) {
-
-        Javalin app = Javalin.create(javalinConfig -> {
+        app = Javalin.create(javalinConfig -> {
                     javalinConfig.plugins.enableCors(cors -> {
                         cors.add(it -> it.anyHost());
                     }); // para poder hacer requests de un dominio a otro
 
                     javalinConfig.staticFiles.add("/"); //recursos estaticos (HTML, CSS, JS, IMG)
-
 
                     /*javalinConfig.accessManager((handler, ctx, routeRoles) -> {
                         Roles userRole = getUserRole(ctx);
@@ -30,127 +28,11 @@ public class Application {
                             //ctx.redirect("/login");
                         }
                     });*/
-                }
-
-            )
-            .get("/", ctx -> {
-                //ctx.sessionAttribute("rolUsuario", Roles.SIN_PERMISOS);  // Set session role attribute
-                ctx.redirect("/inicio-sinLog");  // Redirect to a non-logged-in start page
-            })
+                })
             .start(8080);
 
-        RepositorioColaboradores repoColab = RepositorioColaboradores.getInstancia();
-        RepositorioHeladeras repoHeladeras = RepositorioHeladeras.getInstancia();
-        RepositorioPersonasVulnerables repoPersonasVulnerable = RepositorioPersonasVulnerables.getInstancia();
-
-        app.get("/login", new ShowLoginController()/*, (RouteRole) Set.of(Roles.SIN_PERMISOS)*/);
-        app.post("/login", new ProcessLoginController(repoColab));
-
-        app.get("/inicio-sinLog", new InicioController());
-        app.get("/inicio-conLog", new InicioLogeadoController());
-
-        // Routa para probar los Roles
-        // app.get("/elegirRegistroCuenta", new ElegirRegistroCuentaController(), (RouteRole) Set.of(Roles.SIN_PERMISOS));
-        app.get("/elegirRegistroCuenta", new ElegirRegistroCuentaController());
-
-        app.get("/crearCuentaJuridica", new CrearCuentaJuridicaController());
-        app.get("/crearCuentaFisica", new CrearCuentaFisicaController());
-
-        app.post("/crearCuentaFisica", new CuentaFisicaCreadaController(repoColab));
-        app.post("/crearCuentaJuridica", new CuentaJuridicaCreadaController(repoColab));
-        app.get("/cuentaCreada", new CuentaCreadaController());
-
-
-        //TODO todos los botones que redireccionen a DONAR tienen que venir a este GET
-        // TODO FALTA INSERTAR LAS IMAGENES EN LOS BOTONES DE ELEGIR DONACION (en mustache)
-        app.get("/elegirDonacion", new ElegirDonacionController());
-        app.get("/elegirDonacionFisica", new ElegirDonacionFisicaController());
-        app.get("/elegirDonacionJuridica", new ElegirDonacionJuridicaController());
-
-        //app.get("/donarVianda/{nombre}&{direccion}&{estado}&{disponibilidad}", new DonarViandaController());
-        app.get("/donarVianda", ctx -> {
-            String nombre = ctx.queryParam("nombre");
-            String direccion = ctx.queryParam("direccion");
-            String estado = ctx.queryParam("estado");
-            String disponibilidad = ctx.queryParam("disponibilidad");
-
-            // Llama al controlador y pásale los parámetros
-            new DonarViandaController().handle(ctx);
-
-            // Responde con la vista o un mensaje
-            ctx.result("Solicitud de donar vianda recibida.");
-        });
-        app.post("/donarVianda", new DonarViandaRealizadaController(repoHeladeras));
-
-        app.get("/donarDinero", new DonarDineroController());
-        app.post("/donarDinero", new DonarDineroRealizadaController());
-
-        app.get("/donarDistribuirViandas", new DonarDistribucionViandaController());
-        //app.post("/donarDistribuirViandas", new DonarDistribucionViandaRealizadaController());
-
-        app.get("/donarEntregarTarjetas", new DonarEntregarTarjetasController());
-        //app.post("/donarEntregarTarjetas", new DonarEntregarTarjetasRealizadaController());
-
-        app.get("/agregarHeladera", new AgregarHeladeraController());
-        app.post("/heladeraAgregada", new HeladeraAgregadaController(repoHeladeras));
-
-
-        /* Agrego una heladera de prueba */
-        /* *************************************************************************** */
-
-        PuntoEstrategico puntoEstrategico = new PuntoEstrategico(-34.5986, -58.4208);
-
-        puntoEstrategico.setDireccion("Medrano");
-
-        LocalDate fecha = LocalDate.now();
-
-        Heladera heladeraPrueba = new Heladera(1,fecha, puntoEstrategico);
-
-        repoHeladeras.agregarHeladera(heladeraPrueba);
-
-        /* *************************************************************************** */
-
-
-        app.get("/mapaHeladeras", new MapaHeladeraVistaController());
-
-
-        app.get("/mapaHeladerasRequest", new MapaHeladerasController(repoHeladeras));
-
-        app.get("/visualizarDetalleHeladera", new VisualizarDetalleHeladeraController());
-
-        app.get("/visualizarAlertas", new VisualizarAlertasController());
-
-        app.get("/visualizarFallasTecnicas", new VisualizarFallasTecnicasController());
-
-        app.get("/registroPersonaVulnerable", new RegistroPersonaVulnerableController());
-        app.post("/registroPersonaVulnerable", new RegistroPersonaVulnerableRealizadaController(repoPersonasVulnerable));
-
-        app.get("/registroPersonaVulnerableFinal", new RegistroPersonaVulnerableFinalController());
-
-        // http://localhost:8080/home
-
-        // API REST
-        //app.get("/api/mascotas", new GetMascotasHandler());
-        //app.get("/api/mascotas/{id}", new GetMascotaIdHandler());
-        //app.get("/api/mascotas/{id}/imagen", new GetMascotaImgHandler());
-        //app.post("/api/mascotas", new PostMascotaHandler());
-        //app.get("/api/mis-datos", new GetPerfilSesionHandler());
-
-        //app.post("/api/login", new LoginHandler());
-
-        // VISTA
-        //app.get("/home", new IndexHandler());
-        //app.get("/info-mascota", new InfoMascotaHandler());
-
-
-        app.exception(IllegalArgumentException.class, (e, ctx) -> {
-            ctx.status(400);
-        });
-
+        //Inicializamos el router:
+        Router.init();
     }
 
-    /*
-    private static Roles getUserRole(Context ctx) {
-        return Roles.CON_PERMISOS;//ctx.sessionAttribute("rolUsuario");
-    }*/
 }

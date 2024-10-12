@@ -1,4 +1,4 @@
-package modelo.importador;
+package modelo.contraseña;
 
 import java.security.SecureRandom;
 

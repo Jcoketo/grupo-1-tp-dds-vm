@@ -16,7 +16,7 @@ import java.util.List;
 
 public class Heladera {
     @Getter @Setter private PuntoEstrategico puntoEstrategico;
-    @Setter private String nombre;
+    @Setter @Getter private String nombre;
     @Setter private int viandasMaximas;
     @Getter private List<Vianda> viandas;
     @Getter private LocalDate fechaFuncionamiento;

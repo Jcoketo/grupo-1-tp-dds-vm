@@ -7,18 +7,11 @@ import org.jetbrains.annotations.NotNull;
 import java.util.HashMap;
 import java.util.Map;
 
-public class InicioLogeadoController implements Handler {
+public class ReportarFallaTecnicaController implements Handler {
 
     @Override
     public void handle(@NotNull Context context) throws Exception {
-
-        Validar.validarLogueado(context,"/inicio-sinLog");
-
-        if (Boolean.TRUE.equals(context.sessionAttribute("logueado"))) {
-            context.redirect("/inicio-sinLog");
-        }
-
         Map<String, Object> model = new HashMap<>();
-        context.render("templates/inicioLogeado.mustache", model);
+        context.render("templates/reportarFallaTecnica.mustache", model);
     }
 }

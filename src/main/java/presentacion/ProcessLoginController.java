@@ -35,6 +35,8 @@ public class ProcessLoginController implements Handler {
             Roles userRole = obtenerRolUsuario(email);
             context.sessionAttribute("rolUsuario", userRole);
 
+
+
         } else {
             model.put("error", "Invalid email or password");
             context.render("templates/login.mustache", model);
