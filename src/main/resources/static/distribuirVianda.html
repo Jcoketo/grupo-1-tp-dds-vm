@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Distribuir Viandas</title>
+    <!-- Enlace a CSS de Bootstrap -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #ffffff;
+            margin: 0;
+            padding: 0;
+            height: 100%; /* Asegura que el body y html ocupen el 100% de la altura */
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+    
+        nav {
+            margin-top: 20px; /* Ajusta el valor según el espacio deseado */
+        }
+
+        .navbar-nav .nav-item {
+            margin-left: 20px;
+        }
+
+        .navbar-light .navbar-nav .nav-link,
+        .navbar-light .dropdown-menu {
+            background-color: white;
+            color: #1e5552;
+            font-size: 20px;
+        }
+
+        .navbar-light .dropdown-menu a.dropdown-item:hover {
+            background-color: #cdcdcd;
+        }
+
+        .main-container {
+            padding: 30px;
+            background-color: white;
+        }
+    
+
+        .form-section {
+            margin-bottom: 30px;
+            border-color: #B8CCC8;
+        }
+    
+        .form-group label {
+            font-weight: bold;
+        }
+
+        .form-control {
+            margin-bottom: 30px;
+            border: 1px solid #1e5552;
+        }
+
+        .heladera-card {
+            padding: 15px;
+            border: 1px solid #B8CCC8;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            background-color: #B8CCC8;
+        }
+
+        .heladera-card p {
+            margin: 0;
+            font-size: 14px;
+        }
+
+        .status-box {
+            background-color: #e3f2f1;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+
+        .green-box {
+            background-color: #1e5552;
+            color: white;
+            text-align: center;
+            padding: 5px;
+            border-radius: 5px;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+
+        .btn-group {
+            display: flex;  /*Usar Flexbox para la alineación */
+            flex-direction: row; /* Colocar los botones uno al lado del otro */
+            justify-content: flex-end; /* Alinear los botones al margen derecho */
+            gap: 10px; /* Espacio entre los botones */
+            margin: 10px 0 10px 800px; /* Margen superior e inferior de 20px y margen izquierdo de 20px */
+        }
+
+        .btn {
+            border-radius: 20px; /* Bordes redondeados */
+            padding: 10px 20px; /* Espaciado interno para que se vean mejor */
+            width: 150px; /* Ancho fijo, ajusta según tus necesidades */
+            margin-bottom: 10px; /* Espacio entre los botones */
+            border: none; /* Eliminar borde predeterminado */
+            cursor: pointer; /* Cambiar cursor al pasar sobre el botón */
+            font-size: 16px; /* Tamaño de fuente */
+        }
+
+        .btn-cancel {
+            background-color: #B8CCC8;
+            color: black;
+        }
+
+        .btn-submit {
+            background-color: #0033a0;
+            color: white;
+        }
+
+        footer div {
+            margin-right: 30px;
+        }
+
+
+        footer {
+            background-color: #B8CCC8;
+            padding: 20px 50px;
+            color: white; /* Color de texto */
+            justify-content: center; /* Centrar los elementos */
+            display: flex; /* Utiliza flexbox para disposición horizontal */
+        }
+
+        footer a {
+            color: white;
+            text-decoration: none;
+            margin-top: 10px;
+        }
+
+        .footer-info {
+            display: flex; /* Utiliza flexbox para disposición horizontal */
+            padding: 20px; /* Espaciado interno */
+            background-color: #B8CCC8; /* Color de fondo */
+            color: white; /* Color de texto */
+        }
+
+        .footer-info div {
+            margin-left: 20px; /* Espacio entre los grupos de información */
+        }
+
+        .footer-info h4 {
+            margin-bottom: 10px; /* Espacio debajo del encabezado */
+        }
+
+        .footer-info a {
+            color: white; /* Color de los enlaces */
+            text-decoration: none; /* Sin subrayado */
+            margin-bottom: 5px; /* Espacio entre enlaces */
+        }
+
+        .social-icons {
+            display: flex; /* Utiliza flexbox para disposición horizontal */
+            justify-content: center; /* Centrar los íconos en la línea */
+            padding: 20px; /* Espacio alrededor de los íconos */
+            margin-top: 30px; /* Espacio superior para bajar los íconos */
+        }
+
+        .social-icons a {
+            margin: 0 20px; /* Espacio horizontal entre íconos */
+        }
+
+        .social-icons img {
+            max-height: 70px; /* Altura máxima para los íconos */
+        }
+
+        .info-container {
+            display: flex; /* Habilita Flexbox para el contenedor */
+            flex-direction: column; /* Coloca los elementos en una columna */
+            margin-bottom: 20px; /* Espacio debajo del contenedor */
+        }
+
+        .info-container a {
+            margin-bottom: 5px; /* Espacio entre los enlaces */
+            color: white; /* Color del texto */
+            text-decoration: none; /* Quita el subrayado de los enlaces */
+        }
+
+    </style>
+</head>
+
+<body>
+    <header>
+        <div><img src="" alt="Logo" style="max-height: 50px;"></div>
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Sobre nosotros</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Donar</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Heladeras</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Nombre del Usuario
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item" href="#">Mi perfil</a>
+                            <a class="dropdown-item" href="#">Mis colaboraciones</a>
+                            <a class="dropdown-item" href="#">Mi puntaje</a>
+                            <a class="dropdown-item" href="#">Configuración</a>
+                            <a class="dropdown-item" href="#">Cerrar sesión</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <div class="container main-container">
+            <h1>Distribuir Viandas</h1>
+            <p></p>
+            <form>
+            <div style="display: inline-flex; gap: 20px" >
+                <!-- Heladera origen -->
+                <div class="form-section">
+                    <h4>Heladera origen</h4>
+                    <!-- <label for="heladera-origen">Heladera origen</label> -->
+                    <div class="form-section">
+                        <input type="text" id="heladera-origen" class="form-control" rows="1" placeholder="Heladera Medrano UTN">
+                    </div>
+                    <div class="heladera-card">
+                        <strong>Heladera Medrano UTN</strong>
+                        <p>Avenida Medrano 1234</p>
+                            <p><strong>Estado:</strong> Fuera de servicio</p>
+                            <p><strong>Necesita traslado de:</strong> 2 viandas</p>
+                        <div class="green-box">Suscribirse</div>
+                    </div>
+                </div>
+                <!-- Heladera destino -->
+                <div class="form-section">
+                    <h4>Heladera destino</h4>
+                    <!-- <label for="heladera-origen">Heladera destino</label> -->
+                    <input type="text" class="form-control" id="heladera-destino" placeholder="Heladera Medrano UTN">
+                    <p></p>
+                    <div class="heladera-card">
+                        <strong>Heladera Medrano UTN</strong>
+                        <p>Avenida Medrano 1234</p>
+                        <p><strong>Estado:</strong> Activa</p>
+                        <p><strong>Disponibilidad:</strong> 2 viandas</p>
+                        <div class="green-box">Suscribirse</div>
+                    </div>
+                </div>
+            <div>
+            <!-- Motivo -->
+                <div class="form-section">
+                    <h4>Motivo</h4>
+                    <!--<label for="motivo">Motivo</label> -->
+                    <textarea id="motivo" class="form-control" rows="3" placeholder="Descripción..."></textarea>
+                </div>
+                <!-- Cantidad de viandas -->
+                <div class="form-section">
+                    <h4>Cantidad de viandas</h4>
+                    <!--<label for="motivo">Cantidad de viandas</label> -->
+                    <select id="cantidad" class="form-control">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                    </select>
+                </div>
+            </div>
+            </div>
+                <div class="btn-group">
+                    <button type="button" class="btn btn-cancel">Cancelar</button>
+                    <button type="submit" class="btn btn-submit">Distribuir</button>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <footer>
+        <div class="social-icons">
+            <img src="" alt="Logo" style="max-height: 50px;">
+    </div>
+    <div class="social-icons">
+        <a href="#"><img src="facebook-icon.png" alt="Facebook" style="max-height: 20px;"></a>
+        <a href="#"><img src="instagram-icon.png" alt="Instagram" style="max-height: 20px;"></a>
+        <a href="#"><img src="twitter-icon.png" alt="Twitter" style="max-height: 20px;"></a>
+    </div>
+    <div class="footer-info">
+        <div class="info-container">
+            <h4>Más información</h4>
+            <a href="#">Contáctanos</a>
+            <a href="#">Sobre nosotros</a>
+            <a href="#">Sobre el proyecto</a>
+        </div>
+        <div class="info-container">
+            <h4>Donar</h4>
+            <a href="#">Donar vianda</a>
+            <a href="#">Ver mapa</a>
+        </div>
+    </div>
+    </footer>
+
+    <!-- Scripts de Bootstrap y jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>
