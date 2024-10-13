@@ -74,7 +74,7 @@
 
 
         .btn-subscribe {
-            background-color: #3b559d;
+            background-color: #1e5552;
             color: white;
             border: none;
             padding: 8px 15px;
@@ -114,7 +114,7 @@
         }
 
         .btn-donate {
-            background-color: #3b559d;
+            background-color: #1e5552;
             color: white;
             border: none;
             padding: 8px 15px;
@@ -124,35 +124,6 @@
         {
             background-color: #274597;
             color: white;
-        }
-
-        footer {
-            display: flex;
-            justify-content: space-between;
-            margin-top: auto;
-        }
-
-        footer div {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            margin-right: 30px;
-        }
-
-        footer div a {
-            margin-top: 10px;
-            text-decoration: none;
-            color: black;
-        }
-
-        .social-icons {
-            display: flex;
-            gap: 10px;
-        }
-
-        .social-icons img {
-            width: 24px;
-            height: 24px;
         }
 
         @media (max-width: 768px) {
@@ -236,6 +207,33 @@
 
         .dropdown:hover .dropdown-content {
             display: block;
+        }
+
+        h5 {
+            margin: 0; /* Elimina márgenes por defecto */
+            white-space: nowrap; /* Evita que el texto haga salto de línea */
+            color: white; /* Color de texto */
+        }
+
+
+        .footer-bg {
+            background-color: #B7C9C7; /* Color de fondo */
+            padding: 20px 0; /* Espaciado superior e inferior */
+        }
+        .social-icons a {
+            margin-right: 15px; /* Espacio entre iconos de redes sociales */
+            color: white; /* Color de texto para iconos */
+        }
+        .footer-link {
+            color: white; /* Color de texto para enlaces */
+            text-decoration: none; /* Eliminar subrayado */
+        }
+        .footer-link:hover {
+            text-decoration: underline; /* Subrayar al pasar el mouse */
+        }
+
+        .social-icon {
+            margin-right: 10px; /* Espacio entre el ícono y el texto */
         }
     </style>
 </head>
@@ -382,22 +380,44 @@
         </div>
     </main>
 
-    <footer>
-        <div>
-            <h5>Contactos</h5>
-            <a href="#">Contacto</a>
-            <a href="#">Sobre nosotros</a>
-        </div>
-        <div>
-            <h5>Soporte</h5>
-            <a href="#">FAQ</a>
-            <a href="#">Política de privacidad</a>
-            <a href="#">Términos y condiciones</a>
-        </div>
-        <div class="social-icons">
-            <a href="#"><img src="facebook-icon.png" alt="Facebook"></a>
-            <a href="#"><img src="instagram-icon.png" alt="Instagram"></a>
-            <a href="#"><img src="twitter-icon.png" alt="Twitter"></a>
+    <footer class="footer-bg">
+        <div class="container">
+            <div class="row justify-content-between align-items-center">
+                <div class="col-md-3 text-center text-md-left">
+                    <img src="path/to/logo.png" alt="Logo" class="img-fluid mb-2"> <!-- Reemplaza con tu logo -->
+                </div>
+                <div class="col-md-9">
+                    <div class="row">
+                        <!-- Más Información -->
+                        <div class="col-md-4">
+                            <h5>Más información</h5>
+                            <ul class="list-unstyled">
+                                <li><a href="#" class="footer-link">Contáctanos</a></li>
+                                <li><a href="#" class="footer-link">Sobre nosotros</a></li>
+                                <li><a href="#" class="footer-link">Sobre el proyecto</a></li>
+                            </ul>
+                        </div>
+                        
+                        <!-- Donar -->
+                        <div class="col-md-4">
+                            <h5>Donar</h5>
+                            <ul class="list-unstyled">
+                                <li><a href="#" class="footer-link">Donar vianda</a></li>
+                                <li><a href="#" class="footer-link">Ver mapa</a></li>
+                            </ul>
+                        </div>
+                        
+                        <!-- Dónde encontrarnos -->
+                        <!-- Dónde encontrarnos -->
+                    <div class="col-md-4">
+                        <h5>Dónde encontrarnos</h5>
+                        <ul class="list-unstyled">
+                            <li><a href="#" class="footer-link"><img src="facebook-icon.png" alt="Facebook" style="max-height: 20px;" ><i class="fab fa-facebook-f social-icon"></i>Facebook</a></li>
+                            <li><a href="#" class="footer-link"><img src="instagram-icon.png" alt="Instagram" style="max-height: 20px;"><i class="fab fa-instagram social-icon"></i>Instagram</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </div>
     </footer>
      <!-- Enlace a JavaScript de Bootstrap -->
