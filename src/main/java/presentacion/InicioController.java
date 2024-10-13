@@ -12,6 +12,9 @@ public class InicioController implements Handler {
     @Override
     public void handle(@NotNull Context context) throws Exception {
         Map<String, Object> model = new HashMap<>();
+        Boolean estaLogueado = context.sessionAttribute("logueado");
+        //if( estaLogueado == null ){ estaLogueado = false; }
+        model.put("logueado", estaLogueado != null && estaLogueado);
         context.render("templates/inicio.mustache", model);
     }
 }

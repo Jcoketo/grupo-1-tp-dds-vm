@@ -1,14 +1,10 @@
 import io.javalin.Javalin;
-import modelo.elementos.Heladera;
-import modelo.elementos.PuntoEstrategico;
 import persistencia.RepositorioColaboradores;
 import persistencia.RepositorioHeladeras;
 import persistencia.RepositorioIncidentes;
 import persistencia.RepositorioPersonasVulnerables;
 import presentacion.*;
-import presentacion.AutorizacionMiddleware;
-
-import java.time.LocalDate;
+import accessManagment.AutorizacionMiddleware;
 
 import static io.javalin.apibuilder.ApiBuilder.*;
 
@@ -31,15 +27,9 @@ public class Router {
                 post(new ProcessLoginController(repoColab));
             });
 
-            path("/inicio-sinLog", () -> {
+            path("/inicio", () -> {
                 get(new InicioController());
             });
-
-            path("/inicio-conLog", () -> {
-                before(new AutorizacionMiddleware().setLogueado());
-                get(new InicioLogeadoController());
-            });
-
 
             path("/elegirRegistroCuenta", () -> {
                 before(new AutorizacionMiddleware());

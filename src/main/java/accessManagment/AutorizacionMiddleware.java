@@ -1,6 +1,5 @@
-package presentacion;
+package accessManagment;
 
-import accessManagment.Roles;
 import io.javalin.http.Context;
 import io.javalin.http.Handler;
 import lombok.Getter;
@@ -18,7 +17,7 @@ public class AutorizacionMiddleware implements Handler {
 
         if( estaLogueado == null ){ estaLogueado = false; }
 
-        if(debeEstarLogueado && !estaLogueado){
+        if(debeEstarLogueado && !estaLogueado ){
             context.redirect("/login");
         }
 
