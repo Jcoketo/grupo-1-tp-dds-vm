@@ -20,7 +20,9 @@ public class ReportarFallaTecnicaFinalizadaController implements Handler {
 
     @Override
     public void handle(@NotNull Context context) throws Exception {
-
+        String titulo = Objects.requireNonNull(context.formParam("titulo"));
+        String descripcion = Objects.requireNonNull(context.formParam("descripcion"));
+        // foto??
 
         context.redirect("/aceptarReportarFalla");
     }

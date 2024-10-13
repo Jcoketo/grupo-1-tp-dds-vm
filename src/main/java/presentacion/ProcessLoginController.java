@@ -27,7 +27,6 @@ public class ProcessLoginController implements Handler {
         Map<String, Object> model = new HashMap<>();
         if (authenticateUser(email, password)) {
             context.sessionAttribute("logueado", true);
-            context.redirect("/inicio-conLog");
 
             TipoPersona tipoPer = obtenerTipoUsuario(email);
             context.sessionAttribute("tipoPersona", tipoPer);
@@ -35,7 +34,7 @@ public class ProcessLoginController implements Handler {
             Roles userRole = obtenerRolUsuario(email);
             context.sessionAttribute("rolUsuario", userRole);
 
-
+            context.redirect("/inicio-conLog");
 
         } else {
             model.put("error", "Invalid email or password");
