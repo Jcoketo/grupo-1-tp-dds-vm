@@ -12,9 +12,9 @@ public class InicioLogeadoController implements Handler {
     @Override
     public void handle(@NotNull Context context) throws Exception {
 
-        Validar.validarLogueado(context,"/inicio-sinLog");
+        //Validar.validarLogueado(context,"/inicio-sinLog");
 
-        if (Boolean.TRUE.equals(context.sessionAttribute("logueado"))) {
+        if (Boolean.FALSE.equals(context.sessionAttribute("logueado"))) {
             context.redirect("/inicio-sinLog");
         }
 
