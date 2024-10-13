@@ -21,7 +21,9 @@
             justify-content: space-between;
             align-items: center;
         }
-    
+        header .navbar-nav .nav-link {
+            font-size: 17px !important; /* Ajusta el tamaño de la fuente de los enlaces de navegación en el header */
+        }
         nav {
             margin-top: 20px; /* Ajusta el valor según el espacio deseado */
         }
@@ -37,8 +39,25 @@
             font-size: 20px;
         }
 
-        .navbar-light .dropdown-menu a.dropdown-item:hover {
-            background-color: #cdcdcd;
+        .navbar-nav.ml-auto {
+            font-size: 0.8rem; /* Ajusta el tamaño de la fuente */
+        }
+
+        .dropdown-menu {
+            font-size: 0.8rem; /* Ajusta el tamaño de la fuente del dropdown */
+            padding: 0.5rem; /* Ajusta el padding del dropdown */
+        }
+
+        .dropdown-item {
+            padding: 0.25rem 1.5rem; /* Ajusta el padding de los elementos del dropdown */
+        }
+        .user-dropdown .dropdown-menu {
+            font-size: 0.7rem; /* Ajusta el tamaño de la fuente del dropdown del usuario */
+            padding: 0.3rem; /* Ajusta el padding del dropdown del usuario */
+        }
+
+        .user-dropdown .dropdown-item {
+            padding: 0.2rem 1rem; /* Ajusta el padding de los elementos del dropdown del usuario */
         }
 
         .main-container {
@@ -100,8 +119,8 @@
         }
 
         .btn {
-            border-radius: 20px; /* Bordes redondeados */
-            padding: 10px 20px; /* Espaciado interno para que se vean mejor */
+            border-radius: 10px; /* Bordes redondeados */
+            padding: 10px 10px; /* Espaciado interno para que se vean mejor */
             width: 150px; /* Ancho fijo, ajusta según tus necesidades */
             margin-bottom: 10px; /* Espacio entre los botones */
             border: none; /* Eliminar borde predeterminado */
@@ -115,7 +134,7 @@
         }
 
         .btn-submit {
-            background-color: #0033a0;
+            background-color: #1e5552;
             color: white;
         }
 
@@ -126,27 +145,27 @@
 
         footer {
             background-color: #B8CCC8;
-            padding: 20px 50px;
+            padding: 10px 50px;
             color: white; /* Color de texto */
-            justify-content: center; /* Centrar los elementos */
+            /* justify-content: center; Centrar los elementos */
             display: flex; /* Utiliza flexbox para disposición horizontal */
         }
 
         footer a {
             color: white;
             text-decoration: none;
-            margin-top: 10px;
+            margin-top: 00px;
         }
 
         .footer-info {
             display: flex; /* Utiliza flexbox para disposición horizontal */
-            padding: 20px; /* Espaciado interno */
+            padding: 10px; /* Espaciado interno */
             background-color: #B8CCC8; /* Color de fondo */
             color: white; /* Color de texto */
         }
 
         .footer-info div {
-            margin-left: 20px; /* Espacio entre los grupos de información */
+            margin-left: 10px; /* Espacio entre los grupos de información */
         }
 
         .footer-info h4 {
@@ -173,17 +192,26 @@
         .social-icons img {
             max-height: 70px; /* Altura máxima para los íconos */
         }
-
+        
         .info-container {
             display: flex; /* Habilita Flexbox para el contenedor */
             flex-direction: column; /* Coloca los elementos en una columna */
-            margin-bottom: 20px; /* Espacio debajo del contenedor */
+            margin-bottom: 10px; /* Espacio debajo del contenedor */
         }
 
         .info-container a {
             margin-bottom: 5px; /* Espacio entre los enlaces */
             color: white; /* Color del texto */
             text-decoration: none; /* Quita el subrayado de los enlaces */
+        }
+
+        h1, h2, h3, h5, h6 {
+            font-size: 19px; /* Ajusta el tamaño de la fuente de los headers */
+            font-weight: bold; /* Ajusta el peso de la fuente de los headers */
+        }
+
+        h4 {
+            font-size: 16px; /* Ajusta el tamaño de la fuente de los headers */
         }
 
     </style>
@@ -289,27 +317,32 @@
     </main>
 
     <footer>
+        <div style="display: inline-flex; gap: 700px" >
+        <div style="text-align: right">
         <div class="social-icons">
             <img src="" alt="Logo" style="max-height: 50px;">
+        </div>
+        <div class="social-icons">
+            <a href="#"><img src="facebook-icon.png" alt="Facebook" style="max-height: 20px;"></a>
+            <a href="#"><img src="instagram-icon.png" alt="Instagram" style="max-height: 20px;"></a>
+            <a href="#"><img src="twitter-icon.png" alt="Twitter" style="max-height: 20px;"></a>
+        </div>
     </div>
-    <div class="social-icons">
-        <a href="#"><img src="facebook-icon.png" alt="Facebook" style="max-height: 20px;"></a>
-        <a href="#"><img src="instagram-icon.png" alt="Instagram" style="max-height: 20px;"></a>
-        <a href="#"><img src="twitter-icon.png" alt="Twitter" style="max-height: 20px;"></a>
-    </div>
-    <div class="footer-info">
+     <!-- <div class="footer-info"> -->
+    <div class="footer-info" style="text-align: right">
         <div class="info-container">
-            <h4>Más información</h4>
+            <h3>Más información</h3>
             <a href="#">Contáctanos</a>
             <a href="#">Sobre nosotros</a>
             <a href="#">Sobre el proyecto</a>
         </div>
         <div class="info-container">
-            <h4>Donar</h4>
+            <h3>Donar</h3>
             <a href="#">Donar vianda</a>
             <a href="#">Ver mapa</a>
         </div>
     </div>
+</div>
     </footer>
 
     <!-- Scripts de Bootstrap y jQuery -->

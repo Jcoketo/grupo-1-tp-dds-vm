@@ -20,7 +20,7 @@
             background-color: #f5f5f5;
         }
 
-        header,
+        
         footer {
             background-color: #e0e0e0;
             padding: 20px 50px;
@@ -30,6 +30,8 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            background-color: #e0e0e0;
+            padding: 20px 50px;
         }
 
         .navbar-nav .nav-item {
@@ -92,7 +94,7 @@
         }
 
         .catalog-item {
-            background-color: #ebece3;
+            background-color: #d9ede8;
             padding: 20px;
             text-align: center;
             border-radius: 20px;
@@ -148,7 +150,7 @@
             position: fixed;
             bottom: 20px;
             right: 20px;
-            background-color: #3b559d;
+            background-color: #1e5552;
             color: white;
             width: 200px;
             height: 60px;
@@ -162,7 +164,7 @@
         }
 
         .add-button:hover {
-            background-color: #274597;
+            background-color: #1e5552;
             color: white;
         }
 
@@ -172,24 +174,45 @@
         }
 
         footer {
-            display: flex;
-            justify-content: space-between;
-            margin-top: auto;
-        }
+            background-color: #B8CCC8;
+            padding: 20px 50px;
+            color: white; /* Color de texto */
 
-        footer div {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            margin-right: 30px;
         }
-
-        footer div a {
-            margin-top: 10px;
+        footer a {
+            color: white;
             text-decoration: none;
-            color: black;
+            margin-top: 10px;
         }
 
+        .footer-info {
+            display: flex; /* Utiliza flexbox para disposición horizontal */
+            padding: 20px; /* Espaciado interno */
+            background-color: #B8CCC8; /* Color de fondo */
+            color: white; /* Color de texto */
+        }
+
+        .footer-info div {
+            margin-left: 20px; /* Espacio entre los grupos de información */
+        }
+
+        .footer-info h4 {
+            margin-bottom: 10px; /* Espacio debajo del encabezado */
+        }
+
+        .footer-info a {
+            color: white; /* Color de los enlaces */
+            text-decoration: none; /* Sin subrayado */
+            margin-bottom: 5px; /* Espacio entre enlaces */
+        }
+        h4 {
+            font-size: 16px; /* Ajusta el tamaño de la fuente de los headers */
+        }
+        .info-container a {
+            margin-bottom: 5px; /* Espacio entre los enlaces */
+            color: white; /* Color del texto */
+            text-decoration: none; /* Quita el subrayado de los enlaces */
+        }
         .social-icons {
             display: flex;
             gap: 10px;
@@ -198,6 +221,16 @@
         .social-icons img {
             width: 24px;
             height: 24px;
+        }
+
+        .btn-primary{
+            background-color: #1e5552;
+            color: white;
+        }
+
+        .btn-primary:hover{
+            background-color: #1e5552;
+            color: white;
         }
     </style>
 </head>
@@ -247,14 +280,30 @@
                     <h3 class="header-title">Catálogo</h3>
                 </div>
             </div>
-            <div class="row search-bar">
-                <div class="input-group">
+            <div class="row mb-3">
+                <div class="col-md-12">
+                    <div class="d-flex justify-content-between align-items-center">
+
+                    <form class="form-inline">
+                        <label class="my-1 mr-2" for="filterSelect">Filtrar por:</label>
+                        <select class="custom-select my-1 mr-sm-2" id="filterSelect">
+                            <option selected>Elegir...</option>
+                            <option value="1">Categoría 1</option>
+                            <option value="2">Categoría 2</option>
+                            <option value="3">Categoría 3</option>
+                        </select>
+                        <button type="submit" class="btn btn-primary my-1">Aplicar</button>
+                    </form>
+                    <form class="form-inline">
+                        <div class="input-group">
                     <input type="text" class="form-control" placeholder="Buscar producto">
                     <div class="input-group-append">
                         <button class="btn btn-outline-secondary" type="button">
                             <i class="fas fa-search"></i>
                         </button>                    </div>
                 </div>
+                    </form>
+                    </div>
                 
             </div>
             <div class="row catalog-grid">
@@ -262,42 +311,42 @@
                 <div class="catalog-item-container">
                     <div class="catalog-item">
                         <img src="https://via.placeholder.com/150" alt="Descripción">
-                        <p>Descripción</p>
+                        <p>Título</p>
                         <p>1540 puntos <span>&gt;</span></p>
                     </div>
                 </div>
                 <div class="catalog-item-container">
                     <div class="catalog-item">
                         <img src="https://via.placeholder.com/150" alt="Descripción">
-                        <p>Descripción</p>
+                        <p>Título</p>
                         <p>1540 puntos <span>&gt;</span></p>
                     </div>
                 </div>
                 <div class="catalog-item-container">
                     <div class="catalog-item">
                         <img src="https://via.placeholder.com/150" alt="Descripción">
-                        <p>Descripción</p>
+                        <p>Título</p>
                         <p>1540 puntos <span>&gt;</span></p>
                     </div>
                 </div>
                 <div class="catalog-item-container">
                     <div class="catalog-item">
                         <img src="https://via.placeholder.com/150" alt="Descripción">
-                        <p>Descripción</p>
+                        <p>Título</p>
                         <p>1540 puntos <span>&gt;</span></p>
                     </div>
                 </div>
                 <div class="catalog-item-container">
                     <div class="catalog-item">
                         <img src="https://via.placeholder.com/150" alt="Descripción">
-                        <p>Descripción</p>
+                        <p>Título</p>
                         <p>1540 puntos <span>&gt;</span></p>
                     </div>
                 </div>
                 <div class="catalog-item-container">
                     <div class="catalog-item">
                         <img src="https://via.placeholder.com/150" alt="Descripción">
-                        <p>Descripción</p>
+                        <p>Título</p>
                         <p>1540 puntos <span>&gt;</span></p>
                     </div>
                 </div>
