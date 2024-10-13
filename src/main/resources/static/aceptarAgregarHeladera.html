@@ -9,8 +9,10 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
         .social-icons {
-            display: flex;
-            gap: 10px;
+            display: flex; /* Utiliza flexbox para disposición horizontal */
+            justify-content: center; /* Centrar los íconos en la línea */
+            padding: 20px; /* Espacio alrededor de los íconos */
+            margin-top: 30px; /* Espacio superior para bajar los íconos */
         }
 
         .social-icons img {
@@ -19,18 +21,10 @@
         }
         body {
             font-family: Arial, sans-serif;
+            background-color: #ffffff;
             margin: 0;
             padding: 0;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-            background-color: #f5f5f5; /* Ajustado a #f5f5f5 como el segundo código */
-        }
-
-        header,
-        footer {
-            background-color: #e0e0e0;
-            padding: 20px 50px;
+            height: 100%; /* Asegura que el body y html ocupen el 100% de la altura */
         }
 
         header {
@@ -38,21 +32,28 @@
             justify-content: space-between;
             align-items: center;
         }
+        header .navbar-nav .nav-link {
+            font-size: 17px !important; /* Ajusta el tamaño de la fuente de los enlaces de navegación en el header */
+        }
+        nav {
+            margin-top: 20px; /* Ajusta el valor según el espacio deseado */
+        }
 
         .navbar-nav .nav-item {
-            margin-left: 20px; 
+            margin-left: 20px;
         }
 
-        /* Estilo personalizado para el menú desplegable */
+
         .navbar-light .navbar-nav .nav-link,
         .navbar-light .dropdown-menu {
-            background-color: #e0e0e0;
-            color: black;
-            font-family: Arial, Helvetica, sans-serif;
-            font-size: 16px;
-            font-weight: normal;
+            background-color: white;
+            color: #1e5552;
+            font-size: 20px;
         }
 
+        .navbar-light .dropdown-menu a.dropdown-item:hover {
+            background-color: #cdcdcd;
+        }
         .navbar-light .dropdown-menu {
             width: 200px;
         }
@@ -84,13 +85,13 @@
             background-color: white;
             padding: 40px;
             border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Añadido para emular el estilo del segundo código */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
         }
 
         h2 {
             font-size: 24px;
             margin-bottom: 20px;
-            color: #333; /* Color ajustado como en el segundo código */
+            color: #333; 
         }
 
         p {
@@ -98,23 +99,60 @@
             color: #666;
         }
 
-        footer {
-            display: flex;
-            justify-content: space-between;
-            margin-top: auto;
-        }
-
         footer div {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
             margin-right: 30px;
         }
 
-        footer div a {
-            margin-top: 10px;
+        footer {
+            background-color: #B8CCC8;
+            padding: 10px 50px;
+            color: white; /* Color de texto */
+            justify-content: center; /* Centrar los elementos */
+            display: flex; /* Utiliza flexbox para disposición horizontal */
+        }
+
+        footer a {
+            color: white;
             text-decoration: none;
-            color: black;
+            margin-top: 10px;
+        }
+
+        .footer-info {
+            display: flex; /* Utiliza flexbox para disposición horizontal */
+            padding: 20px; /* Espaciado interno */
+            background-color: #B8CCC8; /* Color de fondo */
+            color: white; /* Color de texto */
+        }
+
+        .footer-info div {
+            margin-left: 20px; /* Espacio entre los grupos de información */
+        }
+
+        .footer-info h4 {
+            margin-bottom: 10px; /* Espacio debajo del encabezado */
+        }
+
+        .footer-info a {
+            color: white; /* Color de los enlaces */
+            text-decoration: none; /* Sin subrayado */
+            margin-bottom: 5px; /* Espacio entre enlaces */
+        }
+        .info-container {
+            display: flex; /* Habilita Flexbox para el contenedor */
+            flex-direction: column; /* Coloca los elementos en una columna */
+            margin-bottom: 20px; /* Espacio debajo del contenedor */
+        }
+
+        .info-container a {
+            margin-bottom: 5px; /* Espacio entre los enlaces */
+            color: white; /* Color del texto */
+            text-decoration: none; /* Quita el subrayado de los enlaces */
+        }
+        h4 {
+            font-size: 16px; /* Ajusta el tamaño de la fuente de los headers */
+        }
+        .social-icons a {
+            margin: 0 20px; /* Espacio horizontal entre íconos */
         }
 
         .btn-volver {
@@ -124,12 +162,12 @@
             font-size: 16px;
             font-weight: bold;
             color: #ffffff;
-            background-color: #3b559d;
+            background-color: #1e5552;
             border-radius: 10px;
         }
 
         .btn-volver:hover {
-            background-color: #274597;
+            background-color: #114c49;
             color: #ffffff;
         }
     </style>
@@ -182,25 +220,27 @@
     </main>
 
     <footer>
-        <div>
-            <p><img src="logo.png" alt="Logo" style="max-height: 50px;"></p>
-            <div class="social-icons">
-                <a href="#"><img src="facebook-icon.png" alt="Facebook"></a>
-                <a href="#"><img src="instagram-icon.png" alt="Instagram"></a>
-                <a href="#"><img src="twitter-icon.png" alt="Twitter"></a>
-            </div>
-        </div>
-        <div>
+        <div class="social-icons">
+            <img src="" alt="Logo" style="max-height: 50px;">
+    </div>
+    <div class="social-icons">
+        <a href="#"><img src="facebook-icon.png" alt="Facebook"></a>
+        <a href="#"><img src="instagram-icon.png" alt="Instagram"></a>
+        <a href="#"><img src="twitter-icon.png" alt="Twitter"></a>
+    </div>
+    <div class="footer-info">
+        <div class="info-container">
             <h4>Más información</h4>
             <a href="#">Contáctanos</a>
             <a href="#">Sobre nosotros</a>
             <a href="#">Sobre el proyecto</a>
         </div>
-        <div>
+        <div class="info-container">
             <h4>Donar</h4>
             <a href="#">Donar vianda</a>
             <a href="#">Ver mapa</a>
         </div>
+    </div>
     </footer>
 
     <!-- Scripts de Bootstrap y jQuery -->

@@ -21,7 +21,9 @@
             justify-content: space-between;
             align-items: center;
         }
-    
+        header .navbar-nav .nav-link {
+            font-size: 17px !important; /* Ajusta el tamaño de la fuente de los enlaces de navegación en el header */
+        }
         nav {
             margin-top: 20px; /* Ajusta el valor según el espacio deseado */
         }
@@ -37,8 +39,25 @@
             font-size: 20px;
         }
 
-        .navbar-light .dropdown-menu a.dropdown-item:hover {
-            background-color: #cdcdcd;
+        .navbar-nav.ml-auto {
+            font-size: 0.8rem; /* Ajusta el tamaño de la fuente */
+        }
+
+        .dropdown-menu {
+            font-size: 0.8rem; /* Ajusta el tamaño de la fuente del dropdown */
+            padding: 0.5rem; /* Ajusta el padding del dropdown */
+        }
+
+        .dropdown-item {
+            padding: 0.25rem 1.5rem; /* Ajusta el padding de los elementos del dropdown */
+        }
+        .user-dropdown .dropdown-menu {
+            font-size: 0.7rem; /* Ajusta el tamaño de la fuente del dropdown del usuario */
+            padding: 0.3rem; /* Ajusta el padding del dropdown del usuario */
+        }
+
+        .user-dropdown .dropdown-item {
+            padding: 0.2rem 1rem; /* Ajusta el padding de los elementos del dropdown del usuario */
         }
 
         .main-container {
@@ -100,7 +119,7 @@
         }
 
         .btn {
-            border-radius: 20px; /* Bordes redondeados */
+            border-radius: 10px; /* Bordes redondeados */
             padding: 10px 20px; /* Espaciado interno para que se vean mejor */
             width: 150px; /* Ancho fijo, ajusta según tus necesidades */
             margin-bottom: 10px; /* Espacio entre los botones */
@@ -115,7 +134,7 @@
         }
 
         .btn-submit {
-            background-color: #0033a0;
+            background-color: #1e5552;
             color: white;
         }
 
@@ -126,7 +145,7 @@
 
         footer {
             background-color: #B8CCC8;
-            padding: 20px 50px;
+            padding: 10px 50px;
             color: white; /* Color de texto */
             justify-content: center; /* Centrar los elementos */
             display: flex; /* Utiliza flexbox para disposición horizontal */
@@ -173,7 +192,7 @@
         .social-icons img {
             max-height: 70px; /* Altura máxima para los íconos */
         }
-
+        
         .info-container {
             display: flex; /* Habilita Flexbox para el contenedor */
             flex-direction: column; /* Coloca los elementos en una columna */
@@ -184,6 +203,15 @@
             margin-bottom: 5px; /* Espacio entre los enlaces */
             color: white; /* Color del texto */
             text-decoration: none; /* Quita el subrayado de los enlaces */
+        }
+
+        h1, h2, h3, h5, h6 {
+            font-size: 19px; /* Ajusta el tamaño de la fuente de los headers */
+            font-weight: bold; /* Ajusta el peso de la fuente de los headers */
+        }
+
+        h4 {
+            font-size: 16px; /* Ajusta el tamaño de la fuente de los headers */
         }
 
     </style>
