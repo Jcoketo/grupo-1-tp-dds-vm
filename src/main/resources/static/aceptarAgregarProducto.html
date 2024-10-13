@@ -18,20 +18,33 @@
             background-color: #f5f5f5; 
         }
 
-        header,
-        footer {
-            background-color: #e0e0e0;
-            padding: 20px 50px;
-        }
 
         header {
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
+        header .navbar-nav .nav-link {
+            font-size: 17px !important; /* Ajusta el tamaño de la fuente de los enlaces de navegación en el header */
+        }
+        nav {
+            margin-top: 20px; /* Ajusta el valor según el espacio deseado */
+        }
 
         .navbar-nav .nav-item {
-            margin-left: 20px; 
+            margin-left: 20px;
+        }
+
+
+        .navbar-light .navbar-nav .nav-link,
+        .navbar-light .dropdown-menu {
+            background-color: white;
+            color: #1e5552;
+            font-size: 20px;
+        }
+
+        .navbar-light .dropdown-menu a.dropdown-item:hover {
+            background-color: #cdcdcd;
         }
 
         main {
@@ -63,49 +76,83 @@
             font-size: 16px;
             font-weight: bold;
             color: white;
-            background-color: #3b559d;
+            background-color: #1e5552;
             border-radius: 10px;
         }
 
         .btn-volver:hover {
-            background-color: #274597;
+            background-color: #114c49;
             color: white;
         }
 
-        footer {
-            display: flex;
-            justify-content: space-between;
-            margin-top: auto;
-        }
-
         footer div {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
             margin-right: 30px;
         }
 
-        footer div a {
-            margin-top: 10px;
+        footer {
+            background-color: #B8CCC8;
+            padding: 10px 50px;
+            color: white; /* Color de texto */
+            justify-content: center; /* Centrar los elementos */
+            display: flex; /* Utiliza flexbox para disposición horizontal */
+        }
+
+        footer a {
+            color: white;
             text-decoration: none;
-            color: black;
+            margin-top: 10px;
         }
 
+        .footer-info {
+            display: flex; /* Utiliza flexbox para disposición horizontal */
+            padding: 20px; /* Espaciado interno */
+            background-color: #B8CCC8; /* Color de fondo */
+            color: white; /* Color de texto */
+        }
+
+        .footer-info div {
+            margin-left: 20px; /* Espacio entre los grupos de información */
+        }
+
+        .footer-info h4 {
+            margin-bottom: 10px; /* Espacio debajo del encabezado */
+        }
+
+        .footer-info a {
+            color: white; /* Color de los enlaces */
+            text-decoration: none; /* Sin subrayado */
+            margin-bottom: 5px; /* Espacio entre enlaces */
+        }
+        .info-container {
+            display: flex; /* Habilita Flexbox para el contenedor */
+            flex-direction: column; /* Coloca los elementos en una columna */
+            margin-bottom: 20px; /* Espacio debajo del contenedor */
+        }
+
+        .info-container a {
+            margin-bottom: 5px; /* Espacio entre los enlaces */
+            color: white; /* Color del texto */
+            text-decoration: none; /* Quita el subrayado de los enlaces */
+        }
+        h4 {
+            font-size: 16px; /* Ajusta el tamaño de la fuente de los headers */
+        }
+        .social-icons a {
+            margin: 0 20px; /* Espacio horizontal entre íconos */
+        }
         .social-icons {
-            display: flex;
-            gap: 10px;
+            display: flex; /* Utiliza flexbox para disposición horizontal */
+            justify-content: center; /* Centrar los íconos en la línea */
+            padding: 20px; /* Espacio alrededor de los íconos */
+            margin-top: 30px; /* Espacio superior para bajar los íconos */
         }
-
         .social-icons img {
             width: 24px;
             height: 24px;
         }
 
-        @media (max-width: 768px) {
-            .container {
-                max-width: 100%;
-            }
-        }
+
+    
     </style>
 </head>
 
