@@ -16,6 +16,14 @@
             width: 24px;
             height: 24px;
         }
+
+        .btn-iniciar-sesion {
+            background-color: black;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+        }
+
         body {
             font-family: Arial, sans-serif;
             margin: 0;
@@ -132,6 +140,10 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/mapaHeladeras">Heladeras</a>
                 </li>
+                {{^logueado}}
+                      <a href="/login" class="btn-iniciar-sesion">Iniciar Sesión</a>
+                {{/logueado}}
+                {{#logueado}}
                 <!-- Menú desplegable -->
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
@@ -145,6 +157,7 @@
                         <a class="dropdown-item" href="#">Configuración</a>
                         <a class="dropdown-item" href="#">Cerrar sesión</a>
                     </div>
+                {{/logueado}}
                 </li>
             </ul>
         </div>
