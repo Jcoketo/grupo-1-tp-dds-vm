@@ -136,62 +136,6 @@
                     background-color: #1e5552;
                     color: white;
                 }
-        
-                footer div {
-                    margin-right: 30px;
-                }
-        
-        
-                footer {
-                    background-color: #B8CCC8;
-                    padding: 10px 50px;
-                    color: white; /* Color de texto */
-                    /* justify-content: center; Centrar los elementos */
-                    display: flex; /* Utiliza flexbox para disposición horizontal */
-                }
-        
-                footer a {
-                    color: white;
-                    text-decoration: none;
-                    margin-top: 00px;
-                }
-        
-                .footer-info {
-                    display: flex; /* Utiliza flexbox para disposición horizontal */
-                    padding: 10px; /* Espaciado interno */
-                    background-color: #B8CCC8; /* Color de fondo */
-                    color: white; /* Color de texto */
-                }
-        
-                .footer-info div {
-                    margin-left: 10px; /* Espacio entre los grupos de información */
-                }
-        
-                .footer-info h4 {
-                    margin-bottom: 10px; /* Espacio debajo del encabezado */
-                }
-        
-                .footer-info a {
-                    color: white; /* Color de los enlaces */
-                    text-decoration: none; /* Sin subrayado */
-                    margin-bottom: 5px; /* Espacio entre enlaces */
-                }
-        
-               
-        
-                .social-icons a {
-                    margin: 0 20px; /* Espacio horizontal entre íconos */
-                }
-        
-                .social-icons {
-                display: flex;
-                gap: 10px;
-            }
-    
-            .social-icons img {
-                width: 24px;
-                height: 24px;
-            }
     
                 
                 .info-container {
@@ -246,8 +190,31 @@
                 font-weight: bold;
                 color: #1e5552;
             }
+
+            h5 {
+            margin: 0; /* Elimina márgenes por defecto */
+            white-space: nowrap; /* Evita que el texto haga salto de línea */
+            color: white; /* Color de texto */
+        }
+
+
+        .footer-bg {
+            background-color: #B7C9C7; /* Color de fondo */
+            padding: 20px 0; /* Espaciado superior e inferior */
+        }
+        .social-icons a {
+            margin-right: 15px; /* Espacio entre iconos de redes sociales */
+            color: white; /* Color de texto para iconos */
+        }
+        .footer-link {
+            color: white; /* Color de texto para enlaces */
+            text-decoration: none; /* Eliminar subrayado */
+        }
+        .footer-link:hover {
+            text-decoration: underline; /* Subrayar al pasar el mouse */
+        }
         
-            </style>
+        </style>
 </head>
 <body>
     <header>
@@ -309,28 +276,46 @@
 
     </main>
 
-<footer>
-    <div>
-        <p><img src="logo.png" alt="Logo" style="max-height: 50px;"></p>
-            <div class="social-icons">
-                <a href="#"><img src="facebook-icon.png" alt="Facebook"></a>
-                <a href="#"><img src="instagram-icon.png" alt="Instagram"></a>
-                <a href="#"><img src="twitter-icon.png" alt="Twitter"></a>
+    <footer class="footer-bg">
+        <div class="container">
+            <div class="row justify-content-between align-items-center">
+                <div class="col-md-3 text-center text-md-left">
+                    <img src="path/to/logo.png" alt="Logo" class="img-fluid mb-2"> <!-- Reemplaza con tu logo -->
+                </div>
+                <div class="col-md-9">
+                    <div class="row">
+                        <!-- Más Información -->
+                        <div class="col-md-4">
+                            <h5>Más información</h5>
+                            <ul class="list-unstyled">
+                                <li><a href="#" class="footer-link">Contáctanos</a></li>
+                                <li><a href="#" class="footer-link">Sobre nosotros</a></li>
+                                <li><a href="#" class="footer-link">Sobre el proyecto</a></li>
+                            </ul>
+                        </div>
+                        
+                        <!-- Donar -->
+                        <div class="col-md-4">
+                            <h5>Donar</h5>
+                            <ul class="list-unstyled">
+                                <li><a href="#" class="footer-link">Donar vianda</a></li>
+                                <li><a href="#" class="footer-link">Ver mapa</a></li>
+                            </ul>
+                        </div>
+                        
+                        <!-- Dónde encontrarnos -->
+                        <!-- Dónde encontrarnos -->
+                    <div class="col-md-4">
+                        <h5>Dónde encontrarnos</h5>
+                        <ul class="list-unstyled">
+                            <li><a href="#" class="footer-link"><img src="facebook-icon.png" alt="Facebook" style="max-height: 20px;" ><i class="fab fa-facebook-f social-icon"></i>Facebook</a></li>
+                            <li><a href="#" class="footer-link"><img src="instagram-icon.png" alt="Instagram" style="max-height: 20px;"><i class="fab fa-instagram social-icon"></i>Instagram</a></li>
+                        </ul>
+                    </div>
+                </div>
             </div>
-    </div>
-    <div>
-        <h4>Más información</h4>
-        <a href="#">Contactanos</a>
-        <a href="#">Sobre nosotros</a>
-        <a href="#">Sobre el proyecto</a>
-    </div>
-    <div>
-        <h4>Donar</h4>
-        <a href="#">Donar vianda</a>
-        <a href="#">Ver mapa</a>
-        <a href="#">Donar dinero</a>
-    </div>
-</footer>
+        </div>
+    </footer>
 
 <!-- Scripts de Bootstrap y jQuery -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
