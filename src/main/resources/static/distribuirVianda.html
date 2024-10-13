@@ -120,7 +120,7 @@
 
         .btn {
             border-radius: 10px; /* Bordes redondeados */
-            padding: 10px 20px; /* Espaciado interno para que se vean mejor */
+            padding: 10px 10px; /* Espaciado interno para que se vean mejor */
             width: 150px; /* Ancho fijo, ajusta según tus necesidades */
             margin-bottom: 10px; /* Espacio entre los botones */
             border: none; /* Eliminar borde predeterminado */
@@ -147,25 +147,25 @@
             background-color: #B8CCC8;
             padding: 10px 50px;
             color: white; /* Color de texto */
-            justify-content: center; /* Centrar los elementos */
+            /* justify-content: center; Centrar los elementos */
             display: flex; /* Utiliza flexbox para disposición horizontal */
         }
 
         footer a {
             color: white;
             text-decoration: none;
-            margin-top: 10px;
+            margin-top: 00px;
         }
 
         .footer-info {
             display: flex; /* Utiliza flexbox para disposición horizontal */
-            padding: 20px; /* Espaciado interno */
+            padding: 10px; /* Espaciado interno */
             background-color: #B8CCC8; /* Color de fondo */
             color: white; /* Color de texto */
         }
 
         .footer-info div {
-            margin-left: 20px; /* Espacio entre los grupos de información */
+            margin-left: 10px; /* Espacio entre los grupos de información */
         }
 
         .footer-info h4 {
@@ -196,7 +196,7 @@
         .info-container {
             display: flex; /* Habilita Flexbox para el contenedor */
             flex-direction: column; /* Coloca los elementos en una columna */
-            margin-bottom: 20px; /* Espacio debajo del contenedor */
+            margin-bottom: 10px; /* Espacio debajo del contenedor */
         }
 
         .info-container a {
@@ -317,27 +317,32 @@
     </main>
 
     <footer>
+        <div style="display: inline-flex; gap: 700px" >
+        <div style="text-align: right">
         <div class="social-icons">
             <img src="" alt="Logo" style="max-height: 50px;">
+        </div>
+        <div class="social-icons">
+            <a href="#"><img src="facebook-icon.png" alt="Facebook" style="max-height: 20px;"></a>
+            <a href="#"><img src="instagram-icon.png" alt="Instagram" style="max-height: 20px;"></a>
+            <a href="#"><img src="twitter-icon.png" alt="Twitter" style="max-height: 20px;"></a>
+        </div>
     </div>
-    <div class="social-icons">
-        <a href="#"><img src="facebook-icon.png" alt="Facebook" style="max-height: 20px;"></a>
-        <a href="#"><img src="instagram-icon.png" alt="Instagram" style="max-height: 20px;"></a>
-        <a href="#"><img src="twitter-icon.png" alt="Twitter" style="max-height: 20px;"></a>
-    </div>
-    <div class="footer-info">
+     <!-- <div class="footer-info"> -->
+    <div class="footer-info" style="text-align: right">
         <div class="info-container">
-            <h4>Más información</h4>
+            <h3>Más información</h3>
             <a href="#">Contáctanos</a>
             <a href="#">Sobre nosotros</a>
             <a href="#">Sobre el proyecto</a>
         </div>
         <div class="info-container">
-            <h4>Donar</h4>
+            <h3>Donar</h3>
             <a href="#">Donar vianda</a>
             <a href="#">Ver mapa</a>
         </div>
     </div>
+</div>
     </footer>
 
     <!-- Scripts de Bootstrap y jQuery -->
