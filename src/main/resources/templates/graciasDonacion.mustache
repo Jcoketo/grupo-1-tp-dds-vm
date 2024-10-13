@@ -1,11 +1,9 @@
-<!-- Aca deberia llegar con el link que reciba en el mail -->
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>cuentaCreada</title>
+    <title>Gracias!</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -29,6 +27,16 @@
             align-items: center;
         }
 
+        header .left-section {
+            display: flex;
+            align-items: center;
+        }
+
+        header nav {
+            display: flex;
+            align-items: center;
+        }
+
         header nav a {
             margin-left: 20px;
             text-decoration: none;
@@ -46,6 +54,16 @@
             text-decoration: none;
             border-radius: 10px;
         }
+
+        .btn-inicio {
+            background-color: #313937;
+            color: white;
+            padding: 10px 15px;
+            text-decoration: none;
+            border-radius: 10px;
+            margin-left: 20px;
+        }
+
         main {
             flex-grow: 1;
             display: flex;
@@ -93,11 +111,14 @@
 </head>
 <body>
 <header>
-    <div><img src="logo.png" alt="Logo" style="max-height: 50px;"></div>
+    <div class="left-section">
+        <img src="/static/logo.png" alt="Logo" style="max-height: 50px;">
+        <a href="/inicio" class="btn-inicio">Inicio</a>
+    </div>
     <nav>
         <a href="#">Sobre nosotros</a>
-        <a href="mapaHeladeras.html">Heladeras</a>
-        <a href="elegirDonacionJuridica.html" class="btn-donar">Donar</a>
+        <a href="/mapaHeladeras">Heladeras</a>
+        <a href="/elegirDonacion" class="btn-donar">Donar</a>
     </nav>
 </header>
 

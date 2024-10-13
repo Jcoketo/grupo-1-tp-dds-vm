@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heladeras con Viandas</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        header {
+            background-color: #e0e0e0;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        header .logo {
+            font-size: 1.5rem;
+        }
+        header nav a {
+            margin: 0 15px;
+            text-decoration: none;
+            color: #333;
+        }
+        header .login-btn {
+            background-color: #000;
+            color: #fff;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .content {
+            padding: 20px;
+            text-align: center;
+        }
+        .content h1 {
+            margin-bottom: 10px;
+        }
+        .map-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 20px 0;
+        }
+        .map {
+            width: 70%;
+            height: 400px;
+            background-color: #ddd;
+            position: relative;
+        }
+        .sidebar {
+            width: 300px;
+            margin-left: 20px;
+        }
+        .search-bar {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            background-color: #fff;
+            border-radius: 20px;
+            padding: 10px;
+        }
+        .search-bar input {
+            border: none;
+            outline: none;
+            padding: 10px;
+            width: 100%;
+            border-radius: 20px;
+        }
+        .fridge-info {
+            background-color: #e0e0e0;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: left;
+        }
+        .donate-button {
+            display: inline-block;
+            background-color: #00695c;
+            color: #fff;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+        .btn-inicio {
+            background-color: #313937;
+            color: white;
+            padding: 10px 15px;
+            text-decoration: none;
+            border-radius: 10px;
+            margin-left: 20px;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <div>
+        <img src="/static/logo.png" alt="Logo" style="max-height: 50px;">
+        <a href="/inicio" class="btn-inicio">Inicio</a>
+    </div>
+    <nav>
+        <a href="#">Sobre nosotros</a>
+        <a href="/elegirDonacion">Donar</a>
+        <a href="/mapaHeladeras">Heladeras</a>
+    </nav>
+    <a href="/login" class="login-btn">Iniciar sesión</a>
+</header>
+
+<div class="content">
+    <h1>Visualiza las heladeras con viandas</h1>
+    <p>Un lindo texto que explique la función del mapa y lo que se puede hacer</p>
+
+    <div class="map-container">
+        <div class="map">
+            <!-- Aquí iría el mapa embebido de Google Maps -->
+        </div>
+        <div class="sidebar">
+            <div class="search-bar">
+                <input type="text" placeholder="Buscá la heladera o tu zona">
+            </div>
+            <div class="fridge-info">
+                <h3>Heladera Medrano UTN</h3>
+                <p>Avenida Medrano 1234</p>
+                <p><strong>Estado:</strong> Activa</p>
+                <p><strong>Viandas:</strong> Disponible</p>
+                <a href="#" class="donate-button">Donar viandas</a>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

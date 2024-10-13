@@ -114,6 +114,15 @@
             width: auto;
         }
 
+        .btn-inicio {
+            background-color: #313937;
+            color: white;
+            padding: 10px 15px;
+            text-decoration: none;
+            border-radius: 10px;
+            margin-left: 20px;
+        }
+
         .report-button {
             display: inline-block;
             margin-top: 15px;
@@ -165,9 +174,11 @@
             </style>
 </head>
 <body>
-
     <header>
-        <div><img src="logo.png" alt="Logo" style="max-height: 50px;"></div>
+        <div>
+            <img src="/static/logo.png" alt="Logo" style="max-height: 50px;">
+            <a href="/inicio" class="btn-inicio">Inicio</a>
+        </div>
         <nav class="navbar navbar-expand-lg navbar-light">
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
                 aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -231,11 +242,11 @@
 
 <footer>
     <div>
-        <p><img src="logo.png" alt="Logo" style="max-height: 50px;"></p>
+        <p><img src="/static/logo.png" alt="Logo" style="max-height: 50px;"></p>
             <div class="social-icons">
-                <a href="#"><img src="facebook-icon.png" alt="Facebook"></a>
-                <a href="#"><img src="instagram-icon.png" alt="Instagram"></a>
-                <a href="#"><img src="twitter-icon.png" alt="Twitter"></a>
+                <a href="#"><img src="/static/facebook-icon.png" alt="Facebook"></a>
+                <a href="#"><img src="/static/instagram-icon.png" alt="Instagram"></a>
+                <a href="#"><img src="/static/twitter-icon.png" alt="Twitter"></a>
             </div>
     </div>
     <div>
@@ -246,9 +257,9 @@
     </div>
     <div>
         <h4>Donar</h4>
-        <a href="#">Donar vianda</a>
-        <a href="#">Ver mapa</a>
-        <a href="#">Donar dinero</a>
+        <a href="/donarVianda">Donar vianda</a>
+        <a href="/mapaHeladeras">Ver mapa</a>
+        <a href="/donarDinero">Donar dinero</a>
     </div>
 </footer>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

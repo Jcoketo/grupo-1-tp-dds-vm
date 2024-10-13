@@ -98,14 +98,24 @@
             text-decoration: none;
             color: black;
         }
+        .btn-inicio {
+            background-color: #313937;
+            color: white;
+            padding: 10px 15px;
+            text-decoration: none;
+            border-radius: 10px;
+            margin-left: 20px;
+        }
     </style>
 </head>
 <body>
 <header>
-    <div><img src="/static/logo.png" alt="Logo" style="max-height: 50px;"></div>
+    <div><img src="/static/logo.png" alt="Logo" style="max-height: 50px;">
+        <a href="/inicio" class="btn-inicio">Inicio</a>
+    </div>
     <nav>
         <a href="#">Sobre nosotros</a>
-        <a href="mapaHeladeras.html">Heladeras</a>
+        <a href="/mapaHeladeras">Heladeras</a>
         <a href="/elegirDonacion" class="btn-donar">Donar</a>
     </nav>
 </header>
@@ -134,9 +144,9 @@
     </div>
     <div>
         <h4>Donar</h4>
-        <a href="#">Donar vianda</a>
-        <a href="#">Ver mapa</a>
-        <a href="#">Donar dinero</a>
+        <a href="/donarVianda">Donar vianda</a>
+        <a href="/mapaHeladeras">Ver mapa</a>
+        <a href="/donarDinero">Donar dinero</a>
     </div>
 </footer>
 </body>

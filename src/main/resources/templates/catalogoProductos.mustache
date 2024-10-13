@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogo</title>
+    <!-- Enlace a CSS de Bootstrap -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Enlace a Font Awesome para el ícono de lupa -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            background-color: #f5f5f5;
+        }
+
+
+        footer {
+            background-color: #e0e0e0;
+            padding: 20px 50px;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #e0e0e0;
+            padding: 20px 50px;
+        }
+
+        .navbar-nav .nav-item {
+            margin-left: 20px;
+        }
+
+        .navbar-light .navbar-nav .nav-link,
+        .navbar-light .dropdown-menu {
+            background-color: #e0e0e0;
+            color: black;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 16px;
+            font-weight: normal;
+        }
+
+        .navbar-light .dropdown-menu {
+            width: 200px;
+        }
+
+        .navbar-light .dropdown-menu a.dropdown-item {
+            color: black;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 16px;
+            font-weight: normal;
+            width: 200px;
+        }
+
+        .navbar-light .dropdown-menu a.dropdown-item:hover {
+            background-color: #cdcdcd;
+            margin: 0;
+            width: 200px;
+        }
+
+        main {
+            flex-grow: 1;
+            padding: 50px;
+            background-color: white;
+        }
+
+        .btn-donar {
+            background-color: black;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+        }
+
+        .header-title {
+            font-weight: 800;
+        }
+
+        .sub-header {
+            font-weight: 600;
+        }
+
+        .puntaje-column {
+            display: flex;
+            flex-direction: column;
+            align-items: left;
+            margin-right: auto;
+        }
+
+        .catalog-item {
+            background-color: #d9ede8;
+            padding: 20px;
+            text-align: center;
+            border-radius: 20px;
+            margin-bottom: 30px;
+        }
+
+        .catalog-item img {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 10px;
+        }
+
+        .search-bar {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .input-group {
+            max-width: 300px; /*ancho de la search bar*/
+        }
+
+        .search-bar input {
+            border-radius: 5px;
+            padding: 10px 20px;
+            width: 100%;
+        }
+
+        .input-group-append .input-group-text {
+            border: none;
+            background-color: white;
+            border-radius: 0;
+        }
+
+        .catalog-grid {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .catalog-item-container {
+            flex-basis: calc(20% - 10px);
+            margin-right: 5px;
+            margin-bottom: 20px;
+        }
+
+        .catalog-item-container:nth-child(5n) {
+            margin-right: 0;
+        }
+
+        .add-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #1e5552;
+            color: white;
+            width: 200px;
+            height: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 16px;
+            text-align: center;
+            border-radius: 30px;
+            z-index: 1000;
+        }
+
+        .add-button:hover {
+            background-color: #1e5552;
+            color: white;
+        }
+
+
+        .add-button i {
+            margin-right: 10px;
+        }
+
+        footer {
+            background-color: #B8CCC8;
+            padding: 20px 50px;
+            color: white; /* Color de texto */
+
+        }
+        footer a {
+            color: white;
+            text-decoration: none;
+            margin-top: 10px;
+        }
+
+        .footer-info {
+            display: flex; /* Utiliza flexbox para disposición horizontal */
+            padding: 20px; /* Espaciado interno */
+            background-color: #B8CCC8; /* Color de fondo */
+            color: white; /* Color de texto */
+        }
+
+        .footer-info div {
+            margin-left: 20px; /* Espacio entre los grupos de información */
+        }
+
+        .footer-info h4 {
+            margin-bottom: 10px; /* Espacio debajo del encabezado */
+        }
+
+        .footer-info a {
+            color: white; /* Color de los enlaces */
+            text-decoration: none; /* Sin subrayado */
+            margin-bottom: 5px; /* Espacio entre enlaces */
+        }
+        h4 {
+            font-size: 16px; /* Ajusta el tamaño de la fuente de los headers */
+        }
+        .info-container a {
+            margin-bottom: 5px; /* Espacio entre los enlaces */
+            color: white; /* Color del texto */
+            text-decoration: none; /* Quita el subrayado de los enlaces */
+        }
+        .social-icons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .social-icons img {
+            width: 24px;
+            height: 24px;
+        }
+
+        .btn-primary{
+            background-color: #1e5552;
+            color: white;
+        }
+
+        .btn-primary:hover{
+            background-color: #1e5552;
+            color: white;
+        }
+        .btn-inicio {
+            background-color: #313937;
+            color: white;
+            padding: 10px 15px;
+            text-decoration: none;
+            border-radius: 10px;
+            margin-left: 20px;
+        }
+    </style>
+</head>
+
+<body>
+<header>
+    <div><img src="/static/logo.png" alt="Logo" style="max-height: 50px;">
+        <a href="/inicio" class="btn-inicio">Inicio</a>
+
+    </div>
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Sobre nosotros</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/elegirDonacion">Donar</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/mapaHeladeras">Heladeras</a>
+                </li>
+                <!-- Menú desplegable -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Nombre del usuario
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="login.html">Mi perfil</a>
+                        <a class="dropdown-item" href="misColaboraciones.html">Mis colaboraciones</a>
+                        <a class="dropdown-item" href="/canjearPuntos.">Mi puntaje</a>
+                        <a class="dropdown-item" href="#">Configuración</a>
+                        <a class="dropdown-item" href="#">Cerrar sesión</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>
+
+<main>
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-12">
+                <h3 class="header-title">Catálogo</h3>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-md-12">
+                <div class="d-flex justify-content-between align-items-center">
+
+                    <form class="form-inline">
+                        <label class="my-1 mr-2" for="filterSelect">Filtrar por:</label>
+                        <select class="custom-select my-1 mr-sm-2" id="filterSelect">
+                            <option selected>Elegir...</option>
+                            <option value="1">Categoría 1</option>
+                            <option value="2">Categoría 2</option>
+                            <option value="3">Categoría 3</option>
+                        </select>
+                        <button type="submit" class="btn btn-primary my-1">Aplicar</button>
+                    </form>
+                    <form class="form-inline">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Buscar producto">
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary" type="button">
+                                    <i class="fas fa-search"></i>
+                                </button>                    </div>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+            <div class="row catalog-grid">
+                <!-- Elementos del catálogo -->
+                <div class="catalog-item-container">
+                    <div class="catalog-item">
+                        <img src="https://via.placeholder.com/150" alt="Descripción">
+                        <p>Título</p>
+                        <p>1540 puntos <span>&gt;</span></p>
+                    </div>
+                </div>
+                <div class="catalog-item-container">
+                    <div class="catalog-item">
+                        <img src="https://via.placeholder.com/150" alt="Descripción">
+                        <p>Título</p>
+                        <p>1540 puntos <span>&gt;</span></p>
+                    </div>
+                </div>
+                <div class="catalog-item-container">
+                    <div class="catalog-item">
+                        <img src="https://via.placeholder.com/150" alt="Descripción">
+                        <p>Título</p>
+                        <p>1540 puntos <span>&gt;</span></p>
+                    </div>
+                </div>
+                <div class="catalog-item-container">
+                    <div class="catalog-item">
+                        <img src="https://via.placeholder.com/150" alt="Descripción">
+                        <p>Título</p>
+                        <p>1540 puntos <span>&gt;</span></p>
+                    </div>
+                </div>
+                <div class="catalog-item-container">
+                    <div class="catalog-item">
+                        <img src="https://via.placeholder.com/150" alt="Descripción">
+                        <p>Título</p>
+                        <p>1540 puntos <span>&gt;</span></p>
+                    </div>
+                </div>
+                <div class="catalog-item-container">
+                    <div class="catalog-item">
+                        <img src="https://via.placeholder.com/150" alt="Descripción">
+                        <p>Título</p>
+                        <p>1540 puntos <span>&gt;</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+</main>
+
+<!-- botón flotante -->
+<a class="add-button" href="/agregarProductosEmpresa">
+    <i class="fas fa-plus"></i> Agregar Producto
+</a>
+
+<footer>
+    <div>
+        <p><img src="/static/logo.png" alt="Logo" style="max-height: 50px;"></p>
+        <div class="social-icons">
+            <a href="#"><img src="/static/facebook-icon.png" alt="Facebook"></a>
+            <a href="#"><img src="/static/instagram-icon.png" alt="Instagram"></a>
+            <a href="#"><img src="/static/twitter-icon.png" alt="Twitter"></a>
+        </div>
+    </div>
+    <div>
+        <h4>Más información</h4>
+        <a href="#">Contáctanos</a>
+        <a href="#">Sobre nosotros</a>
+        <a href="#">Sobre el proyecto</a>
+    </div>
+    <div>
+        <h4>Donar</h4>
+        <a href="/donarVianda">Donar vianda</a>
+        <a href="/mapaHeladeras">Ver mapa</a>
+        <a href="/donarDinero">Donar dinero</a>
+    </div>
+</footer>
+
+<!-- Scripts de Bootstrap -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>
