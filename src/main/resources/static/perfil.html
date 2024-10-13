@@ -79,7 +79,6 @@
                 border: 1px solid #1e5552;
             }
 
-    
             .btn-submit {
                 background-color: #1e5552;
                 color: white;
@@ -88,8 +87,7 @@
             footer div {
                 margin-right: 30px;
             }
-    
-    
+
             footer {
                 background-color: #B8CCC8;
                 padding: 10px 50px;
@@ -124,8 +122,6 @@
                 text-decoration: none; /* Sin subrayado */
                 margin-bottom: 5px; /* Espacio entre enlaces */
             }
-    
-           
     
             .social-icons a {
                 margin: 0 20px; /* Espacio horizontal entre íconos */
@@ -165,53 +161,40 @@
 
             .profile-container {
             margin-top: 50px;
-            
         }
 
         .profile-photo {
-            width: 150px;
-            height: 150px;
+            width: 200px;
+            height: 200px;
             border-radius: 50%;
             object-fit: cover;
             margin-bottom: 20px;
         }
 
         .profile-info {
-            text-align: center;
+            display: flex;
             flex-direction: column;
-        justify-content: center;
+            justify-content: center;
         }
 
-        .profile-info h2 {
-            margin-bottom: 10px;
+        .info-group {
+            margin-bottom: 20px;
         }
 
-        .profile-info p {
-            margin-bottom: 5px;
-        }
-
-        .profile-info .points {
+        .label {
+            font-size: 1.25rem; /* Tamaño de la descripción */
             font-weight: bold;
+        }
+
+        .value {
+            font-size: 1rem; /* Tamaño del valor */
+            font-weight: normal;
+        }
+
+        .points {
+            font-size: 1.5rem;
             color: #1e5552;
         }
-        .info-group {
-        margin-bottom: 10px;
-    }
-
-    .label {
-        font-size: 1rem; /* Tamaño de la descripción */
-        font-weight: normal;
-    }
-
-    .value {
-        font-size: 1.25rem; /* Tamaño del valor */
-        font-weight: bold;
-    }
-
-    .points {
-        font-size: 1.5rem;
-        color: #1e5552;
-    }
     
         </style>
     </head>
@@ -251,34 +234,34 @@
     </header>
 
     <main class="container profile-container">
-    <div class="row">
-        <div class="col-md-3">
-            <img src="user-photo.png" alt="Foto del usuario" class="profile-photo">
+        <div class="row">
+            <div class="col-md-3">
+                <img src="user-photo.png" alt="Foto del usuario" class="profile-photo">
+            </div>
+            <div class="col-md-9 profile-info">
+                <div class="info-group">
+                    <div class="label">Usuario</div>
+                    <div class="value">Juan Perez</div>
+                </div>
+                <div class="info-group">
+                    <div class="label">Domicilio</div>
+                    <div class="value">Av. Las Heras 1234</div>
+                </div>
+                <div class="info-group">
+                    <div class="label">Teléfono</div>
+                    <div class="value">1234567890</div>
+                </div>
+                <div class="info-group">
+                    <div class="label">Email</div>
+                    <div class="value">juanperez@gmail.com</div>
+                </div>
+                <div class="info-group">
+                    <div class="label ">Puntos acumulados</div>
+                    <div class="value ">1580</div>
+                </div>
+            </div>
         </div>
-        <div class="col-md-9 profile-info">
-            <div class="info-group">
-                <span class="label">Nombre:</span>
-                <span class="value">Nombre del Usuario</span>
-            </div>
-            <div class="info-group">
-                <span class="label">Apellido:</span>
-                <span class="value">Apellido del Usuario</span>
-            </div>
-            <div class="info-group">
-                <span class="label">Teléfono:</span>
-                <span class="value">123-456-7890</span>
-            </div>
-            <div class="info-group">
-                <span class="label">Email:</span>
-                <span class="value">usuario@example.com</span>
-            </div>
-            <div class="info-group">
-                <span class="label points">Puntos acumulados:</span>
-                <span class="value points">1580 pts.</span>
-            </div>
-        </div>
-    </div>
-</main>
+    </main>
 
     
 <footer>
