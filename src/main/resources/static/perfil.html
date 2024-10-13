@@ -80,81 +80,43 @@
                 border: 1px solid #1e5552;
             }
 
-    
             .btn-submit {
                 background-color: #1e5552;
                 color: white;
             }
-    
-            footer div {
-                margin-right: 30px;
-            }
-    
-    
-            footer {
-                background-color: #B8CCC8;
-                padding: 10px 50px;
-                color: white; /* Color de texto */
-                /* justify-content: center; Centrar los elementos */
-                display: flex; /* Utiliza flexbox para disposición horizontal */
-            }
-    
-            footer a {
-                color: white;
-                text-decoration: none;
-                margin-top: 00px;
-            }
-    
-            .footer-info {
-                display: flex; /* Utiliza flexbox para disposición horizontal */
-                padding: 10px; /* Espaciado interno */
-                background-color: #B8CCC8; /* Color de fondo */
-                color: white; /* Color de texto */
-            }
-    
-            .footer-info div {
-                margin-left: 10px; /* Espacio entre los grupos de información */
-            }
-    
-            .footer-info h4 {
-                margin-bottom: 10px; /* Espacio debajo del encabezado */
-            }
-    
-            .footer-info a {
-                color: white; /* Color de los enlaces */
-                text-decoration: none; /* Sin subrayado */
-                margin-bottom: 5px; /* Espacio entre enlaces */
-            }
-    
-           
-    
-            .social-icons a {
-                margin: 0 20px; /* Espacio horizontal entre íconos */
-            }
-    
-            .social-icons {
-            display: flex;
-            gap: 10px;
+
+            h3 {
+            margin: 0; /* Elimina márgenes por defecto */
+            white-space: nowrap; /* Evita que el texto haga salto de línea */
         }
 
-        .social-icons img {
-            width: 24px;
-            height: 24px;
+        h5 {
+            margin: 0; /* Elimina márgenes por defecto */
+            white-space: nowrap; /* Evita que el texto haga salto de línea */
+            color: white; /* Color de texto */
         }
 
-            
-            .info-container {
-                display: flex; /* Habilita Flexbox para el contenedor */
-                flex-direction: column; /* Coloca los elementos en una columna */
-                margin-bottom: 10px; /* Espacio debajo del contenedor */
-            }
-    
-            .info-container a {
-                margin-bottom: 5px; /* Espacio entre los enlaces */
-                color: white; /* Color del texto */
-                text-decoration: none; /* Quita el subrayado de los enlaces */
-            }
-    
+
+        .footer-bg {
+            background-color: #B7C9C7; /* Color de fondo */
+            padding: 20px 0; /* Espaciado superior e inferior */
+        }
+        .social-icons a {
+            margin-right: 15px; /* Espacio entre iconos de redes sociales */
+            color: white; /* Color de texto para iconos */
+        }
+        .footer-link {
+            color: white; /* Color de texto para enlaces */
+            text-decoration: none; /* Eliminar subrayado */
+        }
+        .footer-link:hover {
+            text-decoration: underline; /* Subrayar al pasar el mouse */
+        }
+
+        .social-icon {
+            margin-right: 10px; /* Espacio entre el ícono y el texto */
+        }
+
             h1, h2, h3, h5, h6 {
                 font-size: 19px; /* Ajusta el tamaño de la fuente de los headers */
                 font-weight: bold; /* Ajusta el peso de la fuente de los headers */
@@ -166,53 +128,40 @@
 
             .profile-container {
             margin-top: 50px;
-            
         }
 
         .profile-photo {
-            width: 150px;
-            height: 150px;
+            width: 200px;
+            height: 200px;
             border-radius: 50%;
             object-fit: cover;
             margin-bottom: 20px;
         }
 
         .profile-info {
-            text-align: center;
+            display: flex;
             flex-direction: column;
-        justify-content: center;
+            justify-content: center;
         }
 
-        .profile-info h2 {
-            margin-bottom: 10px;
+        .info-group {
+            margin-bottom: 20px;
         }
 
-        .profile-info p {
-            margin-bottom: 5px;
-        }
-
-        .profile-info .points {
+        .label {
+            font-size: 1.25rem; /* Tamaño de la descripción */
             font-weight: bold;
+        }
+
+        .value {
+            font-size: 1rem; /* Tamaño del valor */
+            font-weight: normal;
+        }
+
+        .points {
+            font-size: 1.5rem;
             color: #1e5552;
         }
-        .info-group {
-        margin-bottom: 10px;
-    }
-
-    .label {
-        font-size: 1rem; /* Tamaño de la descripción */
-        font-weight: normal;
-    }
-
-    .value {
-        font-size: 1.25rem; /* Tamaño del valor */
-        font-weight: bold;
-    }
-
-    .points {
-        font-size: 1.5rem;
-        color: #1e5552;
-    }
     
         </style>
     </head>
@@ -242,6 +191,7 @@
                             <a class="dropdown-item" href="/perfil">Mi perfil</a>
                             <a class="dropdown-item" href="#">Mis colaboraciones</a>
                             <a class="dropdown-item" href="canjearPuntos.html">Mi puntaje</a>
+                            <a class="dropdown-item" href="#">Mis reportes</a>
                             <a class="dropdown-item" href="#">Configuración</a>
                             <a class="dropdown-item" href="#">Cerrar sesión</a>
                         </div>
@@ -252,58 +202,77 @@
     </header>
 
     <main class="container profile-container">
-    <div class="row">
-        <div class="col-md-3">
-            <img src="user-photo.png" alt="Foto del usuario" class="profile-photo">
+        <div class="row">
+            <div class="col-md-3">
+                <img src="user-photo.png" alt="Foto del usuario" class="profile-photo">
+            </div>
+            <div class="col-md-9 profile-info">
+                <div class="info-group">
+                    <div class="label">Usuario</div>
+                    <div class="value">Juan Perez</div>
+                </div>
+                <div class="info-group">
+                    <div class="label">Domicilio</div>
+                    <div class="value">Av. Las Heras 1234</div>
+                </div>
+                <div class="info-group">
+                    <div class="label">Teléfono</div>
+                    <div class="value">1234567890</div>
+                </div>
+                <div class="info-group">
+                    <div class="label">Email</div>
+                    <div class="value">juanperez@gmail.com</div>
+                </div>
+                <div class="info-group">
+                    <div class="label ">Puntos acumulados</div>
+                    <div class="value ">1580</div>
+                </div>
+            </div>
         </div>
-        <div class="col-md-9 profile-info">
-            <div class="info-group">
-                <span class="label">Nombre:</span>
-                <span class="value">Nombre del Usuario</span>
-            </div>
-            <div class="info-group">
-                <span class="label">Apellido:</span>
-                <span class="value">Apellido del Usuario</span>
-            </div>
-            <div class="info-group">
-                <span class="label">Teléfono:</span>
-                <span class="value">123-456-7890</span>
-            </div>
-            <div class="info-group">
-                <span class="label">Email:</span>
-                <span class="value">usuario@example.com</span>
-            </div>
-            <div class="info-group">
-                <span class="label points">Puntos acumulados:</span>
-                <span class="value points">1580 pts.</span>
-            </div>
-        </div>
-    </div>
-</main>
+    </main>
 
     
-<footer>
-    <div>
-        <p><img src="logo.png" alt="Logo" style="max-height: 50px;"></p>
-            <div class="social-icons">
-                <a href="#"><img src="facebook-icon.png" alt="Facebook"></a>
-                <a href="#"><img src="instagram-icon.png" alt="Instagram"></a>
-                <a href="#"><img src="twitter-icon.png" alt="Twitter"></a>
+
+    <footer class="footer-bg">
+        <div class="container">
+            <div class="row justify-content-between align-items-center">
+                <div class="col-md-3 text-center text-md-left">
+                    <img src="path/to/logo.png" alt="Logo" class="img-fluid mb-2"> <!-- Reemplaza con tu logo -->
+                </div>
+                <div class="col-md-9">
+                    <div class="row">
+                        <!-- Más Información -->
+                        <div class="col-md-4">
+                            <h5>Más información</h5>
+                            <ul class="list-unstyled">
+                                <li><a href="#" class="footer-link">Contáctanos</a></li>
+                                <li><a href="#" class="footer-link">Sobre nosotros</a></li>
+                                <li><a href="#" class="footer-link">Sobre el proyecto</a></li>
+                            </ul>
+                        </div>
+                        
+                        <!-- Donar -->
+                        <div class="col-md-4">
+                            <h5>Donar</h5>
+                            <ul class="list-unstyled">
+                                <li><a href="#" class="footer-link">Donar vianda</a></li>
+                                <li><a href="#" class="footer-link">Ver mapa</a></li>
+                            </ul>
+                        </div>
+                        
+                        <!-- Dónde encontrarnos -->
+                        <!-- Dónde encontrarnos -->
+                    <div class="col-md-4">
+                        <h5>Dónde encontrarnos</h5>
+                        <ul class="list-unstyled">
+                            <li><a href="#" class="footer-link"><img src="facebook-icon.png" alt="Facebook" style="max-height: 20px;" ><i class="fab fa-facebook-f social-icon"></i>Facebook</a></li>
+                            <li><a href="#" class="footer-link"><img src="instagram-icon.png" alt="Instagram" style="max-height: 20px;"><i class="fab fa-instagram social-icon"></i>Instagram</a></li>
+                        </ul>
+                    </div>
+                </div>
             </div>
-    </div>
-    <div>
-        <h4>Más información</h4>
-        <a href="#">Contactanos</a>
-        <a href="#">Sobre nosotros</a>
-        <a href="#">Sobre el proyecto</a>
-    </div>
-    <div>
-        <h4>Donar</h4>
-        <a href="#">Donar vianda</a>
-        <a href="#">Ver mapa</a>
-        <a href="#">Donar dinero</a>
-    </div>
-</footer>
+        </div>
+    </footer>
 
 <!-- Scripts de Bootstrap y jQuery -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

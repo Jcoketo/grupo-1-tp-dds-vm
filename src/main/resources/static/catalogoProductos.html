@@ -17,7 +17,7 @@
             display: flex;
             flex-direction: column;
             min-height: 100vh;
-            background-color: #f5f5f5;
+            background-color: #ffffff;
         }
 
         
@@ -30,41 +30,41 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background-color: #e0e0e0;
-            padding: 20px 50px;
+        }
+        header .navbar-nav .nav-link {
+            font-size: 17px !important; /* Ajusta el tamaño de la fuente de los enlaces de navegación en el header */
+        }
+        nav {
+            margin-top: 20px; /* Ajusta el valor según el espacio deseado */
         }
 
-        .navbar-nav .nav-item {
-            margin-left: 20px; 
-        }
-
+        /*Dropdown*/
         .navbar-light .navbar-nav .nav-link,
         .navbar-light .dropdown-menu {
-            background-color: #e0e0e0;
-            color: black;
-            font-family: Arial, Helvetica, sans-serif;
+            background-color: #ffffff;
+            color: #1e5552;
             font-size: 16px;
             font-weight: normal;
         }
 
         .navbar-light .dropdown-menu {
-            width: 200px;
+            width: 200px;      
         }
-
         .navbar-light .dropdown-menu a.dropdown-item {
-            color: black;
+            color: #1e5552;
             font-family: Arial, Helvetica, sans-serif;
             font-size: 16px;
             font-weight: normal;
-            width: 200px;
+            width: 200px; 
+            
         }
 
         .navbar-light .dropdown-menu a.dropdown-item:hover {
-            background-color: #cdcdcd;
-            margin: 0;
+            background-color: #ffffff;
+            margin: 0; 
             width: 200px;
         }
-
+        
         main {
             flex-grow: 1;
             padding: 50px;
@@ -172,39 +172,8 @@
         .add-button i {
             margin-right: 10px;
         }
+        
 
-        footer {
-            background-color: #B8CCC8;
-            padding: 20px 50px;
-            color: white; /* Color de texto */
-
-        }
-        footer a {
-            color: white;
-            text-decoration: none;
-            margin-top: 10px;
-        }
-
-        .footer-info {
-            display: flex; /* Utiliza flexbox para disposición horizontal */
-            padding: 20px; /* Espaciado interno */
-            background-color: #B8CCC8; /* Color de fondo */
-            color: white; /* Color de texto */
-        }
-
-        .footer-info div {
-            margin-left: 20px; /* Espacio entre los grupos de información */
-        }
-
-        .footer-info h4 {
-            margin-bottom: 10px; /* Espacio debajo del encabezado */
-        }
-
-        .footer-info a {
-            color: white; /* Color de los enlaces */
-            text-decoration: none; /* Sin subrayado */
-            margin-bottom: 5px; /* Espacio entre enlaces */
-        }
         h4 {
             font-size: 16px; /* Ajusta el tamaño de la fuente de los headers */
         }
@@ -212,15 +181,6 @@
             margin-bottom: 5px; /* Espacio entre los enlaces */
             color: white; /* Color del texto */
             text-decoration: none; /* Quita el subrayado de los enlaces */
-        }
-        .social-icons {
-            display: flex;
-            gap: 10px;
-        }
-
-        .social-icons img {
-            width: 24px;
-            height: 24px;
         }
 
         .btn-primary{
@@ -231,6 +191,32 @@
         .btn-primary:hover{
             background-color: #1e5552;
             color: white;
+        }
+        h5 {
+            margin: 0; /* Elimina márgenes por defecto */
+            white-space: nowrap; /* Evita que el texto haga salto de línea */
+            color: white; /* Color de texto */
+        }
+
+
+        .footer-bg {
+            background-color: #B7C9C7; /* Color de fondo */
+            padding: 20px 0; /* Espaciado superior e inferior */
+        }
+        .social-icons a {
+            margin-right: 15px; /* Espacio entre iconos de redes sociales */
+            color: white; /* Color de texto para iconos */
+        }
+        .footer-link {
+            color: white; /* Color de texto para enlaces */
+            text-decoration: none; /* Eliminar subrayado */
+        }
+        .footer-link:hover {
+            text-decoration: underline; /* Subrayar al pasar el mouse */
+        }
+
+        .social-icon {
+            margin-right: 10px; /* Espacio entre el ícono y el texto */
         }
     </style>
 </head>
@@ -264,6 +250,7 @@
                             <a class="dropdown-item" href="/perfil">Mi perfil</a>
                             <a class="dropdown-item" href="/misColaboraciones">Mis colaboraciones</a>
                             <a class="dropdown-item" href="canjearPuntos.html">Mi puntaje</a>
+                            <a class="dropdown-item" href="canjearPuntos.html">Mis reportes</a>
                             <a class="dropdown-item" href="#">Configuración</a>
                             <a class="dropdown-item" href="#">Cerrar sesión</a>
                         </div>
@@ -359,25 +346,43 @@
         <i class="fas fa-plus"></i> Agregar Producto
     </a>
 
-    <footer>
-        <div>
-        <p><img src="logo.png" alt="Logo" style="max-height: 50px;"></p>
-            <div class="social-icons">
-                <a href="#"><img src="facebook-icon.png" alt="Facebook"></a>
-                <a href="#"><img src="instagram-icon.png" alt="Instagram"></a>
-                <a href="#"><img src="twitter-icon.png" alt="Twitter"></a>
+    <footer class="footer-bg">
+        <div class="container">
+            <div class="row justify-content-between align-items-center">
+                <div class="col-md-3 text-center text-md-left">
+                    <img src="path/to/logo.png" alt="Logo" class="img-fluid mb-2"> <!-- Reemplaza con tu logo -->
+                </div>
+                <div class="col-md-9">
+                    <div class="row">
+                        <!-- Más Información -->
+                        <div class="col-md-4">
+                            <h5>Más información</h5>
+                            <ul class="list-unstyled">
+                                <li><a href="#" class="footer-link">Contáctanos</a></li>
+                                <li><a href="#" class="footer-link">Sobre nosotros</a></li>
+                                <li><a href="#" class="footer-link">Sobre el proyecto</a></li>
+                            </ul>
+                        </div>
+                        
+                        <!-- Donar -->
+                        <div class="col-md-4">
+                            <h5>Donar</h5>
+                            <ul class="list-unstyled">
+                                <li><a href="#" class="footer-link">Donar vianda</a></li>
+                                <li><a href="#" class="footer-link">Ver mapa</a></li>
+                            </ul>
+                        </div>
+                    
+                        <!-- Dónde encontrarnos -->
+                    <div class="col-md-4">
+                        <h5>Dónde encontrarnos</h5>
+                        <ul class="list-unstyled">
+                            <li><a href="#" class="footer-link"><img src="facebook-icon.png" alt="Facebook" style="max-height: 20px;" ><i class="fab fa-facebook-f social-icon"></i>Facebook</a></li>
+                            <li><a href="#" class="footer-link"><img src="instagram-icon.png" alt="Instagram" style="max-height: 20px;"><i class="fab fa-instagram social-icon"></i>Instagram</a></li>
+                        </ul>
+                    </div>
+                </div>
             </div>
-    </div>
-        <div>
-            <h4>Más información</h4>
-            <a href="#">Contáctanos</a>
-            <a href="#">Sobre nosotros</a>
-            <a href="#">Sobre el proyecto</a>
-        </div>
-        <div>
-            <h4>Donar</h4>
-            <a href="#">Donar vianda</a>
-            <a href="#">Ver mapa</a>
         </div>
     </footer>
 
