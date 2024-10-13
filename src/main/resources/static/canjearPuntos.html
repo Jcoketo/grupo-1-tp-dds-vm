@@ -14,18 +14,50 @@
             display: flex;
             flex-direction: column;
             min-height: 100vh;
-            background-color: #f5f5f5;
+            background-color: #ffffff;
         }
 
-        header, footer {
-            background-color: #e0e0e0;
+         footer {
+            background-color: #B8CCC8;
             padding: 20px 50px;
+            color: white; /* Color de texto */
+
+        }
+        footer a {
+            color: white;
+            text-decoration: none;
+            margin-top: 10px;
         }
 
+        .footer-info {
+            display: flex; /* Utiliza flexbox para disposición horizontal */
+            padding: 20px; /* Espaciado interno */
+            background-color: #B8CCC8; /* Color de fondo */
+            color: white; /* Color de texto */
+        }
+
+        .footer-info div {
+            margin-left: 20px; /* Espacio entre los grupos de información */
+        }
+
+        .footer-info h4 {
+            margin-bottom: 10px; /* Espacio debajo del encabezado */
+        }
+
+        .footer-info a {
+            color: white; /* Color de los enlaces */
+            text-decoration: none; /* Sin subrayado */
+            margin-bottom: 5px; /* Espacio entre enlaces */
+        }
+        h4 {
+            font-size: 16px; /* Ajusta el tamaño de la fuente de los headers */
+        }
         header {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            background-color: #ffffff;
+            padding: 20px 50px;
         }
 
         .navbar-nav .nav-item {
@@ -34,7 +66,7 @@
 
         .navbar-light .navbar-nav .nav-link,
         .navbar-light .dropdown-menu {
-            background-color: #e0e0e0;
+            background-color: #ffffff;
             color: black;
             font-family: Arial, Helvetica, sans-serif;
             font-size: 16px;
@@ -45,7 +77,7 @@
             width: 200px;      
         }
         .navbar-light .dropdown-menu a.dropdown-item {
-            color: black;
+            color: #1e5552;
             font-family: Arial, Helvetica, sans-serif;
             font-size: 16px;
             font-weight: normal;
@@ -54,7 +86,7 @@
         }
 
         .navbar-light .dropdown-menu a.dropdown-item:hover {
-            background-color: #cdcdcd;
+            background-color: #ffffff;
             margin: 0; 
             width: 200px;
         }
@@ -66,7 +98,7 @@
         }
 
         .btn-donar {
-            background-color: black;
+            background-color: #1e5552;
             color: white;
             padding: 10px 20px;
             text-decoration: none;
@@ -111,9 +143,14 @@
         footer div a {
             margin-top: 10px;
             text-decoration: none;
-            color: black;
+            color: white;
         }
 
+        .footer-info a {
+            color: white; /* Color de los enlaces */
+            text-decoration: none; /* Sin subrayado */
+            margin-bottom: 5px; /* Espacio entre enlaces */
+        }
         .social-icons {
             display: flex;
             gap: 10px;
@@ -125,7 +162,8 @@
         }
 
         .puntaje {
-            background-color: #ebece3;
+            background-color: #1e5552;
+            color:white;
             padding: 20px;
             text-align:left;
             border-radius: 20px;
@@ -133,7 +171,7 @@
         }
 
         .catalog-item, .view-more {
-            background-color: #ebece3;
+            background-color: #d9ede8;
             padding: 10px; 
             text-align: center;
             border-radius: 20px;
@@ -169,17 +207,45 @@
             font-weight: 600;
         }
 
+        .btn-group {
+            display: flex;  /*Usar Flexbox para la alineación */
+            flex-direction: row; /* Colocar los botones uno al lado del otro */
+            justify-content: center; /* Alinear los botones al margen derecho */
+            gap: 3px; /* Espacio entre los botones */
+            margin: 0px 0 5px 800px; /* Margen superior e inferior de 20px y margen izquierdo de 20px */
+            width: 280px;
+            height: 70px;
+            justify-content: center;
+        }
+        
+
+        .btn {
+            border-radius: 10px; /* Bordes redondeados */
+            padding: 10px 0px; /* Espaciado interno para que se vean mejor */
+            width: 150px; /* Ancho fijo, ajusta según tus necesidades */
+            margin-bottom: 10px; /* Espacio entre los botones */
+            border: none; /* Eliminar borde predeterminado */
+            cursor: pointer; /* Cambiar cursor al pasar sobre el botón */
+            font-size: 16px; /* Tamaño de fuente */
+            
+        }
+
         .puntaje-column {
             display: flex;
             flex-direction: column;
             align-items: left;
-            margin-right: auto;
+            justify-content: flex-end; /* Alinear los botones al margen derecho */
         }
 
         .catalog-row {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
+        }
+        .info-container a {
+            margin-bottom: 5px; /* Espacio entre los enlaces */
+            color: white; /* Color del texto */
+            text-decoration: none; /* Quita el subrayado de los enlaces */
         }
 
     </style>
@@ -220,44 +286,44 @@
 </header>
 
 <main>
+    <div style="display: inline-flex; gap: 20px" >
+    <h1>Catálogo</h1>
+    <div class="btn-group">
+        <div class="puntaje">
+            <p class="sub-header">Puntos acumulados: 1580 pts.</p>
+        </div>
+    </div>
+</div>
     <div class="container mt-5">
         <div class="row">
-            <div class="col-md-3 puntaje-column">
-                <h1>Mi puntaje</h1>
-                <div class="puntaje">
-                    <p class="sub-header">Puntos acumulados</p>
-                    <h4>1580 pts.</h4>
-                </div>
-            </div>
             <div class="col-md-9">
-                <h1>Catálogo</h1>
                 <div class="catalog-row">
                     <!-- Elementos del catálogo -->
                     <div class="col-md-3">
                         <div class="catalog-item">
                             <img src="https://via.placeholder.com/150" alt="Descripción">
-                            <p>Descripción</p>
+                            <p>Título</p>
                             <p>1,540 puntos</p>
                         </div>
                     </div>
                     <div class="col-md-3">
                         <div class="catalog-item">
                             <img src="https://via.placeholder.com/150" alt="Descripción">
-                            <p>Descripción</p>
+                            <p>Título</p>
                             <p>1,540 puntos</p>
                         </div>
                     </div>
                     <div class="col-md-3">
                         <div class="catalog-item">
                             <img src="https://via.placeholder.com/150" alt="Descripción">
-                            <p>Descripción</p>
+                            <p>Título</p>
                             <p>1,540 puntos</p>
                         </div>
                     </div>
                     <div class="col-md-3">
                         <div class="catalog-item">
                             <img src="https://via.placeholder.com/150" alt="Descripción">
-                            <p>Descripción</p>
+                            <p>Título</p>
                             <p>1,540 puntos</p>
                         </div>
                     </div>
@@ -265,21 +331,21 @@
                     <div class="col-md-3">
                         <div class="catalog-item">
                             <img src="https://via.placeholder.com/150" alt="Descripción">
-                            <p>Descripción</p>
+                            <p>Título</p>
                             <p>1,540 puntos</p>
                         </div>
                     </div>
                     <div class="col-md-3">
                         <div class="catalog-item">
                             <img src="https://via.placeholder.com/150" alt="Descripción">
-                            <p>Descripción</p>
+                            <p>Título</p>
                             <p>1,540 puntos</p>
                         </div>
                     </div>
                     <div class="col-md-3">
                         <div class="catalog-item">
                             <img src="https://via.placeholder.com/150" alt="Descripción">
-                            <p>Descripción</p>
+                            <p>Título</p>
                             <p>1,540 puntos</p>
                         </div>
                     </div>
