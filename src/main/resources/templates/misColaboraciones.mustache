@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Agregar Productos</title>
+    <title>Mis colaboraciones</title>
     <!-- Enlace a CSS de Bootstrap -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
@@ -29,15 +29,23 @@
             justify-content: space-between;
             align-items: center;
         }
-
         .navbar-nav .nav-item {
-            margin-left: 20px;
+            margin-left: 20px; 
         }
 
-        /* Estilo personalizado para el menú desplegable */
-        .navbar-light .navbar-nav .nav-link,
-        .navbar-light .dropdown-menu {
-            background-color: #e0e0e0;
+        .navbar {
+            flex-grow: 1;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .navbar-nav {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .nav-link {
             color: black;
             font-family: Arial, Helvetica, sans-serif;
             font-size: 16px;
@@ -45,11 +53,12 @@
         }
 
         .navbar-light .dropdown-menu {
+            background-color: #e0e0e0;
             width: 200px;
         }
+
         .navbar-light .dropdown-menu a.dropdown-item {
             color: black;
-            font-family: Arial, Helvetica, sans-serif;
             font-size: 16px;
             font-weight: normal;
             width: 200px;
@@ -57,13 +66,17 @@
 
         .navbar-light .dropdown-menu a.dropdown-item:hover {
             background-color: #cdcdcd;
-            margin: 0;
             width: 200px;
         }
+
+        .dropdown-menu {
+            margin-top: 0;
+        }
+
         main {
             flex-grow: 1;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
             padding: 50px;
             background-color: white;
@@ -72,7 +85,7 @@
         footer {
             display: flex;
             justify-content: space-between;
-            margin-top: auto;
+            padding: 20px 50px;
         }
 
         footer div {
@@ -98,47 +111,107 @@
             height: 24px;
         }
 
-        .btn-agregar-producto {
-            background-color:#3b559d;
-            color: white;
-        }
-
-        .card {
+        .collaboration-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             width: 100%;
-            max-width: 300px;
+            max-width: 1200px;
             margin: 0 auto;
+            padding: 20px;
+            box-sizing: border-box;
         }
 
-        .card-body {
-            text-align: center;
+        .collaboration-container {
+            width: 100%;
+            max-width: 1000px;
+            position: relative;
         }
 
-        .placeholder-img {
-            background-color: gray;
-            height: 150px;
+        .collaboration-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
         }
 
-        @media (max-width: 768px) {
-            .card {
-                max-width: 100%;
-            }
-        }
-        .btn-inicio {
-            background-color: #313937;
-            color: white;
-            padding: 10px 15px;
-            text-decoration: none;
+        .collaboration {
+            background-color: #e0e0e0;
+            padding: 15px;
             border-radius: 10px;
-            margin-left: 20px;
+            margin-bottom: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            min-height: 80px;
+            width: 100%;
+        }
+
+        .collaboration-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+            right: 0;
+            top: 100%;
+            min-width: 160px;
+        }
+
+        .dropdown-content a,
+        .dropdown-content label {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            font-weight: normal;
+        }
+
+        .dropdown-content a:hover,
+        .dropdown-content label:hover {
+            background-color: #f1f1f1;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .add-button {
+            background-color: #3b559d;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            text-align: center;
+            white-space: nowrap;
+            margin-bottom: 30px;
+        }
+
+        .add-button:hover {
+            background-color: #2e4372;
+        }
+
+        h1 {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
         }
     </style>
 </head>
 
 <body>
     <header>
-        <div><img src="logo.png" alt="Logo" style="max-height: 50px;">
-            <a href="/inicio" class="btn-inicio">Inicio</a>
-        </div>
+        <div><img src="/static/logo.png" alt="Logo" style="max-height: 50px;"></div>
         <nav class="navbar navbar-expand-lg navbar-light">
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
                 aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -150,7 +223,7 @@
                         <a class="nav-link" href="#">Sobre nosotros</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/elegirDonacion">Donar</a>
+                        <a class="nav-link" href="elegirDonacionFisica.html">Donar</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/mapaHeladeras">Heladeras</a>
@@ -164,7 +237,7 @@
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                             <a class="dropdown-item" href="/perfil">Mi perfil</a>
                             <a class="dropdown-item" href="/misColaboraciones">Mis colaboraciones</a>
-                            <a class="dropdown-item" href="canjearPuntos.html">Mi puntaje</a>
+                            <a class="dropdown-item" href="/canjearPuntos">Mi puntaje</a>
                             <a class="dropdown-item" href="#">Configuración</a>
                             <a class="dropdown-item" href="#">Cerrar sesión</a>
                         </div>
@@ -175,32 +248,52 @@
     </header>
 
     <main>
-        <div class="container">
-            <div class="row justify-content-center align-items-center text-center">
-                <div class="col-md-3">
-                    <div class="card">
-                        <a href="/agregarHeladera">
-                        <div class="placeholder-img"></div>
-                        </a>
-                        <div class="card-body">
-                            <a href="/agregarHeladera" class="text-dark">
-                                <h5 class="card-title">Agregar Heladera</h5>
-                            </a>
-                            <p class="card-text">Hazte cargo de una nueva heladera para disponer alimento.</p>
+        <div class="collaboration-wrapper">
+            <div class="collaboration-container">
+                <div class="collaboration-header">
+                    <h1>Mis colaboraciones</h1>
+
+                    <!-- Botón de agregar alineado a la derecha -->
+                    <div class="dropdown">
+                        <button class="add-button">Agregar ▾</button>
+                        <div class="dropdown-content">
+                            <a href="/elegirDonacion">Agregar colaboración</a>
+                            <label for="csvInput">Cargar CSV</label>
+                            <input type="file" id="csvInput" accept=".csv" style="display:none;">
                         </div>
                     </div>
                 </div>
-                <div class="col-md-3">
-                    <div class="card">
-                        <a href="/donarDinero">
-                        <div class="placeholder-img"></div>
-                        </a>
-                        <div class="card-body">
-                            <a href="/donarDinero" class="text-dark">
-                                <h5 class="card-title">Donar Dinero</h5>
-                            </a>
-                            <p class="card-text">Ayuda a las organizaciones a brindar un mejor servicio.</p>
-                        </div>
+
+                <!-- Colaboraciones -->
+                <div class="collaboration">
+                    <div class="collaboration-info">
+                        <strong>Donación vianda</strong>
+                        <span>Info</span>
+                        <span>fecha</span>
+                    </div>
+                </div>
+
+                <div class="collaboration">
+                    <div class="collaboration-info">
+                        <strong>Donación dinero</strong>
+                        <span>Info</span>
+                        <span>fecha</span>
+                    </div>
+                </div>
+
+                <div class="collaboration">
+                    <div class="collaboration-info">
+                        <strong>Donación vianda</strong>
+                        <span>Info</span>
+                        <span>fecha</span>
+                    </div>
+                </div>
+
+                <div class="collaboration">
+                    <div class="collaboration-info">
+                        <strong>Registro Persona Vulnerable</strong>
+                        <span>Info</span>
+                        <span>fecha</span>
                     </div>
                 </div>
             </div>
@@ -218,19 +311,19 @@
         </div>
         <div>
             <h4>Más información</h4>
-            <a href="#">Contáctanos</a>
+            <a href="#">Contactanos</a>
             <a href="#">Sobre nosotros</a>
             <a href="#">Sobre el proyecto</a>
         </div>
         <div>
             <h4>Donar</h4>
-            <a href="/donarVianda">Donar vianda</a>
-            <a href="/mapaHeladeras">Ver mapa</a>
-            <a href="/donarDinero">Donar dinero</a>
+            <a href="#">Donar vianda</a>
+            <a href="#">Ver mapa</a>
+            <a href="#">Donar dinero</a>
         </div>
     </footer>
 
-    <!-- Scripts de Bootstrap y jQuery -->
+    <!-- Enlace a JavaScript de Bootstrap -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

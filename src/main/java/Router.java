@@ -7,6 +7,7 @@ import presentacion.gestorCuentas.*;
 import presentacion.heladera.*;
 import presentacion.incidentes.*;
 import presentacion.ofertas.*;
+import presentacion.reportes.MisReportesController;
 
 import static io.javalin.apibuilder.ApiBuilder.*;
 
@@ -165,6 +166,21 @@ public class Router {
             path("/aceptarAgregarProducto", () -> {
                 before(new AutorizacionMiddleware().setDebeSerLogueado());
                 get(new AceptarAgregarProductoController());
+            });
+
+            path("/misReportes", () -> {
+                before(new AutorizacionMiddleware().setDebeSerLogueado());
+                get(new MisReportesController());
+            });
+
+            path("/perfil", () -> {
+                before(new AutorizacionMiddleware().setDebeSerLogueado());
+                get(new PerfilController());
+            });
+
+            path("/misColaboraciones", () -> {
+                before(new AutorizacionMiddleware().setDebeSerLogueado());
+                get(new MisColaboracionesController());
             });
 
             path("/404Error", () -> {
