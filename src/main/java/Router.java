@@ -107,6 +107,14 @@ public class Router {
                 get(new MapaHeladeraVistaController());
             });
 
+            path("/mapaHeladerasDistribucionOrigen", () -> {
+                get(new MapaHeladerasDistribucionOrigenController());
+            });
+
+            path("/mapaHeladerasDistribucionDestino", () -> {
+                get(new MapaHeladerasDistribucionDestinoController());
+            });
+
             path("/mapaHeladerasRequest", () -> {
                 get(new MapaHeladerasController(repoHeladeras));
             });

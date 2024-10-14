@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visualización de Heladeras</title>
+    <!-- Incluye Bootstrap -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .social-icons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .social-icons img {
+            width: 24px;
+            height: 24px;
+        }
+
+        .btn-iniciar-sesion {
+            background-color: black;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            background-color: #f5f5f5;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header, footer {
+            background-color: #e0e0e0;
+            padding: 20px 50px;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar-nav .nav-item {
+            margin-left: 20px;
+        }
+
+        h1 {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 40px;
+            margin-top: 40px;
+        }
+
+        main {
+            flex: 1; /* Esto hace que el contenido principal crezca para llenar el espacio restante */
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 100px; /* Espaciado adicional para asegurar que el footer no se superponga */
+        }
+
+        .content {
+            flex: 1; /* Esto hace que el contenedor de la fila ocupe el espacio disponible */
+            display: flex;
+            gap: 20px; /* Espaciado entre el mapa y la lista de heladeras */
+        }
+
+        .map-container, .list-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .map-container {
+            margin-bottom: 20px; /* Espaciado adicional entre el mapa y el footer */
+        }
+
+        #map {
+            width: 100%;
+            height: 100%;
+            border-radius: 10px;
+        }
+
+        .list-group-item {
+            cursor: pointer;
+            border-radius: 10px;
+            padding: 10px;
+            background-color: #ebece3;
+            transition: background-color 0.3s;
+            margin-bottom: 7px;
+        }
+
+        .list-group-item:hover {
+            background-color: #e2e6ea;
+        }
+
+        footer {
+            display: flex;
+            justify-content: space-between;
+            background-color: #e0e0e0;
+            padding: 20px 50px;
+            margin-top: 20px; /* Espaciado adicional antes del footer */
+        }
+
+        footer div {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            margin-right: 30px;
+        }
+
+        footer div a {
+            margin-top: 10px;
+            text-decoration: none;
+            color: black;
+        }
+
+        .btn-inicio {
+            background-color: #313937;
+            color: white;
+            padding: 10px 15px;
+            text-decoration: none;
+            border-radius: 10px;
+            margin-left: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div><img src="/static/logo.png" alt="Logo" style="max-height: 50px;">
+        <a href="/inicio" class="btn-inicio">Inicio</a>
+    </div>
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Sobre nosotros</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/elegirDonacion">Donar</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/mapaHeladeras">Heladeras</a>
+                </li>
+                {{^logueado}}
+                      <a href="/login" class="btn-iniciar-sesion">Iniciar Sesión</a>
+                {{/logueado}}
+                {{#logueado}}
+                <!-- Menú desplegable -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Nombre del usuario
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="/perfil">Mi perfil</a>
+                        <a class="dropdown-item" href="#">Mis colaboraciones</a>
+                        <a class="dropdown-item" href="canjearPuntos.html">Mi puntaje</a>
+                        <a class="dropdown-item" href="#">Configuración</a>
+                        <a class="dropdown-item" href="#">Cerrar sesión</a>
+                    </div>
+                {{/logueado}}
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>
+
+<main class="container-fluid">
+    <h1>Visualización de heladeras</h1>
+    <div class="content">
+        <div class="map-container">
+            <div id="map"></div>
+        </div>
+        <div class="list-container">
+            <h3>Heladeras</h3>
+            <ul id="heladeras-list" class="list-group">
+                <!-- Lista de heladeras se llenará dinámicamente -->
+            </ul>
+        </div>
+    </div>
+</main>
+
+<footer>
+    <div>
+        <p><img src="/static/logo.png" alt="Logo" style="max-height: 50px;"></p>
+        <div class="social-icons">
+            <a href="#"><img src="/static/facebook-icon.png" alt="Facebook"></a>
+            <a href="#"><img src="/static/instagram-icon.png" alt="Instagram"></a>
+            <a href="#"><img src="/static/twitter-icon.png" alt="Twitter"></a>
+        </div>
+    </div>
+    <div>
+        <h4>Más información</h4>
+        <a href="#">Contactanos</a>
+        <a href="#">Sobre nosotros</a>
+        <a href="#">Sobre el proyecto</a>
+    </div>
+    <div>
+        <h4>Donar</h4>
+        <a href="/donarVianda">Donar vianda</a>
+        <a href="/mapaHeladeras">Ver mapa</a>
+        <a href="/donarDinero">Donar dinero</a>
+    </div>
+</footer>
+
+<!-- Incluye Bootstrap JS y sus dependencias -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBb5mC9pmmrsoAdUAxHfvE4Z2iW260tlUY"></script>
+<script>
+    let map;
+    let markers = [];
+
+    function fetchHeladeras() {
+        // Realiza una solicitud al endpoint de tu API que devuelve las heladeras
+        return fetch('/mapaHeladerasRequest')
+                .then(response => response.json()) // Convierte la respuesta a JSON
+                .then(data => {
+                    return data; // Devuelve los datos de las heladeras
+                })
+                .catch(error => {
+                    console.error('Error al obtener las heladeras:', error);
+                    return [];
+                });
+    }
+
+    function formatFecha(fechaArray) {
+        // Convierte el array de fecha [año, mes, día] en una cadena legible
+        return `${fechaArray[2]}/${fechaArray[1]}/${fechaArray[0]}`;
+    }
+
+    function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+            center: { lat: -34.599722, lng: -58.381944 },
+            zoom: 13
+        });
+
+        fetchHeladeras().then(heladeras => {
+            heladeras.forEach(heladera => {
+                const nombre = heladera.nombre;
+                const punto = heladera.puntoEstrategico;
+                const fecha = formatFecha(heladera.fechaFuncionamiento);
+                const estado = heladera.activa ? "Activa" : "Inactiva";
+                const cantidadViandas = heladera.viandas.length;
+
+                const marker = new google.maps.Marker({
+                    position: { lat: punto.latitud, lng: punto.longitud },
+                    map: map,
+                    title: `Heladera en ${punto.direccion || 'Ubicación desconocida'}`
+                });
+
+                markers.push(marker);
+
+                const listItem = document.createElement('li');
+                listItem.className = "list-group-item";
+                listItem.innerHTML = `
+                   <div>
+                       <strong>${nombre || 'Ubicación desconocida'}</strong><br>
+                       <small>Direccion: ${punto.direccion || 'Ubicación desconocida'}</small><br>
+                       <small>En funcionamiento desde: ${fecha}</small><br>
+                       <small>${estado}</small><br>
+                       <small>
+                           <a href="/visualizarDetalleHeladera?lat=${punto.latitud}&lng=${punto.longitud}" class="text-primary" style="text-decoration: underline;">Detalles</a>
+                           <button onclick="window.location.href='/donarDistribuirViandas?heladera1=${nombre}&direccion1=${punto.direccion}&estado1=${estado}&disponibilidad1=${cantidadViandas}&heladera2={{heladera2}}&direccion2={{direccion2}}&estado2={{estado2}}&disponibilidad2={{disponibilidad2}}'" class="btn" style="margin-left: 10px; background-color: #3657A6; color: white; padding: 5px 15px; font-size: 14px; border-radius: 5px;">Elegir heladera</button>
+                       </small>
+                   </div>
+                `;
+
+                listItem.addEventListener('click', () => {
+                    map.setCenter(marker.getPosition());
+                    map.setZoom(15);
+                    marker.setAnimation(google.maps.Animation.BOUNCE);
+                    setTimeout(() => marker.setAnimation(null), 1400);
+                });
+
+                document.getElementById('heladeras-list').appendChild(listItem);
+            });
+        });
+    }
+
+    document.addEventListener("DOMContentLoaded", initMap);
+</script>
+
+</body>
+</html>
