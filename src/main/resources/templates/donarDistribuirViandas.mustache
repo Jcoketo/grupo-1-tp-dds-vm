@@ -276,11 +276,13 @@
                     <!-- Input eliminado -->
                     <!--<input type="text" id="heladera-origen" class="form-control" rows="1" placeholder="Heladera Medrano UTN">-->
                     <div class="heladera-card">
-                        <strong>Heladera Medrano UTN</strong>
-                        <p>Avenida Medrano 1234</p>
-                        <p><strong>Estado:</strong> Fuera de servicio</p>
-                        <p><strong>Necesita traslado de:</strong> 2 viandas</p>
-                        <div class="green-box">Elegir otra Heladera</div>
+                        <strong>{{heladera1}}</strong>
+                        <p>{{direccion1}}</p>
+                        <p><strong>Estado:</strong> {{estado1}}</p>
+                        <p><strong>Necesita traslado de:</strong>{{disponibilidad1}}</p>
+                        <div class="green-box">
+                           <a href="/mapaHeladerasDistribucionOrigen?heladera1={{heladera1}}&direccion1={{direccion1}}&estado1={{estado1}}&disponibilidad1={{disponibilidad1}}&heladera2={{heladera2}}&direccion2={{direccion2}}&estado2={{estado2}}&disponibilidad2={{disponibilidad2}}" style="text-decoration: none; color: inherit;">Elegir otra Heladera</a>
+                        </div>
                     </div>
                 </div>
                 <!-- Heladera destino -->
@@ -289,11 +291,13 @@
                     <!-- Input eliminado -->
                     <!--<input type="text" class="form-control" id="heladera-destino" placeholder="Heladera Medrano UTN">-->
                     <div class="heladera-card">
-                        <strong>Heladera Medrano UTN</strong>
-                        <p>Avenida 1234</p>
-                        <p><strong>Estado:</strong> Activa</p>
-                        <p><strong>Disponibilidad:</strong> 2 viandas</p>
-                        <div class="green-box">Elegir otra Heladera</div>
+                        <strong>{{heladera2}}</strong>
+                        <p>{{direccion2}}</p>
+                        <p><strong>Estado:</strong> {{estado2}}</p>
+                        <p><strong>Disponibilidad:</strong>{{disponibilidad2}}</p>
+                        <div class="green-box">
+                          <a href="/mapaHeladerasDistribucionDestino?heladera1={{heladera1}}&direccion1={{direccion1}}&estado1={{estado1}}&disponibilidad1={{disponibilidad1}}&heladera2={{heladera2}}&direccion2={{direccion2}}&estado2={{estado2}}&disponibilidad2={{disponibilidad2}}" style="text-decoration: none; color: inherit;">Elegir otra Heladera</a>
+                        </div>
                     </div>
                 </div>
                 <div>
