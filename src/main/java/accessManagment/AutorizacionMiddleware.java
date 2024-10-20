@@ -36,10 +36,7 @@ public class AutorizacionMiddleware implements Handler {
                 context.redirect("/404");
             }
         }
-
-
     }
-
     public AutorizacionMiddleware setDebeSerAdmin() {
         this.debeSerAdmin = true;
         return this;
