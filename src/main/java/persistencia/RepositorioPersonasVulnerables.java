@@ -1,7 +1,6 @@
 package persistencia;
 
 import modelo.personas.PersonaVulnerable;
-import modelo.reportador.Reporte;
 
 import java.util.ArrayList;
 import java.util.List;

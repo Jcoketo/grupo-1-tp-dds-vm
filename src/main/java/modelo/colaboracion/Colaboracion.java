@@ -2,11 +2,12 @@ package modelo.colaboracion;
 
 import modelo.personas.TipoPersona;
 import modelo.personas.Colaborador;
+import persistencia.EntidadPersistente;
 
 import java.time.LocalDate;
 import java.util.List;
 
-public abstract class Colaboracion {
+public abstract class Colaboracion extends EntidadPersistente {
     protected List<TipoPersona> tiposPersonasHabilitadas;
     protected LocalDate fechaColaboracion;
 

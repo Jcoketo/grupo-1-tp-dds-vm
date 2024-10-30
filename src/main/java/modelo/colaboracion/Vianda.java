@@ -3,10 +3,11 @@ package modelo.colaboracion;
 import modelo.elementos.Heladera;
 import lombok.Setter;
 import modelo.personas.Colaborador;
+import persistencia.EntidadPersistente;
 
 import java.time.LocalDate;
 
-public class Vianda{
+public class Vianda extends EntidadPersistente {
     private String tipoComida;
     private LocalDate fechaCaducidad;
     private LocalDate fechaDonacion;
