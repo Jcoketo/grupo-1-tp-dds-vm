@@ -4,16 +4,28 @@ import modelo.elementos.PuntoEstrategico;
 import modelo.elementos.Heladera;
 import modelo.recomendadorDePuntos.RecomendadorDePuntos;
 
+import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
+@Entity
 public class PersonaJuridica extends Persona{
+
+    @Column
     private String razonSocial;
+
+    @Enumerated(EnumType.STRING)
     private TipoJuridica tipoJuridico;
+
+    @Enumerated(EnumType.STRING)
     private Rubro rubro;
+
+    @Transient
     private List<Heladera> heladeras;
 
     public PersonaJuridica(String razonSocial, TipoJuridica tipoJuridico, Rubro rubro, MedioDeContacto medioDeContacto){
-        super(medioDeContacto);
+        this.mediosDeContacto = new ArrayList<MedioDeContacto>();
+        this.mediosDeContacto.add(medioDeContacto);
         this.razonSocial = razonSocial;
         this.tipoJuridico = tipoJuridico;
         this.rubro = rubro;
