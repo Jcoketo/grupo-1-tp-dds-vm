@@ -29,10 +29,17 @@
     </build>
 
     <dependencies>
+        <!--
         <dependency>
             <groupId> org.uqbar-project </groupId>
             <artifactId> jpa-java8-extras </artifactId>
             <version> 1.0-alpha-1 </version>
+        </dependency>-->
+
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-entitymanager</artifactId>
+            <version>5.4.18.Final</version>
         </dependency>
 
         <dependency>
