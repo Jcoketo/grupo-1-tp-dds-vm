@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 import modelo.personas.Tecnico;
 import modelo.personas.Colaborador;
+import persistencia.EntidadPersistente;
 import persistencia.RepositorioIncidentes;
 import persistencia.RepositoriosTecnicos;
 import modelo.suscripcion.ColaboradorSuscripto;
@@ -14,7 +15,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Heladera {
+public class Heladera extends EntidadPersistente {
     @Getter @Setter private PuntoEstrategico puntoEstrategico;
     @Setter @Getter private String nombre;
     @Setter private int viandasMaximas;

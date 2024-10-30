@@ -5,7 +5,6 @@ import modelo.elementos.TarjetaPlastica;
 import modelo.personas.Colaborador;
 import modelo.personas.PersonaVulnerable;
 import modelo.personas.TipoPersona;
-import persistencia.RepositorioPersonasVulnerables;
 
 import java.time.LocalDate;
 import java.util.ArrayList;

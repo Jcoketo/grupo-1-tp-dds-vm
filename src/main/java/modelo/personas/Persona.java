@@ -5,8 +5,9 @@ import java.util.Collections;
 import java.util.List;
 
 import lombok.Getter;
+import persistencia.EntidadPersistente;
 
-public class Persona {
+public class Persona extends EntidadPersistente {
 
     @Getter private String direccion;
     @Getter protected List<MedioDeContacto> mediosDeContacto;
