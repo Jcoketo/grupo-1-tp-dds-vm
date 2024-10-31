@@ -11,26 +11,62 @@ import persistencia.RepositoriosTecnicos;
 import modelo.suscripcion.ColaboradorSuscripto;
 import modelo.suscripcion.TipoSuscripcion;
 
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+@Entity
+@Table(name = "heladera")
+public class Heladera {
 
-public class Heladera extends EntidadPersistente {
+    @Id
+    @GeneratedValue
+    @Getter private Long id;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "punto_estrategico_id", referencedColumnName = "id")
     @Getter @Setter private PuntoEstrategico puntoEstrategico;
+
+    @Column
     @Setter @Getter private String nombre;
+
+    @Column
     @Setter private int viandasMaximas;
+
+    @OneToMany(mappedBy = "disponibleEn")
     @Getter private List<Vianda> viandas;
+
+    @Column
     @Getter private LocalDate fechaFuncionamiento;
+
+    @Column
     @Getter @Setter private Boolean activa;
+
+    @Column
     @Getter private Float temperaturaMaxima;
+
+    @Column
     @Getter private Float temperaturaMinima;
+
+    @OneToMany(mappedBy = "heladera")
     @Getter private List<ColaboradorSuscripto> colaboradoresSucriptos = new ArrayList<>();
+
+    @Column
     @Getter private Integer contadorFallasSemanal = 0;
+
+    @Column
     @Getter private Integer contadorViandasRetiradas = 0;
+
+    @Column
     @Getter private Integer contadorViandasColocadas = 0;
+
+    @Column
     @Getter @Setter private Boolean habilitado;
+
+    @OneToMany(mappedBy = "heladera")
     private List<Visita> visitas = new ArrayList<>();
 
+    @Column
     private Integer tiempoActivo;
 
     public Heladera(int capacidadMaxima, LocalDate fechaFuncionamiento, PuntoEstrategico puntoEstrategico) {
@@ -39,6 +75,10 @@ public class Heladera extends EntidadPersistente {
         this.fechaFuncionamiento = fechaFuncionamiento;
         this.activa = true;
         this.puntoEstrategico = puntoEstrategico;
+    }
+
+    public Heladera() {
+
     }
 
     public void agregarVianda(Vianda vianda) {

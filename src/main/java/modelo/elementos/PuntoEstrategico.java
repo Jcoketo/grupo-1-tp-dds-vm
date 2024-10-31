@@ -3,10 +3,24 @@ package modelo.elementos;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "punto_estrategico")
 public class PuntoEstrategico {
+
+
+    @Id
+    @GeneratedValue
+    @Getter private Long id;
+
+    @Column
     @Getter private Double latitud;
+    @Column
     @Getter private Double longitud;
+    @Column
     @Getter @Setter private String direccion;
+    @Enumerated(EnumType.STRING)
     @Setter @Getter private Areas areas;
 
     public PuntoEstrategico(Double latitud, Double longitud) {
@@ -17,4 +31,7 @@ public class PuntoEstrategico {
     }
 
 
+    public PuntoEstrategico() {
+
+    }
 }

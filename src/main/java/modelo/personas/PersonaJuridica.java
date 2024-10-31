@@ -1,5 +1,7 @@
 package modelo.personas;
 
+import lombok.Getter;
+import lombok.Setter;
 import modelo.elementos.PuntoEstrategico;
 import modelo.elementos.Heladera;
 import modelo.recomendadorDePuntos.RecomendadorDePuntos;
@@ -20,8 +22,9 @@ public class PersonaJuridica extends Persona{
     @Enumerated(EnumType.STRING)
     private Rubro rubro;
 
-    @Transient
-    private List<Heladera> heladeras;
+    @ManyToMany
+    @JoinTable(name= "heladera_x_persona_juridica")
+    @Getter @Setter private List<Heladera> heladeras = new ArrayList<>();
 
     public PersonaJuridica(String razonSocial, TipoJuridica tipoJuridico, Rubro rubro, MedioDeContacto medioDeContacto){
         this.mediosDeContacto = new ArrayList<MedioDeContacto>();
@@ -30,6 +33,10 @@ public class PersonaJuridica extends Persona{
         this.tipoJuridico = tipoJuridico;
         this.rubro = rubro;
         this.tipoPersona = TipoPersona.PJ;
+    }
+
+    public PersonaJuridica() {
+
     }
 
     public List<PuntoEstrategico> solicitarPuntosRecomendados(Double latitud, Double longitud, Double radio) {

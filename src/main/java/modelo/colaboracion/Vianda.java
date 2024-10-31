@@ -1,20 +1,45 @@
 package modelo.colaboracion;
 
+import lombok.Getter;
 import modelo.elementos.Heladera;
 import lombok.Setter;
 import modelo.personas.Colaborador;
 import persistencia.EntidadPersistente;
 
+import javax.persistence.*;
 import java.time.LocalDate;
 
-public class Vianda extends EntidadPersistente {
+
+@Entity
+@Table(name = "vianda")
+public class Vianda{
+
+    @Id
+    @GeneratedValue
+    @Getter private Long id;
+
+    @Column
     private String tipoComida;
+
+    @Column
     private LocalDate fechaCaducidad;
+
+    @Column
     private LocalDate fechaDonacion;
+
+    @Transient
     private Colaborador colaborador;
+
+    @ManyToOne
     private Heladera disponibleEn;
+
+    @Column
     private Boolean entregada;
+
+    @Column
     @Setter private Float calorias;
+
+    @Column
     @Setter private Float peso;
 
     public Vianda(String tipoComida, LocalDate fechaCaducidad, LocalDate fechaDonacion, Colaborador colaborador, Heladera heladera, Boolean estado) {

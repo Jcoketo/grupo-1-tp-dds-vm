@@ -7,13 +7,33 @@ import modelo.personas.Colaborador;
 import modelo.personas.MedioDeContacto;
 import modelo.personas.TipoMedioDeContacto;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "colaborador_suscripto")
 public abstract class ColaboradorSuscripto {
+
+    @Id
+    @GeneratedValue
+    @Getter private Long id;
+
+    @ManyToOne
     private Heladera heladera;
+
+    @Transient
     private Colaborador colaborador;
-    @Getter
-    private TipoSuscripcion tipoSuscripcion;
+
+    @Enumerated(EnumType.STRING)
+    @Getter private TipoSuscripcion tipoSuscripcion;
+
+    @Column
     @Getter private Integer limiteViandasMinimas;
+
+    @Column
     @Getter private Integer limiteViandasMaximas;
+
+    @OneToOne
+    @JoinColumn(name = "Colaborador_suscripto_id",referencedColumnName = "id")
     private MedioDeContacto medioDeContacto;
 
     public ColaboradorSuscripto(Heladera heladera, Colaborador colaborador, TipoSuscripcion tipo, TipoMedioDeContacto medio) {
