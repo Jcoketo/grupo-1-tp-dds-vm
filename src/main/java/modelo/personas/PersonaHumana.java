@@ -1,6 +1,7 @@
 package modelo.personas;
 
 import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -19,7 +20,8 @@ public class PersonaHumana extends Persona{
     private LocalDate fechaNacimiento;
 
     @OneToOne
-    @JoinColumn(name = "persona_humano_id", referencedColumnName = "id")
+    @JoinColumn(name = "documento_id", referencedColumnName = "id")
+    @Setter
     @Getter private Documento documento;
 
 

@@ -1,9 +1,6 @@
 package modelo.personas;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table
@@ -13,7 +10,10 @@ public class Documento {
     @GeneratedValue
     private int id;
 
+    @Column
     private String numeroDoc;
+
+    @Enumerated(EnumType.STRING)
     private TipoDocumento tipoDoc;
 
     public Documento(String nro_doc, TipoDocumento tipo_doc){
