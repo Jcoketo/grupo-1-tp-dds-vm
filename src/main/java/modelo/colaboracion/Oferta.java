@@ -16,8 +16,10 @@ public class Oferta {
 
     @Column
     private String nombre;
+
     @Column(length = 500)
     private String descripcion;
+
     @Enumerated(EnumType.STRING)
     private TipoOferta tipoOferta;
 
@@ -27,7 +29,7 @@ public class Oferta {
     @Column
     @Getter private Double puntosNecesarios;
 
-    @Transient
+    @Column
     private String imagen;
 
     public Oferta(String nombre, Double puntosNecesarios) {
