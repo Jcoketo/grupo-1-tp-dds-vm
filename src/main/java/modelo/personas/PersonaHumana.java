@@ -2,9 +2,7 @@ package modelo.personas;
 
 import lombok.Getter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Transient;
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -20,7 +18,8 @@ public class PersonaHumana extends Persona{
     @Column
     private LocalDate fechaNacimiento;
 
-    @Transient
+    @OneToOne
+    @JoinColumn(name = "persona_humano_id", referencedColumnName = "id")
     @Getter private Documento documento;
 
 

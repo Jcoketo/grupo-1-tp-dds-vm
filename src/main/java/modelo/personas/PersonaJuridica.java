@@ -22,8 +22,8 @@ public class PersonaJuridica extends Persona{
     @Enumerated(EnumType.STRING)
     private Rubro rubro;
 
-    @ManyToMany
-    @JoinTable(name= "heladera_x_persona_juridica")
+    @OneToMany
+    @JoinColumn(name= "persona_juridica_id", referencedColumnName = "id")
     @Getter @Setter private List<Heladera> heladeras = new ArrayList<>();
 
     public PersonaJuridica(String razonSocial, TipoJuridica tipoJuridico, Rubro rubro, MedioDeContacto medioDeContacto){
