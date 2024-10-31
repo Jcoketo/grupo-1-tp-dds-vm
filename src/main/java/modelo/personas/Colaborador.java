@@ -1,5 +1,6 @@
 package modelo.personas;
 
+import lombok.Generated;
 import modelo.colaboracion.Colaboracion;
 import modelo.colaboracion.Oferta;
 //import elementos.*;
@@ -11,22 +12,43 @@ import modelo.suscripcion.SuscriptoCantidad;
 import modelo.suscripcion.SuscriptoFalla;
 import modelo.suscripcion.TipoSuscripcion;
 
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+@Entity
+@Table(name="colaborador")
 public class Colaborador {
-
-    @Getter protected Integer idUnico;
+    @Id
+    @GeneratedValue
+    @Getter private int id;
  
     //@Getter protected String direccion;
+
+    @Transient
     protected List<Colaboracion> colaboracionesRealizadas;
+
+    @Column
     protected Double puntaje;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name= "colaborador_id",referencedColumnName = "id")
     protected List<Oferta> canjesRealizados;
+
+    @Column
     protected Boolean validada;
+
+    @OneToOne(cascade = CascadeType.ALL)
     @Getter protected Persona persona;
+
+    @OneToOne(cascade = CascadeType.ALL)
     @Getter protected Tarjeta tarjeta;
+
+    @OneToMany(mappedBy="colaborador", cascade ={CascadeType.ALL}, fetch = FetchType.EAGER )
     private List<ColaboradorSuscripto> suscripciones;
+
+    @Transient
     @Getter protected Integer contadorViandasDonadasSemanal;
 
     public TipoPersona getTipoPersona(){

@@ -10,17 +10,19 @@ import modelo.personas.TipoMedioDeContacto;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "colaborador_suscripto")
+@Inheritance(strategy = InheritanceType.JOINED)
 public abstract class ColaboradorSuscripto {
 
     @Id
     @GeneratedValue
-    @Getter private Long id;
+    @Getter
+    private Long id;
 
     @ManyToOne
     private Heladera heladera;
 
-    @Transient
+    @ManyToOne
+    @JoinColumn(name="colaborador_id",referencedColumnName = "id")
     private Colaborador colaborador;
 
     @Enumerated(EnumType.STRING)
@@ -32,8 +34,7 @@ public abstract class ColaboradorSuscripto {
     @Column
     @Getter private Integer limiteViandasMaximas;
 
-    @OneToOne
-    @JoinColumn(name = "Colaborador_suscripto_id",referencedColumnName = "id")
+    @OneToOne(cascade = CascadeType.ALL)
     private MedioDeContacto medioDeContacto;
 
     public ColaboradorSuscripto(Heladera heladera, Colaborador colaborador, TipoSuscripcion tipo, TipoMedioDeContacto medio) {
@@ -41,7 +42,11 @@ public abstract class ColaboradorSuscripto {
         this.colaborador = colaborador;
         this.tipoSuscripcion = tipo;
         this.medioDeContacto = new MedioDeContacto(medio, colaborador.getPersona().devolerMedioDeContacto(medio));
-        this.validarExistenciaMedioDeContacto();
+        //this.validarExistenciaMedioDeContacto();
+    }
+
+    public ColaboradorSuscripto() {
+
     }
 
     // esta validacion debe hacerse en el controller

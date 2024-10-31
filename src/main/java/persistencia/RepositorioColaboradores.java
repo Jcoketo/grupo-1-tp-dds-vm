@@ -29,7 +29,7 @@ public class RepositorioColaboradores {
     public Colaborador existeColaborador(Integer id) {
 
         for (Colaborador colab : colaboradores) {
-            if (Objects.equals(colab.getIdUnico(), id)) {
+            if (Objects.equals(colab.getUniqueIdentifier(), id)) {
                 return colab;  // devuelve el colaborador
             }
         }
