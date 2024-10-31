@@ -126,44 +126,6 @@
             color: white;
         }
 
-        .btn-inicio {
-            background-color: #313937;
-            color: white;
-            padding: 10px 15px;
-            text-decoration: none;
-            border-radius: 10px;
-            margin-left: 20px;
-        }
-
-        footer {
-            display: flex;
-            justify-content: space-between;
-            margin-top: auto;
-        }
-
-        footer div {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            margin-right: 30px;
-        }
-
-        footer div a {
-            margin-top: 10px;
-            text-decoration: none;
-            color: black;
-        }
-
-        .social-icons {
-            display: flex;
-            gap: 10px;
-        }
-
-        .social-icons img {
-            width: 24px;
-            height: 24px;
-        }
-
         @media (max-width: 768px) {
             .card {
                 max-width: 100%;
@@ -246,15 +208,39 @@
         .dropdown:hover .dropdown-content {
             display: block;
         }
+
+        h5 {
+            margin: 0; /* Elimina márgenes por defecto */
+            white-space: nowrap; /* Evita que el texto haga salto de línea */
+            color: white; /* Color de texto */
+        }
+
+
+        .footer-bg {
+            background-color: #B7C9C7; /* Color de fondo */
+            padding: 20px 0; /* Espaciado superior e inferior */
+        }
+        .social-icons a {
+            margin-right: 15px; /* Espacio entre iconos de redes sociales */
+            color: white; /* Color de texto para iconos */
+        }
+        .footer-link {
+            color: white; /* Color de texto para enlaces */
+            text-decoration: none; /* Eliminar subrayado */
+        }
+        .footer-link:hover {
+            text-decoration: underline; /* Subrayar al pasar el mouse */
+        }
+
+        .social-icon {
+            margin-right: 10px; /* Espacio entre el ícono y el texto */
+        }
     </style>
 </head>
 
 <body>
 <header>
-    <div>
-        <img src="/static/logo.png" alt="Logo" style="max-height: 50px;">
-        <a href="/inicio" class="btn-inicio">Inicio</a>
-    </div>
+    <div><img src="/static/logo.png" alt="Logo" style="max-height: 50px;"></div>
     <nav class="navbar navbar-expand-lg navbar-light">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
                 aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -266,10 +252,10 @@
                     <a class="nav-link" href="#">Sobre nosotros</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="elegirDonacionFisica.html">Donar</a>
+                    <a class="nav-link" href="/elegirDonacion">Donar</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/mapaHeladeras">Heladeras</a>
+                    <a class="nav-link" href="/mapaHeladera">Heladeras</a>
                 </li>
                 <!-- Menú desplegable -->
                 <li class="nav-item dropdown">
@@ -279,10 +265,11 @@
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                         <a class="dropdown-item" href="/perfil">Mi perfil</a>
-                        <a class="dropdown-item" href="#">Mis colaboraciones</a>
-                        <a class="dropdown-item" href="canjearPuntos.html">Mi puntaje</a>
+                        <a class="dropdown-item" href="/misColaboraciones">Mis colaboraciones</a>
+                        <a class="dropdown-item" href="/canjearPuntos">Mi puntaje</a>
+                        <a class="dropdown-item" href="/misReportes">Mis reportes</a>
                         <a class="dropdown-item" href="#">Configuración</a>
-                        <a class="dropdown-item" href="#">Cerrar sesión</a>
+                        <a class="dropdown-item" href="/login">Cerrar sesión</a>
                     </div>
                 </li>
             </ul>
@@ -295,19 +282,23 @@
         <div class="col-md-6">
             <h1>Donar vianda</h1>
             <div class="form-group">
+                <label for="heladera">Heladera</label>
                 <div class="input-group">
-                    <a href="/mapaHeladeras" class="btn btn-outline-secondary">
-                        Elegir otra heladera
-                    </a>
+                    <input type="text" class="form-control" id="heladera" placeholder="Heladera Medrano UTN">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="button">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
                 </div>
             </div>
 
             <div class="heladera-list">
                 <div class="heladera-item">
-                    <h5>{{nombre}}</h5>
-                    <p><strong>Direccion: </strong>{{direccion}}</p>
-                    <p><strong>Estado: </strong>{{estado}}</p>
-                    <p><strong>Disponibilidad:</strong> {{disponibilidad}} viandas</p>
+                    <h5>Heladera Medrano UTN</h5>
+                    <p>Avenida Medrano 1234</p>
+                    <p><strong>Estado:</strong> Activa</p>
+                    <p><strong>Disponibilidad:</strong> 2 viandas</p>
                     <button class="btn-subscribe">Suscribirse</button>
                 </div>
             </div>
@@ -315,79 +306,71 @@
 
         <!-- Sección derecha (Formulario de donación) -->
         <div class="col-md-6">
-            <form class="form-donation" action="/donarVianda" method="POST">
-
-                <input id= "haySegundaVianda" type="hidden" name="haySegundaVianda" value="0">
-
+            <form class="form-donation">
                 <h5>Vianda a donar</h5>
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="vianda1">Vianda a donar</label>
-                        <input type="text" class="form-control" id="vianda1" name="vianda1" placeholder="Arroz con pollo">
+                        <input type="text" class="form-control" id="vianda1" placeholder="Arroz con pollo">
                     </div>
                     <div class="form-group col-md-6">
                         <label for="fechaCaducidad1">Fecha de caducidad</label>
-                        <input type="date" class="form-control" id="fechaCaducidad1" name="fechaCaducidad1" value="2024-10-06">
+                        <input type="date" class="form-control" id="fechaCaducidad1" value="2024-10-06">
                     </div>
                 </div>
 
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="pesoVianda1">Peso de la vianda</label>
-                        <input type="number" class="form-control" id="pesoVianda1" name="pesoVianda1" placeholder="500 gr">
+                        <input type="text" class="form-control" id="pesoVianda1" placeholder="500 gr">
                     </div>
                     <div class="form-group col-md-6">
                         <label for="caloriasVianda1">Calorías de la vianda</label>
-                        <input type="number" class="form-control" id="caloriasVianda1" name="caloriasVianda1" placeholder="1200 gr">
+                        <input type="text" class="form-control" id="caloriasVianda1" placeholder="1200 gr">
                     </div>
                 </div>
 
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="fechaDonacion1">Fecha de donación</label>
-                        <input type="date" class="form-control" id="fechaDonacion1" name="fechaDonacion1" value="2024-10-06">
+                        <input type="date" class="form-control" id="fechaDonacion1" value="2024-10-06">
                     </div>
                 </div>
 
-                <div id="extra-vianda" style="display: none;">
-                    <hr>
-                    <h5>Vianda a donar (2)</h5>
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label for="vianda2">Vianda a donar</label>
-                            <input type="text" class="form-control" id="vianda2" name="vianda2" placeholder="Tarta de verduras">
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label for="fechaCaducidad2">Fecha de caducidad</label>
-                            <input type="date" class="form-control" id="fechaCaducidad2" name="fechaCaducidad2" value="2024-10-06">
-                        </div>
-                    </div>
+                <hr>
 
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label for="pesoVianda2">Peso de la vianda</label>
-                            <input type="number" class="form-control" id="pesoVianda2" name="pesoVianda2" placeholder="500 gr">
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label for="caloriasVianda2">Calorías de la vianda</label>
-                            <input type="number" class="form-control" id="caloriasVianda2" name="caloriasVianda2" placeholder="1200 gr">
-                        </div>
+                <h5>Vianda a donar (2)</h5>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="vianda2">Vianda a donar</label>
+                        <input type="text" class="form-control" id="vianda2" placeholder="Tarta de verduras">
                     </div>
-
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label for="fechaDonacion2">Fecha de donación</label>
-                            <input type="date" class="form-control" id="fechaDonacion2" name="fechaDonacion2" value="2024-10-06">
-                        </div>
+                    <div class="form-group col-md-6">
+                        <label for="fechaCaducidad2">Fecha de caducidad</label>
+                        <input type="date" class="form-control" id="fechaCaducidad2" value="2024-10-06">
                     </div>
                 </div>
 
-                <div class="form-group">
-                    <button type="button" class="btn-add" id="botonAgregar" onclick="mostrarSegundaVianda()">+ Añadir otra vianda</button>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="pesoVianda2">Peso de la vianda</label>
+                        <input type="text" class="form-control" id="pesoVianda2" placeholder="500 gr">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="caloriasVianda2">Calorías de la vianda</label>
+                        <input type="text" class="form-control" id="caloriasVianda2" placeholder="1200 gr">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="fechaDonacion2">Fecha de donación</label>
+                        <input type="date" class="form-control" id="fechaDonacion2" value="2024-10-06">
+                    </div>
                 </div>
 
                 <div class="form-group">
-                    <button type="button" class="btn-add" style= "display: none" id="botonAgregar2" onclick="esconderVianda()">Eliminar Vianda</button>
+                    <button type="button" class="btn-add">+ Añadir otra vianda</button>
                 </div>
 
                 <div class="form-group">
@@ -397,46 +380,46 @@
         </div>
     </div>
 </main>
-<script>
-    function mostrarSegundaVianda() {
-        document.getElementById('extra-vianda').style.display = 'block';
-        document.getElementById('botonAgregar').style.display = 'none';
-        document.getElementById('botonAgregar2').style.display = 'block';
-        document.getElementById('haySegundaVianda').value = 1;
-    }
 
-    function esconderVianda() {
-        document.getElementById('extra-vianda').style.display = 'none';
-        document.getElementById('botonAgregar2').style.display = 'none';
-        document.getElementById('botonAgregar').style.display = 'block';
-        document.getElementById('haySegundaVianda').value = 0;
-    }
+<footer class="footer-bg">
+    <div class="container">
+        <div class="row justify-content-between align-items-center">
+            <div class="col-md-3 text-center text-md-left">
+                <img src="path/to/logo.png" alt="Logo" class="img-fluid mb-2"> <!-- Reemplaza con tu logo -->
+            </div>
+            <div class="col-md-9">
+                <div class="row">
+                    <!-- Más Información -->
+                    <div class="col-md-4">
+                        <h5>Más información</h5>
+                        <ul class="list-unstyled">
+                            <li><a href="#" class="footer-link">Contáctanos</a></li>
+                            <li><a href="#" class="footer-link">Sobre nosotros</a></li>
+                            <li><a href="#" class="footer-link">Sobre el proyecto</a></li>
+                        </ul>
+                    </div>
 
-</script>
+                    <!-- Donar -->
+                    <div class="col-md-4">
+                        <h5>Donar</h5>
+                        <ul class="list-unstyled">
+                            <li><a href="/donarVianda" class="footer-link">Donar vianda</a></li>
+                            <li><a href="#/mapaHeladeras" class="footer-link">Ver mapa</a></li>
+                        </ul>
+                    </div>
 
-<footer>
-    <div>
-        <h5>Contactos</h5>
-        <a href="#">Contacto</a>
-        <a href="#">Sobre nosotros</a>
-    </div>
-    <div>
-        <h5>Soporte</h5>
-        <a href="#">FAQ</a>
-        <a href="#">Política de privacidad</a>
-        <a href="#">Términos y condiciones</a>
-    </div>
-    <div class="social-icons">
-        <a href="#"><img src="/static/facebook-icon.png" alt="Facebook"></a>
-        <a href="#"><img src="/static/instagram-icon.png" alt="Instagram"></a>
-        <a href="#"><img src="/static/twitter-icon.png" alt="Twitter"></a>
-    </div>
-    <div>
-        <h5>Donar</h5>
-        <a href="/donarVianda">Donar vianda</a>
-        <a href="/mapaHeladeras">Ver mapa</a>
-        <a href="/donarDinero">Donar dinero</a>
-    </div>
+                    <!-- Dónde encontrarnos -->
+                    <!-- Dónde encontrarnos -->
+                    <div class="col-md-4">
+                        <h5>Dónde encontrarnos</h5>
+                        <ul class="list-unstyled">
+                            <li><a href="#" class="footer-link"><img src="/static/facebook-icon.png" alt="Facebook" style="max-height: 20px;" ><i class="fab fa-facebook-f social-icon"></i>Facebook</a></li>
+                            <li><a href="#" class="footer-link"><img src="/static/instagram-icon.png" alt="Instagram" style="max-height: 20px;"><i class="fab fa-instagram social-icon"></i>Instagram</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
 </footer>
 <!-- Enlace a JavaScript de Bootstrap -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
@@ -445,3 +428,4 @@
 </body>
 
 </html>
+

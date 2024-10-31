@@ -18,8 +18,7 @@
             background-color: #f5f5f5;
         }
 
-        header,
-        footer {
+        header{
             background-color: #e0e0e0;
             padding: 20px 50px;
         }
@@ -30,7 +29,7 @@
             align-items: center;
         }
         .navbar-nav .nav-item {
-            margin-left: 20px; 
+            margin-left: 20px;
         }
 
         .navbar {
@@ -80,35 +79,6 @@
             align-items: center;
             padding: 50px;
             background-color: white;
-        }
-
-        footer {
-            display: flex;
-            justify-content: space-between;
-            padding: 20px 50px;
-        }
-
-        footer div {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            margin-right: 30px;
-        }
-
-        footer div a {
-            margin-top: 10px;
-            text-decoration: none;
-            color: black;
-        }
-
-        .social-icons {
-            display: flex;
-            gap: 10px;
-        }
-
-        .social-icons img {
-            width: 24px;
-            height: 24px;
         }
 
         .collaboration-wrapper {
@@ -186,7 +156,7 @@
         }
 
         .add-button {
-            background-color: #3b559d;
+            background-color: #1e5552;
             color: white;
             padding: 10px 20px;
             border: none;
@@ -206,127 +176,172 @@
             font-weight: bold;
             margin-bottom: 20px;
         }
+
+        h5 {
+            margin: 0; /* Elimina márgenes por defecto */
+            white-space: nowrap; /* Evita que el texto haga salto de línea */
+            color: white; /* Color de texto */
+        }
+
+        .footer-bg {
+            background-color: #B7C9C7; /* Color de fondo */
+            padding: 20px 0; /* Espaciado superior e inferior */
+        }
+        .social-icons a {
+            margin-right: 15px; /* Espacio entre iconos de redes sociales */
+            color: white; /* Color de texto para iconos */
+        }
+        .footer-link {
+            color: white; /* Color de texto para enlaces */
+            text-decoration: none; /* Eliminar subrayado */
+        }
+        .footer-link:hover {
+            text-decoration: underline; /* Subrayar al pasar el mouse */
+        }
+
+        .social-icon {
+            margin-right: 10px; /* Espacio entre el ícono y el texto */
+        }
     </style>
 </head>
 
 <body>
-    <header>
-        <div><img src="/static/logo.png" alt="Logo" style="max-height: 50px;"></div>
-        <nav class="navbar navbar-expand-lg navbar-light">
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+<header>
+    <div><img src="/static/logo.png" alt="Logo" style="max-height: 50px;"></div>
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
                 aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Sobre nosotros</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="elegirDonacionFisica.html">Donar</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/mapaHeladeras">Heladeras</a>
-                    </li>
-                    <!-- Menú desplegable -->
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Nombre del usuario
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <a class="dropdown-item" href="/perfil">Mi perfil</a>
-                            <a class="dropdown-item" href="/misColaboraciones">Mis colaboraciones</a>
-                            <a class="dropdown-item" href="/canjearPuntos">Mi puntaje</a>
-                            <a class="dropdown-item" href="#">Configuración</a>
-                            <a class="dropdown-item" href="#">Cerrar sesión</a>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-    </header>
-
-    <main>
-        <div class="collaboration-wrapper">
-            <div class="collaboration-container">
-                <div class="collaboration-header">
-                    <h1>Mis colaboraciones</h1>
-
-                    <!-- Botón de agregar alineado a la derecha -->
-                    <div class="dropdown">
-                        <button class="add-button">Agregar ▾</button>
-                        <div class="dropdown-content">
-                            <a href="/elegirDonacion">Agregar colaboración</a>
-                            <label for="csvInput">Cargar CSV</label>
-                            <input type="file" id="csvInput" accept=".csv" style="display:none;">
-                        </div>
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Sobre nosotros</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/elegirDonacionFisica">Donar</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/mapaHeladeras">Heladeras</a>
+                </li>
+                <!-- Menú desplegable -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Nombre del usuario
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="/perfil">Mi perfil</a>
+                        <a class="dropdown-item" href="#">Mis colaboraciones</a>
+                        <a class="dropdown-item" href="canjearPuntos.html">Mi puntaje</a>
+                        <a class="dropdown-item" href="#">Configuración</a>
+                        <a class="dropdown-item" href="#">Cerrar sesión</a>
                     </div>
-                </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>
 
-                <!-- Colaboraciones -->
-                <div class="collaboration">
-                    <div class="collaboration-info">
-                        <strong>Donación vianda</strong>
-                        <span>Info</span>
-                        <span>fecha</span>
-                    </div>
-                </div>
+<main>
+    <div class="collaboration-wrapper">
+        <div class="collaboration-container">
+            <div class="collaboration-header">
+                <h1>Mis colaboraciones</h1>
 
-                <div class="collaboration">
-                    <div class="collaboration-info">
-                        <strong>Donación dinero</strong>
-                        <span>Info</span>
-                        <span>fecha</span>
-                    </div>
-                </div>
-
-                <div class="collaboration">
-                    <div class="collaboration-info">
-                        <strong>Donación vianda</strong>
-                        <span>Info</span>
-                        <span>fecha</span>
-                    </div>
-                </div>
-
-                <div class="collaboration">
-                    <div class="collaboration-info">
-                        <strong>Registro Persona Vulnerable</strong>
-                        <span>Info</span>
-                        <span>fecha</span>
+                <!-- Botón de agregar alineado a la derecha -->
+                <div class="dropdown">
+                    <button class="add-button">Agregar ▾</button>
+                    <div class="dropdown-content">
+                        <a href="/elegirDonacionFisica">Agregar colaboración</a>
+                        <label for="csvInput">Cargar CSV</label>
+                        <input type="file" id="csvInput" accept=".csv" style="display:none;">
                     </div>
                 </div>
             </div>
-        </div>
-    </main>
 
-    <footer>
-        <div>
-            <p><img src="/static/logo.png" alt="Logo" style="max-height: 50px;"></p>
-            <div class="social-icons">
-                <a href="#"><img src="/static/facebook-icon.png" alt="Facebook"></a>
-                <a href="#"><img src="/static/instagram-icon.png" alt="Instagram"></a>
-                <a href="#"><img src="/static/twitter-icon.png" alt="Twitter"></a>
+            <!-- Colaboraciones -->
+            <div class="collaboration">
+                <div class="collaboration-info">
+                    <strong>Donación vianda</strong>
+                    <span>Info</span>
+                    <span>fecha</span>
+                </div>
+            </div>
+
+            <div class="collaboration">
+                <div class="collaboration-info">
+                    <strong>Donación dinero</strong>
+                    <span>Info</span>
+                    <span>fecha</span>
+                </div>
+            </div>
+
+            <div class="collaboration">
+                <div class="collaboration-info">
+                    <strong>Donación vianda</strong>
+                    <span>Info</span>
+                    <span>fecha</span>
+                </div>
+            </div>
+
+            <div class="collaboration">
+                <div class="collaboration-info">
+                    <strong>Entrega tarjeta</strong>
+                    <span>Info</span>
+                    <span>fecha</span>
+                </div>
             </div>
         </div>
-        <div>
-            <h4>Más información</h4>
-            <a href="#">Contactanos</a>
-            <a href="#">Sobre nosotros</a>
-            <a href="#">Sobre el proyecto</a>
-        </div>
-        <div>
-            <h4>Donar</h4>
-            <a href="#">Donar vianda</a>
-            <a href="#">Ver mapa</a>
-            <a href="#">Donar dinero</a>
-        </div>
-    </footer>
+    </div>
+</main>
 
-    <!-- Enlace a JavaScript de Bootstrap -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<footer class="footer-bg">
+    <div class="container">
+        <div class="row justify-content-between align-items-center">
+            <div class="col-md-3 text-center text-md-left">
+                <img src="/static/logo.png" alt="Logo" class="img-fluid mb-2"> <!-- Reemplaza con tu logo -->
+            </div>
+            <div class="col-md-9">
+                <div class="row">
+                    <!-- Más Información -->
+                    <div class="col-md-4">
+                        <h5>Más información</h5>
+                        <ul class="list-unstyled">
+                            <li><a href="#" class="footer-link">Contáctanos</a></li>
+                            <li><a href="#" class="footer-link">Sobre nosotros</a></li>
+                            <li><a href="#" class="footer-link">Sobre el proyecto</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Donar -->
+                    <div class="col-md-4">
+                        <h5>Donar</h5>
+                        <ul class="list-unstyled">
+                            <li><a href="/donarVianda" class="footer-link">Donar vianda</a></li>
+                            <li><a href="/mapaHeladeras" class="footer-link">Ver mapa</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Dónde encontrarnos -->
+                    <!-- Dónde encontrarnos -->
+                    <div class="col-md-4">
+                        <h5>Dónde encontrarnos</h5>
+                        <ul class="list-unstyled">
+                            <li><a href="#" class="footer-link"><img src="/static/facebook-icon.png" alt="Facebook" style="max-height: 20px;" ><i class="fab fa-facebook-f social-icon"></i>Facebook</a></li>
+                            <li><a href="#" class="footer-link"><img src="/static/instagram-icon.png" alt="Instagram" style="max-height: 20px;"><i class="fab fa-instagram social-icon"></i>Instagram</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+</footer>
+
+<!-- Enlace a JavaScript de Bootstrap -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 
 </html>
+

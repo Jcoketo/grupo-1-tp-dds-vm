@@ -28,43 +28,38 @@
             margin-top: 20px; /* Ajusta el valor según el espacio deseado */
         }
 
-        .navbar-nav .nav-item {
-            margin-left: 20px;
-        }
-
+        /*Dropdown*/
         .navbar-light .navbar-nav .nav-link,
         .navbar-light .dropdown-menu {
-            background-color: white;
+            background-color: #ffffff;
             color: #1e5552;
-            font-size: 20px;
+            font-size: 16px;
+            font-weight: normal;
         }
 
-        .navbar-nav.ml-auto {
-            font-size: 0.8rem; /* Ajusta el tamaño de la fuente */
+        .navbar-light .dropdown-menu {
+            width: 200px;
+        }
+        .navbar-light .dropdown-menu a.dropdown-item {
+            color: #1e5552;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 16px;
+            font-weight: normal;
+            width: 200px;
+
         }
 
-        .dropdown-menu {
-            font-size: 0.8rem; /* Ajusta el tamaño de la fuente del dropdown */
-            padding: 0.5rem; /* Ajusta el padding del dropdown */
+        .navbar-light .dropdown-menu a.dropdown-item:hover {
+            background-color: #ffffff;
+            margin: 0;
+            width: 200px;
         }
 
-        .dropdown-item {
-            padding: 0.25rem 1.5rem; /* Ajusta el padding de los elementos del dropdown */
-        }
-        .user-dropdown .dropdown-menu {
-            font-size: 0.7rem; /* Ajusta el tamaño de la fuente del dropdown del usuario */
-            padding: 0.3rem; /* Ajusta el padding del dropdown del usuario */
-        }
-
-        .user-dropdown .dropdown-item {
-            padding: 0.2rem 1rem; /* Ajusta el padding de los elementos del dropdown del usuario */
-        }
-
+        /*fin dropdown*/
         .main-container {
             padding: 30px;
             background-color: white;
         }
-
 
         .form-section {
             margin-bottom: 30px;
@@ -138,73 +133,6 @@
             color: white;
         }
 
-        footer div {
-            margin-right: 30px;
-        }
-
-
-        footer {
-            background-color: #B8CCC8;
-            padding: 10px 50px;
-            color: white; /* Color de texto */
-            /* justify-content: center; Centrar los elementos */
-            display: flex; /* Utiliza flexbox para disposición horizontal */
-        }
-
-        footer a {
-            color: white;
-            text-decoration: none;
-            margin-top: 00px;
-        }
-
-        .footer-info {
-            display: flex; /* Utiliza flexbox para disposición horizontal */
-            padding: 10px; /* Espaciado interno */
-            background-color: #B8CCC8; /* Color de fondo */
-            color: white; /* Color de texto */
-        }
-
-        .footer-info div {
-            margin-left: 10px; /* Espacio entre los grupos de información */
-        }
-
-        .footer-info h4 {
-            margin-bottom: 10px; /* Espacio debajo del encabezado */
-        }
-
-        .footer-info a {
-            color: white; /* Color de los enlaces */
-            text-decoration: none; /* Sin subrayado */
-            margin-bottom: 5px; /* Espacio entre enlaces */
-        }
-
-        .social-icons {
-            display: flex; /* Utiliza flexbox para disposición horizontal */
-            justify-content: center; /* Centrar los íconos en la línea */
-            padding: 20px; /* Espacio alrededor de los íconos */
-            margin-top: 30px; /* Espacio superior para bajar los íconos */
-        }
-
-        .social-icons a {
-            margin: 0 20px; /* Espacio horizontal entre íconos */
-        }
-
-        .social-icons img {
-            max-height: 70px; /* Altura máxima para los íconos */
-        }
-
-        .info-container {
-            display: flex; /* Habilita Flexbox para el contenedor */
-            flex-direction: column; /* Coloca los elementos en una columna */
-            margin-bottom: 10px; /* Espacio debajo del contenedor */
-        }
-
-        .info-container a {
-            margin-bottom: 5px; /* Espacio entre los enlaces */
-            color: white; /* Color del texto */
-            text-decoration: none; /* Quita el subrayado de los enlaces */
-        }
-
         h1, h2, h3, h5, h6 {
             font-size: 19px; /* Ajusta el tamaño de la fuente de los headers */
             font-weight: bold; /* Ajusta el peso de la fuente de los headers */
@@ -213,13 +141,36 @@
         h4 {
             font-size: 16px; /* Ajusta el tamaño de la fuente de los headers */
         }
-        .btn-inicio {
-            background-color: #313937;
-            color: white;
-            padding: 10px 15px;
-            text-decoration: none;
-            border-radius: 10px;
-            margin-left: 20px;
+
+        h3 {
+            margin: 0; /* Elimina márgenes por defecto */
+            white-space: nowrap; /* Evita que el texto haga salto de línea */
+        }
+
+        h5 {
+            margin: 0; /* Elimina márgenes por defecto */
+            white-space: nowrap; /* Evita que el texto haga salto de línea */
+            color: white; /* Color de texto */
+        }
+
+        .footer-bg {
+            background-color: #B7C9C7; /* Color de fondo */
+            padding: 20px 0; /* Espaciado superior e inferior */
+        }
+        .social-icons a {
+            margin-right: 15px; /* Espacio entre iconos de redes sociales */
+            color: white; /* Color de texto para iconos */
+        }
+        .footer-link {
+            color: white; /* Color de texto para enlaces */
+            text-decoration: none; /* Eliminar subrayado */
+        }
+        .footer-link:hover {
+            text-decoration: underline; /* Subrayar al pasar el mouse */
+        }
+
+        .social-icon {
+            margin-right: 10px; /* Espacio entre el ícono y el texto */
         }
 
     </style>
@@ -227,9 +178,7 @@
 
 <body>
 <header>
-    <div><img src="/static/logo.png" alt="Logo" style="max-height: 50px;">
-        <a href="/inicio" class="btn-inicio">Inicio</a>
-    </div>
+    <div><img src="/static/logo.png" alt="Logo" style="max-height: 50px;"></div>
     <nav class="navbar navbar-expand-lg navbar-light">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
                 aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -252,11 +201,12 @@
                         Nombre del Usuario
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <a class="dropdown-item" href="#">Mi perfil</a>
-                        <a class="dropdown-item" href="#">Mis colaboraciones</a>
-                        <a class="dropdown-item" href="#">Mi puntaje</a>
+                        <a class="dropdown-item" href="/perfil">Mi perfil</a>
+                        <a class="dropdown-item" href="/misColaboraciones">Mis colaboraciones</a>
+                        <a class="dropdown-item" href="/canjearPuntos">Mi puntaje</a>
+                        <a class="dropdown-item" href="/misReportes">Mis reportes</a>
                         <a class="dropdown-item" href="#">Configuración</a>
-                        <a class="dropdown-item" href="#">Cerrar sesión</a>
+                        <a class="dropdown-item" href="/login">Cerrar sesión</a>
                     </div>
                 </li>
             </ul>
@@ -269,46 +219,47 @@
         <h1>Distribuir Viandas</h1>
         <p></p>
         <form>
-            <div style="display: inline-flex; gap: 20px">
+            <div style="display: inline-flex; gap: 20px" >
                 <!-- Heladera origen -->
                 <div class="form-section">
                     <h4>Heladera origen</h4>
-                    <!-- Input eliminado -->
-                    <!--<input type="text" id="heladera-origen" class="form-control" rows="1" placeholder="Heladera Medrano UTN">-->
+                    <!-- <label for="heladera-origen">Heladera origen</label> -->
+                    <div class="form-section">
+                        <input type="text" id="heladera-origen" class="form-control" rows="1" placeholder="Heladera Medrano UTN">
+                    </div>
                     <div class="heladera-card">
-                        <strong>{{heladera1}}</strong>
-                        <p>{{direccion1}}</p>
-                        <p><strong>Estado:</strong> {{estado1}}</p>
-                        <p><strong>Necesita traslado de:</strong>{{disponibilidad1}}</p>
-                        <div class="green-box">
-                           <a href="/mapaHeladerasDistribucionOrigen?heladera1={{heladera1}}&direccion1={{direccion1}}&estado1={{estado1}}&disponibilidad1={{disponibilidad1}}&heladera2={{heladera2}}&direccion2={{direccion2}}&estado2={{estado2}}&disponibilidad2={{disponibilidad2}}" style="text-decoration: none; color: inherit;">Elegir otra Heladera</a>
-                        </div>
+                        <strong>Heladera Medrano UTN</strong>
+                        <p>Avenida Medrano 1234</p>
+                        <p><strong>Estado:</strong> Fuera de servicio</p>
+                        <p><strong>Necesita traslado de:</strong> 2 viandas</p>
+                        <div class="green-box">Suscribirse</div>
                     </div>
                 </div>
                 <!-- Heladera destino -->
                 <div class="form-section">
                     <h4>Heladera destino</h4>
-                    <!-- Input eliminado -->
-                    <!--<input type="text" class="form-control" id="heladera-destino" placeholder="Heladera Medrano UTN">-->
+                    <!-- <label for="heladera-origen">Heladera destino</label> -->
+                    <input type="text" class="form-control" id="heladera-destino" placeholder="Heladera Medrano UTN">
+                    <p></p>
                     <div class="heladera-card">
-                        <strong>{{heladera2}}</strong>
-                        <p>{{direccion2}}</p>
-                        <p><strong>Estado:</strong> {{estado2}}</p>
-                        <p><strong>Disponibilidad:</strong>{{disponibilidad2}}</p>
-                        <div class="green-box">
-                          <a href="/mapaHeladerasDistribucionDestino?heladera1={{heladera1}}&direccion1={{direccion1}}&estado1={{estado1}}&disponibilidad1={{disponibilidad1}}&heladera2={{heladera2}}&direccion2={{direccion2}}&estado2={{estado2}}&disponibilidad2={{disponibilidad2}}" style="text-decoration: none; color: inherit;">Elegir otra Heladera</a>
-                        </div>
+                        <strong>Heladera Medrano UTN</strong>
+                        <p>Avenida Medrano 1234</p>
+                        <p><strong>Estado:</strong> Activa</p>
+                        <p><strong>Disponibilidad:</strong> 2 viandas</p>
+                        <div class="green-box">Suscribirse</div>
                     </div>
                 </div>
                 <div>
                     <!-- Motivo -->
                     <div class="form-section">
                         <h4>Motivo</h4>
+                        <!--<label for="motivo">Motivo</label> -->
                         <textarea id="motivo" class="form-control" rows="3" placeholder="Descripción..."></textarea>
                     </div>
                     <!-- Cantidad de viandas -->
                     <div class="form-section">
                         <h4>Cantidad de viandas</h4>
+                        <!--<label for="motivo">Cantidad de viandas</label> -->
                         <select id="cantidad" class="form-control">
                             <option value="1">1</option>
                             <option value="2">2</option>
@@ -325,34 +276,45 @@
     </div>
 </main>
 
-<footer>
-    <div style="display: inline-flex; gap: 700px" >
-        <div style="text-align: right">
-            <div class="social-icons">
-                <img src="/static/logo.png" alt="Logo" style="max-height: 50px;">
+<footer class="footer-bg">
+    <div class="container">
+        <div class="row justify-content-between align-items-center">
+            <div class="col-md-3 text-center text-md-left">
+                <img src="/static/logo.png" alt="Logo" class="img-fluid mb-2"> <!-- Reemplaza con tu logo -->
             </div>
-            <div class="social-icons">
-                <a href="#"><img src="/static/facebook-icon.png" alt="Facebook" style="max-height: 20px;"></a>
-                <a href="#"><img src="/static/instagram-icon.png" alt="Instagram" style="max-height: 20px;"></a>
-                <a href="#"><img src="/static/twitter-icon.png" alt="Twitter" style="max-height: 20px;"></a>
+            <div class="col-md-9">
+                <div class="row">
+                    <!-- Más Información -->
+                    <div class="col-md-4">
+                        <h5>Más información</h5>
+                        <ul class="list-unstyled">
+                            <li><a href="#" class="footer-link">Contáctanos</a></li>
+                            <li><a href="#" class="footer-link">Sobre nosotros</a></li>
+                            <li><a href="#" class="footer-link">Sobre el proyecto</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Donar -->
+                    <div class="col-md-4">
+                        <h5>Donar</h5>
+                        <ul class="list-unstyled">
+                            <li><a href="/donarVianda" class="footer-link">Donar vianda</a></li>
+                            <li><a href="/mapaHeladeras" class="footer-link">Ver mapa</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Dónde encontrarnos -->
+                    <!-- Dónde encontrarnos -->
+                    <div class="col-md-4">
+                        <h5>Dónde encontrarnos</h5>
+                        <ul class="list-unstyled">
+                            <li><a href="#" class="footer-link"><img src="/static/facebook-icon.png" alt="Facebook" style="max-height: 20px;" ><i class="fab fa-facebook-f social-icon"></i>Facebook</a></li>
+                            <li><a href="#" class="footer-link"><img src="/static/instagram-icon.png" alt="Instagram" style="max-height: 20px;"><i class="fab fa-instagram social-icon"></i>Instagram</a></li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
-        <!-- <div class="footer-info"> -->
-        <div class="footer-info" style="text-align: right">
-            <div class="info-container">
-                <h3>Más información</h3>
-                <a href="#">Contáctanos</a>
-                <a href="#">Sobre nosotros</a>
-                <a href="#">Sobre el proyecto</a>
-            </div>
-            <div class="info-container">
-                <h3>Donar</h3>
-                <a href="/donarVianda">Donar vianda</a>
-                <a href="/mapaHeladeras">Ver mapa</a>
-                <a href="/donarDinero">Donar dinero</a>
-            </div>
-        </div>
-    </div>
 </footer>
 
 <!-- Scripts de Bootstrap y jQuery -->

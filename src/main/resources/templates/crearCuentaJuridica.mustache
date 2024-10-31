@@ -4,19 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro Persona Jurídica</title>
-    <!-- Incluye Bootstrap -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Enlace a CSS de Bootstrap -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        .social-icons {
-            display: flex;
-            gap: 10px;
-        }
-
-        .social-icons img {
-            width: 24px;
-            height: 24px;
-        }
         body {
             font-family: Arial, sans-serif;
             margin: 0;
@@ -24,30 +14,45 @@
             display: flex;
             flex-direction: column;
             min-height: 100vh;
-            background-color: #f5f5f5;
+            background-color: #ffffff;
         }
-
-        header, footer {
-            background-color: #e0e0e0;
-            padding: 20px 50px;
-            text-align: center;
-        }
-
         header {
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
-
-        header nav a {
-            margin-left: 20px;
-            text-decoration: none;
-            color: black;
+        header .navbar-nav .nav-link {
+            font-size: 17px !important; /* Ajusta el tamaño de la fuente de los enlaces de navegación en el header */
+        }
+        nav {
+            margin-top: 20px; /* Ajusta el valor según el espacio deseado */
         }
 
+        /*Dropdown*/
+        .navbar-light .navbar-nav .nav-link,
+        .navbar-light .dropdown-menu {
+            background-color: #ffffff;
+            color: #1e5552;
+            font-size: 16px;
+            font-weight: normal;
+        }
 
-        .navbar-nav .nav-item {
-            margin-left: 20px;
+        .navbar-light .dropdown-menu {
+            width: 200px;
+        }
+        .navbar-light .dropdown-menu a.dropdown-item {
+            color: #1e5552;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 16px;
+            font-weight: normal;
+            width: 200px;
+
+        }
+
+        .navbar-light .dropdown-menu a.dropdown-item:hover {
+            background-color: #ffffff;
+            margin: 0;
+            width: 200px;
         }
 
         .btn-donar {
@@ -62,24 +67,6 @@
             flex-grow: 1;
             padding: 20px;
             background-color: white;
-        }
-
-        footer {
-            display: flex;
-            justify-content: space-between;
-        }
-
-        footer div {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            margin-right: 30px;
-        }
-
-        footer div a {
-            margin-top: 10px;
-            text-decoration: none;
-            color: black;
         }
 
         .register-container {
@@ -177,26 +164,42 @@
             margin: 0;
             width: 200px;
         }
-        .btn-inicio {
-            background-color: #313937;
-            color: white;
-            padding: 10px 15px;
-            text-decoration: none;
-            border-radius: 10px;
-            margin-left: 20px;
+        h5 {
+            margin: 0; /* Elimina márgenes por defecto */
+            white-space: nowrap; /* Evita que el texto haga salto de línea */
+            color: white; /* Color de texto */
+        }
+
+
+        .footer-bg {
+            background-color: #B7C9C7; /* Color de fondo */
+            padding: 20px 0; /* Espaciado superior e inferior */
+        }
+        .social-icons a {
+            margin-right: 15px; /* Espacio entre iconos de redes sociales */
+            color: white; /* Color de texto para iconos */
+        }
+        .footer-link {
+            color: white; /* Color de texto para enlaces */
+            text-decoration: none; /* Eliminar subrayado */
+        }
+        .footer-link:hover {
+            text-decoration: underline; /* Subrayar al pasar el mouse */
+        }
+
+        .social-icon {
+            margin-right: 10px; /* Espacio entre el ícono y el texto */
         }
     </style>
 </head>
 <body>
 
 <header>
-    <div><img src="/static/logo.png" alt="Logo" style="max-height: 50px;">
-        <a href="/inicio" class="btn-inicio">Inicio</a>
-    </div>
+    <div><img src="/static/logo.png" alt="Logo" style="max-height: 50px;"></div>
     <nav>
         <a href="#">Sobre nosotros</a>
-        <a href="/mapaHeladeras">Heladeras</a>
         <a href="/elegirDonacion" class="btn-donar">Donar</a>
+        <a href="/mapaHeladeras">Heladeras</a>
     </nav>
 </header>
 
@@ -208,7 +211,7 @@
     </div>
     <div class="register-container">
         <h2>Registro Persona Jurídica</h2>
-        <form action="/crearCuentaJuridica" method = "post">
+        <form>
             <label for="razon-social">Razón Social</label>
             <input type="text" id="razon-social" name="razon-social" required>
 
@@ -241,27 +244,45 @@
     </div>
 </main>
 
-<footer>
-    <div>
-        <p><img src="/static/logo.png" alt="Logo" style="max-height: 50px;"></p>
-            <div class="social-icons">
-                <a href="#"><img src="/static/facebook-icon.png" alt="Facebook"></a>
-                <a href="#"><img src="/static/instagram-icon.png" alt="Instagram"></a>
-                <a href="#"><img src="/static/twitter-icon.png" alt="Twitter"></a>
+<footer class="footer-bg">
+    <div class="container">
+        <div class="row justify-content-between align-items-center">
+            <div class="col-md-3 text-center text-md-left">
+                <img src="/static/logo.png" alt="Logo" class="img-fluid mb-2"> <!-- Reemplaza con tu logo -->
             </div>
-    </div>
-    <div>
-        <h4>Más información</h4>
-        <a href="#">Contactanos</a>
-        <a href="#">Sobre nosotros</a>
-        <a href="#">Sobre el proyecto</a>
-    </div>
-    <div>
-        <h4>Donar</h4>
-        <a href="/donarVianda">Donar vianda</a>
-        <a href="/mapaHeladeras">Ver mapa</a>
-        <a href="/donarDinero">Donar dinero</a>
-    </div>
+            <div class="col-md-9">
+                <div class="row">
+                    <!-- Más Información -->
+                    <div class="col-md-4">
+                        <h5>Más información</h5>
+                        <ul class="list-unstyled">
+                            <li><a href="#" class="footer-link">Contáctanos</a></li>
+                            <li><a href="#" class="footer-link">Sobre nosotros</a></li>
+                            <li><a href="#" class="footer-link">Sobre el proyecto</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Donar -->
+                    <div class="col-md-4">
+                        <h5>Donar</h5>
+                        <ul class="list-unstyled">
+                            <li><a href="/donarVianda" class="footer-link">Donar vianda</a></li>
+                            <li><a href="/mapaHeladeras" class="footer-link">Ver mapa</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Dónde encontrarnos -->
+                    <!-- Dónde encontrarnos -->
+                    <div class="col-md-4">
+                        <h5>Dónde encontrarnos</h5>
+                        <ul class="list-unstyled">
+                            <li><a href="#" class="footer-link"><img src="/static/facebook-icon.png" alt="Facebook" style="max-height: 20px;" ><i class="fab fa-facebook-f social-icon"></i>Facebook</a></li>
+                            <li><a href="#" class="footer-link"><img src="/static/instagram-icon.png" alt="Instagram" style="max-height: 20px;"><i class="fab fa-instagram social-icon"></i>Instagram</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
 </footer>
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
