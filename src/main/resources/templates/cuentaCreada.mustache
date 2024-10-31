@@ -6,6 +6,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>cuentaCreada</title>
+    <!-- Enlace a CSS de Bootstrap -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -17,7 +19,7 @@
             background-color: #f5f5f5;
         }
 
-        header, footer {
+        header{
             background-color: #e0e0e0;
             padding: 20px 50px;
             text-align: center;
@@ -69,42 +71,57 @@
             color: #666;
         }
 
-        footer {
-            display: flex;
-            justify-content: space-between;
-        }
-
-        footer div {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            margin-right: 30px;
-        }
-
-        footer div a {
-            margin-top: 10px;
-            text-decoration: none;
-            color: black;
-        }
-        .btn-inicio {
-            background-color: #313937;
+        .btn-volver {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-weight: bold;
             color: white;
-            padding: 10px 15px;
-            text-decoration: none;
+            background-color: #1e5552;
             border-radius: 10px;
-            margin-left: 20px;
+        }
+
+        .btn-volver:hover {
+            background-color: #114c49;
+            color: white;
+        }
+
+        h5 {
+            margin: 0; /* Elimina márgenes por defecto */
+            white-space: nowrap; /* Evita que el texto haga salto de línea */
+            color: white; /* Color de texto */
+        }
+
+
+        .footer-bg {
+            background-color: #B7C9C7; /* Color de fondo */
+            padding: 20px 0; /* Espaciado superior e inferior */
+        }
+        .social-icons a {
+            margin-right: 15px; /* Espacio entre iconos de redes sociales */
+            color: white; /* Color de texto para iconos */
+        }
+        .footer-link {
+            color: white; /* Color de texto para enlaces */
+            text-decoration: none; /* Eliminar subrayado */
+        }
+        .footer-link:hover {
+            text-decoration: underline; /* Subrayar al pasar el mouse */
+        }
+
+        .social-icon {
+            margin-right: 10px; /* Espacio entre el ícono y el texto */
         }
     </style>
 </head>
 <body>
 <header>
-    <div><img src="/static/logo.png" alt="Logo" style="max-height: 50px;">
-        <a href="/inicio" class="btn-inicio">Inicio</a>
-    </div>
+    <div><img src="/static/logo.png" alt="Logo" style="max-height: 50px;"></div>
     <nav>
         <a href="#">Sobre nosotros</a>
-        <a href="/mapaHeladeras">Heladeras</a>
         <a href="/elegirDonacion" class="btn-donar">Donar</a>
+        <a href="/mapaHeladeras">Heladeras</a>
     </nav>
 </header>
 
@@ -112,7 +129,53 @@
     <div class="validation-container">
         <h1>¡Tu cuenta fue creada con exito!</h1>
         <p>Ya podes ingresar a tu cuenta y comenzar a donar alimentos.</p>
+        <a href="/login" class="btn-volver">Iniciar Sesión</a>
     </div>
 </main>
+
+<footer class="footer-bg">
+    <div class="container">
+        <div class="row justify-content-between align-items-center">
+            <div class="col-md-3 text-center text-md-left">
+                <img src="/static/logo.png" alt="Logo" class="img-fluid mb-2"> <!-- Reemplaza con tu logo -->
+            </div>
+            <div class="col-md-9">
+                <div class="row">
+                    <!-- Más Información -->
+                    <div class="col-md-4">
+                        <h5>Más información</h5>
+                        <ul class="list-unstyled">
+                            <li><a href="#" class="footer-link">Contáctanos</a></li>
+                            <li><a href="#" class="footer-link">Sobre nosotros</a></li>
+                            <li><a href="#" class="footer-link">Sobre el proyecto</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Donar -->
+                    <div class="col-md-4">
+                        <h5>Donar</h5>
+                        <ul class="list-unstyled">
+                            <li><a href="/donarVianda" class="footer-link">Donar vianda</a></li>
+                            <li><a href="/mapaHeladeras" class="footer-link">Ver mapa</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Dónde encontrarnos -->
+                    <!-- Dónde encontrarnos -->
+                    <div class="col-md-4">
+                        <h5>Dónde encontrarnos</h5>
+                        <ul class="list-unstyled">
+                            <li><a href="#" class="footer-link"><img src="/static/facebook-icon.png" alt="Facebook" style="max-height: 20px;" ><i class="fab fa-facebook-f social-icon"></i>Facebook</a></li>
+                            <li><a href="#" class="footer-link"><img src="/static/instagram-icon.png" alt="Instagram" style="max-height: 20px;"><i class="fab fa-instagram social-icon"></i>Instagram</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+</footer>
+<!-- Scripts de Bootstrap y jQuery -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

@@ -8,14 +8,14 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-    background-color: #ffffff;
-}
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            background-color: #ffffff;
+        }
 
         header {
             display: flex;
@@ -58,100 +58,100 @@
 
         /*fin dropdown*/
 
-main {
-    flex-grow: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 50px;
-    background-color: white;
-}
+        main {
+            flex-grow: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 50px;
+            background-color: white;
+        }
 
-form {
-    width: 100%;
-    max-width: 800px;
-    margin: 0 auto;
-}
+        form {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+        }
 
-h1 {
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 20px;
-}
+        h1 {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
 
-.form-group label {
-    font-weight: bold;
-}
+        .form-group label {
+            font-weight: bold;
+        }
 
-.form-control {
-    border-radius: 5px;
-}
+        .form-control {
+            border-radius: 5px;
+        }
 
-.upload-area {
-    border: 2px dashed #ced4da;
-    border-radius: 5px;
-    padding: 20px;
-    text-align: center;
-    background-color: #f8f9fa;
-    color: #6c757d;
-    position: relative;
-    cursor: pointer;
-}
+        .upload-area {
+            border: 2px dashed #ced4da;
+            border-radius: 5px;
+            padding: 20px;
+            text-align: center;
+            background-color: #f8f9fa;
+            color: #6c757d;
+            position: relative;
+            cursor: pointer;
+        }
 
-.upload-area:hover {
-    background-color: #e9ecef;
-}
+        .upload-area:hover {
+            background-color: #e9ecef;
+        }
 
-.upload-area input[type="file"] {
-    display: none;
-}
+        .upload-area input[type="file"] {
+            display: none;
+        }
 
-.upload-icon {
-    font-size: 50px;
-    color: #6c757d;
-}
+        .upload-icon {
+            font-size: 50px;
+            color: #6c757d;
+        }
 
-.upload-area p {
-    margin: 10px 0;
-}
+        .upload-area p {
+            margin: 10px 0;
+        }
 
-.upload-area a {
-    color: #007bff;
-    text-decoration: none;
-}
+        .upload-area a {
+            color: #007bff;
+            text-decoration: none;
+        }
 
-.upload-area a:hover {
-    text-decoration: underline;
-}
+        .upload-area a:hover {
+            text-decoration: underline;
+        }
 
-.btn-group {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-}
+        .btn-group {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
 
-.btn-cancelar, .btn-reportar {
-    border: none;
-    padding: 10px 90px;
-    border-radius: 5px;
-    font-size: 16px;
-    margin: 0 15px;
-}
+        .btn-cancelar, .btn-reportar {
+            border: none;
+            padding: 10px 90px;
+            border-radius: 5px;
+            font-size: 16px;
+            margin: 0 15px;
+        }
 
-.btn-cancelar {
-    background-color: #e0e0e0;
-    color: black;
-}
+        .btn-cancelar {
+            background-color: #e0e0e0;
+            color: black;
+        }
 
-.btn-reportar {
-    background-color: #1e5552;
-    color: white;
-}
-.btn-reportar:hover {
-    background-color: #274597;
-    color: white;
-}
-h5 {
+        .btn-reportar {
+            background-color: #1e5552;
+            color: white;
+        }
+        .btn-reportar:hover {
+            background-color: #274597;
+            color: white;
+        }
+        h5 {
             margin: 0; /* Elimina márgenes por defecto */
             white-space: nowrap; /* Evita que el texto haga salto de línea */
             color: white; /* Color de texto */
@@ -187,103 +187,103 @@ h5 {
     </style>
 </head>
 <body>
-    <header>
-        <div><img src="/static/logo.png" alt="Logo" style="max-height: 50px;"></div>
-        <nav class="navbar navbar-expand-lg navbar-light">
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+<header>
+    <div><img src="" alt="Logo" style="max-height: 50px;"></div>
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
                 aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Sobre nosotros</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/elegirDonacion">Donar</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/mapaHeladeras">Heladeras</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Nombre del Usuario
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <a class="dropdown-item" href="/perfil">Mi perfil</a>
-                            <a class="dropdown-item" href="#">Mis colaboraciones</a>
-                            <a class="dropdown-item" href="/canjearPuntos">Mi puntaje</a>
-                            <a class="dropdown-item" href="/misReportes">Mis reportes</a>
-                            <a class="dropdown-item" href="#">Configuración</a>
-                            <a class="dropdown-item" href="#">Cerrar sesión</a>
-                        </div>
-                    </li>
-                </ul>
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Sobre nosotros</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Donar</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Heladeras</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Nombre del Usuario
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="/perfil">Mi perfil</a>
+                        <a class="dropdown-item" href="/misColaboraciones">Mis colaboraciones</a>
+                        <a class="dropdown-item" href="/canjearPuntos">Mi puntaje</a>
+                        <a class="dropdown-item" href="/misReportes">Mis reportes</a>
+                        <a class="dropdown-item" href="#">Configuración</a>
+                        <a class="dropdown-item" href="/login">Cerrar sesión</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>
+
+<main>
+    <div class="container">
+        <h1>Reportar falla técnica</h1>
+
+        <!-- Formulario -->
+        <form>
+            <div class="form-group">
+                <label for="descripcion">Descripción</label>
+                <textarea id="descripcion" class="form-control" rows="4" placeholder="Descripción de la falla técnica"></textarea>
             </div>
-        </nav>
-    </header>
 
-    <main>
-        <div class="container">
-            <h1>Reportar falla técnica</h1>
-
-            <!-- Formulario -->
-            <form action = "/reportarFallaTecnica" method = "POST">
-                <div class="form-group">
-                    <label for="descripcion">Descripción</label>
-                    <textarea id="descripcion" class="form-control" rows="4" placeholder="Descripción de la falla técnica"></textarea>
-                </div>
-
-                <div class="form-group">
-                    <label for="foto">Foto</label>
-                    <div class="upload-area" id="uploadArea">
-                        <input type="file" id="fileInput" accept="image/*">
-                        <div>
-                            <i class="bi bi-cloud-arrow-up upload-icon"></i>
-                            <p>Arrastrá la imagen o <a href="#" id="selectLink">Seleccioná</a></p>
-                        </div>
+            <div class="form-group">
+                <label for="foto">Foto</label>
+                <div class="upload-area" id="uploadArea">
+                    <input type="file" id="fileInput" accept="image/*">
+                    <div>
+                        <i class="bi bi-cloud-arrow-up upload-icon"></i>
+                        <p>Arrastrá la imagen o <a href="#" id="selectLink">Seleccioná</a></p>
                     </div>
                 </div>
+            </div>
 
-                <div class="btn-group">
-                    <a href="/visualizarFallasTecnicas" class="btn-cancelar">Cancelar</a>
-                    <a href="/aceptarReportarFalla" class="btn-reportar">Reportar</a>
-                </div>
+            <div class="btn-group">
+                <a href="/visualizarFallasTecnicas" class="btn-cancelar">Cancelar</a>
+                <a href="/aceptarReportarFalla" class="btn-reportar">Reportar</a>
+            </div>
 
-            </form>
-        </div>
-    </main>
+        </form>
+    </div>
+</main>
 
-    <footer class="footer-bg">
-        <div class="container">
-            <div class="row justify-content-between align-items-center">
-                <div class="col-md-3 text-center text-md-left">
-                    <img src="/static/logo.png" alt="Logo" class="img-fluid mb-2"> <!-- Reemplaza con tu logo -->
-                </div>
-                <div class="col-md-9">
-                    <div class="row">
-                        <!-- Más Información -->
-                        <div class="col-md-4">
-                            <h5>Más información</h5>
-                            <ul class="list-unstyled">
-                                <li><a href="#" class="footer-link">Contáctanos</a></li>
-                                <li><a href="#" class="footer-link">Sobre nosotros</a></li>
-                                <li><a href="#" class="footer-link">Sobre el proyecto</a></li>
-                            </ul>
-                        </div>
+<footer class="footer-bg">
+    <div class="container">
+        <div class="row justify-content-between align-items-center">
+            <div class="col-md-3 text-center text-md-left">
+                <img src="/static/logo.png" alt="Logo" class="img-fluid mb-2"> <!-- Reemplaza con tu logo -->
+            </div>
+            <div class="col-md-9">
+                <div class="row">
+                    <!-- Más Información -->
+                    <div class="col-md-4">
+                        <h5>Más información</h5>
+                        <ul class="list-unstyled">
+                            <li><a href="#" class="footer-link">Contáctanos</a></li>
+                            <li><a href="#" class="footer-link">Sobre nosotros</a></li>
+                            <li><a href="#" class="footer-link">Sobre el proyecto</a></li>
+                        </ul>
+                    </div>
 
-                        <!-- Donar -->
-                        <div class="col-md-4">
-                            <h5>Donar</h5>
-                            <ul class="list-unstyled">
-                                <li><a href="#" class="footer-link">Donar vianda</a></li>
-                                <li><a href="#" class="footer-link">Ver mapa</a></li>
-                            </ul>
-                        </div>
+                    <!-- Donar -->
+                    <div class="col-md-4">
+                        <h5>Donar</h5>
+                        <ul class="list-unstyled">
+                            <li><a href="/donarVianda" class="footer-link">Donar vianda</a></li>
+                            <li><a href="/mapaHeladeras" class="footer-link">Ver mapa</a></li>
+                        </ul>
+                    </div>
 
-                        <!-- Dónde encontrarnos -->
-                        <!-- Dónde encontrarnos -->
+                    <!-- Dónde encontrarnos -->
+                    <!-- Dónde encontrarnos -->
                     <div class="col-md-4">
                         <h5>Dónde encontrarnos</h5>
                         <ul class="list-unstyled">
@@ -294,11 +294,11 @@ h5 {
                 </div>
             </div>
         </div>
-    </footer>
+</footer>
 
-    <!-- Scripts de Bootstrap y jQuery -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-   </body>
+<!-- Scripts de Bootstrap y jQuery -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
 </html>

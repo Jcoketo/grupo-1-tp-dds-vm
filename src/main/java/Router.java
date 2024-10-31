@@ -103,6 +103,11 @@ public class Router {
                 post(new HeladeraAgregadaController(repoHeladeras));
             });
 
+            path("/aceptarAgregarHeladera", () -> {
+                before(new AutorizacionMiddleware().setDebeSerLogueado().setDebeSerPJ());
+                get(new AceptarAgregarHeladeraController());
+            });
+
             path("/mapaHeladeras", () -> {
                 get(new MapaHeladeraVistaController());
             });
