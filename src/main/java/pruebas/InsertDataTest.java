@@ -23,7 +23,7 @@ public class InsertDataTest {
         em.getTransaction().begin();
 
         Documento doc = new Documento("42148665", TipoDocumento.DNI);
-        em.persist(doc);
+        //em.persist(doc);
 
         // Crear y persistir una PersonaHumana
         MedioDeContacto medioDeContacto = new MedioDeContacto(TipoMedioDeContacto.MAIL, "example@example.com");
