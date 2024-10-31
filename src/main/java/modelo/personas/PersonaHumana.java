@@ -19,11 +19,18 @@ public class PersonaHumana extends Persona{
     @Column
     private LocalDate fechaNacimiento;
 
+    /*
     @OneToOne
     @JoinColumn(name = "documento_id", referencedColumnName = "id")
     @Setter
-    @Getter private Documento documento;
+    @Getter private Documento documento;*/
 
+    @Embedded
+    @AttributeOverrides({
+        @AttributeOverride(name = "numeroDoc", column = @Column(name = "numero_doc")),
+        @AttributeOverride(name = "tipoDoc", column = @Column(name = "tipo_doc", columnDefinition = "VARCHAR(255)"))
+    })
+    @Getter @Setter private Documento documento;
 
     // CONSTRUCTOR PRINCIPAL
     public PersonaHumana(String nombre, String apellido, MedioDeContacto medioDeContacto) {

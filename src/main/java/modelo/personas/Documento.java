@@ -2,15 +2,9 @@ package modelo.personas;
 
 import javax.persistence.*;
 
-@Entity
-@Table
+@Embeddable
 public class Documento {
 
-    @Id
-    @GeneratedValue
-    private int id;
-
-    @Column
     private String numeroDoc;
 
     @Enumerated(EnumType.STRING)
@@ -24,6 +18,27 @@ public class Documento {
     public String getUniqueIdentifier(){
         return this.tipoDoc + this.numeroDoc;
     }
+
+    public String getNumeroDoc() {
+        return numeroDoc;
+    }
+
+    public void setNumeroDoc(String numeroDoc) {
+        this.numeroDoc = numeroDoc;
+    }
+
+    public TipoDocumento getTipoDoc() {
+        return tipoDoc;
+    }
+
+    public void setTipoDoc(TipoDocumento tipoDoc) {
+        this.tipoDoc = tipoDoc;
+    }
+
+    public Documento (){
+
+    }
+
 }
 
 
