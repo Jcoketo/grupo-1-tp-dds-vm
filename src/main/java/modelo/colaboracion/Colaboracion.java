@@ -7,7 +7,9 @@ import persistencia.EntidadPersistente;
 import java.time.LocalDate;
 import java.util.List;
 
-public abstract class Colaboracion extends EntidadPersistente {
+
+
+public abstract class Colaboracion  {
     protected List<TipoPersona> tiposPersonasHabilitadas;
     protected LocalDate fechaColaboracion;
 

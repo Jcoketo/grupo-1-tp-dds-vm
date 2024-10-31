@@ -3,6 +3,9 @@ package pruebas;
 import modelo.elementos.Heladera;
 import modelo.elementos.PuntoEstrategico;
 import modelo.personas.*;
+import modelo.suscripcion.SuscriptoCantidad;
+import modelo.suscripcion.TipoSuscripcion;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -39,7 +42,15 @@ public class InsertDataTest {
 
         em.persist(heladera);
 
+        Colaborador colaborador = new Colaborador(personaJuridica);
+
+        SuscriptoCantidad suscriptoCantidad = new SuscriptoCantidad(heladera, colaborador, TipoSuscripcion.QUEDAN_POCAS, 10, TipoMedioDeContacto.MAIL);
+
         personaJuridica.getHeladeras().add(heladera);
+
+        em.persist(suscriptoCantidad);
+
+        heladera.getColaboradoresSucriptos().add(suscriptoCantidad);
 
 
         /*

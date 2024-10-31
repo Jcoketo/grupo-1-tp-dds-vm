@@ -6,8 +6,15 @@ import lombok.Setter;
 import modelo.personas.Colaborador;
 import modelo.personas.TipoMedioDeContacto;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+
+@Entity
 public class SuscriptoCantidad extends ColaboradorSuscripto {
+    @Column
     @Getter @Setter private Integer limiteViandasMinimas;
+
+    @Column
     @Getter @Setter private Integer limiteViandasMaximas;
 
     public SuscriptoCantidad(Heladera heladera, Colaborador colaborador, TipoSuscripcion tipo, Integer n, TipoMedioDeContacto medio) {
@@ -25,4 +32,7 @@ public class SuscriptoCantidad extends ColaboradorSuscripto {
         //this.limiteViandasMaximas = 0;
     }
 
+    public SuscriptoCantidad() {
+
+    }
 }
