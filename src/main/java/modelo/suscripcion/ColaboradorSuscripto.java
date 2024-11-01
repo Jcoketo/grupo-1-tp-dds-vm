@@ -19,6 +19,7 @@ public abstract class ColaboradorSuscripto {
     private Long id;
 
     @ManyToOne
+    @JoinColumn(name="heladera_id", referencedColumnName = "id")
     private Heladera heladera;
 
     @ManyToOne

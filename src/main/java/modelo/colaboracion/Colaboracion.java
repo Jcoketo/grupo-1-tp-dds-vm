@@ -4,13 +4,19 @@ import modelo.personas.TipoPersona;
 import modelo.personas.Colaborador;
 import persistencia.EntidadPersistente;
 
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
 
 
+@Entity
+@Table
+public abstract class Colaboracion extends EntidadPersistente {
 
-public abstract class Colaboracion  {
+    @Transient
     protected List<TipoPersona> tiposPersonasHabilitadas;
+
+    @Column
     protected LocalDate fechaColaboracion;
 
     public abstract void hacerColaboracion(Colaborador colaborador);

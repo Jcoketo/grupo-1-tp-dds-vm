@@ -26,7 +26,8 @@ public class Colaborador {
  
     //@Getter protected String direccion;
 
-    @Transient
+    @OneToMany()
+    @JoinColumn(name = "colaborador_id", referencedColumnName = "id")
     protected List<Colaboracion> colaboracionesRealizadas;
 
     @Column
