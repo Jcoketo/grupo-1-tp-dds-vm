@@ -14,6 +14,7 @@ public class Visita {
     @Getter private Long id;
 
     @ManyToOne
+    @JoinColumn(name ="heladera_id", referencedColumnName = "id")
     Heladera heladera;
 
     @Column

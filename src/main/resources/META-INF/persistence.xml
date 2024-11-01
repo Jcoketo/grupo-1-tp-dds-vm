@@ -23,7 +23,7 @@
 
             <property name="user_sql_comments" value="true" />
 
-            <property name="hibernate.hbm2ddl.auto" value="update"/>
+            <property name="hibernate.hbm2ddl.auto" value="create"/>
             <!--
               - validate: Validate the schema, making sure it matches the mappings. No changes are made to the database.
               - update: Update the schema. Hibernate will attempt to make changes to the database schema to match the mappings.

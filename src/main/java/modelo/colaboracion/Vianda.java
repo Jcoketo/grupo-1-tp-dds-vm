@@ -27,10 +27,12 @@ public class Vianda{
     @Column
     private LocalDate fechaDonacion;
 
-    @Transient
+    @ManyToOne
+    @JoinColumn(name = "colaborador_id", referencedColumnName = "id")
     private Colaborador colaborador;
 
     @ManyToOne
+    @JoinColumn(name = "heladera_id", referencedColumnName = "id")
     private Heladera disponibleEn;
 
     @Column
