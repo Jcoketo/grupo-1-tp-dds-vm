@@ -75,9 +75,10 @@ public class Router {
                 get(new InicioController());
             });
 
-            path("/inicioLogueado", () -> {
+            // no deberia estar ´porque verificamos el log en los mustache
+            /*path("/inicioLogueado", () -> {
                 get(new InicioLogueadoController());
-            });
+            });*/
 
             path("/elegirRegistroCuenta", () -> {
                 before(new AutorizacionMiddleware());

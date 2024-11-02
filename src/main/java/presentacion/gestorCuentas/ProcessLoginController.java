@@ -35,7 +35,7 @@ public class ProcessLoginController implements Handler {
             Roles userRole = obtenerRolUsuario(email);
             context.sessionAttribute("rolUsuario", userRole);
 
-            context.redirect("/inicioLogueado");
+            context.redirect("/inicio");
 
         } else {
             model.put("error", "Invalid email or password");

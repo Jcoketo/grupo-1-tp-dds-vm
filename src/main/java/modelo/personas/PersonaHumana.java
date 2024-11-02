@@ -51,4 +51,7 @@ public class PersonaHumana extends Persona{
         this.tipoPersona = TipoPersona.PH;
     }
 
+    public PersonaHumana() {
+
+    }
 }
