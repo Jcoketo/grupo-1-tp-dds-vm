@@ -1,15 +1,55 @@
-import io.javalin.Javalin;
-import persistencia.*;
-import presentacion.*;
-import accessManagment.AutorizacionMiddleware;
-import presentacion.colaboraciones.*;
-import presentacion.gestorCuentas.*;
-import presentacion.heladera.*;
-import presentacion.incidentes.*;
-import presentacion.ofertas.*;
-import presentacion.reportes.MisReportesController;
-
 import static io.javalin.apibuilder.ApiBuilder.*;
+
+import accessManagment.AutorizacionMiddleware;
+import io.javalin.Javalin;
+import persistencia.RepositorioColaboradores;
+import persistencia.RepositorioHeladeras;
+import persistencia.RepositorioIncidentes;
+import persistencia.RepositorioOfertas;
+import persistencia.RepositorioPersonasVulnerables;
+import presentacion.InicioController;
+import presentacion.colaboraciones.DonarDineroController;
+import presentacion.colaboraciones.DonarDineroRealizadaController;
+import presentacion.colaboraciones.DonarDistribucionViandaController;
+import presentacion.colaboraciones.DonarViandaController;
+import presentacion.colaboraciones.DonarViandaRealizadaController;
+import presentacion.colaboraciones.ElegirDonacionController;
+import presentacion.colaboraciones.ElegirDonacionFisicaController;
+import presentacion.colaboraciones.ElegirDonacionJuridicaController;
+import presentacion.colaboraciones.GraciasPorDonarController;
+import presentacion.colaboraciones.MisColaboracionesController;
+import presentacion.colaboraciones.RegistroPersonaVulnerableController;
+import presentacion.colaboraciones.RegistroPersonaVulnerableFinalController;
+import presentacion.colaboraciones.RegistroPersonaVulnerableRealizadaController;
+import presentacion.gestorCuentas.CrearCuentaFisicaController;
+import presentacion.gestorCuentas.CrearCuentaJuridicaController;
+import presentacion.gestorCuentas.CuentaCreadaController;
+import presentacion.gestorCuentas.CuentaFisicaCreadaController;
+import presentacion.gestorCuentas.CuentaJuridicaCreadaController;
+import presentacion.gestorCuentas.ElegirRegistroCuentaController;
+import presentacion.gestorCuentas.InicioLogueadoController;
+import presentacion.gestorCuentas.PerfilController;
+import presentacion.gestorCuentas.ProcessLoginController;
+import presentacion.gestorCuentas.ShowLoginController;
+import presentacion.heladera.AceptarAgregarHeladeraController;
+import presentacion.heladera.AgregarHeladeraController;
+import presentacion.heladera.HeladeraAgregadaController;
+import presentacion.heladera.MapaHeladeraVistaController;
+import presentacion.heladera.MapaHeladerasController;
+import presentacion.heladera.MapaHeladerasDistribucionDestinoController;
+import presentacion.heladera.MapaHeladerasDistribucionOrigenController;
+import presentacion.heladera.VisualizarDetalleHeladeraController;
+import presentacion.incidentes.AceptarReportarFallaController;
+import presentacion.incidentes.ReportarFallaTecnicaController;
+import presentacion.incidentes.ReportarFallaTecnicaFinalizadaController;
+import presentacion.incidentes.VisualizarAlertasController;
+import presentacion.incidentes.VisualizarFallasTecnicasController;
+import presentacion.ofertas.AceptarAgregarProductoController;
+import presentacion.ofertas.AgregarProductosEmpresaController;
+import presentacion.ofertas.AgregarProductosEmpresaFinalizadoController;
+import presentacion.ofertas.CanjearPuntosController;
+import presentacion.ofertas.CatalogoProductosController;
+import presentacion.reportes.MisReportesController;
 
 public class Router {
     private static Javalin app = Application.app();
@@ -33,6 +73,10 @@ public class Router {
 
             path("/inicio", () -> {
                 get(new InicioController());
+            });
+
+            path("/inicioLogueado", () -> {
+                get(new InicioLogueadoController());
             });
 
             path("/elegirRegistroCuenta", () -> {

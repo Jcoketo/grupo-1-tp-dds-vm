@@ -37,6 +37,28 @@
             color: #1e5552;
             font-size: 16px;
             font-weight: normal;
+            align-items: center;     
+        }
+
+        .btn2 {
+            border-radius: 10px; /* Bordes redondeados */
+            padding: 10px 10px; /* Espaciado interno para que se vean mejor */
+            width: 150px; /* Ancho fijo, ajusta según tus necesidades */
+            margin-bottom: 10px; /* Espacio entre los botones */
+            border: none; /* Eliminar borde predeterminado */
+            cursor: pointer; /* Cambiar cursor al pasar sobre el botón */
+            font-size: 16px; /* Tamaño de fuente */
+            display: inline-block; /* Asegura que el botón se comporte como un elemento en línea */
+            vertical-align: middle; /* Alinea verticalmente con otros elementos en línea */
+            margin-right: 10px; /* Espacio a la derecha para alinearlo con otros elementos */
+            text-align: center; /* Alinea el texto al centro */
+        }
+
+        .btn2-submit {
+            background-color: #1e5552;
+            color: white;
+            font-size: 16px;
+            font-weight: normal;
         }
 
         .navbar-light .dropdown-menu {
@@ -48,7 +70,6 @@
             font-size: 16px;
             font-weight: normal;
             width: 200px;
-
         }
 
         .navbar-light .dropdown-menu a.dropdown-item:hover {
@@ -194,19 +215,8 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/mapaHeladeras">Heladeras</a>
                 </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
-                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Nombre del Usuario
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <a class="dropdown-item" href="/perfil">Mi perfil</a>
-                        <a class="dropdown-item" href="/misColaboraciones">Mis colaboraciones</a>
-                        <a class="dropdown-item" href="/canjearPuntos">Mi puntaje</a>
-                        <a class="dropdown-item" href="/misReportes">Mis reportes</a>
-                        <a class="dropdown-item" href="#">Configuración</a>
-                        <a class="dropdown-item" href="/login">Cerrar sesión</a>
-                    </div>
+                <li class="nav-item">
+                    <a href="/login" class="btn2 btn2-submit">Iniciar Sesión</a>
                 </li>
             </ul>
         </div>
