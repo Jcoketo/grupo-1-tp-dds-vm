@@ -1,14 +1,15 @@
 package presentacion.gestorCuentas;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import org.jetbrains.annotations.NotNull;
+
 import accessManagment.Roles;
 import io.javalin.http.Context;
 import io.javalin.http.Handler;
 import modelo.personas.TipoPersona;
-import org.jetbrains.annotations.NotNull;
 import persistencia.RepositorioColaboradores;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class ProcessLoginController implements Handler {
 
@@ -34,7 +35,7 @@ public class ProcessLoginController implements Handler {
             Roles userRole = obtenerRolUsuario(email);
             context.sessionAttribute("rolUsuario", userRole);
 
-            context.redirect("/inicio");
+            context.redirect("/inicioLogueado");
 
         } else {
             model.put("error", "Invalid email or password");

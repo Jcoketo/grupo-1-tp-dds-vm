@@ -15,31 +15,49 @@
             display: flex;
             flex-direction: column;
             min-height: 100vh;
-            background-color: #f5f5f5;
+            background-color: #ffffff;
         }
 
-        header{
-            background-color: #e0e0e0;
-            padding: 20px 50px;
+        .btn2 {
+            border-radius: 10px; /* Bordes redondeados */
+            padding: 10px 10px; /* Espaciado interno para que se vean mejor */
+            width: 150px; /* Ancho fijo, ajusta según tus necesidades */
+            margin-bottom: 10px; /* Espacio entre los botones */
+            border: none; /* Eliminar borde predeterminado */
+            cursor: pointer; /* Cambiar cursor al pasar sobre el botón */
+            font-size: 16px; /* Tamaño de fuente */
+            display: inline-block; /* Asegura que el botón se comporte como un elemento en línea */
+            vertical-align: middle; /* Alinea verticalmente con otros elementos en línea */
+            margin-right: 10px; /* Espacio a la derecha para alinearlo con otros elementos */
+            text-align: center; /* Alinea el texto al centro */
         }
 
+        .btn2-submit {
+            background-color: #1e5552;
+            color: white;
+            font-size: 16px;
+            font-weight: normal;
+        }
+
+        .btn-donar {
+            background-color: #1e5552;
+            color: white;
+            font-size: 16px;
+            font-weight: normal;
+        }
         header {
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
-        header nav a {
-            margin-left: 20px;
-            text-decoration: none;
-            color: black;
-        }
-
-        .btn-iniciar-sesion {
-            background-color: black;
-            color: white;
-            padding: 10px 20px;
-            text-decoration: none;
+        .navbar-light .navbar-nav .nav-link,
+        .navbar-light .dropdown-menu {
+            background-color: #ffffff;
+            color: #1e5552;
+            font-size: 16px;
+            font-weight: normal;
+            align-items: center;
         }
 
         main {
@@ -53,16 +71,6 @@
 
         .main-content {
             max-width: 50%;
-        }
-
-        .main-content h1 {
-            font-size: 48px;
-            margin: 0;
-        }
-
-        .main-content p {
-            font-size: 20px;
-            color: #666;
         }
 
         .image-placeholder {
@@ -100,24 +108,57 @@
         .social-icon {
             margin-right: 10px; /* Espacio entre el ícono y el texto */
         }
+        .navbar-light .dropdown-menu {
+            width: 200px;
+        }
+        .navbar-light .dropdown-menu a.dropdown-item {
+            color: #1e5552;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 16px;
+            font-weight: normal;
+            width: 200px;
+        }
+
+        .navbar-light .dropdown-menu a.dropdown-item:hover {
+            background-color: #ffffff;
+            margin: 0;
+            width: 200px;
+        }
+
     </style>
 </head>
 <body>
 <header>
     <div><img src="/static/logo.png" alt="Logo" style="max-height: 50px;"></div>
-    <nav>
-        <a href="#">Sobre nosotros</a>
-        <a href="/elegirDonacion">Donar</a>
-        <a href="/mapaHeladeras">Heladeras</a>
-        <a href="/login" class="btn-iniciar-sesion">Iniciar Sesión</a>
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Sobre nosotros</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/elegirDonacion">Donar</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/mapaHeladeras">Heladeras</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/login" class="btn2 btn2-submit">Iniciar Sesión</a>
+                </li>
+            </ul>
+        </div>
     </nav>
 </header>
 
 <main>
     <div class="main-content">
-        <h1>Titulo</h1>
-        <p>Subtitulo que incite a realizar una donacion</p>
-        <a href="#" class="btn-donar">Donar</a>
+        <h1>¡Bienvenido!</h1>
+        <p>Realizá o administrá tu donación aquí.</p>
+        <a href="#" class="btn2 btn-donar">Donar</a>
     </div>
     <div class="image-placeholder">
         <img src="/static/image.png" alt="Imagen" style="max-width: 100%; max-height: 100%; border-radius: 8px;">
@@ -128,7 +169,7 @@
     <div class="container">
         <div class="row justify-content-between align-items-center">
             <div class="col-md-3 text-center text-md-left">
-                <img src="/static/logo.png" alt="Logo" class="img-fluid mb-2"> <!-- Reemplaza con tu logo -->
+                <img src="/static/logo.png" alt="Logo" class="img-fluid mb-2" style= "max-height: 90px;"> <!-- Reemplaza con tu logo -->
             </div>
             <div class="col-md-9">
                 <div class="row">
@@ -152,7 +193,6 @@
                     </div>
 
                     <!-- Dónde encontrarnos -->
-                    <!-- Dónde encontrarnos -->
                     <div class="col-md-4">
                         <h5>Dónde encontrarnos</h5>
                         <ul class="list-unstyled">
@@ -165,12 +205,10 @@
         </div>
 </footer>
 
-
 <!-- Incluye Bootstrap JS y sus dependencias -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
 
 </body>
 </html>

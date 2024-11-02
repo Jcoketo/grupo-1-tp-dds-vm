@@ -1,20 +1,28 @@
 package modelo.elementos;
 
-import modelo.colaboracion.Vianda;
-import lombok.Getter;
-import lombok.Setter;
-import modelo.personas.Tecnico;
-import modelo.personas.Colaborador;
-import persistencia.EntidadPersistente;
-import persistencia.RepositorioIncidentes;
-import persistencia.RepositoriosTecnicos;
-import modelo.suscripcion.ColaboradorSuscripto;
-import modelo.suscripcion.TipoSuscripcion;
-
-import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+import lombok.Getter;
+import lombok.Setter;
+import modelo.colaboracion.Vianda;
+import modelo.personas.Colaborador;
+import modelo.personas.Tecnico;
+import modelo.suscripcion.ColaboradorSuscripto;
+import modelo.suscripcion.TipoSuscripcion;
+import persistencia.RepositorioIncidentes;
+import persistencia.RepositoriosTecnicos;
 @Entity
 @Table(name = "heladera")
 public class Heladera {
