@@ -50,6 +50,7 @@ import presentacion.ofertas.AgregarProductosEmpresaFinalizadoController;
 import presentacion.ofertas.CanjearPuntosController;
 import presentacion.ofertas.CatalogoProductosController;
 import presentacion.reportes.MisReportesController;
+import servicioApiRest.ServicioApiRest;
 
 public class Router {
     private static Javalin app = Application.app();
@@ -239,6 +240,10 @@ public class Router {
             path("/misColaboraciones", () -> {
                 before(new AutorizacionMiddleware().setDebeSerLogueado());
                 get(new MisColaboracionesController());
+            });
+
+            path("/api/recomendacion/locaciones", () -> {
+                get(new ServicioApiRest(repoHeladeras));
             });
 
             path("/404Error", () -> {
