@@ -32,9 +32,13 @@ public class Oferta {
     @Column
     private String imagen;
 
-    public Oferta(String nombre, Double puntosNecesarios) {
+    public Oferta(String nombre, String descripcion, TipoOferta tipoOferta, Rubro rubro, Double puntosNecesarios, String imagen) {
         this.nombre = nombre;
         this.puntosNecesarios = puntosNecesarios;
+        this.descripcion = descripcion;
+        this.tipoOferta = tipoOferta;
+        this.rubro = rubro;
+        this.imagen = imagen;
     }
 
     public Oferta() {
