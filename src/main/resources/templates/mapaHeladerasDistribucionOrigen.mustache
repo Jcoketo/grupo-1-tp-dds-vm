@@ -17,26 +17,12 @@
             height: 24px;
         }
 
-        .btn-iniciar-sesion {
-            background-color: black;
-            color: white;
-            padding: 10px 20px;
-            text-decoration: none;
-        }
-
         body {
             font-family: Arial, sans-serif;
+            background-color: #ffffff;
             margin: 0;
             padding: 0;
-            min-height: 100vh;
-            background-color: #f5f5f5;
-            display: flex;
-            flex-direction: column;
-        }
-
-        header, footer {
-            background-color: #e0e0e0;
-            padding: 20px 50px;
+            height: 100%; /* Asegura que el body y html ocupen el 100% de la altura */
         }
 
         header {
@@ -44,6 +30,40 @@
             justify-content: space-between;
             align-items: center;
         }
+        header .navbar-nav .nav-link {
+            font-size: 17px !important; /* Ajusta el tamaño de la fuente de los enlaces de navegación en el header */
+        }
+        nav {
+            margin-top: 20px; /* Ajusta el valor según el espacio deseado */
+        }
+
+        /*Dropdown*/
+        .navbar-light .navbar-nav .nav-link,
+        .navbar-light .dropdown-menu {
+            background-color: #ffffff;
+            color: #1e5552;
+            font-size: 16px;
+            font-weight: normal;
+        }
+
+        .navbar-light .dropdown-menu {
+            width: 200px;
+        }
+        .navbar-light .dropdown-menu a.dropdown-item {
+            color: #1e5552;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 16px;
+            font-weight: normal;
+            width: 200px;
+
+        }
+
+        .navbar-light .dropdown-menu a.dropdown-item:hover {
+            background-color: #ffffff;
+            margin: 0;
+            width: 200px;
+        }
+
 
         .navbar-nav .nav-item {
             margin-left: 20px;
@@ -89,7 +109,7 @@
             cursor: pointer;
             border-radius: 10px;
             padding: 10px;
-            background-color: #ebece3;
+            background-color: #B8CCC8;
             transition: background-color 0.3s;
             margin-bottom: 7px;
         }
@@ -98,43 +118,39 @@
             background-color: #e2e6ea;
         }
 
-        footer {
-            display: flex;
-            justify-content: space-between;
-            background-color: #e0e0e0;
-            padding: 20px 50px;
-            margin-top: 20px; /* Espaciado adicional antes del footer */
+
+        h5 {
+            margin: 0; /* Elimina márgenes por defecto */
+            white-space: nowrap; /* Evita que el texto haga salto de línea */
+            color: white; /* Color de texto */
         }
 
-        footer div {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            margin-right: 30px;
+        .footer-bg {
+            background-color: #B7C9C7; /* Color de fondo */
+            padding: 20px 0; /* Espaciado superior e inferior */
+        }
+        .social-icons a {
+            margin-right: 15px; /* Espacio entre iconos de redes sociales */
+            color: white; /* Color de texto para iconos */
+        }
+        .footer-link {
+            color: white; /* Color de texto para enlaces */
+            text-decoration: none; /* Eliminar subrayado */
+        }
+        .footer-link:hover {
+            text-decoration: underline; /* Subrayar al pasar el mouse */
         }
 
-        footer div a {
-            margin-top: 10px;
-            text-decoration: none;
-            color: black;
+        .social-icon {
+            margin-right: 10px; /* Espacio entre el ícono y el texto */
         }
 
-        .btn-inicio {
-            background-color: #313937;
-            color: white;
-            padding: 10px 15px;
-            text-decoration: none;
-            border-radius: 10px;
-            margin-left: 20px;
-        }
     </style>
 </head>
 <body>
 
 <header>
-    <div><img src="/static/logo.png" alt="Logo" style="max-height: 50px;">
-        <a href="/inicio" class="btn-inicio">Inicio</a>
-    </div>
+    <div><img src="/static/logo.png" alt="Logo" style="max-height: 50px;"></div>
     <nav class="navbar navbar-expand-lg navbar-light">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
                 aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -151,29 +167,25 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/mapaHeladeras">Heladeras</a>
                 </li>
-                {{^logueado}}
-                      <a href="/login" class="btn-iniciar-sesion">Iniciar Sesión</a>
-                {{/logueado}}
-                {{#logueado}}
-                <!-- Menú desplegable -->
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Nombre del usuario
+                        Nombre del Usuario
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                         <a class="dropdown-item" href="/perfil">Mi perfil</a>
-                        <a class="dropdown-item" href="#">Mis colaboraciones</a>
-                        <a class="dropdown-item" href="canjearPuntos.html">Mi puntaje</a>
+                        <a class="dropdown-item" href="/misColaboraciones">Mis colaboraciones</a>
+                        <a class="dropdown-item" href="/canjearPuntos">Mi puntaje</a>
+                        <a class="dropdown-item" href="/misReportes">Mis reportes</a>
                         <a class="dropdown-item" href="#">Configuración</a>
-                        <a class="dropdown-item" href="#">Cerrar sesión</a>
+                        <a class="dropdown-item" href="/login">Cerrar sesión</a>
                     </div>
-                {{/logueado}}
                 </li>
             </ul>
         </div>
     </nav>
 </header>
+
 
 <main class="container-fluid">
     <h1>Visualización de heladeras</h1>
@@ -190,27 +202,45 @@
     </div>
 </main>
 
-<footer>
-    <div>
-        <p><img src="/static/logo.png" alt="Logo" style="max-height: 50px;"></p>
-        <div class="social-icons">
-            <a href="#"><img src="/static/facebook-icon.png" alt="Facebook"></a>
-            <a href="#"><img src="/static/instagram-icon.png" alt="Instagram"></a>
-            <a href="#"><img src="/static/twitter-icon.png" alt="Twitter"></a>
+<footer class="footer-bg">
+    <div class="container">
+        <div class="row justify-content-between align-items-center">
+            <div class="col-md-3 text-center text-md-left">
+                <img src="/static/logo.png" alt="Logo" class="img-fluid mb-2" style= "max-height: 90px;"> <!-- Reemplaza con tu logo -->
+            </div>
+            <div class="col-md-9">
+                <div class="row">
+                    <!-- Más Información -->
+                    <div class="col-md-4">
+                        <h5>Más información</h5>
+                        <ul class="list-unstyled">
+                            <li><a href="#" class="footer-link">Contáctanos</a></li>
+                            <li><a href="#" class="footer-link">Sobre nosotros</a></li>
+                            <li><a href="#" class="footer-link">Sobre el proyecto</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Donar -->
+                    <div class="col-md-4">
+                        <h5>Donar</h5>
+                        <ul class="list-unstyled">
+                            <li><a href="/donarVianda" class="footer-link">Donar vianda</a></li>
+                            <li><a href="/mapaHeladeras" class="footer-link">Ver mapa</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Dónde encontrarnos -->
+                    <!-- Dónde encontrarnos -->
+                    <div class="col-md-4">
+                        <h5>Dónde encontrarnos</h5>
+                        <ul class="list-unstyled">
+                            <li><a href="#" class="footer-link"><img src="/static/facebook-icon.png" alt="Facebook" style="max-height: 20px;" ><i class="fab fa-facebook-f social-icon"></i>Facebook</a></li>
+                            <li><a href="#" class="footer-link"><img src="/static/instagram-icon.png" alt="Instagram" style="max-height: 20px;"><i class="fab fa-instagram social-icon"></i>Instagram</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
-    <div>
-        <h4>Más información</h4>
-        <a href="#">Contactanos</a>
-        <a href="#">Sobre nosotros</a>
-        <a href="#">Sobre el proyecto</a>
-    </div>
-    <div>
-        <h4>Donar</h4>
-        <a href="/donarVianda">Donar vianda</a>
-        <a href="/mapaHeladeras">Ver mapa</a>
-        <a href="/donarDinero">Donar dinero</a>
-    </div>
 </footer>
 
 <!-- Incluye Bootstrap JS y sus dependencias -->
@@ -273,7 +303,7 @@
                        <small>${estado}</small><br>
                        <small>
                            <a href="/visualizarDetalleHeladera?lat=${punto.latitud}&lng=${punto.longitud}" class="text-primary" style="text-decoration: underline;">Detalles</a>
-                           <button onclick="window.location.href='/donarDistribuirViandas?heladera1=${nombre}&direccion1=${punto.direccion}&estado1=${estado}&disponibilidad1=${cantidadViandas}&heladera2={{heladera2}}&direccion2={{direccion2}}&estado2={{estado2}}&disponibilidad2={{disponibilidad2}}'" class="btn" style="margin-left: 10px; background-color: #3657A6; color: white; padding: 5px 15px; font-size: 14px; border-radius: 5px;">Elegir heladera</button>
+                           <button onclick="window.location.href='/donarDistribuirViandas?heladera1=${nombre}&direccion1=${punto.direccion}&estado1=${estado}&disponibilidad1=${cantidadViandas}&heladera2={{heladera2}}&direccion2={{direccion2}}&estado2={{estado2}}&disponibilidad2={{disponibilidad2}}'" class="btn" style="margin-left: 10px; background-color: #1e5552; color: white; padding: 5px 15px; font-size: 14px; border-radius: 5px;">Elegir heladera</button>
                        </small>
                    </div>
                 `;
