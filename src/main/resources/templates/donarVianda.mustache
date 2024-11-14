@@ -11,20 +11,12 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
     <style>
-        body {
+     body {
             font-family: Arial, sans-serif;
+            background-color: #ffffff;
             margin: 0;
             padding: 0;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-            background-color: #ffffff;
-        }
-
-        header,
-        footer {
-            background-color: #e0e0e0;
-            padding: 20px 50px;
+            height: 100%; /* Asegura que el body y html ocupen el 100% de la altura */
         }
 
         header {
@@ -32,6 +24,41 @@
             justify-content: space-between;
             align-items: center;
         }
+        header .navbar-nav .nav-link {
+            font-size: 17px !important; /* Ajusta el tamaño de la fuente de los enlaces de navegación en el header */
+        }
+        nav {
+            margin-top: 20px; /* Ajusta el valor según el espacio deseado */
+        }
+
+        /*Dropdown*/
+        .navbar-light .navbar-nav .nav-link,
+        .navbar-light .dropdown-menu {
+            background-color: #ffffff;
+            color: #1e5552;
+            font-size: 16px;
+            font-weight: normal;
+        }
+
+        .navbar-light .dropdown-menu {
+            width: 200px;
+        }
+        .navbar-light .dropdown-menu a.dropdown-item {
+            color: #1e5552;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 16px;
+            font-weight: normal;
+            width: 200px;
+
+        }
+
+        .navbar-light .dropdown-menu a.dropdown-item:hover {
+            background-color: #ffffff;
+            margin: 0;
+            width: 200px;
+        }
+
+        /*fin dropdown*/
 
         h1 {
             font-size: 24px;
@@ -235,6 +262,10 @@
         .social-icon {
             margin-right: 10px; /* Espacio entre el ícono y el texto */
         }
+        .heladera-placeholder::placeholder {
+            color: black !important;
+        }
+        
     </style>
 </head>
 
@@ -255,13 +286,12 @@
                     <a class="nav-link" href="/elegirDonacion">Donar</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/mapaHeladera">Heladeras</a>
+                    <a class="nav-link" href="/mapaHeladeras">Heladeras</a>
                 </li>
-                <!-- Menú desplegable -->
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Nombre del usuario
+                        Nombre del Usuario
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                         <a class="dropdown-item" href="/perfil">Mi perfil</a>
@@ -276,6 +306,7 @@
         </div>
     </nav>
 </header>
+
 <main class="container my-5">
     <div class="row">
         <!-- Sección izquierda (Lista de heladeras) -->
@@ -284,7 +315,7 @@
             <div class="form-group">
                 <label for="heladera">Heladera</label>
                 <div class="input-group">
-                    <input type="text" class="form-control" id="heladera" placeholder="Heladera Medrano UTN">
+                    <input type="text" class="form-control heladera-placeholder" id="heladera" placeholder="Heladera Medrano UTN">
                     <div class="input-group-append">
                         <button class="btn btn-outline-secondary" type="button">
                             <i class="fas fa-search"></i>
@@ -295,7 +326,7 @@
 
             <div class="heladera-list">
                 <div class="heladera-item">
-                    <h5>Heladera Medrano UTN</h5>
+                    <h4>Heladera Medrano UTN</h4>
                     <p>Avenida Medrano 1234</p>
                     <p><strong>Estado:</strong> Activa</p>
                     <p><strong>Disponibilidad:</strong> 2 viandas</p>
@@ -307,7 +338,7 @@
         <!-- Sección derecha (Formulario de donación) -->
         <div class="col-md-6">
             <form class="form-donation">
-                <h5>Vianda a donar</h5>
+                <h4>Vianda a donar</h4>
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="vianda1">Vianda a donar</label>
@@ -339,7 +370,7 @@
 
                 <hr>
 
-                <h5>Vianda a donar (2)</h5>
+                <h4>Vianda a donar (2)</h4>
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="vianda2">Vianda a donar</label>
@@ -385,7 +416,7 @@
     <div class="container">
         <div class="row justify-content-between align-items-center">
             <div class="col-md-3 text-center text-md-left">
-                <img src="path/to/logo.png" alt="Logo" class="img-fluid mb-2"> <!-- Reemplaza con tu logo -->
+                <img src="/static/logo.png" alt="Logo" class="img-fluid mb-2" style= "max-height: 90px;"> <!-- Reemplaza con tu logo -->
             </div>
             <div class="col-md-9">
                 <div class="row">
@@ -401,7 +432,7 @@
 
                     <!-- Donar -->
                     <div class="col-md-4">
-                        <h5>Donar</h5>
+                    <h5>Donar</h5>
                         <ul class="list-unstyled">
                             <li><a href="/donarVianda" class="footer-link">Donar vianda</a></li>
                             <li><a href="/mapaHeladeras" class="footer-link">Ver mapa</a></li>
