@@ -29,7 +29,7 @@ public class Tecnico {
     @JoinColumn(name = "persona_id", referencedColumnName = "id")
     private PersonaHumana persona;
 
-    @OneToMany
+    @OneToMany(mappedBy = "tecnico")
     private List<Visita> visitas = new ArrayList<>();
 
 
