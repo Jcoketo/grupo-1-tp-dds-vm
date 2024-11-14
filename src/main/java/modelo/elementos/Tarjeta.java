@@ -9,6 +9,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "tarjeta")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class Tarjeta {
 
     @Id
@@ -20,7 +21,7 @@ public class Tarjeta {
 
     @OneToMany
     @JoinColumn(name="uso_tarjeta_id",referencedColumnName = "id")
-    protected List<UsoTarjetaPlastica> historialDeUsos;
+    protected List<UsoTarjeta> historialDeUsos;
 
     @Column
     protected Boolean recibida;
@@ -28,12 +29,12 @@ public class Tarjeta {
     public Tarjeta(){
         RepositorioTarjetas repositorioTarjetas = RepositorioTarjetas.getInstancia();
         this.nro_tarjeta = repositorioTarjetas.generarIdTarjeta();
-        this.historialDeUsos = new ArrayList<UsoTarjetaPlastica>();
+        this.historialDeUsos = new ArrayList<UsoTarjeta>();
         this.recibida = false;
     }
 
     public void registrarUso(Heladera heladera){
-        this.historialDeUsos.add(new UsoTarjetaPlastica(heladera));
+        this.historialDeUsos.add(new UsoTarjeta(heladera));
     }
 
     public void recibida(){

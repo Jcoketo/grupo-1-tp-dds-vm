@@ -6,18 +6,18 @@ import lombok.Setter;
 import modelo.personas.Colaborador;
 import modelo.personas.TipoMedioDeContacto;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
+import javax.persistence.*;
 
 @Entity
-public class SuscriptoCantidad extends ColaboradorSuscripto {
+@DiscriminatorValue("cantidad")
+public class SuscripcionXCantidad extends Suscripcion {
     @Column
     @Getter @Setter private Integer limiteViandasMinimas;
 
     @Column
     @Getter @Setter private Integer limiteViandasMaximas;
 
-    public SuscriptoCantidad(Heladera heladera, Colaborador colaborador, TipoSuscripcion tipo, Integer n, TipoMedioDeContacto medio) {
+    public SuscripcionXCantidad(Heladera heladera, Colaborador colaborador, TipoSuscripcion tipo, Integer n, TipoMedioDeContacto medio) {
         super(heladera, colaborador, tipo, medio);
 
         if (tipo == TipoSuscripcion.QUEDAN_POCAS){
@@ -32,7 +32,7 @@ public class SuscriptoCantidad extends ColaboradorSuscripto {
         //this.limiteViandasMaximas = 0;
     }
 
-    public SuscriptoCantidad() {
+    public SuscripcionXCantidad() {
 
     }
 }

@@ -52,4 +52,8 @@ public class Vianda{
         this.disponibleEn = heladera;
         this.entregada = estado;
     }
+
+    public Vianda() {
+
+    }
 }

@@ -2,7 +2,6 @@ package modelo.colaboracion;
 
 import modelo.personas.TipoPersona;
 import modelo.personas.Colaborador;
-import persistencia.EntidadPersistente;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -11,7 +10,13 @@ import java.util.List;
 
 @Entity
 @Table
-public abstract class Colaboracion extends EntidadPersistente {
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "tipo_colaboracion")
+public abstract class Colaboracion {
+
+    @Id
+    @GeneratedValue
+    private int id;
 
     @Transient
     protected List<TipoPersona> tiposPersonasHabilitadas;

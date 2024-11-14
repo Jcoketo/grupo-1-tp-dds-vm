@@ -2,9 +2,15 @@ package modelo.reportador;
 
 import modelo.personas.Colaborador;
 
+import javax.persistence.*;
+
+
 public class ReporteColaborador {
+
     private Colaborador colaborador;
+
     private Integer cantidadViandas;
+
 
     // Constructor vacío
     public ReporteColaborador() {}
@@ -28,4 +34,6 @@ public class ReporteColaborador {
     public void setCantidadViandas(Integer cantidadViandas) {
         this.cantidadViandas = cantidadViandas;
     }
+
+
 }

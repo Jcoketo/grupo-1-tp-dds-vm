@@ -1,6 +1,8 @@
 package modelo.elementos;
 
 import lombok.Getter;
+import modelo.colaboracion.Vianda;
+import modelo.personas.Tecnico;
 
 import javax.persistence.*;
 import javax.ws.rs.CookieParam;
@@ -17,6 +19,10 @@ public class Visita {
     @JoinColumn(name ="heladera_id", referencedColumnName = "id")
     Heladera heladera;
 
+    @ManyToOne
+    @JoinColumn(name ="tecnico_id", referencedColumnName = "id")
+    Tecnico tecnico;
+
     @Column
     String descripcion;
     @Column
@@ -29,5 +35,9 @@ public class Visita {
         this.descripcion = descripcion;
         this.URLfoto = URLfoto;
         this.incidenteSolucionado = incidenteSolucionado;
+    }
+
+    public Visita() {
+
     }
 }

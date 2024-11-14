@@ -2,8 +2,12 @@ package modelo.reportador;
 
 import modelo.elementos.Heladera;
 
+import javax.persistence.*;
+
 public class ReporteHeladera {
+
     private Heladera heladera;
+
     private Integer cantidad;
 
     // Constructor

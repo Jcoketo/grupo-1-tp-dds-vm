@@ -3,9 +3,14 @@ package modelo.colaboracion;
 import modelo.personas.Colaborador;
 import modelo.personas.TipoPersona;
 
+import javax.persistence.*;
 import java.util.Arrays;
 
+@Entity
+@DiscriminatorValue("RECOMPENSA")
 public class OfrecerRecompensa extends Colaboracion{
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "oferta_id", referencedColumnName = "id")
     private Oferta oferta;
 
     public OfrecerRecompensa() {

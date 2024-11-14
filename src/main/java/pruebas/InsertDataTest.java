@@ -4,7 +4,7 @@ import modelo.colaboracion.Oferta;
 import modelo.colaboracion.TipoOferta;
 import modelo.elementos.*;
 import modelo.personas.*;
-import modelo.suscripcion.SuscriptoCantidad;
+import modelo.suscripcion.SuscripcionXCantidad;
 import modelo.suscripcion.TipoSuscripcion;
 
 import javax.persistence.EntityManager;
@@ -65,10 +65,10 @@ public class InsertDataTest {
         em.persist(colaborador2);
 
         // Insert SuscriptoCantidad
-        SuscriptoCantidad suscriptoCantidad1 = new SuscriptoCantidad(heladera1, colaborador1, TipoSuscripcion.QUEDAN_POCAS, 10, TipoMedioDeContacto.MAIL);
-        SuscriptoCantidad suscriptoCantidad2 = new SuscriptoCantidad(heladera2, colaborador2, TipoSuscripcion.QUEDAN_POCAS, 5, TipoMedioDeContacto.TELEFONO);
-        em.persist(suscriptoCantidad1);
-        em.persist(suscriptoCantidad2);
+        SuscripcionXCantidad suscripcionXCantidad1 = new SuscripcionXCantidad(heladera1, colaborador1, TipoSuscripcion.QUEDAN_POCAS, 10, TipoMedioDeContacto.MAIL);
+        SuscripcionXCantidad suscripcionXCantidad2 = new SuscripcionXCantidad(heladera2, colaborador2, TipoSuscripcion.QUEDAN_POCAS, 5, TipoMedioDeContacto.TELEFONO);
+        em.persist(suscripcionXCantidad1);
+        em.persist(suscripcionXCantidad2);
 
         // Insert Alerta
         Alerta alerta1 = new Alerta(TipoAlerta.FALLA_EN_CONEXION, heladera1);
@@ -91,8 +91,8 @@ public class InsertDataTest {
         // Establish relationships
         personaJuridica1.getHeladeras().add(heladera1);
         personaJuridica2.getHeladeras().add(heladera2);
-        heladera1.getColaboradoresSucriptos().add(suscriptoCantidad1);
-        heladera2.getColaboradoresSucriptos().add(suscriptoCantidad2);
+        heladera1.getColaboradoresSucriptos().add(suscripcionXCantidad1);
+        heladera2.getColaboradoresSucriptos().add(suscripcionXCantidad2);
 
         em.getTransaction().commit();
         em.close();
