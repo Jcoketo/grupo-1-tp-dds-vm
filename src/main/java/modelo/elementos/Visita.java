@@ -17,18 +17,18 @@ public class Visita {
 
     @ManyToOne
     @JoinColumn(name ="heladera_id", referencedColumnName = "id")
-    Heladera heladera;
+    private Heladera heladera;
 
     @ManyToOne
     @JoinColumn(name ="tecnico_id", referencedColumnName = "id")
-    Tecnico tecnico;
+    private Tecnico tecnico;
 
     @Column
-    String descripcion;
+    private String descripcion;
     @Column
-    String URLfoto;
+    private String URLfoto;
     @Column
-    Boolean incidenteSolucionado;
+    private Boolean incidenteSolucionado;
 
     public Visita(Heladera heladera, String descripcion, String URLfoto, Boolean incidenteSolucionado) {
         this.heladera = heladera;
