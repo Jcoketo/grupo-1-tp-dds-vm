@@ -5,15 +5,22 @@ import modelo.elementos.TarjetaPlastica;
 import modelo.personas.Colaborador;
 import modelo.personas.PersonaVulnerable;
 import modelo.personas.TipoPersona;
+import javax.persistence.*;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+@Entity
+@DiscriminatorValue("REGISTRO")
 public class RegistroPersonasSituVulnerable extends Colaboracion{
+
+    @Column
     private Integer cantidadTarjetas;
+    @OneToMany
     private List<TarjetaPlastica> tarjetasDisponibles;
+    @OneToMany
     private List<TarjetaPlastica> tarjetasRepartidas;
     @Setter private static Double coeficiente = 2.0;
 
@@ -35,6 +42,10 @@ public class RegistroPersonasSituVulnerable extends Colaboracion{
 
         this.cantidadTarjetas = cantidadTarjetas;
         this.fechaColaboracion = fechaDonacion;
+    }
+
+    public RegistroPersonasSituVulnerable() {
+
     }
 
     @Override

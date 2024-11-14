@@ -6,8 +6,8 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "uso_tarjeta_plastica")
-public class UsoTarjetaPlastica {
+@Table(name = "uso_tarjeta")
+public class UsoTarjeta {
 
     @Id
     @GeneratedValue
@@ -19,12 +19,12 @@ public class UsoTarjetaPlastica {
     @Column
     private LocalDateTime fechaYHora;
 
-    public UsoTarjetaPlastica(Heladera heladera) {
+    public UsoTarjeta(Heladera heladera) {
         this.heladera = heladera;
         this.fechaYHora = LocalDateTime.now();
     }
 
-    public UsoTarjetaPlastica() {
+    public UsoTarjeta() {
 
     }
 }

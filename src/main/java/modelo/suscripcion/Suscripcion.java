@@ -10,8 +10,9 @@ import modelo.personas.TipoMedioDeContacto;
 import javax.persistence.*;
 
 @Entity
-@Inheritance(strategy = InheritanceType.JOINED)
-public abstract class ColaboradorSuscripto {
+@Table
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+public abstract class Suscripcion {
 
     @Id
     @GeneratedValue
@@ -38,7 +39,7 @@ public abstract class ColaboradorSuscripto {
     @OneToOne(cascade = CascadeType.ALL)
     private MedioDeContacto medioDeContacto;
 
-    public ColaboradorSuscripto(Heladera heladera, Colaborador colaborador, TipoSuscripcion tipo, TipoMedioDeContacto medio) {
+    public Suscripcion(Heladera heladera, Colaborador colaborador, TipoSuscripcion tipo, TipoMedioDeContacto medio) {
         this.heladera = heladera;
         this.colaborador = colaborador;
         this.tipoSuscripcion = tipo;
@@ -46,7 +47,7 @@ public abstract class ColaboradorSuscripto {
         //this.validarExistenciaMedioDeContacto();
     }
 
-    public ColaboradorSuscripto() {
+    public Suscripcion() {
 
     }
 

@@ -28,7 +28,7 @@ public class GenerarReporte{
 
     }
 
-    public List<ReporteHeladera> obtenerFallasXHeladera() {
+    public String obtenerFallasXHeladera() {
         List<ReporteHeladera> reportes = new ArrayList<>();
 
         for (Heladera heladera : RepositorioHeladeras.getHeladeras()) {
@@ -39,11 +39,12 @@ public class GenerarReporte{
             heladera.resetearContador("fallas");
         }
 
+        String rutaDelArchivo = "ruta";
 
-        return reportes;
+        return rutaDelArchivo;
     }
 
-    public List<ReporteHeladera> obtenerViandasColocadasXHeladera() {
+    public String obtenerViandasColocadasXHeladera() {
         List<ReporteHeladera> reportes = new ArrayList<>();
 
         for (Heladera heladera : RepositorioHeladeras.getHeladeras()) {
@@ -54,10 +55,12 @@ public class GenerarReporte{
             heladera.resetearContador("colocadas");
         }
 
-        return reportes;
+        String rutaDelArchivo = "ruta";
+
+        return rutaDelArchivo;
     }
 
-    public List<ReporteHeladera> obtenerViandasRetiradasXHeladera() {
+    public String obtenerViandasRetiradasXHeladera() {
         List<ReporteHeladera> reportes = new ArrayList<>();
 
         for (Heladera heladera : RepositorioHeladeras.getHeladeras()) {
@@ -68,10 +71,12 @@ public class GenerarReporte{
             heladera.resetearContador("retiradas");
         }
 
-        return reportes;
+        String rutaDelArchivo = "ruta";
+
+        return rutaDelArchivo;
     }
 
-    public List<ReporteColaborador> obtenerViandasXColaborador() {
+    public String obtenerViandasXColaborador() {
         List<ReporteColaborador> reportes = new ArrayList<>();
 
         for (Colaborador colab : RepositorioColaboradores.getColaboradores()) {
@@ -82,7 +87,9 @@ public class GenerarReporte{
             colab.resetearContadorViandasSemanales();
         }
 
-        return reportes;
+        String rutaDelArchivo = "ruta";
+
+        return rutaDelArchivo;
     }
 
 

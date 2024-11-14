@@ -1,21 +1,39 @@
 package modelo.reportador;
 
+import javax.persistence.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
-public class Reporte {
-    private List<ReporteHeladera> cantidadFallasXHeladera;
-    private List<ReporteColaborador> viandasXColaborador;
-    private List<ReporteHeladera> cantidadViandasColocadas;
-    private List<ReporteHeladera> cantidadViandasRetiradas;
 
-    public Reporte(List<ReporteHeladera> cantidadFallasXHeladera, List<ReporteColaborador> viandasXColaborador, List<ReporteHeladera> cantidadViandasColocadas, List<ReporteHeladera> cantidadViandasRetiradas) {
+public class Reporte {
+
+    private int id;
+
+    private LocalDateTime fechaReporte;
+
+    private String cantidadFallasXHeladera;
+
+    private String viandasXColaborador;
+
+    private String cantidadViandasColocadas;
+
+    private String cantidadViandasRetiradas;
+
+
+    public Reporte(String cantidadFallasXHeladera, String viandasXColaborador, String cantidadViandasColocadas, String cantidadViandasRetiradas) {
         this.cantidadFallasXHeladera = cantidadFallasXHeladera;
         this.viandasXColaborador = viandasXColaborador;
         this.cantidadViandasColocadas = cantidadViandasColocadas;
         this.cantidadViandasRetiradas = cantidadViandasRetiradas;
     }
 
+    public Reporte() {
+
+    }
+
     public void generarTXT(){
         //TODO
+        /*hacer la proxima entrega!!!! */
     }
 }

@@ -1,15 +1,14 @@
 package modelo.personas;
 
-import lombok.Generated;
 import modelo.colaboracion.Colaboracion;
 import modelo.colaboracion.Oferta;
 //import elementos.*;
 import lombok.Getter;
 import modelo.elementos.Heladera;
 import modelo.elementos.Tarjeta;
-import modelo.suscripcion.ColaboradorSuscripto;
-import modelo.suscripcion.SuscriptoCantidad;
-import modelo.suscripcion.SuscriptoFalla;
+import modelo.suscripcion.Suscripcion;
+import modelo.suscripcion.SuscripcionXCantidad;
+import modelo.suscripcion.SuscripcionXFalla;
 import modelo.suscripcion.TipoSuscripcion;
 
 import javax.persistence.*;
@@ -23,8 +22,6 @@ public class Colaborador {
     @Id
     @GeneratedValue
     @Getter private int id;
- 
-    //@Getter protected String direccion;
 
     @OneToMany()
     @JoinColumn(name = "colaborador_id", referencedColumnName = "id")
@@ -47,7 +44,7 @@ public class Colaborador {
     @Getter protected Tarjeta tarjeta;
 
     @OneToMany(mappedBy="colaborador", cascade ={CascadeType.ALL}, fetch = FetchType.EAGER )
-    private List<ColaboradorSuscripto> suscripciones;
+    private List<Suscripcion> suscripciones;
 
     @Transient
     @Getter protected Integer contadorViandasDonadasSemanal;
@@ -139,13 +136,13 @@ public class Colaborador {
     }
 
     public void realizarSuscripcionXFalla(Heladera heladera, TipoMedioDeContacto medio){
-        SuscriptoFalla suscripcion = new SuscriptoFalla(heladera, this, TipoSuscripcion.DESPERFECTO, medio);
+        SuscripcionXFalla suscripcion = new SuscripcionXFalla(heladera, this, TipoSuscripcion.DESPERFECTO, medio);
         heladera.agregarSuscriptor(suscripcion);
         this.suscripciones.add(suscripcion);
     }
 
     public void realizarSuscripcionXCantidad(Heladera heladera, Integer n, TipoSuscripcion tipo, TipoMedioDeContacto medio){
-        SuscriptoCantidad suscripcion = new SuscriptoCantidad(heladera, this,tipo,n, medio);
+        SuscripcionXCantidad suscripcion = new SuscripcionXCantidad(heladera, this,tipo,n, medio);
         heladera.agregarSuscriptor(suscripcion);
         this.suscripciones.add(suscripcion);
     }

@@ -7,14 +7,26 @@ import modelo.personas.Colaborador;
 import modelo.personas.TipoPersona;
 import persistencia.RepositorioSolicitudes;
 
+import javax.persistence.*;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.util.Arrays;
 
+@Entity
+@DiscriminatorValue("DONACION_VIANDA")
 public class DonarVianda extends Colaboracion{
+    @OneToOne
+    @JoinColumn(name = "vianda_id", referencedColumnName = "id")
     private Vianda vianda;
+    @ManyToOne
+    @JoinColumn(name = "heladera_id", referencedColumnName = "id")
     private Heladera heladera;
+
+    @Transient
     @Setter private static Double coeficiente = 1.5;
+
+    @OneToOne
+    @JoinColumn(name = "solicitud_apertura_id", referencedColumnName = "id")
     private SolicitudApertura solicitud;
 
 
@@ -29,6 +41,10 @@ public class DonarVianda extends Colaboracion{
     public DonarVianda(LocalDate fechaDonacion) {
         this.tiposPersonasHabilitadas = Arrays.asList(TipoPersona.PH);
         this.fechaColaboracion = fechaDonacion;
+    }
+
+    public DonarVianda() {
+
     }
 
     public void efectuarApertura(Colaborador colaborador){

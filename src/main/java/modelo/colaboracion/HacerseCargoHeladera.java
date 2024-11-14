@@ -4,16 +4,27 @@ import lombok.Setter;
 import modelo.elementos.Heladera;
 import modelo.personas.Colaborador;
 import modelo.personas.TipoPersona;
+import javax.persistence.*;
 
 import java.util.Arrays;
 
+@Entity
+@DiscriminatorValue("CARGO_HELADERA")
 public class HacerseCargoHeladera extends Colaboracion{
+    @OneToOne
+    @JoinColumn(name = "heladera_id", referencedColumnName = "id")
     private Heladera heladera;
+
+    @Transient
     @Setter private static Double coeficiente = 5.0;
 
     public HacerseCargoHeladera(Heladera heladera) {
         this.tiposPersonasHabilitadas = Arrays.asList(TipoPersona.PJ);
         this.heladera = heladera;
+    }
+
+    public HacerseCargoHeladera() {
+
     }
 
     @Override

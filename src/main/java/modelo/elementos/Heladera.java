@@ -19,7 +19,7 @@ import lombok.Setter;
 import modelo.colaboracion.Vianda;
 import modelo.personas.Colaborador;
 import modelo.personas.Tecnico;
-import modelo.suscripcion.ColaboradorSuscripto;
+import modelo.suscripcion.Suscripcion;
 import modelo.suscripcion.TipoSuscripcion;
 import persistencia.RepositorioIncidentes;
 import persistencia.RepositoriosTecnicos;
@@ -57,7 +57,7 @@ public class Heladera {
     @Getter private Float temperaturaMinima;
 
     @OneToMany(mappedBy = "heladera")
-    @Getter private List<ColaboradorSuscripto> colaboradoresSucriptos = new ArrayList<>();
+    @Getter private List<Suscripcion> colaboradoresSucriptos = new ArrayList<>();
 
     @Column
     @Getter private Integer contadorFallasSemanal = 0;
@@ -176,8 +176,8 @@ public class Heladera {
         }
     }*/
 
-    public void agregarSuscriptor(ColaboradorSuscripto colaboradorSuscripto){
-        this.colaboradoresSucriptos.add(colaboradorSuscripto);
+    public void agregarSuscriptor(Suscripcion suscripcion){
+        this.colaboradoresSucriptos.add(suscripcion);
     }
 
     public Boolean permitirIngreso() {

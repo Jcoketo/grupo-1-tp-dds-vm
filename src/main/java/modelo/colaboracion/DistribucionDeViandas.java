@@ -7,6 +7,7 @@ import modelo.elementos.Heladera;
 import modelo.personas.Colaborador;
 import modelo.personas.TipoPersona;
 import persistencia.RepositorioSolicitudes;
+import javax.persistence.*;
 
 import java.time.Duration;
 import java.time.LocalDate;
@@ -14,13 +15,36 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+@Entity
+@DiscriminatorValue("DISTRIBUCION")
 public class DistribucionDeViandas extends Colaboracion {
+    @ManyToOne
+    @JoinColumn(name = "heladera_origen_id", referencedColumnName = "id")
     private Heladera heladeraOrigen;
+
+    @ManyToOne
+    @JoinColumn(name = "heladera_destino_id", referencedColumnName = "id")
     private Heladera heladeraDestino;
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "distribucion_x_vianda",
+            joinColumns = @JoinColumn(name = "distribucion_id"),
+            inverseJoinColumns = @JoinColumn(name = "vianda_id")
+    )
     private List<Vianda>viandas;
+
+    @Enumerated(EnumType.STRING)
     private MotivoDistribucion motivoDistribucion;
+
+    @Transient
     @Setter private static Double coeficiente = 1.0;
+
+    @Column
     private int viandasDistribuidas;
+
+    @OneToOne
+    @JoinColumn(name = "solicitud_apertura_id", referencedColumnName = "id")
     @Getter private SolicitudApertura solicitud;
 
     // CONSTRUCTOR PRINCIPAL
@@ -45,6 +69,10 @@ public class DistribucionDeViandas extends Colaboracion {
         this.heladeraOrigen = null;
         this.motivoDistribucion = null;
         this.viandasDistribuidas = 0;
+
+    }
+
+    public DistribucionDeViandas() {
 
     }
 

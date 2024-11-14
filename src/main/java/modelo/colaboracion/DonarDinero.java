@@ -4,13 +4,22 @@ import lombok.Getter;
 import lombok.Setter;
 import modelo.personas.Colaborador;
 import modelo.personas.TipoPersona;
+import javax.persistence.*;
 
 import java.time.LocalDate;
 import java.util.Arrays;
 
+@Entity
+@DiscriminatorValue("DONACION_DINERO")
 public class DonarDinero extends Colaboracion{
+
+    @Column
     @Getter private Double monto;
+
+    @Enumerated(EnumType.STRING)
     private FrecuenciaDonacion frecuencia;
+
+    @Transient
     @Setter private static Double coeficiente = 1.5;
 
     // CONSTRUCTOR PRINCIPAL
@@ -27,6 +36,10 @@ public class DonarDinero extends Colaboracion{
         this.fechaColaboracion = fechaDonacion;
         this.monto = monto;
         this.frecuencia = FrecuenciaDonacion.UNICA; // Es unica? TODO
+    }
+
+    public DonarDinero() {
+
     }
 
     @Override

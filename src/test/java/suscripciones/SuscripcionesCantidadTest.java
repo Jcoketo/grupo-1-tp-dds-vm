@@ -8,13 +8,13 @@ import modelo.notificador.StrategyNotificacion;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
-import modelo.suscripcion.ColaboradorSuscripto;
+import modelo.suscripcion.Suscripcion;
 import java.time.LocalDate;
 import modelo.personas.Colaborador;
 import modelo.personas.MedioDeContacto;
 import modelo.personas.PersonaHumana;
 import modelo.personas.TipoMedioDeContacto;
-import modelo.suscripcion.SuscriptoCantidad;
+import modelo.suscripcion.SuscripcionXCantidad;
 import modelo.suscripcion.TipoSuscripcion;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -27,7 +27,7 @@ public class SuscripcionesCantidadTest {
   private Heladera heladera;
   private ReceptorMovimiento receptorMovimiento;
   private Colaborador colaborador;
-  private ColaboradorSuscripto colaboradorSuscripto;
+  private Suscripcion suscripcion;
   private StrategyNotificacion strategyNotificacionMock;
   private PuntoEstrategico puntoEstrategico;
 
@@ -51,20 +51,20 @@ public class SuscripcionesCantidadTest {
 
   @Test
   public void testSuscripcionExitosa() {
-    colaboradorSuscripto = new SuscriptoCantidad(heladera, colaborador, TipoSuscripcion.QUEDAN_POCAS, 5, TipoMedioDeContacto.MAIL);
+    suscripcion = new SuscripcionXCantidad(heladera, colaborador, TipoSuscripcion.QUEDAN_POCAS, 5, TipoMedioDeContacto.MAIL);
 
-    heladera.agregarSuscriptor(colaboradorSuscripto);
+    heladera.agregarSuscriptor(suscripcion);
 
-    assertTrue(heladera.getColaboradoresSucriptos().contains(colaboradorSuscripto));
+    assertTrue(heladera.getColaboradoresSucriptos().contains(suscripcion));
   }
 
   @Test
   public void testNotificarmeAlertaQuedanPocas() {
-    colaboradorSuscripto = new SuscriptoCantidad(heladera, colaborador, TipoSuscripcion.QUEDAN_POCAS, 5, TipoMedioDeContacto.MAIL);
+    suscripcion = new SuscripcionXCantidad(heladera, colaborador, TipoSuscripcion.QUEDAN_POCAS, 5, TipoMedioDeContacto.MAIL);
 
-    heladera.agregarSuscriptor(colaboradorSuscripto);
+    heladera.agregarSuscriptor(suscripcion);
 
-    colaboradorSuscripto.notificarmeAlerta();
+    suscripcion.notificarmeAlerta();
 
     ArgumentCaptor<String> textoCaptor = ArgumentCaptor.forClass(String.class);
     ArgumentCaptor<String> asuntoCaptor = ArgumentCaptor.forClass(String.class);
@@ -79,11 +79,11 @@ public class SuscripcionesCantidadTest {
 
   @Test
   public void testNotificarmeAlertaPocoEspacio() {
-    colaboradorSuscripto = new SuscriptoCantidad(heladera, colaborador, TipoSuscripcion.POCO_ESPACIO, 6, TipoMedioDeContacto.MAIL);
+    suscripcion = new SuscripcionXCantidad(heladera, colaborador, TipoSuscripcion.POCO_ESPACIO, 6, TipoMedioDeContacto.MAIL);
 
-    heladera.agregarSuscriptor(colaboradorSuscripto);
+    heladera.agregarSuscriptor(suscripcion);
 
-    colaboradorSuscripto.notificarmeAlerta();
+    suscripcion.notificarmeAlerta();
 
     ArgumentCaptor<String> textoCaptor = ArgumentCaptor.forClass(String.class);
     ArgumentCaptor<String> asuntoCaptor = ArgumentCaptor.forClass(String.class);

@@ -8,13 +8,13 @@ import modelo.notificador.StrategyNotificacion;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
-import modelo.suscripcion.ColaboradorSuscripto;
+import modelo.suscripcion.Suscripcion;
 import java.time.LocalDate;
 import modelo.personas.Colaborador;
 import modelo.personas.MedioDeContacto;
 import modelo.personas.PersonaHumana;
 import modelo.personas.TipoMedioDeContacto;
-import modelo.suscripcion.SuscriptoFalla;
+import modelo.suscripcion.SuscripcionXFalla;
 import modelo.suscripcion.TipoSuscripcion;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -27,7 +27,7 @@ public class SuscripcionesDesperfectoTest {
   private Heladera heladera;
   private ReceptorMovimiento receptorMovimiento;
   private Colaborador colaborador;
-  private ColaboradorSuscripto colaboradorSuscripto;
+  private Suscripcion suscripcion;
   private StrategyNotificacion strategyNotificacionMock;
   private PuntoEstrategico puntoEstrategico;
 
@@ -45,9 +45,9 @@ public class SuscripcionesDesperfectoTest {
 
     colaborador = new Colaborador(personaHumana2);
 
-    colaboradorSuscripto = new SuscriptoFalla(heladera,colaborador, TipoSuscripcion.DESPERFECTO, TipoMedioDeContacto.MAIL);
+    suscripcion = new SuscripcionXFalla(heladera,colaborador, TipoSuscripcion.DESPERFECTO, TipoMedioDeContacto.MAIL);
 
-    heladera.agregarSuscriptor(colaboradorSuscripto);
+    heladera.agregarSuscriptor(suscripcion);
 
     strategyNotificacionMock = mock(StrategyNotificacion.class);
     Notificador.agregarEstrategia(TipoMedioDeContacto.MAIL, strategyNotificacionMock);
@@ -56,12 +56,12 @@ public class SuscripcionesDesperfectoTest {
   }
   @Test
   public void testSuscripcionExitosa() {
-    assertTrue(heladera.getColaboradoresSucriptos().contains(colaboradorSuscripto));
+    assertTrue(heladera.getColaboradoresSucriptos().contains(suscripcion));
   }
 
   @Test
   public void testNotificarmeAlerta() {
-    colaboradorSuscripto.notificarmeAlerta();
+    suscripcion.notificarmeAlerta();
 
     ArgumentCaptor<String> textoCaptor = ArgumentCaptor.forClass(String.class);
     ArgumentCaptor<String> asuntoCaptor = ArgumentCaptor.forClass(String.class);

@@ -2,17 +2,12 @@ package modelo.elementos;
 
 import java.time.LocalDateTime;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
-
+import javax.persistence.*;
 import modelo.personas.Colaborador;
 
 
 @Entity
+@DiscriminatorValue("FALLA_TECNICA")
 public class FallaTecnica extends Incidente{
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
@@ -31,5 +26,9 @@ public class FallaTecnica extends Incidente{
         this.descripcion = descripcion;
         this.URLfoto = URLfoto;
         this.fechaHoraIncidente = LocalDateTime.now();
+    }
+
+    public FallaTecnica() {
+
     }
 }
