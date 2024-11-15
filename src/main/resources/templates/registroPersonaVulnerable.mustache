@@ -286,7 +286,7 @@
 
             <div class="form-group">
                 <label for="documento">¿Posee documento?</label>
-                <select id="documento" name="documento">
+                <select id="documento" name="documento" required>
                     <option value="si">Sí</option>
                     <option value="no">No</option>
                 </select>
@@ -299,7 +299,7 @@
 
             <div class="form-group">
                 <label for="domicilio">¿Posee domicilio?</label>
-                <select id="domicilio" name="domicilio">
+                <select id="domicilio" name="domicilio" required>
                     <option value="si">Sí</option>
                     <option value="no">No</option>
                 </select>
@@ -317,7 +317,7 @@
 
             <div class="form-group">
                 <label for="menores">¿Posee menores a cargo?</label>
-                <select id="menores" name="menores">
+                <select id="menores" name="menores" required>
                     <option value="si">Sí</option>
                     <option value="no">No</option>
                 </select>
@@ -335,8 +335,7 @@
 
             <div class="buttons">
                 <button type="button" class="cancel-button">Cancelar</button>
-                <a href="/registroPersonaVulnerableFinal" class="register-button">Registrar</a>
-            </div>
+                <button type="button" class="register-button" onclick="window.location.href='/registroPersonaVulnerableFinal'">Registrarse</button>            </div>
 
         </form>
     </div>

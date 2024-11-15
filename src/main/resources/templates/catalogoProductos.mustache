@@ -10,20 +10,12 @@
     <!-- Enlace a Font Awesome para el ícono de lupa -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
-        body {
+         body {
             font-family: Arial, sans-serif;
+            background-color: #ffffff;
             margin: 0;
             padding: 0;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-            background-color: #ffffff;
-        }
-
-
-        footer {
-            background-color: #e0e0e0;
-            padding: 20px 50px;
+            height: 100%; /* Asegura que el body y html ocupen el 100% de la altura */
         }
 
         header {
@@ -65,9 +57,11 @@
             width: 200px;
         }
 
+        /*fin dropdown*/
+
         main {
             flex-grow: 1;
-            padding: 50px;
+            padding: 0px;
             background-color: white;
         }
 
@@ -79,12 +73,16 @@
         }
 
         .header-title {
-            font-weight: 800;
+            font-weight: 900;
         }
 
         .sub-header {
             font-weight: 600;
         }
+
+        .form-inline {
+            margin-bottom: 20px;
+        }	
 
         .puntaje-column {
             display: flex;
@@ -290,6 +288,7 @@
                                 </button>                    </div>
                         </div>
                     </form>
+                    <p> </p>
                 </div>
 
             </div>

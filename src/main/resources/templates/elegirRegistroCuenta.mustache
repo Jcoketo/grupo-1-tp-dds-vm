@@ -9,18 +9,10 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-            background-color: #f5f5f5;
-        }
-
-        header{
-            background-color: #e0e0e0;
-            padding: 20px 50px;
-            text-align: center;
+            background-color: #ffffff;
+            margin: 70;
+            padding: 60;
+            height: 100vh; /* Asegura que el body y html ocupen el 100% de la altura */
         }
 
         header {
@@ -28,23 +20,41 @@
             justify-content: space-between;
             align-items: center;
         }
-
-        header nav a {
-            margin-left: 20px;
-            text-decoration: none;
-            color: black;
+        header .navbar-nav .nav-link {
+            font-size: 17px !important; /* Ajusta el tamaño de la fuente de los enlaces de navegación en el header */
         }
-        .navbar-nav .nav-item {
-            margin-left: 20px;
+        nav {
+            margin-top: 20px; /* Ajusta el valor según el espacio deseado */
         }
 
-        .btn-donar {
-            background-color: #1e5552;
-            color: white;
-            padding: 10px 20px;
-            text-decoration: none;
-            border-radius: 10px;
+        /*Dropdown*/
+        .navbar-light .navbar-nav .nav-link,
+        .navbar-light .dropdown-menu {
+            background-color: #ffffff;
+            color: #1e5552;
+            font-size: 16px;
+            font-weight: normal;
         }
+
+        .navbar-light .dropdown-menu {
+            width: 200px;
+        }
+        .navbar-light .dropdown-menu a.dropdown-item {
+            color: #1e5552;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 16px;
+            font-weight: normal;
+            width: 200px;
+
+        }
+
+        .navbar-light .dropdown-menu a.dropdown-item:hover {
+            background-color: #ffffff;
+            margin: 0;
+            width: 200px;
+        }
+
+        /*fin dropdown*/
 
         main {
             flex-grow: 1;
@@ -52,6 +62,10 @@
             justify-content: center;
             align-items: center;
             position: relative;
+            margin: 70;
+            padding: 60;
+            height: 70vh; 
+
         }
 
         .register-container {
@@ -60,6 +74,7 @@
             padding: 40px;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            
         }
 
         .register-container button {
@@ -73,6 +88,7 @@
             font-size: 16px;
             margin-bottom: 20px;
         }
+
         h5 {
             margin: 0; /* Elimina márgenes por defecto */
             white-space: nowrap; /* Evita que el texto haga salto de línea */
@@ -100,14 +116,42 @@
         }
     </style>
 </head>
+
 <body>
 <header>
     <div><img src="/static/logo.png" alt="Logo" style="max-height: 50px;"></div>
-    <nav>
-        <a href="#">Sobre nosotros</a>
-        <a href="/elegirDonacion" class="btn-donar">Donar</a>
-        <a href="/mapaHeladeras">Heladeras</a>
-
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Sobre nosotros</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/elegirDonacion">Donar</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/mapaHeladeras">Heladeras</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Nombre del Usuario
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="/perfil">Mi perfil</a>
+                        <a class="dropdown-item" href="/misColaboraciones">Mis colaboraciones</a>
+                        <a class="dropdown-item" href="/canjearPuntos">Mi puntaje</a>
+                        <a class="dropdown-item" href="/misReportes">Mis reportes</a>
+                        <a class="dropdown-item" href="#">Configuración</a>
+                        <a class="dropdown-item" href="/login">Cerrar sesión</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
     </nav>
 </header>
 
