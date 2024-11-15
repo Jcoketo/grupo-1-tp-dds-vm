@@ -7,15 +7,14 @@
     <!-- Enlace a CSS de Bootstrap -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        body {
+       body {
             font-family: Arial, sans-serif;
+            background-color: #ffffff;
             margin: 0;
             padding: 0;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-            background-color: #ffffff;
+            height: 100%; /* Asegura que el body y html ocupen el 100% de la altura */
         }
+
         header {
             display: flex;
             justify-content: space-between;
@@ -55,14 +54,7 @@
             width: 200px;
         }
 
-        .btn-donar {
-            background-color: #1e5552;
-            color: white;
-            padding: 10px 20px;
-            text-decoration: none;
-            border-radius: 10px;
-        }
-
+        /*fin dropdown*/
         main {
             flex-grow: 1;
             padding: 20px;
@@ -137,12 +129,10 @@
         .volver-link {
             color: #1e5552;
         }
-
         .navbar-light .navbar-nav .nav-link,
         .navbar-light .dropdown-menu {
-            background-color: #e0e0e0;
-            color: black;
-            font-family: Arial, Helvetica, sans-serif;
+            background-color: #ffffff;
+            color: #1e5552;
             font-size: 16px;
             font-weight: normal;
         }
@@ -150,17 +140,17 @@
         .navbar-light .dropdown-menu {
             width: 200px;
         }
-
         .navbar-light .dropdown-menu a.dropdown-item {
-            color: black;
+            color: #1e5552;
             font-family: Arial, Helvetica, sans-serif;
             font-size: 16px;
             font-weight: normal;
             width: 200px;
+
         }
 
         .navbar-light .dropdown-menu a.dropdown-item:hover {
-            background-color: #cdcdcd;
+            background-color: #ffffff;
             margin: 0;
             width: 200px;
         }
@@ -196,10 +186,38 @@
 
 <header>
     <div><img src="/static/logo.png" alt="Logo" style="max-height: 50px;"></div>
-    <nav>
-        <a href="#">Sobre nosotros</a>
-        <a href="/elegirDonacion" class="btn-donar">Donar</a>
-        <a href="/mapaHeladeras">Heladeras</a>
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Sobre nosotros</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/elegirDonacion">Donar</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/mapaHeladeras">Heladeras</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Nombre del Usuario
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="/perfil">Mi perfil</a>
+                        <a class="dropdown-item" href="/misColaboraciones">Mis colaboraciones</a>
+                        <a class="dropdown-item" href="/canjearPuntos">Mi puntaje</a>
+                        <a class="dropdown-item" href="/misReportes">Mis reportes</a>
+                        <a class="dropdown-item" href="#">Configuración</a>
+                        <a class="dropdown-item" href="/login">Cerrar sesión</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
     </nav>
 </header>
 
