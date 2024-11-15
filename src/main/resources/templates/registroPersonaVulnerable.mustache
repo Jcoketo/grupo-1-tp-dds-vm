@@ -273,7 +273,7 @@
 
     <!-- Contenedor del formulario -->
     <div class="form-container">
-        <form>
+        <form id="registroForm" action="/registroPersonaVulnerableFinal" method="post">
             <div class="form-group">
                 <label for="nombre">Nombre de Persona Vulnerable</label>
                 <input type="text" id="nombre" name="nombre" required>
@@ -335,9 +335,20 @@
 
             <div class="buttons">
                 <button type="button" class="cancel-button">Cancelar</button>
-                <button type="button" class="register-button" onclick="window.location.href='/registroPersonaVulnerableFinal'">Registrarse</button>            </div>
+                <button type="button" class="register-button" onclick="submitForm()">Registrarse</button>
 
         </form>
+        <script>
+        function submitForm() {
+        var form = document.getElementById('registroForm');
+        if (form.checkValidity()) {
+            form.submit();
+            window.location.href = '/registroPersonaVulnerableFinal';
+        } else {
+            form.reportValidity();
+        }
+    }
+</script>
     </div>
 </main>
 

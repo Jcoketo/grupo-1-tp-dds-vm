@@ -152,6 +152,20 @@
             font-size: 16px;
             font-weight: normal;
 }
+.register-button {
+            background-color: #1e5552;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .register-button:hover,
+        .cancel-button:hover {
+            opacity: 0.8;
+        }
     </style>
 </head>
 
@@ -200,7 +214,7 @@
                 <div class="card">
                     <div class="card-body">
                         <h3 class="card-title">Donar Dinero</h3>
-                        <form action="graciasDonacion.html" method="post">
+                        <form id="donarForm" action="/graciasPorDonar" method="post">
                             <div class="form-group">
                                 <label for="monto">Monto</label>
                                 <input type="number" id="monto" name="monto" class="form-control" required>
@@ -225,8 +239,19 @@
                                 <input type="checkbox" id="guardar-datos" name="guardar-datos">
                                 <label for="guardar-datos">Guardar los datos de la tarjeta para futuras donaciones</label>
                             </div>
-                            <a href= "/graciasPorDonar" class="btn btn-primary">Donar </a>
+                            <button type="button" class="register-button" onclick="submitForm()">Donar</button>
                         </form>
+                        <script>
+                        function submitForm() {
+        var form = document.getElementById('donarForm');
+        if (form.checkValidity()) {
+            form.submit();
+            window.location.href = '/graciasPorDonar';
+        } else {
+            form.reportValidity();
+        }
+    }
+                        </script>
                     </div>
                 </div>
             </div>

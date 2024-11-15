@@ -218,7 +218,7 @@
     <div class="container main-container">
         <h1>Distribuir Viandas</h1>
         <p></p>
-        <form>
+        <form id="distribuirForm" action="/graciasPorDonar" method="post">
             <div style="display: inline-flex; gap: 20px">
                 <!-- Heladera origen -->
                 <div class="form-section">
@@ -269,9 +269,20 @@
             </div>
             <div class="btn-group">
                 <button type="button" class="btn btn-cancel">Cancelar</button>
-                <button type="submit" class="btn btn-submit">Distribuir</button>
+                <button type="submit" class="btn btn-submit" onclick="submitForm()">Distribuir</button>
             </div>
         </form>
+        <script>
+        function submitForm() {
+        var form = document.getElementById('distribuirForm');
+        if (form.checkValidity()) {
+            form.submit();
+            window.location.href = '/graciasPorDonar';
+        } else {
+            form.reportValidity();
+        }
+    }
+        </script>
     </div>
 </main>
 
@@ -279,7 +290,7 @@
     <div class="container">
         <div class="row justify-content-between align-items-center">
             <div class="col-md-3 text-center text-md-left">
-                <img src="/static/logo.png" alt="Logo" class="img-fluid mb-2" style= "max-height: 90px;"> <!-- Reemplaza con tu logo -->
+                <img src="/static/logo.png" alt="Logo" class="img-fluid mb-2" style= "max-height: 90px;"> 
             </div>
             <div class="col-md-9">
                 <div class="row">
