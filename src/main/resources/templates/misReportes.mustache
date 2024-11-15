@@ -7,19 +7,12 @@
     <!-- Enlace a CSS de Bootstrap -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        body {
+      body {
             font-family: Arial, sans-serif;
+            background-color: #ffffff;
             margin: 0;
             padding: 0;
-            min-height: 100vh;
-            background-color: #f5f5f5;
-            display: flex;
-            flex-direction: column;
-        }
-
-        header{
-            background-color: #e0e0e0;
-            padding: 20px 50px;
+            height: 100%; /* Asegura que el body y html ocupen el 100% de la altura */
         }
 
         header {
@@ -27,10 +20,41 @@
             justify-content: space-between;
             align-items: center;
         }
-
-        .navbar-nav .nav-item {
-            margin-left: 20px;
+        header .navbar-nav .nav-link {
+            font-size: 17px !important; /* Ajusta el tamaño de la fuente de los enlaces de navegación en el header */
         }
+        nav {
+            margin-top: 20px; /* Ajusta el valor según el espacio deseado */
+        }
+
+        /*Dropdown*/
+        .navbar-light .navbar-nav .nav-link,
+        .navbar-light .dropdown-menu {
+            background-color: #ffffff;
+            color: #1e5552;
+            font-size: 16px;
+            font-weight: normal;
+        }
+
+        .navbar-light .dropdown-menu {
+            width: 200px;
+        }
+        .navbar-light .dropdown-menu a.dropdown-item {
+            color: #1e5552;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 16px;
+            font-weight: normal;
+            width: 200px;
+
+        }
+
+        .navbar-light .dropdown-menu a.dropdown-item:hover {
+            background-color: #ffffff;
+            margin: 0;
+            width: 200px;
+        }
+
+        /*fin dropdown*/
         main {
             flex-grow: 1;
             padding: 20px;
@@ -50,7 +74,7 @@
         }
 
         .reporte {
-            background-color: #d3d3d3;
+            background-color: #d9ede8;
             padding: 15px;
             border-radius: 8px;
             margin-bottom: 10px;
@@ -83,32 +107,6 @@
             margin-right: 15px;
         }
 
-        .navbar-light .navbar-nav .nav-link,
-        .navbar-light .dropdown-menu {
-            background-color: #e0e0e0;
-            color: black;
-            font-family: Arial, Helvetica, sans-serif;
-            font-size: 16px;
-            font-weight: normal;
-        }
-
-        .navbar-light .dropdown-menu {
-            width: 200px;
-        }
-        .navbar-light .dropdown-menu a.dropdown-item {
-            color: black;
-            font-family: Arial, Helvetica, sans-serif;
-            font-size: 16px;
-            font-weight: normal;
-            width: 200px;
-
-        }
-
-        .navbar-light .dropdown-menu a.dropdown-item:hover {
-            background-color: #cdcdcd;
-            margin: 0;
-            width: 200px;
-        }
 
         h5 {
             margin: 0; /* Elimina márgenes por defecto */
@@ -153,23 +151,23 @@
                     <a class="nav-link" href="#">Sobre nosotros</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/elegirDonacionFisica">Donar</a>
+                    <a class="nav-link" href="/elegirDonacion">Donar</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/mapaHeladeras">Heladeras</a>
                 </li>
-                <!-- Menú desplegable -->
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Nombre del usuario
+                        Nombre del Usuario
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                         <a class="dropdown-item" href="/perfil">Mi perfil</a>
                         <a class="dropdown-item" href="/misColaboraciones">Mis colaboraciones</a>
                         <a class="dropdown-item" href="/canjearPuntos">Mi puntaje</a>
+                        <a class="dropdown-item" href="/misReportes">Mis reportes</a>
                         <a class="dropdown-item" href="#">Configuración</a>
-                        <a class="dropdown-item" href="#">Cerrar sesión</a>
+                        <a class="dropdown-item" href="/login">Cerrar sesión</a>
                     </div>
                 </li>
             </ul>

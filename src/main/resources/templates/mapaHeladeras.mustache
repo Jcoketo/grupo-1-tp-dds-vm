@@ -10,17 +10,10 @@
 
         body {
             font-family: Arial, sans-serif;
+            background-color: #ffffff;
             margin: 0;
             padding: 0;
-            min-height: 100vh;
-            background-color: #f5f5f5;
-            display: flex;
-            flex-direction: column;
-        }
-
-        header{
-            background-color: #e0e0e0;
-            padding: 20px 50px;
+            height: 100%; /* Asegura que el body y html ocupen el 100% de la altura */
         }
 
         header {
@@ -28,17 +21,41 @@
             justify-content: space-between;
             align-items: center;
         }
-
-        .navbar-nav .nav-item {
-            margin-left: 20px;
+        header .navbar-nav .nav-link {
+            font-size: 17px !important; /* Ajusta el tamaño de la fuente de los enlaces de navegación en el header */
+        }
+        nav {
+            margin-top: 20px; /* Ajusta el valor según el espacio deseado */
         }
 
-        h1 {
-            font-size: 24px;
-            font-weight: bold;
-            margin-bottom: 40px;
-            margin-top: 40px;
+        /*Dropdown*/
+        .navbar-light .navbar-nav .nav-link,
+        .navbar-light .dropdown-menu {
+            background-color: #ffffff;
+            color: #1e5552;
+            font-size: 16px;
+            font-weight: normal;
         }
+
+        .navbar-light .dropdown-menu {
+            width: 200px;
+        }
+        .navbar-light .dropdown-menu a.dropdown-item {
+            color: #1e5552;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 16px;
+            font-weight: normal;
+            width: 200px;
+
+        }
+
+        .navbar-light .dropdown-menu a.dropdown-item:hover {
+            background-color: #ffffff;
+            margin: 0;
+            width: 200px;
+        }
+
+        /*fin dropdown*/
 
         main {
             flex: 1; /* Esto hace que el contenido principal crezca para llenar el espacio restante */
@@ -73,13 +90,13 @@
             cursor: pointer;
             border-radius: 10px;
             padding: 10px;
-            background-color: #ebece3;
+            background-color: #B8CCC8;
             transition: background-color 0.3s;
             margin-bottom: 7px;
         }
 
         .list-group-item:hover {
-            background-color: #e2e6ea;
+            background-color: #B8CCC8;
         }
 
         h5 {
@@ -129,32 +146,25 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/mapaHeladeras">Heladeras</a>
                 </li>
-                {{#logueado}}
-                    <!-- Menú desplegable -->
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
-                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Nombre del usuario
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <a class="dropdown-item" href="/perfil">Mi perfil</a>
-                            <a class="dropdown-item" href="/misColaboraciones">Mis colaboraciones</a>
-                            <a class="dropdown-item" href="/canjearPuntos">Mi puntaje</a>
-                            <a class="dropdown-item" href="/misReportes">Mis reportes</a>
-                            <a class="dropdown-item" href="#">Configuración</a>
-                            <a class="dropdown-item" href="/login">Cerrar sesión</a>
-                        </div>
-                    </li>
-                {{/logueado}}
-                {{^logueado}}
-                    <li class="nav-item">
-                        <a href="/login" class="btn2 btn2-submit">Iniciar Sesión</a>
-                    </li>
-                {{/logueado}}
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Nombre del Usuario
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="/perfil">Mi perfil</a>
+                        <a class="dropdown-item" href="/misColaboraciones">Mis colaboraciones</a>
+                        <a class="dropdown-item" href="/canjearPuntos">Mi puntaje</a>
+                        <a class="dropdown-item" href="/misReportes">Mis reportes</a>
+                        <a class="dropdown-item" href="#">Configuración</a>
+                        <a class="dropdown-item" href="/login">Cerrar sesión</a>
+                    </div>
+                </li>
             </ul>
         </div>
     </nav>
 </header>
+
 
 <main class="container-fluid">
     <h1>Visualización de heladeras</h1>

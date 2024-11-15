@@ -26,10 +26,6 @@
             flex-direction: column;
         }
 
-        .navbar-nav .nav-item {
-            margin-left: 20px;
-        }
-
         h1 {
             font-size: 24px;
             font-weight: bold;
@@ -115,6 +111,14 @@
             background-color: #e2e6ea;
         }
 
+          body {
+            font-family: Arial, sans-serif;
+            background-color: #ffffff;
+            margin: 0;
+            padding: 0;
+            height: 100%; /* Asegura que el body y html ocupen el 100% de la altura */
+        }
+
         header {
             display: flex;
             justify-content: space-between;
@@ -153,6 +157,8 @@
             margin: 0;
             width: 200px;
         }
+
+        /*fin dropdown*/
     </style>
 </head>
 <body>
@@ -170,16 +176,15 @@
                     <a class="nav-link" href="#">Sobre nosotros</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/elegirDonacionFisi>Donar</a>
+                    <a class="nav-link" href="/elegirDonacion">Donar</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/mapaHeladeras">Heladeras</a>
                 </li>
-                <!-- Menú desplegable -->
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Nombre del usuario
+                        Nombre del Usuario
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                         <a class="dropdown-item" href="/perfil">Mi perfil</a>
