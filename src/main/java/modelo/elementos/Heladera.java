@@ -144,7 +144,7 @@ public class Heladera {
         this.temperaturaMinima = temperatura;
     }
 
-    public void reportarFalla(Colaborador colab, String motivo, String foto){
+    public void reportarFalla(Colaborador colab, String motivo, String foto) {
         this.marcarComoInactiva();
         this.contadorFallasSemanal++;
 
@@ -154,11 +154,11 @@ public class Heladera {
         repo.agregar(falla);
 
         RepositoriosTecnicos tecnicos = RepositoriosTecnicos.getInstancia();
-        if(!tecnicos.hayTecnicos()){
-            System.out.println("No hay técnicos disponibles");
-        }else {
-            Tecnico tecnico = tecnicos.obtenerTecnicoCercano(this.getPuntoEstrategico().getAreas());
+        try {
+            Tecnico tecnico = tecnicos.obtenerTecnicoCercano(this.getPuntoEstrategico().getAreas(), this);
             tecnico.notificarFalla(this, falla);
+        } catch (Exception e) { //TODO verificar como volver de este error
+            System.out.println("No hay técnicos disponibles");
         }
     }
 

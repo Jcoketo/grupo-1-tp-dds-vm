@@ -5,6 +5,7 @@ import lombok.Getter;
 import modelo.elementos.Areas;
 import modelo.elementos.Heladera;
 import modelo.elementos.Incidente;
+import modelo.elementos.PuntoEstrategico;
 
 import javax.persistence.*;
 import java.util.List;
@@ -13,22 +14,28 @@ import java.util.List;
 @Table
 public class Tecnico {
 
+
     @Id
     @GeneratedValue
-    private int id;
+    @Getter private int id;
 
     @Column
-    private String nroCUIL;
+    @Getter private String nroCUIL;
 
     @Enumerated
     @Getter private Areas areaCobertura;
 
     @OneToOne
     @JoinColumn(name = "persona_id", referencedColumnName = "id")
-    private PersonaHumana persona;
+    @Getter private PersonaHumana persona;
 
     @OneToMany(mappedBy = "tecnico")
     private List<Visita> visitas = new ArrayList<>();
+
+    @Transient
+    @Getter private PuntoEstrategico puntoEstrategico;
+    // TODO FALTA DEFINIR QUE HACEMOS CON ESTE PUNTO ESTRATEGICO
+    // LO NECESITAMOS PARA VER CUAL ES EL TECNICO MAS CERCANO
 
     public Tecnico(String nroCUIL, Areas areaCobertura, PersonaHumana persona) {
         this.nroCUIL = nroCUIL;

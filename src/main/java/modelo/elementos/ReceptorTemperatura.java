@@ -21,9 +21,12 @@ public class ReceptorTemperatura {
             RepositorioIncidentes repo = RepositorioIncidentes.getInstancia();
             repo.agregar(alerta);
             RepositoriosTecnicos tecnicos = RepositoriosTecnicos.getInstancia();
-            Tecnico tecnico = tecnicos.obtenerTecnicoCercano(heladera.getPuntoEstrategico().getAreas());
-            tecnico.notificarFalla(heladera, alerta);
-
+            try {
+                Tecnico tecnico = tecnicos.obtenerTecnicoCercano(heladera.getPuntoEstrategico().getAreas(), heladera);
+                tecnico.notificarFalla(heladera, alerta);
+            } catch (Exception e) { //TODO verificar como volver de este error
+                System.out.println("No hay técnicos disponibles");
+            }
             return;
         }
 
