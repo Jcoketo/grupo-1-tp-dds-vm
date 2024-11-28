@@ -9,11 +9,9 @@ import persistencia.RepositoriosTecnicos;
 public class ReceptorTemperatura implements Suscriptor {
     private Heladera heladera;
     private Sensoreo ultimoRegistro;
-    private SensoreoBroker broker = new SensoreoBroker();
 
     public ReceptorTemperatura(Heladera heladera){
         this.heladera = heladera;
-        broker.registrar(this);
     }
 
     public void evaluar(Sensoreo sensor){ //TODO:TERMINAR

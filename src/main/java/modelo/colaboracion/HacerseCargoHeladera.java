@@ -11,6 +11,7 @@ import java.util.Arrays;
 @Entity
 @DiscriminatorValue("CARGO_HELADERA")
 public class HacerseCargoHeladera extends Colaboracion{
+
     @OneToOne
     @JoinColumn(name = "heladera_id", referencedColumnName = "id")
     private Heladera heladera;

@@ -1,7 +1,6 @@
 package modelo.personas;
 
 import lombok.Getter;
-import persistencia.EntidadPersistente;
 
 import javax.persistence.*;
 
