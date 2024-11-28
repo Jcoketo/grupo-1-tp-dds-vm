@@ -11,10 +11,10 @@ import java.util.ArrayList;
 public class PersonaHumana extends Persona{
 
     @Column
-    private String nombre;
+    @Getter private String nombre;
 
     @Column
-    private String apellido;
+    @Getter private String apellido;
 
     @Column
     private LocalDate fechaNacimiento;

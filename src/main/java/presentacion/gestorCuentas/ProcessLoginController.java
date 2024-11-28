@@ -10,14 +10,18 @@ import io.javalin.http.Context;
 import io.javalin.http.Handler;
 import modelo.personas.TipoPersona;
 import persistencia.RepositorioColaboradores;
+import modelo.autenticacion.AuthService;
+import org.jetbrains.annotations.NotNull;
 
 public class ProcessLoginController implements Handler {
 
     private RepositorioColaboradores repoColab;
+    private AuthService authService;
 
     public ProcessLoginController(RepositorioColaboradores repoColab) {
         super();
         this.repoColab = repoColab;
+        this.authService = authService;
     }
 
     @Override
@@ -26,7 +30,7 @@ public class ProcessLoginController implements Handler {
         String password = context.formParam("password");
 
         Map<String, Object> model = new HashMap<>();
-        if (authenticateUser(email, password)) {
+        if (authService.autenticarUsuario(email, password)) {
             context.sessionAttribute("logueado", true);
 
             TipoPersona tipoPer = obtenerTipoUsuario(email);
@@ -51,9 +55,17 @@ public class ProcessLoginController implements Handler {
         return repoColab.devolverTipoPersona(email);
     }
 
+
+    /* ---------  VIEJO ---------
+     * Método de autenticación de usuario
+     *
+     * @param email    email del usuario
+     * @param password contraseña del usuario
+     * @return true si el usuario es autenticado, false en caso contrario
+
     private boolean authenticateUser(String email, String password) {
         // Lógica de autenticación (ejemplo simple)
         // ir a la BD
         return "usuario@dominio.com".equals(email) && "password123".equals(password);
-    }
+    }*/
 }
