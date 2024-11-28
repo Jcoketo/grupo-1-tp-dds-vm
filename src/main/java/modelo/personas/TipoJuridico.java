@@ -1,6 +1,6 @@
 package modelo.personas;
 
-public enum TipoJuridica {
+public enum TipoJuridico {
     GUBERNAMENTAL,
     ONG,
     EMPRESA,

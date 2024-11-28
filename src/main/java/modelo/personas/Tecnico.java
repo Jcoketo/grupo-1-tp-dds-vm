@@ -5,11 +5,9 @@ import lombok.Getter;
 import modelo.elementos.Areas;
 import modelo.elementos.Heladera;
 import modelo.elementos.Incidente;
-import modelo.elementos.Visita;
 
 import javax.persistence.*;
 import java.util.List;
-
 
 @Entity
 @Table
@@ -31,7 +29,6 @@ public class Tecnico {
 
     @OneToMany(mappedBy = "tecnico")
     private List<Visita> visitas = new ArrayList<>();
-
 
     public Tecnico(String nroCUIL, Areas areaCobertura, PersonaHumana persona) {
         this.nroCUIL = nroCUIL;

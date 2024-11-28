@@ -8,7 +8,6 @@ import lombok.Getter;
 
 import javax.persistence.*;
 
-
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @Table(name = "persona")
@@ -18,16 +17,15 @@ public abstract class Persona {
     @GeneratedValue
     private int id;
 
+    @Column
+    @Getter protected String direccion;
+
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "persona_id", referencedColumnName = "id")
     @Getter protected List<MedioDeContacto> mediosDeContacto;
 
-    @Column
-    @Getter private String direccion;
-
     @Enumerated(EnumType.STRING)
     @Getter protected TipoPersona tipoPersona;
-
 
     /*public Persona(MedioDeContacto medioDeContacto) {
         this.mediosDeContacto = new ArrayList<MedioDeContacto>();

@@ -17,8 +17,10 @@ public class PersonaVulnerable {
     
     @Column
     private LocalDate fechaRegistro;
+
     @Column
     @Getter private int menoresACargo;
+
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "tarjeta_id", referencedColumnName = "id")
     private TarjetaPlastica tarjeta;

@@ -1,6 +1,6 @@
 package persistencia;
 
-import modelo.elementos.Visita;
+import modelo.personas.Visita;
 import java.util.ArrayList;
 import java.util.List;
 

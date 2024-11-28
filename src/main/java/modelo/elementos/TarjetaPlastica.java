@@ -22,7 +22,6 @@ public class TarjetaPlastica extends Tarjeta {
         this.usosDisponibles = 4 + ( 2 * asociado.getMenoresACargo() );
         this.usosConsumidos = 0;
         this.asociado = asociado;
-
     }
 
     public TarjetaPlastica() {
