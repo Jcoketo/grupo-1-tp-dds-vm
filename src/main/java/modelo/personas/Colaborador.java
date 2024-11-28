@@ -2,7 +2,7 @@ package modelo.personas;
 
 import modelo.colaboracion.Colaboracion;
 import modelo.colaboracion.Oferta;
-//import elementos.*;
+
 import lombok.Getter;
 import modelo.elementos.Heladera;
 import modelo.elementos.Tarjeta;
@@ -19,6 +19,7 @@ import java.util.List;
 @Entity
 @Table(name="colaborador")
 public class Colaborador {
+
     @Id
     @GeneratedValue
     @Getter private int id;
@@ -49,10 +50,6 @@ public class Colaborador {
     @Transient
     @Getter protected Integer contadorViandasDonadasSemanal;
 
-    public TipoPersona getTipoPersona(){
-        return persona.tipoPersona;
-    }
-
     public Colaborador() {
         this.colaboracionesRealizadas = new ArrayList<>();
         this.puntaje = 0.0;
@@ -67,6 +64,8 @@ public class Colaborador {
         //this.contadorViandas = 0;
     }
 
+    public TipoPersona getTipoPersona(){ return this.persona.getTipoPersona(); }
+
     public void resetearContadorViandasSemanales(){
         this.contadorViandasDonadasSemanal = 0;
     }
@@ -76,7 +75,7 @@ public class Colaborador {
     }
 
     public void recibiMiTarjeta(){
-        this.tarjeta.recibida();
+        this.tarjeta.fueRecibida();
     }
 
     public void agregarMediosDeContacto(MedioDeContacto ... medioDeContactos) {
@@ -111,7 +110,6 @@ public class Colaborador {
     protected void iniciarSesion() {
         //TODO
     }
-
 
     public String getEmail(){
         for ( MedioDeContacto contactoAux : persona.mediosDeContacto )
@@ -156,9 +154,8 @@ public class Colaborador {
         this.tarjeta = tarjeta;
     }
 
-    public void notificarme(String mensaje){
+    public void notificarmeXSuscripcion(String mensaje){
       //TODO
     }
-
 
 }

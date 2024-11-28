@@ -1,7 +1,8 @@
-package modelo.elementos;
+package modelo.personas;
 
 import lombok.Getter;
 import modelo.colaboracion.Vianda;
+import modelo.elementos.Heladera;
 import modelo.personas.Tecnico;
 
 import javax.persistence.*;

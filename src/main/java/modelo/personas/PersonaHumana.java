@@ -19,12 +19,6 @@ public class PersonaHumana extends Persona{
     @Column
     private LocalDate fechaNacimiento;
 
-    /*
-    @OneToOne
-    @JoinColumn(name = "documento_id", referencedColumnName = "id")
-    @Setter
-    @Getter private Documento documento;*/
-
     @Embedded
     @AttributeOverrides({
         @AttributeOverride(name = "numeroDoc", column = @Column(name = "numero_doc")),

@@ -19,6 +19,7 @@ import lombok.Setter;
 import modelo.colaboracion.Vianda;
 import modelo.personas.Colaborador;
 import modelo.personas.Tecnico;
+import modelo.personas.Visita;
 import modelo.suscripcion.Suscripcion;
 import modelo.suscripcion.TipoSuscripcion;
 import persistencia.RepositorioIncidentes;

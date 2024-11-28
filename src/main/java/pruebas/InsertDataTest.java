@@ -39,8 +39,8 @@ public class InsertDataTest {
         em.persist(medioDeContactoPJ1);
         em.persist(medioDeContactoPJ2);
 
-        PersonaJuridica personaJuridica1 = new PersonaJuridica("Empresa S.A.", TipoJuridica.GUBERNAMENTAL, Rubro.ELECTRONICA, medioDeContactoPJ1);
-        PersonaJuridica personaJuridica2 = new PersonaJuridica("Tech Corp.", TipoJuridica.ONG, Rubro.ELECTRONICA, medioDeContactoPJ2);
+        PersonaJuridica personaJuridica1 = new PersonaJuridica("Empresa S.A.", TipoJuridico.GUBERNAMENTAL, Rubro.ELECTRONICA, medioDeContactoPJ1);
+        PersonaJuridica personaJuridica2 = new PersonaJuridica("Tech Corp.", TipoJuridico.ONG, Rubro.ELECTRONICA, medioDeContactoPJ2);
         em.persist(personaJuridica1);
         em.persist(personaJuridica2);
 

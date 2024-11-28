@@ -37,7 +37,7 @@ public class Tarjeta {
         this.historialDeUsos.add(new UsoTarjeta(heladera));
     }
 
-    public void recibida(){
+    public void fueRecibida(){
         this.recibida = true;
     }
 }
