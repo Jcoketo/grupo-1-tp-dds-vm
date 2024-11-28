@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 
 
-public class notificadores {
+public class NotificadoresTest {
 
     @Test
     @DisplayName("Prueba Notificacion por Telegram.")

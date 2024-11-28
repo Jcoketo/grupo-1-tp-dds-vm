@@ -18,10 +18,13 @@ public class RegistroPersonasSituVulnerable extends Colaboracion{
 
     @Column
     private Integer cantidadTarjetas;
+
     @OneToMany
     private List<TarjetaPlastica> tarjetasDisponibles;
+
     @OneToMany
     private List<TarjetaPlastica> tarjetasRepartidas;
+
     @Setter private static Double coeficiente = 2.0;
 
 

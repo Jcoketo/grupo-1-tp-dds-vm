@@ -9,13 +9,16 @@ import java.util.Arrays;
 @Entity
 @DiscriminatorValue("RECOMPENSA")
 public class OfrecerRecompensa extends Colaboracion{
+
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "oferta_id", referencedColumnName = "id")
     private Oferta oferta;
 
-    public OfrecerRecompensa() {
+    public OfrecerRecompensa(Oferta oferta) {
         this.tiposPersonasHabilitadas = Arrays.asList(TipoPersona.PJ);
+        this.oferta = oferta;
     }
+
     @Override
     public void hacerColaboracion(Colaborador colaborador) {
         String text = validar(colaborador);

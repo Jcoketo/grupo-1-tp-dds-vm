@@ -1,4 +1,4 @@
-package Elementos;
+package elementos;
 
 import modelo.elementos.Alerta;
 import modelo.elementos.Areas;

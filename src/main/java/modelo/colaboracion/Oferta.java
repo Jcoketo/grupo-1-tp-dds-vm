@@ -5,7 +5,6 @@ import modelo.personas.Rubro;
 
 import javax.persistence.*;
 
-
 @Entity
 @Table(name = "oferta")
 public class Oferta {

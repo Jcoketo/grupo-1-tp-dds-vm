@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.time.Duration;
 import java.time.LocalDateTime;
 
-public class probando {
+public class PruebasManuales {
     public static void main(String[] args) throws IOException {
 
 

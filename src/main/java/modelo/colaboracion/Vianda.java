@@ -4,7 +4,6 @@ import lombok.Getter;
 import modelo.elementos.Heladera;
 import lombok.Setter;
 import modelo.personas.Colaborador;
-import persistencia.EntidadPersistente;
 
 import javax.persistence.*;
 import java.time.LocalDate;

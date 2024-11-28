@@ -15,9 +15,11 @@ import java.util.Arrays;
 @Entity
 @DiscriminatorValue("DONACION_VIANDA")
 public class DonarVianda extends Colaboracion{
+
     @OneToOne
     @JoinColumn(name = "vianda_id", referencedColumnName = "id")
     private Vianda vianda;
+
     @ManyToOne
     @JoinColumn(name = "heladera_id", referencedColumnName = "id")
     private Heladera heladera;
@@ -28,7 +30,6 @@ public class DonarVianda extends Colaboracion{
     @OneToOne
     @JoinColumn(name = "solicitud_apertura_id", referencedColumnName = "id")
     private SolicitudApertura solicitud;
-
 
     //CONSTRUCTOR PRINCIPAL
     public DonarVianda(Vianda vianda, Heladera heladera) {
@@ -44,33 +45,6 @@ public class DonarVianda extends Colaboracion{
     }
 
     public DonarVianda() {
-
-    }
-
-    public void efectuarApertura(Colaborador colaborador){
-        if(this.solicitud != null){
-            RepositorioSolicitudes repositorioSolicitudes = RepositorioSolicitudes.getInstancia();
-            repositorioSolicitudes.cambiarEstadoAFehaciente(this.solicitud);
-        }
-        else {
-            System.out.println("No se ha solicitado la apertura de la heladera");
-            return;
-        }
-    }
-
-    public void solicitarAperturaHeladera(Colaborador colaborador, Heladera heladera){
-        if( !heladera.permitirIngreso() ) {
-            System.out.println("La heladera ya se encuentra inhabilitada");
-            return;
-        }
-        SolicitudApertura seguimientoApertura = new SolicitudApertura(heladera, colaborador);
-        RepositorioSolicitudes repositorioSolicitudes = RepositorioSolicitudes.getInstancia();
-        repositorioSolicitudes.agregarSolicitud(seguimientoApertura);
-        this.solicitud = seguimientoApertura;
-
-        if (colaborador.getTarjeta() == null) {
-            colaborador.solicitarTarjeta();
-        }
 
     }
 
@@ -114,6 +88,33 @@ public class DonarVianda extends Colaboracion{
     @Override
     public void incrementarPuntos(Colaborador colaborador) {
         colaborador.incrementarPuntaje(coeficiente);
+    }
+
+    public void solicitarAperturaHeladera(Colaborador colaborador, Heladera heladera){
+        if( !heladera.permitirIngreso() ) {
+            System.out.println("La heladera ya se encuentra inhabilitada");
+            return;
+        }
+        SolicitudApertura seguimientoApertura = new SolicitudApertura(heladera, colaborador);
+        RepositorioSolicitudes repositorioSolicitudes = RepositorioSolicitudes.getInstancia();
+        repositorioSolicitudes.agregarSolicitud(seguimientoApertura);
+        this.solicitud = seguimientoApertura;
+
+        if (colaborador.getTarjeta() == null) {
+            colaborador.solicitarTarjeta();
+        }
+
+    }
+
+    public void efectuarApertura(Colaborador colaborador){
+        if(this.solicitud != null){
+            RepositorioSolicitudes repositorioSolicitudes = RepositorioSolicitudes.getInstancia();
+            repositorioSolicitudes.cambiarEstadoAFehaciente(this.solicitud);
+        }
+        else {
+            System.out.println("No se ha solicitado la apertura de la heladera");
+            return;
+        }
     }
 
 }

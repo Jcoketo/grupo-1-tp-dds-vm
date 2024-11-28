@@ -1,4 +1,4 @@
-package Elementos;
+package elementos;
 
 import modelo.colaboracion.DistribucionDeViandas;
 import modelo.colaboracion.Vianda;
