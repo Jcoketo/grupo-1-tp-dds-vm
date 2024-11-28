@@ -1,12 +1,10 @@
 package modelo.elementos;
 
-import modelo.broker.Suscriptor;
-import modelo.broker.brokers.SensoreoBroker;
 import modelo.personas.Tecnico;
 import persistencia.RepositorioIncidentes;
 import persistencia.RepositoriosTecnicos;
 
-public class ReceptorTemperatura implements Suscriptor {
+public class ReceptorTemperatura {
     private Heladera heladera;
     private Sensoreo ultimoRegistro;
 
@@ -48,11 +46,9 @@ public class ReceptorTemperatura implements Suscriptor {
         // en caso que sea igual, se reporta una FALLA DE CONEXION
     }*/
 
-    @Override
     public void actualizar(Sensoreo sensor) {
         this.ultimoRegistro = sensor;
         evaluar(sensor);
     }
-
 
 }

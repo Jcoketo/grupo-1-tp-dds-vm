@@ -1,9 +1,8 @@
 package modelo.elementos;
 
-import modelo.broker.Suscriptor;
 import persistencia.RepositorioIncidentes;
 
-public class ReceptorMovimiento implements Suscriptor {
+public class ReceptorMovimiento {
     private Heladera heladera;
 
     public ReceptorMovimiento(Heladera heladera){
@@ -17,7 +16,6 @@ public class ReceptorMovimiento implements Suscriptor {
         repo.agregar(alerta);
     }
 
-    @Override
     public void actualizar(Sensoreo sensor) {
 
     }
