@@ -11,32 +11,36 @@ public class Oferta {
 
     @Id
     @GeneratedValue
-    private int id;
+    @Getter private int id;
 
     @Column
-    private String nombre;
+    @Getter private String nombre;
 
     @Column(length = 500)
-    private String descripcion;
+    @Getter private String descripcion;
 
     @Enumerated(EnumType.STRING)
-    private TipoOferta tipoOferta;
+    @Getter private TipoOferta tipoOferta;
 
     @Enumerated(EnumType.STRING)
-    private Rubro rubro;
+    @Getter private Rubro rubro;
+
+    @Column
+    @Getter private boolean disponibilidad;
 
     @Column
     @Getter private Double puntosNecesarios;
 
     @Column
-    private String imagen;
+    @Getter private String imagen;
 
-    public Oferta(String nombre, String descripcion, TipoOferta tipoOferta, Rubro rubro, Double puntosNecesarios, String imagen) {
+    public Oferta(String nombre, String descripcion, TipoOferta tipoOferta, Rubro rubro, Boolean disponibilidad, Double puntosNecesarios, String imagen) {
         this.nombre = nombre;
         this.puntosNecesarios = puntosNecesarios;
         this.descripcion = descripcion;
         this.tipoOferta = tipoOferta;
         this.rubro = rubro;
+        this.disponibilidad = disponibilidad;
         this.imagen = imagen;
     }
 

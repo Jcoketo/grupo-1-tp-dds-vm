@@ -83,8 +83,8 @@ public class InsertDataTest {
         em.persist(fallaTecnica2);
 
         // Insert Oferta
-        Oferta oferta1 = new Oferta("Un helado", "helado de pistacho", TipoOferta.PRODUCTO, Rubro.GASTRONOMIA, 10.0, "imagenHelado.jpg");
-        Oferta oferta2 = new Oferta("Una milanga", "mila a caballo", TipoOferta.PRODUCTO, Rubro.GASTRONOMIA, 15.0, "imagenMila.jpg");
+        Oferta oferta1 = new Oferta("Un helado", "helado de pistacho", TipoOferta.PRODUCTO, Rubro.GASTRONOMIA, true,10.0, "imagenHelado.jpg");
+        Oferta oferta2 = new Oferta("Una milanga", "mila a caballo", TipoOferta.PRODUCTO, Rubro.GASTRONOMIA,true, 15.0, "imagenMila.jpg");
         em.persist(oferta1);
         em.persist(oferta2);
 

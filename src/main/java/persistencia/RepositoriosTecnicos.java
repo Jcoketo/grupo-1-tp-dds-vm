@@ -21,9 +21,8 @@ import java.util.Map;
 
 public class RepositoriosTecnicos{
     private static RepositoriosTecnicos instancia = null;
-
-    EntityManagerFactory emf = Persistence.createEntityManagerFactory("db");
-    EntityManager em = emf.createEntityManager();
+    private static EntityManagerFactory emf;
+    private static EntityManager em;
 
     //em.getTransaction().begin();
 
@@ -31,12 +30,14 @@ public class RepositoriosTecnicos{
     public static RepositoriosTecnicos getInstancia() {
         if(instancia == null) {
             instancia = new RepositoriosTecnicos();
+            emf = Persistence.createEntityManagerFactory("db");
+            em = emf.createEntityManager();
         }
         return instancia;
     }
 
     public void agregar(Tecnico tecnico){
-        validarInsertTecnico(tecnico);
+        this.validarInsertTecnico(tecnico);
         em.getTransaction().begin();
         em.persist(tecnico);
         em.getTransaction().commit();
@@ -71,15 +72,12 @@ public class RepositoriosTecnicos{
             em.remove(managedTecnico);
             em.getTransaction().commit();
         }
-
     }
 
     public Tecnico obtenerTecnicoCercano(Areas area, Heladera heladera) throws Exception {
-        EntityManager em = emf.createEntityManager();
         List<Tecnico> tecnicos = em.createQuery("SELECT u FROM Tecnico u WHERE u.areaCobertura = :area", Tecnico.class)
                 .setParameter("area", area)
                 .getResultList();
-        em.close();
 
         // Serializar las latitudes y longitudes de los técnicos y la heladera en un JSON
         Map<String, Object> requestBody = new HashMap<>();
@@ -133,10 +131,5 @@ public class RepositoriosTecnicos{
 
         return null; // En caso de no encontrar un técnico cercano
     }
-
-    public boolean hayTecnicos(){
-       // return !tecnicos.isEmpty();
-        return true; //todo
-    }//no se para que esta, es si tenemos una BD vacia
 
   }
