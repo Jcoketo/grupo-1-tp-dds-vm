@@ -31,6 +31,13 @@ public class RepositorioTarjetas {
         return instancia;
     }
 
+    public static RepositorioTarjetas getInstancia() {
+        if(instancia == null) {
+            throw new RuntimeException("Repositorio de Tarjetas no creado");
+        }
+        return instancia;
+    }
+
     public String generarIdTarjeta() {
         String nuevoID = IdGenerator.generateNextId(this.ultimoID);
         this.ultimoID = nuevoID;

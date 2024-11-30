@@ -2,16 +2,12 @@ package persistencia;
 
 import accessManagment.Roles;
 import lombok.Getter;
-import modelo.contraseña.PasswordGenerator;
+import modelo.contrasenia.PasswordGenerator;
 import modelo.notificador.Notificador;
 import modelo.personas.*;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class RepositorioColaboradores {
     @Getter

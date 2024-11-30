@@ -1,11 +1,13 @@
 package modelo.colaboracion;
 
+import lombok.NoArgsConstructor;
 import modelo.personas.Colaborador;
 import modelo.personas.TipoPersona;
 
 import javax.persistence.*;
 import java.util.Arrays;
 
+@NoArgsConstructor
 @Entity
 @DiscriminatorValue("RECOMPENSA")
 public class OfrecerRecompensa extends Colaboracion{

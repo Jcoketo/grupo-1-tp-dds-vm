@@ -1,4 +1,4 @@
-package modelo.contraseña;
+package modelo.contrasenia;
 
 import java.security.SecureRandom;
 

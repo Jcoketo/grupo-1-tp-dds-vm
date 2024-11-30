@@ -4,7 +4,7 @@ import modelo.colaboracion.DistribucionDeViandas;
 import modelo.colaboracion.DonarDinero;
 import modelo.colaboracion.DonarVianda;
 import modelo.colaboracion.RegistroPersonasSituVulnerable;
-import modelo.contraseña.PasswordGenerator;
+import modelo.contrasenia.PasswordGenerator;
 import modelo.notificador.Notificador;
 import modelo.personas.*;
 import persistencia.RepositorioColaboradores;
