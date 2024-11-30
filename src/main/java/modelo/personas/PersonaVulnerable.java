@@ -13,25 +13,25 @@ public class PersonaVulnerable {
 
     @Id
     @GeneratedValue
-    private int id;
+    @Getter private int id;
     
     @Column
-    private LocalDate fechaRegistro;
+    @Getter private LocalDate fechaRegistro;
 
     @Column
     @Getter private int menoresACargo;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "tarjeta_id", referencedColumnName = "id")
-    private TarjetaPlastica tarjeta;
+    @Getter private TarjetaPlastica tarjeta;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "persona_alta_id", referencedColumnName = "id")
-    private PersonaHumana dioAlta;
+    @Getter private PersonaHumana dioAlta;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "persona_humana_id", referencedColumnName = "id")
-    private PersonaHumana persona;
+    @Getter private PersonaHumana persona;
 
 
     public PersonaVulnerable(LocalDate fechaRegistro, int menoresACargo, TarjetaPlastica tarjeta, PersonaHumana dioAlta, PersonaHumana persona){

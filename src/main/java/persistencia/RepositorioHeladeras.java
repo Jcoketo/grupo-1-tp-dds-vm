@@ -1,38 +1,23 @@
 package persistencia;
 
 import modelo.elementos.Heladera;
-import lombok.Getter;
-import modelo.elementos.PuntoEstrategico;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import java.time.LocalDate;
-import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 public class RepositorioHeladeras {
     private static RepositorioHeladeras instancia = null;
-    @Getter
-    private static List<Heladera> heladeras;
+
+    private static EntityManagerFactory emf;
+    private static EntityManager em;
 
     private RepositorioHeladeras() {
-        heladeras = new ArrayList<>();
-        /* *************************************************************************************************** */
-        PuntoEstrategico puntoEstrategico1 = new PuntoEstrategico(-34.5986, -58.4208);
-        PuntoEstrategico puntoEstrategico2 = new PuntoEstrategico(-34.5986, -58.4208);
-
-        puntoEstrategico1.setDireccion("Heladera Medrano UTN");
-        puntoEstrategico2.setDireccion("Heladera Lugano UTN");
-
-        LocalDate fecha = LocalDate.now();
-
-        Heladera heladeraPrueba1 = new Heladera(1,fecha, puntoEstrategico1);
-        Heladera heladeraPrueba2 = new Heladera(1,fecha, puntoEstrategico2);
-
-        heladeraPrueba1.setNombre("Heladera Medrano UTN");
-        heladeraPrueba2.setNombre("Heladera Lugano UTN");
-
-        this.agregarHeladera(heladeraPrueba1);
-        this.agregarHeladera(heladeraPrueba2);
-        /* *************************************************************************** */
+        emf = Persistence.createEntityManagerFactory("db");
+        em = emf.createEntityManager();
     }
 
     public static RepositorioHeladeras getInstancia() {
@@ -43,28 +28,70 @@ public class RepositorioHeladeras {
     }
 
     public void agregarHeladera(Heladera heladera) {
-        this.heladeras.add(heladera);
+        validarInsertHeladera(heladera);
+        em.getTransaction().begin();
+        em.persist(heladera);
+        em.getTransaction().commit();
+
+    }
+
+    public void validarInsertHeladera(Heladera heladera) {
+        if (heladera.getPuntoEstrategico() == null || heladera.getPuntoEstrategico().getLongitud() == null ||
+                heladera.getPuntoEstrategico().getLatitud() == null || heladera.getPuntoEstrategico().getDireccion() == null) {
+            throw new RuntimeException("La heladera no tiene completa la direccion");
+        }
+        if (heladera.getNombre() == null) {
+            throw new RuntimeException("La heladera no tiene nombre");
+        }
+        if (heladera.getViandasMaximas() == null) {
+            throw new RuntimeException("La heladera no tiene declarada la cantidad de viandas maximas");
+        }
+        if (heladera.getActiva() == null) {
+            throw new RuntimeException("Se tiene que indicar si ya esta activa la heladera");
+        }
     }
 
     public List<Heladera> obtenerHeladerasCercanas(Heladera heladeraAfectada, Integer cantidadHeladerasCercanas) {
-        List<Heladera> heladerasCercanas = new ArrayList<>();
-        Integer cantAux = 0;
-        for (Heladera heladera : heladeras) {
-            if (heladeraAfectada.getPuntoEstrategico().getAreas().equals(heladera.getPuntoEstrategico().getAreas())
-                    && heladera.getActiva()) {
-                heladerasCercanas.add(heladera);
-                cantAux += 1;
-                if (cantAux.equals(cantidadHeladerasCercanas)) {
-                    break;
-                }
-            }
-        }
-
-        return heladerasCercanas;
+        List<Heladera> heladeras = em.createQuery("SELECT h FROM Heladera h WHERE h.puntoEstrategico.areas = :area AND h.activa = TRUE", Heladera.class)
+                .setParameter("area", heladeraAfectada.getPuntoEstrategico().getAreas())
+                .setMaxResults(cantidadHeladerasCercanas)
+                .setMaxResults(cantidadHeladerasCercanas)
+                .getResultList();
+        return heladeras;
     }
 
-    public List<Heladera> obtenerHeladeras(Integer cantidadHeladeras) {
-        List<Heladera> heladerasATraer = heladeras.subList(0, Math.min(5, heladeras.size()));
-        return heladerasATraer;
+    public void setearInactivaHeladera(Heladera heladera) {
+        em.getTransaction().begin();
+        Heladera managedHeladera = em.find(Heladera.class, heladera.getId());
+        managedHeladera.setActiva(false);
+        em.getTransaction().commit();
     }
+
+    public void setearActivaHeladera(Heladera heladera) {
+        em.getTransaction().begin();
+        Heladera managedHeladera = em.find(Heladera.class, heladera.getId());
+        managedHeladera.setActiva(true);
+        em.getTransaction().commit();
+    }
+
+    public void setearHabilitadaHeladera(Heladera heladera) {
+        em.getTransaction().begin();
+        Heladera managedHeladera = em.find(Heladera.class, heladera.getId());
+        managedHeladera.setHabilitado(true);
+        em.getTransaction().commit();
+    }
+
+    public void setearInhabilitadaHeladera(Heladera heladera) {
+        em.getTransaction().begin();
+        Heladera managedHeladera = em.find(Heladera.class, heladera.getId());
+        managedHeladera.setHabilitado(false);
+        em.getTransaction().commit();
+    }
+
+    public static List<Heladera> obtenerHeladeras() {
+        List<Heladera> heladeras = em.createQuery("SELECT h FROM Heladera h", Heladera.class)
+                .getResultList();
+        return heladeras;
+    }
+
 }

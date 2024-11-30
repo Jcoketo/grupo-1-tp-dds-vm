@@ -9,7 +9,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 import modelo.suscripcion.Suscripcion;
-import java.time.LocalDate;
 import modelo.personas.Colaborador;
 import modelo.personas.MedioDeContacto;
 import modelo.personas.PersonaHumana;
@@ -34,7 +33,7 @@ public class SuscripcionesCantidadTest {
 
   @BeforeEach
   public void setUp() {
-    heladera = new Heladera(5, LocalDate.now(), null);
+    heladera = new Heladera(5, null);
     puntoEstrategico = new PuntoEstrategico(0.0, 0.0);
     puntoEstrategico.setDireccion("Av. Las Heras 2186");
     heladera.setPuntoEstrategico(puntoEstrategico);

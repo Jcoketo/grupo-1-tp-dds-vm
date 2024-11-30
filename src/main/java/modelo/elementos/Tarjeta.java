@@ -17,14 +17,14 @@ public class Tarjeta {
     @Getter private long id;
 
     @Column
-    protected String nro_tarjeta;
+    @Getter protected String nro_tarjeta;
 
     @OneToMany
     @JoinColumn(name="uso_tarjeta_id",referencedColumnName = "id")
-    protected List<UsoTarjeta> historialDeUsos;
+    @Getter protected List<UsoTarjeta> historialDeUsos;
 
     @Column
-    protected Boolean recibida;
+    @Getter protected Boolean recibida;
 
     public Tarjeta(){
         RepositorioTarjetas repositorioTarjetas = RepositorioTarjetas.getInstancia();

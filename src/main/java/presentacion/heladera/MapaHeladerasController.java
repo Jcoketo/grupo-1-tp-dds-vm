@@ -20,7 +20,7 @@ public class MapaHeladerasController implements Handler {
     @Override
     public void handle(@NotNull Context context) throws Exception {
         // Obtén las heladeras del repositorio
-        List<Heladera> heladeras = this.repositorioHeladeras.obtenerHeladeras(5);
+        List<Heladera> heladeras = this.repositorioHeladeras.obtenerHeladeras();
 
         // Devuelve las heladeras en formato JSON
         context.json(heladeras);

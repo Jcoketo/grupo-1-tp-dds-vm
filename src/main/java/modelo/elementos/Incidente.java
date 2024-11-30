@@ -14,14 +14,14 @@ public abstract class Incidente {
 
     @Id
     @GeneratedValue
-    private int id;
+    @Getter private int id;
 
     @ManyToOne
     @JoinColumn(name = "heladera_id", nullable = false)
     @Getter protected Heladera heladera;
 
     @Column
-    protected LocalDateTime fechaHoraIncidente;
+    @Getter protected LocalDateTime fechaHoraIncidente;
 
     public Incidente(Heladera heladera) {
         this.heladera = heladera;

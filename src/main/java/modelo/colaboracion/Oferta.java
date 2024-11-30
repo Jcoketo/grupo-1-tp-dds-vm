@@ -1,6 +1,7 @@
 package modelo.colaboracion;
 
 import lombok.Getter;
+import lombok.Setter;
 import modelo.personas.Rubro;
 
 import javax.persistence.*;
@@ -26,7 +27,8 @@ public class Oferta {
     @Getter private Rubro rubro;
 
     @Column
-    @Getter private boolean disponibilidad;
+    @Getter @Setter
+    private boolean disponibilidad;
 
     @Column
     @Getter private Double puntosNecesarios;
@@ -42,6 +44,7 @@ public class Oferta {
         this.rubro = rubro;
         this.disponibilidad = disponibilidad;
         this.imagen = imagen;
+        this.disponibilidad = true;
     }
 
     public Oferta() {

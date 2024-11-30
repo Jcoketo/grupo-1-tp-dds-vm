@@ -6,8 +6,7 @@ import modelo.elementos.Areas;
     import modelo.elementos.PuntoEstrategico;
 import modelo.elementos.ReceptorMovimiento;
 import modelo.elementos.TipoAlerta;
-import java.time.LocalDate;
-    import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeEach;
     import org.junit.jupiter.api.Test;
     import modelo.personas.Colaborador;
     import modelo.personas.MedioDeContacto;
@@ -42,7 +41,7 @@ public class IncidentesTest {
     PuntoEstrategico puntoEstrategico = new PuntoEstrategico(0.0, 0.0);
     puntoEstrategico.setAreas(Areas.PALERMO);
 
-    heladera = new Heladera(10, LocalDate.now(), puntoEstrategico);
+    heladera = new Heladera(10, puntoEstrategico);
     heladera.setActiva(true);
 
     // Reportar falla

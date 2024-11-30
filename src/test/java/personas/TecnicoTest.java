@@ -10,8 +10,6 @@ import modelo.personas.PersonaHumana;
 import modelo.personas.Tecnico;
 import modelo.personas.TipoMedioDeContacto;
 
-import java.time.LocalDate;
-
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class TecnicoTest {
@@ -27,7 +25,7 @@ public class TecnicoTest {
     PuntoEstrategico puntoEstrategico = new PuntoEstrategico(0.0, 0.0);
     puntoEstrategico.setAreas(Areas.PALERMO);
 
-    heladera = new Heladera(10, LocalDate.now(), puntoEstrategico);
+    heladera = new Heladera(10, puntoEstrategico);
     heladera.setActiva(false);
 
     // Registrar visita y solucionar incidente
