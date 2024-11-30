@@ -1,7 +1,9 @@
 package persistencia;
 
+import lombok.Getter;
 import modelo.elementos.Heladera;
 
+import javax.persistence.Entity;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -10,19 +12,18 @@ import java.util.Collection;
 import java.util.List;
 
 public class RepositorioHeladeras {
+    @Getter
     private static RepositorioHeladeras instancia = null;
 
-    private static EntityManagerFactory emf;
     private static EntityManager em;
 
-    private RepositorioHeladeras() {
-        emf = Persistence.createEntityManagerFactory("db");
-        em = emf.createEntityManager();
+    private RepositorioHeladeras(EntityManager entityManager) {
+        em = entityManager;
     }
 
-    public static RepositorioHeladeras getInstancia() {
+    public static RepositorioHeladeras getInstancia(EntityManager em) {
         if(instancia == null) {
-            instancia = new RepositorioHeladeras();
+            instancia = new RepositorioHeladeras(em);
         }
         return instancia;
     }

@@ -4,6 +4,8 @@ import modelo.colaboracion.Oferta;
 import persistencia.RepositorioColaboradores;
 import persistencia.RepositorioOfertas;
 
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import java.io.IOException;
 import java.time.Duration;
 import java.time.LocalDateTime;
@@ -85,7 +87,9 @@ public class PruebasManuales {
         repositorioOfertas.darDeBaja(ofertaaux);*/
 
         // quiero probar el metodo de obtener tipo persona
-        RepositorioColaboradores repoColab = RepositorioColaboradores.getInstancia();
+
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("db");
+        RepositorioColaboradores repoColab = RepositorioColaboradores.getInstancia(emf.createEntityManager());
         System.out.println(repoColab.devolverTipoPersona("example1@example.com"));
 
     }

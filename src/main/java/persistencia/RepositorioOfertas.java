@@ -1,5 +1,6 @@
 package persistencia;
 
+import lombok.Getter;
 import modelo.colaboracion.Oferta;
 import modelo.personas.Tecnico;
 
@@ -11,18 +12,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RepositorioOfertas {
+    @Getter
     private static RepositorioOfertas instancia = null;
-    private static EntityManagerFactory emf;
+
     private static EntityManager em;
 
-    private RepositorioOfertas() {
-        emf = Persistence.createEntityManagerFactory("db");
-        em = emf.createEntityManager();
+    private RepositorioOfertas(EntityManager em) {
+        this.em = em;
     }
 
-    public static RepositorioOfertas getInstancia() {
+    public static RepositorioOfertas getInstancia(EntityManager em) {
         if(instancia == null) {
-            instancia = new RepositorioOfertas();
+            instancia = new RepositorioOfertas(em);
         }
         return instancia;
     }

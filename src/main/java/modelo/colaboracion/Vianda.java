@@ -18,29 +18,37 @@ public class Vianda{
     @Getter private Long id;
 
     @Column
+    @Getter
     private String tipoComida;
 
     @Column
+    @Getter
     private LocalDate fechaCaducidad;
 
     @Column
+    @Getter
     private LocalDate fechaDonacion;
 
     @ManyToOne
     @JoinColumn(name = "colaborador_id", referencedColumnName = "id")
+    @Getter
     private Colaborador colaborador;
 
     @ManyToOne
     @JoinColumn(name = "heladera_id", referencedColumnName = "id")
+    @Getter
     private Heladera disponibleEn;
 
     @Column
+    @Getter @Setter
     private Boolean entregada;
 
     @Column
+    @Getter
     @Setter private Float calorias;
 
     @Column
+    @Getter
     @Setter private Float peso;
 
     public Vianda(String tipoComida, LocalDate fechaCaducidad, LocalDate fechaDonacion, Colaborador colaborador, Heladera heladera, Boolean estado) {

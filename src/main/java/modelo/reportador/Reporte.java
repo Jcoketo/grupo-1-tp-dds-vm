@@ -1,14 +1,23 @@
 package modelo.reportador;
 
+import lombok.Getter;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
-
+@Entity
+@Table(name = "reporte")
 public class Reporte {
 
-    private int id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Getter private int id;
+
+    @Getter
+    @Column(name = "link", nullable = false)
+    public String link;
 
     private LocalDateTime fechaReporte;
 
@@ -21,7 +30,8 @@ public class Reporte {
     private String cantidadViandasRetiradas;
 
 
-    public Reporte(String cantidadFallasXHeladera, String viandasXColaborador, String cantidadViandasColocadas, String cantidadViandasRetiradas) {
+    public Reporte( String cantidadFallasXHeladera, String viandasXColaborador, String cantidadViandasColocadas, String cantidadViandasRetiradas) {
+
         this.cantidadFallasXHeladera = cantidadFallasXHeladera;
         this.viandasXColaborador = viandasXColaborador;
         this.cantidadViandasColocadas = cantidadViandasColocadas;
@@ -35,5 +45,9 @@ public class Reporte {
     public void generarTXT(){
         //TODO
         /*hacer la proxima entrega!!!! */
+    }
+
+    public void generarLink(){
+        //TODO
     }
 }

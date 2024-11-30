@@ -2,11 +2,7 @@ import static io.javalin.apibuilder.ApiBuilder.*;
 
 import accessManagment.AutorizacionMiddleware;
 import io.javalin.Javalin;
-import persistencia.RepositorioColaboradores;
-import persistencia.RepositorioHeladeras;
-import persistencia.RepositorioIncidentes;
-import persistencia.RepositorioOfertas;
-import persistencia.RepositorioPersonasVulnerables;
+import persistencia.*;
 import presentacion.InicioController;
 import presentacion.colaboraciones.DonarDineroController;
 import presentacion.colaboraciones.DonarDineroRealizadaController;
@@ -52,16 +48,25 @@ import presentacion.ofertas.CatalogoProductosController;
 import presentacion.reportes.MisReportesController;
 import servicioApiRest.ServicioApiRest;
 
+import javax.persistence.EntityManager;
+
 public class Router {
     private static Javalin app = Application.app();
 
-    public static void init(){
+    public static void init(EntityManager entityManager){
         /* *************************************************************************** */
-        RepositorioIncidentes repoIncidentes = RepositorioIncidentes.getInstancia();
-        RepositorioColaboradores repoColab = RepositorioColaboradores.getInstancia();
-        RepositorioHeladeras repoHeladeras = RepositorioHeladeras.getInstancia();
-        RepositorioPersonasVulnerables repoPersonasVulnerable = RepositorioPersonasVulnerables.getInstancia();
-        RepositorioOfertas repoOfertas = RepositorioOfertas.getInstancia();
+        RepositorioArchivos repoArchivos = RepositorioArchivos.getInstancia(entityManager);
+        RepositorioColaboradores repoColab = RepositorioColaboradores.getInstancia(entityManager);
+        RepositorioHeladeras repoHeladeras = RepositorioHeladeras.getInstancia(entityManager);
+        RepositorioIncidentes repoIncidentes = RepositorioIncidentes.getInstancia(entityManager);
+        RepositorioOfertas repoOfertas = RepositorioOfertas.getInstancia(entityManager);
+        RepositorioPersonasVulnerables repoPersonasVulnerable = RepositorioPersonasVulnerables.getInstancia(entityManager);
+        RepositorioReportes repoReportes = RepositorioReportes.getInstancia(entityManager);
+        RepositorioSolicitudes repoSolicitudes = RepositorioSolicitudes.getInstancia(entityManager);
+        RepositoriosTecnicos repoTecnicos = RepositoriosTecnicos.getInstancia(entityManager);
+        // repoTarjetas = RepositorioTarjetas.getInstancia(entityManager);
+        RepositorioVisitas repoVisitas = RepositorioVisitas.getInstancia(entityManager);
+
         /* *************************************************************************** */
 
         // ------------------------------------   RUTAS   ------------------------------------------------

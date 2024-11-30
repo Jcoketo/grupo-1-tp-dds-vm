@@ -1,5 +1,6 @@
 package persistencia;
 
+import lombok.Getter;
 import modelo.colaboracion.Oferta;
 import modelo.elementos.Incidente;
 
@@ -10,18 +11,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RepositorioIncidentes {
+    @Getter
     private static RepositorioIncidentes instancia = null;
-    private static EntityManagerFactory emf;
+
     private static EntityManager em;
 
-    private RepositorioIncidentes() {
-        emf = Persistence.createEntityManagerFactory("db");
-        em = emf.createEntityManager();
+    private RepositorioIncidentes(EntityManager entityManager) {
+        em = entityManager;
     }
 
-    public static RepositorioIncidentes getInstancia() {
+    public static RepositorioIncidentes getInstancia(EntityManager entityManager) {
         if(instancia == null) {
-            instancia = new RepositorioIncidentes();
+            instancia = new RepositorioIncidentes(entityManager);
         }
         return instancia;
     }

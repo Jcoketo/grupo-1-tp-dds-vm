@@ -1,5 +1,9 @@
 import io.javalin.Javalin;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+
 
 public class Application {
     private static Javalin app = null;
@@ -32,7 +36,14 @@ public class Application {
             .start(8080);
 
         //Inicializamos el router:
-        Router.init();
+        Router.init(getEntityManager());
+
     }
+    private static EntityManager getEntityManager(){
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("db");
+        return emf.createEntityManager();
+    }
+
+
 
 }

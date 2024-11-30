@@ -22,9 +22,12 @@ public class GenerarReporte{
                                             obtenerViandasColocadasXHeladera(),
                                             obtenerViandasRetiradasXHeladera());
 
+        String link = reporteSemanal.link;
+
         reporteSemanal.generarTXT();
 
-        RepositorioReportes.getInstancia().agregarReporte(reporteSemanal);
+       // RepositorioReportes.getInstancia().agregarReporte(link);
+        //TODO
 
     }
 

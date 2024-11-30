@@ -18,13 +18,16 @@ public class Visita {
 
     @ManyToOne
     @JoinColumn(name ="heladera_id", referencedColumnName = "id")
+    @Getter
     private Heladera heladera;
 
     @ManyToOne
     @JoinColumn(name ="tecnico_id", referencedColumnName = "id")
+    @Getter
     private Tecnico tecnico;
 
     @Column
+    @Getter
     private String descripcion;
     @Column
     private String URLfoto;
