@@ -5,6 +5,7 @@ import io.javalin.http.Handler;
 import modelo.autenticacion.AuthService;
 import org.jetbrains.annotations.NotNull;
 import persistencia.RepositorioColaboradores;
+import persistencia.RepositorioUsuarios;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -12,10 +13,12 @@ import java.util.Map;
 public class CuentaFisicaCreadaController implements Handler {
 
     private RepositorioColaboradores repoColaboradores;
+    private RepositorioUsuarios repoUsuarios;
 
-    public CuentaFisicaCreadaController(RepositorioColaboradores repositorioColaboradores) {
+    public CuentaFisicaCreadaController(RepositorioColaboradores repositorioColaboradores, RepositorioUsuarios repositorioUsuarios) {
         super();
         this.repoColaboradores = repositorioColaboradores;
+        this.repoUsuarios = repositorioUsuarios;
     }
 
     @Override
@@ -25,6 +28,7 @@ public class CuentaFisicaCreadaController implements Handler {
 
         String nombre = context.formParam("nombre");
         String apellido = context.formParam("apellido");
+        String username = context.formParam("username");
         String email = context.formParam("email");
         String password = context.formParam("password");
         String terminos = context.formParam("terms");
@@ -40,8 +44,8 @@ public class CuentaFisicaCreadaController implements Handler {
         }
 
         // creamos el usuario
-        AuthService authService = new AuthService();
-        authService.registrarUsuario(email, password);
+
+        repoUsuarios.registrarUsuario(email, username, password);
 
         // hay que validad que no exista el mail en la base de datos
         //todo
