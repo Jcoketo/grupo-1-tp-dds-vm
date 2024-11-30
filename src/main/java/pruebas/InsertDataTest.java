@@ -6,6 +6,8 @@ import modelo.elementos.*;
 import modelo.personas.*;
 import modelo.suscripcion.SuscripcionXCantidad;
 import modelo.suscripcion.TipoSuscripcion;
+import persistencia.RepositorioColaboradores;
+import persistencia.RepositorioHeladeras;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -13,6 +15,8 @@ import javax.persistence.Persistence;
 
 public class InsertDataTest {
     public static void main(String[] args) {
+
+        /*
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("db");
         EntityManager em = emf.createEntityManager();
 
@@ -96,5 +100,22 @@ public class InsertDataTest {
         em.getTransaction().commit();
         em.close();
         emf.close();
-    }
+    }*/
+
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("db");
+
+        RepositorioHeladeras repositorioHeladeras = RepositorioHeladeras.getInstancia(emf.createEntityManager());
+        // Insert PuntoEstrategico
+        PuntoEstrategico puntoEstrategico1 = new PuntoEstrategico(13.0, 13.0);
+        PuntoEstrategico puntoEstrategico2 = new PuntoEstrategico(14.0, 14.0);
+        /*repositorioHeladeras.em.persist(puntoEstrategico1);
+        repositorioHeladeras.em.persist(puntoEstrategico2);*/
+        // Insert Heladera
+        Heladera heladera1 = new Heladera(14, puntoEstrategico1);
+        Heladera heladera2 = new Heladera(20, puntoEstrategico2);
+        Heladera heladera3 = new Heladera(25, puntoEstrategico1);
+        repositorioHeladeras.agregarHeladera(heladera1);
+        repositorioHeladeras.agregarHeladera(heladera2);
+        repositorioHeladeras.agregarHeladera(heladera3);
+}
 }

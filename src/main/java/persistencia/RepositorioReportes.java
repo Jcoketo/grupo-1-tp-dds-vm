@@ -2,29 +2,49 @@ package persistencia;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import lombok.Getter;
+import modelo.elementos.Incidente;
 import modelo.reportador.Reporte;
 
+import javax.persistence.EntityManager;
+
 public class RepositorioReportes {
-    private List<Reporte> reportes;
+    @Getter
     private static RepositorioReportes instancia = null;
 
+    private static EntityManager em;
 
-    public RepositorioReportes() {
-        this.reportes = new ArrayList<>();
+    private RepositorioReportes(EntityManager entityManager) {
+        em = entityManager;
     }
 
-    public static RepositorioReportes getInstancia() {
+    public static RepositorioReportes getInstancia(EntityManager entityManager) {
         if(instancia == null) {
-            instancia = new RepositorioReportes();
+            instancia = new RepositorioReportes(entityManager);
         }
         return instancia;
     }
 
-    public void agregarReporte(Reporte reporte) {
-        this.reportes.add(reporte);
+    public void agregarReporte(Reporte reporte){
+        validarInsertReporte(reporte);
+        em.getTransaction().begin();
+        em.persist(reporte);
+        em.getTransaction().commit();
     }
 
-    public List<Reporte> obtenerReportes() {
-        return this.reportes;
+    public void validarInsertReporte(Reporte reporte) {
+        if (reporte.getLink() == null) {
+            throw new RuntimeException("El reporte no tiene un link asociado");
+        }
+    }
+
+    public void eliminar(Reporte reporte) {
+        em.getTransaction().begin();
+        Reporte managedReporte = em.find(Reporte.class, reporte.getId());
+        if (managedReporte != null) {
+            em.remove(managedReporte);
+            em.getTransaction().commit();
+        }
     }
 }

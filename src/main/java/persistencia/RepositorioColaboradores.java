@@ -14,22 +14,18 @@ import java.util.List;
 import java.util.Objects;
 
 public class RepositorioColaboradores {
+    @Getter
     private static RepositorioColaboradores instancia = null;
 
-    private static EntityManagerFactory emf;
     private static EntityManager em;
 
-    //em.getTransaction().begin();
-
-
-
-    private RepositorioColaboradores() {
-        emf = Persistence.createEntityManagerFactory("db");
-        em = emf.createEntityManager();
+    private RepositorioColaboradores(EntityManager em) {
+        this.em = em;
     }
-    public static RepositorioColaboradores getInstancia() {
+
+    public static RepositorioColaboradores getInstancia(EntityManager em) {
         if(instancia == null) {
-            instancia = new RepositorioColaboradores();
+            instancia = new RepositorioColaboradores(em);
         }
         return instancia;
     }
@@ -72,6 +68,7 @@ public class RepositorioColaboradores {
 
     public Roles devolverRol(String email) {
         //TODO
+        // TABLA DE ROLES
         return null;
     }
 

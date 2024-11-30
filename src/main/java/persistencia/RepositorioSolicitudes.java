@@ -1,28 +1,29 @@
 package persistencia;
 
+import lombok.Getter;
 import modelo.elementos.SolicitudApertura;
+import javax.persistence.EntityManager;
 
-import java.util.ArrayList;
-import java.util.List;
 
 public class RepositorioSolicitudes {
+    @Getter
     private static RepositorioSolicitudes instancia = null;
 
-    private static List<SolicitudApertura> solicitudes;
+    private static EntityManager em;
 
-    public RepositorioSolicitudes() {
-        solicitudes = new ArrayList<SolicitudApertura>();
+    public RepositorioSolicitudes(EntityManager entityManager ){
+        em = entityManager;
     }
 
-    public static RepositorioSolicitudes getInstancia() {
+    public static RepositorioSolicitudes getInstancia(EntityManager entityManager) {
         if(instancia == null) {
-            instancia = new RepositorioSolicitudes();
+            instancia = new RepositorioSolicitudes(entityManager);
         }
         return instancia;
     }
 
     public void agregarSolicitud(SolicitudApertura solicitud){
-        solicitudes.add(solicitud);
+
     }
 
     public void cambiarEstadoAFehaciente(SolicitudApertura solicitud){

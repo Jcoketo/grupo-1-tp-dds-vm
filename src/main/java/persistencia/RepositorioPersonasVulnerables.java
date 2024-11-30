@@ -1,5 +1,6 @@
 package persistencia;
 
+import lombok.Getter;
 import modelo.elementos.Incidente;
 import modelo.personas.PersonaVulnerable;
 
@@ -10,18 +11,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RepositorioPersonasVulnerables {
+    @Getter
     private static RepositorioPersonasVulnerables instancia = null;
-    private static EntityManagerFactory emf;
+
     private static EntityManager em;
 
-    public RepositorioPersonasVulnerables() {
-        emf = Persistence.createEntityManagerFactory("db");
-        em = emf.createEntityManager();
+
+    public RepositorioPersonasVulnerables(EntityManager entityManager) {
+        this.em = entityManager;
     }
 
-    public static RepositorioPersonasVulnerables getInstancia() {
+    public static RepositorioPersonasVulnerables getInstancia(EntityManager entityManager) {
         if(instancia == null) {
-            instancia = new RepositorioPersonasVulnerables();
+            instancia = new RepositorioPersonasVulnerables(entityManager);
         }
         return instancia;
     }

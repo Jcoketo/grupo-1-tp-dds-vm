@@ -1,6 +1,7 @@
 package persistencia;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.Getter;
 import modelo.elementos.Areas;
 
 import java.io.InputStreamReader;
@@ -20,20 +21,20 @@ import java.util.List;
 import java.util.Map;
 
 public class RepositoriosTecnicos{
+    @Getter
     private static RepositoriosTecnicos instancia = null;
-    private static EntityManagerFactory emf;
+
     private static EntityManager em;
 
-    //em.getTransaction().begin();
-
-
-    public static RepositoriosTecnicos getInstancia() {
-        if(instancia == null) {
-            instancia = new RepositoriosTecnicos();
-            emf = Persistence.createEntityManagerFactory("db");
-            em = emf.createEntityManager();
+    public static RepositoriosTecnicos getInstancia(EntityManager entityManager) {
+        if (instancia == null) {
+                instancia = new RepositoriosTecnicos(entityManager);
         }
         return instancia;
+    }
+
+    private RepositoriosTecnicos(EntityManager entityManager) {
+        em = entityManager;
     }
 
     public void agregar(Tecnico tecnico){

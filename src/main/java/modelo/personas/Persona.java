@@ -32,6 +32,10 @@ public abstract class Persona {
         this.mediosDeContacto.add(medioDeContacto);
     }*/
 
+    public TipoPersona getTipoPersona() {
+        return tipoPersona;
+    }
+
     public void agregarMediosDeContacto(MedioDeContacto ... medioDeContactos) {
         Collections.addAll(this.mediosDeContacto, medioDeContactos);
     }
