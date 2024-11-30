@@ -42,7 +42,7 @@ public class RepositorioUsuarios {
         Usuario usuario = em.createQuery("SELECT u FROM Usuario u WHERE u.mail = :mail", Usuario.class)
                 .setParameter("mail", mail)
                 .getSingleResult();
-        em.close();
+        //em.close();
 
         if (usuario != null) {
             return authService.checkPassword(password, usuario.getHashedPassword());
@@ -54,7 +54,7 @@ public class RepositorioUsuarios {
         Usuario usuario = em.createQuery("SELECT u FROM Usuario u WHERE u.mail = :mail", Usuario.class)
                 .setParameter("mail", mail)
                 .getSingleResult();
-        em.close();
+        //em.close();
         return usuario != null;
     }
 

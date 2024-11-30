@@ -28,6 +28,7 @@ public class RepositorioSolicitudes {
 
     public void cambiarEstadoAFehaciente(SolicitudApertura solicitud){
         solicitud.setAperturaFehaciente();
+        // TODO: Hay que reflejar en la BD, este cambio de estado en las solicitudes persistidas.
     }
 
 }
