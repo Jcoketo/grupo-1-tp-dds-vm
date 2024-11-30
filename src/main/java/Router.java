@@ -2,6 +2,7 @@ import static io.javalin.apibuilder.ApiBuilder.*;
 
 import accessManagment.AutorizacionMiddleware;
 import io.javalin.Javalin;
+import modelo.autenticacion.AuthService;
 import persistencia.*;
 import presentacion.InicioController;
 import presentacion.colaboraciones.DonarDineroController;
@@ -66,6 +67,7 @@ public class Router {
         RepositoriosTecnicos repoTecnicos = RepositoriosTecnicos.getInstancia(entityManager);
         RepositorioTarjetas repoTarjetas = RepositorioTarjetas.getInstancia(entityManager);
         RepositorioVisitas repoVisitas = RepositorioVisitas.getInstancia(entityManager);
+        RepositorioUsuarios repoUsuarios = RepositorioUsuarios.getInstancia(entityManager);
 
         /* *************************************************************************** */
 
@@ -74,7 +76,7 @@ public class Router {
 
             path("/login", () -> {
                 get(new ShowLoginController());
-                post(new ProcessLoginController(repoColab));
+                post(new ProcessLoginController(repoUsuarios, repoColab));
             });
 
             path("/inicio", () -> {
@@ -95,7 +97,7 @@ public class Router {
             path("/crearCuentaFisica", () -> {
                 before(new AutorizacionMiddleware());
                 get(new CrearCuentaFisicaController());
-                post(new CuentaFisicaCreadaController(repoColab));
+                post(new CuentaFisicaCreadaController(repoColab, repoUsuarios));
             });
 
             path("/cuentaCreada", () -> {

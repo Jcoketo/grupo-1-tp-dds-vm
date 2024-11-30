@@ -2,6 +2,7 @@ package modelo.elementos;
 
 import lombok.Getter;
 import persistencia.RepositorioTarjetas;
+import pruebas.IdGenerator;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -27,8 +28,7 @@ public class Tarjeta {
     @Getter protected Boolean recibida;
 
     public Tarjeta(){
-        RepositorioTarjetas repositorioTarjetas = RepositorioTarjetas.getInstancia();
-        this.nro_tarjeta = repositorioTarjetas.generarIdTarjeta();
+        this.nro_tarjeta = IdGenerator.getInstancia().generateNextId();
         this.historialDeUsos = new ArrayList<UsoTarjeta>();
         this.recibida = false;
     }

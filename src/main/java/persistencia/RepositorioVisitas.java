@@ -1,6 +1,7 @@
 package persistencia;
 
 import lombok.Getter;
+import modelo.personas.Tecnico;
 import modelo.personas.Visita;
 
 import javax.persistence.EntityManager;
@@ -8,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RepositorioVisitas {
-    @Getter
     private static RepositorioVisitas instancia = null;
 
     private static EntityManager em;
@@ -24,7 +24,7 @@ public class RepositorioVisitas {
         em = entityManager;
     }
 
-    public void agregar(Visita visita) {
+    public void agregarVisita(Visita visita) {
         try {
             this.validarInsertVisita(visita);
             em.getTransaction().begin();
@@ -46,8 +46,15 @@ public class RepositorioVisitas {
         if (visita.getDescripcion() == null) {
             throw new RuntimeException("La visita no tiene una descripcion asociadas");
         }
-
     }
 
+    public void eliminarVisita(Visita visita) {
+        em.getTransaction().begin();
+        Visita managedVisita = em.find(Visita.class, visita.getId());
+        if (managedVisita != null) {
+            em.remove(managedVisita);
+            em.getTransaction().commit();
+        }
+    }
 
 }

@@ -12,16 +12,19 @@ import modelo.personas.TipoPersona;
 import persistencia.RepositorioColaboradores;
 import modelo.autenticacion.AuthService;
 import org.jetbrains.annotations.NotNull;
+import persistencia.RepositorioUsuarios;
 
 public class ProcessLoginController implements Handler {
 
+    private RepositorioUsuarios repoUsuarios;
     private RepositorioColaboradores repoColab;
-    private AuthService authService;
+    //private AuthService authService; ??? Qué hace esto COCO
 
-    public ProcessLoginController(RepositorioColaboradores repoColab) {
+    public ProcessLoginController(RepositorioUsuarios repoUsuarios, RepositorioColaboradores repoColaboradores) {
         super();
-        this.repoColab = repoColab;
-        this.authService = authService;
+        this.repoUsuarios = repoUsuarios;
+        this.repoColab = repoColaboradores;
+        //this.authService = authService; ??? Qué hace esto COCO
     }
 
     @Override
@@ -30,7 +33,7 @@ public class ProcessLoginController implements Handler {
         String password = context.formParam("password");
 
         Map<String, Object> model = new HashMap<>();
-        if (authService.autenticarUsuario(email, password)) {
+        if (repoUsuarios.autenticarUsuario(email, password)) {
             context.sessionAttribute("logueado", true);
 
             TipoPersona tipoPer = obtenerTipoUsuario(email);

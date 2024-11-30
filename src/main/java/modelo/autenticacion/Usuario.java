@@ -19,6 +19,11 @@ public class Usuario {
     @Setter
     @Getter
     @Column
+    private String Usuario;
+
+    @Setter
+    @Getter
+    @Column
     private String hashedPassword;
 
 
