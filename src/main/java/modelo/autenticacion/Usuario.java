@@ -11,27 +11,20 @@ public class Usuario {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Setter
+    @Getter
     @Column(unique = true)
     private String mail;
 
+    @Setter
+    @Getter
     @Column
     private String hashedPassword;
 
-    public String getMail() {
-        return mail;
-    }
 
-    public void setMail(String mail) {
+    public Usuario(String mail, String hashedPassword) {
         this.mail = mail;
-    }
-
-    public String getHashedPassword() {
-        return hashedPassword;
-    }
-
-    public void setHashedPassword(String hashedPassword) {
         this.hashedPassword = hashedPassword;
     }
 
-    // Getters y setters
 }
