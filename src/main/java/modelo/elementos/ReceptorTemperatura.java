@@ -19,7 +19,7 @@ public class ReceptorTemperatura {
             heladera.marcarComoInactiva();
             Alerta alerta = new Alerta(TipoAlerta.FALLA_EN_CONEXION, heladera);
             RepositorioIncidentes repo = RepositorioIncidentes.getInstancia();
-            repo.agregar(alerta);
+            repo.agregarIncidente(alerta);
             RepositoriosTecnicos tecnicos = RepositoriosTecnicos.getInstancia();
             try {
                 Tecnico tecnico = tecnicos.obtenerTecnicoCercano(heladera.getPuntoEstrategico().getAreas(), heladera);
@@ -38,7 +38,7 @@ public class ReceptorTemperatura {
             heladera.marcarComoInactiva();
             Alerta alerta = new Alerta(TipoAlerta.FALLA_TEMPERATURA, heladera);
             RepositorioIncidentes repo = RepositorioIncidentes.getInstancia();
-            repo.agregar(alerta);
+            repo.agregarIncidente(alerta);
         }
     }
 

@@ -6,6 +6,9 @@ import modelo.contraseña.PasswordGenerator;
 import modelo.notificador.Notificador;
 import modelo.personas.*;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -13,11 +16,16 @@ import java.util.Objects;
 public class RepositorioColaboradores {
     private static RepositorioColaboradores instancia = null;
 
-    @Getter
-    private static List<Colaborador> colaboradores;
+    private static EntityManagerFactory emf;
+    private static EntityManager em;
+
+    //em.getTransaction().begin();
+
+
 
     private RepositorioColaboradores() {
-        colaboradores = new ArrayList<Colaborador>();
+        emf = Persistence.createEntityManagerFactory("db");
+        em = emf.createEntityManager();
     }
     public static RepositorioColaboradores getInstancia() {
         if(instancia == null) {
@@ -27,31 +35,39 @@ public class RepositorioColaboradores {
     }
 
     public Colaborador existeColaborador(Integer id) {
-
-        for (Colaborador colab : colaboradores) {
-            if (Objects.equals(colab.getUniqueIdentifier(), id)) {
-                return colab;  // devuelve el colaborador
-            }
-        }
-
-        return null;  // Devuelve null si no se encuentra un colaborador con el mismo tipo y número de documento
+        return em.find(Colaborador.class, id);
     }
 
     public void agregar(Colaborador colaborador) {
-        colaboradores.add(colaborador);
+        validarInsertColaborador(colaborador);
+        em.getTransaction().begin();
+        em.persist(colaborador);
+        em.getTransaction().commit();
+    }
+
+    private void validarInsertColaborador(Colaborador colaborador) {
+
+
     }
 
     public void darDeBaja(Colaborador colaborador) {
-        colaboradores.remove(colaborador);
+        em.getTransaction().begin();
+        em.remove(colaborador);
+        em.getTransaction().commit();
     }
 
     public TipoPersona devolverTipoPersona(String email) {
-        for (Colaborador colab : colaboradores) {
-            if (colab.getEmail().equals(email)) {
-                return colab.getTipoPersona();
-            }
+        List<Persona> personas = em.createQuery("SELECT p FROM Persona p JOIN p.mediosDeContacto m WHERE m.contacto = :email", Persona.class)
+                .setParameter("email", email)
+                .getResultList();
+        if (!personas.isEmpty()) {
+            return personas.get(0).getTipoPersona();
         }
         return null;
+    }
+
+    public static List<Colaborador> obtenerColaboradores() {
+        return em.createQuery("SELECT c FROM Colaborador c", Colaborador.class).getResultList();
     }
 
     public Roles devolverRol(String email) {
@@ -85,12 +101,10 @@ public class RepositorioColaboradores {
     }
 
     private Boolean existeMail(String mail) {
-        for (Colaborador colab : colaboradores) {
-            if (colab.getEmail().equals(mail)) {
-                return true;
-            }
-        }
-        return false;
+        List<MedioDeContacto> medioDeContactos = em.createQuery("SELECT m FROM MedioDeContacto m WHERE m.contacto = :mail", MedioDeContacto.class)
+                .setParameter("mail", mail)
+                .getResultList();
+        return !medioDeContactos.isEmpty();
     }
 
 }

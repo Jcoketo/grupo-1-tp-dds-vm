@@ -26,17 +26,17 @@ public class Colaborador {
 
     @OneToMany()
     @JoinColumn(name = "colaborador_id", referencedColumnName = "id")
-    protected List<Colaboracion> colaboracionesRealizadas;
+    @Getter List<Colaboracion> colaboracionesRealizadas;
 
     @Column
-    protected Double puntaje;
+    @Getter protected Double puntaje;
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name= "colaborador_id",referencedColumnName = "id")
-    protected List<Oferta> canjesRealizados;
+    @Getter protected List<Oferta> canjesRealizados;
 
     @Column
-    protected Boolean validada;
+    @Getter protected Boolean validada;
 
     @OneToOne(cascade = CascadeType.ALL)
     @Getter protected Persona persona;
@@ -45,7 +45,7 @@ public class Colaborador {
     @Getter protected Tarjeta tarjeta;
 
     @OneToMany(mappedBy="colaborador", cascade ={CascadeType.ALL}, fetch = FetchType.EAGER )
-    private List<Suscripcion> suscripciones;
+    @Getter private List<Suscripcion> suscripciones;
 
     @Transient
     @Getter protected Integer contadorViandasDonadasSemanal;

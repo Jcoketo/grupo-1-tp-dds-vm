@@ -49,20 +49,19 @@ public class RepositorioOfertas {
         }
     }
 
-    public void eliminar(Oferta oferta) {
+    public void darDeBaja(Oferta oferta) {
         em.getTransaction().begin();
         Oferta managedOferta = em.find(Oferta.class, oferta.getId());
         if (managedOferta != null) {
-            em.remove(managedOferta);
+            managedOferta.setDisponibilidad(false);
             em.getTransaction().commit();
         }
     }
 
 
-    /*public List<Oferta> conocerOfertasDisponibles() {
-        List<Oferta> ofertas = em.createQuery("SELECT o FROM Oferta o WHERE o.disponibilidad = :true", Oferta.class)
-                .setParameter("disponibilidad", disponibilidad)
+    public List<Oferta> conocerOfertasDisponibles() {
+        List<Oferta> ofertas = em.createQuery("SELECT u FROM Oferta u WHERE u.disponibilidad = TRUE", Oferta.class)
                 .getResultList();
-        em.createNativeQuery("SELECT o FROM Oferta o WHERE Disponbilidad )
-    }*/
+        return ofertas;
+    }
  }

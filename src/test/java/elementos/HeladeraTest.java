@@ -11,8 +11,8 @@ public class HeladeraTest {
     @Test
     public void testRetirarVianda() {
         // Arrange
-        Heladera heladera = new Heladera(10, LocalDate.now(), null);
-        Heladera heladera2 = new Heladera(10, LocalDate.now(), null);
+        Heladera heladera = new Heladera(10, null);
+        Heladera heladera2 = new Heladera(10, null);
         Vianda vianda1 = new Vianda("Vianda1", LocalDate.now(), LocalDate.now(), null, heladera, false);
         Vianda vianda2 = new Vianda("Vianda2", LocalDate.now(), LocalDate.now(), null, heladera, false);
 

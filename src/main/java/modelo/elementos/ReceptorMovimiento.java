@@ -13,7 +13,7 @@ public class ReceptorMovimiento {
         heladera.marcarComoInactiva();
         Alerta alerta = new Alerta(TipoAlerta.FRAUDE, heladera);
         RepositorioIncidentes repo = RepositorioIncidentes.getInstancia();
-        repo.agregar(alerta);
+        repo.agregarIncidente(alerta);
     }
 
     public void actualizar(Sensoreo sensor) {

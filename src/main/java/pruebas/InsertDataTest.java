@@ -10,7 +10,6 @@ import modelo.suscripcion.TipoSuscripcion;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import java.time.LocalDate;
 
 public class InsertDataTest {
     public static void main(String[] args) {
@@ -51,9 +50,9 @@ public class InsertDataTest {
         em.persist(puntoEstrategico2);
 
         // Insert Heladera
-        Heladera heladera1 = new Heladera(14, LocalDate.now(), puntoEstrategico1);
-        Heladera heladera2 = new Heladera(20, LocalDate.now(), puntoEstrategico2);
-        Heladera heladera3 = new Heladera(25, LocalDate.now(), puntoEstrategico1);
+        Heladera heladera1 = new Heladera(14, puntoEstrategico1);
+        Heladera heladera2 = new Heladera(20, puntoEstrategico2);
+        Heladera heladera3 = new Heladera(25, puntoEstrategico1);
         em.persist(heladera1);
         em.persist(heladera2);
         em.persist(heladera3);

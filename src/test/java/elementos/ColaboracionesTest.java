@@ -31,9 +31,9 @@ public class ColaboracionesTest {
 
   @BeforeEach
   public void setUp() {
-    heladeraOrigen = new Heladera(10, LocalDate.now(), null);
-    heladeraDestino = new Heladera(10, LocalDate.now(), null);
-    heladeraDestinoSinLugar = new Heladera(1, LocalDate.now(), null);
+    heladeraOrigen = new Heladera(10, null);
+    heladeraDestino = new Heladera(10, null);
+    heladeraDestinoSinLugar = new Heladera(1, null);
 
     personaHumana = new PersonaHumana("Juan", "Perez", new MedioDeContacto(TipoMedioDeContacto.MAIL, "juanperez@gmail.com"));
     colaborador = new Colaborador(personaHumana);

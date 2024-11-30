@@ -40,7 +40,7 @@ public class Heladera {
     @Setter @Getter private String nombre;
 
     @Column
-    @Setter private int viandasMaximas;
+    @Setter @Getter private Integer viandasMaximas;
 
     @OneToMany(mappedBy = "disponibleEn")
     @Getter private List<Vianda> viandas;
@@ -78,12 +78,13 @@ public class Heladera {
     @Column
     private Integer tiempoActivo;
 
-    public Heladera(int capacidadMaxima, LocalDate fechaFuncionamiento, PuntoEstrategico puntoEstrategico) {
+    public Heladera(Integer capacidadMaxima, PuntoEstrategico puntoEstrategico) {
         this.viandas = new ArrayList<Vianda>();
         this.viandasMaximas = capacidadMaxima;
-        this.fechaFuncionamiento = fechaFuncionamiento;
+        this.fechaFuncionamiento = LocalDate.now();
         this.activa = true;
         this.puntoEstrategico = puntoEstrategico;
+        this.habilitado = false;
     }
 
     public Heladera() {
@@ -151,7 +152,7 @@ public class Heladera {
         FallaTecnica falla = new FallaTecnica(this, colab, motivo, foto);
 
         RepositorioIncidentes repo = RepositorioIncidentes.getInstancia();
-        repo.agregar(falla);
+        repo.agregarIncidente(falla);
 
         RepositoriosTecnicos tecnicos = RepositoriosTecnicos.getInstancia();
         try {

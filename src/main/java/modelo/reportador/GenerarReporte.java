@@ -31,7 +31,7 @@ public class GenerarReporte{
     public String obtenerFallasXHeladera() {
         List<ReporteHeladera> reportes = new ArrayList<>();
 
-        for (Heladera heladera : RepositorioHeladeras.getHeladeras()) {
+        for (Heladera heladera : RepositorioHeladeras.obtenerHeladeras()) {
             ReporteHeladera reporte = new ReporteHeladera();
             reporte.setHeladera(heladera);
             reporte.setCantidad(heladera.getContadorFallasSemanal());
@@ -47,7 +47,7 @@ public class GenerarReporte{
     public String obtenerViandasColocadasXHeladera() {
         List<ReporteHeladera> reportes = new ArrayList<>();
 
-        for (Heladera heladera : RepositorioHeladeras.getHeladeras()) {
+        for (Heladera heladera : RepositorioHeladeras.obtenerHeladeras()) {
             ReporteHeladera reporte = new ReporteHeladera();
             reporte.setHeladera(heladera);
             reporte.setCantidad(heladera.getContadorViandasColocadas());
@@ -63,7 +63,7 @@ public class GenerarReporte{
     public String obtenerViandasRetiradasXHeladera() {
         List<ReporteHeladera> reportes = new ArrayList<>();
 
-        for (Heladera heladera : RepositorioHeladeras.getHeladeras()) {
+        for (Heladera heladera : RepositorioHeladeras.obtenerHeladeras()) {
             ReporteHeladera reporte = new ReporteHeladera();
             reporte.setHeladera(heladera);
             reporte.setCantidad(heladera.getContadorViandasRetiradas());
@@ -79,7 +79,7 @@ public class GenerarReporte{
     public String obtenerViandasXColaborador() {
         List<ReporteColaborador> reportes = new ArrayList<>();
 
-        for (Colaborador colab : RepositorioColaboradores.getColaboradores()) {
+        for (Colaborador colab : RepositorioColaboradores.obtenerColaboradores()) {
             ReporteColaborador reporte = new ReporteColaborador();
             reporte.setColaborador(colab);
             reporte.setCantidadViandas(colab.getContadorViandasDonadasSemanal());

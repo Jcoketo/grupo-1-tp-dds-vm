@@ -1,8 +1,13 @@
 package pruebas;
 
+import modelo.colaboracion.Oferta;
+import persistencia.RepositorioColaboradores;
+import persistencia.RepositorioOfertas;
+
 import java.io.IOException;
 import java.time.Duration;
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class PruebasManuales {
     public static void main(String[] args) throws IOException {
@@ -64,11 +69,24 @@ public class PruebasManuales {
         //System.out.println (UUID.randomUUID().toString().toUpperCase().subSequence(0,11));
 
         // genera una prueba para verificar el beetwen de la fecha de solicitud y la fecha de apertura
-        LocalDateTime start = LocalDateTime.of(2023, 10, 1, 14, 30);
+        /*LocalDateTime start = LocalDateTime.of(2023, 10, 1, 14, 30);
         LocalDateTime end = LocalDateTime.of(2023, 10, 2, 18, 45);
 
         System.out.println(Duration.between(start, end).toHours());
+        */
 
+        /*RepositorioOfertas repositorioOfertas = RepositorioOfertas.getInstancia();
+        List<Oferta> ofertas = repositorioOfertas.conocerOfertasDisponibles();
+        for (Oferta oferta : ofertas) {
+            System.out.println(oferta.getNombre());
+        }
+        Oferta ofertaaux= ofertas.get(0);
+
+        repositorioOfertas.darDeBaja(ofertaaux);*/
+
+        // quiero probar el metodo de obtener tipo persona
+        RepositorioColaboradores repoColab = RepositorioColaboradores.getInstancia();
+        System.out.println(repoColab.devolverTipoPersona("example1@example.com"));
 
     }
 }
