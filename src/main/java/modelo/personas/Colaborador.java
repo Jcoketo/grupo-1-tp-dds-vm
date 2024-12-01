@@ -59,7 +59,7 @@ public class Colaborador {
         this.persona = persona;
         this.colaboracionesRealizadas = new ArrayList<>();
         this.puntaje = 0.0;
-        this.validada = Boolean.FALSE;
+        this.validada = Boolean.TRUE;
         this.canjesRealizados = new ArrayList<>();
         //this.contadorViandas = 0;
     }

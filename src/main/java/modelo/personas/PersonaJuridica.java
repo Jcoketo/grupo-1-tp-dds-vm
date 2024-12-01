@@ -16,6 +16,9 @@ public class PersonaJuridica extends Persona{
     @Column
     private String razonSocial;
 
+    @Column
+    private Integer CUIT;
+
     @Enumerated(EnumType.STRING)
     private TipoJuridico tipoJuridico;
 
@@ -26,13 +29,14 @@ public class PersonaJuridica extends Persona{
     @JoinColumn(name= "persona_juridica_id", referencedColumnName = "id")
     @Getter @Setter private List<Heladera> heladeras = new ArrayList<>();
 
-    public PersonaJuridica(String razonSocial, TipoJuridico tipoJuridico, Rubro rubro, MedioDeContacto medioDeContacto){
+    public PersonaJuridica(Integer CUIT, String razonSocial, TipoJuridico tipoJuridico, Rubro rubro, MedioDeContacto medioDeContacto){
         this.mediosDeContacto = new ArrayList<MedioDeContacto>();
         this.mediosDeContacto.add(medioDeContacto);
         this.razonSocial = razonSocial;
         this.tipoJuridico = tipoJuridico;
         this.rubro = rubro;
         this.tipoPersona = TipoPersona.PJ;
+        this.CUIT = CUIT;
     }
 
     public PersonaJuridica() {

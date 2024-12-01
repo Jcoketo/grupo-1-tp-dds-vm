@@ -9,4 +9,3 @@ public class SanitizadorDeContrasenias {
         return contrasenia;
     }
 }
-// Esta clase tiene un método que se encarga de reemplazar los múltiples espacios contiguos por un solo espacio. Retorna el string modificado.

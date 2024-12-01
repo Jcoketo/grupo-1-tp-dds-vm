@@ -2,7 +2,6 @@ import static io.javalin.apibuilder.ApiBuilder.*;
 
 import accessManagment.AutorizacionMiddleware;
 import io.javalin.Javalin;
-import modelo.autenticacion.AuthService;
 import persistencia.*;
 import presentacion.InicioController;
 import presentacion.colaboraciones.DonarDineroController;
@@ -24,7 +23,6 @@ import presentacion.gestorCuentas.CuentaCreadaController;
 import presentacion.gestorCuentas.CuentaFisicaCreadaController;
 import presentacion.gestorCuentas.CuentaJuridicaCreadaController;
 import presentacion.gestorCuentas.ElegirRegistroCuentaController;
-import presentacion.gestorCuentas.InicioLogueadoController;
 import presentacion.gestorCuentas.PerfilController;
 import presentacion.gestorCuentas.ProcessLoginController;
 import presentacion.gestorCuentas.ShowLoginController;
@@ -69,6 +67,7 @@ public class Router {
         RepositorioVisitas repoVisitas = RepositorioVisitas.getInstancia(entityManager);
         RepositorioUsuarios repoUsuarios = RepositorioUsuarios.getInstancia(entityManager);
 
+
         /* *************************************************************************** */
 
         // ------------------------------------   RUTAS   ------------------------------------------------
@@ -76,7 +75,7 @@ public class Router {
 
             path("/login", () -> {
                 get(new ShowLoginController());
-                post(new ProcessLoginController(repoUsuarios, repoColab));
+                post(new ProcessLoginController(repoColab));
             });
 
             path("/inicio", () -> {
@@ -97,7 +96,7 @@ public class Router {
             path("/crearCuentaFisica", () -> {
                 before(new AutorizacionMiddleware());
                 get(new CrearCuentaFisicaController());
-                post(new CuentaFisicaCreadaController(repoColab, repoUsuarios));
+                post(new CuentaFisicaCreadaController());
             });
 
             path("/cuentaCreada", () -> {

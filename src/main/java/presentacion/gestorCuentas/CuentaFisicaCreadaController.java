@@ -2,55 +2,100 @@ package presentacion.gestorCuentas;
 
 import io.javalin.http.Context;
 import io.javalin.http.Handler;
-import modelo.autenticacion.AuthService;
+import modelo.authService.AuthServiceColaborador;
+import modelo.excepciones.ExcepcionValidacion;
+import modelo.authService.AuthServiceUsuario;
+import modelo.personas.TipoDocumento;
 import org.jetbrains.annotations.NotNull;
-import persistencia.RepositorioColaboradores;
-import persistencia.RepositorioUsuarios;
 
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
 
 public class CuentaFisicaCreadaController implements Handler {
 
-    private RepositorioColaboradores repoColaboradores;
-    private RepositorioUsuarios repoUsuarios;
-
-    public CuentaFisicaCreadaController(RepositorioColaboradores repositorioColaboradores, RepositorioUsuarios repositorioUsuarios) {
+    public CuentaFisicaCreadaController() {
         super();
-        this.repoColaboradores = repositorioColaboradores;
-        this.repoUsuarios = repositorioUsuarios;
     }
 
     @Override
     public void handle(@NotNull Context context) throws Exception {
         Map<String, Object> model = new HashMap<>();
-        //context.render("templates/elegirRegistroCuenta.mustache", model);
+        context.sessionAttribute("model", model);
 
+        String tipoDoc = context.formParam("tipoDoc");
+        String nroDoc = context.formParam("nroDoc");
         String nombre = context.formParam("nombre");
         String apellido = context.formParam("apellido");
-        String username = context.formParam("username");
-        String email = context.formParam("email");
+        String email = context.formParam("email"); // Este va a ser el Medio de contacto necesario y x defecto
         String password = context.formParam("password");
         String terminos = context.formParam("terms");
+        String username = context.formParam("username");
+        String telefono = context.formParam("telefono"); // opcional
+        String direccion = context.formParam("direccion"); // opcional
+        // FECHA DE NACIMIENTO
+        String dia = context.formParam("dia"); // opcional
+        String mes = context.formParam("mes"); // opcional
+        String anio = context.formParam("anio"); // opcional
+        String fechaNacimiento = anio + "-" + mes + "-" + dia; // opcional
 
-
-        // esto creo que esta mal, nunca va a ser null, deberiamos chequear que el string no sea == ' '
-        if (nombre == null || apellido == null || email == null || password == null || terminos == null) {
-            model.put("error", "Debe completar todos los campos");
-            //context.render("templates/crearCuentaFisica.mustache", model);
+        if (nombre.equals("") || apellido.equals("") || email.equals("") ||
+                password.equals("") || terminos.equals("") || username.equals("") ||
+                tipoDoc.equals("") || nroDoc.equals("") )  {
+            model.put("error", "Debe completar los campos obligatorios");
             context.status(400);
-            context.redirect("/crearCuentaFisica"); // <-- este hace el render de la vista
-            // se puede agregar que se pase x param los que ya ingreso
+            context.redirect("/crearCuentaFisica");
         }
 
-        // creamos el usuario
+        if ( !esNumerico(nroDoc)  ||  !esNumerico(telefono) )  {
+            model.put("error", "El número de documento o el teléfono no son numéricos");
+            context.status(400);
+            context.redirect("/crearCuentaFisica");
+        }
 
-        repoUsuarios.registrarUsuario(email, username, password);
+        if ( !nroDoc.matches("[0-9]{0,8}") )  {
+            model.put("error", "El número de documento debe tener 8 dígitos");
+            context.status(400);
+            context.redirect("/crearCuentaFisica");
+        }
 
-        // hay que validad que no exista el mail en la base de datos
-        //todo
+        if ( !telefono.equals("")  &&  !telefono.matches("[0-9]{8,10}") )  {
+            model.put("error", "El teléfono debe tener entre 8 y 10 dígitos");
+            context.status(400);
+            context.redirect("/crearCuentaFisica");
+        }
+        TipoDocumento tipoDocumentoEnum;
+        try {
+            tipoDoc = tipoDoc.toUpperCase();
+            tipoDocumentoEnum = TipoDocumento.valueOf(tipoDoc);
+        } catch (IllegalArgumentException e) {
+            model.put("error", "El tipo de documento no es válido");
+            context.status(400);
+            context.redirect("/crearCuentaFisica");
+            return;
+        }
 
-        // crear la cuenta y enviar a
+        try {
+            AuthServiceUsuario.registrarUsuario(email, username, password);
+            AuthServiceColaborador.registrarColaboradorFisico(tipoDocumentoEnum, nroDoc, nombre, apellido, email, telefono, direccion, fechaNacimiento);
+        } catch (ExcepcionValidacion e) {
+            model.put("error", e.getMessage());
+            context.status(400);
+            context.redirect("/crearCuentaFisica");
+        }
+
         context.redirect("/cuentaCreada");
+    }
+
+    public static boolean esNumerico(String str) {
+        if (str == null || str.isEmpty()) {
+            return false;
+        }
+        for (char c : str.toCharArray()) {
+            if (!Character.isDigit(c)) {
+                return false;
+            }
+        }
+        return true;
     }
 }

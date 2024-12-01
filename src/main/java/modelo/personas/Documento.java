@@ -18,6 +18,8 @@ public class Documento {
         this.tipoDoc = tipo_doc;
     }
 
+
+
     public Documento (){
 
     }
