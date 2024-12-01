@@ -11,13 +11,12 @@ public class CrearCuentaFisicaController implements Handler {
 
     @Override
     public void handle(@NotNull Context context) throws Exception {
-        Map<String, Object> model = new HashMap<>();
+        Map<String, Object> model = context.sessionAttribute("model");
+        if (model == null) {
+            model = new HashMap<>();
+        }
         context.render("templates/crearCuentaFisica.mustache", model);
-
-
-
-        // aca hay que ir a dar de alta e usuario en la base de datos
-        //TODO
+        context.sessionAttribute("model", null);
 
 
     }

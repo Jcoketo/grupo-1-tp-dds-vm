@@ -1,4 +1,4 @@
-package modelo.autenticacion;
+package modelo.validador;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -19,17 +19,20 @@ public class Usuario {
     @Setter
     @Getter
     @Column
-    private String Usuario;
+    private String username;
 
     @Setter
     @Getter
     @Column
     private String hashedPassword;
 
-
-    public Usuario(String mail, String hashedPassword) {
+    public Usuario(String mail, String username, String password) {
         this.mail = mail;
-        this.hashedPassword = hashedPassword;
+        this.hashedPassword = password;
+        this.username = username;
     }
 
+    public Usuario() {
+
+    }
 }

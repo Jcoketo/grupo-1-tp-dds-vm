@@ -17,25 +17,18 @@ public class ValidadorDeContrasenias {
     public static ValidadorDeContrasenias getInstancia() {
         if(instancia == null) {
             instancia = new ValidadorDeContrasenias();
-
         }
         return instancia;
     }
 
-    public boolean validarContrasenia(String username, String contrasenia) {
+    public Boolean validarContrasenia(String username, String contrasenia) {
         String password = SanitizadorDeContrasenias.eliminarMultiplesEspacios(contrasenia);
-        boolean esValida =
-                this.condicionesContrasenia.stream().allMatch(
-                        condicion -> condicion.verificarContrasenia(username, password));
+        return this.condicionesContrasenia.stream().allMatch(
+                    condicion -> condicion.verificarContrasenia(username, password));
 
-        if (esValida) {
-            System.out.printf("Su contrasenia es valida.");
-        }
-        return esValida;
     }
 
     public void agregarCondiciones (Condicion ... condiciones) {
         Collections.addAll(this.condicionesContrasenia, condiciones);
     }
 }
-// Esta clase se encarga de validar la contraseña pasada por parámetro según cada una de las condiciones establecidas.

@@ -3,6 +3,7 @@ package presentacion.gestorCuentas;
 import java.util.HashMap;
 import java.util.Map;
 
+import modelo.excepciones.ExcepcionValidacion;
 import org.jetbrains.annotations.NotNull;
 
 import accessManagment.Roles;
@@ -10,30 +11,34 @@ import io.javalin.http.Context;
 import io.javalin.http.Handler;
 import modelo.personas.TipoPersona;
 import persistencia.RepositorioColaboradores;
-import modelo.autenticacion.AuthService;
-import org.jetbrains.annotations.NotNull;
-import persistencia.RepositorioUsuarios;
+import modelo.authService.AuthServiceUsuario;
 
 public class ProcessLoginController implements Handler {
 
-    private RepositorioUsuarios repoUsuarios;
     private RepositorioColaboradores repoColab;
-    //private AuthService authService; ??? Qué hace esto COCO
+    private AuthServiceUsuario authServiceUsuario;
 
-    public ProcessLoginController(RepositorioUsuarios repoUsuarios, RepositorioColaboradores repoColaboradores) {
+    public ProcessLoginController(RepositorioColaboradores repoColab) {
         super();
-        this.repoUsuarios = repoUsuarios;
-        this.repoColab = repoColaboradores;
-        //this.authService = authService; ??? Qué hace esto COCO
+        this.repoColab = repoColab;
     }
 
     @Override
     public void handle(@NotNull Context context) throws Exception {
         String email = context.formParam("email");
         String password = context.formParam("password");
+        boolean valido = false;
 
         Map<String, Object> model = new HashMap<>();
-        if (repoUsuarios.autenticarUsuario(email, password)) {
+
+        try {
+            valido = AuthServiceUsuario.autenticarUsuario(email, password);
+        } catch (ExcepcionValidacion e) {
+            model.put("error", "El mail o la contraseña son incorrectos");
+            context.redirect("/login");
+        }
+
+        if (valido) {
             context.sessionAttribute("logueado", true);
 
             TipoPersona tipoPer = obtenerTipoUsuario(email);
@@ -44,9 +49,6 @@ public class ProcessLoginController implements Handler {
 
             context.redirect("/inicio");
 
-        } else {
-            model.put("error", "Invalid email or password");
-            context.render("templates/login.mustache", model);
         }
     }
 
@@ -58,17 +60,4 @@ public class ProcessLoginController implements Handler {
         return repoColab.devolverTipoPersona(email);
     }
 
-
-    /* ---------  VIEJO ---------
-     * Método de autenticación de usuario
-     *
-     * @param email    email del usuario
-     * @param password contraseña del usuario
-     * @return true si el usuario es autenticado, false en caso contrario
-
-    private boolean authenticateUser(String email, String password) {
-        // Lógica de autenticación (ejemplo simple)
-        // ir a la BD
-        return "usuario@dominio.com".equals(email) && "password123".equals(password);
-    }*/
 }
