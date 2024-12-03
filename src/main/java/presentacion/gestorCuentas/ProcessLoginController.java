@@ -27,14 +27,17 @@ public class ProcessLoginController implements Handler {
     public void handle(@NotNull Context context) throws Exception {
         String email = context.formParam("email");
         String password = context.formParam("password");
+        Map<String, Object> model = context.sessionAttribute("model");
+        if (model == null) {
+            model = new HashMap<>();
+        }
         boolean valido = false;
-
-        Map<String, Object> model = new HashMap<>();
 
         try {
             valido = AuthServiceUsuario.autenticarUsuario(email, password);
         } catch (ExcepcionValidacion e) {
             model.put("error", "El mail o la contraseña son incorrectos");
+            context.sessionAttribute("model", model);
             context.redirect("/login");
         }
 

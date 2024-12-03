@@ -215,9 +215,6 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/mapaHeladeras">Heladeras</a>
                 </li>
-                <li class="nav-item">
-                    <a href="/login" class="btn2 btn2-submit">Iniciar Sesión</a>
-                </li>
             </ul>
         </div>
     </nav>
@@ -245,15 +242,18 @@
 <main>
     <div class="login-container">
         <h2>Iniciar sesión</h2>
-        {{#error}}
+        <!-- {{#error}}
             <p class="error-message">{{error}}</p>
-        {{/error}}
+        {{/error}} -->
         <form action="/login" method="post">
             <p>Ingresa tu correo electrónico</p>
             <input type="email" name="email" placeholder="correo@dominio.com" required>
             <p>Ingresa tu contraseña</p>
             <input type="password" name="password" placeholder="Ingresa tu contraseña" required>
             <button type="submit">Continuar</button>
+            {{#error}}
+                <div class="alert alert-danger mt-3">{{error}}</div>
+            {{/error}}
         </form>
         <a href="/elegirRegistroCuenta" class="btn btn-primary custom-btn">¿No tenés una cuenta? Crear cuenta</a>
         <p>Al hacer clic en continuar, estás aceptando nuestra <a href="#">política de privacidad y términos de uso</a>.</p>
