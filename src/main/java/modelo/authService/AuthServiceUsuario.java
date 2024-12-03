@@ -30,6 +30,9 @@ public class AuthServiceUsuario {
     }
 
     public static boolean autenticarUsuario(String mail, String password) {
+        if (!repoUsuarios.existeMAIL(mail)) {
+            throw new ExcepcionValidacion("El usuario no existe");
+        }
         String passwordBase = repoUsuarios.traerClavexUsuario(mail);
         return checkPassword(password, passwordBase);
     }
