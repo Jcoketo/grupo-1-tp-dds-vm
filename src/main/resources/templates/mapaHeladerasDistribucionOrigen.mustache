@@ -84,7 +84,6 @@
         }
 
         .content {
-            flex: 1; /* Esto hace que el contenedor de la fila ocupe el espacio disponible */
             display: flex;
             gap: 20px; /* Espaciado entre el mapa y la lista de heladeras */
         }
@@ -101,7 +100,7 @@
 
         #map {
             width: 100%;
-            height: 100%;
+            height: 500px; /* Set a fixed height for the map */
             border-radius: 10px;
         }
 
@@ -150,7 +149,11 @@
 <body>
 
 <header>
-    <div><img src="/static/logo.png" alt="Logo" style="max-height: 50px;"></div>
+    <div>
+        <a href="/inicio">
+            <img src="/static/logo.png" alt="Logo" style="max-height: 50px;">
+        </a>
+    </div>
     <nav class="navbar navbar-expand-lg navbar-light">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
                 aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -189,11 +192,11 @@
 
 <main class="container-fluid">
     <h1>Visualización de heladeras</h1>
-    <div class="content">
-        <div class="map-container">
+    <div class="content row">
+        <div class="map-container col-md-6">
             <div id="map"></div>
         </div>
-        <div class="list-container">
+        <div class="list-container col-md-6">
             <h3>Heladeras</h3>
             <ul id="heladeras-list" class="list-group">
                 <!-- Lista de heladeras se llenará dinámicamente -->
@@ -241,6 +244,7 @@
                 </div>
             </div>
         </div>
+    </div>
 </footer>
 
 <!-- Incluye Bootstrap JS y sus dependencias -->
@@ -254,11 +258,10 @@
     let markers = [];
 
     function fetchHeladeras() {
-        // Realiza una solicitud al endpoint de tu API que devuelve las heladeras
         return fetch('/mapaHeladerasRequest')
-                .then(response => response.json()) // Convierte la respuesta a JSON
+                .then(response => response.json())
                 .then(data => {
-                    return data; // Devuelve los datos de las heladeras
+                    return data;
                 })
                 .catch(error => {
                     console.error('Error al obtener las heladeras:', error);
@@ -267,7 +270,6 @@
     }
 
     function formatFecha(fechaArray) {
-        // Convierte el array de fecha [año, mes, día] en una cadena legible
         return `${fechaArray[2]}/${fechaArray[1]}/${fechaArray[0]}`;
     }
 
@@ -278,12 +280,13 @@
         });
 
         fetchHeladeras().then(heladeras => {
-            heladeras.forEach(heladera => {
+            heladeras.filter(heladera => heladera.necesitaTrasladoDe > 0).forEach(heladera => {
+                const idHeladera = heladera.id;
                 const nombre = heladera.nombre;
-                const punto = heladera.puntoEstrategico;
+                const punto = heladera.punto;
                 const fecha = formatFecha(heladera.fechaFuncionamiento);
                 const estado = heladera.activa ? "Activa" : "Inactiva";
-                const cantidadViandas = heladera.viandas.length;
+                const disponibilidad = heladera.disponibilidad;
 
                 const marker = new google.maps.Marker({
                     position: { lat: punto.latitud, lng: punto.longitud },
@@ -296,17 +299,17 @@
                 const listItem = document.createElement('li');
                 listItem.className = "list-group-item";
                 listItem.innerHTML = `
-                   <div>
-                       <strong>${nombre || 'Ubicación desconocida'}</strong><br>
-                       <small>Direccion: ${punto.direccion || 'Ubicación desconocida'}</small><br>
-                       <small>En funcionamiento desde: ${fecha}</small><br>
-                       <small>${estado}</small><br>
-                       <small>
-                           <a href="/visualizarDetalleHeladera?lat=${punto.latitud}&lng=${punto.longitud}" class="text-primary" style="text-decoration: underline;">Detalles</a>
-                           <button onclick="window.location.href='/donarDistribuirViandas?heladera1=${nombre}&direccion1=${punto.direccion}&estado1=${estado}&disponibilidad1=${cantidadViandas}&heladera2={{heladera2}}&direccion2={{direccion2}}&estado2={{estado2}}&disponibilidad2={{disponibilidad2}}'" class="btn" style="margin-left: 10px; background-color: #1e5552; color: white; padding: 5px 15px; font-size: 14px; border-radius: 5px;">Elegir heladera</button>
-                       </small>
-                   </div>
-                `;
+                <div>
+                    <strong>${nombre || 'Ubicación desconocida'}</strong><br>
+                    <small>Direccion: ${punto.direccion || 'Ubicación desconocida'}</small><br>
+                    <small>En funcionamiento desde: ${fecha}</small><br>
+                    <small>${estado}</small><br>
+                    <small>
+                        <a href="/visualizarDetalleHeladera?lat=${punto.latitud}&lng=${punto.longitud}" class="text-primary" style="text-decoration: underline;">Detalles</a>
+                        <button onclick="window.location.href='/donarDistribuirViandas?idHeladeraOrigen=${idHeladera}&heladera1=${nombre}&direccion1=${punto.direccion}&estado1=${estado}&disponibilidad1=${heladera.necesitaTrasladoDe}&idHeladeraDestino={{idHeladeraDestino}}&heladera2={{heladera2}}&direccion2={{direccion2}}&estado2={{estado2}}&disponibilidad2={{disponibilidad2}}'" class="btn" style="margin-left: 10px; background-color: #1e5552; color: white; padding: 5px 15px; font-size: 14px; border-radius: 5px;">Elegir heladera</button>
+                    </small>
+                </div>
+            `;
 
                 listItem.addEventListener('click', () => {
                     map.setCenter(marker.getPosition());

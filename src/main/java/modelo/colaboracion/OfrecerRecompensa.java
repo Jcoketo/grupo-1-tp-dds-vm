@@ -47,4 +47,14 @@ public class OfrecerRecompensa extends Colaboracion{
         // No especifica cuantos puntos gana el colaborador...
     }
 
+    @Override
+    public Double conocerPuntaje() {
+        return 0.0;
+    }
+
+    @Override
+    public String getClassName() {
+        return "Ofreciste una recompensa";
+    }
+
 }

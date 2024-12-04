@@ -1,6 +1,7 @@
 package modelo.validador.condiciones;
 
 import modelo.config.Config;
+import modelo.excepciones.ExcepcionValidacion;
 import modelo.validador.Condicion;
 
 import java.io.BufferedReader;
@@ -15,10 +16,9 @@ public class TopPeores10000 implements Condicion {
         boolean esValida = !this.buscarPalabraEn(constrasenia, archivo10000);
 
         if(!esValida){
-            System.out.println(
-                "La contraseña esta en la lista de las peores contraseñas. Intente con otra contraseña");
+            throw new ExcepcionValidacion("La contraseña esta en la lista de las peores contraseñas. Intente con otra contraseña");
         }
-        return esValida;
+        return true;
     }
 
     public boolean buscarPalabraEn(String password, File archivo) {

@@ -4,26 +4,13 @@ import accessManagment.AutorizacionMiddleware;
 import io.javalin.Javalin;
 import persistencia.*;
 import presentacion.InicioController;
-import presentacion.colaboraciones.DonarDineroController;
-import presentacion.colaboraciones.DonarDineroRealizadaController;
-import presentacion.colaboraciones.DonarDistribucionViandaController;
-import presentacion.colaboraciones.DonarViandaController;
-import presentacion.colaboraciones.DonarViandaRealizadaController;
-import presentacion.colaboraciones.ElegirDonacionController;
-import presentacion.colaboraciones.ElegirDonacionFisicaController;
-import presentacion.colaboraciones.ElegirDonacionJuridicaController;
-import presentacion.colaboraciones.GraciasPorDonarController;
-import presentacion.colaboraciones.MisColaboracionesController;
-import presentacion.colaboraciones.RegistroPersonaVulnerableController;
-import presentacion.colaboraciones.RegistroPersonaVulnerableFinalController;
-import presentacion.colaboraciones.RegistroPersonaVulnerableRealizadaController;
+import presentacion.colaboraciones.*;
 import presentacion.gestorCuentas.CrearCuentaFisicaController;
 import presentacion.gestorCuentas.CrearCuentaJuridicaController;
 import presentacion.gestorCuentas.CuentaCreadaController;
 import presentacion.gestorCuentas.CuentaFisicaCreadaController;
 import presentacion.gestorCuentas.CuentaJuridicaCreadaController;
 import presentacion.gestorCuentas.ElegirRegistroCuentaController;
-import presentacion.gestorCuentas.InicioLogueadoController;
 import presentacion.gestorCuentas.PerfilController;
 import presentacion.gestorCuentas.ProcessLoginController;
 import presentacion.gestorCuentas.ShowLoginController;
@@ -66,6 +53,8 @@ public class Router {
         RepositoriosTecnicos repoTecnicos = RepositoriosTecnicos.getInstancia(entityManager);
         RepositorioTarjetas repoTarjetas = RepositorioTarjetas.getInstancia(entityManager);
         RepositorioVisitas repoVisitas = RepositorioVisitas.getInstancia(entityManager);
+        RepositorioUsuarios repoUsuarios = RepositorioUsuarios.getInstancia(entityManager);
+
 
         /* *************************************************************************** */
 
@@ -95,7 +84,7 @@ public class Router {
             path("/crearCuentaFisica", () -> {
                 before(new AutorizacionMiddleware());
                 get(new CrearCuentaFisicaController());
-                post(new CuentaFisicaCreadaController(repoColab));
+                post(new CuentaFisicaCreadaController());
             });
 
             path("/cuentaCreada", () -> {
@@ -121,7 +110,7 @@ public class Router {
             });
 
             path("/donarVianda", () -> {
-                before(new AutorizacionMiddleware().setDebeSerLogueado().setDebeSerPF());
+                //before(new AutorizacionMiddleware().setDebeSerLogueado().setDebeSerPF());
                 get(new DonarViandaController());
                 post(new DonarViandaRealizadaController(repoHeladeras));
             });
@@ -135,7 +124,7 @@ public class Router {
             path("/donarDistribuirViandas", () -> {
                 before(new AutorizacionMiddleware().setDebeSerLogueado().setDebeSerPF());
                 get(new DonarDistribucionViandaController());
-                //post(new DonarDistribucionViandaRealizadaController());
+                post(new DonarDistribucionViandaRealizadaController());
             });
 
             path("/graciasPorDonar", () -> {
@@ -234,12 +223,12 @@ public class Router {
 
             path("/perfil", () -> {
                 before(new AutorizacionMiddleware().setDebeSerLogueado());
-                get(new PerfilController());
+                get(new PerfilController(repoColab));
             });
 
             path("/misColaboraciones", () -> {
                 before(new AutorizacionMiddleware().setDebeSerLogueado());
-                get(new MisColaboracionesController());
+                get(new MisColaboracionesController(repoColab));
             });
 
             path("/api/recomendacion/locaciones", () -> {

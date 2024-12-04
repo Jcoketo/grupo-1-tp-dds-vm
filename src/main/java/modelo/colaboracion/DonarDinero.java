@@ -2,6 +2,7 @@ package modelo.colaboracion;
 
 import lombok.Getter;
 import lombok.Setter;
+import modelo.excepciones.ExcepcionValidacion;
 import modelo.personas.Colaborador;
 import modelo.personas.TipoPersona;
 import javax.persistence.*;
@@ -44,7 +45,7 @@ public class DonarDinero extends Colaboracion{
 
     @Override
     public void hacerColaboracion(Colaborador colaborador) {
-        String text = validar(colaborador);
+        /*String text = validar(colaborador);
         if(text == null){
             incrementarPuntos(colaborador);
             colaborador.agregarColaboracion(this);
@@ -52,20 +53,32 @@ public class DonarDinero extends Colaboracion{
         else {
             System.out.println("Error!!!");
             System.out.println(text);
-        }
-    }
+        }*/ // CAMBIO COCO - MAS FACIL - NO HACE FALTA EL IF
+        this.validar(colaborador);
+        incrementarPuntos(colaborador);
+        colaborador.agregarColaboracion(this);
 
+    }
+    // TODO YA NO HARIA FALTA
+    // DEBERIA SER VOID
     @Override
     public String validar(Colaborador colaborador) {
         if(!this.tiposPersonasHabilitadas.contains(colaborador.getTipoPersona())){
-            return "Ese Tipo de Persona no puede realizar este tipo de Colaboración!";
+            throw new ExcepcionValidacion("Ese Tipo de Persona no puede realizar este tipo de Colaboración!");
         }
-        return null;
+        return "true";
     }
 
     @Override
     public void incrementarPuntos(Colaborador colaborador){
         colaborador.incrementarPuntaje(this.monto * coeficiente);
+    }
+    @Override
+    public Double conocerPuntaje(){return this.monto * coeficiente; }
+
+    @Override
+    public String getClassName() {
+        return "Donacion de Dinero";
     }
 
 }

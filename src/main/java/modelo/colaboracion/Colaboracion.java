@@ -1,5 +1,6 @@
 package modelo.colaboracion;
 
+import lombok.Getter;
 import modelo.personas.TipoPersona;
 import modelo.personas.Colaborador;
 
@@ -20,6 +21,7 @@ public abstract class Colaboracion {
     @Transient
     protected List<TipoPersona> tiposPersonasHabilitadas;
 
+    @Getter
     @Column
     protected LocalDate fechaColaboracion;
 
@@ -28,5 +30,9 @@ public abstract class Colaboracion {
     public abstract String validar(Colaborador colaborador);
 
     public abstract void incrementarPuntos(Colaborador colaborador);
+
+    public abstract Double conocerPuntaje();
+
+    public abstract String getClassName();
 
 }

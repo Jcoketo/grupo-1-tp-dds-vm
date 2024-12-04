@@ -12,6 +12,7 @@ public class CuentaJuridicaCreadaController implements Handler {
 
     private RepositorioColaboradores repoColab;
 
+
     public CuentaJuridicaCreadaController(RepositorioColaboradores repoColab) {
         super();
         this.repoColab = repoColab;
@@ -25,12 +26,13 @@ public class CuentaJuridicaCreadaController implements Handler {
         String razonSocial = context.formParam("razon-social");
         String rubro = context.formParam("rubro");
         String email = context.formParam("email");
+        String username = context.formParam("username");
         String password = context.formParam("password");
         String terminos = context.formParam("terms");
 
         if (razonSocial == null || rubro == null || email == null || password == null || terminos == null) {
             model.put("error", "Debe completar todos los campos");
-            context.status(400);
+            //context.status(400);
             context.redirect("/crearCuentaJuridica");
         }
 

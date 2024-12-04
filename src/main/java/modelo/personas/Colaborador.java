@@ -24,7 +24,7 @@ public class Colaborador {
     @GeneratedValue
     @Getter private int id;
 
-    @OneToMany()
+    @OneToMany(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "colaborador_id", referencedColumnName = "id")
     @Getter List<Colaboracion> colaboracionesRealizadas;
 
@@ -47,21 +47,22 @@ public class Colaborador {
     @OneToMany(mappedBy="colaborador", cascade ={CascadeType.ALL}, fetch = FetchType.EAGER )
     @Getter private List<Suscripcion> suscripciones;
 
-    @Transient
+    @Column
     @Getter protected Integer contadorViandasDonadasSemanal;
 
     public Colaborador() {
         this.colaboracionesRealizadas = new ArrayList<>();
         this.puntaje = 0.0;
+        this.contadorViandasDonadasSemanal = 0;
     }
 
     public Colaborador(Persona persona) {
         this.persona = persona;
         this.colaboracionesRealizadas = new ArrayList<>();
         this.puntaje = 0.0;
-        this.validada = Boolean.FALSE;
+        this.validada = Boolean.TRUE;
         this.canjesRealizados = new ArrayList<>();
-        //this.contadorViandas = 0;
+        this.contadorViandasDonadasSemanal = 0;
     }
 
     public TipoPersona getTipoPersona(){ return this.persona.getTipoPersona(); }
@@ -107,10 +108,6 @@ public class Colaborador {
         this.validada = Boolean.TRUE;
     }
 
-    protected void iniciarSesion() {
-        //TODO
-    }
-
     public String getEmail(){
         for ( MedioDeContacto contactoAux : persona.mediosDeContacto )
             if ( contactoAux.getMedio() == TipoMedioDeContacto.MAIL ){
@@ -118,6 +115,7 @@ public class Colaborador {
             }
         return null;
     }
+
 
     public String getUniqueIdentifier() {
 

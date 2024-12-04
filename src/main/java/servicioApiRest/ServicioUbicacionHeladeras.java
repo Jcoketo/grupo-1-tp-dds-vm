@@ -30,7 +30,7 @@ public class ServicioUbicacionHeladeras {
 
     // Método para obtener heladeras cercanas
     public List<PuntoEstrategico> obtenerHeladerasCercanas(double latitud, double longitud, double radio) {
-        return RepositorioHeladeras.obtenerHeladeras().stream()
+        return repositorioHeladeras.obtenerHeladeras().stream()
                 .filter(Heladera::getActiva) // Solo heladeras activas
                 .filter(heladera -> {
                     double distancia = calcularDistancia(

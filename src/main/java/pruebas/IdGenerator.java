@@ -5,8 +5,11 @@ public class IdGenerator {
 
     private static IdGenerator instancia = null;
 
+    private static String ultimoID;
+
 
     public IdGenerator() {
+        this.ultimoID = "00000000000";
     }
 
     public static IdGenerator getInstancia() {
@@ -16,8 +19,8 @@ public class IdGenerator {
         return instancia;
     }
 
-    public static String generateNextId(String currentId) {
-        char[] idArray = currentId.toCharArray();
+    public static String generateNextId() {
+        char[] idArray = ultimoID.toCharArray();
         boolean carry = true;
 
         for (int i = idArray.length - 1; i >= 0 && carry; i--) {
@@ -54,9 +57,9 @@ public class IdGenerator {
     }
 
     public static void main(String[] args) {
-        System.out.println(generateNextId("00000000009")); // Should print 00000000010
-        System.out.println(generateNextId("A0000000009")); // Should print A0000000010
-        System.out.println(generateNextId("99999999999")); // Should print Z0000000000
-        System.out.println(generateNextId("Z9999999999")); // Should print ZZ000000000
+        System.out.println(generateNextId()); // Should print 00000000010
+        System.out.println(generateNextId()); // Should print A0000000010
+        System.out.println(generateNextId()); // Should print Z0000000000
+        System.out.println(generateNextId()); // Should print ZZ000000000
     }
 }

@@ -2,11 +2,17 @@ package persistencia;
 
 import accessManagment.Roles;
 import lombok.Getter;
+import modelo.colaboracion.Colaboracion;
+import modelo.colaboracion.DonarDinero;
+import modelo.colaboracion.Vianda;
 import modelo.contrasenia.PasswordGenerator;
+import modelo.elementos.Heladera;
 import modelo.notificador.Notificador;
 import modelo.personas.*;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
+import javax.persistence.TypedQuery;
 import java.util.List;
 
 public class RepositorioColaboradores {
@@ -26,20 +32,24 @@ public class RepositorioColaboradores {
         return instancia;
     }
 
-    public Colaborador existeColaborador(Integer id) {
-        return em.find(Colaborador.class, id);
+    public PersonaHumana existePersonaFisica(String nroDoc, TipoDocumento tipoDoc) {
+        TypedQuery<PersonaHumana> query = em.createQuery(
+                "SELECT p FROM PersonaHumana p WHERE p.documento.numeroDoc = :numeroDoc AND p.documento.tipoDoc = :tipoDoc",
+                PersonaHumana.class
+        );
+        query.setParameter("numeroDoc", nroDoc);
+        query.setParameter("tipoDoc", tipoDoc);
+        try {
+            return query.getSingleResult();
+        } catch (NoResultException e) {
+            return null;
+        }
     }
 
     public void agregar(Colaborador colaborador) {
-        validarInsertColaborador(colaborador);
         em.getTransaction().begin();
         em.persist(colaborador);
         em.getTransaction().commit();
-    }
-
-    private void validarInsertColaborador(Colaborador colaborador) {
-
-
     }
 
     public void darDeBaja(Colaborador colaborador) {
@@ -68,12 +78,25 @@ public class RepositorioColaboradores {
         return null;
     }
 
+    public void registrarColaboradorFisico(TipoDocumento tipoDoc, String nroDoc, String nombre, String apellido, String mail, String telefono, String direccion, String fechaNacimiento) {
+
+        PersonaHumana persona = new PersonaHumana(tipoDoc, nroDoc, nombre, apellido, mail, telefono, direccion, fechaNacimiento);
+        Colaborador colaborador = new Colaborador(persona);
+
+        em.getTransaction().begin();
+        em.persist(persona);
+        em.persist(colaborador);
+        em.getTransaction().commit();
+
+        String mensajeBienvenida = "Bienvenido a la plataforma " + nombre + ". Ojala que te diviertas";
+
+        Notificador.notificarXNuevoUsuario(mensajeBienvenida, colaborador);
+
+    }
+       // IMPORTADOR CSV
     public Colaborador crearColaboradorFisico(TipoDocumento tipoDocumento, String nroDocumento, String nombre, String apellido, String mail) {
         String identificadorUnico = tipoDocumento + nroDocumento;
 
-        Boolean existeMail = existeMail(mail);
-
-        if (!existeMail) { // NO EXISTE MAIL
             MedioDeContacto medioDeContacto = new MedioDeContacto(TipoMedioDeContacto.MAIL, mail);
 
             PersonaHumana persona = new PersonaHumana(tipoDocumento, nroDocumento, nombre, apellido, medioDeContacto);
@@ -89,16 +112,70 @@ public class RepositorioColaboradores {
 
             return colaborador;
 
-        }
-        return null; //TODO
+
+
     }
 
-    private Boolean existeMail(String mail) {
-        List<MedioDeContacto> medioDeContactos = em.createQuery("SELECT m FROM MedioDeContacto m WHERE m.contacto = :mail", MedioDeContacto.class)
-                .setParameter("mail", mail)
-                .getResultList();
-        return !medioDeContactos.isEmpty();
+    public Colaborador existeColaborador(Integer id) {
+        return em.find(Colaborador.class, id);
     }
+
+    public Colaborador buscarColaboradorXIdPersona(Integer idPersona) {
+        TypedQuery<Colaborador> query = em.createQuery("SELECT c FROM Colaborador c WHERE c.persona.id = :idPersona", Colaborador.class);
+        query.setParameter("idPersona", idPersona);
+        try {
+            return query.getSingleResult();
+        } catch (NoResultException e) {
+            return null;
+        }
+    }
+
+    public Integer devolverIdUsuario(String email) {
+        List<Persona> personas = em.createQuery("SELECT p FROM Persona p JOIN p.mediosDeContacto m WHERE m.contacto = :email", Persona.class)
+                .setParameter("email", email)
+                .getResultList();
+        if (!personas.isEmpty()) {
+            return personas.get(0).getId();
+        }
+        return null;
+    }
+
+    public void nuevaColaboracion(Colaborador colab, Colaboracion donacion) {
+        em.getTransaction().begin();
+        em.persist(donacion);
+        em.persist(colab);
+        em.getTransaction().commit();
+    }
+
+    public List<Colaboracion> getColaboraciones(Integer idPersona) {
+        Colaborador colab = this.buscarColaboradorXIdPersona(idPersona);
+        return colab.getColaboracionesRealizadas();
+    }
+
+    public void persistirViandas(List<Vianda> viandas) {
+        em.getTransaction().begin();
+        viandas.forEach(vianda -> em.persist(vianda));
+        em.getTransaction().commit();
+    }
+
+    public PersonaJuridica traerPersonaPorIdJuridica(Integer idPersona) {
+        return em.find(PersonaJuridica.class, idPersona);
+    }
+    public PersonaHumana traerPersonaPorIdFisica(Integer idPersona) {
+        return em.find(PersonaHumana.class, idPersona);
+    }
+
+
+
+    /*public MedioDeContacto existeMail(String mail) {
+        TypedQuery<MedioDeContacto> query = em.createQuery("SELECT m FROM MedioDeContacto m WHERE m.contacto = :mail", MedioDeContacto.class);
+        query.setParameter("mail", mail);
+        try {
+            return query.getSingleResult();
+        } catch (NoResultException e) {
+            return null;
+        }
+    }*/
 
 }
 

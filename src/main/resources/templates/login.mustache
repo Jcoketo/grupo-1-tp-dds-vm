@@ -198,7 +198,11 @@
 </head>
 <body>
 <header>
-    <div><img src="/static/logo.png" alt="Logo" style="max-height: 50px;"></div>
+    <div>
+        <a href="/inicio">
+            <img src="/static/logo.png" alt="Logo" style="max-height: 50px;">
+        </a>
+    </div>
     <nav class="navbar navbar-expand-lg navbar-light">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
                 aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -214,9 +218,6 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/mapaHeladeras">Heladeras</a>
-                </li>
-                <li class="nav-item">
-                    <a href="/login" class="btn2 btn2-submit">Iniciar Sesión</a>
                 </li>
             </ul>
         </div>
@@ -245,15 +246,18 @@
 <main>
     <div class="login-container">
         <h2>Iniciar sesión</h2>
-        {{#error}}
+        <!-- {{#error}}
             <p class="error-message">{{error}}</p>
-        {{/error}}
+        {{/error}} -->
         <form action="/login" method="post">
             <p>Ingresa tu correo electrónico</p>
             <input type="email" name="email" placeholder="correo@dominio.com" required>
             <p>Ingresa tu contraseña</p>
             <input type="password" name="password" placeholder="Ingresa tu contraseña" required>
             <button type="submit">Continuar</button>
+            {{#errorLogin}}
+                <div class="alert alert-danger mt-3">{{errorLogin}}</div>
+            {{/errorLogin}}
         </form>
         <a href="/elegirRegistroCuenta" class="btn btn-primary custom-btn">¿No tenés una cuenta? Crear cuenta</a>
         <p>Al hacer clic en continuar, estás aceptando nuestra <a href="#">política de privacidad y términos de uso</a>.</p>
