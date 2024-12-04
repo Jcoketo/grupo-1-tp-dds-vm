@@ -30,6 +30,7 @@ public class ProcessLoginController implements Handler {
         Map<String, Object> model = context.sessionAttribute("model");
         if (model == null) {
             model = new HashMap<>();
+            context.sessionAttribute("model", model);
         }
 
         try {

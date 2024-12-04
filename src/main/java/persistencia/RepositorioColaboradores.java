@@ -158,6 +158,13 @@ public class RepositorioColaboradores {
         em.getTransaction().commit();
     }
 
+    public PersonaJuridica traerPersonaPorIdJuridica(Integer idPersona) {
+        return em.find(PersonaJuridica.class, idPersona);
+    }
+    public PersonaHumana traerPersonaPorIdFisica(Integer idPersona) {
+        return em.find(PersonaHumana.class, idPersona);
+    }
+
 
 
     /*public MedioDeContacto existeMail(String mail) {
