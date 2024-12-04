@@ -1,12 +1,19 @@
 package presentacion.colaboraciones;
 
+import lombok.Getter;
+import lombok.Setter;
+import modelo.colaboracion.Colaboracion;
+import modelo.colaboracion.DonarDinero;
 import org.jetbrains.annotations.NotNull;
 
 import io.javalin.http.Context;
 import io.javalin.http.Handler;
 import persistencia.RepositorioColaboradores;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class MisColaboracionesController implements Handler{
@@ -29,8 +36,29 @@ public MisColaboracionesController(RepositorioColaboradores repoColaboradores) {
 
         Integer idPersona = context.sessionAttribute("idPersona");
 
-        model.put("colaboraciones", repoColaboradores.getColaboraciones((idPersona)));
-        context.render("templates/misColaboraciones.mustache");
+        List<DatosColaboracion> datosColaboraciones = getDatosColaboraciones(repoColaboradores.getColaboraciones(idPersona));
+
+        model.put("colabs", datosColaboraciones);
+
+        context.render("templates/misColaboraciones.mustache", model);
     }
 
+    private List<DatosColaboracion> getDatosColaboraciones(List<Colaboracion> colaboraciones){
+        return colaboraciones.stream().map(colab -> new DatosColaboracion(colab.getClassName(), colab.getFechaColaboracion(), colab.conocerPuntaje())).toList();
+    }
+
+
+}
+@Getter
+@Setter
+class DatosColaboracion {
+    private String tipo;
+    private LocalDate fechaDeColaboracion;
+    private Double puntosSumados;
+
+    public DatosColaboracion(String tipo, LocalDate fechaDeColaboracion, Double puntosSumados) {
+        this.tipo = tipo;
+        this.fechaDeColaboracion = fechaDeColaboracion;
+        this.puntosSumados = puntosSumados;
+    }
 }

@@ -173,4 +173,12 @@ public class DistribucionDeViandas extends Colaboracion {
             return;
         }
     }
+
+    @Override
+    public Double conocerPuntaje(){return this.viandasDistribuidas * coeficiente; }
+
+    @Override
+    public String getClassName() {
+        return "Donacion de Dinero";
+    }
 }

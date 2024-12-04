@@ -92,6 +92,13 @@ public class DonarVianda extends Colaboracion{
     public void incrementarPuntos(Colaborador colaborador) {
         colaborador.incrementarPuntaje(coeficiente);
     }
+    @Override
+    public Double conocerPuntaje(){return coeficiente; }
+
+    @Override
+    public String getClassName() {
+        return "Donaste una Vianda";
+    }
 
     public void solicitarAperturaHeladera(Colaborador colaborador, Heladera heladera){
         if( !heladera.permitirIngreso() ) {
