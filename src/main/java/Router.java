@@ -223,7 +223,7 @@ public class Router {
 
             path("/perfil", () -> {
                 before(new AutorizacionMiddleware().setDebeSerLogueado());
-                get(new PerfilController());
+                get(new PerfilController(repoColab));
             });
 
             path("/misColaboraciones", () -> {
