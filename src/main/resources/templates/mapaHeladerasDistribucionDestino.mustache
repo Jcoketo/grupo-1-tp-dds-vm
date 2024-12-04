@@ -83,7 +83,6 @@
         }
 
         .content {
-            flex: 1; /* Esto hace que el contenedor de la fila ocupe el espacio disponible */
             display: flex;
             gap: 20px; /* Espaciado entre el mapa y la lista de heladeras */
         }
@@ -100,7 +99,7 @@
 
         #map {
             width: 100%;
-            height: 100%;
+            height: 500px; /* Set a fixed height for the map */
             border-radius: 10px;
         }
 
@@ -188,10 +187,10 @@
 <main class="container-fluid">
     <h1>Visualización de heladeras</h1>
     <div class="content">
-        <div class="map-container">
+        <div class="map-container col-md-6">
             <div id="map"></div>
         </div>
-        <div class="list-container">
+        <div class="list-container col-md-6">
             <h3>Heladeras</h3>
             <ul id="heladeras-list" class="list-group">
                 <!-- Lista de heladeras se llenará dinámicamente -->
@@ -277,43 +276,46 @@
 
         fetchHeladeras().then(heladeras => {
             heladeras.forEach(heladera => {
+                const idHeladera = heladera.id;
                 const nombre = heladera.nombre;
-                const punto = heladera.puntoEstrategico;
+                const punto = heladera.punto;
                 const fecha = formatFecha(heladera.fechaFuncionamiento);
                 const estado = heladera.activa ? "Activa" : "Inactiva";
-                const cantidadViandas = heladera.viandas.length;
+                const disponibilidad = heladera.disponibilidad;
 
-                const marker = new google.maps.Marker({
-                    position: { lat: punto.latitud, lng: punto.longitud },
-                    map: map,
-                    title: `Heladera en ${punto.direccion || 'Ubicación desconocida'}`
-                });
+                if (disponibilidad > 0 && estado === "Activa") {
+                    const marker = new google.maps.Marker({
+                        position: { lat: punto.latitud, lng: punto.longitud },
+                        map: map,
+                        title: `Heladera en ${punto.direccion || 'Ubicación desconocida'}`
+                    });
 
-                markers.push(marker);
+                    markers.push(marker);
 
-                const listItem = document.createElement('li');
-                listItem.className = "list-group-item";
-                listItem.innerHTML = `
-                   <div>
-                       <strong>${nombre || 'Ubicación desconocida'}</strong><br>
-                       <small>Direccion: ${punto.direccion || 'Ubicación desconocida'}</small><br>
-                       <small>En funcionamiento desde: ${fecha}</small><br>
-                       <small>${estado}</small><br>
-                       <small>
-                           <a href="/visualizarDetalleHeladera?lat=${punto.latitud}&lng=${punto.longitud}" class="text-primary" style="text-decoration: underline;">Detalles</a>
-                           <button onclick="window.location.href='/donarDistribuirViandas?heladera1={{heladera1}}&direccion1={{direccion1}}&estado1={{estado1}}&disponibilidad1={{disponibilidad1}}&heladera2=${nombre}&direccion2=${punto.direccion}&estado2=${estado}&disponibilidad2=${cantidadViandas}'" class="btn" style="margin-left: 10px; background-color: #1e5552; color: white; padding: 5px 15px; font-size: 14px; border-radius: 5px;">Elegir heladera</button>
-                       </small>
-                   </div>
-                `;
+                    const listItem = document.createElement('li');
+                    listItem.className = "list-group-item";
+                    listItem.innerHTML = `
+                <div>
+                    <strong>${nombre || 'Ubicación desconocida'}</strong><br>
+                    <small>Direccion: ${punto.direccion || 'Ubicación desconocida'}</small><br>
+                    <small>En funcionamiento desde: ${fecha}</small><br>
+                    <small>${estado}</small><br>
+                    <small>
+                        <a href="/visualizarDetalleHeladera?lat=${punto.latitud}&lng=${punto.longitud}" class="text-primary" style="text-decoration: underline;">Detalles</a>
+                        <button onclick="window.location.href='/donarDistribuirViandas?idHeladeraOrigen={{idHeladeraOrigen}}&heladera1={{heladera1}}&direccion1={{direccion1}}&estado1={{estado1}}&disponibilidad1={{disponibilidad1}}&idHeladeraDestino=${idHeladera}&heladera2=${nombre}&direccion2=${punto.direccion}&estado2=${estado}&disponibilidad2=${disponibilidad}'" class="btn" style="margin-left: 10px; background-color: #1e5552; color: white; padding: 5px 15px; font-size: 14px; border-radius: 5px;">Elegir heladera</button>
+                    </small>
+                </div>
+            `;
 
-                listItem.addEventListener('click', () => {
-                    map.setCenter(marker.getPosition());
-                    map.setZoom(15);
-                    marker.setAnimation(google.maps.Animation.BOUNCE);
-                    setTimeout(() => marker.setAnimation(null), 1400);
-                });
+                    listItem.addEventListener('click', () => {
+                        map.setCenter(marker.getPosition());
+                        map.setZoom(15);
+                        marker.setAnimation(google.maps.Animation.BOUNCE);
+                        setTimeout(() => marker.setAnimation(null), 1400);
+                    });
 
-                document.getElementById('heladeras-list').appendChild(listItem);
+                    document.getElementById('heladeras-list').appendChild(listItem);
+                }
             });
         });
     }
