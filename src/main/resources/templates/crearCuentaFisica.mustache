@@ -106,6 +106,7 @@
             margin: 50px auto;
             width: 100%;
             background-color: white;
+            color: #1e5552;
             padding: 40px;
             border-radius: 20px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -114,12 +115,14 @@
 
         .register-container h2 {
             margin-bottom: 20px;
+            color: #1e5552;
         }
 
         .register-container input, .register-container select {
             width: calc(100% - 20px);
             padding: 10px;
             margin: 10px 0;
+            color: #1e5552;
             border: 1px solid #ccc;
             border-radius: 10px;
         }
@@ -251,7 +254,15 @@
         <form action="/crearCuentaFisica" method="post" >
 
             <label for="tipoDoc">Tipo de Documento</label>
-            <input type="text" id="tipoDoc" name="tipoDoc" required>
+            <div class="date-fields">
+                <select id="mes" name="mes" required>
+                    <option value="" disabled selected></option>
+                    <option value="01">DNI</option>
+                    <option value="02">LC</option>
+                    <option value="03">LE</option>
+                </select>
+            </div>
+
 
             <label for="nroDoc">Numero de Documento</label>
             <input type="text" id="nroDoc" name="nroDoc" required>

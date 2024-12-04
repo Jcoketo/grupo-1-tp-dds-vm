@@ -15,7 +15,11 @@ public class MapaHeladerasDistribucionDestinoController implements Handler{
 
     @Override
     public void handle(@NotNull Context context) throws Exception {
-        Map<String, Object> model = new HashMap<>();
+        Map<String, Object> model = context.sessionAttribute("model");
+        if (model == null) {
+            model = new HashMap<>();
+            context.sessionAttribute("model", model);
+        }
 
         String heladera1 = context.queryParam("heladera1");
         String direccion1 = context.queryParam("direccion1");
@@ -38,10 +42,10 @@ public class MapaHeladerasDistribucionDestinoController implements Handler{
         model.put("disponibilidad2", disponibilidad2);
 
 
-        Boolean estaLogueado = context.sessionAttribute("logueado");
+        /*Boolean estaLogueado = context.sessionAttribute("logueado");
 
         //if( estaLogueado == null ){ estaLogueado = false; }
-        model.put("logueado", estaLogueado != null && estaLogueado);
+        model.put("logueado", estaLogueado != null && estaLogueado);*/
 
         context.render("templates/mapaHeladerasDistribucionDestino.mustache", model);
 
