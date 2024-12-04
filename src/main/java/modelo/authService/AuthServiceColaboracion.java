@@ -1,15 +1,16 @@
 package modelo.authService;
 
-import modelo.colaboracion.DonarDinero;
-import modelo.colaboracion.DonarVianda;
-import modelo.colaboracion.Vianda;
+import modelo.colaboracion.*;
 import modelo.elementos.Heladera;
+import modelo.excepciones.ExcepcionValidacion;
 import modelo.personas.Colaborador;
 import persistencia.RepositorioColaboradores;
 import persistencia.RepositorioHeladeras;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 public class AuthServiceColaboracion {
 
@@ -31,6 +32,31 @@ public class AuthServiceColaboracion {
         donacion.hacerColaboracion(colab);
         repoHeladeras.actualizarHeladera(heladera);
         repoColab.nuevaColaboracion(colab, donacion);
-        // MERGEAR HELADERA
+
+    }
+
+    public static void registrarColaboracionDistribuirViandas(Integer idPersona, Integer idHeladeraOrigen, Integer idHeladeraDestino, MotivoDistribucion motivoDistribucion, Integer cantidadViandas) {
+        Heladera origen = repoHeladeras.buscarHeladera(idHeladeraOrigen);
+        Heladera destino = repoHeladeras.buscarHeladera(idHeladeraDestino);
+        Colaborador colab = repoColab.buscarColaboradorXIdPersona(idPersona);
+
+        if (!destino.entranXViandasMas(cantidadViandas)){
+            throw new ExcepcionValidacion("No hay espacio suficiente en la heladera de destino para esa cantidad de viandas!");
+        }
+
+        List<Vianda> viandas = new ArrayList<>();
+        for (int i = 0; i < cantidadViandas; i++){
+            Vianda vianda = origen.conocerVianda(i);
+            viandas.add(vianda);
+        }
+        //List<Vianda> viandas = repoHeladeras.obtenerViandasDeHeladera(origen, cantidadViandas);
+        DistribucionDeViandas distribucion = new DistribucionDeViandas(cantidadViandas, origen, destino, motivoDistribucion, LocalDate.now());
+        distribucion.setViandas(viandas);
+        distribucion.hacerColaboracion(colab);
+        repoHeladeras.actualizarHeladera(origen);
+        repoHeladeras.actualizarHeladera(destino);
+        repoColab.persistirViandas(viandas);
+        repoColab.nuevaColaboracion(colab, distribucion);
+
     }
 }

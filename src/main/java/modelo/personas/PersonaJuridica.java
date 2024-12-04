@@ -14,7 +14,7 @@ import java.util.List;
 public class PersonaJuridica extends Persona{
 
     @Column
-    private String razonSocial;
+    @Getter private String razonSocial;
 
     @Column
     private Integer CUIT;

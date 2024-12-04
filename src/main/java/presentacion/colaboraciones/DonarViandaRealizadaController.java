@@ -37,14 +37,14 @@ public class DonarViandaRealizadaController implements Handler {
 
         if (heladeraId.equals("") || comida.equals("") || fechaCaducidad.equals("") || pesoVianda.equals("") || calorias.equals("")) {
             model.put("errorVianda", "Debe completar todos los campos");
-            context.status(400);
+            //context.status(400);
             context.redirect("/donarVianda");
             return;
         }
 
         if (!esNumerico(pesoVianda) || !esNumerico(calorias)) {
             model.put("errorVianda", "El peso y las calorías deben ser numéricos");
-            context.status(400);
+            //context.status(400);
             context.redirect("/donarVianda");
             return;
         }
@@ -55,7 +55,7 @@ public class DonarViandaRealizadaController implements Handler {
 
         } catch (Exception e) {
             model.put("errorVianda", e.getMessage());
-            context.status(400);
+            //context.status(400);
             context.redirect("/donarVianda");
             return;
         }

@@ -116,6 +116,7 @@ public class Colaborador {
         return null;
     }
 
+
     public String getUniqueIdentifier() {
 
         if(persona.tipoPersona == TipoPersona.PH){

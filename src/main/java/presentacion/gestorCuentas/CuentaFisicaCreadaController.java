@@ -46,28 +46,28 @@ public class CuentaFisicaCreadaController implements Handler {
                 password.equals("") || terminos.equals("") || username.equals("") ||
                 tipoDoc.equals("") || nroDoc.equals("") )  {
             model.put("error", "Debe completar los campos obligatorios");
-            context.status(400);
+            //context.status(400);
             context.redirect("/crearCuentaFisica");
             return;
         }
 
         if ( !esNumerico(nroDoc)  ||  !esNumerico(telefono) )  {
             model.put("error", "El número de documento o el teléfono no son numéricos");
-            context.status(400);
+            //context.status(400);
             context.redirect("/crearCuentaFisica");
             return;
         }
 
         if ( !nroDoc.matches("[0-9]{0,8}") )  {
             model.put("error", "El número de documento debe tener 8 dígitos");
-            context.status(400);
+            //context.status(400);
             context.redirect("/crearCuentaFisica");
             return;
         }
 
         if ( !telefono.equals("")  &&  !telefono.matches("[0-9]{8,10}") )  {
             model.put("error", "El teléfono debe tener entre 8 y 10 dígitos");
-            context.status(400);
+            //context.status(400);
             context.redirect("/crearCuentaFisica");
             return;
         }
@@ -77,7 +77,7 @@ public class CuentaFisicaCreadaController implements Handler {
             tipoDocumentoEnum = TipoDocumento.valueOf(tipoDoc);
         } catch (IllegalArgumentException e) {
             model.put("error", "El tipo de documento no es válido");
-            context.status(400);
+            //context.status(400);
             context.redirect("/crearCuentaFisica");
             return;
         }
@@ -90,7 +90,7 @@ public class CuentaFisicaCreadaController implements Handler {
         } catch (ExcepcionValidacion e) {
             // TODO ROLLBACK
             model.put("error", e.getMessage());
-            context.status(400);
+            //context.status(400);
             context.redirect("/crearCuentaFisica");
             return;
         }
