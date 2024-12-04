@@ -73,5 +73,12 @@ public class DonarDinero extends Colaboracion{
     public void incrementarPuntos(Colaborador colaborador){
         colaborador.incrementarPuntaje(this.monto * coeficiente);
     }
+    @Override
+    public Double conocerPuntaje(){return this.monto * coeficiente; }
+
+    @Override
+    public String getClassName() {
+        return "Donacion de Dinero";
+    }
 
 }
