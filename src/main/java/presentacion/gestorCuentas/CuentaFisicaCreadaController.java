@@ -37,6 +37,9 @@ public class CuentaFisicaCreadaController implements Handler {
         String dia = context.formParam("dia"); // opcional
         String mes = context.formParam("mes"); // opcional
         String anio = context.formParam("anio"); // opcional
+        if ( Integer.parseInt(dia) < 10 ) {
+            dia = "0" + dia;
+        }
         String fechaNacimiento = anio + "-" + mes + "-" + dia; // opcional
 
         if (nombre.equals("") || apellido.equals("") || email.equals("") ||
@@ -45,24 +48,28 @@ public class CuentaFisicaCreadaController implements Handler {
             model.put("error", "Debe completar los campos obligatorios");
             context.status(400);
             context.redirect("/crearCuentaFisica");
+            return;
         }
 
         if ( !esNumerico(nroDoc)  ||  !esNumerico(telefono) )  {
             model.put("error", "El número de documento o el teléfono no son numéricos");
             context.status(400);
             context.redirect("/crearCuentaFisica");
+            return;
         }
 
         if ( !nroDoc.matches("[0-9]{0,8}") )  {
             model.put("error", "El número de documento debe tener 8 dígitos");
             context.status(400);
             context.redirect("/crearCuentaFisica");
+            return;
         }
 
         if ( !telefono.equals("")  &&  !telefono.matches("[0-9]{8,10}") )  {
             model.put("error", "El teléfono debe tener entre 8 y 10 dígitos");
             context.status(400);
             context.redirect("/crearCuentaFisica");
+            return;
         }
         TipoDocumento tipoDocumentoEnum;
         try {
@@ -75,13 +82,17 @@ public class CuentaFisicaCreadaController implements Handler {
             return;
         }
 
+
         try {
             AuthServiceUsuario.registrarUsuario(email, username, password);
             AuthServiceColaborador.registrarColaboradorFisico(tipoDocumentoEnum, nroDoc, nombre, apellido, email, telefono, direccion, fechaNacimiento);
+
         } catch (ExcepcionValidacion e) {
+            // TODO ROLLBACK
             model.put("error", e.getMessage());
             context.status(400);
             context.redirect("/crearCuentaFisica");
+            return;
         }
 
         context.redirect("/cuentaCreada");

@@ -122,7 +122,7 @@ public class Router {
             });
 
             path("/donarVianda", () -> {
-                before(new AutorizacionMiddleware().setDebeSerLogueado().setDebeSerPF());
+                //before(new AutorizacionMiddleware().setDebeSerLogueado().setDebeSerPF());
                 get(new DonarViandaController());
                 post(new DonarViandaRealizadaController(repoHeladeras));
             });
@@ -240,7 +240,7 @@ public class Router {
 
             path("/misColaboraciones", () -> {
                 before(new AutorizacionMiddleware().setDebeSerLogueado());
-                get(new MisColaboracionesController());
+                get(new MisColaboracionesController(repoColab));
             });
 
             path("/api/recomendacion/locaciones", () -> {

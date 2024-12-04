@@ -251,9 +251,9 @@
             <p>Ingresa tu contraseña</p>
             <input type="password" name="password" placeholder="Ingresa tu contraseña" required>
             <button type="submit">Continuar</button>
-            {{#error}}
-                <div class="alert alert-danger mt-3">{{error}}</div>
-            {{/error}}
+            {{#errorLogin}}
+                <div class="alert alert-danger mt-3">{{errorLogin}}</div>
+            {{/errorLogin}}
         </form>
         <a href="/elegirRegistroCuenta" class="btn btn-primary custom-btn">¿No tenés una cuenta? Crear cuenta</a>
         <p>Al hacer clic en continuar, estás aceptando nuestra <a href="#">política de privacidad y términos de uso</a>.</p>

@@ -45,20 +45,32 @@ public class Vianda{
 
     @Column
     @Getter
-    @Setter private Float calorias;
+    @Setter private Integer calorias;
 
     @Column
     @Getter
-    @Setter private Float peso;
+    @Setter private Integer peso;
 
-    public Vianda(String tipoComida, LocalDate fechaCaducidad, LocalDate fechaDonacion, Colaborador colaborador, Heladera heladera, Boolean estado) {
+    public Vianda(String tipoComida, LocalDate fechaCaducidad, LocalDate fechaDonacion, Colaborador colaborador, Heladera heladera) {
         this.tipoComida = tipoComida;
         this.fechaCaducidad = fechaCaducidad;
         this.fechaDonacion = fechaDonacion;
         this.colaborador = colaborador;
         this.disponibleEn = heladera;
-        this.entregada = estado;
+        this.entregada = Boolean.FALSE;
     }
+
+    public Vianda(String tipoComida, LocalDate fechaCaducidad, LocalDate fechaDonacion, Colaborador colaborador, Heladera heladera, Integer calorias, Integer peso) {
+        this.tipoComida = tipoComida;
+        this.fechaCaducidad = fechaCaducidad;
+        this.fechaDonacion = fechaDonacion;
+        this.colaborador = colaborador;
+        this.disponibleEn = heladera;
+        this.entregada = Boolean.FALSE;
+        this.calorias = calorias;
+        this.peso = peso;
+    }
+
 
     public Vianda() {
 

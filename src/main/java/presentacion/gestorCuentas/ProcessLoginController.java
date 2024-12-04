@@ -31,28 +31,28 @@ public class ProcessLoginController implements Handler {
         if (model == null) {
             model = new HashMap<>();
         }
-        boolean valido = false;
 
         try {
-            valido = AuthServiceUsuario.autenticarUsuario(email, password);
+            AuthServiceUsuario.autenticarUsuario(email, password);
         } catch (ExcepcionValidacion e) {
-            model.put("error", "El mail o la contraseña son incorrectos");
+            model.put("errorLogin", "El mail o la contraseña son incorrectos");
             context.sessionAttribute("model", model);
             context.redirect("/login");
+            return;
         }
+        context.sessionAttribute("logueado", true);
 
-        if (valido) {
-            context.sessionAttribute("logueado", true);
+        TipoPersona tipoPer = repoColab.devolverTipoPersona(email);
+        context.sessionAttribute("tipoPersona", tipoPer);
 
-            TipoPersona tipoPer = obtenerTipoUsuario(email);
-            context.sessionAttribute("tipoPersona", tipoPer);
+        Integer idPersona = repoColab.devolverIdUsuario(email);
+        context.sessionAttribute("idPersona", idPersona);
 
-            Roles userRole = obtenerRolUsuario(email);
-            context.sessionAttribute("rolUsuario", userRole);
+        Roles userRole = obtenerRolUsuario(email);
+        context.sessionAttribute("rolUsuario", userRole);
 
-            context.redirect("/inicio");
+        context.redirect("/inicio");
 
-        }
     }
 
     public Roles obtenerRolUsuario(String email) {

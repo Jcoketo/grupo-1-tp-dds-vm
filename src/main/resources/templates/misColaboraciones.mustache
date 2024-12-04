@@ -239,13 +239,16 @@
                     <button class="add-button">Agregar ▾</button>
                     <div class="dropdown-content">
                         <a href="/elegirDonacionFisica">Agregar colaboración</a>
+                    {{#admin}}
                         <label for="csvInput">Cargar CSV</label>
                         <input type="file" id="csvInput" accept=".csv" style="display:none;">
+                    {{/admin}}
                     </div>
                 </div>
             </div>
 
             <!-- Colaboraciones -->
+            
             <div class="collaboration">
                 <div class="collaboration-info">
                     <strong>Donación vianda</strong>
@@ -254,29 +257,6 @@
                 </div>
             </div>
 
-            <div class="collaboration">
-                <div class="collaboration-info">
-                    <strong>Donación dinero</strong>
-                    <span>Info</span>
-                    <span>fecha</span>
-                </div>
-            </div>
-
-            <div class="collaboration">
-                <div class="collaboration-info">
-                    <strong>Donación vianda</strong>
-                    <span>Info</span>
-                    <span>fecha</span>
-                </div>
-            </div>
-
-            <div class="collaboration">
-                <div class="collaboration-info">
-                    <strong>Entrega tarjeta</strong>
-                    <span>Info</span>
-                    <span>fecha</span>
-                </div>
-            </div>
         </div>
     </div>
 </main>
