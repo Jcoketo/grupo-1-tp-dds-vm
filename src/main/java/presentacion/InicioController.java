@@ -16,6 +16,7 @@ public class InicioController implements Handler {
         Boolean estaLogueado = context.sessionAttribute("logueado");
         //if( estaLogueado == null ){ estaLogueado = false; }
         model.put("logueado", estaLogueado != null && estaLogueado);
+        model.put("nombreUsuario", context.sessionAttribute("nombreUsuario"));
         context.render("templates/inicio.mustache", model);
     }
 }

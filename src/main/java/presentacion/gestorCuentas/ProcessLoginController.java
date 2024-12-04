@@ -11,16 +11,19 @@ import io.javalin.http.Context;
 import io.javalin.http.Handler;
 import modelo.personas.TipoPersona;
 import persistencia.RepositorioColaboradores;
+import persistencia.RepositorioUsuarios;
 import modelo.authService.AuthServiceUsuario;
 
 public class ProcessLoginController implements Handler {
 
     private RepositorioColaboradores repoColab;
+    private RepositorioUsuarios repoUsuarios;
     private AuthServiceUsuario authServiceUsuario;
 
-    public ProcessLoginController(RepositorioColaboradores repoColab) {
+    public ProcessLoginController(RepositorioColaboradores repoColab, RepositorioUsuarios repoUsuarios) {
         super();
         this.repoColab = repoColab;
+        this.repoUsuarios = repoUsuarios;
     }
 
     @Override
@@ -50,6 +53,10 @@ public class ProcessLoginController implements Handler {
 
         Roles userRole = obtenerRolUsuario(email);
         context.sessionAttribute("rolUsuario", userRole);
+
+        String nombre = repoUsuarios.traerNombreUsuario(email);
+        context.sessionAttribute("nombreUsuario", nombre);
+        model.put("nombreUsuario", nombre);
 
         context.redirect("/inicio");
 
