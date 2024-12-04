@@ -265,13 +265,31 @@
         .heladera-placeholder::placeholder {
             color: black !important;
         }
+        #bloqueVianda2
+        {
+            display: none;
+        }
+     #eliminarVianda
+     {
+         display: none;
+     }
+     .error-message {
+         color: red;
+         font-size: 14px;
+         margin-top: 10px;
+     }
+
         
     </style>
 </head>
 
 <body>
 <header>
-    <div><img src="/static/logo.png" alt="Logo" style="max-height: 50px;"></div>
+    <div>
+        <a href="/inicio">
+            <img src="/static/logo.png" alt="Logo" style="max-height: 50px;">
+        </a>
+    </div>
     <nav class="navbar navbar-expand-lg navbar-light">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
                 aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -315,98 +333,109 @@
             <div class="form-group">
                 <label for="heladera">Heladera</label>
                 <div class="input-group">
-                    <input type="text" class="form-control heladera-placeholder" id="heladera" placeholder="Heladera Medrano UTN">
-                    <div class="input-group-append">
-                        <button class="btn btn-outline-secondary" type="button">
-                            <i class="fas fa-search"></i>
-                        </button>
-                    </div>
+                    <select onclick="setearHeladera(this)" class="form-control form-select">
+                        <option value="unselected" selected>Seleccionar heladera</option>
+                        {{#heladeras}}
+                            <option value="{{id}}">{{nombre}}</option>
+                        {{/heladeras}}
+                    </select>
                 </div>
             </div>
 
             <div class="heladera-list">
-                <div class="heladera-item">
-                    <h4>Heladera Medrano UTN</h4>
-                    <p>Avenida Medrano 1234</p>
-                    <p><strong>Estado:</strong> Activa</p>
-                    <p><strong>Disponibilidad:</strong> 2 viandas</p>
-                    <button class="btn-subscribe">Suscribirse</button>
-                </div>
+                {{#heladeras}}
+                    <div class="heladera-item" data-id="{{id}}" style="display: none">
+                        <h4>{{nombre}}</h4>
+                        <p>{{direccion}}</p>
+                        <p><strong>Estado:</strong> Activa</p>
+                        <p><strong>Disponibilidad:</strong> {{disponibilidad}} viandas</p>
+                        <button class="btn-subscribe">Suscribirse</button>
+                    </div>
+                {{/heladeras}}
             </div>
         </div>
 
         <!-- Sección derecha (Formulario de donación) -->
         <div class="col-md-6">
-            <form class="form-donation">
+            <form action="/donarVianda" method= "post" class="form-donation" onsubmit="return validateForm()">
+                <input type="hidden" name="heladeraId" id="heladeraId" required/>
                 <h4>Vianda a donar</h4>
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="vianda1">Vianda a donar</label>
-                        <input type="text" class="form-control" id="vianda1" placeholder="Arroz con pollo">
+                        <input type="text" name="vianda1" class="form-control" id="vianda1" placeholder="Arroz con pollo" required>
                     </div>
                     <div class="form-group col-md-6">
                         <label for="fechaCaducidad1">Fecha de caducidad</label>
-                        <input type="date" class="form-control" id="fechaCaducidad1" value="2024-10-06">
+                        <input type="date" name="fechaCaducidad1" class="form-control" id="fechaCaducidad1" value="2024-10-06" required>
                     </div>
                 </div>
 
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="pesoVianda1">Peso de la vianda</label>
-                        <input type="text" class="form-control" id="pesoVianda1" placeholder="500 gr">
+                        <input type="text" name="pesoVianda1" class="form-control" id="pesoVianda1" placeholder="500 gr">
                     </div>
                     <div class="form-group col-md-6">
                         <label for="caloriasVianda1">Calorías de la vianda</label>
-                        <input type="text" class="form-control" id="caloriasVianda1" placeholder="1200 gr">
+                        <input type="text" name="caloriasVianda1" class="form-control" id="caloriasVianda1" placeholder="1200 gr">
                     </div>
                 </div>
 
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="fechaDonacion1">Fecha de donación</label>
-                        <input type="date" class="form-control" id="fechaDonacion1" value="2024-10-06">
+                        <input type="date" name="fechaDonacion1" class="form-control" id="fechaDonacion1" value="2024-10-06">
                     </div>
                 </div>
 
                 <hr>
-
-                <h4>Vianda a donar (2)</h4>
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label for="vianda2">Vianda a donar</label>
-                        <input type="text" class="form-control" id="vianda2" placeholder="Tarta de verduras">
+                <div id="bloqueVianda2">
+                    <h4>Vianda a donar (2)</h4>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="vianda2">Vianda a donar</label>
+                            <input type="text" name="vianda2" class="form-control" id="vianda2" placeholder="Tarta de verduras">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="fechaCaducidad2">Fecha de caducidad</label>
+                            <input type="date" name="fechaCaducidad2" class="form-control" id="fechaCaducidad2" value="2024-10-06">
+                        </div>
                     </div>
-                    <div class="form-group col-md-6">
-                        <label for="fechaCaducidad2">Fecha de caducidad</label>
-                        <input type="date" class="form-control" id="fechaCaducidad2" value="2024-10-06">
-                    </div>
-                </div>
 
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label for="pesoVianda2">Peso de la vianda</label>
-                        <input type="text" class="form-control" id="pesoVianda2" placeholder="500 gr">
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="pesoVianda2">Peso de la vianda</label>
+                            <input type="text" name="pesoVianda2" class="form-control" id="pesoVianda2" placeholder="500 gr">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="caloriasVianda2">Calorías de la vianda</label>
+                            <input type="text" name="caloriasVianda2" class="form-control" id="caloriasVianda2" placeholder="1200 gr">
+                        </div>
                     </div>
-                    <div class="form-group col-md-6">
-                        <label for="caloriasVianda2">Calorías de la vianda</label>
-                        <input type="text" class="form-control" id="caloriasVianda2" placeholder="1200 gr">
+
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="fechaDonacion2">Fecha de donación</label>
+                            <input type="date" name="fechaDonacion2" class="form-control" id="fechaDonacion2" value="2024-10-06">
+                        </div>
                     </div>
-                </div>
-
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label for="fechaDonacion2">Fecha de donación</label>
-                        <input type="date" class="form-control" id="fechaDonacion2" value="2024-10-06">
                     </div>
-                </div>
 
-                <div class="form-group">
-                    <button type="button" class="btn-add">+ Añadir otra vianda</button>
-                </div>
+                    <div class="form-group">
+                        <button onclick="agregarViandaFunction();" id="agregarVianda" type="button" class="btn-add">+ Añadir otra vianda</button>
+                    </div>
 
-                <div class="form-group">
-                    <button type="submit" class="btn-donate">Donar viandas</button>
-                </div>
+                    <div class="form-group">
+                        <button onclick="eliminarViandaFunction(); resetearVianda2();" id="eliminarVianda" type="button" class="btn-add">- Eliminar Vianda</button>
+                    </div>
+
+                    <div class="form-group">
+                        <button type="submit" class="btn-donate">Donar viandas</button>
+                    </div>
+                {{#errorVianda}}
+                    <div class="error-message">{{errorVianda}}</div>
+                {{/errorVianda}}
             </form>
         </div>
     </div>
@@ -456,6 +485,59 @@
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script>
+    function validateForm(){
+        const heladeraId = document.getElementById('heladeraId').value;
+
+        if (!heladeraId) {
+            alert('Es necesario elegir una heladera');
+            return false;
+        }
+
+        return true;
+    }
+    function setearHeladera(event){
+        let idHeladeraSeleccionada = event.value;
+        if(idHeladeraSeleccionada === "unselected") {
+            document.getElementById("heladeraId").value = ""
+        } else {
+            document.getElementById("heladeraId").value = event.value
+        }
+
+        document.querySelectorAll(`[data-id]`).forEach((element) => {
+            if(element.getAttribute("data-id") === event.value){
+                element.style.display = "block"
+            }
+        })
+        document.querySelectorAll(`[data-id]`).forEach((element) => {
+            if(element.getAttribute("data-id") !== event.value){
+                element.style.display = "none"
+            }
+        })
+
+    }
+
+    function agregarViandaFunction() {
+        document.getElementById('bloqueVianda2').style.display = 'block';
+        document.getElementById('agregarVianda').style.display = 'none';
+        document.getElementById('eliminarVianda').style.display = 'block'
+
+    }
+
+    function eliminarViandaFunction() {
+        document.getElementById('bloqueVianda2').style.display = 'none';
+        document.getElementById('agregarVianda').style.display = 'block';
+        document.getElementById('eliminarVianda').style.display = 'none';
+    }
+
+    function resetearVianda2() {
+        document.getElementById("vianda2").value = "";
+        document.getElementById("fechaCaducidad2").value = "";
+        document.getElementById("pesoVianda2").value = "";
+        document.getElementById("caloriasVianda2").value = "";
+        document.getElementById("fechaDonacion2").value = "";
+    }
+</script>
 </body>
 
 </html>

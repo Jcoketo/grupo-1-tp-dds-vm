@@ -17,6 +17,7 @@ import javax.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 import modelo.colaboracion.Vianda;
+import modelo.excepciones.ExcepcionValidacion;
 import modelo.personas.Colaborador;
 import modelo.personas.Tecnico;
 import modelo.personas.Visita;
@@ -30,7 +31,7 @@ public class Heladera {
 
     @Id
     @GeneratedValue
-    @Getter private Long id;
+    @Getter private int id;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "punto_estrategico_id", referencedColumnName = "id")
@@ -103,7 +104,7 @@ public class Heladera {
             }
         } else {
             // TODO no deberia ser una excepcion, deberia ser un mensaje de error
-            throw new IndexOutOfBoundsException("No se pueden agregar más viandas");
+            throw new ExcepcionValidacion("No se pueden agregar más viandas");
         }
     }
 
@@ -118,7 +119,7 @@ public class Heladera {
             return this.viandas.remove((int)indice);
         } else {
             // TODO no deberia ser una excepcion, deberia ser un mensaje de error
-            throw new IndexOutOfBoundsException("Índice fuera de rango: " + indice);
+            throw new ExcepcionValidacion("Índice fuera de rango: " + indice);
         }
     }
 
@@ -219,5 +220,13 @@ public class Heladera {
 
     public void agregarVisita(Visita visita) {
         this.visitas.add(visita);
+    }
+
+    public Boolean entranXViandasMas(Integer cantidad){
+        return this.viandas.size() + cantidad <= this.viandasMaximas;
+    }
+
+    public Vianda conocerVianda(int i) {
+        return this.viandas.get(i);
     }
 }

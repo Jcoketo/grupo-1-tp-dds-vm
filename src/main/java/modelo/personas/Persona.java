@@ -15,6 +15,7 @@ public abstract class Persona {
 
     @Id
     @GeneratedValue
+    @Getter
     private int id;
 
     @Column
@@ -46,6 +47,9 @@ public abstract class Persona {
                 return contactoAux.getContacto();
             }
         return null;
+    }
+    public String getTelefono() {
+        return this.mediosDeContacto.stream().filter(m -> m.getMedio().equals(TipoMedioDeContacto.TELEFONO)).findFirst().get().getContacto();
     }
 
     public String getUniqueIdentifier() {

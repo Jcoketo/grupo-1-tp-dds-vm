@@ -192,7 +192,11 @@
 
 <body>
 <header>
-    <div><img src="/static/logo.png" alt="Logo" style="max-height: 50px;"></div>
+    <div>
+        <a href="/inicio">
+            <img src="/static/logo.png" alt="Logo" style="max-height: 50px;">
+        </a>
+    </div>
     <nav class="navbar navbar-expand-lg navbar-light">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
                 aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -239,44 +243,24 @@
                     <button class="add-button">Agregar ▾</button>
                     <div class="dropdown-content">
                         <a href="/elegirDonacionFisica">Agregar colaboración</a>
+                            {{#admin}}
                         <label for="csvInput">Cargar CSV</label>
                         <input type="file" id="csvInput" accept=".csv" style="display:none;">
+                            {{/admin}}
                     </div>
                 </div>
             </div>
 
             <!-- Colaboraciones -->
+            {{#colabs}}
             <div class="collaboration">
                 <div class="collaboration-info">
-                    <strong>Donación vianda</strong>
-                    <span>Info</span>
-                    <span>fecha</span>
+                    <p><b>{{tipo}}</b></p>
+                    <p><b>Fecha:</b> {{fechaDeColaboracion}}</p>
+                    <p><b>Sumaste {{puntosSumados}} puntos</b>!</p>
                 </div>
             </div>
-
-            <div class="collaboration">
-                <div class="collaboration-info">
-                    <strong>Donación dinero</strong>
-                    <span>Info</span>
-                    <span>fecha</span>
-                </div>
-            </div>
-
-            <div class="collaboration">
-                <div class="collaboration-info">
-                    <strong>Donación vianda</strong>
-                    <span>Info</span>
-                    <span>fecha</span>
-                </div>
-            </div>
-
-            <div class="collaboration">
-                <div class="collaboration-info">
-                    <strong>Entrega tarjeta</strong>
-                    <span>Info</span>
-                    <span>fecha</span>
-                </div>
-            </div>
+            {{/colabs}}
         </div>
     </div>
 </main>

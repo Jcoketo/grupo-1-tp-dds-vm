@@ -79,6 +79,14 @@ public class RegistroPersonasSituVulnerable extends Colaboracion{
         colaborador.incrementarPuntaje((double) this.cantidadTarjetas * coeficiente);
     } // Nosotros entendemos que las tarjetas ya fueron repartidas.
 
+    @Override
+    public Double conocerPuntaje(){return this.cantidadTarjetas * coeficiente; }
+
+    @Override
+    public String getClassName() {
+        return "Registrar Personas Vulnerables";
+    }
+
    /* public void darAltaPersonaVulnerable(){
         RepositorioPersonasVulnerables.getInstancia().agregarPersonaVulnerable(persona);
     }*/

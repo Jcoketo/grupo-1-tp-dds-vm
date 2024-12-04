@@ -1,62 +1,68 @@
 package persistencia;
 
 import lombok.Getter;
-import modelo.autenticacion.AuthService;
-import modelo.autenticacion.Usuario;
-import org.mindrot.jbcrypt.BCrypt;
+import modelo.validador.Usuario;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
+import javax.persistence.TypedQuery;
 
 
 public class RepositorioUsuarios {
-    @Getter
+
+
     private static RepositorioUsuarios instancia = null;
 
     private static EntityManager em;
-    private static AuthService authService;
 
-    private RepositorioUsuarios(EntityManager em, AuthService authService) {
+    private RepositorioUsuarios(EntityManager em) {
         this.em = em;
-        this.authService = authService;
     }
-    public static RepositorioUsuarios getInstancia(EntityManager em, AuthService authService) {
-        if(instancia == null) {
-            instancia = new RepositorioUsuarios(em, authService);
 
+    public static RepositorioUsuarios getInstancia(EntityManager em) {
+        if(instancia == null) {
+            instancia = new RepositorioUsuarios(em);
         }
         return instancia;
     }
 
-    public void registrarUsuario(String mail, String password) {
-        if (existeUsuario(mail)) {
-            throw new RuntimeException("El usuario ya existe");
-        }else {
-            // TODO implementar que verifique que tenga ciertas reglas la clave
-            password = authService.hashPassword(password);
-            em.getTransaction().begin();
-            em.persist(new Usuario(mail, password));
-            em.getTransaction().commit();
+    public static RepositorioUsuarios getInstancia() {
+        if (instancia == null) {
+            throw new IllegalStateException("RepositorioUsuarios no inicializado");
         }
+        return instancia;
     }
 
-    public boolean autenticarUsuario(String mail, String password) {
+    public void registrarUsuario(String mail, String username, String password) {
+            em.getTransaction().begin();
+            em.persist(new Usuario(mail, username, password));
+            em.getTransaction().commit();
+    }
+
+    public String traerClavexUsuario(String mail) {
         Usuario usuario = em.createQuery("SELECT u FROM Usuario u WHERE u.mail = :mail", Usuario.class)
                 .setParameter("mail", mail)
                 .getSingleResult();
-        em.close();
-
-        if (usuario != null) {
-            return authService.checkPassword(password, usuario.getHashedPassword());
-        }
-        return false;
+        return usuario.getHashedPassword();
     }
     
+    public Boolean existeMAIL(String mail) {
+        TypedQuery<Usuario> query = em.createQuery("SELECT u FROM Usuario u WHERE u.mail = :mail", Usuario.class);
+        query.setParameter("mail", mail);
+        try {
+            query.getSingleResult();
+            return true;
+        } catch (NoResultException e) {
+            return false;
+        }
+    }
+
+    /* PUEDE DEVOLVER NULL LA CONSULTA ENTONCES ROMPE PORQUE NO LA ESTABAMOS MANEJANDO
     public Boolean existeUsuario(String mail) {
         Usuario usuario = em.createQuery("SELECT u FROM Usuario u WHERE u.mail = :mail", Usuario.class)
                 .setParameter("mail", mail)
                 .getSingleResult();
-        em.close();
+        //em.close();
         return usuario != null;
     }
-
-
+     */
 }

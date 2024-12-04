@@ -1,5 +1,6 @@
 package modelo.validador.condiciones;
 
+import modelo.excepciones.ExcepcionValidacion;
 import modelo.validador.Condicion;
 
 public class Longitud implements Condicion {
@@ -10,12 +11,10 @@ public class Longitud implements Condicion {
     public boolean verificarContrasenia(String username, String constrasenia){
         boolean esValida =
                 this.between(constrasenia.length(), minValueInclusive, maxValueInclusive);
-
         if(!esValida){
-            System.out.println(
-                    "La contraseña debe tener entr 8 y 64 caracteres. Intente con otra contraseña");
+            throw new ExcepcionValidacion("La contraseña debe tener entre 8 y 64 caracteres. Intente con otra contraseña");
         }
-        return esValida;
+        return true;
     }
 
     public boolean between(int variable, int minValueInclusive, int maxValueInclusive) {

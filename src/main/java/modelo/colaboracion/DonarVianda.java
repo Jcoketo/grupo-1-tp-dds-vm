@@ -16,11 +16,11 @@ import java.util.Arrays;
 @DiscriminatorValue("DONACION_VIANDA")
 public class DonarVianda extends Colaboracion{
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "vianda_id", referencedColumnName = "id")
     private Vianda vianda;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "heladera_id", referencedColumnName = "id")
     private Heladera heladera;
 
@@ -32,11 +32,13 @@ public class DonarVianda extends Colaboracion{
     private SolicitudApertura solicitud;
 
     //CONSTRUCTOR PRINCIPAL
-    public DonarVianda(Vianda vianda, Heladera heladera) {
+    public DonarVianda(Vianda vianda, Heladera heladera, LocalDate fechaDonacion) {
+        this.fechaColaboracion = fechaDonacion;
         this.tiposPersonasHabilitadas = Arrays.asList(TipoPersona.PH);
         this.vianda = vianda;
         this.heladera = heladera;
     };
+
 
     // CONSTRUCTOR PARA IMPORTADOR CSV
     public DonarVianda(LocalDate fechaDonacion) {
@@ -50,23 +52,24 @@ public class DonarVianda extends Colaboracion{
 
     @Override
     public void hacerColaboracion(Colaborador colaborador) {
-        if ( Duration.between(this.solicitud.getFechaSolicitud(), this.solicitud.getAperturaFehaciente()).toHours() > this.solicitud.getHorasDeApertura()){
+        /*if ( Duration.between(this.solicitud.getFechaSolicitud(), this.solicitud.getAperturaFehaciente()).toHours() > this.solicitud.getHorasDeApertura()){
             System.out.println("El usuario carece de permisos para realizar dicha acción.");
             return;
-        }
-        this.efectuarApertura(colaborador);
+        }*/
+        // TODO
+        //this.efectuarApertura(colaborador);
         colaborador.aumentarCantidadDonacion();
-        String text = validar(colaborador);
-        if(text == null){
+        //String text = validar(colaborador);
+        //if(text == null){
             incrementarPuntos(colaborador);
             colaborador.agregarColaboracion(this);
 
             heladera.agregarVianda(this.vianda);
-        }
-        else {
-            System.out.println("Error!!!");
-            System.out.println(text);
-        }
+        //}
+        //else {
+         //   System.out.println("Error!!!");
+         //   System.out.println(text);
+        //}
 
     }
 
@@ -88,6 +91,13 @@ public class DonarVianda extends Colaboracion{
     @Override
     public void incrementarPuntos(Colaborador colaborador) {
         colaborador.incrementarPuntaje(coeficiente);
+    }
+    @Override
+    public Double conocerPuntaje(){return coeficiente; }
+
+    @Override
+    public String getClassName() {
+        return "Donaste una Vianda";
     }
 
     public void solicitarAperturaHeladera(Colaborador colaborador, Heladera heladera){

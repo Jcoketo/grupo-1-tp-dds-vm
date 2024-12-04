@@ -1,12 +1,11 @@
 package persistencia;
 
 import lombok.Getter;
+import modelo.colaboracion.Vianda;
 import modelo.elementos.Heladera;
+import modelo.personas.Colaborador;
 
-import javax.persistence.Entity;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Collection;
 import java.util.List;
@@ -15,6 +14,7 @@ public class RepositorioHeladeras {
     @Getter
     private static RepositorioHeladeras instancia = null;
 
+    @Getter
     private static EntityManager em;
 
     private RepositorioHeladeras(EntityManager entityManager) {
@@ -34,6 +34,10 @@ public class RepositorioHeladeras {
         em.persist(heladera);
         em.getTransaction().commit();
 
+    }
+
+    public EntityManager getEntityManager() {
+        return em;
     }
 
     public void validarInsertHeladera(Heladera heladera) {
@@ -59,6 +63,12 @@ public class RepositorioHeladeras {
                 .setMaxResults(cantidadHeladerasCercanas)
                 .getResultList();
         return heladeras;
+    }
+
+    public void actualizarHeladera(Heladera heladera) {
+        em.getTransaction().begin();
+        em.persist(heladera);
+        em.getTransaction().commit();
     }
 
     public void setearInactivaHeladera(Heladera heladera) {
@@ -89,10 +99,28 @@ public class RepositorioHeladeras {
         em.getTransaction().commit();
     }
 
-    public static List<Heladera> obtenerHeladeras() {
+    public List<Heladera> obtenerHeladeras() {
         List<Heladera> heladeras = em.createQuery("SELECT h FROM Heladera h", Heladera.class)
                 .getResultList();
         return heladeras;
     }
 
+    public Heladera buscarHeladera(Integer id) {
+        TypedQuery<Heladera> query = em.createQuery("SELECT c FROM Heladera c WHERE c.id = :id", Heladera.class);
+        query.setParameter("id", id);
+        try {
+            return query.getSingleResult();
+        } catch (NoResultException e) {
+            return null;
+        }
+    }
+
+    public List<Vianda> obtenerViandasDeHeladera(Heladera origen, Integer cantidadViandas) {
+        Integer id = origen.getId();
+        List<Vianda> viandas = em.createQuery("SELECT v FROM Vianda v WHERE v.disponibleEn = :origen", Vianda.class)
+                .setParameter("origen", id)
+                .setMaxResults(cantidadViandas)
+                .getResultList();
+        return viandas;
+    }
 }

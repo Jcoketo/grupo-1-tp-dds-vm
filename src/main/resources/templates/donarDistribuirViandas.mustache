@@ -172,13 +172,22 @@
         .social-icon {
             margin-right: 10px; /* Espacio entre el ícono y el texto */
         }
+        .error-message {
+            color: red;
+            font-size: 14px;
+            margin-top: 10px;
+        }
 
     </style>
 </head>
 
 <body>
 <header>
-    <div><img src="/static/logo.png" alt="Logo" style="max-height: 50px;"></div>
+    <div>
+        <a href="/inicio">
+            <img src="/static/logo.png" alt="Logo" style="max-height: 50px;">
+        </a>
+    </div>
     <nav class="navbar navbar-expand-lg navbar-light">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
                 aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -218,7 +227,7 @@
     <div class="container main-container">
         <h1>Distribuir Viandas</h1>
         <p></p>
-        <form id="distribuirForm" action="/graciasPorDonar" method="post">
+        <form id="distribuirForm" action="/donarDistribuirViandas" method="post">
             <div style="display: inline-flex; gap: 20px">
                 <!-- Heladera origen -->
                 <div class="form-section">
@@ -254,12 +263,15 @@
                     <!-- Motivo -->
                     <div class="form-section">
                         <h4>Motivo</h4>
-                        <textarea id="motivo" class="form-control" rows="3" placeholder="Descripción..."></textarea>
+                        <select name="motivoDistribucion" id="motivo" class="form-control">
+                            <option value="1">DESPERFECTO</option>
+                            <option value="2">FALTA DE VIANDAS</option>
+                        </select>
                     </div>
                     <!-- Cantidad de viandas -->
                     <div class="form-section">
                         <h4>Cantidad de viandas</h4>
-                        <select id="cantidad" class="form-control">
+                        <select name="cantidadViandas" id="cantidad" class="form-control">
                             <option value="1">1</option>
                             <option value="2">2</option>
                             <option value="3">3</option>
@@ -270,6 +282,10 @@
             <div class="btn-group">
                 <button type="button" class="btn btn-cancel">Cancelar</button>
                 <button type="submit" class="btn btn-submit" onclick="submitForm()">Distribuir</button>
+                {{#errorDistribuir}}
+                    <div class="error-message">{{errorDistribuir}}</div>
+                {{/errorDistribuir}}
+
             </div>
         </form>
         <script>

@@ -56,4 +56,14 @@ public class HacerseCargoHeladera extends Colaboracion{
         colaborador.incrementarPuntaje(coeficiente);
     }
 
+    @Override
+    public Double conocerPuntaje() {
+        return 0.0;
+    }
+
+    @Override
+    public String getClassName() {
+        return "Hacerse cargo de una Heladera";
+    }
+
 }

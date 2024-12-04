@@ -37,6 +37,28 @@
             color: #1e5552;
             font-size: 16px;
             font-weight: normal;
+            align-items: center;
+        }
+
+        .btn2 {
+            border-radius: 10px; /* Bordes redondeados */
+            padding: 10px 10px; /* Espaciado interno para que se vean mejor */
+            width: 150px; /* Ancho fijo, ajusta según tus necesidades */
+            margin-bottom: 10px; /* Espacio entre los botones */
+            border: none; /* Eliminar borde predeterminado */
+            cursor: pointer; /* Cambiar cursor al pasar sobre el botón */
+            font-size: 16px; /* Tamaño de fuente */
+            display: inline-block; /* Asegura que el botón se comporte como un elemento en línea */
+            vertical-align: middle; /* Alinea verticalmente con otros elementos en línea */
+            margin-right: 10px; /* Espacio a la derecha para alinearlo con otros elementos */
+            text-align: center; /* Alinea el texto al centro */
+        }
+
+        .btn2-submit {
+            background-color: #1e5552;
+            color: white;
+            font-size: 16px;
+            font-weight: normal;
         }
 
         .navbar-light .dropdown-menu {
@@ -48,7 +70,6 @@
             font-size: 16px;
             font-weight: normal;
             width: 200px;
-
         }
 
         .navbar-light .dropdown-menu a.dropdown-item:hover {
@@ -85,6 +106,7 @@
             margin: 50px auto;
             width: 100%;
             background-color: white;
+            color: #1e5552;
             padding: 40px;
             border-radius: 20px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -93,12 +115,14 @@
 
         .register-container h2 {
             margin-bottom: 20px;
+            color: #1e5552;
         }
 
         .register-container input, .register-container select {
             width: calc(100% - 20px);
             padding: 10px;
             margin: 10px 0;
+            color: #1e5552;
             border: 1px solid #ccc;
             border-radius: 10px;
         }
@@ -185,11 +209,20 @@
         .social-icon {
             margin-right: 10px; /* Espacio entre el ícono y el texto */
         }
+        .error-message {
+            color: red;
+            font-size: 14px;
+            margin-top: 10px;
+        }
     </style>
 </head>
 <body>
 <header>
-     <div><img src="/static/logo.png" alt="Logo" style="max-height: 50px;"></div>
+    <div>
+        <a href="/inicio">
+            <img src="/static/logo.png" alt="Logo" style="max-height: 50px;">
+        </a>
+    </div>
     <nav class="navbar navbar-expand-lg navbar-light">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
                 aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -206,20 +239,8 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/mapaHeladeras">Heladeras</a>
                 </li>
-                <!-- Menú desplegable -->
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
-                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Nombre del usuario
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <a class="dropdown-item" href="/perfil">Mi perfil</a>
-                        <a class="dropdown-item" href="/misColaboraciones">Mis colaboraciones</a>
-                        <a class="dropdown-item" href="/canjearPuntos">Mi puntaje</a>
-                        <a class="dropdown-item" href="/misReportes">Mis reportes</a>
-                        <a class="dropdown-item" href="#">Configuración</a>
-                        <a class="dropdown-item" href="/login">Cerrar sesión</a>
-                    </div>
+                <li class="nav-item">
+                    <a href="/login" class="btn2 btn2-submit">Iniciar Sesión</a>
                 </li>
             </ul>
         </div>
@@ -234,14 +255,29 @@
     </div>
     <div class="register-container">
         <h2>Registro Persona Física</h2>
-        <form method="POST" action="/cuentaCreada">
+        <form action="/crearCuentaFisica" method="post" >
+
+            <label for="tipoDoc">Tipo de Documento</label>
+            <div class="date-fields">
+                <select id="mes" name="mes" required>
+                    <option value="" disabled selected></option>
+                    <option value="01">DNI</option>
+                    <option value="02">LC</option>
+                    <option value="03">LE</option>
+                </select>
+            </div>
+
+
+            <label for="nroDoc">Numero de Documento</label>
+            <input type="text" id="nroDoc" name="nroDoc" required>
+
             <label for="nombre">Nombre</label>
             <input type="text" id="nombre" name="nombre" required>
 
             <label for="apellido">Apellido</label>
             <input type="text" id="apellido" name="apellido" required>
 
-            <label>Fecha de Nacimiento</label>
+            <label>Fecha de Nacimiento (opcional)</label>
             <div class="date-fields">
                 <select id="dia" name="dia" required>
                     <option value="" disabled selected>Día</option>
@@ -281,21 +317,31 @@
                 </select>
             </div>
 
-            <label for="telefono">Número de Teléfono</label>
-            <input type="tel" id="telefono" name="telefono" required>
+            <label for="telefono">Número de Teléfono (opcional)</label>
+            <input type="text" id="telefono" name="telefono">
 
             <label for="email">Email</label>
-            <input type="email" id="email" name="email" required>
+            <input type="text" id="email" name="email" required>
 
             <label for="password">Contraseña</label>
             <input type="password" id="password" name="password" required>
+
+            <label for="username">Nombre de Usuario</label>
+            <input type="text" id="username" name="username" required>
+
+            <label for="Direccion">Direccion (Opcional)</label>
+            <input type="text" id="direccion" name="direccion">
 
             <div class="terms">
                 <input type="checkbox" id="terms" name="terms" required>
                 <label for="terms">Acepto los <a href="#">términos de política de privacidad</a> y <a href="#">términos de uso</a></label>
             </div>
 
+
             <button type="submit">Registrarse</button>
+            {{#error}}
+                <div class="error-message">{{error}}</div>
+            {{/error}}
         </form>
     </div>
 </main>
