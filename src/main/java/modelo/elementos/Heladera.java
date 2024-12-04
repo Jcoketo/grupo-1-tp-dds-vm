@@ -119,7 +119,7 @@ public class Heladera {
             return this.viandas.remove((int)indice);
         } else {
             // TODO no deberia ser una excepcion, deberia ser un mensaje de error
-            throw new IndexOutOfBoundsException("Índice fuera de rango: " + indice);
+            throw new ExcepcionValidacion("Índice fuera de rango: " + indice);
         }
     }
 
@@ -220,5 +220,13 @@ public class Heladera {
 
     public void agregarVisita(Visita visita) {
         this.visitas.add(visita);
+    }
+
+    public Boolean entranXViandasMas(Integer cantidad){
+        return this.viandas.size() + cantidad <= this.viandasMaximas;
+    }
+
+    public Vianda conocerVianda(int i) {
+        return this.viandas.get(i);
     }
 }

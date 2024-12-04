@@ -32,7 +32,7 @@ public class CuentaJuridicaCreadaController implements Handler {
 
         if (razonSocial == null || rubro == null || email == null || password == null || terminos == null) {
             model.put("error", "Debe completar todos los campos");
-            context.status(400);
+            //context.status(400);
             context.redirect("/crearCuentaJuridica");
         }
 

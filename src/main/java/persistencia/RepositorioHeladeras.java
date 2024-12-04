@@ -1,6 +1,7 @@
 package persistencia;
 
 import lombok.Getter;
+import modelo.colaboracion.Vianda;
 import modelo.elementos.Heladera;
 import modelo.personas.Colaborador;
 
@@ -112,5 +113,14 @@ public class RepositorioHeladeras {
         } catch (NoResultException e) {
             return null;
         }
+    }
+
+    public List<Vianda> obtenerViandasDeHeladera(Heladera origen, Integer cantidadViandas) {
+        Integer id = origen.getId();
+        List<Vianda> viandas = em.createQuery("SELECT v FROM Vianda v WHERE v.disponibleEn = :origen", Vianda.class)
+                .setParameter("origen", id)
+                .setMaxResults(cantidadViandas)
+                .getResultList();
+        return viandas;
     }
 }

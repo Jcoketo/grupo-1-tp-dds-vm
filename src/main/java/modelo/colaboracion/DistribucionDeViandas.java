@@ -4,6 +4,7 @@ import modelo.elementos.SolicitudApertura;
 import lombok.Getter;
 import lombok.Setter;
 import modelo.elementos.Heladera;
+import modelo.excepciones.ExcepcionValidacion;
 import modelo.personas.Colaborador;
 import modelo.personas.TipoPersona;
 import persistencia.RepositorioSolicitudes;
@@ -36,7 +37,7 @@ public class DistribucionDeViandas extends Colaboracion {
             joinColumns = @JoinColumn(name = "distribucion_id"),
             inverseJoinColumns = @JoinColumn(name = "vianda_id")
     )
-    private List<Vianda>viandas;
+    @Setter private List<Vianda>viandas;
 
     @Enumerated(EnumType.STRING)
     private MotivoDistribucion motivoDistribucion;
@@ -49,7 +50,7 @@ public class DistribucionDeViandas extends Colaboracion {
     @Getter private SolicitudApertura solicitud;
 
     // CONSTRUCTOR PRINCIPAL
-    public DistribucionDeViandas(TipoPersona persona, Integer cantidadViandas, Heladera heladeraOrigen, Heladera heladeraDestino, MotivoDistribucion motivoDistribucion, LocalDate fechaDistribucion) {
+    public DistribucionDeViandas(Integer cantidadViandas, Heladera heladeraOrigen, Heladera heladeraDestino, MotivoDistribucion motivoDistribucion, LocalDate fechaDistribucion) {
         this.tiposPersonasHabilitadas = Arrays.asList(TipoPersona.PH);
         this.fechaColaboracion = fechaDistribucion;
 
@@ -57,6 +58,7 @@ public class DistribucionDeViandas extends Colaboracion {
         this.heladeraDestino = heladeraDestino;
         this.viandas = new ArrayList<>();
         this.motivoDistribucion = motivoDistribucion;
+        this.viandasDistribuidas = cantidadViandas;
     }
 
     // CONSTRUCTOR PARA IMPORTADOR CSV
@@ -79,16 +81,16 @@ public class DistribucionDeViandas extends Colaboracion {
 
     @Override
     public void hacerColaboracion(Colaborador colaborador) {
-        if(this.solicitud.getAperturaFehaciente() == null){
-            System.out.println("No se ha solicitado la apertura de la heladera destino");
-            return;
-        }else if ( Duration.between(this.solicitud.getFechaSolicitud(), this.solicitud.getAperturaFehaciente()).toHours() >= this.solicitud.getHorasDeApertura()){
-            System.out.println("El usuario carece de permisos para realizar dicha acción.");
-            return;
-        }
-        this.efectuarApertura(colaborador);
-        String text = validar(colaborador);
-        if(text == null){
+//        if(this.solicitud.getAperturaFehaciente() == null){
+//            System.out.println("No se ha solicitado la apertura de la heladera destino");
+//            return;
+//        }else if ( Duration.between(this.solicitud.getFechaSolicitud(), this.solicitud.getAperturaFehaciente()).toHours() >= this.solicitud.getHorasDeApertura()){
+//            System.out.println("El usuario carece de permisos para realizar dicha acción.");
+//            return;
+//        } //TODO
+        //this.efectuarApertura(colaborador);
+        //String text = validar(colaborador);
+        //if(text == null){
             colaborador.agregarColaboracion(this);
 
             switch (motivoDistribucion) {
@@ -96,8 +98,7 @@ public class DistribucionDeViandas extends Colaboracion {
 
                     for (Vianda vianda : viandas) {
                         if(!heladeraDestino.hayLugar()){
-                            System.out.println("No hay lugar en la heladera destino");
-                            break; // salgo del for
+                            throw new ExcepcionValidacion("No hay lugar en la heladera destino");
                         }
                         heladeraOrigen.retirarVianda(heladeraOrigen.getViandas().indexOf(vianda));
                         heladeraDestino.agregarVianda(vianda);
@@ -106,8 +107,7 @@ public class DistribucionDeViandas extends Colaboracion {
                     break;
                 case FALTA_VIANDAS:
                     if(!heladeraDestino.hayLugar()){
-                        System.out.println("No hay lugar en la heladera destino");
-                        break; // salgo del for
+                        throw new ExcepcionValidacion("No hay lugar en la heladera destino");
                     }else {
                         for (Vianda vianda : viandas) {
                             heladeraOrigen.retirarVianda(heladeraOrigen.getViandas().indexOf(vianda));
@@ -121,11 +121,11 @@ public class DistribucionDeViandas extends Colaboracion {
             }
 
             incrementarPuntos(colaborador);
-        }
-        else {
-            System.out.println("Error!!!");
-            System.out.println(text);
-        }
+
+        //else {
+         //   System.out.println("Error!!!");
+          //  System.out.println(text);
+        //}
     }
 
     @Override
