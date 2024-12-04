@@ -44,6 +44,13 @@ public class RepositorioUsuarios {
                 .getSingleResult();
         return usuario.getHashedPassword();
     }
+
+    public String traerNombreUsuario(String mail) {
+        Usuario usuario = em.createQuery("SELECT u FROM Usuario u WHERE u.mail = :mail", Usuario.class)
+                .setParameter("mail", mail)
+                .getSingleResult();
+        return usuario.getUsername();
+    }
     
     public Boolean existeMAIL(String mail) {
         TypedQuery<Usuario> query = em.createQuery("SELECT u FROM Usuario u WHERE u.mail = :mail", Usuario.class);
