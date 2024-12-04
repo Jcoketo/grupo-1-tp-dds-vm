@@ -75,7 +75,7 @@ public class Router {
 
             path("/login", () -> {
                 get(new ShowLoginController());
-                post(new ProcessLoginController(repoColab));
+                post(new ProcessLoginController(repoColab, repoUsuarios));
             });
 
             path("/inicio", () -> {
