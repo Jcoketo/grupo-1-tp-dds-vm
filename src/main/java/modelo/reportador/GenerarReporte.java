@@ -15,8 +15,10 @@ import java.util.concurrent.TimeUnit;
 public class GenerarReporte{
 
     private final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
+    private RepositorioHeladeras repoHeladeras = RepositorioHeladeras.getInstancia();
 
     public void generarReporte(){
+
         Reporte reporteSemanal = new Reporte(obtenerFallasXHeladera(),
                                             obtenerViandasXColaborador(),
                                             obtenerViandasColocadasXHeladera(),
@@ -34,7 +36,7 @@ public class GenerarReporte{
     public String obtenerFallasXHeladera() {
         List<ReporteHeladera> reportes = new ArrayList<>();
 
-        for (Heladera heladera : RepositorioHeladeras.obtenerHeladeras()) {
+        for (Heladera heladera : repoHeladeras.obtenerHeladeras()) {
             ReporteHeladera reporte = new ReporteHeladera();
             reporte.setHeladera(heladera);
             reporte.setCantidad(heladera.getContadorFallasSemanal());
@@ -50,7 +52,7 @@ public class GenerarReporte{
     public String obtenerViandasColocadasXHeladera() {
         List<ReporteHeladera> reportes = new ArrayList<>();
 
-        for (Heladera heladera : RepositorioHeladeras.obtenerHeladeras()) {
+        for (Heladera heladera : repoHeladeras.obtenerHeladeras()) {
             ReporteHeladera reporte = new ReporteHeladera();
             reporte.setHeladera(heladera);
             reporte.setCantidad(heladera.getContadorViandasColocadas());
@@ -66,7 +68,7 @@ public class GenerarReporte{
     public String obtenerViandasRetiradasXHeladera() {
         List<ReporteHeladera> reportes = new ArrayList<>();
 
-        for (Heladera heladera : RepositorioHeladeras.obtenerHeladeras()) {
+        for (Heladera heladera : repoHeladeras.obtenerHeladeras()) {
             ReporteHeladera reporte = new ReporteHeladera();
             reporte.setHeladera(heladera);
             reporte.setCantidad(heladera.getContadorViandasRetiradas());

@@ -152,20 +152,64 @@
             font-size: 16px;
             font-weight: normal;
 }
-.register-button {
-            background-color: #1e5552;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
+        .volver-container {
+            margin-top: 20px;
+            margin-left: 20px;
+        }
+
+        .volver-link {
+            color: #1e5552;
+            text-decoration: none;
             font-size: 16px;
         }
 
-        .register-button:hover,
-        .cancel-button:hover {
-            opacity: 0.8;
+        .volver-link i {
+            margin-right: 5px;
         }
+
+        .donar-container {
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .donar-container h2 {
+            margin-bottom: 20px;
+            color: #1e5552;
+        }
+
+        .donar-container label {
+            display: block;
+            margin-bottom: 5px;
+            color: #1e5552;
+        }
+
+        .donar-container input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .donar-container button {
+            background-color: #1e5552;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+         .error-message {
+             color: red;
+             font-size: 14px;
+             margin-top: 10px;
+         }
+
     </style>
 </head>
 
@@ -208,54 +252,60 @@
 </header>
 
 <main>
-    <div class="container">
-        <div class="row justify-content-center align-items-center">
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-body">
-                        <h3 class="card-title">Donar Dinero</h3>
-                        <form id="donarForm" action="/graciasPorDonar" method="post">
-                            <div class="form-group">
-                                <label for="monto">Monto</label>
-                                <input type="number" id="monto" name="monto" class="form-control" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="nombre">Nombre en la Tarjeta</label>
-                                <input type="text" id="nombre" name="nombre" class="form-control" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="numero-tarjeta">Número de Tarjeta</label>
-                                <input type="text" id="numero-tarjeta" name="numero-tarjeta" class="form-control" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="fecha-expiracion">Fecha de Expiración</label>
-                                <input type="text" id="fecha-expiracion" name="fecha-expiracion" class="form-control" placeholder="MM/AA" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="cvv">CVV</label>
-                                <input type="text" id="cvv" name="cvv" class="form-control" required>
-                            </div>
-                            <div class="form-group checkbox-container">
-                                <input type="checkbox" id="guardar-datos" name="guardar-datos">
-                                <label for="guardar-datos">Guardar los datos de la tarjeta para futuras donaciones</label>
-                            </div>
-                            <button type="button" class="register-button" onclick="submitForm()">Donar</button>
-                        </form>
-                        <script>
-                        function submitForm() {
-        var form = document.getElementById('donarForm');
-        if (form.checkValidity()) {
-            form.submit();
-            window.location.href = '/graciasPorDonar';
-        } else {
-            form.reportValidity();
-        }
-    }
-                        </script>
-                    </div>
-                </div>
+    <div class="volver-container">
+        <a href="/elegirDonacionFisica" class="volver-link">
+            <i class="fas fa-arrow-left"></i> Volver
+        </a>
+    </div>
+    <div class="donar-container">
+        <h2>Donar Dinero</h2>
+        <form action="/donarDinero" method="post" >
+            <label for="monto">Monto para donar</label>
+            <input type="text" id="monto" name="monto" required>
+
+            <label for="nombreTarj">Nombre Titular Tarjeta</label>
+            <input type="text" id="nombreTarj" name="nombreTarj" required>
+
+            <label for="numTarj">Numero de Tarjeta</label>
+            <input type="text" id="numTarj" name="numTarj" required>
+
+            <div class="date-fields">
+                <select id="mesExpir" name="mesExpir" required>
+                    <option value="" disabled selected>Mes</option>
+                    <option value="01">Enero</option>
+                    <option value="02">Febrero</option>
+                    <option value="03">Marzo</option>
+                    <option value="04">Abril</option>
+                    <option value="05">Mayo</option>
+                    <option value="06">Junio</option>
+                    <option value="07">Julio</option>
+                    <option value="08">Agosto</option>
+                    <option value="09">Septiembre</option>
+                    <option value="10">Octubre</option>
+                    <option value="11">Noviembre</option>
+                    <option value="12">Diciembre</option>
+                </select>
+
+                <select id="anioExpir" name="anioExpir" required>
+                    <option value="" disabled selected>Año</option>
+                    <!-- Generar opciones para los proximos 20 años -->
+                    <script>
+                        const currentYear = new Date().getFullYear();
+                        for (let i = currentYear; i <= currentYear + 20; i++) {
+                            document.write(`<option value="${i}">${i}</option>`);
+                        }
+                    </script>
+                </select>
             </div>
-        </div>
+
+            <label for="cvv">codigo de seguridad</label>
+            <input type="text" id="cvv" name="cvv" required>
+
+            <button type="submit">Donar</button>
+            {{#errorDonacion}}
+                <div class="error-message">{{errorDonacion}}</div>
+            {{/errorDonacion}}
+        </form>
     </div>
 </main>
 

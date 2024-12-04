@@ -2,7 +2,10 @@ package persistencia;
 
 import accessManagment.Roles;
 import lombok.Getter;
+import modelo.colaboracion.Colaboracion;
+import modelo.colaboracion.DonarDinero;
 import modelo.contrasenia.PasswordGenerator;
+import modelo.elementos.Heladera;
 import modelo.notificador.Notificador;
 import modelo.personas.*;
 
@@ -115,6 +118,40 @@ public class RepositorioColaboradores {
     public Colaborador existeColaborador(Integer id) {
         return em.find(Colaborador.class, id);
     }
+
+    public Colaborador buscarColaboradorXIdPersona(Integer idPersona) {
+        TypedQuery<Colaborador> query = em.createQuery("SELECT c FROM Colaborador c WHERE c.persona.id = :idPersona", Colaborador.class);
+        query.setParameter("idPersona", idPersona);
+        try {
+            return query.getSingleResult();
+        } catch (NoResultException e) {
+            return null;
+        }
+    }
+
+    public Integer devolverIdUsuario(String email) {
+        List<Persona> personas = em.createQuery("SELECT p FROM Persona p JOIN p.mediosDeContacto m WHERE m.contacto = :email", Persona.class)
+                .setParameter("email", email)
+                .getResultList();
+        if (!personas.isEmpty()) {
+            return personas.get(0).getId();
+        }
+        return null;
+    }
+
+    public void nuevaColaboracion(Colaborador colab, Colaboracion donacion) {
+        em.getTransaction().begin();
+        em.persist(donacion);
+        em.persist(colab);
+        em.getTransaction().commit();
+    }
+
+    public List<Colaboracion> getColaboraciones(Integer idPersona) {
+        Colaborador colab = this.buscarColaboradorXIdPersona(idPersona);
+        return colab.getColaboracionesRealizadas();
+    }
+
+
 
     /*public MedioDeContacto existeMail(String mail) {
         TypedQuery<MedioDeContacto> query = em.createQuery("SELECT m FROM MedioDeContacto m WHERE m.contacto = :mail", MedioDeContacto.class);

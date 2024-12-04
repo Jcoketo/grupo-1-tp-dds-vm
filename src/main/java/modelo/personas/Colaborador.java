@@ -24,7 +24,7 @@ public class Colaborador {
     @GeneratedValue
     @Getter private int id;
 
-    @OneToMany()
+    @OneToMany(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "colaborador_id", referencedColumnName = "id")
     @Getter List<Colaboracion> colaboracionesRealizadas;
 
@@ -47,12 +47,13 @@ public class Colaborador {
     @OneToMany(mappedBy="colaborador", cascade ={CascadeType.ALL}, fetch = FetchType.EAGER )
     @Getter private List<Suscripcion> suscripciones;
 
-    @Transient
+    @Column
     @Getter protected Integer contadorViandasDonadasSemanal;
 
     public Colaborador() {
         this.colaboracionesRealizadas = new ArrayList<>();
         this.puntaje = 0.0;
+        this.contadorViandasDonadasSemanal = 0;
     }
 
     public Colaborador(Persona persona) {
@@ -61,7 +62,7 @@ public class Colaborador {
         this.puntaje = 0.0;
         this.validada = Boolean.TRUE;
         this.canjesRealizados = new ArrayList<>();
-        //this.contadorViandas = 0;
+        this.contadorViandasDonadasSemanal = 0;
     }
 
     public TipoPersona getTipoPersona(){ return this.persona.getTipoPersona(); }
@@ -105,10 +106,6 @@ public class Colaborador {
         // Este método valida que la cuenta ya tiene usuario y contraseña.
         // En caso afirmativo, cambia el valor del atributo en TRUE.
         this.validada = Boolean.TRUE;
-    }
-
-    protected void iniciarSesion() {
-        //TODO
     }
 
     public String getEmail(){

@@ -15,6 +15,7 @@ public abstract class Persona {
 
     @Id
     @GeneratedValue
+    @Getter
     private int id;
 
     @Column

@@ -12,11 +12,6 @@ public class AuthServiceColaborador {
         if (repoColab.existePersonaFisica(nroDoc, tipoDoc) != null) {
             throw new ExcepcionValidacion("El colaborador ya existe");
         }
-        /* NO HACE FALTA, YA SE VALIDO CUANDO SE CREO EL USUARIO
-        if (repoColab.existeMail(mail) != null) {
-            throw new ExcepcionValidacion("El mail ya existe");
-        }*/
-
         repoColab.registrarColaboradorFisico(tipoDoc, nroDoc, nombre, apellido, mail, telefono, direccion, fechaNacimiento);
 
     }
