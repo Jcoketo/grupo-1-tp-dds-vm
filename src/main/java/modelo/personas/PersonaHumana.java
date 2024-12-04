@@ -54,4 +54,6 @@ public class PersonaHumana extends Persona{
     public PersonaHumana() {
 
     }
+
+
 }

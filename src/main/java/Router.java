@@ -4,19 +4,7 @@ import accessManagment.AutorizacionMiddleware;
 import io.javalin.Javalin;
 import persistencia.*;
 import presentacion.InicioController;
-import presentacion.colaboraciones.DonarDineroController;
-import presentacion.colaboraciones.DonarDineroRealizadaController;
-import presentacion.colaboraciones.DonarDistribucionViandaController;
-import presentacion.colaboraciones.DonarViandaController;
-import presentacion.colaboraciones.DonarViandaRealizadaController;
-import presentacion.colaboraciones.ElegirDonacionController;
-import presentacion.colaboraciones.ElegirDonacionFisicaController;
-import presentacion.colaboraciones.ElegirDonacionJuridicaController;
-import presentacion.colaboraciones.GraciasPorDonarController;
-import presentacion.colaboraciones.MisColaboracionesController;
-import presentacion.colaboraciones.RegistroPersonaVulnerableController;
-import presentacion.colaboraciones.RegistroPersonaVulnerableFinalController;
-import presentacion.colaboraciones.RegistroPersonaVulnerableRealizadaController;
+import presentacion.colaboraciones.*;
 import presentacion.gestorCuentas.CrearCuentaFisicaController;
 import presentacion.gestorCuentas.CrearCuentaJuridicaController;
 import presentacion.gestorCuentas.CuentaCreadaController;
@@ -136,7 +124,7 @@ public class Router {
             path("/donarDistribuirViandas", () -> {
                 before(new AutorizacionMiddleware().setDebeSerLogueado().setDebeSerPF());
                 get(new DonarDistribucionViandaController());
-                //post(new DonarDistribucionViandaRealizadaController());
+                post(new DonarDistribucionViandaRealizadaController());
             });
 
             path("/graciasPorDonar", () -> {
@@ -235,7 +223,7 @@ public class Router {
 
             path("/perfil", () -> {
                 before(new AutorizacionMiddleware().setDebeSerLogueado());
-                get(new PerfilController());
+                get(new PerfilController(repoColab));
             });
 
             path("/misColaboraciones", () -> {
