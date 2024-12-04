@@ -4,6 +4,7 @@ import accessManagment.Roles;
 import lombok.Getter;
 import modelo.colaboracion.Colaboracion;
 import modelo.colaboracion.DonarDinero;
+import modelo.colaboracion.Vianda;
 import modelo.contrasenia.PasswordGenerator;
 import modelo.elementos.Heladera;
 import modelo.notificador.Notificador;
@@ -149,6 +150,12 @@ public class RepositorioColaboradores {
     public List<Colaboracion> getColaboraciones(Integer idPersona) {
         Colaborador colab = this.buscarColaboradorXIdPersona(idPersona);
         return colab.getColaboracionesRealizadas();
+    }
+
+    public void persistirViandas(List<Vianda> viandas) {
+        em.getTransaction().begin();
+        viandas.forEach(vianda -> em.persist(vianda));
+        em.getTransaction().commit();
     }
 
 
