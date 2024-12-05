@@ -262,7 +262,7 @@
         <h1>Catálogo</h1>
         <div class="btn-group">
             <div class="puntaje">
-                <p class="sub-header">Puntos acumulados: 1580 pts.</p>
+                <p class="sub-header">Puntos acumulados: {{puntos}} </p>
             </div>
         </div>
     </div>
@@ -271,59 +271,20 @@
             <div class="col-md-9">
                 <div class="catalog-row">
                     <!-- elementos del catálogo -->
+
+                    {{#ofertas}}
                     <div class="col-md-3">
                         <div class="catalog-item">
-                            <img src="https://via.placeholder.com/150" alt="Descripción">
-                            <p>Título</p>
-                            <p>1,540 puntos</p>
+                            <img src="/static/{{imagen}}" alt="Descripción">
+                            <p>{{nombre}}</p>
+                            <p>{{descripcion}}</p>
+                            <p>{{puntosNecesarios}}</p>
                         </div>
                     </div>
-                    <div class="col-md-3">
-                        <div class="catalog-item">
-                            <img src="https://via.placeholder.com/150" alt="Descripción">
-                            <p>Título</p>
-                            <p>1,540 puntos</p>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="catalog-item">
-                            <img src="https://via.placeholder.com/150" alt="Descripción">
-                            <p>Título</p>
-                            <p>1,540 puntos</p>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="catalog-item">
-                            <img src="https://via.placeholder.com/150" alt="Descripción">
-                            <p>Título</p>
-                            <p>1,540 puntos</p>
-                        </div>
-                    </div>
-                    <!-- Segunda fila de elementos del catálogo -->
-                    <div class="col-md-3">
-                        <div class="catalog-item">
-                            <img src="https://via.placeholder.com/150" alt="Descripción">
-                            <p>Título</p>
-                            <p>1,540 puntos</p>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="catalog-item">
-                            <img src="https://via.placeholder.com/150" alt="Descripción">
-                            <p>Título</p>
-                            <p>1,540 puntos</p>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="catalog-item">
-                            <img src="https://via.placeholder.com/150" alt="Descripción">
-                            <p>Título</p>
-                            <p>1,540 puntos</p>
-                        </div>
-                    </div>
+                    {{/ofertas}}
                     <div class="col-md-3">
                         <div class="view-more">
-                            <a href="/catalogoProductos">Ver más</a>
+                            <a href="/catalogoProductos?filter=0">Ver más</a>
                         </div>
                     </div>
                 </div>
@@ -372,6 +333,7 @@
                 </div>
             </div>
         </div>
+    </div>
 </footer>
 
 <!-- Scripts de Bootstrap y jQuery -->

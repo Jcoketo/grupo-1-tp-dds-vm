@@ -202,12 +202,12 @@ public class Router {
 
             path("/canjearPuntos", () -> {
                 before(new AutorizacionMiddleware().setDebeSerLogueado());
-                get(new CanjearPuntosController());
+                get(new CanjearPuntosController(repoColab,repoOfertas));
             });
 
             path("/catalogoProductos", () -> {
                 before(new AutorizacionMiddleware().setDebeSerLogueado());
-                get(new CatalogoProductosController());
+                get(new CatalogoProductosController(repoOfertas));
             });
 
             path("/agregarProductosEmpresa", () -> {

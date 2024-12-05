@@ -273,13 +273,13 @@
             <div class="col-md-12">
                 <div class="d-flex justify-content-between align-items-center">
 
-                    <form class="form-inline">
+                    <form class="form-inline" method="GET" action="/catalogoProductos">
                         <label class="my-1 mr-2" for="filterSelect">Filtrar por:</label>
-                        <select class="custom-select my-1 mr-sm-2" id="filterSelect">
+                        <select class="custom-select my-1 mr-sm-2" id="filterSelect" name="filter">
                             <option selected>Elegir...</option>
-                            <option value="1">Categoría 1</option>
-                            <option value="2">Categoría 2</option>
-                            <option value="3">Categoría 3</option>
+                            <option value="1">SERVICIO</option>
+                            <option value="2">PRODUCTO</option>
+                            <option value="3">Todos</option>
                         </select>
                         <button type="submit" class="btn btn-primary my-1">Aplicar</button>
                     </form>
@@ -289,7 +289,8 @@
                             <div class="input-group-append">
                                 <button class="btn btn-outline-secondary" type="button">
                                     <i class="fas fa-search"></i>
-                                </button>                    </div>
+                                </button>
+                            </div>
                         </div>
                     </form>
                     <p> </p>
@@ -298,56 +299,27 @@
             </div>
             <div class="row catalog-grid">
                 <!-- elementos del catálogo -->
+                {{#ofertas}}
                 <div class="catalog-item-container">
                     <div class="catalog-item">
-                        <img src="https://via.placeholder.com/150" alt="Descripción">
-                        <p>Título</p>
-                        <p>1540 puntos <span>&gt;</span></p>
+                        <img src="/static/{{imagen}}" alt="Descripción">
+                        <p>{{nombre}}</p>
+                        <p>{{descripcion}}</p>
+                        <p>{{puntosNecesarios}}</p>
                     </div>
                 </div>
-                <div class="catalog-item-container">
-                    <div class="catalog-item">
-                        <img src="https://via.placeholder.com/150" alt="Descripción">
-                        <p>Título</p>
-                        <p>1540 puntos <span>&gt;</span></p>
-                    </div>
-                </div>
-                <div class="catalog-item-container">
-                    <div class="catalog-item">
-                        <img src="https://via.placeholder.com/150" alt="Descripción">
-                        <p>Título</p>
-                        <p>1540 puntos <span>&gt;</span></p>
-                    </div>
-                </div>
-                <div class="catalog-item-container">
-                    <div class="catalog-item">
-                        <img src="https://via.placeholder.com/150" alt="Descripción">
-                        <p>Título</p>
-                        <p>1540 puntos <span>&gt;</span></p>
-                    </div>
-                </div>
-                <div class="catalog-item-container">
-                    <div class="catalog-item">
-                        <img src="https://via.placeholder.com/150" alt="Descripción">
-                        <p>Título</p>
-                        <p>1540 puntos <span>&gt;</span></p>
-                    </div>
-                </div>
-                <div class="catalog-item-container">
-                    <div class="catalog-item">
-                        <img src="https://via.placeholder.com/150" alt="Descripción">
-                        <p>Título</p>
-                        <p>1540 puntos <span>&gt;</span></p>
-                    </div>
-                </div>
+                {{/ofertas}}
             </div>
         </div>
+    </div>
+    <a href="/elegirDonacion" class="add-button">
+        <i class="fas fa-plus"></i>
+        <span>Donar</span>
+    </a>
 </main>
 
 <!-- botón flotante -->
-<a class="add-button" href="/agregarProductosEmpresa">
-    <i class="fas fa-plus"></i> Agregar Producto
-</a>
+
 
 <footer class="footer-bg">
     <div class="container">
