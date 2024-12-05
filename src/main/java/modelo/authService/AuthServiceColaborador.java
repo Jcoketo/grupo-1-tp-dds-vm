@@ -16,5 +16,12 @@ public class AuthServiceColaborador {
 
     }
 
+    public static void registrarColaboradorJuridico(String razonSocial, String nombreFantasia, String mail, String telefono, String direccion) {
+        if (repoColab.existePersonaJuridica(razonSocial) != null) {
+            throw new ExcepcionValidacion("El colaborador ya existe");
+        }
+        repoColab.registrarColaboradorJuridico(razonSocial, nombreFantasia, mail, telefono, direccion);
+    }
+
 
 }
