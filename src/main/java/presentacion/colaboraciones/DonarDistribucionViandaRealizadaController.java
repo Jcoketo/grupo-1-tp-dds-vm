@@ -52,6 +52,8 @@ public class DonarDistribucionViandaRealizadaController implements Handler {
             context.redirect("/donarDistribuirViandas");
             return;
         }
+
+        context.redirect("/graciasPorDonar");
     }
 
 

@@ -26,8 +26,15 @@ public class CuentaJuridicaCreadaController implements Handler {
 
     @Override
     public void handle(@NotNull Context context) throws Exception {
-        Map<String, Object> model = new HashMap<>();
+        Map<String, Object> model = context.sessionAttribute("model");
+        if (model == null) {
+            model = new HashMap<>();
+            context.sessionAttribute("model", model);
+        }
+        model.put("nombreUsuario", context.sessionAttribute("nombreUsuario"));
         context.render("templates/elegirRegistroCuenta.mustache", model);
+
+
 
         String razonSocial = context.formParam("razon-social");
         Integer tipo = Integer.valueOf(context.formParam("tipo"));
@@ -40,11 +47,11 @@ public class CuentaJuridicaCreadaController implements Handler {
         String terminos = context.formParam("terms");
 
         if (razonSocial.equals("") || tipo.equals("") || rubro.equals("") || cuit.equals("") || email.equals("") || username.equals("")
-            || password.equals("") || terminos.equals(""))
-        {
+            || password.equals("") || terminos.equals("")){
             model.put("error", "Debe completar todos los campos");
             //context.status(400);
             context.redirect("/crearCuentaJuridica");
+            return;
         }
 
         if ( !esNumerico(cuit)  ||  !esNumerico(telefono) )  {
@@ -100,21 +107,17 @@ public class CuentaJuridicaCreadaController implements Handler {
                 break;
         }
 
-
-        Integer cuitAux = Integer.parseInt(cuit);
-
         try {
-            AuthServiceUsuario.registrarUsuario(email, username, password);
-            AuthServiceColaborador.registrarColaboradorJuridico(razonSocial, tipoJuridico, rubroJuridico, cuitAux, telefono, email);
+            //AuthServiceUsuario.registrarUsuario(email, username, password);
+            AuthServiceColaborador.registrarColaboradorJuridico(razonSocial, tipoJuridico, rubroJuridico, cuit, telefono, email);
 
         } catch (ExcepcionValidacion e) {
             // TODO ROLLBACK
-            model.put("error", e.getMessage());
+            model.put("errorJuridico", e.getMessage());
             //context.status(400);
             context.redirect("/crearCuentaJuridica");
             return;
         }
-
 
         // crear la cuenta y enviar a
         context.redirect("/cuentaCreada");

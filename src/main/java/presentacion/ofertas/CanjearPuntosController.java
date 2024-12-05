@@ -13,6 +13,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class CanjearPuntosController implements Handler {
 
     RepositorioColaboradores repoColaboradores;
@@ -32,6 +35,7 @@ public class CanjearPuntosController implements Handler {
             context.sessionAttribute("model", model);
         }
 
+
         Integer idPersona = context.sessionAttribute("idPersona");
         TipoPersona tipoPer = context.sessionAttribute("tipoPersona");
         Colaborador colab = repoColaboradores.buscarColaboradorXIdPersona(idPersona);
@@ -43,7 +47,5 @@ public class CanjearPuntosController implements Handler {
 
         context.render("templates/canjearPuntos.mustache",model);
     }
-
-
 
 }

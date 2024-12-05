@@ -2,10 +2,12 @@ package modelo.authService;
 
 import modelo.colaboracion.*;
 import modelo.elementos.Heladera;
+import modelo.elementos.TarjetaPlastica;
 import modelo.excepciones.ExcepcionValidacion;
 import modelo.personas.Colaborador;
 import persistencia.RepositorioColaboradores;
 import persistencia.RepositorioHeladeras;
+import persistencia.RepositorioTarjetas;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -16,6 +18,7 @@ public class AuthServiceColaboracion {
 
     private static RepositorioColaboradores repoColab = RepositorioColaboradores.getInstancia();
     private static RepositorioHeladeras repoHeladeras = RepositorioHeladeras.getInstancia();
+    private static RepositorioTarjetas repoTarjetas = RepositorioTarjetas.getInstancia();
 
     public static void registrarColaboracionDinero(Integer idPersona, String monto){
         Colaborador colab = repoColab.buscarColaboradorXIdPersona(idPersona);
@@ -43,20 +46,38 @@ public class AuthServiceColaboracion {
         if (!destino.entranXViandasMas(cantidadViandas)){
             throw new ExcepcionValidacion("No hay espacio suficiente en la heladera de destino para esa cantidad de viandas!");
         }
+        if (!origen.tieneNViandasDisponibles(cantidadViandas)){
+            throw new ExcepcionValidacion("No hay suficientes viandas en la heladera de origen!");
+        }
 
         List<Vianda> viandas = new ArrayList<>();
         for (int i = 0; i < cantidadViandas; i++){
+            System.out.println(i + ' ');
             Vianda vianda = origen.conocerVianda(i);
             viandas.add(vianda);
         }
         //List<Vianda> viandas = repoHeladeras.obtenerViandasDeHeladera(origen, cantidadViandas);
-        DistribucionDeViandas distribucion = new DistribucionDeViandas(cantidadViandas, origen, destino, motivoDistribucion, LocalDate.now());
+        DistribucionDeViandas distribucion = new DistribucionDeViandas(origen, destino, motivoDistribucion, LocalDate.now());
         distribucion.setViandas(viandas);
         distribucion.hacerColaboracion(colab);
+        repoColab.persistirViandas(viandas);
         repoHeladeras.actualizarHeladera(origen);
         repoHeladeras.actualizarHeladera(destino);
-        repoColab.persistirViandas(viandas);
         repoColab.nuevaColaboracion(colab, distribucion);
 
+    }
+
+
+    // CREA INSTANCIA DE COLABORACION Y ASIGNA TARJETAS A COLABORADOR
+    public static void registrarPersonasVulnerables(Integer idPersona){
+        Colaborador colab = repoColab.buscarColaboradorXIdPersona(idPersona);
+
+        List<TarjetaPlastica> tarjetas = repoTarjetas.crearNTarjetasPlasticas(2);
+
+        RegistroPersonasSituVulnerable registroPersonasSituVulnerable = new RegistroPersonasSituVulnerable(2, tarjetas, LocalDate.now());
+
+        colab.agregarColaboracion(registroPersonasSituVulnerable);
+
+        repoColab.nuevaColaboracion(colab, registroPersonasSituVulnerable);
     }
 }
