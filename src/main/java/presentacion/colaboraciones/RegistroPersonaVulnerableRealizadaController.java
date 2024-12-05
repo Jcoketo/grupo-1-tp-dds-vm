@@ -27,6 +27,7 @@ public class RegistroPersonaVulnerableRealizadaController implements Handler{
         Long tarjeta = Long.parseLong(Objects.requireNonNull(context.formParam("tarjeta")));
         Integer cantidadMenoresStr = Integer.parseInt(Objects.requireNonNull(context.formParam("cantidad-menores")));
 
+
         context.redirect("/registroPersonaVulnerableFinal");
    }
 }

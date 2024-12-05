@@ -10,7 +10,9 @@ import org.jetbrains.annotations.NotNull;
 import persistencia.RepositorioHeladeras;
 
 import java.time.LocalDate;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class MapaHeladerasController implements Handler {
 
@@ -31,10 +33,19 @@ public class MapaHeladerasController implements Handler {
         List<HeladeraOrigenDestino> HeladeraOrigenDestino = getHeladerasDistribucion(heladeras);
 
         context.json(HeladeraOrigenDestino);
-
         // Devuelve las heladeras en formato JSON
 
+        Map<String, Object> model = context.sessionAttribute("model");
+        if (model == null) {
+            model = new HashMap<>();
+            context.sessionAttribute("model", model);
+        }
+        model.put("nombreUsuario", context.sessionAttribute("nombreUsuario"));
+        context.render("templates/mapaHeladeras.mustache", model);
+
     }
+
+
     private List<HeladeraOrigenDestino> getHeladerasDistribucion(List<Heladera> heladeras){
         return heladeras.stream()
                 .map(heladera -> {

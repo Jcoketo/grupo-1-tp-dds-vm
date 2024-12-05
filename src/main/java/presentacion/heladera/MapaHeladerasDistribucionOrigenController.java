@@ -44,6 +44,7 @@ public class MapaHeladerasDistribucionOrigenController implements Handler {
         model.put("estado2", estado2);
         model.put("disponibilidad2", disponibilidad2);
 
+        model.put("nombreUsuario", context.sessionAttribute("nombreUsuario"));
 
         /*Boolean estaLogueado = context.sessionAttribute("logueado");
 
