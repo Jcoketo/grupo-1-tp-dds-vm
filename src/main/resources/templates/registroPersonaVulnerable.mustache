@@ -194,6 +194,9 @@
         .cancel-button:hover {
             opacity: 0.8;
         }
+        .pedir-tarjeta {
+            opacity: 0.8;
+        }
 
         /* Ajustes para el espaciado de los campos del formulario */
         .form-group {
@@ -277,7 +280,7 @@
 
     <!-- Contenedor del formulario -->
     <div class="form-container">
-        <form id="registroForm" action="/registroPersonaVulnerableFinal" method="post">
+        <form id="registroForm" action="/registroPersonaVulnerable" method="post">
             <div class="form-group">
                 <label for="nombre">Nombre de Persona Vulnerable</label>
                 <input type="text" id="nombre" name="nombre" required>
@@ -290,7 +293,7 @@
 
             <div class="form-group">
                 <label for="documento">¿Posee documento?</label>
-                <select id="documento" name="documento" required>
+                <select id="documento" name="tieneDoc" required>
                     <option value="si">Sí</option>
                     <option value="no">No</option>
                 </select>
@@ -298,12 +301,12 @@
 
             <div class="form-group">
                 <label for="numero-documento">Número de documento</label>
-                <input type="text" id="numero-documento" name="numero-documento">
+                <input type="text" id="numero-documento" name="numDoc">
             </div>
 
             <div class="form-group">
                 <label for="domicilio">¿Posee domicilio?</label>
-                <select id="domicilio" name="domicilio" required>
+                <select id="domicilio" name="tieneDom" required>
                     <option value="si">Sí</option>
                     <option value="no">No</option>
                 </select>
@@ -311,17 +314,17 @@
 
             <div class="form-group">
                 <label for="direccion">Domicilio</label>
-                <input type="text" id="direccion" name="direccion">
+                <input type="text" id="direccion" name="domicilio">
             </div>
 
             <div class="form-group full-width">
                 <label for="tarjeta">Número de tarjeta asociada</label>
-                <input type="text" id="tarjeta" name="tarjeta">
+                <input type="text" id="tarjeta" name="numTarjeta">
             </div>
 
             <div class="form-group">
                 <label for="menores">¿Posee menores a cargo?</label>
-                <select id="menores" name="menores" required>
+                <select id="menores" name="tieneMenores" required>
                     <option value="si">Sí</option>
                     <option value="no">No</option>
                 </select>
@@ -329,7 +332,7 @@
 
             <div class="form-group">
                 <label for="cantidad-menores">Cantidad de menores a cargo</label>
-                <select id="cantidad-menores" name="cantidad-menores">
+                <select id="cantidad-menores" name="cantidadMenores">
                     <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
@@ -339,10 +342,16 @@
 
             <div class="buttons">
                 <button type="button" class="cancel-button">Cancelar</button>
-                <button type="button" class="register-button" onclick="submitForm()">Registrarse</button>
+                <button type="button" id="pedir-tarjeta" class="pedir-tarjeta">No tenes tarjetas? Recibilas clickeando aca!</button>
+                <div id="mensaje-tarjeta" style="display: none; color: green; margin-top: 10px;"></div>
+                <!-- <button type="button" class="register-button" onclick="submitForm()">Registrar</button> -->
+                <div class="form-group">
+                    <button type="submit" class="register-button">Registrar</button>
+                </div>
 
+            </div>
         </form>
-        <script>
+        <!--<script>
         function submitForm() {
         var form = document.getElementById('registroForm');
         if (form.checkValidity()) {
@@ -350,7 +359,7 @@
             window.location.href = '/registroPersonaVulnerableFinal';
         } else {
             form.reportValidity();
-        }
+        }-->
     }
 </script>
     </div>
@@ -395,12 +404,33 @@
                 </div>
             </div>
         </div>
+    </div>
 </footer>
 
 <!-- Scripts de Bootstrap y jQuery -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script>
+    document.getElementById('pedir-tarjeta').addEventListener('click', function() {
+        fetch('/solicitarTarjeta', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ solicitud: true })
+        })
+                .then(response => response.json())
+                .then(data => {
+                    const mensajeDiv = document.getElementById('mensaje-tarjeta');
+                    mensajeDiv.textContent = data.mensaje;
+                    mensajeDiv.style.display = 'block';
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+    });
+</script>
 </body>
 
 </html>

@@ -99,15 +99,15 @@ public class Router {
                 get(new ElegirDonacionController());
             });
 
-            path("/elegirDonacionFisica", () -> {
-                before(new AutorizacionMiddleware().setDebeSerLogueado());
-                get(new ElegirDonacionFisicaController());
-            });
-
-            path("/elegirDonacionJuridica", () -> {
-                before(new AutorizacionMiddleware().setDebeSerLogueado());
-                get(new ElegirDonacionJuridicaController());
-            });
+//            path("/elegirDonacionFisica", () -> {
+//                before(new AutorizacionMiddleware().setDebeSerLogueado());
+//                get(new ElegirDonacionFisicaController());
+//            });
+//
+//            path("/elegirDonacionJuridica", () -> {
+//                before(new AutorizacionMiddleware().setDebeSerLogueado());
+//                get(new ElegirDonacionJuridicaController());
+//            });
 
             path("/donarVianda", () -> {
                 //before(new AutorizacionMiddleware().setDebeSerLogueado().setDebeSerPF());
@@ -179,8 +179,13 @@ public class Router {
                 post(new RegistroPersonaVulnerableRealizadaController(repoPersonasVulnerable));
             });
 
-            path("/registroPersonaVulnerableFinal", () -> {
+            path("/solicitarTarjeta", () -> {
                 before(new AutorizacionMiddleware().setDebeSerLogueado());
+                get(new SolicitudDeTarjetasController(repoColab));
+            });
+
+            path("/registroPersonaVulnerableFinal", () -> {
+                //(new AutorizacionMiddleware().setDebeSerLogueado());
                 get(new RegistroPersonaVulnerableFinalController());
             });
 
