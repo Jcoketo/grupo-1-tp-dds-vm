@@ -26,6 +26,7 @@ public class SolicitudDeTarjetasController implements Handler {
             context.sessionAttribute("model", model);
         }
 
+
         Integer IdPersona = context.sessionAttribute("IdPersona");
 
         try {

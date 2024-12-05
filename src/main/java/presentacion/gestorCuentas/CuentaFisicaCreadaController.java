@@ -20,8 +20,13 @@ public class CuentaFisicaCreadaController implements Handler {
 
     @Override
     public void handle(@NotNull Context context) throws Exception {
-        Map<String, Object> model = new HashMap<>();
-        context.sessionAttribute("model", model);
+        Map<String, Object> model = context.sessionAttribute("model");
+        if (model == null) {
+            model = new HashMap<>();
+            context.sessionAttribute("model", model);
+        }
+        model.put("nombreUsuario", context.sessionAttribute("nombreUsuario"));
+        context.render("templates/elegirRegistroCuenta.mustache", model);
 
         String tipoDoc = context.formParam("tipoDoc");
         String nroDoc = context.formParam("nroDoc");
