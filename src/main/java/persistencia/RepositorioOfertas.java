@@ -1,13 +1,15 @@
 package persistencia;
 
+import lombok.Data;
 import lombok.Getter;
+import lombok.Setter;
 import modelo.colaboracion.Oferta;
+import modelo.colaboracion.TipoOferta;
+import modelo.personas.Rubro;
 import modelo.personas.Tecnico;
 
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -60,9 +62,26 @@ public class RepositorioOfertas {
     }
 
 
+
     public List<Oferta> conocerOfertasDisponibles() {
-        List<Oferta> ofertas = em.createQuery("SELECT u FROM Oferta u WHERE u.disponibilidad = TRUE", Oferta.class)
-                .getResultList();
-        return ofertas;
+        List<Object> ofertas = em.createNativeQuery("SELECT nombre, descripcion,puntosnecesarios,imagen,tipoOferta FROM oferta WHERE disponibilidad = true").getResultList();
+
+        List<Oferta> ofertaList = new ArrayList<>();
+
+        for (Object o : ofertas) {
+            Object[] datos = (Object[]) o;
+
+            if (datos[4].equals("PRODUCTO")) {
+                Oferta of = new Oferta((String) datos[0], (String) datos[1], TipoOferta.PRODUCTO, null, true, (Double) datos[2], (String) datos[3]);
+                ofertaList.add(of);
+            } else {
+                Oferta of = new Oferta((String) datos[0], (String) datos[1], TipoOferta.SERVICIO, null, true, (Double) datos[2], (String) datos[3]);
+                ofertaList.add(of);
+            }
+        }
+
+        return ofertaList;
     }
+
+
  }
