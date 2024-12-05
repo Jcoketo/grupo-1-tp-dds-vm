@@ -226,6 +226,10 @@ public class Heladera {
         return this.viandas.size() + cantidad <= this.viandasMaximas;
     }
 
+    public Boolean tieneNViandasDisponibles(Integer cantidad){
+        return this.viandas.size() >= cantidad;
+    }
+
     public Vianda conocerVianda(int i) {
         return this.viandas.get(i);
     }

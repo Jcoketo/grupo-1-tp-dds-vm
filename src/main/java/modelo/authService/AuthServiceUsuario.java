@@ -1,6 +1,7 @@
 package modelo.authService;
 
 import modelo.excepciones.ExcepcionValidacion;
+import modelo.validador.Usuario;
 import modelo.validador.ValidadorDeContrasenias;
 import org.mindrot.jbcrypt.BCrypt;
 import persistencia.RepositorioUsuarios;
@@ -17,7 +18,7 @@ public class AuthServiceUsuario {
         return BCrypt.checkpw(password, hashedPassword);
     }
 
-    public static void registrarUsuario(String mail, String username, String password) {    // Puede existir varios Usuarios con el mismo username.
+    public static Usuario validarUsuario(String mail, String username, String password) {    // Puede existir varios Usuarios con el mismo username.
         if (repoUsuarios.existeMAIL(mail)) {
             throw new ExcepcionValidacion("El usuario ya existe");
         }
@@ -26,7 +27,8 @@ public class AuthServiceUsuario {
             throw new ExcepcionValidacion("La contraseña no es válida");
         }
         password = hashPassword(password);
-        repoUsuarios.registrarUsuario(mail, username, password);
+        return new Usuario(mail, username, password);
+//        repoUsuarios.registrarUsuario(mail, username, password);
     }
 
     public static boolean autenticarUsuario(String mail, String password) {

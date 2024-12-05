@@ -50,7 +50,7 @@ public class DistribucionDeViandas extends Colaboracion {
     @Getter private SolicitudApertura solicitud;
 
     // CONSTRUCTOR PRINCIPAL
-    public DistribucionDeViandas(Integer cantidadViandas, Heladera heladeraOrigen, Heladera heladeraDestino, MotivoDistribucion motivoDistribucion, LocalDate fechaDistribucion) {
+    public DistribucionDeViandas(Heladera heladeraOrigen, Heladera heladeraDestino, MotivoDistribucion motivoDistribucion, LocalDate fechaDistribucion) {
         this.tiposPersonasHabilitadas = Arrays.asList(TipoPersona.PH);
         this.fechaColaboracion = fechaDistribucion;
 
@@ -58,7 +58,7 @@ public class DistribucionDeViandas extends Colaboracion {
         this.heladeraDestino = heladeraDestino;
         this.viandas = new ArrayList<>();
         this.motivoDistribucion = motivoDistribucion;
-        this.viandasDistribuidas = cantidadViandas;
+        this.viandasDistribuidas = 0;
     }
 
     // CONSTRUCTOR PARA IMPORTADOR CSV
@@ -102,6 +102,7 @@ public class DistribucionDeViandas extends Colaboracion {
                         }
                         heladeraOrigen.retirarVianda(heladeraOrigen.getViandas().indexOf(vianda));
                         heladeraDestino.agregarVianda(vianda);
+                        vianda.setDisponibleEn(heladeraDestino);
                         viandasDistribuidas += 1;
                     }
                     break;
@@ -112,6 +113,7 @@ public class DistribucionDeViandas extends Colaboracion {
                         for (Vianda vianda : viandas) {
                             heladeraOrigen.retirarVianda(heladeraOrigen.getViandas().indexOf(vianda));
                             heladeraDestino.agregarVianda(vianda);
+                            vianda.setDisponibleEn(heladeraDestino);
                             viandasDistribuidas += 1;
                         }
                         break;

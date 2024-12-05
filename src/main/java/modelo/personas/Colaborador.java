@@ -24,7 +24,7 @@ public class Colaborador {
     @GeneratedValue
     @Getter private int id;
 
-    @OneToMany(cascade = CascadeType.PERSIST)
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "colaborador_id", referencedColumnName = "id")
     @Getter List<Colaboracion> colaboracionesRealizadas;
 
@@ -38,7 +38,7 @@ public class Colaborador {
     @Column
     @Getter protected Boolean validada;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.PERSIST)
     @Getter protected Persona persona;
 
     @OneToOne(cascade = CascadeType.ALL)
