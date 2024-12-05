@@ -36,7 +36,7 @@ public class Vianda{
 
     @ManyToOne
     @JoinColumn(name = "heladera_id", referencedColumnName = "id")
-    @Getter
+    @Getter @Setter
     private Heladera disponibleEn;
 
     @Column

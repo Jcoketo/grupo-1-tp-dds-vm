@@ -28,7 +28,11 @@ public class Tarjeta {
     @Getter protected Boolean recibida;
 
     public Tarjeta(){
-        this.nro_tarjeta = IdGenerator.getInstancia().generateNextId();
+
+    }
+
+    public Tarjeta(String nro_tarjeta){
+        this.nro_tarjeta = nro_tarjeta;
         this.historialDeUsos = new ArrayList<UsoTarjeta>();
         this.recibida = false;
     }

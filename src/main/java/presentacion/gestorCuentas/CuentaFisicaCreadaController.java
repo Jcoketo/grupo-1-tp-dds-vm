@@ -6,9 +6,9 @@ import modelo.authService.AuthServiceColaborador;
 import modelo.excepciones.ExcepcionValidacion;
 import modelo.authService.AuthServiceUsuario;
 import modelo.personas.TipoDocumento;
+import modelo.validador.Usuario;
 import org.jetbrains.annotations.NotNull;
 
-import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -81,13 +81,11 @@ public class CuentaFisicaCreadaController implements Handler {
         }
 
         try {
-            AuthServiceUsuario.registrarUsuario(email, username, password);
-            AuthServiceColaborador.registrarColaboradorFisico(tipoDocumentoEnum, nroDoc, nombre, apellido, email, telefono, direccion, fechaNacimiento);
+            Usuario usuario = AuthServiceUsuario.validarUsuario(email, username, password);
+            AuthServiceColaborador.registrarColaboradorFisico(usuario, tipoDocumentoEnum, nroDoc, nombre, apellido, email, telefono, direccion, fechaNacimiento);
 
         } catch (ExcepcionValidacion e) {
-            // TODO ROLLBACK
             model.put("error", e.getMessage());
-            //context.status(400);
             context.redirect("/crearCuentaFisica");
             return;
         }

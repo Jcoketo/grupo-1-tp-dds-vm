@@ -10,6 +10,7 @@ import modelo.elementos.Heladera;
 import modelo.excepciones.ExcepcionValidacion;
 import modelo.notificador.Notificador;
 import modelo.personas.*;
+import modelo.validador.Usuario;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
@@ -99,7 +100,7 @@ public class RepositorioColaboradores {
         return null;
     }
 
-    public void registrarColaboradorFisico(TipoDocumento tipoDoc, String nroDoc, String nombre, String apellido, String mail, String telefono, String direccion, String fechaNacimiento) {
+    public void registrarColaboradorFisico(Usuario usuario, TipoDocumento tipoDoc, String nroDoc, String nombre, String apellido, String mail, String telefono, String direccion, String fechaNacimiento) {
 
         MedioDeContacto medioContactoMail = new MedioDeContacto(TipoMedioDeContacto.MAIL, mail);
         PersonaHumana persona = new PersonaHumana(tipoDoc, nroDoc, nombre, apellido, medioContactoMail, direccion, fechaNacimiento);
@@ -108,8 +109,8 @@ public class RepositorioColaboradores {
             persona.agregarMediosDeContacto(medioContactoMail);
         }
         Colaborador colaborador = new Colaborador(persona);
-
         em.getTransaction().begin();
+        em.persist(usuario);
         em.persist(persona);
         em.persist(colaborador);
         em.getTransaction().commit();

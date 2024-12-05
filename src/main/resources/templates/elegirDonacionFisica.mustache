@@ -109,6 +109,23 @@
         .social-icon {
             margin-right: 10px; /* Espacio entre el ícono y el texto */
         }
+
+        .recibirTarj {
+            background-color: #1e5552;
+            color: white;
+            margin-right: 0;
+            margin-left: 907px;
+            margin-top: 20px;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+
+        .error-message {
+            color: red;
+            font-size: 14px;
+            margin-top: 10px;
+        }
     </style>
 </head>
 
@@ -207,7 +224,12 @@
         </div>
     </div>
 </div>
-
+    <div>
+        <a class="recibirTarj" href="/solicitarTarjeta" class="btn btn-primary mt-5">Solicitar Tarjetas</a>
+    </div>
+        {{#errorRegistro}}
+            <div class="error-message">{{errorRegistro}}</div>
+        {{/errorRegistro}}
     </div>
 </main>
 

@@ -4,17 +4,18 @@ import modelo.excepciones.ExcepcionValidacion;
 import modelo.personas.Rubro;
 import modelo.personas.TipoDocumento;
 import modelo.personas.TipoJuridico;
+import modelo.validador.Usuario;
 import persistencia.RepositorioColaboradores;
 
 public class AuthServiceColaborador {
 
     private static RepositorioColaboradores repoColab = RepositorioColaboradores.getInstancia(); // pasar em?
 
-    public static void registrarColaboradorFisico(TipoDocumento tipoDoc, String nroDoc, String nombre, String apellido, String mail, String telefono, String direccion, String fechaNacimiento) {
+    public static void registrarColaboradorFisico(Usuario usuario, TipoDocumento tipoDoc, String nroDoc, String nombre, String apellido, String mail, String telefono, String direccion, String fechaNacimiento) {
         if (repoColab.existePersonaFisica(nroDoc, tipoDoc) != null) {
             throw new ExcepcionValidacion("El colaborador ya existe!");
         }
-        repoColab.registrarColaboradorFisico(tipoDoc, nroDoc, nombre, apellido, mail, telefono, direccion, fechaNacimiento);
+        repoColab.registrarColaboradorFisico(usuario, tipoDoc, nroDoc, nombre, apellido, mail, telefono, direccion, fechaNacimiento);
 
     }
 
@@ -24,6 +25,5 @@ public class AuthServiceColaborador {
         }
         repoColab.registrarColaboradorJuridico(razonSocial, tipoJuridico, rubro, cuit, telefono, email);
     }
-
 
 }
