@@ -33,12 +33,12 @@ public class RepositorioColaboradores {
         return instancia;
     }
 
-    public static RepositorioColaboradores getInstance(){
-        if(instancia == null){
-            throw new ExcepcionValidacion("No fue instanciado en el repositorio!");
-        }
-        return instancia;
-    }
+//    public static RepositorioColaboradores getInstance(){
+//        if(instancia == null){
+//            throw new ExcepcionValidacion("No fue instanciado en el repositorio!");
+//        }
+//        return instancia;
+//    }
 
     public PersonaHumana existePersonaFisica(String nroDoc, TipoDocumento tipoDoc) {
         TypedQuery<PersonaHumana> query = em.createQuery(
@@ -54,10 +54,10 @@ public class RepositorioColaboradores {
         }
     }
 
-    public PersonaHumana existePersonaJuridica(Integer cuit) {
-        TypedQuery<PersonaHumana> query = em.createQuery(
-                "SELECT p FROM PersonaJuridica p WHERE p.cuit = :nroCuit ", //revisar que este bien
-                PersonaHumana.class
+    public PersonaJuridica existePersonaJuridica(String cuit) {
+        TypedQuery<PersonaJuridica> query = em.createQuery(
+                "SELECT p FROM PersonaJuridica p WHERE p.CUIT = :nroCuit ", //revisar que este bien
+                PersonaJuridica.class
         );
         query.setParameter("nroCuit", cuit);
         try {
@@ -103,7 +103,7 @@ public class RepositorioColaboradores {
 
         MedioDeContacto medioContactoMail = new MedioDeContacto(TipoMedioDeContacto.MAIL, mail);
         PersonaHumana persona = new PersonaHumana(tipoDoc, nroDoc, nombre, apellido, medioContactoMail, direccion, fechaNacimiento);
-        if(mail.equals("")){
+        if(!telefono.equals("")){
             MedioDeContacto medioContactoTelefono = new MedioDeContacto(TipoMedioDeContacto.TELEFONO, telefono);
             persona.agregarMediosDeContacto(medioContactoMail);
         }
@@ -120,15 +120,13 @@ public class RepositorioColaboradores {
 
     }
 
-    public void registrarColaboradorJuridico(String razonSocial, TipoJuridico tipoJuridico, Rubro rubro, Integer cuit, String telefono, String email) {
-
-
+    public void registrarColaboradorJuridico(String razonSocial, TipoJuridico tipoJuridico, Rubro rubro, String cuit, String telefono, String email) {
 
         MedioDeContacto medioContactoMail = new MedioDeContacto(TipoMedioDeContacto.MAIL, email);
 
         PersonaJuridica persona = new PersonaJuridica(cuit, razonSocial, tipoJuridico, rubro, medioContactoMail);
 
-        if(email.equals("")){
+        if(!telefono.equals("")){
             MedioDeContacto medioContactoTelefono = new MedioDeContacto(TipoMedioDeContacto.TELEFONO, telefono);
             persona.agregarMediosDeContacto(medioContactoMail);
         }

@@ -8,7 +8,7 @@ import persistencia.RepositorioColaboradores;
 
 public class AuthServiceColaborador {
 
-    private static RepositorioColaboradores repoColab = RepositorioColaboradores.getInstance(); // pasar em?
+    private static RepositorioColaboradores repoColab = RepositorioColaboradores.getInstancia(); // pasar em?
 
     public static void registrarColaboradorFisico(TipoDocumento tipoDoc, String nroDoc, String nombre, String apellido, String mail, String telefono, String direccion, String fechaNacimiento) {
         if (repoColab.existePersonaFisica(nroDoc, tipoDoc) != null) {
@@ -18,7 +18,7 @@ public class AuthServiceColaborador {
 
     }
 
-    public static void registrarColaboradorJuridico(String razonSocial, TipoJuridico tipoJuridico, Rubro rubro, Integer cuit, String telefono, String email) {
+    public static void registrarColaboradorJuridico(String razonSocial, TipoJuridico tipoJuridico, Rubro rubro, String cuit, String telefono, String email) {
         if (repoColab.existePersonaJuridica(cuit) != null) {
             throw new ExcepcionValidacion("El colaborador ya existe!");
         }
