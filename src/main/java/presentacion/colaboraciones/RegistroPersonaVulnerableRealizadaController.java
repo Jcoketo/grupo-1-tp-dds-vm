@@ -28,6 +28,7 @@ public class RegistroPersonaVulnerableRealizadaController implements Handler{
         Integer cantidadMenoresStr = Integer.parseInt(Objects.requireNonNull(context.formParam("cantidad-menores")));
         //TODO: Con estos valores hay que crear una instancia de Persona Vulnerable vinculada a la Persona Física que la registró. Y guardarlo en el Repositorio.
 
+
         context.redirect("/registroPersonaVulnerableFinal");
    }
 }

@@ -40,6 +40,7 @@ public MisColaboracionesController(RepositorioColaboradores repoColaboradores) {
 
         model.put("colabs", datosColaboraciones);
 
+        model.put("nombreUsuario", context.sessionAttribute("nombreUsuario"));
         context.render("templates/misColaboraciones.mustache", model);
     }
 
