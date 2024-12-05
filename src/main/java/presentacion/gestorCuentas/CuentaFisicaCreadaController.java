@@ -22,6 +22,7 @@ public class CuentaFisicaCreadaController implements Handler {
     public void handle(@NotNull Context context) throws Exception {
         Map<String, Object> model = new HashMap<>();
         context.sessionAttribute("model", model);
+        model.put("error", null);
 
         String tipoDoc = context.formParam("tipoDoc");
         String nroDoc = context.formParam("nroDoc");
@@ -72,16 +73,12 @@ public class CuentaFisicaCreadaController implements Handler {
             return;
         }
         TipoDocumento tipoDocumentoEnum;
-        try {
-            tipoDoc = tipoDoc.toUpperCase();
-            tipoDocumentoEnum = TipoDocumento.valueOf(tipoDoc);
-        } catch (IllegalArgumentException e) {
-            model.put("error", "El tipo de documento no es válido");
-            //context.status(400);
-            context.redirect("/crearCuentaFisica");
-            return;
+        switch (tipoDoc){
+            case "01" -> tipoDocumentoEnum = TipoDocumento.DNI;
+            case "02" -> tipoDocumentoEnum = TipoDocumento.LC;
+            case "03" -> tipoDocumentoEnum = TipoDocumento.LE;
+            default -> throw new ExcepcionValidacion("Unexpected value: " + tipoDoc);
         }
-
 
         try {
             AuthServiceUsuario.registrarUsuario(email, username, password);

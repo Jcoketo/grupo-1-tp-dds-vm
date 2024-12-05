@@ -82,7 +82,7 @@ public class Router {
             });
 
             path("/crearCuentaFisica", () -> {
-                before(new AutorizacionMiddleware());
+                //before(new AutorizacionMiddleware()); //TODO no tiene que estar logueado
                 get(new CrearCuentaFisicaController());
                 post(new CuentaFisicaCreadaController());
             });
