@@ -29,17 +29,17 @@ public class PersonaVulnerable {
     @JoinColumn(name = "persona_alta_id", referencedColumnName = "id")
     @Getter private PersonaHumana dioAlta;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "persona_humana_id", referencedColumnName = "id")
-    @Getter private PersonaHumana persona;
+//    @OneToOne(cascade = CascadeType.ALL)
+//    @JoinColumn(name = "persona_humana_id", referencedColumnName = "id")
+//    @Getter private PersonaHumana persona;
 
 
-    public PersonaVulnerable(LocalDate fechaRegistro, int menoresACargo, TarjetaPlastica tarjeta, PersonaHumana dioAlta, PersonaHumana persona){
+    public PersonaVulnerable(LocalDate fechaRegistro, int menoresACargo, TarjetaPlastica tarjeta, PersonaHumana dioAlta){
         this.fechaRegistro = fechaRegistro;
         this.menoresACargo = menoresACargo;
         this.tarjeta = tarjeta;
         this.dioAlta = dioAlta;
-        this.persona = persona;
+//        this.persona = persona;
     }
 
     public PersonaVulnerable() {
