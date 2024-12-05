@@ -5,15 +5,7 @@ import io.javalin.Javalin;
 import persistencia.*;
 import presentacion.InicioController;
 import presentacion.colaboraciones.*;
-import presentacion.gestorCuentas.CrearCuentaFisicaController;
-import presentacion.gestorCuentas.CrearCuentaJuridicaController;
-import presentacion.gestorCuentas.CuentaCreadaController;
-import presentacion.gestorCuentas.CuentaFisicaCreadaController;
-import presentacion.gestorCuentas.CuentaJuridicaCreadaController;
-import presentacion.gestorCuentas.ElegirRegistroCuentaController;
-import presentacion.gestorCuentas.PerfilController;
-import presentacion.gestorCuentas.ProcessLoginController;
-import presentacion.gestorCuentas.ShowLoginController;
+import presentacion.gestorCuentas.*;
 import presentacion.heladera.AceptarAgregarHeladeraController;
 import presentacion.heladera.AgregarHeladeraController;
 import presentacion.heladera.HeladeraAgregadaController;
@@ -55,7 +47,6 @@ public class Router {
         RepositorioVisitas repoVisitas = RepositorioVisitas.getInstancia(entityManager);
         RepositorioUsuarios repoUsuarios = RepositorioUsuarios.getInstancia(entityManager);
 
-
         /* *************************************************************************** */
 
         // ------------------------------------   RUTAS   ------------------------------------------------
@@ -82,7 +73,7 @@ public class Router {
             });
 
             path("/crearCuentaFisica", () -> {
-                before(new AutorizacionMiddleware());
+                //before(new AutorizacionMiddleware()); //TODO no tiene que estar logueado
                 get(new CrearCuentaFisicaController());
                 post(new CuentaFisicaCreadaController());
             });
@@ -98,16 +89,6 @@ public class Router {
                 before(new AutorizacionMiddleware().setDebeSerLogueado());
                 get(new ElegirDonacionController());
             });
-
-//            path("/elegirDonacionFisica", () -> {
-//                before(new AutorizacionMiddleware().setDebeSerLogueado());
-//                get(new ElegirDonacionFisicaController());
-//            });
-//
-//            path("/elegirDonacionJuridica", () -> {
-//                before(new AutorizacionMiddleware().setDebeSerLogueado());
-//                get(new ElegirDonacionJuridicaController());
-//            });
 
             path("/donarVianda", () -> {
                 //before(new AutorizacionMiddleware().setDebeSerLogueado().setDebeSerPF());
@@ -229,6 +210,12 @@ public class Router {
             path("/perfil", () -> {
                 before(new AutorizacionMiddleware().setDebeSerLogueado());
                 get(new PerfilController(repoColab));
+            });
+
+            path("/configurarPerfil", () -> {
+                before(new AutorizacionMiddleware().setDebeSerLogueado());
+                get(new ConfigurarPerfilController(repoColab));
+                post(new ConfigurarPerfilFinalizadoController(repoColab));
             });
 
             path("/misColaboraciones", () -> {

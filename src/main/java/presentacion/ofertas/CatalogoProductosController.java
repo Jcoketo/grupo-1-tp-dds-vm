@@ -13,6 +13,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class CatalogoProductosController implements Handler {
 
     private RepositorioOfertas repoOfertas;
@@ -30,6 +33,7 @@ public class CatalogoProductosController implements Handler {
             model = new HashMap<>();
             context.sessionAttribute("model", model);
         }
+
 
         String opcion = context.queryParam("filter");
 

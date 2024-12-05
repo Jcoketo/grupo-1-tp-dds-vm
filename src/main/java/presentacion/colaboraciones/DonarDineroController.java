@@ -21,6 +21,8 @@ public class DonarDineroController implements Handler {
             model = new HashMap<>();
             context.sessionAttribute("model", model);
         }
+
+        model.put("nombreUsuario", context.sessionAttribute("nombreUsuario"));
         context.render("templates/donarDinero.mustache", model);
 
     }

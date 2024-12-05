@@ -342,7 +342,8 @@
 
             <div class="buttons">
                 <button type="button" class="cancel-button">Cancelar</button>
-                <button type="button" id="pedir-tarjeta" class="pedir-tarjeta">No tenes tarjetas? Recibilas clickeando aca!</button>
+
+
                 <div id="mensaje-tarjeta" style="display: none; color: green; margin-top: 10px;"></div>
                 <!-- <button type="button" class="register-button" onclick="submitForm()">Registrar</button> -->
                 <div class="form-group">
@@ -360,7 +361,7 @@
         } else {
             form.reportValidity();
         }-->
-    }
+
 </script>
     </div>
 </main>
@@ -411,26 +412,6 @@
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<script>
-    document.getElementById('pedir-tarjeta').addEventListener('click', function() {
-        fetch('/solicitarTarjeta', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ solicitud: true })
-        })
-                .then(response => response.json())
-                .then(data => {
-                    const mensajeDiv = document.getElementById('mensaje-tarjeta');
-                    mensajeDiv.textContent = data.mensaje;
-                    mensajeDiv.style.display = 'block';
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                });
-    });
-</script>
 </body>
 
 </html>

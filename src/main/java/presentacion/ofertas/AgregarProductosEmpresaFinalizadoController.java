@@ -5,6 +5,8 @@ import io.javalin.http.Handler;
 import org.jetbrains.annotations.NotNull;
 import persistencia.RepositorioOfertas;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 public class AgregarProductosEmpresaFinalizadoController implements Handler {
@@ -23,7 +25,15 @@ public class AgregarProductosEmpresaFinalizadoController implements Handler {
         String descripcion = Objects.requireNonNull(context.formParam("descripcion"));
         Integer puntos = Integer.parseInt(Objects.requireNonNull(context.formParam("puntos")));
 
+        Map<String, Object> model = context.sessionAttribute("model");
+        if (model == null) {
+            model = new HashMap<>();
+            context.sessionAttribute("model", model);
+        }
+        model.put("nombreUsuario", context.sessionAttribute("nombreUsuario"));
+        context.render("templates/aceptarAgregarProducto.mustache", model);
         context.redirect("/aceptarAgregarProducto");
     }
+
 }
 

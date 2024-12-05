@@ -50,7 +50,7 @@ public class DonarDistribucionViandaController implements Handler {
         model.put("estado2", estado2);
         model.put("disponibilidad2", disponibilidad2);
 
-
+        model.put("nombreUsuario", context.sessionAttribute("nombreUsuario"));
         context.render("templates/donarDistribuirViandas.mustache", model);
 
     }

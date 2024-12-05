@@ -2,18 +2,21 @@ package presentacion.gestorCuentas;
 
 import io.javalin.http.Context;
 import io.javalin.http.Handler;
-import modelo.personas.*;
+import modelo.personas.Colaborador;
+import modelo.personas.PersonaHumana;
+import modelo.personas.PersonaJuridica;
+import modelo.personas.TipoPersona;
 import org.jetbrains.annotations.NotNull;
 import persistencia.RepositorioColaboradores;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class PerfilController implements Handler {
+public class ConfigurarPerfilController implements Handler {
 
     RepositorioColaboradores repoColaboradores;
 
-    public PerfilController(RepositorioColaboradores repoColaboradores) {
+    public ConfigurarPerfilController(RepositorioColaboradores repoColaboradores) {
         super();
         this.repoColaboradores = repoColaboradores;
     }
@@ -48,6 +51,6 @@ public class PerfilController implements Handler {
             model.put("puntos", colab.getPuntaje());
         }
 
-        context.render("templates/perfil.mustache", model);
+        context.render("templates/configurarPerfil.mustache", model);
     }
 }

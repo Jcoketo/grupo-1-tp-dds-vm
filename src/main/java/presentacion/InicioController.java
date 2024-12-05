@@ -22,6 +22,7 @@ public class InicioController implements Handler {
         model.put("logueado", logueado);
         model.put("nombreUsuario", context.sessionAttribute("nombreUsuario"));
 
+
         context.render("templates/inicio.mustache", model);
     }
 }

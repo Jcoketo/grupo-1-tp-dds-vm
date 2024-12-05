@@ -1,14 +1,21 @@
-package presentacion.incidentes;
+package presentacion.gestorCuentas;
 
 import io.javalin.http.Context;
 import io.javalin.http.Handler;
 import org.jetbrains.annotations.NotNull;
+import persistencia.RepositorioColaboradores;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class VisualizarAlertasController implements Handler {
+public class ConfigurarPerfilFinalizadoController implements Handler {
 
+    RepositorioColaboradores repoColaboradores;
+
+    public ConfigurarPerfilFinalizadoController(RepositorioColaboradores repoColaboradores) {
+        super();
+        this.repoColaboradores = repoColaboradores;
+    }
 
     @Override
     public void handle(@NotNull Context context) throws Exception {
@@ -17,7 +24,6 @@ public class VisualizarAlertasController implements Handler {
             model = new HashMap<>();
             context.sessionAttribute("model", model);
         }
-        model.put("nombreUsuario", context.sessionAttribute("nombreUsuario"));
-        context.render("templates/visualizarAlertas.mustache", model);
+        Integer idPersona = context.sessionAttribute("idPersona");
     }
 }
