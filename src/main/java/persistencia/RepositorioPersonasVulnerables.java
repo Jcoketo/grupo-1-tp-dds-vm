@@ -52,9 +52,9 @@ public class RepositorioPersonasVulnerables {
             throw new RuntimeException("La PV no tiene alguien que lo haya dado de alta");
         } //revisar, la PV tiene que tener una persona que lo haya dado de alta sí o sí
 
-        if (PV.getPersona() == null) {
-            throw new RuntimeException("La PV no tiene una persona real asociada");
-        }
+//        if (PV.getPersona() == null) {
+//            throw new RuntimeException("La PV no tiene una persona real asociada");
+//        }
 
 
     }

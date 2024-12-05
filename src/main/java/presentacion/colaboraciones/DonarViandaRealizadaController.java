@@ -35,6 +35,8 @@ public class DonarViandaRealizadaController implements Handler {
         String calorias = context.formParam("caloriasVianda1");
         LocalDateTime fechaDonacion = LocalDateTime.now();
 
+        //TODO falto hacerlo con la segunda vianda
+
         if (heladeraId.equals("") || comida.equals("") || fechaCaducidad.equals("") || pesoVianda.equals("") || calorias.equals("")) {
             model.put("errorVianda", "Debe completar todos los campos");
             //context.status(400);
