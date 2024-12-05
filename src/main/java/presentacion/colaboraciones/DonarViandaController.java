@@ -28,6 +28,7 @@ public class DonarViandaController implements Handler {
 
         model.put("heladeras", heladeras);
 
+        model.put("nombreUsuario", context.sessionAttribute("nombreUsuario"));
         context.render("templates/donarVianda.mustache",model);
     }
 

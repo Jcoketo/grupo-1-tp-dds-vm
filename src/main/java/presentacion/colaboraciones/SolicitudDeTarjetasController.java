@@ -30,6 +30,7 @@ public class SolicitudDeTarjetasController implements Handler {
 
         Integer IdPersona = context.sessionAttribute("idPersona");
 
+
         try {
             AuthServiceColaboracion.registrarPersonasVulnerables(IdPersona);
 

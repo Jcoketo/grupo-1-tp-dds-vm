@@ -46,7 +46,7 @@ public class PerfilController implements Handler {
             model.put("direccion", persona.getDireccion());
             model.put("puntos", colab.getPuntaje());
         }
-
+        model.put("nombreUsuario", context.sessionAttribute("nombreUsuario"));
         context.render("templates/perfil.mustache", model);
     }
 }

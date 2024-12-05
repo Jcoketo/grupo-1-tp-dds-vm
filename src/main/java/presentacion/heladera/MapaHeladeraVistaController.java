@@ -27,4 +27,5 @@ public class MapaHeladeraVistaController implements Handler {
         context.render("templates/mapaHeladeras.mustache", model);
 
     }
+
 }

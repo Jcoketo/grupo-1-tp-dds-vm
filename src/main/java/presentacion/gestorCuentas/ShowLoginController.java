@@ -19,9 +19,13 @@ public class ShowLoginController implements Handler {
         Map<String, Object> model = context.sessionAttribute("model");
         if (model == null) {
             model = new HashMap<>();
+            context.sessionAttribute("model", model);
         }
+        model.put("nombreUsuario", context.sessionAttribute("nombreUsuario"));
 
         context.render("templates/login.mustache", model);
 
     }
+
+
 }

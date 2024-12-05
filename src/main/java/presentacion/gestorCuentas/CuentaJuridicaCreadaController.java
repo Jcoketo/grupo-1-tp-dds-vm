@@ -26,8 +26,15 @@ public class CuentaJuridicaCreadaController implements Handler {
 
     @Override
     public void handle(@NotNull Context context) throws Exception {
-        Map<String, Object> model = new HashMap<>();
+        Map<String, Object> model = context.sessionAttribute("model");
+        if (model == null) {
+            model = new HashMap<>();
+            context.sessionAttribute("model", model);
+        }
+        model.put("nombreUsuario", context.sessionAttribute("nombreUsuario"));
         context.render("templates/elegirRegistroCuenta.mustache", model);
+
+
 
         String razonSocial = context.formParam("razon-social");
         Integer tipo = Integer.valueOf(context.formParam("tipo"));
