@@ -7,7 +7,7 @@ import persistencia.RepositorioUsuarios;
 
 public class AuthServiceUsuario {
 
-    private static RepositorioUsuarios repoUsuarios = RepositorioUsuarios.getInstancia();
+    private static RepositorioUsuarios repoUsuarios = RepositorioUsuarios.getInstancia(); //por que no le pasamos el em?
 
     public static String hashPassword(String password) {
         return BCrypt.hashpw(password, BCrypt.gensalt());

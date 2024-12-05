@@ -27,15 +27,12 @@ public class PersonaHumana extends Persona{
     @Getter @Setter private Documento documento;
 
     // CONSTRUCTOR PRINCIPAL
-    public PersonaHumana(TipoDocumento tipoDoc, String nroDoc, String nombre, String apellido, String mail, String telefono, String direccion, String fechaNacimiento) {
+    public PersonaHumana(TipoDocumento tipoDoc, String nroDoc, String nombre, String apellido, MedioDeContacto medioDeContacto, String direccion, String fechaNacimiento) {
         this.documento = new Documento(nroDoc,tipoDoc);
         this.nombre = nombre;
         this.apellido = apellido;
         this.mediosDeContacto = new ArrayList<MedioDeContacto>();
-        this.mediosDeContacto.add(new MedioDeContacto(TipoMedioDeContacto.MAIL, mail));
-        if (telefono != null){
-            this.mediosDeContacto.add(new MedioDeContacto(TipoMedioDeContacto.TELEFONO, telefono));
-        }
+        this.mediosDeContacto.add(medioDeContacto);
         this.direccion = direccion;
         this.tipoPersona = TipoPersona.PH;
         this.fechaNacimiento = LocalDate.parse(fechaNacimiento);
