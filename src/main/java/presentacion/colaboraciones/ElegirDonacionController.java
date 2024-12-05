@@ -16,9 +16,14 @@ public class ElegirDonacionController implements Handler {
     public void handle(@NotNull Context context) throws Exception {
 
         if (Objects.equals(context.sessionAttribute("logueado"), true)) {
-            Map<String, Object> model = new HashMap<>();
+            Map<String, Object> model = context.sessionAttribute("model");
+            if (model == null) {
+                model = new HashMap<>();
+                context.sessionAttribute("model", model);
+            }
             TipoPersona tipoPersona = context.sessionAttribute("tipoPersona");
-            //model.put("tipoPer", tipoPersona);
+            model.put("nombreUsuario", context.sessionAttribute("nombreUsuario"));
+
             if (tipoPersona == TipoPersona.PJ) {
                 context.render("templates/elegirDonacionJuridica.mustache",model);
             } else {
