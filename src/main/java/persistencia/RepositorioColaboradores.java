@@ -7,6 +7,7 @@ import modelo.colaboracion.DonarDinero;
 import modelo.colaboracion.Vianda;
 import modelo.contrasenia.PasswordGenerator;
 import modelo.elementos.Heladera;
+import modelo.excepciones.ExcepcionValidacion;
 import modelo.notificador.Notificador;
 import modelo.personas.*;
 
@@ -32,6 +33,13 @@ public class RepositorioColaboradores {
         return instancia;
     }
 
+    public static RepositorioColaboradores getInstance(){
+        if(instancia == null){
+            throw new ExcepcionValidacion("No fue instanciado en el repositorio!");
+        }
+        return instancia;
+    }
+
     public PersonaHumana existePersonaFisica(String nroDoc, TipoDocumento tipoDoc) {
         TypedQuery<PersonaHumana> query = em.createQuery(
                 "SELECT p FROM PersonaHumana p WHERE p.documento.numeroDoc = :numeroDoc AND p.documento.tipoDoc = :tipoDoc",
@@ -39,6 +47,19 @@ public class RepositorioColaboradores {
         );
         query.setParameter("numeroDoc", nroDoc);
         query.setParameter("tipoDoc", tipoDoc);
+        try {
+            return query.getSingleResult();
+        } catch (NoResultException e) {
+            return null;
+        }
+    }
+
+    public PersonaHumana existePersonaJuridica(Integer cuit) {
+        TypedQuery<PersonaHumana> query = em.createQuery(
+                "SELECT p FROM PersonaJuridica p WHERE p.cuit = :nroCuit ", //revisar que este bien
+                PersonaHumana.class
+        );
+        query.setParameter("nroCuit", cuit);
         try {
             return query.getSingleResult();
         } catch (NoResultException e) {
@@ -80,7 +101,12 @@ public class RepositorioColaboradores {
 
     public void registrarColaboradorFisico(TipoDocumento tipoDoc, String nroDoc, String nombre, String apellido, String mail, String telefono, String direccion, String fechaNacimiento) {
 
-        PersonaHumana persona = new PersonaHumana(tipoDoc, nroDoc, nombre, apellido, mail, telefono, direccion, fechaNacimiento);
+        MedioDeContacto medioContactoMail = new MedioDeContacto(TipoMedioDeContacto.MAIL, mail);
+        PersonaHumana persona = new PersonaHumana(tipoDoc, nroDoc, nombre, apellido, medioContactoMail, direccion, fechaNacimiento);
+        if(mail.equals("")){
+            MedioDeContacto medioContactoTelefono = new MedioDeContacto(TipoMedioDeContacto.TELEFONO, telefono);
+            persona.agregarMediosDeContacto(medioContactoMail);
+        }
         Colaborador colaborador = new Colaborador(persona);
 
         em.getTransaction().begin();
@@ -89,6 +115,32 @@ public class RepositorioColaboradores {
         em.getTransaction().commit();
 
         String mensajeBienvenida = "Bienvenido a la plataforma " + nombre + ". Ojala que te diviertas";
+
+        Notificador.notificarXNuevoUsuario(mensajeBienvenida, colaborador);
+
+    }
+
+    public void registrarColaboradorJuridico(String razonSocial, TipoJuridico tipoJuridico, Rubro rubro, Integer cuit, String telefono, String email) {
+
+
+
+        MedioDeContacto medioContactoMail = new MedioDeContacto(TipoMedioDeContacto.MAIL, email);
+
+        PersonaJuridica persona = new PersonaJuridica(cuit, razonSocial, tipoJuridico, rubro, medioContactoMail);
+
+        if(email.equals("")){
+            MedioDeContacto medioContactoTelefono = new MedioDeContacto(TipoMedioDeContacto.TELEFONO, telefono);
+            persona.agregarMediosDeContacto(medioContactoMail);
+        }
+
+        Colaborador colaborador = new Colaborador(persona);
+
+        em.getTransaction().begin();
+        em.persist(persona);
+        em.persist(colaborador);
+        em.getTransaction().commit();
+
+        String mensajeBienvenida = "Bienvenido a la plataforma " + razonSocial + ". Ojala que te diviertas";
 
         Notificador.notificarXNuevoUsuario(mensajeBienvenida, colaborador);
 

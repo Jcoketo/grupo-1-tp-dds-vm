@@ -253,18 +253,31 @@
             <label for="tipo">Tipo</label>
             <select id="tipo" name="tipo" required>
                 <option value="" disabled selected>Selecciona un tipo</option>
-                <option value="sociedades">Sociedades civiles y comerciales</option>
-                <option value="corporaciones">Corporaciones y fundaciones</option>
+                <option value="1">Gubernamental</option>
+                <option value="2">Organización No Gubernamental</option>
+                <option value="3">Empresa</option>
+                <option value="4">Institución</option>
             </select>
 
+             <label for="cuit">CUIT/CUIL</label>
+             <input type="text" id="cuit" name="cuit" required>
+
             <label for="rubro">Rubro</label>
-            <input type="text" id="rubro" name="rubro" required>
+                        <select id="rubro" name="rubro" required>
+                            <option value="" disabled selected>Selecciona un tipo</option>
+                            <option value="1">Gastronomía</option>
+                            <option value="2">Electrónica</option>
+                            <option value="3">Articulos para el hogar</option>
+                        </select>
 
             <label for="telefono-representante">Número de Teléfono del Representante</label>
             <input type="tel" id="telefono-representante" name="telefono-representante" required>
 
             <label for="email">Email</label>
             <input type="email" id="email" name="email" required>
+
+            <label for="username">Nombre de usuario</label>
+            <input type="text" id="username" name="username" required>
 
             <label for="password">Contraseña</label>
             <input type="password" id="password" name="password" required>
