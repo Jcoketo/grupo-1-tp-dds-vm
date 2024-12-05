@@ -32,10 +32,15 @@ public class RepositorioUsuarios {
         return instancia;
     }
 
-    public void registrarUsuario(String mail, String username, String password) {
-            em.getTransaction().begin();
-            em.persist(new Usuario(mail, username, password));
-            em.getTransaction().commit();
+//    public void registrarUsuario(String mail, String username, String password) {
+//            em.getTransaction().begin();
+//            em.persist(new Usuario(mail, username, password));
+//            em.getTransaction().commit();
+//    }
+
+    public void registrarSinCommit(String mail, String username, String password) {
+        em.getTransaction().begin();
+        em.persist(new Usuario(mail, username, password));
     }
 
     public String traerClavexUsuario(String mail) {

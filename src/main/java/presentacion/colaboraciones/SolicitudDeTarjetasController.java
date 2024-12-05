@@ -2,6 +2,8 @@ package presentacion.colaboraciones;
 
 import io.javalin.http.Context;
 import io.javalin.http.Handler;
+import modelo.authService.AuthServiceColaboracion;
+import modelo.authService.AuthServiceColaborador;
 import modelo.excepciones.ExcepcionValidacion;
 import org.jetbrains.annotations.NotNull;
 import persistencia.RepositorioColaboradores;
@@ -26,16 +28,17 @@ public class SolicitudDeTarjetasController implements Handler {
             context.sessionAttribute("model", model);
         }
 
+        Integer IdPersona = context.sessionAttribute("idPersona");
 
-        Integer IdPersona = context.sessionAttribute("IdPersona");
 
         try {
-
-
+            AuthServiceColaboracion.registrarPersonasVulnerables(IdPersona);
 
         } catch (ExcepcionValidacion e) {
             e.getMessage();
-            context.redirect("/error");
+            context.redirect("/errorRegistro");
         }
+
+        context.redirect("/elegirDonacion");
     }
 }

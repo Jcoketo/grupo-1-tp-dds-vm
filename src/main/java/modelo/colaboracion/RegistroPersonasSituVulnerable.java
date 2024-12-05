@@ -20,10 +20,11 @@ public class RegistroPersonasSituVulnerable extends Colaboracion{
     private Integer cantidadTarjetas;
 
     @OneToMany
+    @JoinColumn(name= "colaboracion_id", referencedColumnName = "id")
     private List<TarjetaPlastica> tarjetasDisponibles;
 
-    @OneToMany
-    private List<TarjetaPlastica> tarjetasRepartidas;
+//    @OneToMany
+//    private List<TarjetaPlastica> tarjetasRepartidas;
 
     @Setter private static Double coeficiente = 2.0;
 
@@ -33,7 +34,6 @@ public class RegistroPersonasSituVulnerable extends Colaboracion{
     public RegistroPersonasSituVulnerable(Integer cantidadTarjetas) {
         this.tiposPersonasHabilitadas = Arrays.asList(TipoPersona.PH);
         this.tarjetasDisponibles = new ArrayList<TarjetaPlastica>();
-        this.tarjetasRepartidas = new ArrayList<TarjetaPlastica>();
 
         this.cantidadTarjetas = cantidadTarjetas;
     }
@@ -41,15 +41,23 @@ public class RegistroPersonasSituVulnerable extends Colaboracion{
     public RegistroPersonasSituVulnerable(LocalDate fechaDonacion, Integer cantidadTarjetas) {
         this.tiposPersonasHabilitadas = Arrays.asList(TipoPersona.PH);
         this.tarjetasDisponibles = new ArrayList<TarjetaPlastica>();
-        this.tarjetasRepartidas = new ArrayList<TarjetaPlastica>();
 
         this.cantidadTarjetas = cantidadTarjetas;
         this.fechaColaboracion = fechaDonacion;
     }
 
+    public RegistroPersonasSituVulnerable(Integer cantidadTarjetas, List<TarjetaPlastica> tarjetasDisponibles, LocalDate fechaDonacion) {
+        this.tiposPersonasHabilitadas = Arrays.asList(TipoPersona.PH);
+        this.tarjetasDisponibles = new ArrayList<TarjetaPlastica>();
+        this.tarjetasDisponibles = tarjetasDisponibles;
+        this.cantidadTarjetas = cantidadTarjetas;
+
+    }
+
     public RegistroPersonasSituVulnerable() {
 
     }
+
 
     @Override
     public void hacerColaboracion(Colaborador colaborador) {

@@ -6,9 +6,9 @@ import modelo.authService.AuthServiceColaborador;
 import modelo.excepciones.ExcepcionValidacion;
 import modelo.authService.AuthServiceUsuario;
 import modelo.personas.TipoDocumento;
+import modelo.validador.Usuario;
 import org.jetbrains.annotations.NotNull;
 
-import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -26,7 +26,7 @@ public class CuentaFisicaCreadaController implements Handler {
             context.sessionAttribute("model", model);
         }
         model.put("nombreUsuario", context.sessionAttribute("nombreUsuario"));
-        context.render("templates/elegirRegistroCuenta.mustache", model);
+
 
         String tipoDoc = context.formParam("tipoDoc");
         String nroDoc = context.formParam("nroDoc");
@@ -77,25 +77,19 @@ public class CuentaFisicaCreadaController implements Handler {
             return;
         }
         TipoDocumento tipoDocumentoEnum;
-        try {
-            tipoDoc = tipoDoc.toUpperCase();
-            tipoDocumentoEnum = TipoDocumento.valueOf(tipoDoc);
-        } catch (IllegalArgumentException e) {
-            model.put("error", "El tipo de documento no es válido");
-            //context.status(400);
-            context.redirect("/crearCuentaFisica");
-            return;
+        switch (tipoDoc){
+            case "01" -> tipoDocumentoEnum = TipoDocumento.DNI;
+            case "02" -> tipoDocumentoEnum = TipoDocumento.LC;
+            case "03" -> tipoDocumentoEnum = TipoDocumento.LE;
+            default -> throw new ExcepcionValidacion("Unexpected value: " + tipoDoc);
         }
 
-
         try {
-            AuthServiceUsuario.registrarUsuario(email, username, password);
-            AuthServiceColaborador.registrarColaboradorFisico(tipoDocumentoEnum, nroDoc, nombre, apellido, email, telefono, direccion, fechaNacimiento);
+            Usuario usuario = AuthServiceUsuario.validarUsuario(email, username, password);
+            AuthServiceColaborador.registrarColaboradorFisico(usuario, tipoDocumentoEnum, nroDoc, nombre, apellido, email, telefono, direccion, fechaNacimiento);
 
         } catch (ExcepcionValidacion e) {
-            // TODO ROLLBACK
             model.put("error", e.getMessage());
-            //context.status(400);
             context.redirect("/crearCuentaFisica");
             return;
         }
