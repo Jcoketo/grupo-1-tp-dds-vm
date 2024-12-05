@@ -5,15 +5,7 @@ import io.javalin.Javalin;
 import persistencia.*;
 import presentacion.InicioController;
 import presentacion.colaboraciones.*;
-import presentacion.gestorCuentas.CrearCuentaFisicaController;
-import presentacion.gestorCuentas.CrearCuentaJuridicaController;
-import presentacion.gestorCuentas.CuentaCreadaController;
-import presentacion.gestorCuentas.CuentaFisicaCreadaController;
-import presentacion.gestorCuentas.CuentaJuridicaCreadaController;
-import presentacion.gestorCuentas.ElegirRegistroCuentaController;
-import presentacion.gestorCuentas.PerfilController;
-import presentacion.gestorCuentas.ProcessLoginController;
-import presentacion.gestorCuentas.ShowLoginController;
+import presentacion.gestorCuentas.*;
 import presentacion.heladera.AceptarAgregarHeladeraController;
 import presentacion.heladera.AgregarHeladeraController;
 import presentacion.heladera.HeladeraAgregadaController;
@@ -218,6 +210,12 @@ public class Router {
             path("/perfil", () -> {
                 before(new AutorizacionMiddleware().setDebeSerLogueado());
                 get(new PerfilController(repoColab));
+            });
+
+            path("/configurarPerfil", () -> {
+                before(new AutorizacionMiddleware().setDebeSerLogueado());
+                get(new ConfigurarPerfilController(repoColab));
+                post(new ConfigurarPerfilFinalizadoController(repoColab));
             });
 
             path("/misColaboraciones", () -> {

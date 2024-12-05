@@ -108,7 +108,7 @@ public class CuentaJuridicaCreadaController implements Handler {
         }
 
         try {
-            AuthServiceUsuario.registrarUsuario(email, username, password);
+            //AuthServiceUsuario.registrarUsuario(email, username, password);
             AuthServiceColaborador.registrarColaboradorJuridico(razonSocial, tipoJuridico, rubroJuridico, cuit, telefono, email);
 
         } catch (ExcepcionValidacion e) {
