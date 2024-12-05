@@ -55,7 +55,6 @@ public class Router {
         RepositorioVisitas repoVisitas = RepositorioVisitas.getInstancia(entityManager);
         RepositorioUsuarios repoUsuarios = RepositorioUsuarios.getInstancia(entityManager);
 
-
         /* *************************************************************************** */
 
         // ------------------------------------   RUTAS   ------------------------------------------------
@@ -98,16 +97,6 @@ public class Router {
                 before(new AutorizacionMiddleware().setDebeSerLogueado());
                 get(new ElegirDonacionController());
             });
-
-//            path("/elegirDonacionFisica", () -> {
-//                before(new AutorizacionMiddleware().setDebeSerLogueado());
-//                get(new ElegirDonacionFisicaController());
-//            });
-//
-//            path("/elegirDonacionJuridica", () -> {
-//                before(new AutorizacionMiddleware().setDebeSerLogueado());
-//                get(new ElegirDonacionJuridicaController());
-//            });
 
             path("/donarVianda", () -> {
                 //before(new AutorizacionMiddleware().setDebeSerLogueado().setDebeSerPF());
