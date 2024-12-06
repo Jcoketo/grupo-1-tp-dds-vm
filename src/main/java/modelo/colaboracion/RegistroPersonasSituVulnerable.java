@@ -1,11 +1,13 @@
 package modelo.colaboracion;
 
+import lombok.Getter;
 import lombok.Setter;
 import modelo.elementos.TarjetaPlastica;
 import modelo.personas.Colaborador;
 import modelo.personas.PersonaVulnerable;
 import modelo.personas.TipoPersona;
 import javax.persistence.*;
+import javax.ws.rs.DefaultValue;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -17,14 +19,18 @@ import java.util.List;
 public class RegistroPersonasSituVulnerable extends Colaboracion{
 
     @Column
+    @Setter
     private Integer cantidadTarjetas;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.PERSIST)
     @JoinColumn(name= "colaboracion_id", referencedColumnName = "id")
+    @Getter
     private List<TarjetaPlastica> tarjetasDisponibles;
 
-//    @OneToMany
-//    private List<TarjetaPlastica> tarjetasRepartidas;
+    @Column
+    @DefaultValue("0")
+    @Getter @Setter
+    private Integer cantidadRepartida;
 
     @Setter private static Double coeficiente = 2.0;
 
@@ -36,6 +42,8 @@ public class RegistroPersonasSituVulnerable extends Colaboracion{
         this.tarjetasDisponibles = new ArrayList<TarjetaPlastica>();
 
         this.cantidadTarjetas = cantidadTarjetas;
+        this.cantidadRepartida = 0;
+
     }
     // CONSTRUCTOR PARA IMPORTADOR SCV
     public RegistroPersonasSituVulnerable(LocalDate fechaDonacion, Integer cantidadTarjetas) {
@@ -44,6 +52,7 @@ public class RegistroPersonasSituVulnerable extends Colaboracion{
 
         this.cantidadTarjetas = cantidadTarjetas;
         this.fechaColaboracion = fechaDonacion;
+        this.cantidadRepartida = 0;
     }
 
     public RegistroPersonasSituVulnerable(Integer cantidadTarjetas, List<TarjetaPlastica> tarjetasDisponibles, LocalDate fechaDonacion) {
@@ -51,6 +60,7 @@ public class RegistroPersonasSituVulnerable extends Colaboracion{
         this.tarjetasDisponibles = new ArrayList<TarjetaPlastica>();
         this.tarjetasDisponibles = tarjetasDisponibles;
         this.cantidadTarjetas = cantidadTarjetas;
+        this.cantidadRepartida = 0;
 
     }
 
@@ -61,15 +71,15 @@ public class RegistroPersonasSituVulnerable extends Colaboracion{
 
     @Override
     public void hacerColaboracion(Colaborador colaborador) {
-        String text = validar(colaborador);
-        if(text == null){
+        //String text = validar(colaborador);
+        //if(text == null){
             incrementarPuntos(colaborador);
-            colaborador.agregarColaboracion(this);
-        }
-        else {
-            System.out.println("Error!!!");
-            System.out.println(text);
-        }
+            //colaborador.agregarColaboracion(this);
+       // }
+        //else {
+           // System.out.println("Error!!!");
+            //System.out.println(text);
+        //}
     }
 
     @Override
