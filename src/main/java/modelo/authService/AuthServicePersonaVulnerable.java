@@ -17,7 +17,11 @@ public class AuthServicePersonaVulnerable {
     private static RepositorioColaboradores repoColab = RepositorioColaboradores.getInstancia();
     private static RepositorioPersonasVulnerables repoPersVuln = RepositorioPersonasVulnerables.getInstancia();
 
-    public static void procesarAltaPersonaVulnerable(Integer idPersona, String nombre, TipoDocumento tipoDoc, String numeroDocumento, String domicilio, String nroTarjeta, Integer cantidadMenores) {
+    public static void procesarAltaPersonaVulnerable(Integer idPersona, String nombre, TipoDocumento tipoDoc, String numeroDocumento, String domicilio, String nroTarj, Integer cantidadMenores) {
+
+        //Con esto sacamos los 0s del id autogenerado
+        Integer nroTarj2 = Integer.parseInt(nroTarj);
+        String nroTarjeta = nroTarj2.toString();
 
         PersonaHumana persona = repoColab.buscarPersonaPorId(idPersona);
         Colaborador colaborador = repoColab.buscarColaboradorXIdPersona(idPersona);
