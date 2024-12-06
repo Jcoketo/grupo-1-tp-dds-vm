@@ -2,6 +2,7 @@ package modelo.authService;
 
 import modelo.colaboracion.*;
 import modelo.elementos.Heladera;
+import modelo.elementos.PuntoEstrategico;
 import modelo.elementos.TarjetaPlastica;
 import modelo.excepciones.ExcepcionValidacion;
 import modelo.personas.Colaborador;
@@ -86,7 +87,15 @@ public class AuthServiceColaboracion {
         repoColab.nuevaColaboracion(colab, registroPersonasSituVulnerable);
     }
 
-    public static void registrarColaboracionHeladera() {
+    public static void registrarColaboracionHeladera(Integer idPersona, String nombre, LocalDate fechaInicio, Integer capacidad, Boolean activa, String direccion) {
+        Colaborador colab = repoColab.buscarColaboradorXIdPersona(idPersona);
+        PuntoEstrategico puntoColocacion = new PuntoEstrategico(direccion);
+
+        Heladera heladeraNueva = new Heladera(nombre, capacidad, puntoColocacion, activa, fechaInicio);
+
+        repoHeladeras.agregarHeladera(heladeraNueva);
+
+
 
     }
 }
