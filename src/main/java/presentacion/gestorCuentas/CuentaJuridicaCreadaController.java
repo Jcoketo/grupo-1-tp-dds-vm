@@ -8,6 +8,7 @@ import modelo.colaboracion.MotivoDistribucion;
 import modelo.excepciones.ExcepcionValidacion;
 import modelo.personas.Rubro;
 import modelo.personas.TipoJuridico;
+import modelo.validador.Usuario;
 import org.jetbrains.annotations.NotNull;
 import persistencia.RepositorioColaboradores;
 
@@ -108,13 +109,11 @@ public class CuentaJuridicaCreadaController implements Handler {
         }
 
         try {
-            //AuthServiceUsuario.registrarUsuario(email, username, password);
-            AuthServiceColaborador.registrarColaboradorJuridico(razonSocial, tipoJuridico, rubroJuridico, cuit, telefono, email);
+            Usuario usuario = AuthServiceUsuario.validarUsuario(email, username, password);
+            AuthServiceColaborador.registrarColaboradorJuridico(usuario, razonSocial, tipoJuridico, rubroJuridico, cuit, telefono, email);
 
         } catch (ExcepcionValidacion e) {
-            // TODO ROLLBACK
-            model.put("errorJuridico", e.getMessage());
-            //context.status(400);
+            model.put("error", e.getMessage());
             context.redirect("/crearCuentaJuridica");
             return;
         }

@@ -56,7 +56,7 @@ public class AuthServiceColaboracion {
             Vianda vianda = origen.conocerVianda(i);
             viandas.add(vianda);
         }
-        //List<Vianda> viandas = repoHeladeras.obtenerViandasDeHeladera(origen, cantidadViandas);
+
         DistribucionDeViandas distribucion = new DistribucionDeViandas(origen, destino, motivoDistribucion, LocalDate.now());
         distribucion.setViandas(viandas);
         distribucion.hacerColaboracion(colab);
@@ -72,6 +72,11 @@ public class AuthServiceColaboracion {
     public static void registrarPersonasVulnerables(Integer idPersona){
         Colaborador colab = repoColab.buscarColaboradorXIdPersona(idPersona);
 
+        RegistroPersonasSituVulnerable colaboracion = repoColab.traerColaboradoresXColaboradorPersonaSitu(colab);
+
+        if ( (colaboracion.getTarjetasDisponibles().size() - colaboracion.getCantidadRepartida() > 0 ) )
+            throw new ExcepcionValidacion("Tienes tarjetas para repartir!");
+
         List<TarjetaPlastica> tarjetas = repoTarjetas.crearNTarjetasPlasticas(2);
 
         RegistroPersonasSituVulnerable registroPersonasSituVulnerable = new RegistroPersonasSituVulnerable(2, tarjetas, LocalDate.now());
@@ -79,5 +84,9 @@ public class AuthServiceColaboracion {
         colab.agregarColaboracion(registroPersonasSituVulnerable);
 
         repoColab.nuevaColaboracion(colab, registroPersonasSituVulnerable);
+    }
+
+    public static void registrarColaboracionHeladera() {
+
     }
 }

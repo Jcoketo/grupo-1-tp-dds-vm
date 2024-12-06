@@ -16,6 +16,7 @@ public abstract class Colaboracion {
 
     @Id
     @GeneratedValue
+    @Getter
     private int id;
 
     @Transient

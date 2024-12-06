@@ -2,6 +2,7 @@ package modelo.colaboracion;
 
 import lombok.Setter;
 import modelo.elementos.Heladera;
+import modelo.elementos.PuntoEstrategico;
 import modelo.personas.Colaborador;
 import modelo.personas.TipoPersona;
 import javax.persistence.*;
@@ -30,15 +31,9 @@ public class HacerseCargoHeladera extends Colaboracion{
 
     @Override
     public void hacerColaboracion(Colaborador colaborador) {
-        String text = validar(colaborador);
-        if(text == null){
-            incrementarPuntos(colaborador);
-            colaborador.agregarColaboracion(this);
-        }
-        else {
-            System.out.println("Error!!!");
-            System.out.println(text);
-        }
+        this.validar(colaborador);
+        incrementarPuntos(colaborador);
+        colaborador.agregarColaboracion(this);
     }
 
     @Override
