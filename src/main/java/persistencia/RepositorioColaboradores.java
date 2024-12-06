@@ -217,6 +217,11 @@ public class RepositorioColaboradores {
     }
 
 
+    public void actualizarPersona(Persona persona) {
+        em.getTransaction().begin();
+        em.persist(persona);
+        em.getTransaction().commit();
+    }
 
     /*public MedioDeContacto existeMail(String mail) {
         TypedQuery<MedioDeContacto> query = em.createQuery("SELECT m FROM MedioDeContacto m WHERE m.contacto = :mail", MedioDeContacto.class);

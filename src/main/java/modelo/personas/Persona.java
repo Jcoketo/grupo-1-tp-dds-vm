@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.List;
 
 import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 
@@ -19,11 +20,12 @@ public abstract class Persona {
     private int id;
 
     @Column
-    @Getter protected String direccion;
+    @Getter @Setter protected String direccion;
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "persona_id", referencedColumnName = "id")
-    @Getter protected List<MedioDeContacto> mediosDeContacto;
+    @Getter @Setter
+    protected List<MedioDeContacto> mediosDeContacto;
 
     @Enumerated(EnumType.STRING)
     @Getter protected TipoPersona tipoPersona;
@@ -50,6 +52,14 @@ public abstract class Persona {
     }
     public String getTelefono() {
         return this.mediosDeContacto.stream().filter(m -> m.getMedio().equals(TipoMedioDeContacto.TELEFONO)).findFirst().get().getContacto();
+    }
+
+    public void setTelefono(String nuevoTelefono) {
+        this.mediosDeContacto.stream().filter(m -> m.getMedio().equals(TipoMedioDeContacto.TELEFONO)).findFirst().get().setContacto(nuevoTelefono);
+    }
+
+    public void setEmail(String nuevoEmail) {
+        this.mediosDeContacto.stream().filter(m -> m.getMedio().equals(TipoMedioDeContacto.MAIL)).findFirst().get().setContacto(nuevoEmail);
     }
 
     public String getUniqueIdentifier() {

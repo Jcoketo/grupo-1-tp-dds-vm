@@ -1,6 +1,7 @@
 package modelo.personas;
 
 import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 
@@ -16,7 +17,7 @@ public class MedioDeContacto {
     @Getter private TipoMedioDeContacto medio;
 
     @Column
-    @Getter private String contacto;
+    @Getter @Setter private String contacto;
 
     public MedioDeContacto(TipoMedioDeContacto medio, String contacto){
         this.medio = medio;

@@ -35,8 +35,8 @@ public class ConfigurarPerfilController implements Handler {
 
         if (tipoPer == TipoPersona.PH) {
             PersonaHumana persona = repoColaboradores.traerPersonaPorIdFisica(idPersona);
-            String nombreApellido = persona.getNombre() + " " + persona.getApellido();
-            model.put("nombre", nombreApellido);
+            model.put("nombre", persona.getNombre());
+            model.put("apellido", persona.getApellido());
             model.put("email", persona.getEmail());
             model.put("telefono", persona.getTelefono());
             model.put("direccion", persona.getDireccion());
