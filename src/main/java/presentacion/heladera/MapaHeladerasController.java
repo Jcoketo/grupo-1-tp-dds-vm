@@ -28,13 +28,18 @@ public class MapaHeladerasController implements Handler {
         // Obtén las heladeras del repositorio
 
 
+        try {
+            RepositorioHeladeras repoHeladeras = RepositorioHeladeras.getInstancia();
+            List<Heladera> heladeras = repoHeladeras.obtenerHeladeras();
 
-        RepositorioHeladeras repoHeladeras = RepositorioHeladeras.getInstancia();
-        List<Heladera> heladeras = repoHeladeras.obtenerHeladeras();
+            List<HeladeraOrigenDestino> HeladeraOrigenDestino = getHeladerasDistribucion(heladeras);
 
-        List<HeladeraOrigenDestino> HeladeraOrigenDestino = getHeladerasDistribucion(heladeras);
-
-        context.json(HeladeraOrigenDestino);
+            context.json(HeladeraOrigenDestino);
+        }catch (Exception e) {
+            e.printStackTrace();
+            context.status(500);
+            context.result("Error al obtener las heladeras");
+        }
         // Devuelve las heladeras en formato JSON
 
 
