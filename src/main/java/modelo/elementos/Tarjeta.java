@@ -1,6 +1,7 @@
 package modelo.elementos;
 
 import lombok.Getter;
+import lombok.Setter;
 import persistencia.RepositorioTarjetas;
 import pruebas.IdGenerator;
 
@@ -25,7 +26,8 @@ public class Tarjeta {
     @Getter protected List<UsoTarjeta> historialDeUsos;
 
     @Column
-    @Getter protected Boolean recibida;
+    @Getter @Setter
+    protected Boolean recibida;
 
     public Tarjeta(){
 

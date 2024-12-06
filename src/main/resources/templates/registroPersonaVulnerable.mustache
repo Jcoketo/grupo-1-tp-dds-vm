@@ -294,8 +294,8 @@
             <div class="form-group">
                 <label for="documento">¿Posee documento?</label>
                 <select id="documento" name="tieneDoc" required>
-                    <option value="si">Sí</option>
-                    <option value="no">No</option>
+                    <option value="0">No</option>
+                    <option value="1">Sí</option>
                 </select>
             </div>
 
@@ -307,8 +307,8 @@
             <div class="form-group">
                 <label for="domicilio">¿Posee domicilio?</label>
                 <select id="domicilio" name="tieneDom" required>
-                    <option value="si">Sí</option>
-                    <option value="no">No</option>
+                    <option value="0">No</option>
+                    <option value="1">Sí</option>
                 </select>
             </div>
 
@@ -325,14 +325,15 @@
             <div class="form-group">
                 <label for="menores">¿Posee menores a cargo?</label>
                 <select id="menores" name="tieneMenores" required>
-                    <option value="si">Sí</option>
-                    <option value="no">No</option>
+                    <option value="0">No</option>
+                    <option value="1">Sí</option>
                 </select>
             </div>
 
             <div class="form-group">
                 <label for="cantidad-menores">Cantidad de menores a cargo</label>
                 <select id="cantidad-menores" name="cantidadMenores">
+                    <option value="0">0</option>
                     <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
