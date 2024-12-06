@@ -35,6 +35,13 @@ public class RepositorioTarjetas {
         return instancia;
     }
 
+    public static RepositorioTarjetas getInstancia() {
+        if(instancia == null) {
+            throw new ExcepcionValidacion("No fue instanciado en el repositorio!");
+        }
+        return instancia;
+    }
+
     public String buscarUltimoId() {
         String ultimoId = em.createQuery(
                         "SELECT t.nro_tarjeta FROM TarjetaPlastica t ORDER BY t.nro_tarjeta DESC", String.class)

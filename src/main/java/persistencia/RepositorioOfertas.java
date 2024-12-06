@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 import modelo.colaboracion.Oferta;
 import modelo.colaboracion.TipoOferta;
+import modelo.excepciones.ExcepcionValidacion;
 import modelo.personas.Rubro;
 import modelo.personas.Tecnico;
 
@@ -26,6 +27,12 @@ public class RepositorioOfertas {
     public static RepositorioOfertas getInstancia(EntityManager em) {
         if(instancia == null) {
             instancia = new RepositorioOfertas(em);
+        }
+        return instancia;
+    }
+    public static RepositorioOfertas getInstancia() {
+        if(instancia == null) {
+            throw new ExcepcionValidacion("No fue instanciado en el repositorio!");
         }
         return instancia;
     }

@@ -2,6 +2,8 @@ package persistencia;
 
 import lombok.Getter;
 import modelo.elementos.SolicitudApertura;
+import modelo.excepciones.ExcepcionValidacion;
+
 import javax.persistence.EntityManager;
 
 
@@ -18,6 +20,12 @@ public class RepositorioSolicitudes {
     public static RepositorioSolicitudes getInstancia(EntityManager entityManager) {
         if(instancia == null) {
             instancia = new RepositorioSolicitudes(entityManager);
+        }
+        return instancia;
+    }
+    public static RepositorioSolicitudes getInstancia() {
+        if(instancia == null) {
+            throw new ExcepcionValidacion("No fue instanciado en el repositorio!");
         }
         return instancia;
     }

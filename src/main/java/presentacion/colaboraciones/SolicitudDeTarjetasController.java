@@ -3,7 +3,6 @@ package presentacion.colaboraciones;
 import io.javalin.http.Context;
 import io.javalin.http.Handler;
 import modelo.authService.AuthServiceColaboracion;
-import modelo.authService.AuthServiceColaborador;
 import modelo.excepciones.ExcepcionValidacion;
 import org.jetbrains.annotations.NotNull;
 import persistencia.RepositorioColaboradores;
@@ -33,12 +32,13 @@ public class SolicitudDeTarjetasController implements Handler {
 
         try {
             AuthServiceColaboracion.registrarPersonasVulnerables(IdPersona);
+            model.put("SolicitudAprobada", "Tu pedido de tarjetas esta en camino!");
 
         } catch (ExcepcionValidacion e) {
             e.getMessage();
-            context.redirect("/errorRegistro");
+            model.put("errorSolicitudTarjeta", e.getMessage());
         }
 
-        context.redirect("/elegirDonacion");
+        context.render("templates/elegirDonacionFisica.mustache", model);
     }
 }

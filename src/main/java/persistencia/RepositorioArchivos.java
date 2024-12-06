@@ -1,6 +1,7 @@
 package persistencia;
 
 import lombok.Getter;
+import modelo.excepciones.ExcepcionValidacion;
 import modelo.importador.RegistroLeido;
 
 import javax.persistence.Entity;
@@ -24,6 +25,12 @@ public class RepositorioArchivos {
     public static RepositorioArchivos getInstancia(EntityManager entityManager) {
         if(instancia == null) {
             instancia = new RepositorioArchivos(entityManager);
+        }
+        return instancia;
+    }
+    public static RepositorioArchivos getInstancia() {
+        if(instancia == null) {
+            throw new ExcepcionValidacion("No fue instanciado en el repositorio!");
         }
         return instancia;
     }

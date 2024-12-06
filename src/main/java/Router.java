@@ -108,6 +108,12 @@ public class Router {
                 post(new DonarDistribucionViandaRealizadaController());
             });
 
+            path("/donarHacerseCargoHeladera", () -> {
+                before(new AutorizacionMiddleware().setDebeSerLogueado().setDebeSerPF());
+                get(new DonarHacerseCargoHeladeraController());
+                post(new DonarHacerseCargoHeladeraRealizadaController());
+            });
+
             path("/graciasPorDonar", () -> {
                 before(new AutorizacionMiddleware().setDebeSerLogueado());
                 get(new GraciasPorDonarController());

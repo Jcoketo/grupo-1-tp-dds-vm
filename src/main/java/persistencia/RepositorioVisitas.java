@@ -1,6 +1,7 @@
 package persistencia;
 
 import lombok.Getter;
+import modelo.excepciones.ExcepcionValidacion;
 import modelo.personas.Tecnico;
 import modelo.personas.Visita;
 
@@ -16,6 +17,13 @@ public class RepositorioVisitas {
     public static RepositorioVisitas getInstancia(EntityManager entityManager) {
         if (instancia == null) {
             instancia = new RepositorioVisitas(entityManager);
+        }
+        return instancia;
+    }
+
+    public static RepositorioVisitas getInstancia() {
+        if(instancia == null) {
+            throw new ExcepcionValidacion("No fue instanciado en el repositorio!");
         }
         return instancia;
     }
