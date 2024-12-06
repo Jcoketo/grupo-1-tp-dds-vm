@@ -28,6 +28,12 @@ public class RepositorioPersonasVulnerables {
         }
         return instancia;
     }
+    public static RepositorioPersonasVulnerables getInstancia() {
+        if(instancia == null) {
+            throw new ExcepcionValidacion("No fue instanciado en el repositorio!");
+        }
+        return instancia;
+    }
 
     public void agregarPersonaVulnerable(PersonaVulnerable PV){
         validarInsertPersonaVulnerable(PV);

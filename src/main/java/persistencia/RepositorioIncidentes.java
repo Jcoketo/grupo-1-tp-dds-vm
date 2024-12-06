@@ -3,6 +3,7 @@ package persistencia;
 import lombok.Getter;
 import modelo.colaboracion.Oferta;
 import modelo.elementos.Incidente;
+import modelo.excepciones.ExcepcionValidacion;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -23,6 +24,12 @@ public class RepositorioIncidentes {
     public static RepositorioIncidentes getInstancia(EntityManager entityManager) {
         if(instancia == null) {
             instancia = new RepositorioIncidentes(entityManager);
+        }
+        return instancia;
+    }
+    public static RepositorioIncidentes getInstancia() {
+        if(instancia == null) {
+            throw new ExcepcionValidacion("No fue instanciado en el repositorio!");
         }
         return instancia;
     }

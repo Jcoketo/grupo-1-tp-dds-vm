@@ -11,6 +11,7 @@ import java.net.URL;
 import java.util.ArrayList;
 
 import modelo.elementos.Heladera;
+import modelo.excepciones.ExcepcionValidacion;
 import modelo.personas.Tecnico;
 
 import javax.persistence.EntityManager;
@@ -29,6 +30,13 @@ public class RepositoriosTecnicos{
     public static RepositoriosTecnicos getInstancia(EntityManager entityManager) {
         if (instancia == null) {
                 instancia = new RepositoriosTecnicos(entityManager);
+        }
+        return instancia;
+    }
+
+    public static RepositoriosTecnicos getInstancia() {
+        if(instancia == null) {
+            throw new ExcepcionValidacion("No fue instanciado en el repositorio!");
         }
         return instancia;
     }

@@ -3,6 +3,7 @@ package persistencia;
 import lombok.Getter;
 import modelo.colaboracion.Vianda;
 import modelo.elementos.Heladera;
+import modelo.excepciones.ExcepcionValidacion;
 import modelo.personas.Colaborador;
 
 import javax.persistence.*;
@@ -24,6 +25,12 @@ public class RepositorioHeladeras {
     public static RepositorioHeladeras getInstancia(EntityManager em) {
         if(instancia == null) {
             instancia = new RepositorioHeladeras(em);
+        }
+        return instancia;
+    }
+    public static RepositorioHeladeras getInstancia() {
+        if(instancia == null) {
+            throw new ExcepcionValidacion("No fue instanciado en el repositorio!");
         }
         return instancia;
     }

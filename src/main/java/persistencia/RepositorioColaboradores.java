@@ -35,6 +35,13 @@ public class RepositorioColaboradores {
         return instancia;
     }
 
+    public static RepositorioColaboradores getInstancia() {
+        if(instancia == null) {
+            throw new ExcepcionValidacion("No fue instanciado en el repositorio!");
+        }
+        return instancia;
+    }
+
 //    public static RepositorioColaboradores getInstance(){
 //        if(instancia == null){
 //            throw new ExcepcionValidacion("No fue instanciado en el repositorio!");

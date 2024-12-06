@@ -5,6 +5,7 @@ import java.util.List;
 
 import lombok.Getter;
 import modelo.elementos.Incidente;
+import modelo.excepciones.ExcepcionValidacion;
 import modelo.reportador.Reporte;
 
 import javax.persistence.EntityManager;
@@ -22,6 +23,12 @@ public class RepositorioReportes {
     public static RepositorioReportes getInstancia(EntityManager entityManager) {
         if(instancia == null) {
             instancia = new RepositorioReportes(entityManager);
+        }
+        return instancia;
+    }
+    public static RepositorioReportes getInstancia() {
+        if(instancia == null) {
+            throw new ExcepcionValidacion("No fue instanciado en el repositorio!");
         }
         return instancia;
     }

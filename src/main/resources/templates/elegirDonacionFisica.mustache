@@ -126,6 +126,12 @@
             font-size: 14px;
             margin-top: 10px;
         }
+
+        .solicitudAprobada {
+            color: green;
+            font-size: 14px;
+            margin-top: 10px;
+        }
     </style>
 </head>
 
@@ -230,6 +236,12 @@
         {{#errorRegistro}}
             <div class="error-message">{{errorRegistro}}</div>
         {{/errorRegistro}}
+        {{#errorSolicitudTarjeta}}
+            <div class="error-message">{{errorSolicitudTarjeta}}</div>
+        {{/errorSolicitudTarjeta}}
+        {{#SolicitudAprobada}}
+            <div class="solicitudAprobada">{{SolicitudAprobada}}</div>
+        {{/SolicitudAprobada}}
     </div>
 </main>
 
