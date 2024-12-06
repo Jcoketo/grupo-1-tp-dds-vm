@@ -4,6 +4,7 @@ import accessManagment.Roles;
 import lombok.Getter;
 import modelo.colaboracion.Colaboracion;
 import modelo.colaboracion.DonarDinero;
+import modelo.colaboracion.RegistroPersonasSituVulnerable;
 import modelo.colaboracion.Vianda;
 import modelo.contrasenia.PasswordGenerator;
 import modelo.elementos.Heladera;
@@ -106,7 +107,7 @@ public class RepositorioColaboradores {
         PersonaHumana persona = new PersonaHumana(tipoDoc, nroDoc, nombre, apellido, medioContactoMail, direccion, fechaNacimiento);
         if(!telefono.equals("")){
             MedioDeContacto medioContactoTelefono = new MedioDeContacto(TipoMedioDeContacto.TELEFONO, telefono);
-            persona.agregarMediosDeContacto(medioContactoMail);
+            persona.agregarMediosDeContacto(medioContactoTelefono);
         }
         Colaborador colaborador = new Colaborador(persona);
         em.getTransaction().begin();
@@ -121,7 +122,7 @@ public class RepositorioColaboradores {
 
     }
 
-    public void registrarColaboradorJuridico(String razonSocial, TipoJuridico tipoJuridico, Rubro rubro, String cuit, String telefono, String email) {
+    public void registrarColaboradorJuridico(Usuario usuario, String razonSocial, TipoJuridico tipoJuridico, Rubro rubro, String cuit, String telefono, String email) {
 
         MedioDeContacto medioContactoMail = new MedioDeContacto(TipoMedioDeContacto.MAIL, email);
 
@@ -129,12 +130,13 @@ public class RepositorioColaboradores {
 
         if(!telefono.equals("")){
             MedioDeContacto medioContactoTelefono = new MedioDeContacto(TipoMedioDeContacto.TELEFONO, telefono);
-            persona.agregarMediosDeContacto(medioContactoMail);
+            persona.agregarMediosDeContacto(medioContactoTelefono);
         }
 
         Colaborador colaborador = new Colaborador(persona);
 
         em.getTransaction().begin();
+        em.persist(usuario);
         em.persist(persona);
         em.persist(colaborador);
         em.getTransaction().commit();
@@ -181,6 +183,10 @@ public class RepositorioColaboradores {
         }
     }
 
+    public PersonaHumana buscarPersonaPorId(Integer idPersona) {
+        return em.find(PersonaHumana.class, idPersona);
+    }
+
     public Integer devolverIdUsuario(String email) {
         List<Persona> personas = em.createQuery("SELECT p FROM Persona p JOIN p.mediosDeContacto m WHERE m.contacto = :email", Persona.class)
                 .setParameter("email", email)
@@ -191,9 +197,9 @@ public class RepositorioColaboradores {
         return null;
     }
 
-    public void nuevaColaboracion(Colaborador colab, Colaboracion donacion) {
+    public void nuevaColaboracion(Colaborador colab, Colaboracion colaboracion) {
         em.getTransaction().begin();
-        em.persist(donacion);
+        em.persist(colaboracion);
         em.persist(colab);
         em.getTransaction().commit();
     }
@@ -214,6 +220,17 @@ public class RepositorioColaboradores {
     }
     public PersonaHumana traerPersonaPorIdFisica(Integer idPersona) {
         return em.find(PersonaHumana.class, idPersona);
+    }
+
+    public RegistroPersonasSituVulnerable traerColaboradoresXColaboradorPersonaSitu(Colaborador colab) {
+        List<Integer> idsColaboraciones = colab.getColaboracionesRealizadas().stream().map(Colaboracion::getId).toList();
+        TypedQuery<RegistroPersonasSituVulnerable> query = em.createQuery("SELECT c FROM RegistroPersonasSituVulnerable c WHERE c.id IN :colaboraciones ORDER BY c.id DESC", RegistroPersonasSituVulnerable.class);
+        query.setParameter("colaboraciones", idsColaboraciones).setMaxResults(1);
+        try {
+            return query.getSingleResult();
+        } catch (NoResultException e) {
+            return null;
+        }
     }
 
 

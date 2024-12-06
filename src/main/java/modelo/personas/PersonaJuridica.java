@@ -1,5 +1,6 @@
 package modelo.personas;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import modelo.elementos.PuntoEstrategico;
@@ -7,6 +8,7 @@ import modelo.elementos.Heladera;
 import modelo.recomendadorDePuntos.RecomendadorDePuntos;
 
 import javax.persistence.*;
+import javax.ws.rs.DefaultValue;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,6 +19,7 @@ public class PersonaJuridica extends Persona{
     @Getter private String razonSocial;
 
     @Column
+    @DefaultValue("0")
     private String CUIT;
 
     @Enumerated(EnumType.STRING)
