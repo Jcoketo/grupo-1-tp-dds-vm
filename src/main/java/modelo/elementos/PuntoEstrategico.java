@@ -30,6 +30,12 @@ public class PuntoEstrategico {
         this.areas = null;
     }
 
+    public PuntoEstrategico(String direccion){
+        this.latitud = 0.0;
+        this.longitud = 0.0;
+        this.direccion = direccion;
+    }
+
 
     public PuntoEstrategico() {
 

@@ -193,30 +193,31 @@ aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navig
 <main>
 <div class="container">
 <h1>Agregar heladera</h1>
-<form>
+<form action = "/agregarHeladera" method = "post">
 <div class="row mb-3">
 <div class="col-md-6">
 <label for="nombre" class="form-label">Nombre</label>
-<input type="text" class="form-control" id="nombre" placeholder="Heladera Campus UTN">
+<input type="text" class="form-control" id="nombre" name="nombre" placeholder="Heladera Campus UTN">
 </div>
 <div class="col-md-6">
 <label for="fechaInicio" class="form-label">Fecha de inicio de funcionamiento</label>
-<input type="date" class="form-control" id="fechaInicio">
+<input type="date" class="form-control" name="fecha-inicio" id="fechaInicio">
 </div>
 </div>
 
 <div class="row mb-3">
 <div class="col-md-6">
 <label for="capacidad" class="form-label">Capacidad (cant. de viandas)</label>
-<input type="number" class="form-control" id="capacidad" placeholder="18">
+<input type="number" class="form-control" id="capacidad" name = "capacidad" placeholder="18">
 </div>
 <div class="col-md-6">
 <div>
 <label for="activa" class="form-label">¿Está activa?</label>
 </div>
-<select class="form-select form-control" id="activa">
-<option>Sí</option>
-<option>No</option>
+<select class="form-select form-control" id="activa" name = "activa" required>
+<option value="" disabled selected>Selección</option>
+<option value= "1">Sí</option>
+<option value = "0">No</option>
 </select>
 </div>
 </div>
@@ -225,7 +226,7 @@ aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navig
 <div>
 <label for="ubicacion" class="form-label">Punto de colocación</label>
 </div>
-<select class="form-select form-control" id="ubicacion">
+<select class="form-select form-control" id="ubicacion" name  = "ubicacion">
 <option selected disabled>Seleccione una ubicación</option>
 <option value="Mozart 2300, CABA">Mozart 2300, CABA</option>
 <option value="Av. Rivadavia 3456, CABA">Av. Rivadavia 3456, CABA</option>
@@ -236,10 +237,15 @@ aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navig
 
 <div class="btn-group">
 <a href="/mapaHeladeras" class="btn-cancelar">Cancelar</a>
-<a href="/aceptarAgregarHeladera" class="btn-agregar">Agregar</a>
+<button type="submit" class="btn-agregar" href="perfil">Agregar</button>
 </div>
 </form>
 </div>
+
+{{#errorHeladera}}
+  <div class="error-message">{{errorHeladera}}</div>
+{{/errorHeladera}}
+
 </main>
 
 <footer class="footer-bg">

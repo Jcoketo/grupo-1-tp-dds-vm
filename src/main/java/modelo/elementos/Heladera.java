@@ -88,6 +88,17 @@ public class Heladera {
         this.habilitado = false;
     }
 
+    public Heladera(String nombre, Integer capacidadMaxima, PuntoEstrategico puntoEstrategico, Boolean Activa, LocalDate fechaFuncionamiento){
+
+        this.nombre = nombre;
+        this.viandasMaximas = capacidadMaxima;
+        this.fechaFuncionamiento = fechaFuncionamiento;
+        this.activa = true;
+        this.habilitado = false;
+        this.puntoEstrategico = puntoEstrategico;
+
+    }
+
     public Heladera() {
 
     }
