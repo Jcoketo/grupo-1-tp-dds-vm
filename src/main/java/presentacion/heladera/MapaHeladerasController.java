@@ -27,6 +27,8 @@ public class MapaHeladerasController implements Handler {
     public void handle(@NotNull Context context) throws Exception {
         // Obtén las heladeras del repositorio
 
+
+
         RepositorioHeladeras repoHeladeras = RepositorioHeladeras.getInstancia();
         List<Heladera> heladeras = repoHeladeras.obtenerHeladeras();
 
@@ -35,13 +37,7 @@ public class MapaHeladerasController implements Handler {
         context.json(HeladeraOrigenDestino);
         // Devuelve las heladeras en formato JSON
 
-        Map<String, Object> model = context.sessionAttribute("model");
-        if (model == null) {
-            model = new HashMap<>();
-            context.sessionAttribute("model", model);
-        }
-        model.put("nombreUsuario", context.sessionAttribute("nombreUsuario"));
-        context.render("templates/mapaHeladeras.mustache", model);
+
 
     }
 

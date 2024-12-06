@@ -5,6 +5,7 @@ import io.javalin.http.Handler;
 import lombok.Getter;
 import lombok.Setter;
 import modelo.elementos.Heladera;
+import modelo.excepciones.ExcepcionValidacion;
 import org.jetbrains.annotations.NotNull;
 import persistencia.RepositorioHeladeras;
 
@@ -24,6 +25,9 @@ public class DonarViandaController implements Handler {
 
         RepositorioHeladeras repoHeladeras = RepositorioHeladeras.getInstancia();
         List<HeladeraConDisponibilidad> heladeras = getHeladerasConDisponibilidad(repoHeladeras.obtenerHeladeras().stream().filter(Heladera::getActiva).toList());
+
+        if (heladeras == null)
+            throw new ExcepcionValidacion("No se pudieron obtener las heladeras");
 
 
         model.put("heladeras", heladeras);
