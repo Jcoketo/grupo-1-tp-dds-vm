@@ -16,7 +16,7 @@ public class CrearCuentaFisicaController implements Handler {
             model = new HashMap<>();
         }
         context.render("templates/crearCuentaFisica.mustache", model);
-        context.sessionAttribute("model", null);
+//        context.sessionAttribute("model", null);
 
 
     }

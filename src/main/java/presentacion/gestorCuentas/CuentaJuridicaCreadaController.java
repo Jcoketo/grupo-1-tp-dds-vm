@@ -110,7 +110,7 @@ public class CuentaJuridicaCreadaController implements Handler {
             AuthServiceColaborador.registrarColaboradorJuridico(usuario, razonSocial, tipoJuridico, rubroJuridico, cuit, telefono, email);
 
         } catch (ExcepcionValidacion e) {
-            model.put("error", e.getMessage());
+            model.put("errorJuridico", e.getMessage());
             context.redirect("/crearCuentaJuridica");
             return;
         }
