@@ -21,7 +21,7 @@ public class Tarjeta {
     @Column
     @Getter protected String nro_tarjeta;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.PERSIST)
     @JoinColumn(name="uso_tarjeta_id",referencedColumnName = "id")
     @Getter protected List<UsoTarjeta> historialDeUsos;
 

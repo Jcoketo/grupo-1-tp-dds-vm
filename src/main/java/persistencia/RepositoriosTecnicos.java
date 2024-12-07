@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 import modelo.elementos.Heladera;
 import modelo.excepciones.ExcepcionValidacion;
-import modelo.personas.Tecnico;
+import modelo.personas.*;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -141,4 +141,20 @@ public class RepositoriosTecnicos{
         return null; // En caso de no encontrar un técnico cercano
     }
 
-  }
+    public void registrarTecnico(String nombre, String apellido, TipoDocumento tipoDoc, String numeroDoc, String cuil, String mail, String telefono, Areas areaCobertura) {
+        MedioDeContacto medioMail = new MedioDeContacto(TipoMedioDeContacto.MAIL, mail);
+        PersonaHumana persona = new PersonaHumana(tipoDoc, numeroDoc, nombre, apellido, medioMail);
+
+        MedioDeContacto medioTelefonico;
+        if (!telefono.equals("")) {
+            medioTelefonico = new MedioDeContacto(TipoMedioDeContacto.TELEFONO, telefono);
+            persona.agregarMediosDeContacto(medioTelefonico);
+        }
+
+        RepositorioColaboradores repoColab = RepositorioColaboradores.getInstancia();
+        repoColab.actualizarPersona(persona);
+
+        Tecnico tecnico = new Tecnico(cuil, areaCobertura, persona);
+        this.agregar(tecnico);
+    }
+}
