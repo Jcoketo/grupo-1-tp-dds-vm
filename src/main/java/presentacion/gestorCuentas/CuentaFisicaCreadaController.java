@@ -89,7 +89,7 @@ public class CuentaFisicaCreadaController implements Handler {
             AuthServiceColaborador.registrarColaboradorFisico(usuario, tipoDocumentoEnum, nroDoc, nombre, apellido, email, telefono, direccion, fechaNacimiento);
 
         } catch (ExcepcionValidacion e) {
-            model.put("error", e.getMessage());
+            model.put("errorRegistroFisica", e.getMessage());
             context.redirect("/crearCuentaFisica");
             return;
         }
