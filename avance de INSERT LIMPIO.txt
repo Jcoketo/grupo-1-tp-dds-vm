@@ -1,0 +1,27 @@
+use maravilla;
+INSERT INTO maravilla.oferta 
+(id, descripcion, disponibilidad, imagen, nombre, puntosNecesarios, rubro, tipoOferta, colaborador_id) 
+VALUES 
+('1', 'AUTO', 1, 'auto.jpg', 'AUTO', 2000, 'ARTICULO_HOGAR', 'PRODUCTO', 4);
+
+INSERT INTO maravilla.oferta 
+(id, descripcion, disponibilidad, imagen, nombre, puntosNecesarios, rubro, tipoOferta, colaborador_id) 
+VALUES 
+('2', 'Barco de madera', 1, 'barco.jpg', 'BARCO', 5000, 'ARTICULO_HOGAR', 'PRODUCTO', 4);
+
+INSERT INTO maravilla.oferta 
+(id, descripcion, disponibilidad, imagen, nombre, puntosNecesarios, rubro, tipoOferta, colaborador_id) 
+VALUES 
+('3', 'Masajes', 1, 'masaje.avif', 'MASAJE', 3500, 'ARTICULO_HOGAR', 'SERVICIO', 4);
+
+INSERT INTO punto_estrategico (id, areas, direccion, latitud, longitud) VALUES
+(1, 'CABALLITO', 'Avenida 9 de Julio 1234, CABA', -34.603722, -58.381592),
+(2, 'BELGRANO', 'Avenida del Libertador 8500, CABA', -34.548935, -58.441023),
+(3, 'PALERMO', 'Avenida Caseros 2500, CABA', -34.628789, -58.391646),
+(4, 'RECOLETA', 'Avenida Rivadavia 8000, CABA', -34.633506, -58.456917);
+
+INSERT INTO heladera (id, activa, contadorFallasSemanal, contadorViandasColocadas, contadorViandasRetiradas, fechaFuncionamiento, habilitado, nombre, temperaturaMaxima, temperaturaMinima, tiempoActivo, viandasMaximas, punto_estrategico_id, persona_juridica_id) VALUES
+(1, b'1', 0, 0, 0, '2023-01-15', b'1', 'Heladera CABALLITO', 8.0, 2.0, 120, 2, 1, 1),
+(2, b'1', 0, 0, 0, '2023-02-10', b'1', 'Heladera BELGRANO', 7.5, 3.0, 90, 15, 2, 1),
+(3, b'0', 0, 0, 0, '2023-03-05', b'0', 'Heladera PALERMO', 10.0, 4.0, 50, 10, 3, 1),
+(4, b'1', 0, 0, 0, '2023-04-01', b'1', 'Heladera RECOLETA', 9.0, 2.5, 70, 3, 4, 1);
