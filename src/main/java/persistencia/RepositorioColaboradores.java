@@ -147,6 +147,7 @@ public class RepositorioColaboradores {
         em.persist(persona);
         em.persist(colaborador);
         em.getTransaction().commit();
+        // TODO verificar que no vuelva con NULL - todos los commits
 
         String mensajeBienvenida = "Bienvenido a la plataforma " + razonSocial + ". Ojala que te diviertas";
 

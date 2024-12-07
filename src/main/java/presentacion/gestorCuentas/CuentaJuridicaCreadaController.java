@@ -32,8 +32,8 @@ public class CuentaJuridicaCreadaController implements Handler {
             model = new HashMap<>();
             context.sessionAttribute("model", model);
         }
-        model.put("nombreUsuario", context.sessionAttribute("nombreUsuario"));
-        context.render("templates/elegirRegistroCuenta.mustache", model);
+//        model.put("nombreUsuario", context.sessionAttribute("nombreUsuario"));
+//        context.render("templates/elegirRegistroCuenta.mustache", model);
 
 
 
@@ -75,9 +75,6 @@ public class CuentaJuridicaCreadaController implements Handler {
             context.redirect("/crearCuentaJuridica");
             return;
         }
-
-        // hay que validad que no exista el mail en la base de datos
-        //todo
 
         Rubro rubroJuridico;
         switch (rubro) {
