@@ -23,7 +23,10 @@ public class inicioADMINController implements Handler {
             context.redirect("/login");
             return;
         }
-        if (context.sessionAttribute("rolUsuario") != Roles.ADMIN) {
+
+        Roles rol = (Roles) context.sessionAttribute("rolUsuario");
+
+        if (rol != Roles.ADMIN) {
             context.redirect("/404Error");
             return;
         }
