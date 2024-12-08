@@ -2,7 +2,7 @@
 USE MARAVILLA;
 INSERT INTO maravilla.usuario (id,hashedPassword,mail,username) 
 VALUES 
-('1', '$2a$10$/dC4vdLd7HuAGAsOELez8.BFL26boqGhJG9EQPDJT4VVtYuhgwQqW', 'cocomenazzi@hotmail.com', 'coketo');
+('1', '$2a$10$/dC4vdLd7HuAGAsOELez8.BFL26boqGhJG9EQPDJT4VVtYuhgwQqW', 'cocomenazzi@hotmail.com', 'USUARIO', 'coketo');
 /* mail: cocomenazzi@hotmail.com -- clave : cocoprobando  */
 
 USE MARAVILLA;
@@ -19,7 +19,7 @@ VALUES
 USE MARAVILLA;
 INSERT INTO maravilla.usuario (id, hashedPassword, mail, username)
 VALUES
-('2', '$2a$10$XqVMefdTJn3OFxSXopvpJ.gsjNduSh6wywwk33DYQe8CkEDtyzjCG', 'mlucia.gandur@gmail.com', 'LULA');
+('2', '$2a$10$XqVMefdTJn3OFxSXopvpJ.gsjNduSh6wywwk33DYQe8CkEDtyzjCG', 'mlucia.gandur@gmail.com', 'ADMIN', 'LULA');
 /* mail: mlucia.gandur@gmail.com  -- clave : luciaprobando */
 
 USE MARAVILLA;

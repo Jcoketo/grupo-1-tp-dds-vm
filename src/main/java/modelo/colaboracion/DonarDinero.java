@@ -37,6 +37,7 @@ public class DonarDinero extends Colaboracion{
         this.fechaColaboracion = fechaDonacion;
         this.monto = monto;
         this.frecuencia = FrecuenciaDonacion.UNICA; // Es unica? TODO
+        this.porCSV = Boolean.TRUE;
     }
 
     public DonarDinero() {

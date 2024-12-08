@@ -45,7 +45,7 @@ public class RegistroPersonasSituVulnerable extends Colaboracion{
         this.cantidadRepartida = 0;
 
     }
-    // CONSTRUCTOR PARA IMPORTADOR SCV
+    // CONSTRUCTOR PARA IMPORTADOR CSV
     public RegistroPersonasSituVulnerable(LocalDate fechaDonacion, Integer cantidadTarjetas) {
         this.tiposPersonasHabilitadas = Arrays.asList(TipoPersona.PH);
         this.tarjetas = new ArrayList<TarjetaPlastica>();
@@ -53,6 +53,7 @@ public class RegistroPersonasSituVulnerable extends Colaboracion{
         this.cantidadTarjetas = cantidadTarjetas;
         this.fechaColaboracion = fechaDonacion;
         this.cantidadRepartida = 0;
+        this.porCSV = Boolean.TRUE;
     }
 
     public RegistroPersonasSituVulnerable(Integer cantidadTarjetas, List<TarjetaPlastica> tarjetas, LocalDate fechaDonacion) {

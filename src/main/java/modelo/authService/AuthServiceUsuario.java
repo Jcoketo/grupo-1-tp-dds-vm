@@ -1,5 +1,6 @@
 package modelo.authService;
 
+import accessManagment.Roles;
 import modelo.excepciones.ExcepcionValidacion;
 import modelo.validador.Usuario;
 import modelo.validador.ValidadorDeContrasenias;
@@ -27,8 +28,8 @@ public class AuthServiceUsuario {
             throw new ExcepcionValidacion("La contraseña no es válida");
         }
         password = hashPassword(password);
-        return new Usuario(mail, username, password);
-//        repoUsuarios.registrarUsuario(mail, username, password);
+        return new Usuario(mail, username, password, Roles.USUARIO);
+        //repoUsuarios.registrarUsuario(mail, username, password);
     }
 
     public static boolean autenticarUsuario(String mail, String password) {

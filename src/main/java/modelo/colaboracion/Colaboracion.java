@@ -1,10 +1,12 @@
 package modelo.colaboracion;
 
 import lombok.Getter;
+import lombok.Setter;
 import modelo.personas.TipoPersona;
 import modelo.personas.Colaborador;
 
 import javax.persistence.*;
+import javax.ws.rs.DefaultValue;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -25,6 +27,11 @@ public abstract class Colaboracion {
     @Getter
     @Column
     protected LocalDate fechaColaboracion;
+
+    @Column
+    @Getter @Setter
+    @DefaultValue("0")
+    protected Boolean porCSV;
 
     public abstract void hacerColaboracion(Colaborador colaborador);
 

@@ -44,6 +44,7 @@ public class DonarVianda extends Colaboracion{
     public DonarVianda(LocalDate fechaDonacion) {
         this.tiposPersonasHabilitadas = Arrays.asList(TipoPersona.PH);
         this.fechaColaboracion = fechaDonacion;
+        this.porCSV = Boolean.TRUE;
     }
 
     public DonarVianda() {
