@@ -1,5 +1,6 @@
 package modelo.validador;
 
+import accessManagment.Roles;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -25,6 +26,11 @@ public class Usuario {
     @Getter
     @Column
     private String hashedPassword;
+
+    @Setter
+    @Getter
+    @Enumerated(EnumType.STRING)
+    private Roles rol;
 
     public Usuario(String mail, String username, String password) {
         this.mail = mail;

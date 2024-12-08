@@ -19,6 +19,8 @@ import presentacion.incidentes.ReportarFallaTecnicaController;
 import presentacion.incidentes.ReportarFallaTecnicaFinalizadaController;
 import presentacion.incidentes.VisualizarAlertasController;
 import presentacion.incidentes.VisualizarFallasTecnicasController;
+import presentacion.vistasAdmin.CargarSCVController;
+import presentacion.vistasAdmin.inicioADMINController;
 import presentacion.ofertas.AceptarAgregarProductoController;
 import presentacion.ofertas.AgregarProductosEmpresaController;
 import presentacion.ofertas.AgregarProductosEmpresaFinalizadoController;
@@ -59,6 +61,10 @@ public class Router {
 
             path("/inicio", () -> {
                 get(new InicioController());
+            });
+
+            path("/inicioADMIN", () -> {
+                get(new inicioADMINController());
             });
 
             path("/elegirRegistroCuenta", () -> {
@@ -112,6 +118,11 @@ public class Router {
             path("/graciasPorDonar", () -> {
                 before(new AutorizacionMiddleware().setDebeSerLogueado());
                 get(new GraciasPorDonarController());
+            });
+
+            path("/cargarSCV", () -> {
+                get(new CargarSCVController());
+                post(new SCVCargadoController(repoHeladeras));
             });
 
             path("/agregarHeladera", () -> {
