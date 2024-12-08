@@ -56,6 +56,15 @@ public class Colaborador {
         this.contadorViandasDonadasSemanal = 0;
     }
 
+    public Colaborador(Persona persona, String xCSV) {
+        this.persona = persona;
+        this.colaboracionesRealizadas = new ArrayList<>();
+        this.puntaje = 0.0;
+        this.validada = Boolean.FALSE;
+        this.canjesRealizados = new ArrayList<>();
+        this.contadorViandasDonadasSemanal = 0;
+    }
+
     public Colaborador(Persona persona) {
         this.persona = persona;
         this.colaboracionesRealizadas = new ArrayList<>();

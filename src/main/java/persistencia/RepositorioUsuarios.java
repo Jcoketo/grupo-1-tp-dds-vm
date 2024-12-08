@@ -1,5 +1,6 @@
 package persistencia;
 
+import accessManagment.Roles;
 import modelo.validador.Usuario;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
@@ -31,17 +32,6 @@ public class RepositorioUsuarios {
         return instancia;
     }
 
-//    public void registrarUsuario(String mail, String username, String password) {
-//            em.getTransaction().begin();
-//            em.persist(new Usuario(mail, username, password));
-//            em.getTransaction().commit();
-//    }
-
-    public void registrarSinCommit(String mail, String username, String password) {
-        em.getTransaction().begin();
-        em.persist(new Usuario(mail, username, password));
-    }
-
     public String traerClavexUsuario(String mail) {
         Usuario usuario = em.createQuery("SELECT u FROM Usuario u WHERE u.mail = :mail", Usuario.class)
                 .setParameter("mail", mail)
@@ -67,9 +57,15 @@ public class RepositorioUsuarios {
         }
     }
 
+    public void persistirUsuario(String mail, String username, String password, Roles rol) {
+        em.getTransaction().begin();
+        em.persist(new Usuario(mail, username, password, rol));
+        em.getTransaction().commit();
+    }
+
     /* PUEDE DEVOLVER NULL LA CONSULTA ENTONCES ROMPE PORQUE NO LA ESTABAMOS MANEJANDO
     public Boolean existeUsuario(String mail) {
-        Usuario usuario = em.createQuery("SELECT u FROM Usuario u WHERE u.mail = :mail", Usuario.class)
+        em.persist(new Usuario(mail, username, password, rol));o u WHERE u.mail = :mail", Usuario.class)
                 .setParameter("mail", mail)
                 .getSingleResult();
         //em.close();

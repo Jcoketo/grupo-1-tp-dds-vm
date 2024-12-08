@@ -1,22 +1,25 @@
 package modelo.importador;
 
+import modelo.authService.AuthServiceColaborador;
+import modelo.colaboracion.*;
+
 import modelo.importador.validaciones.ValidarLongitudes;
 import modelo.importador.validaciones.ValidarTipoDoc;
 import modelo.importador.validaciones.VerificarTipoDonacion;
 import modelo.personas.Colaborador;
 import modelo.personas.TipoDocumento;
-import persistencia.RepositorioHeladeras;
+import persistencia.RepositorioColaboradores;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 
-import static modelo.importador.AsignarColaborador.agregarColaboracion;
-import static modelo.importador.AsignarColaborador.crearColaborador;
 
 public class ProcesarCSV {
+    private static RepositorioColaboradores repoColab = RepositorioColaboradores.getInstancia();
 
-    public static void ProcesarCSV(List<RegistroLeido> registrosLeidos) {
-
-        RepositorioHeladeras repoHeladeras = RepositorioHeladeras.getInstancia();
+    public void ProcesarCSV(List<RegistroLeido> registrosLeidos) {
 
         for (RegistroLeido registro : registrosLeidos) {
 
@@ -25,85 +28,16 @@ public class ProcesarCSV {
             String nombre = registro.getNombre();
             String apellido = registro.getApellido();
             String mail = registro.getMail();
-            String fechaColab = registro.getFechaColab();         // FORMATO YYYY/MM/DD
+            String fecha = registro.getFechaDonacion(); // FORMATO YYYY/MM/DD
             String formaColaboracion = registro.getFormaColaboracion();
-            String monto = registro.getMonto();
-            String idHeladeraDestino = registro.getIdHeladeraDestino();
-            String tipoComida = registro.getTipoComida();
-            String fechaCaducidad = registro.getFechaCaducidad(); // FORMATO YYYY/MM/DD
-            String fechaDonacion = registro.getFechaDonacion();   // FORMATO YYYY/MM/DD
-            String entregada = registro.getEntregada();
-            String calorias = registro.getCalorias();
-            String peso = registro.getPeso();
-            String idHeladeraOrigen = registro.getIdHeladeraOrigen();
-            List<Integer> idViandas = registro.getIdViandas();
-            String motivoDistribucion = registro.getMotivoDistribucion();
-            List<Integer> idTarjetas = registro.getIdTarjetas();
-            String cantidadRepartida = registro.getCantidadRepartida();
+            String cantidad = registro.getCantidad();
             Integer record = registro.getRecord();
 
-            if (!esNumerico(nroDocumento) || !esNumerico(monto) || !esNumerico(idHeladeraDestino)
-                    || !esNumerico(calorias) || !esNumerico(peso) || !esNumerico(idHeladeraOrigen) || !esNumerico(cantidadRepartida)) {
-                String mensajeError = "Error en Sintaxis.         Linea: " + record;
-                EscribirLogError.escribirMensajeError(mensajeError);
-                continue; // busca el siguiente registro
-            }
-
-            Boolean error = Boolean.FALSE;
-
-            for (Integer idVianda : idViandas) {
-                if (!esNumerico(idVianda.toString())) {
-                    String mensajeError = "Error en Sintaxis.         Linea: " + record;
-                    EscribirLogError.escribirMensajeError(mensajeError);
-                    error = true;
-                    break;
-                }
-            }
-            if (error){
-                continue;
-            }
-
-            for (Integer idTarjeta : idTarjetas) {
-                if (!esNumerico(idTarjeta.toString())) {
-                    String mensajeError = "Error en Sintaxis.         Linea: " + record;
-                    EscribirLogError.escribirMensajeError(mensajeError);
-                    error = true;
-                    break;
-                }
-            }
-            if (error){
-                continue;
-            }
-
-            boolean errorEnLongitud = ValidarLongitudes.validarLongitudes(tipoDoc, nroDocumento, nombre, apellido, mail, fechaColab, formaColaboracion, fechaCaducidad,fechaDonacion,entregada, motivoDistribucion, tipoComida);
+            boolean errorEnLongitud = ValidarLongitudes.validarLongitudes(tipoDoc, nroDocumento, nombre, apellido, mail, fecha, formaColaboracion, cantidad);
             if (errorEnLongitud) {
                 String mensajeError = "Error en Sintaxis.         Linea: " + record;
                 EscribirLogError.escribirMensajeError(mensajeError);
                 continue; // busca el siguiente registro
-            }
-
-            if ( !fechaCaducidad.equals("") ){
-                if( !fechaCaducidad.matches("\\d{4}-\\d{2}-\\d{2}") ){
-                    String mensajeError = "Fecha de Caducidad Invalida. Linea: " + record;
-                    EscribirLogError.escribirMensajeError(mensajeError);
-                    continue; // busca el siguiente registro
-                }
-            }
-
-            if ( !fechaCaducidad.equals("") ){
-                if( !fechaCaducidad.matches("\\d{4}-\\d{2}-\\d{2}") ){
-                    String mensajeError = "Fecha de Caducidad Invalida. Linea: " + record;
-                    EscribirLogError.escribirMensajeError(mensajeError);
-                    continue; // busca el siguiente registro
-                }
-            }
-
-            if ( !fechaDonacion.equals("") ){
-                if( !fechaDonacion.matches("\\d{4}-\\d{2}-\\d{2}") ){
-                    String mensajeError = "Fecha de Donacion Invalida. Linea: " + record;
-                    EscribirLogError.escribirMensajeError(mensajeError);
-                    continue; // busca el siguiente registro
-                }
             }
 
             boolean errorEnTipoDonacion = VerificarTipoDonacion.verificarTipoDonacion(formaColaboracion);
@@ -113,6 +47,14 @@ public class ProcesarCSV {
                 continue; // busca el siguiente registro
             }
 
+            if ( !fecha.equals("") ){
+                if( !fecha.matches("\\d{4}-\\d{2}-\\d{2}") ){ // FORMATO YYYY/MM/DD
+                    String mensajeError = "Fecha de Donacion Invalida. Linea: " + record;
+                    EscribirLogError.escribirMensajeError(mensajeError);
+                    continue; // busca el siguiente registro
+                }
+            }
+
             TipoDocumento tipoDocumento = ValidarTipoDoc.validarTipoDocumento(tipoDoc);
             if (tipoDocumento == null) {
                 String mensajeError = "Tipo de Documento Invalido. Linea: " + record;
@@ -120,62 +62,41 @@ public class ProcesarCSV {
                 continue; // busca el siguiente registro
             }
 
-            if ( !idHeladeraDestino.equals("") ){
-                int idHeladera = Integer.parseInt(idHeladeraDestino);
-                if( repoHeladeras.existeHeladera(idHeladera) ){
-                    String mensajeError = "Heladera Destino no existe. Linea: " + record;
-                    EscribirLogError.escribirMensajeError(mensajeError);
-                    continue; // busca el siguiente registro
-                }
-            }
-            if ( !idHeladeraOrigen.equals("") ){
-                int idHeladera = Integer.parseInt(idHeladeraOrigen);
-                if( repoHeladeras.existeHeladera(idHeladera) ){
-                    String mensajeError = "Heladera Origen no existe. Linea: " + record;
-                    EscribirLogError.escribirMensajeError(mensajeError);
-                    continue; // busca el siguiente registro
-                }
-            }
+            Colaborador colaborador = AuthServiceColaborador.procesarXCargaCSV(tipoDocumento, nroDocumento, nombre, apellido, mail, fecha, formaColaboracion, cantidad);
 
-            if ( !entregada.equals("") ) {
-                if (!entregada.equals("1") && !entregada.equals("0")) {
-                    String mensajeError = "El campo 'entregada' debe ser 1 / 0. Linea: " + record;
-                    EscribirLogError.escribirMensajeError(mensajeError);
-                    continue; // busca el siguiente registro
-                }
-            }
-
-            Boolean errorDatosObligatorios = ValidarDatosObligatorios.validar(formaColaboracion, monto, idTarjetas, idViandas, record);
+            LocalDate fechaDonacion = LocalDate.parse(fecha, DateTimeFormatter.ofPattern("yyyy/MM/dd"));
 
             switch (formaColaboracion) {
                 case "DINERO":
-                    if (monto.equals("")) {
-                        String mensajeError = "El campo 'monto' no puede estar vacio. Linea: " + record;
-                        EscribirLogError.escribirMensajeError(mensajeError);
-                        continue; // busca el siguiente registro
-                    }
+                    DonarDinero donacionDinero = new DonarDinero(fechaDonacion, Double.parseDouble(cantidad));
+                    donacionDinero.incrementarPuntos(colaborador);
+                    colaborador.agregarColaboracion(donacionDinero);
+                    repoColab.nuevaColaboracion(colaborador, donacionDinero);
                     break;
                 case "DONACION_VIANDAS":
-                    if (idTarjetas.isEmpty()) {
-                        String mensajeError = "El campo 'idTarjetas' no puede estar vacio. Linea: " + record;
-                        EscribirLogError.escribirMensajeError(mensajeError);
-                        continue; // busca el siguiente registro
+                    List<Colaboracion> donacionesDeVianda = new ArrayList<Colaboracion>();
+
+                    for (int i = 0; i < Integer.parseInt(cantidad); i++) {
+                        DonarVianda donacion = new DonarVianda(fechaDonacion);
+                        donacionesDeVianda.add(donacion);
+                        donacion.incrementarPuntos(colaborador);
+                        colaborador.agregarColaboracion(donacion);
                     }
+                    repoColab.persistirColaboraciones(donacionesDeVianda);
+                    repoColab.agregar(colaborador);
                     break;
                 case "REDISTRIBUCION_VIANDAS":
-                    if (idViandas.isEmpty()) {
-                        String mensajeError = "El campo 'idViandas' no puede estar vacio. Linea: " + record;
-                        EscribirLogError.escribirMensajeError(mensajeError);
-                        continue; // busca el siguiente registro
-                    }
+                    DistribucionDeViandas donacionDistribucion = new DistribucionDeViandas(fechaDonacion, Integer.parseInt(cantidad));
+                    colaborador.agregarColaboracion(donacionDistribucion);
+                    donacionDistribucion.incrementarPuntos(colaborador);
+                    repoColab.nuevaColaboracion(colaborador, donacionDistribucion);
                     break;
-
-                    case "ENTREGA_TARJETAS":
-                    if (idTarjetas.isEmpty()) {
-                        String mensajeError = "El campo 'idTarjetas' no puede estar vacio. Linea: " + record;
-                        EscribirLogError.escribirMensajeError(mensajeError);
-                        continue; // busca el siguiente registro
-                    }
+                case "ENTREGA_TARJETAS":
+                    RegistroPersonasSituVulnerable registroPersonasSituVulnerable = new RegistroPersonasSituVulnerable(fechaDonacion, Integer.parseInt(cantidad));
+                    colaborador.agregarColaboracion(registroPersonasSituVulnerable);
+                    registroPersonasSituVulnerable.incrementarPuntos(colaborador);
+                    repoColab.nuevaColaboracion(colaborador, registroPersonasSituVulnerable);
+                    break;
                 default:
                     String mensajeError = "El campo 'formaColaboracion' no es valido. Linea: " + record;
                     EscribirLogError.escribirMensajeError(mensajeError);
@@ -184,14 +105,11 @@ public class ProcesarCSV {
 
 
 
-            Colaborador colaborador = crearColaborador(tipoDocumento, nroDocumento, nombre, apellido, mail);
-            agregarColaboracion(colaborador, fecha, formaColaboracion, cantidad);
-
         }
     }
 
     public static boolean esNumerico(String str) {
-        if (str == null || str.isEmpty()) {
+        if (str == null) {
             return false;
         }
         for (char c : str.toCharArray()) {

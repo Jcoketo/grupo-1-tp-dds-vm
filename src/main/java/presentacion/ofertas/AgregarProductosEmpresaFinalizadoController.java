@@ -30,9 +30,12 @@ public class AgregarProductosEmpresaFinalizadoController implements Handler {
             model = new HashMap<>();
             context.sessionAttribute("model", model);
         }
+
+        //Parsear la oferta
+
         model.put("nombreUsuario", context.sessionAttribute("nombreUsuario"));
-        context.render("templates/aceptarAgregarProducto.mustache", model);
-        context.redirect("/aceptarAgregarProducto");
+        context.render("templates/graciasOferta.mustache", model);
+
     }
 
 }

@@ -28,8 +28,8 @@ public class CargarCSV {
                 String formaColaboracion = record.get(6);
                 String cantidad = record.get(7);
 
-                RegistroLeido registro = new RegistroLeido(tipoDoc, nroDocumento, nombre, apellido, mail, fecha, formaColaboracion, cantidad, record.getRecordNumber());
-                registrosLeidos.add(registro);
+//                RegistroLeido registro = new RegistroLeido(tipoDoc, nroDocumento, nombre, apellido, mail, fecha, formaColaboracion, cantidad, record.getRecordNumber());
+//                registrosLeidos.add(registro);
 
             }
             RepositorioArchivos repositorio = RepositorioArchivos.getInstancia();

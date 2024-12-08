@@ -72,7 +72,7 @@ public class DistribucionDeViandas extends Colaboracion {
         this.heladeraOrigen = null;
         this.motivoDistribucion = null;
         this.viandasDistribuidas = 0;
-
+        this.porCSV = Boolean.TRUE;
     }
 
     public DistribucionDeViandas() {

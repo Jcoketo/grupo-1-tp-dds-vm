@@ -3,11 +3,8 @@ package persistencia;
 import accessManagment.Roles;
 import lombok.Getter;
 import modelo.colaboracion.Colaboracion;
-import modelo.colaboracion.DonarDinero;
 import modelo.colaboracion.RegistroPersonasSituVulnerable;
 import modelo.colaboracion.Vianda;
-import modelo.contrasenia.PasswordGenerator;
-import modelo.elementos.Heladera;
 import modelo.excepciones.ExcepcionValidacion;
 import modelo.notificador.Notificador;
 import modelo.personas.*;
@@ -154,28 +151,6 @@ public class RepositorioColaboradores {
         Notificador.notificarXNuevoUsuario(mensajeBienvenida, colaborador);
 
     }
-       // IMPORTADOR CSV
-    public Colaborador crearColaboradorFisico(TipoDocumento tipoDocumento, String nroDocumento, String nombre, String apellido, String mail) {
-        String identificadorUnico = tipoDocumento + nroDocumento;
-
-            MedioDeContacto medioDeContacto = new MedioDeContacto(TipoMedioDeContacto.MAIL, mail);
-
-            PersonaHumana persona = new PersonaHumana(tipoDocumento, nroDocumento, nombre, apellido, medioDeContacto);
-            Colaborador colaborador = new Colaborador(persona);
-
-            this.agregar(colaborador);
-
-            String password = PasswordGenerator.generatePassword();
-            // TODO ACA IRIA EL CODIGO PARA ALMACENAR EN LA BD LAS CREDENCIALES
-            String mensajeMasCredenciales = "Bienvenido a la plataforma. Su usuario es: " + identificadorUnico + " y su contraseña es: " + password;
-
-            Notificador.notificarXNuevoUsuario(mensajeMasCredenciales, colaborador);
-
-            return colaborador;
-
-
-
-    }
 
     public Colaborador existeColaborador(Integer id) {
         return em.find(Colaborador.class, id);
@@ -195,7 +170,7 @@ public class RepositorioColaboradores {
         return em.find(PersonaHumana.class, idPersona);
     }
 
-    public Integer devolverIdUsuario(String email) {
+    public Integer devolverIdPersona(String email) {
         List<Persona> personas = em.createQuery("SELECT p FROM Persona p JOIN p.mediosDeContacto m WHERE m.contacto = :email", Persona.class)
                 .setParameter("email", email)
                 .getResultList();
@@ -209,6 +184,18 @@ public class RepositorioColaboradores {
         em.getTransaction().begin();
         em.persist(colaboracion);
         em.persist(colab);
+        em.getTransaction().commit();
+    }
+
+    public void persistirColaboracion(Colaboracion colaboracion) {
+        em.getTransaction().begin();
+        em.persist(colaboracion);
+        em.getTransaction().commit();
+    }
+
+    public void persistirColaboraciones(List<Colaboracion> colaboraciones) {
+        em.getTransaction().begin();
+        colaboraciones.forEach(colaboracion -> em.persist(colaboracion));
         em.getTransaction().commit();
     }
 
@@ -246,6 +233,17 @@ public class RepositorioColaboradores {
         em.getTransaction().begin();
         em.persist(persona);
         em.getTransaction().commit();
+    }
+
+    public Integer devolverIdPersona(TipoDocumento tipoDoc, String nroDoc) {
+        TypedQuery<PersonaHumana> query = em.createQuery("SELECT p FROM PersonaHumana p WHERE p.documento.numeroDoc = :nroDoc AND p.documento.tipoDoc = :tipoDoc", PersonaHumana.class);
+        query.setParameter("nroDoc", nroDoc);
+        query.setParameter("tipoDoc", tipoDoc);
+        try {
+            return query.getSingleResult().getId();
+        } catch (NoResultException e) {
+            return null;
+        }
     }
 
 //    public Colaborador devolverColaborador(String email) {
