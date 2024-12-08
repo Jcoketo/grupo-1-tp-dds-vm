@@ -130,4 +130,9 @@ public class RepositorioHeladeras {
                 .getResultList();
         return viandas;
     }
+
+    public Boolean existeHeladera(Integer id) {
+        Heladera heladera = em.find(Heladera.class, id);
+        return heladera != null;
+    }
 }
