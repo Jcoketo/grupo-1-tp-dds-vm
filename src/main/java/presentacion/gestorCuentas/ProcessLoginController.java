@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import modelo.excepciones.ExcepcionValidacion;
+import modelo.validador.Usuario;
 import org.jetbrains.annotations.NotNull;
 
 import accessManagment.Roles;
@@ -44,6 +45,7 @@ public class ProcessLoginController implements Handler {
             context.redirect("/login");
             return;
         }
+
         context.sessionAttribute("logueado", true);
 
         TipoPersona tipoPer = repoColab.devolverTipoPersona(email);
@@ -52,23 +54,20 @@ public class ProcessLoginController implements Handler {
         Integer idPersona = repoColab.devolverIdUsuario(email);
         context.sessionAttribute("idPersona", idPersona);
 
-        Roles userRole = obtenerRolUsuario(email);
-        context.sessionAttribute("rolUsuario", userRole);
+        Usuario usuario = repoUsuarios.traerUsuario(email);
+        context.sessionAttribute("rolUsuario", usuario.getRol());
+        context.sessionAttribute("nombreUsuario", usuario.getUsername());
 
-        String nombre = repoUsuarios.traerNombreUsuario(email);
-        context.sessionAttribute("nombreUsuario", nombre);
-        model.put("nombreUsuario", nombre);
+        model.put("nombreUsuario", usuario.getUsername());
+
+        if (usuario.getRol() == Roles.ADMIN){
+            context.redirect("/inicioADMIN");
+            return;
+        }
 
         context.redirect("/inicio");
 
     }
 
-    public Roles obtenerRolUsuario(String email) {
-        return repoColab.devolverRol(email);
-    }
-
-    public TipoPersona obtenerTipoUsuario(String email) {
-        return repoColab.devolverTipoPersona(email);
-    }
 
 }

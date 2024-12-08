@@ -2,5 +2,6 @@ package accessManagment;
 
 public enum Roles {
     USUARIO,
-    ADMINISTRADOR,
+    ADMIN,
+    TECNICO,
 }

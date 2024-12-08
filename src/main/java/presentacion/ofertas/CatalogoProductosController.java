@@ -5,6 +5,7 @@ import io.javalin.http.Handler;
 import modelo.colaboracion.Oferta;
 import modelo.colaboracion.TipoOferta;
 import modelo.personas.Colaborador;
+import modelo.personas.TipoJuridico;
 import modelo.personas.TipoPersona;
 import org.jetbrains.annotations.NotNull;
 import persistencia.RepositorioOfertas;
@@ -54,6 +55,12 @@ public class CatalogoProductosController implements Handler {
                 ofertas = repoOfertas.conocerOfertasDisponibles();
                 break;
         }
+
+        TipoPersona tipoPersona = context.sessionAttribute("tipoPersona");
+
+        Boolean esPersonaJuridica = tipoPersona.equals(TipoPersona.PJ);
+
+        model.put("esPersonaJuridica",esPersonaJuridica);
 
         model.put("ofertas", ofertas);
 

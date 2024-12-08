@@ -1,6 +1,5 @@
 package persistencia;
 
-import lombok.Getter;
 import modelo.validador.Usuario;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
@@ -50,11 +49,11 @@ public class RepositorioUsuarios {
         return usuario.getHashedPassword();
     }
 
-    public String traerNombreUsuario(String mail) {
+    public Usuario traerUsuario(String mail) {
         Usuario usuario = em.createQuery("SELECT u FROM Usuario u WHERE u.mail = :mail", Usuario.class)
                 .setParameter("mail", mail)
                 .getSingleResult();
-        return usuario.getUsername();
+        return usuario;
     }
     
     public Boolean existeMAIL(String mail) {

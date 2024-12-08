@@ -18,8 +18,7 @@ public class InicioController implements Handler {
             context.sessionAttribute("model", model);
         }
 
-        Boolean logueado = context.sessionAttribute("logueado");
-        model.put("logueado", logueado);
+        model.put("logueado", context.sessionAttribute("logueado"));
         model.put("nombreUsuario", context.sessionAttribute("nombreUsuario"));
 
 

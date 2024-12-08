@@ -248,6 +248,17 @@ public class RepositorioColaboradores {
         em.getTransaction().commit();
     }
 
+//    public Colaborador devolverColaborador(String email) {
+//        List<Colaborador> colabs = em.createQuery("SELECT c FROM Colaborador c JOIN p.mediosDeContacto m WHERE m.contacto = :email", Colaborador.class)
+//                .setParameter("email", email)
+//                .getResultList();
+//        if (!colabs.isEmpty()) {
+//            return colabs.get(0).getColaborador();
+//        }
+//        return null;
+//
+//    }
+
     /*public MedioDeContacto existeMail(String mail) {
         TypedQuery<MedioDeContacto> query = em.createQuery("SELECT m FROM MedioDeContacto m WHERE m.contacto = :mail", MedioDeContacto.class);
         query.setParameter("mail", mail);
