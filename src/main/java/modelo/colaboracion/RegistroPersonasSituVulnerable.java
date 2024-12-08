@@ -25,7 +25,7 @@ public class RegistroPersonasSituVulnerable extends Colaboracion{
     @OneToMany(cascade = CascadeType.PERSIST)
     @JoinColumn(name= "colaboracion_id", referencedColumnName = "id")
     @Getter
-    private List<TarjetaPlastica> tarjetasDisponibles;
+    private List<TarjetaPlastica> tarjetas;
 
     @Column
     @DefaultValue("0")
@@ -39,7 +39,7 @@ public class RegistroPersonasSituVulnerable extends Colaboracion{
     // y la instanciamos cuando la repartimos
     public RegistroPersonasSituVulnerable(Integer cantidadTarjetas) {
         this.tiposPersonasHabilitadas = Arrays.asList(TipoPersona.PH);
-        this.tarjetasDisponibles = new ArrayList<TarjetaPlastica>();
+        this.tarjetas = new ArrayList<TarjetaPlastica>();
 
         this.cantidadTarjetas = cantidadTarjetas;
         this.cantidadRepartida = 0;
@@ -48,17 +48,17 @@ public class RegistroPersonasSituVulnerable extends Colaboracion{
     // CONSTRUCTOR PARA IMPORTADOR SCV
     public RegistroPersonasSituVulnerable(LocalDate fechaDonacion, Integer cantidadTarjetas) {
         this.tiposPersonasHabilitadas = Arrays.asList(TipoPersona.PH);
-        this.tarjetasDisponibles = new ArrayList<TarjetaPlastica>();
+        this.tarjetas = new ArrayList<TarjetaPlastica>();
 
         this.cantidadTarjetas = cantidadTarjetas;
         this.fechaColaboracion = fechaDonacion;
         this.cantidadRepartida = 0;
     }
 
-    public RegistroPersonasSituVulnerable(Integer cantidadTarjetas, List<TarjetaPlastica> tarjetasDisponibles, LocalDate fechaDonacion) {
+    public RegistroPersonasSituVulnerable(Integer cantidadTarjetas, List<TarjetaPlastica> tarjetas, LocalDate fechaDonacion) {
         this.tiposPersonasHabilitadas = Arrays.asList(TipoPersona.PH);
-        this.tarjetasDisponibles = new ArrayList<TarjetaPlastica>();
-        this.tarjetasDisponibles = tarjetasDisponibles;
+        this.tarjetas = new ArrayList<TarjetaPlastica>();
+        this.tarjetas = tarjetas;
         this.cantidadTarjetas = cantidadTarjetas;
         this.cantidadRepartida = 0;
 

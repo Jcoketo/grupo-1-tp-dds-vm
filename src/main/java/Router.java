@@ -20,6 +20,7 @@ import presentacion.incidentes.ReportarFallaTecnicaFinalizadaController;
 import presentacion.incidentes.VisualizarAlertasController;
 import presentacion.incidentes.VisualizarFallasTecnicasController;
 import presentacion.vistasAdmin.CargarSCVController;
+import presentacion.vistasAdmin.SCVCargadoController;
 import presentacion.vistasAdmin.inicioADMINController;
 import presentacion.ofertas.AceptarAgregarProductoController;
 import presentacion.ofertas.AgregarProductosEmpresaController;
@@ -120,9 +121,9 @@ public class Router {
                 get(new GraciasPorDonarController());
             });
 
-            path("/cargarSCV", () -> {
+            path("/cargarCSV", () -> {
                 get(new CargarSCVController());
-                post(new SCVCargadoController(repoHeladeras));
+                post(new SCVCargadoController());
             });
 
             path("/agregarHeladera", () -> {

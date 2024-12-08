@@ -74,7 +74,7 @@ public class AuthServiceColaboracion {
         RegistroPersonasSituVulnerable colaboracion = repoColab.traerColaboradoresXColaboradorPersonaSitu(colab);
 
         if (colaboracion != null) {
-            if ((colaboracion.getTarjetasDisponibles().size() - colaboracion.getCantidadRepartida() > 0))
+            if ((colaboracion.getTarjetas().size() - colaboracion.getCantidadRepartida() > 0))
                 throw new ExcepcionValidacion("Tienes tarjetas para repartir!");
         }
 

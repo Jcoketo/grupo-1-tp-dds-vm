@@ -28,16 +28,16 @@ public class AuthServicePersonaVulnerable {
 
         RegistroPersonasSituVulnerable colaboracion = repoColab.traerColaboradoresXColaboradorPersonaSitu(colaborador);
 
-        if (colaboracion.getTarjetasDisponibles().isEmpty())
+        if (colaboracion.getTarjetas().isEmpty())
             throw new ExcepcionValidacion("No hay tarjetas disponibles");
 
-        if (colaboracion.getTarjetasDisponibles().stream().noneMatch(tarjeta -> tarjeta.getNro_tarjeta().equals(nroTarjeta)))
+        if (colaboracion.getTarjetas().stream().noneMatch(tarjeta -> tarjeta.getNro_tarjeta().equals(nroTarjeta)))
             throw new ExcepcionValidacion("La tarjeta no es válida");
 
-        if ( (colaboracion.getTarjetasDisponibles().size() - colaboracion.getCantidadRepartida() <= 0 ) )
+        if ( (colaboracion.getTarjetas().size() - colaboracion.getCantidadRepartida() <= 0 ) )
             throw new ExcepcionValidacion("No hay tarjetas disponibles para asignar. Solicite mas!");
 
-        TarjetaPlastica tarjetaPlasticaxAsignar = colaboracion.getTarjetasDisponibles().stream()
+        TarjetaPlastica tarjetaPlasticaxAsignar = colaboracion.getTarjetas().stream()
                 .filter(tarjeta -> tarjeta.getNro_tarjeta().equals(nroTarjeta)).findFirst().get();
 
         tarjetaPlasticaxAsignar.setRecibida(true);
