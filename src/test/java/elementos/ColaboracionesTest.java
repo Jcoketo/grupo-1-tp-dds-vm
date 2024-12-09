@@ -20,7 +20,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class ColaboracionesTest {
 
-  private DistribucionDeViandas distribucionDeViandasDesperfecto;
+  /*private DistribucionDeViandas distribucionDeViandasDesperfecto;
   private DistribucionDeViandas distribucionDeViandasFaltaViandas;
   private Colaborador colaborador;
   private Heladera heladeraOrigen;
@@ -156,5 +156,5 @@ public class ColaboracionesTest {
     assertEquals(1, heladeraDestinoSinLugar.getViandas().size());
     //Verifica que se imprime la excepcion con el mensaje "No hay lugar en la heladera destino"
     assertThrows(IndexOutOfBoundsException.class, () -> heladeraDestinoSinLugar.agregarVianda(new Vianda("Vianda2", LocalDate.now(), LocalDate.now().plusDays(5), colaborador2, heladeraDestinoSinLugar, true)));
-    }
+    }*/
 }

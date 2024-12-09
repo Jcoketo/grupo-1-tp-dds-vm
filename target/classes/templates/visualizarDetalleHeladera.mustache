@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visualización de Heladeras</title>
+    <!-- Incluye Bootstrap -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .social-icons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .social-icons img {
+            width: 24px;
+            height: 24px;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            background-color: white;
+            display: flex;
+            flex-direction: column;
+        }
+
+        h1 {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 30px;
+            margin-top: 30px;
+
+        }
+        p {
+            margin-bottom: 20px;
+        }
+
+        .info {
+            margin-bottom: 15px;
+        }
+
+        .info span {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .action-link {
+            display: block;
+            color: black;
+            text-decoration: none;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        .action-link::after {
+            content: ">";
+            padding-left: 5px;
+        }
+
+        main {
+            flex-grow: 1;
+            padding: 20px;
+            background-color: white;
+        }
+
+        h5 {
+            margin: 0; /* Elimina márgenes por defecto */
+            white-space: nowrap; /* Evita que el texto haga salto de línea */
+            color: white; /* Color de texto */
+        }
+
+        .footer-bg {
+            background-color: #B7C9C7; /* Color de fondo */
+            padding: 20px 0; /* Espaciado superior e inferior */
+        }
+        .social-icons a {
+            margin-right: 15px; /* Espacio entre iconos de redes sociales */
+            color: white; /* Color de texto para iconos */
+        }
+        .footer-link {
+            color: white; /* Color de texto para enlaces */
+            text-decoration: none; /* Eliminar subrayado */
+        }
+        .footer-link:hover {
+            text-decoration: underline; /* Subrayar al pasar el mouse */
+        }
+
+        .social-icon {
+            margin-right: 10px; /* Espacio entre el ícono y el texto */
+        }
+
+        #map {
+            width: 100%;
+            height: 600px;
+            border-radius: 10px;
+        }
+
+        .list-group-item {
+            cursor: pointer;
+            border-radius: 10px;
+            padding: 10px;
+            background-color: #ebece3;
+            transition: background-color 0.3s;
+            margin-bottom: 7px;
+        }
+
+        .list-group-item:hover {
+            background-color: #e2e6ea;
+        }
+
+          body {
+            font-family: Arial, sans-serif;
+            background-color: #ffffff;
+            margin: 0;
+            padding: 0;
+            height: 100%; /* Asegura que el body y html ocupen el 100% de la altura */
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        header .navbar-nav .nav-link {
+            font-size: 17px !important; /* Ajusta el tamaño de la fuente de los enlaces de navegación en el header */
+        }
+        nav {
+            margin-top: 20px; /* Ajusta el valor según el espacio deseado */
+        }
+
+        /*Dropdown*/
+        .navbar-light .navbar-nav .nav-link,
+        .navbar-light .dropdown-menu {
+            background-color: #ffffff;
+            color: #1e5552;
+            font-size: 16px;
+            font-weight: normal;
+        }
+
+        .navbar-light .dropdown-menu {
+            width: 200px;
+        }
+        .navbar-light .dropdown-menu a.dropdown-item {
+            color: #1e5552;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 16px;
+            font-weight: normal;
+            width: 200px;
+
+        }
+
+        .navbar-light .dropdown-menu a.dropdown-item:hover {
+            background-color: #ffffff;
+            margin: 0;
+            width: 200px;
+        }
+
+        /*fin dropdown*/
+    </style>
+</head>
+<body>
+
+<header>
+    <div>
+        <a href="/inicio">
+            <img src="/static/logo.png" alt="Logo" style="max-height: 50px;">
+        </a>
+    </div>
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Sobre nosotros</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/elegirDonacion">Donar</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/mapaHeladeras">Heladeras</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        {{nombreUsuario}}
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="/perfil">Mi perfil</a>
+                        <a class="dropdown-item" href="/misColaboraciones">Mis colaboraciones</a>
+                        <a class="dropdown-item" href="/canjearPuntos">Mi puntaje</a>
+                        <a class="dropdown-item" href="/misReportes">Mis reportes</a>
+                        <a class="dropdown-item" href="#">Configuración</a>
+                        <a class="dropdown-item" href="/login">Cerrar sesión</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>
+
+<main class="container-fluid">
+    <h1>Visualización de heladeras</h1>
+    <div class="row">
+        <div class="col-md-7">
+            <div id="map"></div>
+        </div>
+        <div class="col-md-5 mt-4 mt-md-0">
+            <h3>Heladera Medrano UTN</h3>
+            <p>Avenida Medrano 1234</p>
+
+            <div class="info">
+                <span>Estado</span>
+                Activa
+            </div>
+
+            <div class="info">
+                <span>Disponibilidad</span>
+                2 viandas
+            </div>
+
+            <div class="info">
+                <span>Fecha de inicio de funcionamiento</span>
+                10/03/2023
+            </div>
+
+            <a href="/visualizarAlertas" class="action-link">Alertas</a>
+            <a href="/visualizarFallasTecnicas" class="action-link">Fallas técnicas</a>
+            </ul>
+        </div>
+    </div>
+</main>
+<!-- AIzaSyBb5mC9pmmrsoAdUAxHfvE4Z2iW260tlUY -->
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBb5mC9pmmrsoAdUAxHfvE4Z2iW260tlUY"></script>
+<script>
+
+    let map;
+    let markers = [];
+
+    function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+            center: { lat: -34.599722, lng: -58.381944 },
+            zoom: 13
+        });
+
+        heladeras.forEach(heladera => {
+            const marker = new google.maps.Marker({
+                position: { lat: heladera.lat, lng: heladera.lng },
+                map: map,
+                title: heladera.name,
+            });
+
+            markers.push(marker);
+
+            const listItem = document.createElement('li');
+            listItem.className = "list-group-item";
+            listItem.innerHTML = `
+                <div>
+                    <strong>${heladera.name}</strong><br>
+                    <small>En funcionamiento desde: ${heladera.date}</small><br>
+                    <small>${heladera.status}</small>
+                </div>
+            `;
+            listItem.addEventListener('click', () => {
+                map.setCenter(marker.getPosition());
+                map.setZoom(15);
+                marker.setAnimation(google.maps.Animation.BOUNCE);
+                setTimeout(() => marker.setAnimation(null), 1400);
+            });
+            document.getElementById('heladeras-list').appendChild(listItem);
+        });
+    }
+
+    document.addEventListener("DOMContentLoaded", initMap);
+</script>
+
+<script>
+    // Función para obtener el valor de un parámetro de la URL
+    function getParameterByName(name) {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get(name);
+    }
+
+    // Obtener el nombre de la heladera de la URL
+    const heladeraName = getParameterByName('name');
+
+    // Mostrar los detalles de la heladera
+    document.getElementById('heladeraDetails').innerText = `Mostrando detalles para la heladera: ${heladeraName}`;
+
+    // Redirigir al archivo de fallas técnicas con el nombre de la heladera
+    document.getElementById('fallasTecnicasBtn').addEventListener('click', function() {
+        window.location.href = `/visualizarFallasTecnicas?name=${heladeraName}`;
+    });
+</script>
+<footer class="footer-bg">
+    <div class="container">
+        <div class="row justify-content-between align-items-center">
+            <div class="col-md-3 text-center text-md-left">
+                <img src="/static/logo.png" alt="Logo" class="img-fluid mb-2" style= "max-height: 90px;"> <!-- Reemplaza con tu logo -->
+            </div>
+            <div class="col-md-9">
+                <div class="row">
+                    <!-- Más Información -->
+                    <div class="col-md-4">
+                        <h5>Más información</h5>
+                        <ul class="list-unstyled">
+                            <li><a href="#" class="footer-link">Contáctanos</a></li>
+                            <li><a href="#" class="footer-link">Sobre nosotros</a></li>
+                            <li><a href="#" class="footer-link">Sobre el proyecto</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Donar -->
+                    <div class="col-md-4">
+                        <h5>Donar</h5>
+                        <ul class="list-unstyled">
+                            <li><a href="#" class="footer-link">Donar vianda</a></li>
+                            <li><a href="#" class="footer-link">Ver mapa</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Dónde encontrarnos -->
+                    <!-- Dónde encontrarnos -->
+                    <div class="col-md-4">
+                        <h5>Dónde encontrarnos</h5>
+                        <ul class="list-unstyled">
+                            <li><a href="#" class="footer-link"><img src="/static/facebook-icon.png" alt="Facebook" style="max-height: 20px;" ><i class="fab fa-facebook-f social-icon"></i>Facebook</a></li>
+                            <li><a href="#" class="footer-link"><img src="/static/instagram-icon.png" alt="Instagram" style="max-height: 20px;"><i class="fab fa-instagram social-icon"></i>Instagram</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+</footer>
+
+<!-- Incluye Bootstrap JS y sus dependencias -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>
