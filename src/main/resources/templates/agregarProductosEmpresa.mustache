@@ -225,7 +225,7 @@
     <div class="container">
         <h1>Agregar producto o servicio</h1>
         <!-- Formulario -->
-        <form>
+        <form action="/agregarProductosEmpresa" method="post" enctype="multipart/form-data">
             <div class="form-group">
                 <label for="nombre">Nombre</label>
                 <input type="text" id="nombre" name="nombre" class="form-control" placeholder="Nombre del producto o servicio">
@@ -249,15 +249,15 @@
                 <label for="foto">Foto</label>
                 <div class="upload-area" id="uploadArea">
                     <input type="file" id="fileInput" name="file" accept="image/*">
-                    <div>
-                        <i class="bi bi-cloud-arrow-up upload-icon"></i>
-                        <p>Arrastrá la imagen o <a href="#" id="selectLink">Seleccioná</a></p>
+                    <div id="dropZone" class="drop-zone">
+                        Arrastra y suelta el archivo aquí
                     </div>
+                    <p id="fileName" class="mt-2"></p>
                 </div>
             </div>
             <div class="btn-group">
                 <a href="/catalogoProductos?filter=0" class="btn-cancelar">Cancelar</a>
-                <a href="/aceptarAgregarProducto" class="btn-agregar">Agregar</a>
+                <button type="submit" class="btn-agregar">Agregar</button>
             </div>
         </form>
     </div>
@@ -302,8 +302,41 @@
                 </div>
             </div>
         </div>
+    </div>
 </footer>
 
+<script>
+    const dropZone = document.getElementById('dropZone');
+    const fileInput = document.getElementById('fileInput');
+    const fileName = document.getElementById('fileName');
+
+    dropZone.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        dropZone.classList.add('drop-zone-hover');
+    });
+
+    dropZone.addEventListener('dragleave', () => {
+        dropZone.classList.remove('drop-zone-hover');
+    });
+
+    dropZone.addEventListener('drop', (e) => {
+        e.preventDefault();
+        dropZone.classList.remove('drop-zone-hover');
+        const files = e.dataTransfer.files;
+        fileInput.files = files;
+        fileName.textContent = `Archivo seleccionado: ${files[0].name}`;
+    });
+
+    dropZone.addEventListener('click', () => {
+        fileInput.click();
+    });
+
+    fileInput.addEventListener('change', () => {
+        if (fileInput.files.length > 0) {
+            fileName.textContent = `Archivo seleccionado: ${fileInput.files[0].name}`;
+        }
+    });
+</script>
 <!-- Scripts de Bootstrap y jQuery -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>

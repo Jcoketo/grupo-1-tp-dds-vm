@@ -19,14 +19,10 @@ import presentacion.incidentes.ReportarFallaTecnicaController;
 import presentacion.incidentes.ReportarFallaTecnicaFinalizadaController;
 import presentacion.incidentes.VisualizarAlertasController;
 import presentacion.incidentes.VisualizarFallasTecnicasController;
+import presentacion.ofertas.*;
 import presentacion.vistasAdmin.CargarSCVController;
 import presentacion.vistasAdmin.SCVCargadoController;
 import presentacion.vistasAdmin.inicioADMINController;
-import presentacion.ofertas.AceptarAgregarProductoController;
-import presentacion.ofertas.AgregarProductosEmpresaController;
-import presentacion.ofertas.AgregarProductosEmpresaFinalizadoController;
-import presentacion.ofertas.CanjearPuntosController;
-import presentacion.ofertas.CatalogoProductosController;
 import presentacion.reportes.MisReportesController;
 import servicioApiRest.ServicioApiRest;
 
@@ -197,7 +193,10 @@ public class Router {
             path("/canjearPuntos", () -> {
                 before(new AutorizacionMiddleware().setDebeSerLogueado());
                 get(new CanjearPuntosController(repoColab,repoOfertas));
+                post(new CanjearPuntosFinalizadoController(repoColab,repoOfertas));
             });
+
+
 
             path("/catalogoProductos", () -> {
                 before(new AutorizacionMiddleware().setDebeSerLogueado());

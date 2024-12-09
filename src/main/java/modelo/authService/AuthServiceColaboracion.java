@@ -6,8 +6,11 @@ import modelo.elementos.PuntoEstrategico;
 import modelo.elementos.TarjetaPlastica;
 import modelo.excepciones.ExcepcionValidacion;
 import modelo.personas.Colaborador;
+import modelo.personas.Persona;
+import modelo.personas.PersonaJuridica;
 import persistencia.RepositorioColaboradores;
 import persistencia.RepositorioHeladeras;
+import persistencia.RepositorioOfertas;
 import persistencia.RepositorioTarjetas;
 
 import java.time.LocalDate;
@@ -20,6 +23,7 @@ public class AuthServiceColaboracion {
     private static RepositorioColaboradores repoColab = RepositorioColaboradores.getInstancia();
     private static RepositorioHeladeras repoHeladeras = RepositorioHeladeras.getInstancia();
     private static RepositorioTarjetas repoTarjetas = RepositorioTarjetas.getInstancia();
+    private static RepositorioOfertas reposOfertas = RepositorioOfertas.getInstancia();
 
     public static void registrarColaboracionDinero(Integer idPersona, String monto){
         Colaborador colab = repoColab.buscarColaboradorXIdPersona(idPersona);
@@ -95,7 +99,23 @@ public class AuthServiceColaboracion {
 
         repoHeladeras.agregarHeladera(heladeraNueva);
 
+    }
 
+    public static void registrarColaboracionRecompensa(Integer idPersona, String nombre,String descripcion,TipoOferta tipoOferta,Double puntos,String imagen) {
+
+        Colaborador colab = repoColab.buscarColaboradorXIdPersona(idPersona);
+
+        PersonaJuridica persona = repoColab.traerPersonaPorIdJuridica(idPersona);
+
+        Oferta oferta = new Oferta(nombre,descripcion,tipoOferta,persona.getRubro(),Boolean.TRUE,puntos,imagen);
+
+        OfrecerRecompensa colaboracion = new OfrecerRecompensa(oferta);
+
+        colaboracion.hacerColaboracion(colab);
+
+        colab.agregarColaboracion(colaboracion);
+
+        repoColab.nuevaColaboracion(colab, colaboracion);
 
     }
 }
