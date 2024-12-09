@@ -1,49 +1,77 @@
 import io.javalin.Javalin;
+import io.javalin.http.Context;
+import io.javalin.http.staticfiles.Location;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 public class Application {
     private static Javalin app = null;
+    private static final String UPLOAD_DIR = "uploads";
 
     public static Javalin app() {
-        if(app == null)
+        if (app == null)
             throw new RuntimeException("App no inicializada");
         return app;
     }
 
     public static void main(String[] args) {
+
         app = Javalin.create(javalinConfig -> {
-                    javalinConfig.plugins.enableCors(cors -> {
-                        cors.add(it -> it.anyHost());
-                    }); // para poder hacer requests de un dominio a otro
+            javalinConfig.plugins.enableCors(cors -> {
+                cors.add(it -> it.anyHost());
+            });
 
-                    javalinConfig.staticFiles.add("/"); //recursos estaticos (HTML, CSS, JS, IMG)
+            // Configurar recursos estáticos
+            javalinConfig.staticFiles.add("/", Location.CLASSPATH);
 
-                    /*javalinConfig.accessManager((handler, ctx, routeRoles) -> {
-                        Roles userRole = getUserRole(ctx);
-                        if (routeRoles.contains(userRole)) {
-                            handler.handle(ctx);
-                        }
-                        else {
-                            ctx.status(401).result("Unauthorized");
-                            //ctx.redirect("/login");
-                        }
-                    });*/
-                })
-            .start(8080);
+        }).start(8080);
 
-        //Inicializamos el router:
+        // Crear el directorio de imágenes si no existe
+        initializeUploadDirectory();
+
+        // Configurar rutas
         Router.init(getEntityManager());
-
+        configureImageRoutes(app);
     }
-    private static EntityManager getEntityManager(){
+
+    private static EntityManager getEntityManager() {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("db");
         return emf.createEntityManager();
     }
 
+    private static void initializeUploadDirectory() {
+        File uploadDir = new File(UPLOAD_DIR);
+        if (!uploadDir.exists()) {
+            uploadDir.mkdirs();
+        }
+    }
 
+    private static void configureImageRoutes(Javalin app) {
+        app.get("/images/{filename}", ctx -> {
+            String filePath = "uploads/" + ctx.pathParam("filename");
+            try {
+                // Leer el archivo completo como un arreglo de bytes
+                byte[] fileBytes = Files.readAllBytes(Paths.get(filePath));
 
+                if (fileBytes.length > 0) {
+                    ctx.contentType("image/*");
+                    ctx.result(fileBytes); // Enviar los bytes directamente
+                } else {
+                    ctx.status(404).result("Imagen vacía");
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+                ctx.status(500).result("Error al cargar la imagen");
+            }
+        });
+    }
 }
+

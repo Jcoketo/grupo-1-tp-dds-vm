@@ -26,6 +26,7 @@ public class PersonaJuridica extends Persona{
     private TipoJuridico tipoJuridico;
 
     @Enumerated(EnumType.STRING)
+    @Getter
     private Rubro rubro;
 
     @OneToMany
