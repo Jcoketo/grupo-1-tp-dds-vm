@@ -20,7 +20,7 @@ public class Application {
                         cors.add(it -> it.anyHost());
                     }); // para poder hacer requests de un dominio a otro
 
-                    javalinConfig.staticFiles.add("/"); //recursos estaticos (HTML, CSS, JS, IMG)
+                    // javalinConfig.staticFiles.add("/"); //recursos estaticos (HTML, CSS, JS, IMG)
 
                     /*javalinConfig.accessManager((handler, ctx, routeRoles) -> {
                         Roles userRole = getUserRole(ctx);
