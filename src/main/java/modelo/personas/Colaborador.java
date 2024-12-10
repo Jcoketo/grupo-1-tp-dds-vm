@@ -45,7 +45,7 @@ public class Colaborador {
     @OneToOne(cascade = CascadeType.ALL)
     @Getter protected Tarjeta tarjeta;
 
-    @OneToMany(mappedBy="colaborador", cascade ={CascadeType.ALL}, fetch = FetchType.EAGER )
+    @OneToMany(mappedBy="colaborador")
     @Getter private List<Suscripcion> suscripciones;
 
     @Column
@@ -157,4 +157,7 @@ public class Colaborador {
       //TODO
     }
 
+    public void agregarSuscripcion(Suscripcion suscripcion) {
+        this.getSuscripciones().add(suscripcion);
+    }
 }

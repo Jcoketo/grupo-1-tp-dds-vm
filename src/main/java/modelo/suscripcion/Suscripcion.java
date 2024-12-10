@@ -39,12 +39,11 @@ public abstract class Suscripcion {
     @OneToOne(cascade = CascadeType.ALL)
     private MedioDeContacto medioDeContacto;
 
-    public Suscripcion(Heladera heladera, Colaborador colaborador, TipoSuscripcion tipo, TipoMedioDeContacto medio) {
+    public Suscripcion(Heladera heladera, Colaborador colaborador, TipoSuscripcion tipo, MedioDeContacto medio) {
         this.heladera = heladera;
         this.colaborador = colaborador;
         this.tipoSuscripcion = tipo;
-        this.medioDeContacto = new MedioDeContacto(medio, colaborador.getPersona().devolerMedioDeContacto(medio));
-        //this.validarExistenciaMedioDeContacto();
+        this.medioDeContacto = medio;
     }
 
     public Suscripcion() {

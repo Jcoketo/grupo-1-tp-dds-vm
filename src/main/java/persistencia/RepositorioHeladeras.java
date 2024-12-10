@@ -5,6 +5,7 @@ import modelo.colaboracion.Vianda;
 import modelo.elementos.Heladera;
 import modelo.excepciones.ExcepcionValidacion;
 import modelo.personas.Colaborador;
+import modelo.suscripcion.Suscripcion;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -135,4 +136,11 @@ public class RepositorioHeladeras {
         Heladera heladera = em.find(Heladera.class, id);
         return heladera != null;
     }
+
+    public void persistirSuscripcion(Suscripcion suscripcion) {
+        em.getTransaction().begin();
+        em.persist(suscripcion);
+        em.getTransaction().commit();
+    }
+
 }

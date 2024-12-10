@@ -58,7 +58,7 @@ public class Heladera {
     @Column
     @Getter private Float temperaturaMinima;
 
-    @OneToMany(mappedBy = "heladera")
+    @OneToMany(mappedBy = "heladera", cascade = CascadeType.PERSIST)
     @Getter private List<Suscripcion> colaboradoresSucriptos = new ArrayList<>();
 
     @Column
@@ -107,14 +107,14 @@ public class Heladera {
         if (this.viandas.size() < this.viandasMaximas) { // si es menor significa que por lo menos hay n - 1 viandas
             this.viandas.add(vianda);
             this.contadorViandasColocadas++;
-            if ( ( this.viandasMaximas - this.viandas.size() ) <= 5 && this.colaboradoresSucriptos != null) // no damos posibilidad a que el numero sea mayor ya que sino es muy poco performante
+            // if ( ( this.viandasMaximas - this.viandas.size() ) <= 5 && this.colaboradoresSucriptos != null)
+            if ( this.colaboradoresSucriptos != null) // no damos posibilidad a que el numero sea mayor ya que sino es muy poco performante
                                                                      //  si quedan 30 lugares libres va a hacer siempre este bloque de codigo
             { this.colaboradoresSucriptos.stream().filter(colab -> colab.getTipoSuscripcion() == TipoSuscripcion.POCO_ESPACIO
                                 && colab.getLimiteViandasMaximas() == (this.viandasMaximas - this.viandas.size()))
                                 .forEach(colab -> colab.notificarmeAlerta());
             }
         } else {
-            // TODO no deberia ser una excepcion, deberia ser un mensaje de error
             throw new ExcepcionValidacion("No se pueden agregar más viandas");
         }
     }
@@ -122,7 +122,8 @@ public class Heladera {
     public Vianda retirarVianda(Integer indice){
         if (indice >= 0 && indice < this.viandas.size()) {
             this.contadorViandasRetiradas++;
-            if ( ( this.viandas.size() ) <= 5  && this.colaboradoresSucriptos != null) {
+            // if ( ( this.viandas.size() ) <= 5  && this.colaboradoresSucriptos != null) {
+            if ( this.colaboradoresSucriptos != null) {
                 this.colaboradoresSucriptos.stream().filter(colab -> colab.getTipoSuscripcion() == TipoSuscripcion.QUEDAN_POCAS
                                 && colab.getLimiteViandasMinimas() == this.viandas.size())
                                 .forEach(colab -> colab.notificarmeAlerta());
@@ -164,14 +165,15 @@ public class Heladera {
         FallaTecnica falla = new FallaTecnica(this, colab, motivo, foto);
 
         RepositorioIncidentes repo = RepositorioIncidentes.getInstancia();
-        repo.agregarIncidente(falla);
+        repo.agregarIncidente(falla); // Persiste el Incidente
 
         RepositoriosTecnicos tecnicos = RepositoriosTecnicos.getInstancia();
+        /* mover a auth service asi no ponemos el try aca */
         try {
             Tecnico tecnico = tecnicos.obtenerTecnicoCercano(this.getPuntoEstrategico().getAreas(), this);
             tecnico.notificarFalla(this, falla);
         } catch (Exception e) { //TODO verificar como volver de este error
-            System.out.println("No hay técnicos disponibles");
+            System.out.println("No hay técnicos !");
         }
     }
 

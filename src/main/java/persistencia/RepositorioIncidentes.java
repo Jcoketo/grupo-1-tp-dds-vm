@@ -42,10 +42,10 @@ public class RepositorioIncidentes {
 
     public void validarInsertIncidente(Incidente incidente) {
         if (incidente.getHeladera() == null) {
-            throw new RuntimeException("El incidente no tiene una heladera asociada");
+            throw new ExcepcionValidacion("El incidente no tiene una heladera asociada");
         }
         if (incidente.getFechaHoraIncidente() == null) {
-            throw new RuntimeException("El incidente no tiene una fecha y hora asociadas");
+            throw new ExcepcionValidacion("El incidente no tiene una fecha y hora asociadas");
         }
     }
 
