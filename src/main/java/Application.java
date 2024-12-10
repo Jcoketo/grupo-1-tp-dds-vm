@@ -14,7 +14,7 @@ import java.nio.file.Paths;
 
 public class Application {
     private static Javalin app = null;
-    private static final String UPLOAD_DIR = "uploads";
+    private static final String UPLOAD_DIR = "src/main/resources/uploads";
 
     public static Javalin app() {
         if (app == null)
@@ -56,7 +56,7 @@ public class Application {
 
     private static void configureImageRoutes(Javalin app) {
         app.get("/images/{filename}", ctx -> {
-            String filePath = "uploads/" + ctx.pathParam("filename");
+            String filePath = "src/main/resources/uploads/" + ctx.pathParam("filename");
             try {
                 // Leer el archivo completo como un arreglo de bytes
                 byte[] fileBytes = Files.readAllBytes(Paths.get(filePath));

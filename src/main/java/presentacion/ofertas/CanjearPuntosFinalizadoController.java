@@ -2,6 +2,11 @@ package presentacion.ofertas;
 
 import io.javalin.http.Context;
 import io.javalin.http.Handler;
+import modelo.authService.AuthServiceColaboracion;
+import modelo.colaboracion.Oferta;
+import modelo.excepciones.ExcepcionCanjear;
+import modelo.personas.Colaborador;
+import org.apache.commons.io.FileUtils;
 import persistencia.RepositorioColaboradores;
 import persistencia.RepositorioOfertas;
 
@@ -27,6 +32,29 @@ public class CanjearPuntosFinalizadoController  implements Handler {
             context.sessionAttribute("model", model);
         }
 
+        Integer idOferta = Integer.parseInt(context.formParam("ofertaId"));
+
+        Integer idPersona = context.sessionAttribute("idPersona");
+
+
+
+        try {
+
+            Colaborador colab = repoColaboradores.buscarColaboradorXIdPersona(idPersona);
+            Oferta oferta = repoOfertas.buscarOfertaXId(idOferta);
+            colab.canjearPuntos(oferta);
+
+            repoOfertas.darDeBaja(oferta);
+
+            repoColaboradores.actualizarColaborador(colab);
+
+        } catch (ExcepcionCanjear e) {
+            context.render("templates/noTienePuntosSuficientes.mustache");
+        }
+
+        context.render("templates/productoCanjeado.mustache");
+
+        //Se canjeo el producto exitosamente
 
     }
 

@@ -53,7 +53,7 @@ public class AgregarProductosEmpresaFinalizadoController implements Handler {
         }
 
 
-        File archivo = new File("uploads/" + file.filename());
+        File archivo = new File("src/main/resources/uploads/" + file.filename());
 
 
         try {
@@ -63,6 +63,7 @@ public class AgregarProductosEmpresaFinalizadoController implements Handler {
             FileUtils.copyInputStreamToFile(file.content(), archivo);
 
         } catch (Exception e) {
+            //Arreglar con un error mas apropiado
             model.put("errorLogin", "Error en el CSV");
             context.sessionAttribute("model", model);
             context.redirect("/cargarCSV");
