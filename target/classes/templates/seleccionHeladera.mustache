@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heladeras con Viandas</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        header {
+            background-color: #e0e0e0;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        header .logo {
+            font-size: 1.5rem;
+        }
+        header nav a {
+            margin: 0 15px;
+            text-decoration: none;
+            color: #333;
+        }
+        header .login-btn {
+            background-color: #000;
+            color: #fff;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .content {
+            padding: 20px;
+            text-align: center;
+        }
+        .content h1 {
+            margin-bottom: 10px;
+        }
+        .map-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 20px 0;
+        }
+        .map {
+            width: 70%;
+            height: 400px;
+            background-color: #ddd;
+            position: relative;
+        }
+        .sidebar {
+            width: 300px;
+            margin-left: 20px;
+        }
+        .search-bar {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            background-color: #fff;
+            border-radius: 20px;
+            padding: 10px;
+        }
+        .search-bar input {
+            border: none;
+            outline: none;
+            padding: 10px;
+            width: 100%;
+            border-radius: 20px;
+        }
+        .fridge-info {
+            background-color: #e0e0e0;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: left;
+        }
+        .donate-button {
+            display: inline-block;
+            background-color: #00695c;
+            color: #fff;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+        .btn-inicio {
+            background-color: #313937;
+            color: white;
+            padding: 10px 15px;
+            text-decoration: none;
+            border-radius: 10px;
+            margin-left: 20px;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <div>
+        <a href="/inicio">
+            <img src="/static/logo.png" alt="Logo" style="max-height: 50px;">
+        </a>
+    </div>
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Sobre nosotros</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/elegirDonacionFisica">Donar</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/mapaHeladeras">Heladeras</a>
+                </li>
+                <!-- Menú desplegable -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        {{nombreUsuario}}
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="/perfil">Mi perfil</a>
+                        <a class="dropdown-item" href="/misColaboraciones">Mis colaboraciones</a>
+                        <a class="dropdown-item" href="/canjearPuntos">Mi puntaje</a>
+                        <a class="dropdown-item" href="/misReportes">Mis reportes</a>
+                        <a class="dropdown-item" href="#">Configuración</a>
+                        <a class="dropdown-item" href="/login">Cerrar sesión</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>
+
+<div class="content">
+    <h1>Visualiza las heladeras con viandas</h1>
+    <p>Un lindo texto que explique la función del mapa y lo que se puede hacer</p>
+
+    <div class="map-container">
+        <div class="map">
+            <!-- Aquí iría el mapa embebido de Google Maps -->
+        </div>
+        <div class="sidebar">
+            <div class="search-bar">
+                <input type="text" placeholder="Buscá la heladera o tu zona">
+            </div>
+            <div class="fridge-info">
+                <h3>Heladera Medrano UTN</h3>
+                <p>Avenida Medrano 1234</p>
+                <p><strong>Estado:</strong> Activa</p>
+                <p><strong>Viandas:</strong> Disponible</p>
+                <a href="#" class="donate-button">Donar viandas</a>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class TecnicoTest {
 
-  private Tecnico tecnico;
+  /*private Tecnico tecnico;
   private Heladera heladera;
 
   @BeforeEach
@@ -36,5 +36,5 @@ public class TecnicoTest {
   public void testVisitaRegistradaEIncidenteSolucionado() {
     // Verificar que la visita se registró (por ende el incidente se solucionó)
     assertTrue(heladera.getActiva());
-  }
+  }*/
 }

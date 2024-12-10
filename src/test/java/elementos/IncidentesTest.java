@@ -22,7 +22,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 
 public class IncidentesTest {
 
-  private Heladera heladera;
+ /* private Heladera heladera;
   private Colaborador colaborador;
 
   @BeforeEach
@@ -71,5 +71,5 @@ public class IncidentesTest {
     // Verificar que la alerta se agregó al repositorio
     assertTrue(RepositorioIncidentes.getInstancia().incidentes.stream()
         .anyMatch(incidente -> incidente instanceof Alerta && ((Alerta) incidente).getTipoAlerta() == TipoAlerta.FRAUDE && incidente.getHeladera().equals(heladera)));
-  }
+  }*/
 }

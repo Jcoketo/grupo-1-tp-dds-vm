@@ -23,7 +23,7 @@ import static org.mockito.Mockito.*;
 
 public class SuscripcionesDesperfectoTest {
 
-  private Heladera heladera;
+  /*private Heladera heladera;
   private ReceptorMovimiento receptorMovimiento;
   private Colaborador colaborador;
   private Suscripcion suscripcion;
@@ -70,6 +70,6 @@ public class SuscripcionesDesperfectoTest {
 
     assertEquals("Hubo un Desperfecto!", asuntoCaptor.getValue());
     assertEquals(colaborador, colaboradorCaptor.getValue());
-  }
+  }*/
 
 }

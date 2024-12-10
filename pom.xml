@@ -37,6 +37,13 @@
         </dependency>-->
 
         <dependency>
+            <groupId>com.github.spullara.mustache.java</groupId>
+            <artifactId>mustache.java</artifactId>
+            <version>0.9.5</version>  <!-- Usa la última versión disponible -->
+        </dependency>
+
+
+        <dependency>
             <groupId>org.mindrot</groupId>
             <artifactId>jbcrypt</artifactId>
             <version>0.4</version>
