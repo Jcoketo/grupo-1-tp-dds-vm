@@ -4,6 +4,7 @@ import modelo.elementos.Heladera;
 import lombok.Getter;
 import lombok.Setter;
 import modelo.personas.Colaborador;
+import modelo.personas.MedioDeContacto;
 import modelo.personas.TipoMedioDeContacto;
 
 import javax.persistence.*;
@@ -17,7 +18,7 @@ public class SuscripcionXCantidad extends Suscripcion {
     @Column
     @Getter @Setter private Integer limiteViandasMaximas;
 
-    public SuscripcionXCantidad(Heladera heladera, Colaborador colaborador, TipoSuscripcion tipo, Integer n, TipoMedioDeContacto medio) {
+    public SuscripcionXCantidad(Heladera heladera, Colaborador colaborador, TipoSuscripcion tipo, Integer n, MedioDeContacto medio) {
         super(heladera, colaborador, tipo, medio);
 
         if (tipo == TipoSuscripcion.QUEDAN_POCAS){

@@ -2,6 +2,10 @@ package modelo.authService;
 
 import modelo.elementos.Heladera;
 import modelo.personas.Colaborador;
+import modelo.personas.MedioDeContacto;
+import modelo.personas.TipoMedioDeContacto;
+import modelo.suscripcion.SuscripcionXCantidad;
+import modelo.suscripcion.SuscripcionXFalla;
 import modelo.suscripcion.TipoSuscripcion;
 import persistencia.RepositorioColaboradores;
 import persistencia.RepositorioHeladeras;
@@ -12,22 +16,31 @@ public class AuthServiceSuscripcion {
     private static RepositorioColaboradores repositorioColaboradores = RepositorioColaboradores.getInstancia();
 
 
-    public static void generarSuscripcion(Integer idHeladera, Integer idPersona, TipoSuscripcion tipoSuscripcion, Integer limiteMinimo, Integer limiteMaximo, String tipoMedioDeContacto) {
+    public static void generarSuscripcion(Integer idHeladera, Integer idPersona, TipoSuscripcion tipoSuscripcion, Integer limiteMinimo, Integer limiteMaximo, TipoMedioDeContacto tipoMedioDeContacto) {
 
         Heladera heladera = repositorioHeladeras.buscarHeladera(idHeladera);
         Colaborador colaborador = repositorioColaboradores.buscarColaboradorXIdPersona(idPersona);
+        MedioDeContacto medioDeContacto = colaborador.getPersona().devolerMedioDeContacto(tipoMedioDeContacto);
 
         switch (tipoSuscripcion) {
             case QUEDAN_POCAS -> {
-                //realizarSuscripcionXCantidad(heladera, n, tipo, medio);
+                SuscripcionXCantidad suscripcion = new SuscripcionXCantidad(heladera, colaborador, TipoSuscripcion.QUEDAN_POCAS, limiteMinimo, medioDeContacto);
+                heladera.agregarSuscriptor(suscripcion);
+                colaborador.agregarSuscripcion(suscripcion);
             }
             case POCO_ESPACIO -> {
-                //realizarSuscripcionXCantidad(heladera, n, tipo, medio);
+                SuscripcionXCantidad suscripcion = new SuscripcionXCantidad(heladera, colaborador, TipoSuscripcion.POCO_ESPACIO, limiteMaximo, medioDeContacto);
+                heladera.agregarSuscriptor(suscripcion);
+                colaborador.agregarSuscripcion(suscripcion);
             }
             case DESPERFECTO -> {
-                //realizarSuscripcionXFalla(heladera, medio);
+                SuscripcionXFalla suscripcion = new SuscripcionXFalla(heladera, colaborador, TipoSuscripcion.DESPERFECTO, medioDeContacto);
+                heladera.agregarSuscriptor(suscripcion);
+                colaborador.agregarSuscripcion(suscripcion);
             }
         }
+
+        repositorioHeladeras.actualizarHeladera(heladera);
     }
 }
 

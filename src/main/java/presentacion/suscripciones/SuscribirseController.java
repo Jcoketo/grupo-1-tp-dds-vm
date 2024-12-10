@@ -5,6 +5,8 @@ import io.javalin.http.Handler;
 import modelo.authService.AuthServiceSuscripcion;
 import modelo.colaboracion.FrecuenciaDonacion;
 import modelo.excepciones.ExcepcionValidacion;
+import modelo.personas.MedioDeContacto;
+import modelo.personas.TipoMedioDeContacto;
 import modelo.suscripcion.TipoSuscripcion;
 import org.jetbrains.annotations.NotNull;
 
@@ -36,8 +38,16 @@ public class SuscribirseController implements Handler {
             default -> tipo = null;
         }
 
+        TipoMedioDeContacto medio;
+        switch (medioDeContacto) {
+            case "01" -> medio = TipoMedioDeContacto.MAIL;
+            case "02" -> medio = TipoMedioDeContacto.WHATSAPP;
+            case "03" -> medio = TipoMedioDeContacto.TELEGRAM;
+            default -> medio = null;
+        }
+
         try {
-            AuthServiceSuscripcion.generarSuscripcion(idHeladera, idPersona, tipo, Integer.parseInt(limiteMinimo), Integer.parseInt(limiteMaximo), medioDeContacto);
+            AuthServiceSuscripcion.generarSuscripcion(idHeladera, idPersona, tipo, Integer.parseInt(limiteMinimo), Integer.parseInt(limiteMaximo), medio);
         }
         catch (ExcepcionValidacion e)
         {

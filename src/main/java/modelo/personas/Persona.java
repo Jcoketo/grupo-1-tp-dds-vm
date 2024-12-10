@@ -75,10 +75,10 @@ public abstract class Persona {
         return null;
     }
 
-    public String devolerMedioDeContacto(TipoMedioDeContacto tipo){
+    public MedioDeContacto devolerMedioDeContacto(TipoMedioDeContacto tipo){
         for ( MedioDeContacto contactoAux : this.mediosDeContacto )
             if ( contactoAux.getMedio() == tipo ){
-                return contactoAux.getContacto();
+                return contactoAux;
             }
         return null;
     }
