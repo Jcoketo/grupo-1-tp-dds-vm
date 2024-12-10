@@ -3,7 +3,9 @@ package presentacion.colaboraciones;
 import io.javalin.http.Context;
 import io.javalin.http.Handler;
 import modelo.authService.AuthServiceColaboracion;
+import modelo.colaboracion.FrecuenciaDonacion;
 import modelo.excepciones.ExcepcionValidacion;
+import modelo.personas.TipoDocumento;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Map;
@@ -31,6 +33,7 @@ public class DonarDineroRealizadaController implements Handler {
         String mesExpir = context.formParam("mesExpir");
         String anioExpir = context.formParam("anioExpir");
         String codigoSeguridad = context.formParam("cvv");
+        String frecuenciaDonacion = context.formParam("frecuenciaDonacion");
 
         String fechaExpir = mesExpir + "/" + anioExpir;
 
@@ -59,19 +62,24 @@ public class DonarDineroRealizadaController implements Handler {
             return;
         }
 
+        FrecuenciaDonacion frecuencia;
+        switch (frecuenciaDonacion) {
+            case "01" -> frecuencia = FrecuenciaDonacion.UNICA;
+            case "02" -> frecuencia = FrecuenciaDonacion.PERIODICA;
+            default -> frecuencia = FrecuenciaDonacion.UNICA;
+        }
+
         try {
             // TODA LA LOGICA DE IR AL BANCO Y DESCONTAR EL DINERO
             Integer idPersona = context.sessionAttribute("idPersona");
-            AuthServiceColaboracion.registrarColaboracionDinero(idPersona, monto);
+            AuthServiceColaboracion.registrarColaboracionDinero(idPersona, monto, frecuencia);
         } catch (ExcepcionValidacion e) {
             model.put("errorDonacion", "No se pudo realizar la donación");
             //context.status(400);
             context.redirect("/donarDinero");
             return;
         }
-
         context.redirect("/graciasPorDonar");
-
 
     }
     public static boolean esNumerico(String str) {

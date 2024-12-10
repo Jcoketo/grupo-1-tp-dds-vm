@@ -3,6 +3,9 @@ package presentacion.vistasAdmin;
 import io.javalin.http.Context;
 import io.javalin.http.Handler;
 import io.javalin.http.UploadedFile;
+import modelo.importador.CargarCSV;
+import modelo.importador.ProcesarCSV;
+import modelo.importador.RegistroLeido;
 import org.apache.commons.io.FileUtils;
 import org.jetbrains.annotations.NotNull;
 
@@ -35,6 +38,9 @@ public class SCVCargadoController implements Handler {
         File archivo = new File("main/resources/archivos/CSVs/" + file.filename());
         try {
             FileUtils.copyInputStreamToFile(file.content(), archivo);
+            List<RegistroLeido> registrosLeidos = CargarCSV.CargarSCV(fileName);
+            ProcesarCSV.ProcesarCSV(registrosLeidos);
+            context.redirect("/cargarCSV");
             //Hasta este punto esta cargado el archivp, quedaria cargarlo a la base de datos
 
         } catch (Exception e) {

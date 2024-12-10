@@ -142,17 +142,7 @@ public class Colaborador {
 
     }
 
-    public void realizarSuscripcionXFalla(Heladera heladera, TipoMedioDeContacto medio){
-        SuscripcionXFalla suscripcion = new SuscripcionXFalla(heladera, this, TipoSuscripcion.DESPERFECTO, medio);
-        heladera.agregarSuscriptor(suscripcion);
-        this.suscripciones.add(suscripcion);
-    }
 
-    public void realizarSuscripcionXCantidad(Heladera heladera, Integer n, TipoSuscripcion tipo, TipoMedioDeContacto medio){
-        SuscripcionXCantidad suscripcion = new SuscripcionXCantidad(heladera, this,tipo,n, medio);
-        heladera.agregarSuscriptor(suscripcion);
-        this.suscripciones.add(suscripcion);
-    }
 
     /*public void reportarFalla(Heladera heladera, String motivo, String foto){
         heladera.reportarFalla(this, motivo, foto);

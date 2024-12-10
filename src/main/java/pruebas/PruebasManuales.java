@@ -1,18 +1,41 @@
 package pruebas;
 
 import modelo.colaboracion.Oferta;
+import modelo.importador.CargarCSV;
+import modelo.importador.EscribirLogError;
+import modelo.importador.ProcesarCSV;
+import modelo.importador.RegistroLeido;
 import persistencia.RepositorioColaboradores;
 import persistencia.RepositorioOfertas;
+import persistencia.RepositorioUsuarios;
 
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import java.io.IOException;
 import java.time.Duration;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class PruebasManuales {
     public static void main(String[] args) throws IOException {
+
+
+//        LocalDateTime now = LocalDateTime.now();
+//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+//        String formattedDateTime = now.format(formatter);
+//
+//        EscribirLogError.crearArchivoLog(formattedDateTime + " Log errores CSV");
+//        System.out.println(formattedDateTime);
+
+//        EntityManagerFactory emf = Persistence.createEntityManagerFactory("db");
+//        RepositorioColaboradores repoColab = RepositorioColaboradores.getInstancia(emf.createEntityManager());
+//        RepositorioUsuarios repoUsuarios = RepositorioUsuarios.getInstancia(emf.createEntityManager());
+//
+//        List<RegistroLeido> registrosLeidos = CargarCSV.CargarSCV();
+//        ProcesarCSV.ProcesarCSV(registrosLeidos);
+//
+
 
 
 
@@ -88,9 +111,9 @@ public class PruebasManuales {
 
         // quiero probar el metodo de obtener tipo persona
 
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("db");
-        RepositorioColaboradores repoColab = RepositorioColaboradores.getInstancia(emf.createEntityManager());
-        System.out.println(repoColab.devolverTipoPersona("example1@example.com"));
+//        EntityManagerFactory emf = Persistence.createEntityManagerFactory("db");
+//        RepositorioColaboradores repoColab = RepositorioColaboradores.getInstancia(emf.createEntityManager());
+//        System.out.println(repoColab.devolverTipoPersona("example1@example.com"));
 
     }
 }

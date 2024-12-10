@@ -1,0 +1,3 @@
+Error al enviar mail a cocomenazzi@hotmail.com: Sending the email to the following server failed : smtp.gmail.com:465
+Error al enviar mail a mgurruchaga@frba.utn.edu.ar: Sending the email to the following server failed : smtp.gmail.com:465
+Error al enviar mail a ana.garcia@example.com: Sending the email to the following server failed : smtp.gmail.com:465

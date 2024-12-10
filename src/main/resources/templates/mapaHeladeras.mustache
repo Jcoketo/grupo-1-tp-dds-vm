@@ -303,10 +303,12 @@
 
         fetchHeladeras().then(heladeras => {
             heladeras.forEach(heladera => {
+                const heladeraId = heladera.id;
                 const nombre = heladera.nombre;
                 const punto = heladera.punto;
                 const fecha = formatFecha(heladera.fechaFuncionamiento);
                 const estado = heladera.activa ? "Activa" : "Inactiva";
+                const disponibilidad = heladera.disponibilidad;
 
                     const marker = new google.maps.Marker({
                         position: { lat: punto.latitud, lng: punto.longitud },
@@ -324,6 +326,9 @@
                             <small>Direccion: ${punto.direccion || 'Ubicación desconocida'}</small><br>
                             <small>En funcionamiento desde: ${fecha}</small><br>
                             <small>${estado}</small><br>
+                            <small>
+                            <a href="/visualizarDetalleHeladera?heladeraId=${heladeraId}&nombre=${nombre}&direccion=${punto.direccion}&lat=${punto.latitud}&long=${punto.longitud}&fecha=${fecha}&estado=${estado}&disponibilidad=${disponibilidad}" class="text-primary" style="text-decoration: underline;">Detalles</a>
+                            </small>
                         </div>
                     `;
 

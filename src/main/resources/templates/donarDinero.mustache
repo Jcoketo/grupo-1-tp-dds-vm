@@ -351,6 +351,12 @@
             <label for="cvv">Codigo de Seguridad</label>
             <input type="text" id="cvv" name="cvv" required>
 
+            <label>Frecuencia de donacion</label>
+            <select id="frecuenciaDonacion" name="frecuenciaDonacion" required>
+                <option value="01">UNICA</option>
+                <option value="02">PERIODICA</option>
+            </select>
+
             <button type="submit">Donar</button>
             {{#errorDonacion}}
                 <div class="error-message">{{errorDonacion}}</div>

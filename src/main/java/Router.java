@@ -20,6 +20,7 @@ import presentacion.incidentes.ReportarFallaTecnicaFinalizadaController;
 import presentacion.incidentes.VisualizarAlertasController;
 import presentacion.incidentes.VisualizarFallasTecnicasController;
 import presentacion.ofertas.*;
+import presentacion.suscripciones.SuscribirseController;
 import presentacion.vistasAdmin.CargarSCVController;
 import presentacion.vistasAdmin.SCVCargadoController;
 import presentacion.vistasAdmin.inicioADMINController;
@@ -196,8 +197,6 @@ public class Router {
                 post(new CanjearPuntosFinalizadoController(repoColab,repoOfertas));
             });
 
-
-
             path("/catalogoProductos", () -> {
                 before(new AutorizacionMiddleware().setDebeSerLogueado());
                 get(new CatalogoProductosController(repoOfertas));
@@ -233,6 +232,11 @@ public class Router {
             path("/misColaboraciones", () -> {
                 before(new AutorizacionMiddleware().setDebeSerLogueado());
                 get(new MisColaboracionesController(repoColab));
+            });
+
+            path("/suscribirse", () -> {
+                before(new AutorizacionMiddleware().setDebeSerLogueado());
+                post(new SuscribirseController());
             });
 
             path("/api/recomendacion/locaciones", () -> {

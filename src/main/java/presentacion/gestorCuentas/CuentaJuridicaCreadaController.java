@@ -49,28 +49,28 @@ public class CuentaJuridicaCreadaController implements Handler {
 
         if (razonSocial.equals("") || tipo.equals("") || rubro.equals("") || cuit.equals("") || email.equals("") || username.equals("")
             || password.equals("") || terminos.equals("")){
-            model.put("error", "Debe completar todos los campos");
+            model.put("errorJuridico", "Debe completar todos los campos");
             //context.status(400);
             context.redirect("/crearCuentaJuridica");
             return;
         }
 
         if ( !esNumerico(cuit)  ||  !esNumerico(telefono) )  {
-            model.put("error", "El número de CUIT o el teléfono no son numéricos");
+            model.put("errorJuridico", "El número de CUIT o el teléfono no son numéricos");
             //context.status(400);
             context.redirect("/crearCuentaJuridica");
             return;
         }
 
         if ( !cuit.matches("[0-9]{11}") )  {
-            model.put("error", "El número de CUIT debe tener 11 dígitos");
+            model.put("errorJuridico", "El número de CUIT debe tener 11 dígitos");
             //context.status(400);
             context.redirect("/crearCuentaJuridica");
             return;
         }
 
         if ( !telefono.equals("")  &&  !telefono.matches("[0-9]{8,10}") )  {
-            model.put("error", "El teléfono debe tener entre 8 y 10 dígitos");
+            model.put("errorJuridico", "El teléfono debe tener entre 8 y 10 dígitos");
             //context.status(400);
             context.redirect("/crearCuentaJuridica");
             return;

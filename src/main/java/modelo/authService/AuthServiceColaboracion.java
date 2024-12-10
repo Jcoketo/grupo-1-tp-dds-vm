@@ -25,9 +25,9 @@ public class AuthServiceColaboracion {
     private static RepositorioTarjetas repoTarjetas = RepositorioTarjetas.getInstancia();
     private static RepositorioOfertas reposOfertas = RepositorioOfertas.getInstancia();
 
-    public static void registrarColaboracionDinero(Integer idPersona, String monto){
+    public static void registrarColaboracionDinero(Integer idPersona, String monto, FrecuenciaDonacion freq){
         Colaborador colab = repoColab.buscarColaboradorXIdPersona(idPersona);
-        DonarDinero donacion = new DonarDinero(LocalDate.now(), Double.parseDouble(monto));
+        DonarDinero donacion = new DonarDinero(LocalDate.now(), Double.parseDouble(monto), freq);
         donacion.hacerColaboracion(colab);
         repoColab.nuevaColaboracion(colab, donacion);
     }

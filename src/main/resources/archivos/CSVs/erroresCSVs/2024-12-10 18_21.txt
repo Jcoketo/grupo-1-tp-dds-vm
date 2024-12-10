@@ -1,0 +1,3 @@
+Error en Sintaxis.         Linea: 4
+Fecha de Donacion Invalida. Linea: 5
+Tipo de Donacion Invalida. Linea: 6
