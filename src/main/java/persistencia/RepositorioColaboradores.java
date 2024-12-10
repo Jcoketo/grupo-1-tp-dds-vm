@@ -235,6 +235,12 @@ public class RepositorioColaboradores {
         em.getTransaction().commit();
     }
 
+    public void actualizarColaborador(Colaborador colaborador) {
+        em.getTransaction().begin();
+        em.persist(colaborador);
+        em.getTransaction().commit();
+    }
+
     public Integer devolverIdPersona(TipoDocumento tipoDoc, String nroDoc) {
         TypedQuery<PersonaHumana> query = em.createQuery("SELECT p FROM PersonaHumana p WHERE p.documento.numeroDoc = :nroDoc AND p.documento.tipoDoc = :tipoDoc", PersonaHumana.class);
         query.setParameter("nroDoc", nroDoc);
