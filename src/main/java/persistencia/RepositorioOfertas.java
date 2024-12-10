@@ -6,6 +6,7 @@ import lombok.Setter;
 import modelo.colaboracion.Oferta;
 import modelo.colaboracion.TipoOferta;
 import modelo.excepciones.ExcepcionValidacion;
+import modelo.personas.Colaborador;
 import modelo.personas.Rubro;
 import modelo.personas.Tecnico;
 
@@ -71,23 +72,23 @@ public class RepositorioOfertas {
 
 
     public List<Oferta> conocerOfertasDisponibles() {
-        List<Object> ofertas = em.createNativeQuery("SELECT nombre, descripcion,puntosnecesarios,imagen,tipoOferta FROM oferta WHERE disponibilidad = true").getResultList();
+        TypedQuery<Oferta> query = em.createQuery("SELECT o FROM Oferta o WHERE o.disponibilidad = true ",Oferta.class);
 
-        List<Oferta> ofertaList = new ArrayList<>();
-
-        for (Object o : ofertas) {
-            Object[] datos = (Object[]) o;
-
-            if (datos[4].equals("PRODUCTO")) {
-                Oferta of = new Oferta((String) datos[0], (String) datos[1], TipoOferta.PRODUCTO, null, true, (Double) datos[2], (String) datos[3]);
-                ofertaList.add(of);
-            } else {
-                Oferta of = new Oferta((String) datos[0], (String) datos[1], TipoOferta.SERVICIO, null, true, (Double) datos[2], (String) datos[3]);
-                ofertaList.add(of);
-            }
+        try{
+            return query.getResultList();
+        } catch (NoResultException e) {
+            return null;
         }
+    }
 
-        return ofertaList;
+    public Oferta buscarOfertaXId(Integer idOferta) {
+        TypedQuery<Oferta> query = em.createQuery("SELECT o FROM Oferta o WHERE o.id = :idOferta", Oferta.class);
+        query.setParameter("idOferta", idOferta);
+        try {
+            return query.getSingleResult();
+        } catch (NoResultException e) {
+            return null;
+        }
     }
 
 

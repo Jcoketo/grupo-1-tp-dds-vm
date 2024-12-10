@@ -216,6 +216,10 @@
             margin-right: 10px; /* Espacio entre el ícono y el texto */
         }
 
+        .form-canjear {
+            margin-top: 10px;
+        }
+
     </style>
 </head>
 <body>
@@ -260,11 +264,11 @@
 </header>
 
 <main>
-    <div style="display: inline-flex; gap: 20px" >
+    <div style="display: inline-flex; gap: 20px">
         <h1>Catálogo</h1>
         <div class="btn-group">
             <div class="puntaje">
-                <p class="sub-header">Puntos acumulados: {{puntos}} </p>
+                <p class="sub-header">Puntos acumulados: {{puntos}}</p>
             </div>
         </div>
     </div>
@@ -272,17 +276,25 @@
         <div class="row">
             <div class="col-md-9">
                 <div class="catalog-row">
-                    <!-- elementos del catálogo -->
-
                     {{#ofertas}}
-                    <div class="col-md-3">
-                        <div class="catalog-item">
-                            <img src="/static/{{imagen}}" alt="Descripción">
-                            <p>{{nombre}}</p>
-                            <p>{{descripcion}}</p>
-                            <p>{{puntosNecesarios}}</p>
+                        <div class="col-md-3">
+                            <div class="catalog-item">
+                                <img src="http://localhost:8080/images/{{imagen}}" alt="Descripción">
+                                <p>{{nombre}}</p>
+                                <p>{{descripcion}}</p>
+                                <p>Puntos requeridos: {{puntosNecesarios}}</p>
+
+                                <!-- Botón de selección -->
+                                <button class="btn btn-success btn-seleccionar" onclick="mostrarBotonCanjear(this)">Seleccionar</button>
+
+                                <!-- Formulario de canje oculto inicialmente -->
+                                <form method="POST" action="/canjearPuntos" class="form-canjear" style="display:none;">
+                                    <input type="hidden" name="ofertaId" value="{{id}}">
+                                    <input type="hidden" name="puntos" value="{{puntosNecesarios}}">
+                                    <button type="submit" class="btn btn-primary">Canjear</button>
+                                </form>
+                            </div>
                         </div>
-                    </div>
                     {{/ofertas}}
                     <div class="col-md-3">
                         <div class="view-more">
@@ -338,6 +350,18 @@
     </div>
 </footer>
 
+<script>
+    function mostrarBotonCanjear(btn) {
+        const form = btn.nextElementSibling; // Obtiene el formulario que sigue al botón
+        if (form && form.classList.contains('form-canjear')) { // Seguridad para evitar errores
+            if (form.style.display === "none" || form.style.display === "") {
+                form.style.display = "block";
+            } else {
+                form.style.display = "none";
+            }
+        }
+    }
+</script>
 <!-- Scripts de Bootstrap y jQuery -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>

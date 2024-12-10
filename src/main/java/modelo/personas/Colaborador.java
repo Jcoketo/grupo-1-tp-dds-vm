@@ -6,6 +6,7 @@ import modelo.colaboracion.Oferta;
 import lombok.Getter;
 import modelo.elementos.Heladera;
 import modelo.elementos.Tarjeta;
+import modelo.excepciones.ExcepcionCanjear;
 import modelo.suscripcion.Suscripcion;
 import modelo.suscripcion.SuscripcionXCantidad;
 import modelo.suscripcion.SuscripcionXFalla;
@@ -108,6 +109,7 @@ public class Colaborador {
         }
         else {
             System.out.println("Esta persona no posee los puntos necesarios para canjear esa oferta!");
+            throw new ExcepcionCanjear("No tiene puntos suficientes");
         }
     }
 

@@ -1,21 +1,23 @@
+<!-- Aca deberia llegar con el link que reciba en el mail -->
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Agregar producto o servicio</title>
-    <!-- Enlace a CSS de Bootstrap -->
+    <title>cuentaCreada</title>
+    <!-- Incluye Bootstrap -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
     <style>
         body {
             font-family: Arial, sans-serif;
+            background-color: #ffffff;
             margin: 0;
             padding: 0;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-            background-color: #ffffff;
+            height: 100%; /* Asegura que el body y html ocupen el 100% de la altura */
         }
+
         header {
             display: flex;
             justify-content: space-between;
@@ -55,129 +57,193 @@
             width: 200px;
         }
 
+        /*fin dropdown*/
+
         main {
             flex-grow: 1;
+            padding: 50px;
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 50px;
             background-color: white;
+            height: 90vh;
         }
 
-        form {
-            width: 100%;
-            max-width: 800px;
-            margin: 0 auto;
+        .validation-container {
+            text-align: center;
+            background-color: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .heladera-list {
+            background-color: #f5f5f5;
+            padding: 10px;
+            border-radius: 8px;
+            max-height: 200px;
+        }
+
+        .heladera-item {
+            border: 1px solid #ddd;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            max-height: 180px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .heladera-item h5 {
+            font-size: 16px;
+            font-weight: bold;
         }
 
         h1 {
             font-size: 24px;
-            font-weight: bold;
             margin-bottom: 20px;
+            color: #333;
+        }
+
+        .btn-volver,
+        .btn-add,
+        .btn-donate,
+        .btn-subscribe {
+            background-color: #1e5552;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            padding: 10px 20px;
+            border-radius: 8px;
+            border: none;
+        }
+
+        .btn-volver:hover, .btn-donate:hover, .btn-subscribe:hover {
+            background-color: #114c49;
+            color: white;
+        }
+
+        .btn-volver2:hover {
+            background-color: #B7C9C7;
+            color: #114c49;
+        }
+
+        .btn-volver2{
+            background-color: #B7C9C7;
+            color: #1e5552;
+            font-size: 16px;
+            font-weight: bold;
+            padding: 10px 20px;
+            border-radius: 8px;
+            border: none;
+        }
+
+        .form-donation {
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
         }
 
         .form-group label {
             font-weight: bold;
         }
 
-        .form-control {
-            border-radius: 5px;
+        .form-group input {
+            border-radius: 8px;
+            padding: 8px;
         }
 
-        .upload-area {
-            border: 2px dashed #ced4da;
-            border-radius: 5px;
-            padding: 20px;
-            text-align: center;
-            background-color: #f8f9fa;
-            color: #6c757d;
-            position: relative;
-            cursor: pointer;
+        p {
+            font-size: 16px;
+            color: #666;
         }
 
-        .upload-area:hover {
-            background-color: #e9ecef;
+        h5 {
+            margin: 0;
+            white-space: nowrap;
+            color: white;
         }
 
-        .upload-area input[type="file"] {
-            display: none;
+        .footer-bg {
+            background-color: #B7C9C7;
+            padding: 20px 0;
         }
 
-        .upload-icon {
-            font-size: 50px;
-            color: #6c757d;
+        .social-icons a {
+            margin-right: 15px;
+            color: white;
         }
 
-        .upload-area p {
-            margin: 10px 0;
-        }
-
-        .upload-area a {
-            color: #007bff;
+        .footer-link {
+            color: white;
             text-decoration: none;
         }
 
-        .upload-area a:hover {
+        .footer-link:hover {
             text-decoration: underline;
         }
 
-        .btn-group {
-            display: flex;
-            justify-content: center;
-            margin-top: 20px;
-        }
-
-        .btn-cancelar, .btn-agregar {
-            border: none;
-            padding: 10px 90px;
-            border-radius: 5px;
-            font-size: 16px;
-            margin: 0 15px;
-        }
-
-        .btn-cancelar {
-            background-color: #e0e0e0;
-            color: black;
-        }
-
-        .btn-agregar {
-            background-color: #1e5552;
-            color: white;
-        }
-
-        .btn-agregar:hover {
-            background-color: #274597;
-            color: white;
-
-        }
-        h5 {
-            margin: 0; /* Elimina márgenes por defecto */
-            white-space: nowrap; /* Evita que el texto haga salto de línea */
-            color: white; /* Color de texto */
-        }
-
-
-        .footer-bg {
-            background-color: #B7C9C7; /* Color de fondo */
-            padding: 20px 0; /* Espaciado superior e inferior */
-        }
-        .social-icons a {
-            margin-right: 15px; /* Espacio entre iconos de redes sociales */
-            color: white; /* Color de texto para iconos */
-        }
-        .footer-link {
-            color: white; /* Color de texto para enlaces */
-            text-decoration: none; /* Eliminar subrayado */
-        }
-        .footer-link:hover {
-            text-decoration: underline; /* Subrayar al pasar el mouse */
-        }
-
         .social-icon {
-            margin-right: 10px; /* Espacio entre el ícono y el texto */
+            margin-right: 10px;
         }
 
+        @media (max-width: 768px) {
+            .card {
+                max-width: 100%;
+            }
+        }
+
+        .navbar {
+            flex-grow: 1;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .navbar-nav {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .nav-link {
+            color: black;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 16px;
+            font-weight: normal;
+        }
+
+        .dropdown-menu {
+            margin-top: 0;
+        }
+
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+            right: 0;
+            top: 100%;
+            min-width: 160px;
+        }
+
+        .dropdown-content a,
+        .dropdown-content label {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
     </style>
+
 </head>
 <body>
 <header>
@@ -187,7 +253,8 @@
         </a>
     </div>
     <nav class="navbar navbar-expand-lg navbar-light">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
@@ -201,7 +268,6 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/mapaHeladeras">Heladeras</a>
                 </li>
-                <!-- Menú desplegable -->
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -222,46 +288,13 @@
 </header>
 
 <main>
-    <div class="container">
-        <h1>Agregar producto o servicio</h1>
-        <!-- Formulario -->
-        <form action="/agregarProductosEmpresa" method="post" enctype="multipart/form-data">
-            <div class="form-group">
-                <label for="nombre">Nombre</label>
-                <input type="text" id="nombre" name="nombre" class="form-control" placeholder="Nombre del producto o servicio">
-            </div>
-            <div class="form-group">
-                <label for="tipo">Tipo de publicación</label>
-                <select id="tipo" name="tipo" class="form-control">
-                    <option value="producto">Producto</option>
-                    <option value="servicio">Servicio</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="puntos"> Descripción</label>
-                <input type="text" id="Descripcion" name="descripcion" class="form-control" placeholder="Descripción">
-            </div>
-            <div class="form-group">
-                <label for="puntos"> Puntos necesarios para canjearlo</label>
-                <input type="number" id="puntos" name="puntos" class="form-control" placeholder="0" min="0">
-            </div>
-            <div class="form-group">
-                <label for="foto">Foto</label>
-                <div class="upload-area" id="uploadArea">
-                    <input type="file" id="fileInput" name="file" accept="image/*">
-                    <div id="dropZone" class="drop-zone">
-                        Arrastra y suelta el archivo aquí
-                    </div>
-                    <p id="fileName" class="mt-2"></p>
-                </div>
-            </div>
-            <div class="btn-group">
-                <a href="/catalogoProductos?filter=0" class="btn-cancelar">Cancelar</a>
-                <button type="submit" class="btn-agregar">Agregar</button>
-            </div>
-        </form>
+    <div class="validation-container">
+        <h1>No tiene puntos suficientes para cajear este producto/servicio</h1>
+        <a href="/canjearPuntos" class="btn-volver">Volver a canjear</a>
+        <a href="/inicio" class="btn-volver2">Volver a Inicio</a>
     </div>
 </main>
+
 
 <footer class="footer-bg">
     <div class="container">
@@ -305,42 +338,12 @@
     </div>
 </footer>
 
-<script>
-    const dropZone = document.getElementById('dropZone');
-    const fileInput = document.getElementById('fileInput');
-    const fileName = document.getElementById('fileName');
 
-    dropZone.addEventListener('dragover', (e) => {
-        e.preventDefault();
-        dropZone.classList.add('drop-zone-hover');
-    });
-
-    dropZone.addEventListener('dragleave', () => {
-        dropZone.classList.remove('drop-zone-hover');
-    });
-
-    dropZone.addEventListener('drop', (e) => {
-        e.preventDefault();
-        dropZone.classList.remove('drop-zone-hover');
-        const files = e.dataTransfer.files;
-        fileInput.files = files;
-        fileName.textContent = `Archivo seleccionado: ${files[0].name}`;
-    });
-
-    dropZone.addEventListener('click', () => {
-        fileInput.click();
-    });
-
-    fileInput.addEventListener('change', () => {
-        if (fileInput.files.length > 0) {
-            fileName.textContent = `Archivo seleccionado: ${fileInput.files[0].name}`;
-        }
-    });
-</script>
-<!-- Scripts de Bootstrap y jQuery -->
+<!-- Incluye Bootstrap JS y sus dependencias -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
 
 </body>
 </html>

@@ -1,10 +1,12 @@
 package modelo.colaboracion;
 
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import modelo.personas.Colaborador;
 import modelo.personas.TipoPersona;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Arrays;
 
 @NoArgsConstructor
@@ -25,6 +27,7 @@ public class OfrecerRecompensa extends Colaboracion{
     public void hacerColaboracion(Colaborador colaborador) {
         String text = validar(colaborador);
         if(text == null){
+            this.fechaColaboracion = LocalDate.now();
             incrementarPuntos(colaborador);
             colaborador.agregarColaboracion(this);
         }
