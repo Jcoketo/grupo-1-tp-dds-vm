@@ -6,6 +6,7 @@ import org.apache.commons.mail.EmailException;
 import org.apache.commons.mail.SimpleEmail;
 
 import static modelo.importador.EscribirLogError.escribirMensajeError;
+import static modelo.importador.EscribirLogError.escribirMensajeErrorXMail;
 
 public class ApacheCommonsEmail implements AdapterMAIL{
     private String hostName = "smtp.gmail.com";
@@ -32,7 +33,7 @@ public class ApacheCommonsEmail implements AdapterMAIL{
             System.out.println("Al mail: "+ destinatario);
         } catch (EmailException e){
             String mensajeError = "Error al enviar mail a " + destinatario + ": " + e.getMessage();
-            escribirMensajeError(mensajeError);
+            escribirMensajeErrorXMail(mensajeError);
 
         }
     }

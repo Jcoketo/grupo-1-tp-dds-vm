@@ -1,1 +1,0 @@
-Error al enviar mail a coquitomenazzi: javax.mail.internet.AddressException: Missing final '@domain' in string ``coquitomenazzi''

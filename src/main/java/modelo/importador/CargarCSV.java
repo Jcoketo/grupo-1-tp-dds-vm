@@ -12,9 +12,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CargarCSV {
-    private static List<RegistroLeido> registrosLeidos = new ArrayList<>();
-    public static void CargarSCV() throws IOException {
-        try (Reader reader = new FileReader("src/main/resources/cargaMasivaNuevosUsuarios.csv")) {
+    public static List<RegistroLeido> CargarSCV(String filename) throws Exception {
+
+        List<RegistroLeido> registrosLeidos = new ArrayList<>();
+
+        try (Reader reader = new FileReader("src/main/resources/archivos/CSVs/"+ filename )) {
             CSVParser csvParser = CSVFormat.DEFAULT
                     .withDelimiter(';') // el delimitador entre columna y columna es el ;
                     .parse(reader);
@@ -28,45 +30,45 @@ public class CargarCSV {
                 String formaColaboracion = record.get(6);
                 String cantidad = record.get(7);
 
-//                RegistroLeido registro = new RegistroLeido(tipoDoc, nroDocumento, nombre, apellido, mail, fecha, formaColaboracion, cantidad, record.getRecordNumber());
-//                registrosLeidos.add(registro);
+                RegistroLeido registro = new RegistroLeido(tipoDoc, nroDocumento, nombre, apellido, mail, fecha, formaColaboracion, cantidad, record.getRecordNumber());
+                registrosLeidos.add(registro);
 
             }
-            RepositorioArchivos repositorio = RepositorioArchivos.getInstancia();
-            repositorio.agregarCSVNoProcesado(registrosLeidos);
+//            RepositorioArchivos repositorio = RepositorioArchivos.getInstancia();
+//            repositorio.agregarCSVNoProcesado(registrosLeidos);
 
         }
+        return registrosLeidos;
     }
 }
 // LA MISMA FUNCIONALIDAD PERO SI SE QUIERE MANDAR EL PATH COMO PARAMETRO
 // QUE ES COMO DEBERIA SER
-/*
-public class CargarCSV {
-    static List<RegistroLeido> registrosLeidos = new ArrayList<>();
 
-    public static void cargarCSV(String path) throws IOException {
-        try (Reader reader = new FileReader(path)) {
-            CSVParser csvParser = CSVFormat.DEFAULT
-                    .withFirstRecordAsHeader() // Considera la primera fila como cabecera
-                    .withDelimiter(';') // El delimitador entre columna y columna es el ';'
-                    .parse(reader);
-            for (CSVRecord record : csvParser) {
-                String tipoDoc = record.get("TipoDoc");
-                String nroDocumento = record.get("NroDocumento");
-                String nombre = record.get("Nombre");
-                String apellido = record.get("Apellido");
-                String mail = record.get("Mail");
-                String fecha = record.get("Fecha");
-                String formaColaboracion = record.get("FormaColaboracion");
-                String cantidad = record.get("Cantidad");
+//public class CargarCSV {
+//    static List<RegistroLeido> registrosLeidos = new ArrayList<>();
+//
+//    public static void cargarCSV(String path) throws IOException {
+//        try (Reader reader = new FileReader(path)) {
+//            CSVParser csvParser = CSVFormat.DEFAULT
+//                    .withFirstRecordAsHeader() // Considera la primera fila como cabecera
+//                    .withDelimiter(';') // El delimitador entre columna y columna es el ';'
+//                    .parse(reader);
+//            for (CSVRecord record : csvParser) {
+//                String tipoDoc = record.get("TipoDoc");
+//                String nroDocumento = record.get("NroDocumento");
+//                String nombre = record.get("Nombre");
+//                String apellido = record.get("Apellido");
+//                String mail = record.get("Mail");
+//                String fecha = record.get("Fecha");
+//                String formaColaboracion = record.get("FormaColaboracion");
+//                String cantidad = record.get("Cantidad");
+//
+//                RegistroLeido registro = new RegistroLeido(tipoDoc, nroDocumento, nombre, apellido, mail, fecha, formaColaboracion, cantidad, record.getRecordNumber());
+//                registrosLeidos.add(registro);
+//            }
+//
+//            RepositorioArchivos.CSVNOProcesados.add(registrosLeidos);
+//        }
+//    }
+//}
 
-                RegistroLeido registro = new RegistroLeido(tipoDoc, nroDocumento, nombre, apellido, mail, fecha, formaColaboracion, cantidad, record.getRecordNumber());
-                registrosLeidos.add(registro);
-            }
-
-            RepositorioArchivos.CSVNOProcesados.add(registrosLeidos);
-        }
-    }
-}
-
- */

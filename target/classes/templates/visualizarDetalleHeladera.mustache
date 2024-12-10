@@ -211,22 +211,22 @@
             <div id="map"></div>
         </div>
         <div class="col-md-5 mt-4 mt-md-0">
-            <h3>Heladera Medrano UTN</h3>
-            <p>Avenida Medrano 1234</p>
+            <h3>{{nombre}}</h3>
+            <p>{{direccion}}</p>
 
             <div class="info">
                 <span>Estado</span>
-                Activa
+                {{estado}}
             </div>
 
             <div class="info">
                 <span>Disponibilidad</span>
-                2 viandas
+                {{disponibilidad}} viandas
             </div>
 
             <div class="info">
                 <span>Fecha de inicio de funcionamiento</span>
-                10/03/2023
+                {{fecha}}
             </div>
 
             <a href="/visualizarAlertas" class="action-link">Alertas</a>
@@ -248,32 +248,13 @@
             zoom: 13
         });
 
-        heladeras.forEach(heladera => {
-            const marker = new google.maps.Marker({
-                position: { lat: heladera.lat, lng: heladera.lng },
-                map: map,
-                title: heladera.name,
-            });
-
-            markers.push(marker);
-
-            const listItem = document.createElement('li');
-            listItem.className = "list-group-item";
-            listItem.innerHTML = `
-                <div>
-                    <strong>${heladera.name}</strong><br>
-                    <small>En funcionamiento desde: ${heladera.date}</small><br>
-                    <small>${heladera.status}</small>
-                </div>
-            `;
-            listItem.addEventListener('click', () => {
-                map.setCenter(marker.getPosition());
-                map.setZoom(15);
-                marker.setAnimation(google.maps.Animation.BOUNCE);
-                setTimeout(() => marker.setAnimation(null), 1400);
-            });
-            document.getElementById('heladeras-list').appendChild(listItem);
+        const marker = new google.maps.Marker({
+            position: { lat: {{latitud}}, lng: {{longitud}} },
+            map: map,
+            title: {{nombre}},
         });
+
+        markers.push(marker);
     }
 
     document.addEventListener("DOMContentLoaded", initMap);

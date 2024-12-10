@@ -45,7 +45,7 @@ public MisColaboracionesController(RepositorioColaboradores repoColaboradores) {
     }
 
     private List<DatosColaboracion> getDatosColaboraciones(List<Colaboracion> colaboraciones){
-        return colaboraciones.stream().map(colab -> new DatosColaboracion(colab.getClassName(), colab.getFechaColaboracion(), colab.conocerPuntaje())).toList();
+        return colaboraciones.stream().map(colab -> new DatosColaboracion(colab.getClassName(), colab.getFechaColaboracion(), colab.conocerPuntaje(), colab.getPorCSV())).toList();
     }
 
 
@@ -56,10 +56,13 @@ class DatosColaboracion {
     private String tipo;
     private LocalDate fechaDeColaboracion;
     private Double puntosSumados;
+    private Boolean xCSV;
 
-    public DatosColaboracion(String tipo, LocalDate fechaDeColaboracion, Double puntosSumados) {
+    public DatosColaboracion(String tipo, LocalDate fechaDeColaboracion, Double puntosSumados, Boolean xCSV ) {
         this.tipo = tipo;
         this.fechaDeColaboracion = fechaDeColaboracion;
         this.puntosSumados = puntosSumados;
+        this.xCSV = xCSV;
+
     }
 }

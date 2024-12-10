@@ -33,10 +33,7 @@ public class CanjearPuntosFinalizadoController  implements Handler {
         }
 
         Integer idOferta = Integer.parseInt(context.formParam("ofertaId"));
-
         Integer idPersona = context.sessionAttribute("idPersona");
-
-
 
         try {
 
@@ -50,6 +47,7 @@ public class CanjearPuntosFinalizadoController  implements Handler {
 
         } catch (ExcepcionCanjear e) {
             context.render("templates/noTienePuntosSuficientes.mustache");
+            return;
         }
 
         context.render("templates/productoCanjeado.mustache");
