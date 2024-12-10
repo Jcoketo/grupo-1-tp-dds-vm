@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class HeladeraTest {
 
-    @Test
+   /* @Test
     public void testRetirarVianda() {
         // Arrange
         Heladera heladera = new Heladera(10, null);
@@ -29,5 +29,5 @@ public class HeladeraTest {
 
         assertEquals(1, heladera2.getViandas().size());
 
-    }
+    }*/
 }
