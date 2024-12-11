@@ -71,7 +71,8 @@ public class AuthServiceColaborador {
             Colaborador colaborador = new Colaborador(persona, "CSV");
 
             String password = PasswordGenerator.generatePassword();
-            repoUsuarios.persistirUsuario(mail, nombre, password, Roles.USUARIO);
+            String passwordAux = AuthServiceUsuario.hashPassword(password);
+            repoUsuarios.persistirUsuario(mail, nombre, passwordAux, Roles.USUARIO);
             repoColab.actualizarColaborador(colaborador);
 
             String mensajeMasCredenciales = "Bienvenido a la plataforma. Su mail de ingreso es: " + mail + " y su contraseña es: " + password;
