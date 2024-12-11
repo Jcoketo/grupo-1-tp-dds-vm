@@ -49,7 +49,7 @@ public class AuthServiceColaborador {
 
             String mensajeMasCredenciales = "Bienvenido a la plataforma. Su mail de ingreso es: " + mail + " y su contraseña es: " + password;
 
-            Notificador.notificarXNuevoUsuario(mensajeMasCredenciales, colaborador);
+            Notificador.notificarXNuevoUsuario(mensajeMasCredenciales, medioDeContacto);
 
             return colaborador;
 

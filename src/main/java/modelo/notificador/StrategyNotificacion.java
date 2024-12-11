@@ -1,7 +1,8 @@
 package modelo.notificador;
 
 import modelo.personas.Colaborador;
+import modelo.personas.MedioDeContacto;
 
 public interface StrategyNotificacion {
-    public void enviarNotificacion(String mensaje, Colaborador persona, String asunto);
+    public void enviarNotificacion(String mensaje, MedioDeContacto medioDeContacto, String asunto);
 }

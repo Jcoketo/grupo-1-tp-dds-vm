@@ -1,6 +1,7 @@
 package modelo.elementos;
 
 import modelo.personas.Tecnico;
+import persistencia.RepositorioHeladeras;
 import persistencia.RepositorioIncidentes;
 import persistencia.RepositoriosTecnicos;
 
@@ -14,8 +15,7 @@ public class ReceptorTemperatura {
 
     public void evaluar(Sensoreo sensor){ //TODO:TERMINAR
 
-        if ( sensor.getFechaYhora().toLocalDate() != ultimoRegistro.getFechaYhora().toLocalDate() ){
-            // Se reporta una FALLA DE CONEXION
+        if ( sensor.getFechaYhora().toLocalDate() == ultimoRegistro.getFechaYhora().toLocalDate() ){ // En ese caso, se reporta una FALLA DE CONEXION.
             heladera.marcarComoInactiva();
             Alerta alerta = new Alerta(TipoAlerta.FALLA_EN_CONEXION, heladera);
             RepositorioIncidentes repo = RepositorioIncidentes.getInstancia();
@@ -23,20 +23,19 @@ public class ReceptorTemperatura {
             RepositoriosTecnicos tecnicos = RepositoriosTecnicos.getInstancia();
             try {
                 Tecnico tecnico = tecnicos.obtenerTecnicoCercano(heladera.getPuntoEstrategico().getAreas(), heladera);
-                tecnico.notificarFalla(heladera, alerta);
+                tecnico.notificarAlerta(heladera, alerta.getTipoAlerta());
             } catch (Exception e) { //TODO verificar como volver de este error
-                System.out.println("No hay técnicos disponibles");
+                System.out.println("LOG SENSOR TEMPERATURA: Se reporto una falla de conexion pero no se pudo contactar con tecnico.");
+                // log
             }
-            return;
         }
 
-        if(sensor.getTempRegistrada() <= heladera.getTemperaturaMaxima()
-            && sensor.getTempRegistrada() >= heladera.getTemperaturaMinima()){
-            return;
-        }
-        else {
+        if(sensor.getTempRegistrada() > heladera.getTemperaturaMaxima()
+            || sensor.getTempRegistrada() < heladera.getTemperaturaMinima()){
+
             heladera.marcarComoInactiva();
             Alerta alerta = new Alerta(TipoAlerta.FALLA_TEMPERATURA, heladera);
+
             RepositorioIncidentes repo = RepositorioIncidentes.getInstancia();
             repo.agregarIncidente(alerta);
         }

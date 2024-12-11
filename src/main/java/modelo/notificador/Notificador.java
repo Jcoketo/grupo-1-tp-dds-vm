@@ -6,6 +6,7 @@ import modelo.personas.Colaborador;
 import modelo.notificador.telegram.StrategyTelegram;
 import modelo.notificador.whatsApp.NotificadorWhatsApp;
 import modelo.notificador.whatsApp.StrategyWhatsApp;
+import modelo.personas.MedioDeContacto;
 import modelo.personas.TipoMedioDeContacto;
 import lombok.Getter;
 
@@ -37,21 +38,17 @@ public class Notificador {
         estrategias.put(medio, estrategia);
     }
 
-    public static void notificarXNuevoUsuario(String mensaje, Colaborador persona) {
-        if (persona.getEmail() == null) {
-            throw new IllegalArgumentException("El colaborador no tiene un email asignado.");
-        }
-
+    public static void notificarXNuevoUsuario(String mensaje, MedioDeContacto medioDeContacto) {
         if (estrategias.containsKey(TipoMedioDeContacto.MAIL)) {
-            estrategias.get(TipoMedioDeContacto.MAIL).enviarNotificacion(mensaje, persona, "Bienvenido");
+            estrategias.get(TipoMedioDeContacto.MAIL).enviarNotificacion(mensaje, medioDeContacto, "Bienvenido");
         } else {
             throw new NoExisteMetodoExcepcion();
         }
     }
 
-    public static void notificar(String mensaje, String asunto, Colaborador persona, TipoMedioDeContacto contacto) {
-        if(estrategias.containsKey(contacto)){
-            estrategias.get(contacto).enviarNotificacion(mensaje, persona, asunto);
+    public static void notificar(String mensaje, String asunto, MedioDeContacto medioDeContacto) {
+        if(estrategias.containsKey(medioDeContacto.getMedio())){
+            estrategias.get(medioDeContacto.getMedio()).enviarNotificacion(mensaje, medioDeContacto, asunto);
         }else{
             throw new NoExisteMetodoExcepcion();
         }

@@ -4,8 +4,9 @@ import java.util.ArrayList;
 import lombok.Getter;
 import modelo.elementos.Areas;
 import modelo.elementos.Heladera;
-import modelo.elementos.Incidente;
 import modelo.elementos.PuntoEstrategico;
+import modelo.elementos.TipoAlerta;
+import modelo.notificador.Notificador;
 
 import javax.persistence.*;
 import java.util.List;
@@ -13,8 +14,6 @@ import java.util.List;
 @Entity
 @Table
 public class Tecnico {
-
-
     @Id
     @GeneratedValue
     @Getter private int id;
@@ -63,10 +62,22 @@ public class Tecnico {
 
     }
 
-    public void notificarFalla(Heladera heladera, Incidente incidente) {
-        //TODO
-        // enviar notificacion al tecnico
-        // enviar notificacion al area de mantenimiento
+    public void notificarFalla(Heladera heladera, String descripcion){
+        String texto = "Se ha reportado una falla en la heladera " + heladera.getNombre() + " en " + heladera.getPuntoEstrategico().getDireccion() + ". " +
+                "Descripción del problema: " + descripcion;
+        String asunto = "Falla técnica reportada";
+
+        MedioDeContacto medio = persona.devolerMedioDeContacto(TipoMedioDeContacto.MAIL);
+        Notificador.notificar(texto, asunto, medio);
+    }
+
+    public void notificarAlerta(Heladera heladera, TipoAlerta alerta){
+        String texto = "Se ha reportado una alerta en la heladera " + heladera.getNombre() + " en " + heladera.getPuntoEstrategico().getDireccion() + ". " +
+                "Tipo de alerta: " + alerta;
+        String asunto = "Alerta reportada";
+
+        MedioDeContacto medio = persona.devolerMedioDeContacto(TipoMedioDeContacto.MAIL);
+        Notificador.notificar(texto, asunto, medio);
     }
 
 }

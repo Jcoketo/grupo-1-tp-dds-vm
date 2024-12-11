@@ -3,6 +3,8 @@ package modelo.elementos;
 import java.time.LocalDateTime;
 
 import javax.persistence.*;
+
+import lombok.Getter;
 import modelo.personas.Colaborador;
 
 
@@ -15,6 +17,7 @@ public class FallaTecnica extends Incidente{
     Colaborador colaborador;
 
     @Column
+    @Getter
     String descripcion;
 
     @Column

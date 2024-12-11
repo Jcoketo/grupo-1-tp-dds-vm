@@ -183,7 +183,7 @@ public class Router {
             path("/reportarFallaTecnica", () -> {
                 before(new AutorizacionMiddleware().setDebeSerLogueado());
                 get(new ReportarFallaTecnicaController());
-                post(new ReportarFallaTecnicaFinalizadaController(repoIncidentes));
+                post(new ReportarFallaTecnicaFinalizadaController());
             });
 
             path("/aceptarReportarFalla", () -> {

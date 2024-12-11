@@ -1,7 +1,7 @@
 package modelo.notificador.whatsApp;
 
 import modelo.notificador.StrategyNotificacion;
-import modelo.personas.Colaborador;
+import modelo.personas.MedioDeContacto;
 
 public class StrategyWhatsApp implements StrategyNotificacion {
     private AdapterWhatsApp adapter;
@@ -11,7 +11,7 @@ public class StrategyWhatsApp implements StrategyNotificacion {
     }
 
     @Override
-    public void enviarNotificacion(String mensaje, Colaborador persona, String asunto) {
-        this.adapter.enviarWhatsApp(mensaje, "");
+    public void enviarNotificacion(String mensaje, MedioDeContacto medioDeContacto, String asunto) {
+        this.adapter.enviarWhatsApp(mensaje, medioDeContacto.getContacto());
     }
 }
