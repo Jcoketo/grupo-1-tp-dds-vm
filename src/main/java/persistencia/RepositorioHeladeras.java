@@ -4,16 +4,13 @@ import lombok.Getter;
 import modelo.colaboracion.Vianda;
 import modelo.elementos.Heladera;
 import modelo.excepciones.ExcepcionValidacion;
-import modelo.personas.Colaborador;
 import modelo.suscripcion.Suscripcion;
 
 import javax.persistence.*;
-import java.time.LocalDate;
-import java.util.Collection;
+
 import java.util.List;
 
 public class RepositorioHeladeras {
-    @Getter
     private static RepositorioHeladeras instancia = null;
 
     @Getter
@@ -29,6 +26,7 @@ public class RepositorioHeladeras {
         }
         return instancia;
     }
+
     public static RepositorioHeladeras getInstancia() {
         if(instancia == null) {
             throw new ExcepcionValidacion("No fue instanciado en el repositorio!");
@@ -42,10 +40,6 @@ public class RepositorioHeladeras {
         em.persist(heladera);
         em.getTransaction().commit();
 
-    }
-
-    public EntityManager getEntityManager() {
-        return em;
     }
 
     public void validarInsertHeladera(Heladera heladera) {

@@ -1,11 +1,10 @@
 package modelo.personas;
 
-import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import modelo.elementos.PuntoEstrategico;
 import modelo.elementos.Heladera;
-import modelo.recomendadorDePuntos.RecomendadorDePuntos;
+import modelo.consumosAPIs.recomendadorDePuntos.RecomendadorDePuntos;
 
 import javax.persistence.*;
 import javax.ws.rs.DefaultValue;
@@ -29,7 +28,7 @@ public class PersonaJuridica extends Persona{
     @Getter
     private Rubro rubro;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.PERSIST)
     @JoinColumn(name= "persona_juridica_id", referencedColumnName = "id")
     @Getter @Setter private List<Heladera> heladeras = new ArrayList<>();
 
@@ -49,6 +48,10 @@ public class PersonaJuridica extends Persona{
 
     public List<PuntoEstrategico> solicitarPuntosRecomendados(Double latitud, Double longitud, Double radio) {
         return RecomendadorDePuntos.getInstancia().obtenerPuntosRecomendados(latitud, longitud, radio);
+    }
+
+    public void agregarHeladera(Heladera heladera){
+        this.heladeras.add(heladera);
     }
 
     public void incrementarPuntosXHeladera(){

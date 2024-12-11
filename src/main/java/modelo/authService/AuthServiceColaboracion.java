@@ -1,6 +1,7 @@
 package modelo.authService;
 
 import modelo.colaboracion.*;
+import modelo.consumosAPIs.servicioGeoLocalizacion.LocalizadorLatLong;
 import modelo.elementos.Heladera;
 import modelo.elementos.PuntoEstrategico;
 import modelo.elementos.TarjetaPlastica;
@@ -69,7 +70,6 @@ public class AuthServiceColaboracion {
         repoHeladeras.actualizarHeladera(origen);
         repoHeladeras.actualizarHeladera(destino);
         repoColab.nuevaColaboracion(colab, distribucion);
-
     }
 
     public static void registrarPersonasVulnerables(Integer idPersona){
@@ -91,16 +91,6 @@ public class AuthServiceColaboracion {
         repoColab.nuevaColaboracion(colab, registroPersonasSituVulnerable);
     }
 
-    public static void registrarColaboracionHeladera(Integer idPersona, String nombre, LocalDate fechaInicio, Integer capacidad, Boolean activa, String direccion) {
-        Colaborador colab = repoColab.buscarColaboradorXIdPersona(idPersona);
-        PuntoEstrategico puntoColocacion = new PuntoEstrategico(direccion);
-
-        Heladera heladeraNueva = new Heladera(nombre, capacidad, puntoColocacion, activa, fechaInicio);
-
-        repoHeladeras.agregarHeladera(heladeraNueva);
-
-    }
-
     public static void registrarColaboracionRecompensa(Integer idPersona, String nombre,String descripcion,TipoOferta tipoOferta,Double puntos,String imagen) {
 
         Colaborador colab = repoColab.buscarColaboradorXIdPersona(idPersona);
@@ -113,9 +103,52 @@ public class AuthServiceColaboracion {
 
         colaboracion.hacerColaboracion(colab);
 
-        colab.agregarColaboracion(colaboracion);
-
         repoColab.nuevaColaboracion(colab, colaboracion);
 
     }
+
+    public static void registrarHeladera(Integer idPersona, String nombre, String capacidad, Boolean activo, String direccion, LocalDate fechaInicio, Boolean checkBoxDireccion, Float tempMax, Float tempMin, Boolean esRecomendada, String direcRecomendada, String latRecomendada, String longRecomendada) {
+
+        Colaborador colaborador = repoColab.buscarColaboradorXIdPersona(idPersona);
+        PersonaJuridica persona = (PersonaJuridica) colaborador.getPersona();
+
+        PuntoEstrategico puntoEstrategico = new PuntoEstrategico();
+
+        if ( checkBoxDireccion ){
+            String direcAux = colaborador.getPersona().getDireccion();
+            puntoEstrategico.setDireccion(direcAux);
+            puntoEstrategico.setLatitud(LocalizadorLatLong.obtenerLatitud(direcAux));
+            puntoEstrategico.setLongitud(LocalizadorLatLong.obtenerLongitud(direcAux));
+        }else if ( esRecomendada ){
+            puntoEstrategico.setDireccion(direcRecomendada);
+            puntoEstrategico.setLatitud(Double.parseDouble(latRecomendada));
+            puntoEstrategico.setLongitud(Double.parseDouble(longRecomendada));
+        } else {
+            puntoEstrategico.setDireccion(direccion);
+            puntoEstrategico.setLatitud(LocalizadorLatLong.obtenerLatitud(direccion));
+            puntoEstrategico.setLongitud(LocalizadorLatLong.obtenerLongitud(direccion));
+
+        }
+
+        puntoEstrategico.setAreas(LocalizadorLatLong.obtenerArea(puntoEstrategico.getLatitud(), puntoEstrategico.getLongitud()));
+
+        Heladera heladera = new Heladera(nombre, Integer.parseInt(capacidad), puntoEstrategico, activo, fechaInicio, tempMax, tempMin);
+        HacerseCargoHeladera colaboracion = new HacerseCargoHeladera(heladera);
+        persona.agregarHeladera(heladera);
+        colaboracion.hacerColaboracion(colaborador);
+
+        repoColab.actualizarColaborador(colaborador);
+
+    }
 }
+
+/*
+* CRONE TASK DIARIO
+* que se ejecute todos los días a las 00:00 hs
+* VA IR A TABLA PUNTO ESTRATEGICO
+* Y VA A DECIR
+* CHE LATITUD Y LONGITUD SON VACIA? BUENO
+* DAME LA DIRECCION, HABLO CON GOOGLEMAPS
+* Y TE DEVUELVO LATITUD Y LONGITUD
+* Y ACTUALIZAS LA BASE DE DATOS
+* */

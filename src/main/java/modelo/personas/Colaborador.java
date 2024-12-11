@@ -25,7 +25,7 @@ public class Colaborador {
     @GeneratedValue
     @Getter private int id;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "colaborador_id", referencedColumnName = "id")
     @Getter List<Colaboracion> colaboracionesRealizadas;
 

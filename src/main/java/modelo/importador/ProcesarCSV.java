@@ -102,7 +102,7 @@ public class ProcesarCSV {
                         colaborador.agregarColaboracion(donacion);
                     }
                     repoColab.persistirColaboraciones(donacionesDeVianda);
-                    repoColab.agregar(colaborador);
+                    repoColab.actualizarColaborador(colaborador);
                     break;
                 case "REDISTRIBUCION_VIANDAS":
                     DistribucionDeViandas donacionDistribucion = new DistribucionDeViandas(fechaDonacion, Integer.parseInt(cantidad));

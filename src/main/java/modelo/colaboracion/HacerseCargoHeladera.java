@@ -7,6 +7,7 @@ import modelo.personas.Colaborador;
 import modelo.personas.TipoPersona;
 import javax.persistence.*;
 
+import java.time.LocalDate;
 import java.util.Arrays;
 
 @Entity
@@ -23,6 +24,7 @@ public class HacerseCargoHeladera extends Colaboracion{
     public HacerseCargoHeladera(Heladera heladera) {
         this.tiposPersonasHabilitadas = Arrays.asList(TipoPersona.PJ);
         this.heladera = heladera;
+        this.fechaColaboracion = LocalDate.now();
     }
 
     public HacerseCargoHeladera() {
@@ -32,7 +34,7 @@ public class HacerseCargoHeladera extends Colaboracion{
     @Override
     public void hacerColaboracion(Colaborador colaborador) {
         this.validar(colaborador);
-        incrementarPuntos(colaborador);
+        //incrementarPuntos(colaborador);
         colaborador.agregarColaboracion(this);
     }
 
@@ -48,7 +50,7 @@ public class HacerseCargoHeladera extends Colaboracion{
     public void incrementarPuntos(Colaborador colaborador){
         //TODO: este método se ejecutaría de manera CRON-TASK cada 30 días o una vez por mes (en un día determinado).
         // Por lo tanto incrementa el puntaje del colaborador en 5, en cada una de las heladeras que la Persona se hizo cargo.
-        colaborador.incrementarPuntaje(coeficiente);
+        // colaborador.incrementarPuntaje(coeficiente);
     }
 
     @Override

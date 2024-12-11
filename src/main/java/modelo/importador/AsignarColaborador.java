@@ -60,7 +60,7 @@ public class AsignarColaborador {
             Colaborador colaboradoraux = new Colaborador(persona);
 
             //colaborador = new PersonaHumana(tipoDocumento, nroDocumento, nombre, apellido, medioDeContacto);
-            repoColaboradores.agregar(colaboradoraux);
+            repoColaboradores.actualizarColaborador(colaboradoraux);
 
             String password = PasswordGenerator.generatePassword();
             // TODO ACA IRIA EL CODIGO PARA ALMACENAR EN LA BD LAS CREDENCIALES
