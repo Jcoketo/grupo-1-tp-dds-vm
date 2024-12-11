@@ -1,6 +1,7 @@
 package modelo.authService;
 
 import modelo.elementos.Heladera;
+import modelo.excepciones.ExcepcionValidacion;
 import modelo.personas.Colaborador;
 import modelo.personas.MedioDeContacto;
 import modelo.personas.TipoMedioDeContacto;
@@ -20,6 +21,10 @@ public class AuthServiceSuscripcion {
 
         Heladera heladera = repositorioHeladeras.buscarHeladera(idHeladera);
         Colaborador colaborador = repositorioColaboradores.buscarColaboradorXIdPersona(idPersona);
+
+        if (heladera == null || colaborador == null) {
+            throw new ExcepcionValidacion("Hubo un problema en el servidor. Intente mas tarde");}
+
         MedioDeContacto medioDeContacto = colaborador.getPersona().devolerMedioDeContacto(tipoMedioDeContacto);
 
         switch (tipoSuscripcion) {

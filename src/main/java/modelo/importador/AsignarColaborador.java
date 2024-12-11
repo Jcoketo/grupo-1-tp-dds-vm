@@ -66,7 +66,7 @@ public class AsignarColaborador {
             // TODO ACA IRIA EL CODIGO PARA ALMACENAR EN LA BD LAS CREDENCIALES
             String mensajeMasCredenciales = "Bienvenido a la plataforma. Su usuario es: " + identificadorUnico + " y su contraseña es: " + password;
 
-            Notificador.notificarXNuevoUsuario(mensajeMasCredenciales, colaboradoraux);
+            Notificador.notificarXNuevoUsuario(mensajeMasCredenciales, medioDeContacto);
 
             return colaboradoraux;
 

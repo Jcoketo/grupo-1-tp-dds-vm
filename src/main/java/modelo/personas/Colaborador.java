@@ -142,19 +142,9 @@ public class Colaborador {
 
     }
 
-
-
-    /*public void reportarFalla(Heladera heladera, String motivo, String foto){
-        heladera.reportarFalla(this, motivo, foto);
-    }*/
-
     public void solicitarTarjeta(){
         Tarjeta tarjeta = new Tarjeta();
         this.tarjeta = tarjeta;
-    }
-
-    public void notificarmeXSuscripcion(String mensaje){
-      //TODO
     }
 
     public void agregarSuscripcion(Suscripcion suscripcion) {

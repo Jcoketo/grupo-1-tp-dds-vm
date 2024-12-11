@@ -22,6 +22,7 @@ public class ReportarFallaTecnicaController implements Handler {
         }
         model.put("nombreUsuario", context.sessionAttribute("nombreUsuario"));
         context.render("templates/reportarFallaTecnica.mustache", model);
+
     }
 
 }

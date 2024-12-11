@@ -5,7 +5,6 @@ import lombok.Getter;
 import modelo.notificador.Notificador;
 import modelo.personas.Colaborador;
 import modelo.personas.MedioDeContacto;
-import modelo.personas.TipoMedioDeContacto;
 
 import javax.persistence.*;
 
@@ -57,25 +56,27 @@ public abstract class Suscripcion {
         }
     }
 
-    public void notificarmeAlerta() {
+    public void notificarmeSuscripcion() {
         String texto;
         String asunto;
         switch (this.tipoSuscripcion) {
             case POCO_ESPACIO:
-                texto = "La heladera en " + heladera.getPuntoEstrategico().getDireccion() + " tiene poco espacio!";
+                texto = "La heladera " + heladera.getNombre() + " ubicada en " + heladera.getPuntoEstrategico().getDireccion() + " tiene poco espacio!" +
+                        "Corre a distribuir sus viandas y suma puntos!";
                 asunto = "Poco espacio en heladera";
-                Notificador.notificar(texto, asunto, colaborador, medioDeContacto.getMedio());
+                Notificador.notificar(texto, asunto, medioDeContacto);
                 break;
             case QUEDAN_POCAS:
-                texto = "En la heladera ubicada en " + heladera.getPuntoEstrategico().getDireccion() + " quedan pocas viandas!";
+                texto = "La heladera " + heladera.getNombre()  + " ubicada en " + heladera.getPuntoEstrategico().getDireccion() + " tiene pocas viandas!" +
+                        "Ve a rellenarla con mas viandas y consigue puntos!";
                 asunto = "Quedan pocas viandas!";
-                Notificador.notificar(texto, asunto, colaborador, medioDeContacto.getMedio());
+                Notificador.notificar(texto, asunto, medioDeContacto);
                 break;
             case DESPERFECTO:
                 Sugerencia sugerencia = new Sugerencia(heladera);
                 texto = sugerencia.devolerMensajeSugerencia();
-                asunto = "Hubo un Desperfecto!";
-                Notificador.notificar(texto, asunto, colaborador, medioDeContacto.getMedio());
+                asunto = "Hubo un Desperfecto en " + heladera.getNombre() +"!";
+                Notificador.notificar(texto, asunto, medioDeContacto);
                 break;
             default:
                 break;

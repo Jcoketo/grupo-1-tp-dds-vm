@@ -60,7 +60,7 @@ public class SuscripcionesDesperfectoTest {
 
   @Test
   public void testNotificarmeAlerta() {
-    suscripcion.notificarmeAlerta();
+    suscripcion.notificarmeSuscripcion();
 
     ArgumentCaptor<String> textoCaptor = ArgumentCaptor.forClass(String.class);
     ArgumentCaptor<String> asuntoCaptor = ArgumentCaptor.forClass(String.class);

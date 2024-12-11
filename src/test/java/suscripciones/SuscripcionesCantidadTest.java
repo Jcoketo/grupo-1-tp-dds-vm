@@ -63,7 +63,7 @@ public class SuscripcionesCantidadTest {
 
     heladera.agregarSuscriptor(suscripcion);
 
-    suscripcion.notificarmeAlerta();
+    suscripcion.notificarmeSuscripcion();
 
     ArgumentCaptor<String> textoCaptor = ArgumentCaptor.forClass(String.class);
     ArgumentCaptor<String> asuntoCaptor = ArgumentCaptor.forClass(String.class);
@@ -82,7 +82,7 @@ public class SuscripcionesCantidadTest {
 
     heladera.agregarSuscriptor(suscripcion);
 
-    suscripcion.notificarmeAlerta();
+    suscripcion.notificarmeSuscripcion();
 
     ArgumentCaptor<String> textoCaptor = ArgumentCaptor.forClass(String.class);
     ArgumentCaptor<String> asuntoCaptor = ArgumentCaptor.forClass(String.class);

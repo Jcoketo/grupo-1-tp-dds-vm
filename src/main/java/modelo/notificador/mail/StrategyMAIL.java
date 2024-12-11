@@ -2,6 +2,7 @@ package modelo.notificador.mail;
 
 import modelo.notificador.StrategyNotificacion;
 import modelo.personas.Colaborador;
+import modelo.personas.MedioDeContacto;
 
 public class StrategyMAIL implements StrategyNotificacion {
     private AdapterMAIL adapter;
@@ -11,8 +12,8 @@ public class StrategyMAIL implements StrategyNotificacion {
     }
 
     @Override
-    public void enviarNotificacion(String mensaje, Colaborador persona, String asunto) {
-        this.adapter.enviarMAIL(mensaje, persona.getEmail(), asunto);
+    public void enviarNotificacion(String mensaje, MedioDeContacto medioDeContacto, String asunto) {
+        this.adapter.enviarMAIL(mensaje, medioDeContacto.getContacto(), asunto);
     }
 
 

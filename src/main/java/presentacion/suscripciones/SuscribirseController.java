@@ -50,11 +50,10 @@ public class SuscribirseController implements Handler {
             AuthServiceSuscripcion.generarSuscripcion(idHeladera, idPersona, tipo, Integer.parseInt(limiteMinimo), Integer.parseInt(limiteMaximo), medio);
         }
         catch (ExcepcionValidacion e)
-        {
-            e.printStackTrace();
+        {   model.put("errorSuscribirse", e.getMessage());
+            context.redirect("/mapaHeladeras");
+            return;
         }
-
-
 
     }
 }

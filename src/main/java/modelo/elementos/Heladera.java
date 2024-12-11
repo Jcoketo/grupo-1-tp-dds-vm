@@ -18,13 +18,10 @@ import lombok.Getter;
 import lombok.Setter;
 import modelo.colaboracion.Vianda;
 import modelo.excepciones.ExcepcionValidacion;
-import modelo.personas.Colaborador;
-import modelo.personas.Tecnico;
 import modelo.personas.Visita;
 import modelo.suscripcion.Suscripcion;
 import modelo.suscripcion.TipoSuscripcion;
-import persistencia.RepositorioIncidentes;
-import persistencia.RepositoriosTecnicos;
+
 @Entity
 @Table(name = "heladera")
 public class Heladera {
@@ -112,7 +109,7 @@ public class Heladera {
                                                                      //  si quedan 30 lugares libres va a hacer siempre este bloque de codigo
             { this.colaboradoresSucriptos.stream().filter(colab -> colab.getTipoSuscripcion() == TipoSuscripcion.POCO_ESPACIO
                                 && colab.getLimiteViandasMaximas() == (this.viandasMaximas - this.viandas.size()))
-                                .forEach(colab -> colab.notificarmeAlerta());
+                                .forEach(colab -> colab.notificarmeSuscripcion());
             }
         } else {
             throw new ExcepcionValidacion("No se pueden agregar más viandas");
@@ -126,7 +123,7 @@ public class Heladera {
             if ( this.colaboradoresSucriptos != null) {
                 this.colaboradoresSucriptos.stream().filter(colab -> colab.getTipoSuscripcion() == TipoSuscripcion.QUEDAN_POCAS
                                 && colab.getLimiteViandasMinimas() == this.viandas.size())
-                                .forEach(colab -> colab.notificarmeAlerta());
+                                .forEach(colab -> colab.notificarmeSuscripcion());
             }
             return this.viandas.remove((int)indice);
         } else {
@@ -158,29 +155,15 @@ public class Heladera {
         this.temperaturaMinima = temperatura;
     }
 
-    public void reportarFalla(Colaborador colab, String motivo, String foto) {
+    public void reportarFalla() {
         this.marcarComoInactiva();
         this.contadorFallasSemanal++;
-
-        FallaTecnica falla = new FallaTecnica(this, colab, motivo, foto);
-
-        RepositorioIncidentes repo = RepositorioIncidentes.getInstancia();
-        repo.agregarIncidente(falla); // Persiste el Incidente
-
-        RepositoriosTecnicos tecnicos = RepositoriosTecnicos.getInstancia();
-        /* mover a auth service asi no ponemos el try aca */
-        try {
-            Tecnico tecnico = tecnicos.obtenerTecnicoCercano(this.getPuntoEstrategico().getAreas(), this);
-            tecnico.notificarFalla(this, falla);
-        } catch (Exception e) { //TODO verificar como volver de este error
-            System.out.println("No hay técnicos !");
-        }
     }
 
     void marcarComoInactiva(){
         this.activa = false;
         if(this.colaboradoresSucriptos != null)
-            this.colaboradoresSucriptos.stream().filter(colab -> colab.getTipoSuscripcion() == TipoSuscripcion.DESPERFECTO).forEach(colab -> colab.notificarmeAlerta());
+            this.colaboradoresSucriptos.stream().filter(colab -> colab.getTipoSuscripcion() == TipoSuscripcion.DESPERFECTO).forEach(colab -> colab.notificarmeSuscripcion());
         //this.detenerTareaPeriodica(); // CANCELAR EL PERMITIR INGRESO
     }
 

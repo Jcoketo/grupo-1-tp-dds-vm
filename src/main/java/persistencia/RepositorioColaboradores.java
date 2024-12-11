@@ -122,7 +122,7 @@ public class RepositorioColaboradores {
 
         String mensajeBienvenida = "Bienvenido a la plataforma " + nombre + ". Ojala que te diviertas";
 
-        Notificador.notificarXNuevoUsuario(mensajeBienvenida, colaborador);
+        Notificador.notificarXNuevoUsuario(mensajeBienvenida, medioContactoMail);
 
     }
 
@@ -148,7 +148,7 @@ public class RepositorioColaboradores {
 
         String mensajeBienvenida = "Bienvenido a la plataforma " + razonSocial + ". Ojala que te diviertas";
 
-        Notificador.notificarXNuevoUsuario(mensajeBienvenida, colaborador);
+        Notificador.notificarXNuevoUsuario(mensajeBienvenida, medioContactoMail);
 
     }
 
