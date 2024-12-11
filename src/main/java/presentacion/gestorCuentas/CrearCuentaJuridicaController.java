@@ -11,11 +11,7 @@ public class CrearCuentaJuridicaController implements Handler {
 
     @Override
     public void handle(@NotNull Context context) throws Exception {
-        Map<String, Object> model = context.sessionAttribute("model");
-        if (model == null) {
-            model = new HashMap<>();
-            context.sessionAttribute("model", model);
-        }
+        Map<String, Object> model = new HashMap<>();
         context.render("templates/crearCuentaJuridica.mustache", model);
 
     }

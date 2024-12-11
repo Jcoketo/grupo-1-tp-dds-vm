@@ -4,6 +4,7 @@ import accessManagment.AutorizacionMiddleware;
 import io.javalin.Javalin;
 import persistencia.*;
 import presentacion.InicioController;
+import presentacion.LogoutController;
 import presentacion.colaboraciones.*;
 import presentacion.gestorCuentas.*;
 import presentacion.heladera.AceptarAgregarHeladeraController;
@@ -55,6 +56,10 @@ public class Router {
             path("/login", () -> {
                 get(new ShowLoginController());
                 post(new ProcessLoginController(repoColab, repoUsuarios));
+            });
+
+            path("/logout", () -> {
+                get(new LogoutController());
             });
 
             path("/inicio", () -> {
