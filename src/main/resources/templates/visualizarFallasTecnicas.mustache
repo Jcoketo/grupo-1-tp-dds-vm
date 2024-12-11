@@ -253,18 +253,16 @@
 
         <h1>Fallas Técnicas</h1>
 
-        <div class="falla">
-            <h2>Puerta de heladera rota</h2>
-            <p>Fecha: 12/10/2023</p>
-        </div>
-
-        <div class="falla">
-            <h2>Falla en el compresor</h2>
-            <p>Fecha: 15/10/2023</p>
-        </div>
+        {{#detalleFallas}}
+            <div class="falla">
+                <h2>{{descripcion}}</h2>
+                <p>Fecha: {{fechaHoraIncidente}}</p>
+                <p>Estado: {{#estaSolucionado}}solucionado{{/estaSolucionado}}{{^estaSolucionado}}pendiente de solucion{{/estaSolucionado}}</p>
+            </div>
+        {{/detalleFallas}}
 
         <div class="button-container">
-            <a href="/reportarFallaTecnica" class="report-button">Reportar Falla Técnica</a>
+            <a href="/reportarFallaTecnica?heladeraId={{heladeraId}}" class="report-button">Reportar Falla Técnica</a>
         </div>
     </div>
 </main>

@@ -10,7 +10,6 @@ import org.jetbrains.annotations.NotNull;
 import persistencia.RepositorioColaboradores;
 import utils.GeneradorModel;
 
-import java.util.HashMap;
 import java.util.Map;
 
 public class SolicitudDeTarjetasController implements Handler {

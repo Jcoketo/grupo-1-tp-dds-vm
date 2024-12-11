@@ -2,6 +2,7 @@ import static io.javalin.apibuilder.ApiBuilder.*;
 
 import accessManagment.AutorizacionMiddleware;
 import io.javalin.Javalin;
+import io.javalin.http.Context;
 import persistencia.*;
 import presentacion.InicioController;
 import presentacion.LogoutController;
@@ -52,6 +53,10 @@ public class Router {
 
         // ------------------------------------   RUTAS   ------------------------------------------------
         app.routes(() -> {
+
+            path("/", () -> {
+                get(ctx -> ctx.redirect("/inicio") );
+            });
 
             path("/login", () -> {
                 get(new ShowLoginController());

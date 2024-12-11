@@ -20,6 +20,14 @@ public class ReportarFallaTecnicaController implements Handler {
             model = new HashMap<>();
             context.sessionAttribute("model", model);
         }
+
+        String idHel = context.queryParam("heladeraId");
+        if (idHel == null || idHel.isEmpty()) {
+            context.redirect("/visualizarFallasTecnicas?heladeraId=" + idHel);
+            return;
+        }
+        int idHeladera = Integer.parseInt(idHel);
+
         model.put("nombreUsuario", context.sessionAttribute("nombreUsuario"));
         context.render("templates/reportarFallaTecnica.mustache", model);
 

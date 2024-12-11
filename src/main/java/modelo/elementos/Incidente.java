@@ -3,8 +3,10 @@ package modelo.elementos;
 import java.time.LocalDateTime;
 
 import javax.persistence.*;
+import javax.ws.rs.DefaultValue;
 
 import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Table
@@ -22,6 +24,11 @@ public abstract class Incidente {
 
     @Column
     @Getter protected LocalDateTime fechaHoraIncidente;
+
+    @Column
+    @Getter @Setter
+    @DefaultValue("0")
+    protected Boolean estaSolucionado;
 
     public Incidente(Heladera heladera) {
         this.heladera = heladera;
