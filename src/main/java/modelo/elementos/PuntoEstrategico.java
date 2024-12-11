@@ -15,9 +15,9 @@ public class PuntoEstrategico {
     @Getter private Long id;
 
     @Column
-    @Getter private Double latitud;
+    @Setter @Getter private Double latitud;
     @Column
-    @Getter private Double longitud;
+    @Setter @Getter private Double longitud;
     @Column
     @Getter @Setter private String direccion;
     @Enumerated(EnumType.STRING)
@@ -34,6 +34,12 @@ public class PuntoEstrategico {
         this.latitud = 0.0;
         this.longitud = 0.0;
         this.direccion = direccion;
+    }
+
+    public PuntoEstrategico(String direccion, Double latitud, Double longitud){
+       this.latitud = latitud;
+       this.longitud = longitud;
+       this.direccion = direccion;
     }
 
 

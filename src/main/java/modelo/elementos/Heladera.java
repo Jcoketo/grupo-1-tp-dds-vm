@@ -30,7 +30,7 @@ public class Heladera {
     @GeneratedValue
     @Getter private int id;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "punto_estrategico_id", referencedColumnName = "id")
     @Getter @Setter private PuntoEstrategico puntoEstrategico;
 
@@ -49,11 +49,12 @@ public class Heladera {
     @Column
     @Getter @Setter private Boolean activa;
 
-    @Column
-    @Getter private Float temperaturaMaxima;
 
     @Column
-    @Getter private Float temperaturaMinima;
+    @Getter @Setter private Float temperaturaMaxima;
+
+    @Column
+    @Getter @Setter private Float temperaturaMinima;
 
     @OneToMany(mappedBy = "heladera", cascade = CascadeType.PERSIST)
     @Getter private List<Suscripcion> colaboradoresSucriptos = new ArrayList<>();
@@ -76,6 +77,10 @@ public class Heladera {
     @Column
     private Integer tiempoActivo;
 
+    public Heladera() {
+
+    }
+
     public Heladera(Integer capacidadMaxima, PuntoEstrategico puntoEstrategico) {
         this.viandas = new ArrayList<Vianda>();
         this.viandasMaximas = capacidadMaxima;
@@ -93,11 +98,18 @@ public class Heladera {
         this.activa = true;
         this.habilitado = false;
         this.puntoEstrategico = puntoEstrategico;
-
     }
 
-    public Heladera() {
-
+    public Heladera (String nombre, Integer capacidadMaxima, PuntoEstrategico puntoEstrategico, Boolean activa,
+                     LocalDate fechaFuncionamiento, Float temperaturaMaxima, Float temperaturaMinima){
+        this.nombre = nombre;
+        this.viandasMaximas = capacidadMaxima;
+        this.fechaFuncionamiento = fechaFuncionamiento;
+        this.activa = activa;
+        //this.habilitado = false;
+        this.puntoEstrategico = puntoEstrategico;
+        this.temperaturaMaxima = temperaturaMaxima;
+        this.temperaturaMinima = temperaturaMinima;
     }
 
     public void agregarVianda(Vianda vianda) {
@@ -145,14 +157,6 @@ public class Heladera {
                 break;
         }
 
-    }
-
-    public void setTempMaxima(Float temperatura){
-        this.temperaturaMaxima = temperatura;
-    }
-
-    public void setTempMinima(Float temperatura){
-        this.temperaturaMinima = temperatura;
     }
 
     public void reportarFalla() {

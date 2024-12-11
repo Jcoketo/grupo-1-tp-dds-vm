@@ -101,7 +101,7 @@ public class InsertDataTest {
         em.close();
         emf.close();
     }*/
-
+/*
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("db");
 
         RepositorioHeladeras repositorioHeladeras = RepositorioHeladeras.getInstancia(emf.createEntityManager());
@@ -126,6 +126,6 @@ public class InsertDataTest {
         heladera3.setViandasMaximas(15);
         repositorioHeladeras.agregarHeladera(heladera1);
         repositorioHeladeras.agregarHeladera(heladera2);
-        repositorioHeladeras.agregarHeladera(heladera3);
+        repositorioHeladeras.agregarHeladera(heladera3);*/
 }
 }

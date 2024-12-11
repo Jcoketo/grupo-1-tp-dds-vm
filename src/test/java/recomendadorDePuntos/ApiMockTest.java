@@ -2,7 +2,7 @@ package recomendadorDePuntos;
 
 
 import modelo.elementos.PuntoEstrategico;
-import modelo.recomendadorDePuntos.RecomendadorDePuntos;
+import modelo.consumosAPIs.recomendadorDePuntos.RecomendadorDePuntos;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;

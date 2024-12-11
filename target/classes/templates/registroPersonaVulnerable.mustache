@@ -225,6 +225,11 @@
         .footer-link:hover {
             text-decoration: underline; /* Subrayar al pasar el mouse */
         }
+        .error-message {
+            color: red;
+            font-size: 14px;
+            margin-top: 10px;
+        }
 
 
     </style>
@@ -360,6 +365,9 @@
                 <div class="form-group">
                     <button type="submit" class="register-button">Registrar</button>
                 </div>
+                {{#errorRegistroVulnerable}}
+                    <div class="error-message">{{errorRegistroVulnerable}}</div>
+                {{/errorRegistroVulnerable}}
 
             </div>
         </form>

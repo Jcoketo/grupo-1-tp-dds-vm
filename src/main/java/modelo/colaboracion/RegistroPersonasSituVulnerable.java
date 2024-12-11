@@ -94,8 +94,8 @@ public class RegistroPersonasSituVulnerable extends Colaboracion{
     }
 
     @Override
-    public void incrementarPuntos(Colaborador colaborador){
-        colaborador.incrementarPuntaje((double) this.cantidadTarjetas * coeficiente);
+    public void incrementarPuntos(Colaborador colaborador){ // Se llama cada vez que se reparte una tarjeta --> es solo coeficiente
+        colaborador.incrementarPuntaje(coeficiente);
     } // Nosotros entendemos que las tarjetas ya fueron repartidas.
 
     @Override

@@ -63,13 +63,4 @@ public class RepositorioUsuarios {
         em.getTransaction().commit();
     }
 
-    /* PUEDE DEVOLVER NULL LA CONSULTA ENTONCES ROMPE PORQUE NO LA ESTABAMOS MANEJANDO
-    public Boolean existeUsuario(String mail) {
-        em.persist(new Usuario(mail, username, password, rol));o u WHERE u.mail = :mail", Usuario.class)
-                .setParameter("mail", mail)
-                .getSingleResult();
-        //em.close();
-        return usuario != null;
-    }
-     */
 }

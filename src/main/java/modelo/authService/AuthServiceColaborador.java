@@ -21,7 +21,20 @@ public class AuthServiceColaborador {
         if (repoColab.existePersonaFisica(nroDoc, tipoDoc) != null) {
             throw new ExcepcionValidacion("El TIPO y NUMERO DE DOC ya existe!");
         }
-        repoColab.registrarColaboradorFisico(usuario, tipoDoc, nroDoc, nombre, apellido, mail, telefono, direccion, fechaNacimiento);
+
+        MedioDeContacto medioContactoMail = new MedioDeContacto(TipoMedioDeContacto.MAIL, mail);
+        PersonaHumana persona = new PersonaHumana(tipoDoc, nroDoc, nombre, apellido, medioContactoMail, direccion, fechaNacimiento);
+
+        if(!telefono.equals("")){
+            MedioDeContacto medioContactoTelefono = new MedioDeContacto(TipoMedioDeContacto.TELEFONO, telefono);
+            persona.agregarMediosDeContacto(medioContactoTelefono);
+        }
+        Colaborador colaborador = new Colaborador(persona);
+
+        repoColab.registrarColaboradorFisico(usuario, persona, colaborador);
+
+        String mensajeBienvenida = "Bienvenido a la plataforma " + nombre + ". Ojala que te diviertas";
+        Notificador.notificarXNuevoUsuario(mensajeBienvenida, medioContactoMail);
 
     }
 
@@ -29,7 +42,21 @@ public class AuthServiceColaborador {
         if (repoColab.existePersonaJuridica(cuit) != null) {
             throw new ExcepcionValidacion("El CUIT ingresado ya existe!");
         }
-        repoColab.registrarColaboradorJuridico(usuario, razonSocial, tipoJuridico, rubro, cuit, telefono, email);
+
+        MedioDeContacto medioContactoMail = new MedioDeContacto(TipoMedioDeContacto.MAIL, email);
+        PersonaJuridica persona = new PersonaJuridica(cuit, razonSocial, tipoJuridico, rubro, medioContactoMail);
+
+        if(!telefono.equals("")){
+            MedioDeContacto medioContactoTelefono = new MedioDeContacto(TipoMedioDeContacto.TELEFONO, telefono);
+            persona.agregarMediosDeContacto(medioContactoTelefono);
+        }
+
+        Colaborador colaborador = new Colaborador(persona);
+
+        repoColab.registrarColaboradorJuridico(usuario, persona, colaborador);
+
+        String mensajeBienvenida = "Bienvenido a la plataforma " + razonSocial + ". Ojala que te diviertas";
+        Notificador.notificarXNuevoUsuario(mensajeBienvenida, medioContactoMail);
     }
 
     public static Colaborador procesarXCargaCSV(TipoDocumento tipoDoc, String nroDocumento, String nombre, String apellido, String mail, String fecha, String formaColaboracion, String cantidad){
@@ -45,7 +72,7 @@ public class AuthServiceColaborador {
 
             String password = PasswordGenerator.generatePassword();
             repoUsuarios.persistirUsuario(mail, nombre, password, Roles.USUARIO);
-            repoColab.agregar(colaborador);
+            repoColab.actualizarColaborador(colaborador);
 
             String mensajeMasCredenciales = "Bienvenido a la plataforma. Su mail de ingreso es: " + mail + " y su contraseña es: " + password;
 
