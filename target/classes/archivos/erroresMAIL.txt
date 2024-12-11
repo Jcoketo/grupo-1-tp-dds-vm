@@ -4,3 +4,4 @@ Error al enviar mail a ana.garcia@example.com: Sending the email to the followin
 Error al enviar mail a gsantucho@frba.utn.edu.ar: Sending the email to the following server failed : smtp.gmail.com:465
 Error al enviar mail a coco@hotmail.com: Sending the email to the following server failed : smtp.gmail.com:465
 Error al enviar mail a coc@hotmail.com: Sending the email to the following server failed : smtp.gmail.com:465
+Error al enviar mail a c@hotmail.com: Sending the email to the following server failed : smtp.gmail.com:465
