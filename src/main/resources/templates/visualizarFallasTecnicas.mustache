@@ -264,6 +264,10 @@
         <div class="button-container">
             <a href="/reportarFallaTecnica?heladeraId={{heladeraId}}" class="report-button">Reportar Falla Técnica</a>
         </div>
+        {{#notificacionAlerta}}
+            <div class="text-{{tipo}}">{{mensaje}}</div>
+        {{/notificacionAlerta}}
+
     </div>
 </main>
 

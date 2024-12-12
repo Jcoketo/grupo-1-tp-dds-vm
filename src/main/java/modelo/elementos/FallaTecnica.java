@@ -31,6 +31,14 @@ public class FallaTecnica extends Incidente{
         this.fechaHoraIncidente = LocalDateTime.now();
     }
 
+    public FallaTecnica(Heladera heladera, Colaborador colaborador, String descripcion) {
+        super(heladera);
+        this.colaborador = colaborador;
+        this.descripcion = descripcion;
+        this.fechaHoraIncidente = LocalDateTime.now();
+    }
+
+
     public FallaTecnica() {
 
     }

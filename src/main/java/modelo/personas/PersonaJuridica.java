@@ -32,7 +32,7 @@ public class PersonaJuridica extends Persona{
     @JoinColumn(name= "persona_juridica_id", referencedColumnName = "id")
     @Getter @Setter private List<Heladera> heladeras = new ArrayList<>();
 
-    public PersonaJuridica(String CUIT, String razonSocial, TipoJuridico tipoJuridico, Rubro rubro, MedioDeContacto medioDeContacto){
+    public PersonaJuridica(String CUIT, String razonSocial, TipoJuridico tipoJuridico, Rubro rubro, MedioDeContacto medioDeContacto, String direccion){
         this.mediosDeContacto = new ArrayList<MedioDeContacto>();
         this.mediosDeContacto.add(medioDeContacto);
         this.razonSocial = razonSocial;
@@ -40,6 +40,7 @@ public class PersonaJuridica extends Persona{
         this.rubro = rubro;
         this.tipoPersona = TipoPersona.PJ;
         this.CUIT = CUIT;
+        this.direccion = direccion;
     }
 
     public PersonaJuridica() {

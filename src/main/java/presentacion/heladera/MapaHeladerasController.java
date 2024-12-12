@@ -36,6 +36,7 @@ public class MapaHeladerasController implements Handler {
             context.json(HeladeraOrigenDestino);
         }catch (Exception e) {
             e.printStackTrace();
+            System.out.println(e.getMessage());
             context.status(500);
             context.result("Error al obtener las heladeras");
         }
@@ -59,18 +60,18 @@ public class MapaHeladerasController implements Handler {
     }
 
     private Integer cantidadViandas(Heladera heladera){
-        return heladera.getViandasMaximas() - heladera.getViandas().size();
+        return heladera.getViandasMaximas() - heladera.getCantidadViandas();
     }
 }
-    @Getter
-    @Setter
-    class HeladeraOrigenDestino {
-        private int id;
-        private String nombre;
-        private Integer disponibilidad;
-        private Boolean activa;
-        private Integer necesitaTrasladoDe;
-        private PuntoEstrategico punto;
-        private LocalDate fechaFuncionamiento;
+@Getter
+@Setter
+class HeladeraOrigenDestino {
+    private int id;
+    private String nombre;
+    private Integer disponibilidad;
+    private Boolean activa;
+    private Integer necesitaTrasladoDe;
+    private PuntoEstrategico punto;
+    private LocalDate fechaFuncionamiento;
 
-    }
+}
