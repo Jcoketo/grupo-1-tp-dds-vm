@@ -1,7 +1,6 @@
 package modelo.elementos;
 
 import modelo.personas.Tecnico;
-import persistencia.RepositorioHeladeras;
 import persistencia.RepositorioIncidentes;
 import persistencia.RepositoriosTecnicos;
 

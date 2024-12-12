@@ -7,3 +7,4 @@ Error al enviar mail a coc@hotmail.com: Sending the email to the following serve
 Error al enviar mail a c@hotmail.com: Sending the email to the following server failed : smtp.gmail.com:465
 Error al enviar mail a giansantucho2@gmail.com: Sending the email to the following server failed : smtp.gmail.com:465
 Error al enviar mail a luchoputo@gmail.com: Sending the email to the following server failed : smtp.gmail.com:465
+Error al enviar mail a cc@gmail.com: Sending the email to the following server failed : smtp.gmail.com:465
