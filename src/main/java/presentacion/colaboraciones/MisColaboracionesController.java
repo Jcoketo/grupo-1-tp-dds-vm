@@ -18,12 +18,11 @@ import java.util.Map;
 
 public class MisColaboracionesController implements Handler{
 
-    private RepositorioColaboradores repoColaboradores;
+    private RepositorioColaboradores repoColaboradores = RepositorioColaboradores.getInstancia();
     
 
-public MisColaboracionesController(RepositorioColaboradores repoColaboradores) {
+public MisColaboracionesController() {
         super();
-        this.repoColaboradores = repoColaboradores;
     }
 
     @Override

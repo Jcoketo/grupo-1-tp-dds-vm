@@ -15,11 +15,8 @@ import java.util.Objects;
 
 public class RegistroPersonaVulnerableRealizadaController implements Handler{
 
-    private RepositorioPersonasVulnerables repoPersonasVulnerables;
-
-    public RegistroPersonaVulnerableRealizadaController(RepositorioPersonasVulnerables repoPersonas) {
+    public RegistroPersonaVulnerableRealizadaController() {
         super();
-        this.repoPersonasVulnerables = repoPersonas;
     }
 
     @Override

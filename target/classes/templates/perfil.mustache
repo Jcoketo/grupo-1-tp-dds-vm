@@ -226,7 +226,7 @@
             <img src="/static/user-photo.png" alt="Foto del usuario" class="profile-photo">
         </div>
         <div class="col-md-9 profile-info">
-            {{#esPersonaHumana}} <!-- ------  PERSONA HUMANA ------ -->
+            {{#esPersonaHumana}} <!--  PERSONA HUMANA  -->
                 <div class="info-group">
                     <div class="label">Nombre y Apellido</div>
                     <div class="value">{{nombre}}</div>
@@ -260,7 +260,7 @@
                     <div class="value ">{{puntos}}</div>
                 </div>
             {{/esPersonaHumana}}
-            {{#esPersonaJuridica}} <!--  PERSONA JURIDICA -->
+            {{#esPersonaJuridica}} <!--  PERSONA JURIDICA  -->
                 <div class="info-group">
                     <div class="label">Razon Social</div>
                     <div class="value">{{nombre}}</div>
@@ -296,6 +296,9 @@
             {{/esPersonaJuridica}}
         </div>
     </div>
+    {{#notificacionCambio}}
+        <div class="text-{{tipo}}">{{mensaje}}</div>
+    {{/notificacionCambio}}
 
     <div class="row">
         <div class="col-md-12">

@@ -19,11 +19,10 @@ import java.util.Map;
 
 public class CatalogoProductosController implements Handler {
 
-    private RepositorioOfertas repoOfertas;
+    private RepositorioOfertas repoOfertas = RepositorioOfertas.getInstancia();
 
-    public CatalogoProductosController(RepositorioOfertas repoOfertas) {
+    public CatalogoProductosController() {
         super();
-        this.repoOfertas = repoOfertas;
     }
 
     @Override

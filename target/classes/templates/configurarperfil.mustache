@@ -207,13 +207,18 @@
         </div>
         <div class="col-md-9 profile-info">
             <form action="/configurarPerfil" method="post">
+            {{#esPersonaHumana}} <!--  PERSONA HUMANA  -->
                 <div class="info-group">
-                    <label for="nombre" class="label">Nombre de Usuario</label>
+                    <label for="nombre" class="label">Nombre</label>
                     <input type="text" class="form-control" id="nombre" name="nombre" value="{{nombre}}">
                 </div>
                 <div class="info-group">
-                    <label for="apellido" class="label">Apellido de Usuario</label>
+                    <label for="apellido" class="label">Apellido</label>
                     <input type="text" class="form-control" id="apellido" name="apellido" value="{{apellido}}">
+                </div>
+                <div class="info-group">
+                    <label for="fechaNacimiento" class="label">Fecha De Nacimiento</label>
+                    <input type="date" class="form-control" id="fechaNacimiento" name="fechaNacimiento" value="{{fechaNacimiento}}">
                 </div>
                 <div class="info-group">
                     <label for="direccion" class="label">Domicilio</label>
@@ -227,6 +232,53 @@
                     <label for="email" class="label">Email</label>
                     <input type="email" class="form-control" id="email" name="email" value="{{email}}">
                 </div>
+            {{/esPersonaHumana}}
+            {{#esPersonaJuridica}} <!--  PERSONA JURIDICA  -->
+                <div class="info-group">
+                    <label for="nombre" class="label">Razon Social</label>
+                    <input type="text" class="form-control" id="nombre" name="nombre" value="{{nombre}}">
+                </div>
+                <div class="info-group">
+                    <label for="cuit" class="label">CUIT</label>
+                    <input type="text" class="form-control" id="cuit" name="cuit" value="{{cuit}}">
+                </div>
+                <div class="info-group">
+                    <label for="tipoJuridico" class="label">Tipo Juridico actual</label>
+                    <select id="tipo" name="tipoJuridico" required>
+                        <option value="0">{{tipoJuridico}}</option>
+                        <option value="1">Gubernamental</option>
+                        <option value="2">Organización No Gubernamental</option>
+                        <option value="3">Empresa</option>
+                        <option value="4">Institución</option>
+                    </select>
+                </div>
+                <div class="info-group">
+                    <label for="rubro" class="label">Rubro actual</label>
+                    <select id="rubro" name="rubro" required>
+                        <option value="0">{{rubro}}</option>
+                        <option value="1">Gastronomía</option>
+                        <option value="2">Electrónica</option>
+                        <option value="3">Articulos para el hogar</option>
+                    </select>
+                </div>
+                <div class="info-group">
+                    <label for="direccion" class="label">Domicilio</label>
+                    <input type="text" class="form-control" id="direccion" name="direccion" value="{{direccion}}">
+                </div>
+                <div class="info-group">
+                    <label for="telefono" class="label">Teléfono</label>
+                    <input type="text" class="form-control" id="telefono" name="telefono" value="{{telefono}}">
+                </div>
+                <div class="info-group">
+                    <label for="email" class="label">Mail</label>
+                    <input type="email" class="form-control" id="email" name="email" value="{{email}}">
+                </div>
+            {{/esPersonaJuridica}}
+
+                {{#notificacionCambio}}
+                    <div class="text-{{tipo}}">{{mensaje}}</div>
+                {{/notificacionCambio}}
+
                 <button type="submit" class="nav-link, btn btn-submit" href="perfil">Guardar cambios</button>
             </form>
         </div>
@@ -266,6 +318,7 @@
                 </div>
             </div>
         </div>
+    </div>
 </footer>
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

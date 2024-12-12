@@ -10,36 +10,38 @@ import org.jetbrains.annotations.NotNull;
 import persistencia.RepositorioColaboradores;
 import utils.GeneradorModel;
 
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
 
 public class ConfigurarPerfilController implements Handler {
 
-    RepositorioColaboradores repoColaboradores;
+    RepositorioColaboradores repoColaboradores = RepositorioColaboradores.getInstancia();
 
-    public ConfigurarPerfilController(RepositorioColaboradores repoColaboradores) {
+    public ConfigurarPerfilController() {
         super();
-        this.repoColaboradores = repoColaboradores;
     }
 
     @Override
     public void handle(@NotNull Context context) throws Exception {
         Map<String, Object> model = GeneradorModel.getModel(context);
 
+        NotificacionCambio notificacionCambio = context.sessionAttribute("notificacionCambio");
+        if(notificacionCambio != null){
+            model.put("notificacionCambio", notificacionCambio);
+        }
+        context.consumeSessionAttribute("notificacionCambio");
+
         Integer idPersona = context.sessionAttribute("idPersona");
         TipoPersona tipoPer = context.sessionAttribute("tipoPersona");
         model.put("nombreUsuario", context.sessionAttribute("nombreUsuario"));
-
-        Colaborador colab = repoColaboradores.buscarColaboradorXIdPersona(idPersona);
-        model.put("puntos", colab.getPuntaje());
+        model.put("tipoPer", tipoPer);
 
         if (tipoPer == TipoPersona.PH) {
             PersonaHumana persona = repoColaboradores.traerPersonaPorIdFisica(idPersona);
             model.put("esPersonaHumana", true);
             model.put("nombre", persona.getNombre());
             model.put("apellido", persona.getApellido());
-            model.put("tipoDoc", persona.getDocumento().getTipoDoc());
-            model.put("nroDoc", persona.getDocumento().getNumeroDoc());
             model.put("fechaNacimiento", persona.getFechaNacimiento());
             model.put("direccion", persona.getDireccion());
             model.put("telefono", persona.getTelefono());

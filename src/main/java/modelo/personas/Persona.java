@@ -22,7 +22,7 @@ public abstract class Persona {
     @Column
     @Getter @Setter protected String direccion;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "persona_id", referencedColumnName = "id")
     @Getter @Setter
     protected List<MedioDeContacto> mediosDeContacto;

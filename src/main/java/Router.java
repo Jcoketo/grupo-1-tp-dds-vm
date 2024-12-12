@@ -2,10 +2,10 @@ import static io.javalin.apibuilder.ApiBuilder.*;
 
 import accessManagment.AutorizacionMiddleware;
 import io.javalin.Javalin;
-import io.javalin.http.Context;
 import persistencia.*;
 import presentacion.InicioController;
 import presentacion.LogoutController;
+import presentacion.MostrarErrorPermisosController;
 import presentacion.colaboraciones.*;
 import presentacion.gestorCuentas.*;
 import presentacion.heladera.AceptarAgregarHeladeraController;
@@ -80,28 +80,28 @@ public class Router {
             path("/agregarHeladera", () -> {
                 before(new AutorizacionMiddleware().setDebeSerLogueado().setDebeSerPJ());
                 get(new AgregarHeladeraController());
-                post(new HeladeraAgregadaController(repoHeladeras));
+                post(new HeladeraAgregadaController());
             });
 
             path("/agregarProductosEmpresa", () -> {
                 before(new AutorizacionMiddleware().setDebeSerLogueado());
                 get(new AgregarProductosEmpresaController());
-                post(new AgregarProductosEmpresaFinalizadoController(repoOfertas));
+                post(new AgregarProductosEmpresaFinalizadoController());
             });
 
             path("/api/recomendacion/locaciones", () -> {
-                get(new ServicioApiRest(repoHeladeras));
+                get(new ServicioApiRest());
             });
 
             path("/canjearPuntos", () -> {
                 before(new AutorizacionMiddleware().setDebeSerLogueado());
-                get(new CanjearPuntosController(repoColab, repoOfertas));
-                post(new CanjearPuntosFinalizadoController(repoColab, repoOfertas));
+                get(new CanjearPuntosController());
+                post(new CanjearPuntosFinalizadoController());
             });
 
             path("/catalogoProductos", () -> {
                 before(new AutorizacionMiddleware().setDebeSerLogueado());
-                get(new CatalogoProductosController(repoOfertas));
+                get(new CatalogoProductosController());
             });
 
             path("/cargarCSV", () -> {
@@ -111,8 +111,8 @@ public class Router {
 
             path("/configurarPerfil", () -> {
                 before(new AutorizacionMiddleware().setDebeSerLogueado());
-                get(new ConfigurarPerfilController(repoColab));
-                post(new ConfigurarPerfilFinalizadoController(repoColab));
+                get(new ConfigurarPerfilController());
+                post(new ConfigurarPerfilFinalizadoController());
             });
 
             path("/crearCuentaFisica", () -> {
@@ -124,7 +124,7 @@ public class Router {
             path("/crearCuentaJuridica", () -> {
                 //before(new AutorizacionMiddleware());
                 get(new CrearCuentaJuridicaController());
-                post(new CuentaJuridicaCreadaController(repoColab));
+                post(new CuentaJuridicaCreadaController());
             });
 
             path("/cuentaCreada", () -> {
@@ -147,7 +147,7 @@ public class Router {
             path("/donarVianda", () -> {
                 //before(new AutorizacionMiddleware().setDebeSerLogueado().setDebeSerPF());
                 get(new DonarViandaController());
-                post(new DonarViandaRealizadaController(repoHeladeras));
+                post(new DonarViandaRealizadaController());
             });
 
             path("/elegirDonacion", () -> {
@@ -176,7 +176,7 @@ public class Router {
 
             path("/login", () -> {
                 get(new ShowLoginController());
-                post(new ProcessLoginController(repoColab, repoUsuarios));
+                post(new ProcessLoginController());
             });
 
             path("/logout", () -> {
@@ -196,12 +196,12 @@ public class Router {
             });
 
             path("/mapaHeladerasRequest", () -> {
-                get(new MapaHeladerasController(repoHeladeras));
+                get(new MapaHeladerasController());
             });
 
             path("/misColaboraciones", () -> {
                 before(new AutorizacionMiddleware().setDebeSerLogueado());
-                get(new MisColaboracionesController(repoColab));
+                get(new MisColaboracionesController());
             });
 
             path("/misReportes", () -> {
@@ -211,13 +211,13 @@ public class Router {
 
             path("/perfil", () -> {
                 before(new AutorizacionMiddleware().setDebeSerLogueado());
-                get(new PerfilController(repoColab));
+                get(new PerfilController());
             });
 
             path("/registroPersonaVulnerable", () -> {
                 before(new AutorizacionMiddleware().setDebeSerLogueado());
                 get(new RegistroPersonaVulnerableController());
-                post(new RegistroPersonaVulnerableRealizadaController(repoPersonasVulnerable));
+                post(new RegistroPersonaVulnerableRealizadaController());
             });
 
             path("/registroPersonaVulnerableFinal", () -> {
@@ -233,7 +233,7 @@ public class Router {
 
             path("/solicitarTarjeta", () -> {
                 before(new AutorizacionMiddleware().setDebeSerLogueado());
-                get(new SolicitudDeTarjetasController(repoColab));
+                get(new SolicitudDeTarjetasController());
             });
 
             path("/suscribirse", () -> {
@@ -254,7 +254,6 @@ public class Router {
                 before(new AutorizacionMiddleware().setDebeSerLogueado());
                 get(new VisualizarFallasTecnicasController());
             });
-
 
         });
 

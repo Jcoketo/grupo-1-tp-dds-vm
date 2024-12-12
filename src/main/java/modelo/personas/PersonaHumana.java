@@ -17,7 +17,7 @@ public class PersonaHumana extends Persona{
     @Getter @Setter private String apellido;
 
     @Column
-    @Getter private LocalDate fechaNacimiento;
+    @Getter @Setter private LocalDate fechaNacimiento;
 
     @Embedded
     @AttributeOverrides({
