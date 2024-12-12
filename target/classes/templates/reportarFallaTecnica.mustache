@@ -233,16 +233,17 @@
         <h1>Reportar falla técnica</h1>
 
         <!-- Formulario -->
-        <form>
+        <form action="/reportarFallaTecnica" method="post">
+
             <div class="form-group">
                 <label for="descripcion">Descripción</label>
-                <textarea id="descripcion" class="form-control" rows="4" placeholder="Descripción de la falla técnica"></textarea>
+                <textarea id="descripcion" name="descripcion" class="form-control" rows="4" placeholder="Descripción de la falla técnica"></textarea>
             </div>
 
             <div class="form-group">
                 <label for="foto">Foto</label>
                 <div class="upload-area" id="uploadArea">
-                    <input type="file" id="fileInput" accept="image/*">
+                    <input type="file" id="file" accept="image/*">
                     <div>
                         <i class="bi bi-cloud-arrow-up upload-icon"></i>
                         <p>Arrastrá la imagen o <a href="#" id="selectLink">Seleccioná</a></p>
@@ -252,7 +253,8 @@
 
             <div class="btn-group">
                 <a href="/visualizarFallasTecnicas" class="btn-cancelar">Cancelar</a>
-                <a href="/aceptarReportarFalla" class="btn-reportar">Reportar</a>
+                <input type="hidden" name="heladeraId" value="{{heladeraId}}">
+                <button type="submit" class="btn-reportar">Reportar</button>
             </div>
 
         </form>
@@ -298,6 +300,7 @@
                 </div>
             </div>
         </div>
+    </div>
 </footer>
 
 <!-- Scripts de Bootstrap y jQuery -->
