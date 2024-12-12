@@ -8,6 +8,7 @@ import modelo.personas.PersonaJuridica;
 import modelo.personas.TipoPersona;
 import org.jetbrains.annotations.NotNull;
 import persistencia.RepositorioColaboradores;
+import utils.GeneradorModel;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -23,32 +24,37 @@ public class ConfigurarPerfilController implements Handler {
 
     @Override
     public void handle(@NotNull Context context) throws Exception {
-        Map<String, Object> model = context.sessionAttribute("model");
-        if (model == null) {
-            model = new HashMap<>();
-            context.sessionAttribute("model", model);
-        }
+        Map<String, Object> model = GeneradorModel.getModel(context);
+
         Integer idPersona = context.sessionAttribute("idPersona");
         TipoPersona tipoPer = context.sessionAttribute("tipoPersona");
         model.put("nombreUsuario", context.sessionAttribute("nombreUsuario"));
+
         Colaborador colab = repoColaboradores.buscarColaboradorXIdPersona(idPersona);
+        model.put("puntos", colab.getPuntaje());
 
         if (tipoPer == TipoPersona.PH) {
             PersonaHumana persona = repoColaboradores.traerPersonaPorIdFisica(idPersona);
+            model.put("esPersonaHumana", true);
             model.put("nombre", persona.getNombre());
             model.put("apellido", persona.getApellido());
-            model.put("email", persona.getEmail());
-            model.put("telefono", persona.getTelefono());
+            model.put("tipoDoc", persona.getDocumento().getTipoDoc());
+            model.put("nroDoc", persona.getDocumento().getNumeroDoc());
+            model.put("fechaNacimiento", persona.getFechaNacimiento());
             model.put("direccion", persona.getDireccion());
-            model.put("puntos", colab.getPuntaje());
+            model.put("telefono", persona.getTelefono());
+            model.put("email", persona.getEmail());
         }
         if (tipoPer == TipoPersona.PJ) {
             PersonaJuridica persona = repoColaboradores.traerPersonaPorIdJuridica(idPersona);
+            model.put("esPersonaJuridica", true);
             model.put("nombre", persona.getRazonSocial());
-            model.put("email", persona.getEmail());
-            model.put("telefono", persona.getTelefono());
+            model.put("cuit", persona.getCUIT());
+            model.put("tipoJuridico", persona.getTipoJuridico());
+            model.put("rubro", persona.getRubro());
             model.put("direccion", persona.getDireccion());
-            model.put("puntos", colab.getPuntaje());
+            model.put("telefono", persona.getTelefono());
+            model.put("email", persona.getEmail());
         }
 
         context.render("templates/configurarPerfil.mustache", model);

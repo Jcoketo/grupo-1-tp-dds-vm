@@ -226,28 +226,83 @@
             <img src="/static/user-photo.png" alt="Foto del usuario" class="profile-photo">
         </div>
         <div class="col-md-9 profile-info">
-            <div class="info-group">
-                <div class="label">Usuario</div>
-                <div class="value">{{nombre}}</div>
-            </div>
-            <div class="info-group">
-                <div class="label">Domicilio</div>
-                <div class="value">{{direccion}}</div>
-            </div>
-            <div class="info-group">
-                <div class="label">Teléfono</div>
-                <div class="value">{{telefono}}</div>
-            </div>
-            <div class="info-group">
-                <div class="label">Email</div>
-                <div class="value">{{email}}</div>
-            </div>
-            <div class="info-group">
-                <div class="label ">Puntos acumulados</div>
-                <div class="value ">{{puntos}}</div>
-            </div>
+            {{#esPersonaHumana}} <!--  PERSONA HUMANA  -->
+                <div class="info-group">
+                    <div class="label">Nombre y Apellido</div>
+                    <div class="value">{{nombre}}</div>
+                </div>
+                <div class="info-group">
+                    <div class="label">Tipo de Documento</div>
+                    <div class="value">{{tipoDoc}}</div>
+                </div>
+                <div class="info-group">
+                    <div class="label">Número de Documento</div>
+                    <div class="value">{{nroDoc}}</div>
+                </div>
+                <div class="info-group">
+                    <div class="label">Fecha de Nacimiento</div>
+                    <div class="value">{{fechaNacimiento}}</div>
+                </div>
+                <div class="info-group">
+                    <div class="label">Domicilio</div>
+                    <div class="value">{{direccion}}</div>
+                </div>
+                <div class="info-group">
+                    <div class="label">Teléfono</div>
+                    <div class="value">{{telefono}}</div>
+                </div>
+                <div class="info-group">
+                    <div class="label">Mail</div>
+                    <div class="value">{{email}}</div>
+                </div>
+                <div class="info-group">
+                    <div class="label ">Puntos acumulados</div>
+                    <div class="value ">{{puntos}}</div>
+                </div>
+            {{/esPersonaHumana}}
+            {{#esPersonaJuridica}} <!--  PERSONA JURIDICA  -->
+                <div class="info-group">
+                    <div class="label">Razon Social</div>
+                    <div class="value">{{nombre}}</div>
+                </div>
+                <div class="info-group">
+                    <div class="label">CUIT</div>
+                    <div class="value">{{cuit}}</div>
+                </div>
+                <div class="info-group">
+                    <div class="label">Tipo Juridico</div>
+                    <div class="value">{{tipoJuridico}}</div>
+                </div>
+                <div class="info-group">
+                    <div class="label">Rubro</div>
+                    <div class="value">{{rubro}}</div>
+                </div>
+                <div class="info-group">
+                    <div class="label">Domicilio</div>
+                    <div class="value">{{direccion}}</div>
+                </div>
+                <div class="info-group">
+                    <div class="label">Teléfono</div>
+                    <div class="value">{{telefono}}</div>
+                </div>
+                <div class="info-group">
+                    <div class="label">Mail</div>
+                    <div class="value">{{email}}</div>
+                </div>
+                <div class="info-group">
+                    <div class="label ">Puntos acumulados</div>
+                    <div class="value ">{{puntos}}</div>
+                </div>
+            {{/esPersonaJuridica}}
         </div>
     </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <a href="/configurarPerfil" class="btn2 btn2-submit">Editar perfil</a>
+        </div>
+    </div>
+
 </main>
 
 

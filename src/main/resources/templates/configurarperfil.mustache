@@ -207,6 +207,7 @@
         </div>
         <div class="col-md-9 profile-info">
             <form action="/configurarPerfil" method="post">
+            {{#esPersonaHumana}} <!--  PERSONA HUMANA  -->
                 <div class="info-group">
                     <label for="nombre" class="label">Nombre de Usuario</label>
                     <input type="text" class="form-control" id="nombre" name="nombre" value="{{nombre}}">
@@ -228,6 +229,10 @@
                     <input type="email" class="form-control" id="email" name="email" value="{{email}}">
                 </div>
                 <button type="submit" class="nav-link, btn btn-submit" href="perfil">Guardar cambios</button>
+            {{/esPersonaHumana}}
+            {{#esPersonaJuridica}} <!--  PERSONA JURIDICA  -->
+
+            {{/esPersonaJuridica}}
             </form>
         </div>
     </div>
