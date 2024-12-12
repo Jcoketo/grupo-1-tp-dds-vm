@@ -16,11 +16,8 @@ import java.util.Map;
 
 public class MapaHeladerasController implements Handler {
 
-    private RepositorioHeladeras repositorioHeladeras;
-
-    public MapaHeladerasController(RepositorioHeladeras repo) {
+    public MapaHeladerasController() {
         super();
-        this.repositorioHeladeras = repo;
     }
 
     @Override

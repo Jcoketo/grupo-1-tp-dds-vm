@@ -14,11 +14,8 @@ import java.util.Map;
 
 public class SolicitudDeTarjetasController implements Handler {
 
-    private RepositorioColaboradores repoColab;
-
-    public SolicitudDeTarjetasController(RepositorioColaboradores repo) {
+    public SolicitudDeTarjetasController() {
         super();
-        this.repoColab = repo;
     }
 
     @Override

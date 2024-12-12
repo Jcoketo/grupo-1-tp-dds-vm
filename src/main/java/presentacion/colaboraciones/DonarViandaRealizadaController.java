@@ -13,11 +13,8 @@ import java.util.Map;
 
 public class DonarViandaRealizadaController implements Handler {
 
-    private RepositorioHeladeras repoHeladeras;
-
-    public DonarViandaRealizadaController(RepositorioHeladeras repoHeladeras) {
+    public DonarViandaRealizadaController() {
         super();
-        this.repoHeladeras = repoHeladeras;
     }
 
     @Override

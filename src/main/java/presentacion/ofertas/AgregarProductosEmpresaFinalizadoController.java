@@ -19,10 +19,7 @@ import java.util.Objects;
 
 public class AgregarProductosEmpresaFinalizadoController implements Handler {
 
-    private RepositorioOfertas repoOfertas;
-
-    public AgregarProductosEmpresaFinalizadoController(RepositorioOfertas repoOfertas) {
-        this.repoOfertas = repoOfertas;
+    public AgregarProductosEmpresaFinalizadoController() {
     }
 
     @Override

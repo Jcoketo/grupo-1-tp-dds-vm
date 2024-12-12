@@ -15,7 +15,7 @@ import java.util.List;
 public class PersonaJuridica extends Persona{
 
     @Column
-    @Getter private String razonSocial;
+    @Getter @Setter private String razonSocial;
 
     @Column
     @DefaultValue("0")

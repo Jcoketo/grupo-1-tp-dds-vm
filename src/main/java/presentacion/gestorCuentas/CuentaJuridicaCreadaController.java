@@ -18,12 +18,11 @@ import java.util.Map;
 
 public class CuentaJuridicaCreadaController implements Handler {
 
-    private RepositorioColaboradores repoColab;
+    private RepositorioColaboradores repoColab = RepositorioColaboradores.getInstancia();
 
 
-    public CuentaJuridicaCreadaController(RepositorioColaboradores repoColab) {
+    public CuentaJuridicaCreadaController() {
         super();
-        this.repoColab = repoColab;
     }
 
     @Override

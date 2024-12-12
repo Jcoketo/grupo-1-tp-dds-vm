@@ -11,3 +11,4 @@ Error al enviar mail a cc@gmail.com: Sending the email to the following server f
 Error al enviar mail a joaquinmenazzi@hotmail.com: Sending the email to the following server failed : smtp.gmail.com:465
 Error al enviar mail a cocomenazzi@hotmail.com: Sending the email to the following server failed : smtp.gmail.com:465
 Error al enviar mail a cocomenazzi@hotmail.com: Sending the email to the following server failed : smtp.gmail.com:465
+Error al enviar mail a joaquinmenazzi@hotmail.com: Sending the email to the following server failed : smtp.gmail.com:465

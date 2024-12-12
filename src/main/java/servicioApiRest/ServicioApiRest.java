@@ -14,12 +14,10 @@ import java.util.Map;
 public class ServicioApiRest implements Handler {
 
     private ServicioUbicacionHeladeras servicioUbicacionHeladeras;
-    private RepositorioHeladeras repositorioHeladeras;
 
-    public ServicioApiRest(RepositorioHeladeras repo) {
+    public ServicioApiRest() {
         super();
-        this.repositorioHeladeras = repo;
-        this.servicioUbicacionHeladeras = new ServicioUbicacionHeladeras(repo);
+        this.servicioUbicacionHeladeras = new ServicioUbicacionHeladeras(RepositorioHeladeras.getInstancia());
     }
 
     @Override

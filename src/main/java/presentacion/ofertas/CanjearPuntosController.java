@@ -19,13 +19,11 @@ import java.util.Map;
 
 public class CanjearPuntosController implements Handler {
 
-    RepositorioColaboradores repoColaboradores;
-    RepositorioOfertas repoOfertas;
+    RepositorioColaboradores repoColaboradores = RepositorioColaboradores.getInstancia();
+    RepositorioOfertas repoOfertas = RepositorioOfertas.getInstancia();
 
-    public CanjearPuntosController(RepositorioColaboradores repoColaboradores, RepositorioOfertas repositorioOfertas) {
+    public CanjearPuntosController() {
         super();
-        this.repoColaboradores = repoColaboradores;
-        this.repoOfertas = repositorioOfertas;
     }
 
     @Override

@@ -12,11 +12,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class HeladeraAgregadaController implements Handler {
-    private RepositorioHeladeras repoHeladeras;
-
-    public HeladeraAgregadaController(RepositorioHeladeras repoHeladeras) {
+    public HeladeraAgregadaController() {
         super();
-        this.repoHeladeras = repoHeladeras;
     }
 
     @Override

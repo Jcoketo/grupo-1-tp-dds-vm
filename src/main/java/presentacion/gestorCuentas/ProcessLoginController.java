@@ -18,14 +18,11 @@ import utils.GeneradorModel;
 
 public class ProcessLoginController implements Handler {
 
-    private RepositorioColaboradores repoColab;
-    private RepositorioUsuarios repoUsuarios;
-    private AuthServiceUsuario authServiceUsuario;
+    private RepositorioColaboradores repoColab = RepositorioColaboradores.getInstancia();
+    private RepositorioUsuarios repoUsuarios = RepositorioUsuarios.getInstancia();
 
-    public ProcessLoginController(RepositorioColaboradores repoColab, RepositorioUsuarios repoUsuarios) {
+    public ProcessLoginController() {
         super();
-        this.repoColab = repoColab;
-        this.repoUsuarios = repoUsuarios;
     }
 
     @Override
