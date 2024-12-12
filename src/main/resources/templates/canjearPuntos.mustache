@@ -220,6 +220,33 @@
             margin-top: 10px;
         }
 
+        .add-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #1e5552;
+            color: white;
+            width: 200px;
+            height: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 16px;
+            text-align: center;
+            border-radius: 30px;
+            z-index: 1000;
+        }
+
+        .add-button:hover {
+            background-color: #1e5552;
+            color: white;
+        }
+
+
+        .add-button i {
+            margin-right: 10px;
+        }
+
     </style>
 </head>
 <body>
@@ -265,7 +292,19 @@
 
 <main>
     <div style="display: inline-flex; gap: 20px">
-        <h1>Catálogo</h1>
+        <h3 class="header-title">Catalogo</h3>
+
+        <select class="custom-select my-1 mr-sm-2" id="filterSelect" onchange="filterOffers()">
+            <option value="">Elegir...</option>
+            <option value="todos">Todos</option>
+            <option value="producto">Producto</option>
+            <option value="servicio">Servicio</option>
+        </select>
+
+        <a class="btn-donar" href="/misCanjes">Ver mis canjes</a>
+
+
+
         <div class="btn-group">
             <div class="puntaje">
                 <p class="sub-header">Puntos acumulados: {{puntos}}</p>
@@ -307,6 +346,12 @@
     </div>
 </main>
 
+{{#esPersonaJuridica}}
+    <!-- botón flotante -->
+    <a class="add-button" href="/agregarProductosEmpresa">
+        <i class="fas fa-plus"></i> Agregar Producto
+    </a>
+{{/esPersonaJuridica}}
 
 <footer class="footer-bg">
     <div class="container">
@@ -360,6 +405,18 @@
                 form.style.display = "none";
             }
         }
+    }
+</script>
+
+<script>
+    function filterOffers() {
+        const filterSelect = document.getElementById('filterSelect');
+        const selectedValue = filterSelect.value;
+        let url = '/canjearPuntos';
+        if (selectedValue) {
+            url += `?tipoOferta=${selectedValue}`;
+        }
+        window.location.href = url;
     }
 </script>
 <!-- Scripts de Bootstrap y jQuery -->
