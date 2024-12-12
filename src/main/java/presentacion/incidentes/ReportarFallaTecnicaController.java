@@ -28,6 +28,7 @@ public class ReportarFallaTecnicaController implements Handler {
         }
         int idHeladera = Integer.parseInt(idHel);
 
+        model.put("heladeraId", idHeladera);
         model.put("nombreUsuario", context.sessionAttribute("nombreUsuario"));
         context.render("templates/reportarFallaTecnica.mustache", model);
 
