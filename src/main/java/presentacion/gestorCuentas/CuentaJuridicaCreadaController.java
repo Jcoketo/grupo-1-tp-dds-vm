@@ -11,6 +11,7 @@ import modelo.personas.TipoJuridico;
 import modelo.validador.Usuario;
 import org.jetbrains.annotations.NotNull;
 import persistencia.RepositorioColaboradores;
+import utils.GeneradorModel;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -27,15 +28,7 @@ public class CuentaJuridicaCreadaController implements Handler {
 
     @Override
     public void handle(@NotNull Context context) throws Exception {
-        Map<String, Object> model = context.sessionAttribute("model");
-        if (model == null) {
-            model = new HashMap<>();
-            context.sessionAttribute("model", model);
-        }
-//        model.put("nombreUsuario", context.sessionAttribute("nombreUsuario"));
-//        context.render("templates/elegirRegistroCuenta.mustache", model);
-
-
+        Map<String, Object> model = GeneradorModel.getModel(context);
 
         String razonSocial = context.formParam("razon-social");
         Integer tipo = Integer.valueOf(context.formParam("tipo"));
@@ -46,6 +39,7 @@ public class CuentaJuridicaCreadaController implements Handler {
         String username = context.formParam("username");
         String password = context.formParam("password");
         String terminos = context.formParam("terms");
+        String direccion = context.formParam("direccion");
 
         if (razonSocial.equals("") || tipo.equals("") || rubro.equals("") || cuit.equals("") || email.equals("") || username.equals("")
             || password.equals("") || terminos.equals("")){
@@ -107,7 +101,7 @@ public class CuentaJuridicaCreadaController implements Handler {
 
         try {
             Usuario usuario = AuthServiceUsuario.validarUsuario(email, username, password);
-            AuthServiceColaborador.registrarColaboradorJuridico(usuario, razonSocial, tipoJuridico, rubroJuridico, cuit, telefono, email);
+            AuthServiceColaborador.registrarColaboradorJuridico(usuario, razonSocial, tipoJuridico, rubroJuridico, cuit, telefono, email, direccion);
 
         } catch (ExcepcionValidacion e) {
             model.put("errorJuridico", e.getMessage());

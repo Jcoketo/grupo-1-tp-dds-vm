@@ -16,24 +16,30 @@ public class AutorizacionMiddleware implements Handler {
     @Override
     public void handle(@NotNull Context context) throws Exception {
         Roles userRole = context.sessionAttribute("rolUsuario");
+        if (userRole == null) {
+            userRole = Roles.USUARIO;
+        }
         Boolean estaLogueado = context.sessionAttribute("logueado");
-        TipoPersona tipoPersona = context.sessionAttribute("tipoPersona");
-
         if( estaLogueado == null ){ estaLogueado = false; }
 
+        TipoPersona tipoPersona = context.sessionAttribute("tipoPersona");
+        if (tipoPersona == null) {
+            tipoPersona = TipoPersona.PH;
+        }
+
         if(debeEstarLogueado && !estaLogueado ){
-            context.redirect("/login");
+            context.redirect("/inicio");
         }
 
         if (userRole != null && estaLogueado) {
             if (debeSerAdmin && userRole.equals(Roles.USUARIO)) {
-                context.redirect("/404");
+                context.redirect("/404NotFound");
             }
             if (tipoPersona != null && debeSerPJ && tipoPersona.equals(TipoPersona.PH)) {
-                context.redirect("/404");
+                context.redirect("/404NotFound");
             }
             if (tipoPersona != null && debeSerPH && tipoPersona.equals(TipoPersona.PJ)) {
-                context.redirect("/404");
+                context.redirect("/404NotFound");
             }
         }
     }

@@ -112,6 +112,13 @@ public class Heladera {
         this.temperaturaMinima = temperaturaMinima;
     }
 
+    public Integer getCantidadViandas() {
+        if (this.viandas == null) {
+            this.viandas = new ArrayList<>();
+        }
+        return this.viandas.size();
+    }
+
     public void agregarVianda(Vianda vianda) {
         if (this.viandas.size() < this.viandasMaximas) { // si es menor significa que por lo menos hay n - 1 viandas
             this.viandas.add(vianda);

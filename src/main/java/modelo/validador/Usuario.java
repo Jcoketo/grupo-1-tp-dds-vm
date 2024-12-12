@@ -36,6 +36,7 @@ public class Usuario {
         this.mail = mail;
         this.hashedPassword = password;
         this.username = username;
+        this.rol = rol;
     }
 
     public Usuario() {

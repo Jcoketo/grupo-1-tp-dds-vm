@@ -116,6 +116,9 @@ public class AuthServiceColaboracion {
 
         if ( checkBoxDireccion ){
             String direcAux = colaborador.getPersona().getDireccion();
+            if ( direcAux == null || direcAux.equals("") ){
+                throw new ExcepcionValidacion("La dirección de la persona jurídica no fue cargada!");
+            }
             puntoEstrategico.setDireccion(direcAux);
             puntoEstrategico.setLatitud(LocalizadorLatLong.obtenerLatitud(direcAux));
             puntoEstrategico.setLongitud(LocalizadorLatLong.obtenerLongitud(direcAux));

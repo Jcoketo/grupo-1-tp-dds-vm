@@ -8,6 +8,7 @@ import modelo.suscripcion.Suscripcion;
 
 import javax.persistence.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class RepositorioHeladeras {
@@ -101,10 +102,19 @@ public class RepositorioHeladeras {
         em.getTransaction().commit();
     }
 
-    public List<Heladera> obtenerHeladeras() {
+    public List<Heladera> obtenerTodasLasHeladeras() {
         List<Heladera> heladeras = em.createQuery("SELECT h FROM Heladera h", Heladera.class)
                 .getResultList();
         return heladeras;
+    }
+
+    public List<Heladera> obtenerHeladeras() {
+        TypedQuery<Heladera> query = em.createQuery("SELECT h FROM Heladera h", Heladera.class);
+        try {
+            return query.getResultList();
+        } catch (NoResultException e) {
+            return new ArrayList<Heladera>();
+        }
     }
 
     public Heladera buscarHeladera(Integer id) {

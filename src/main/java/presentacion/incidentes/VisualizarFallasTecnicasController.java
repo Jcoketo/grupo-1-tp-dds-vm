@@ -4,14 +4,12 @@ import io.javalin.http.Context;
 import io.javalin.http.Handler;
 import lombok.Getter;
 import lombok.Setter;
-import modelo.elementos.PuntoEstrategico;
-import modelo.excepciones.ExcepcionValidacion;
 import org.jetbrains.annotations.NotNull;
 import persistencia.RepositorioIncidentes;
+import utils.GeneradorModel;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.HashMap;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Map;
 
@@ -22,11 +20,7 @@ public class VisualizarFallasTecnicasController implements Handler{
 
     @Override
     public void handle(@NotNull Context context) throws Exception {
-        Map<String, Object> model = context.sessionAttribute("model");
-        if (model == null) {
-            model = new HashMap<>();
-            context.sessionAttribute("model", model);
-        }
+        Map<String, Object> model = GeneradorModel.getModel(context);
 
         String idHel = context.queryParam("heladeraId");
         if (idHel == null || idHel.isEmpty()) {
@@ -35,12 +29,19 @@ public class VisualizarFallasTecnicasController implements Handler{
         }
         int idHeladera = Integer.parseInt(idHel);
 
+        NotificacionAlerta notificacionAlerta = context.sessionAttribute("notificacionAlerta");
+        if(notificacionAlerta != null){
+            model.put("notificacionTarjeta", notificacionAlerta);
+        }
+        context.consumeSessionAttribute("notificacionAlerta");
+
         List<FallasHeladera> fallasHeladera = repoIncidentes.obtenerIncidentes(idHeladera).stream().map(incidente -> {
             FallasHeladera falla = new FallasHeladera();
             falla.setId(incidente.getId());
             falla.setDescripcion(incidente.getDescripcion());
             falla.setEstaSolucionado(incidente.getEstaSolucionado());
-            falla.setFechaHoraIncidente(incidente.getFechaHoraIncidente());
+            LocalDateTime fechaHoraIncidente = incidente.getFechaHoraIncidente();
+            falla.setFechaHoraIncidente(falla.setFormato(fechaHoraIncidente));
             return falla;
         }).toList();
 
@@ -56,7 +57,12 @@ public class VisualizarFallasTecnicasController implements Handler{
 class FallasHeladera {
     private int id;
     private String descripcion;
-    private LocalDateTime fechaHoraIncidente;
+    private String fechaHoraIncidente;
     private Boolean estaSolucionado;
 
+    public String setFormato(LocalDateTime fechaHoraIncidente){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd - HH:mm");
+        return fechaHoraIncidente.format(formatter);
+    }
 }
+
