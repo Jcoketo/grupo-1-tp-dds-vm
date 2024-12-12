@@ -38,8 +38,8 @@ public class CanjearPuntosController implements Handler {
         }
 
 
+
         Integer idPersona = context.sessionAttribute("idPersona");
-        TipoPersona tipoPer = context.sessionAttribute("tipoPersona");
         Colaborador colab = repoColaboradores.buscarColaboradorXIdPersona(idPersona);
 
         String tipoOferta = context.queryParam("tipoOferta");

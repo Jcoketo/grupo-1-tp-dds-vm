@@ -207,6 +207,12 @@ public class Router {
                 post(new CanjearPuntosFinalizadoController(repoColab,repoOfertas));
             });
 
+            path("/misCanjes", () -> {
+                before(new AutorizacionMiddleware().setDebeSerLogueado());
+                get(new MisCanjesController(repoColab,repoOfertas));
+            });
+
+
             path("/catalogoProductos", () -> {
                 before(new AutorizacionMiddleware().setDebeSerLogueado());
                 get(new CatalogoProductosController(repoOfertas));
