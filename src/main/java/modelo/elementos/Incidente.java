@@ -26,9 +26,10 @@ public abstract class Incidente {
     @Getter protected LocalDateTime fechaHoraIncidente;
 
     @Column
-    @Getter @Setter
+    @Getter
     @DefaultValue("0")
     protected Boolean estaSolucionado;
+
 
     public Incidente(Heladera heladera) {
         this.heladera = heladera;
@@ -39,6 +40,8 @@ public abstract class Incidente {
 
     }
 
-
+    public void fueResuelto() {
+        this.estaSolucionado = Boolean.TRUE;
+    }
 
 }

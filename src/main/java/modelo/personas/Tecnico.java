@@ -28,7 +28,7 @@ public class Tecnico {
     @JoinColumn(name = "persona_id", referencedColumnName = "id")
     @Getter private PersonaHumana persona;
 
-    @OneToMany(mappedBy = "tecnico")
+    @OneToMany(mappedBy = "tecnico", cascade = CascadeType.PERSIST)
     private List<Visita> visitas = new ArrayList<>();
 
     @Transient
@@ -46,20 +46,9 @@ public class Tecnico {
 
     }
 
-    public void registrarVisita(Heladera heladera, String descripcion, String URLfoto, Boolean incidenteSolucionado){
-        Visita visita = new Visita(heladera, descripcion, URLfoto, incidenteSolucionado);
-
-        /* ALTERNATIVA CON REPO:
-        RepositorioVisitas repo = RepositorioVisitas.getInstancia();
-        repo.agregar(visita); */
-
+    public void registrarVisita(Heladera heladera, Visita visita){
         this.visitas.add(visita);
         heladera.agregarVisita(visita);
-
-        if (incidenteSolucionado){
-            heladera.marcarComoActiva();
-        }
-
     }
 
     public void notificarFalla(Heladera heladera, String descripcion){

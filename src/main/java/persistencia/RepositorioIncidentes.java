@@ -2,8 +2,10 @@ package persistencia;
 
 import lombok.Getter;
 import modelo.colaboracion.Oferta;
+import modelo.elementos.Alerta;
 import modelo.elementos.FallaTecnica;
 import modelo.elementos.Incidente;
+import modelo.elementos.TipoAlerta;
 import modelo.excepciones.ExcepcionValidacion;
 
 import javax.persistence.EntityManager;
@@ -72,4 +74,34 @@ public class RepositorioIncidentes {
     }
 
 
+    public Incidente devolverIncidente(Integer idIncidente) {
+        return em.find(Incidente.class, idIncidente);
+    }
+
+    public List<FallaTecnica> obtenerFallasTecnicas(Integer idHeladera) {
+        TypedQuery<FallaTecnica> query = em.createQuery("SELECT i FROM FallaTecnica i WHERE i.heladera.id = :idHeladera AND i.estaSolucionado" , FallaTecnica.class);
+        query.setParameter("idHeladera", idHeladera);
+        try {
+            return query.getResultList();
+        } catch (Exception e){
+            return null;
+        }
+    }
+
+    public List<Alerta> obtenerAlertasPorTipo(Integer idHeladera, TipoAlerta tipoAlerta) {
+        TypedQuery<Alerta> query = em.createQuery("SELECT i FROM Alerta i WHERE i.heladera.id = :idHeladera AND i.tipoAlerta = :tipoAlerta" , Alerta.class);
+        query.setParameter("idHeladera", idHeladera);
+        query.setParameter("tipoAlerta", tipoAlerta);
+        try {
+            return query.getResultList();
+        } catch (Exception e){
+            return null;
+        }
+    }
+
+    public void actualizarIncidente(Incidente incidente) {
+        em.getTransaction().begin();
+        em.persist(incidente);
+        em.getTransaction().commit();
+    }
 }

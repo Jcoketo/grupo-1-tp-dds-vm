@@ -23,9 +23,9 @@ import presentacion.incidentes.VisualizarAlertasController;
 import presentacion.incidentes.VisualizarFallasTecnicasController;
 import presentacion.ofertas.*;
 import presentacion.suscripciones.SuscribirseController;
-import presentacion.vistasAdmin.CargarSCVController;
-import presentacion.vistasAdmin.SCVCargadoController;
-import presentacion.vistasAdmin.inicioADMINController;
+import presentacion.vistaAdmin.CargarSCVController;
+import presentacion.vistaAdmin.SCVCargadoController;
+import presentacion.vistaAdmin.inicioADMINController;
 import presentacion.reportes.MisReportesController;
 import servicioApiRest.ServicioApiRest;
 

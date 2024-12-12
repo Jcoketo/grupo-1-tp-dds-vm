@@ -1,4 +1,4 @@
-package presentacion.vistasAdmin;
+package presentacion.vistaAdmin;
 
 import io.javalin.http.Context;
 import io.javalin.http.Handler;

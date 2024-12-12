@@ -7,6 +7,7 @@ import modelo.personas.Tecnico;
 
 import javax.persistence.*;
 import javax.ws.rs.CookieParam;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "visita")
@@ -34,11 +35,16 @@ public class Visita {
     @Column
     private Boolean incidenteSolucionado;
 
-    public Visita(Heladera heladera, String descripcion, String URLfoto, Boolean incidenteSolucionado) {
+    @Column
+    private LocalDateTime fechaHoraVisita;
+
+    public Visita(Heladera heladera, Tecnico tecnico, String descripcion, String URLfoto, Boolean incidenteSolucionado) {
         this.heladera = heladera;
+        this.tecnico = tecnico;
         this.descripcion = descripcion;
         this.URLfoto = URLfoto;
         this.incidenteSolucionado = incidenteSolucionado;
+        this.fechaHoraVisita = LocalDateTime.now();
     }
 
     public Visita() {

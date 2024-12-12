@@ -42,4 +42,6 @@ public class FallaTecnica extends Incidente{
     public FallaTecnica() {
 
     }
+
+
 }
