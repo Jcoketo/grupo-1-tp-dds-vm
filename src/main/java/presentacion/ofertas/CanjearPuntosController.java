@@ -8,6 +8,7 @@ import modelo.personas.TipoPersona;
 import org.jetbrains.annotations.NotNull;
 import persistencia.RepositorioColaboradores;
 import persistencia.RepositorioOfertas;
+import utils.GeneradorModel;
 
 import java.util.HashMap;
 import java.util.List;
@@ -29,12 +30,7 @@ public class CanjearPuntosController implements Handler {
 
     @Override
     public void handle(@NotNull Context context) throws Exception {
-        Map<String, Object> model = context.sessionAttribute("model");
-        if (model == null) {
-            model = new HashMap<>();
-            context.sessionAttribute("model", model);
-        }
-
+        Map<String, Object> model = GeneradorModel.getModel(context);
 
         Integer idPersona = context.sessionAttribute("idPersona");
         TipoPersona tipoPer = context.sessionAttribute("tipoPersona");
