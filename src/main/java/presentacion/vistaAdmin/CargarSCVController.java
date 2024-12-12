@@ -1,4 +1,4 @@
-package presentacion.vistasAdmin;
+package presentacion.vistaAdmin;
 
 import accessManagment.Roles;
 import io.javalin.http.Context;
@@ -7,12 +7,9 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Map;
 
-public class inicioADMINController implements Handler {
-
-
+public class CargarSCVController implements Handler {
     @Override
     public void handle(@NotNull Context context) throws Exception {
-
         Map<String, Object> model = context.sessionAttribute("model");
         if (model == null) {
             model = new java.util.HashMap<>();
@@ -23,10 +20,7 @@ public class inicioADMINController implements Handler {
             context.redirect("/login");
             return;
         }
-
-        Roles rol = (Roles) context.sessionAttribute("rolUsuario");
-
-        if (rol != Roles.ADMIN) {
+        if (context.sessionAttribute("rolUsuario") != Roles.ADMIN) {
             context.redirect("/404Error");
             return;
         }
@@ -34,6 +28,6 @@ public class inicioADMINController implements Handler {
         model.put("nombreUsuario", context.sessionAttribute("nombreUsuario"));
         model.put("logueado", context.sessionAttribute("logueado"));
 
-        context.render("templates/inicioAdmin.mustache", model);
+        context.render("templates/cargarCSV.mustache", model);
     }
 }

@@ -157,4 +157,14 @@ public class RepositoriosTecnicos{
         Tecnico tecnico = new Tecnico(cuil, areaCobertura, persona);
         this.agregar(tecnico);
     }
+
+    public Tecnico obtenerTecnico(Integer id) {
+        return em.find(Tecnico.class, id);
+    }
+
+    public void registrarVisita(Tecnico tecnico) {
+        em.getTransaction().begin();
+        em.persist(tecnico);
+        em.getTransaction().commit();
+    }
 }
