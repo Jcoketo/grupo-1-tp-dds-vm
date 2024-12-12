@@ -53,7 +53,7 @@ public class AgregarProductosEmpresaFinalizadoController implements Handler {
         }
 
 
-        File archivo = new File("src/main/resources/uploads/" + file.filename());
+        File archivo = new File("src/main/resources/uploads/ofertas/" + file.filename());
 
 
         try {

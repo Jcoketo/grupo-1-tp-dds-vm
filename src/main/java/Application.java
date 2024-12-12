@@ -56,7 +56,7 @@ public class Application {
 
     private static void configureImageRoutes(Javalin app) {
         app.get("/images/{filename}", ctx -> {
-            String filePath = "src/main/resources/uploads/" + ctx.pathParam("filename");
+            String filePath = "src/main/resources/uploads/ofertas/" + ctx.pathParam("filename");
             try {
                 // Leer el archivo completo como un arreglo de bytes
                 byte[] fileBytes = Files.readAllBytes(Paths.get(filePath));
