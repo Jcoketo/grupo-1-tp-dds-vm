@@ -1,6 +1,7 @@
 package modelo.authService;
 
 import modelo.colaboracion.*;
+import modelo.consumosAPIs.servicioGeoLocalizacion.LatLong;
 import modelo.consumosAPIs.servicioGeoLocalizacion.LocalizadorLatLong;
 import modelo.elementos.Heladera;
 import modelo.elementos.PuntoEstrategico;
@@ -120,20 +121,24 @@ public class AuthServiceColaboracion {
                 throw new ExcepcionValidacion("La dirección de la persona jurídica no fue cargada!");
             }
             puntoEstrategico.setDireccion(direcAux);
-            puntoEstrategico.setLatitud(LocalizadorLatLong.obtenerLatitud(direcAux));
-            puntoEstrategico.setLongitud(LocalizadorLatLong.obtenerLongitud(direcAux));
+            LatLong latLong = LocalizadorLatLong.obtenerLatitudYLongitud(direcAux);
+            puntoEstrategico.setLatitud(latLong.getLatitud());
+            puntoEstrategico.setLongitud(latLong.getLongitud());
+            puntoEstrategico.setAreas(LocalizadorLatLong.obtenerArea(direcAux));
         }else if ( esRecomendada ){
             puntoEstrategico.setDireccion(direcRecomendada);
-            puntoEstrategico.setLatitud(Double.parseDouble(latRecomendada));
-            puntoEstrategico.setLongitud(Double.parseDouble(longRecomendada));
+            LatLong latLong = LocalizadorLatLong.obtenerLatitudYLongitud(direcRecomendada);
+            puntoEstrategico.setLatitud(latLong.getLatitud());
+            puntoEstrategico.setLongitud(latLong.getLongitud());
+            puntoEstrategico.setAreas(LocalizadorLatLong.obtenerArea(direcRecomendada));
         } else {
             puntoEstrategico.setDireccion(direccion);
-            puntoEstrategico.setLatitud(LocalizadorLatLong.obtenerLatitud(direccion));
-            puntoEstrategico.setLongitud(LocalizadorLatLong.obtenerLongitud(direccion));
+            LatLong latLong = LocalizadorLatLong.obtenerLatitudYLongitud(direccion);
+            puntoEstrategico.setLatitud(latLong.getLatitud());
+            puntoEstrategico.setLongitud(latLong.getLongitud());
+            puntoEstrategico.setAreas(LocalizadorLatLong.obtenerArea(direccion));
 
         }
-
-        puntoEstrategico.setAreas(LocalizadorLatLong.obtenerArea(puntoEstrategico.getLatitud(), puntoEstrategico.getLongitud()));
 
         Heladera heladera = new Heladera(nombre, Integer.parseInt(capacidad), puntoEstrategico, activo, fechaInicio, tempMax, tempMin);
         HacerseCargoHeladera colaboracion = new HacerseCargoHeladera(heladera);

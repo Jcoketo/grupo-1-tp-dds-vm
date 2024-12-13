@@ -218,7 +218,13 @@
             <div id="map"></div>
         </div>
         <div class="list-container col-md-6">
-            <h3>Heladeras</h3>
+            <div>
+            <h3 style="display: inline-block; margin-right:10px;">Heladeras</h3>
+
+            {{#notificacionSuscripcion}}
+                <div class="text-{{tipo}}">{{mensaje}}</div>
+            {{/notificacionSuscripcion}}
+            </div>
             <ul id="heladeras-list" class="list-group">
                 <!-- Lista de heladeras se llenará dinámicamente -->
             </ul>
