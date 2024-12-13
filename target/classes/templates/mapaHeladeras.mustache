@@ -332,7 +332,7 @@
                         <strong>${nombre || 'Ubicación desconocida'}</strong>
                         <small>Dirección: ${punto.direccion || 'Ubicación desconocida'}</small>
                         <small>En funcionamiento desde: ${fecha}</small>
-                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <div style="display: flex; justify-content: flex-start; align-items: center;">
                             <small>${estado}</small>
                             <small>
                                 <a href="/visualizarDetalleHeladera?heladeraId=${heladeraId}&nombre=${nombre}&direccion=${punto.direccion}&lat=${punto.latitud}&long=${punto.longitud}&fecha=${fecha}&estado=${estado}&disponibilidad=${disponibilidad}" class="text-primary" style="text-decoration: underline; margin-left: 10px;">Detalles</a>
