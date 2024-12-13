@@ -34,6 +34,7 @@ public abstract class Incidente {
     public Incidente(Heladera heladera) {
         this.heladera = heladera;
         this.fechaHoraIncidente = LocalDateTime.now();
+        this.estaSolucionado = Boolean.FALSE;
     }
 
     public Incidente() {

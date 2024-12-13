@@ -28,7 +28,7 @@ public class AutorizacionMiddleware implements Handler {
         }
 
         if(debeEstarLogueado && !estaLogueado ){
-            context.redirect("/inicio");
+            context.redirect("/login");
         }
 
         if (userRole != null && estaLogueado) {

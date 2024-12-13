@@ -188,9 +188,9 @@
 </head>
 <body>
 <header>
-    <div>
+    <div class="p-3">
         <a href="/inicio">
-            <img src="/static/logo.png" alt="Logo" style="max-height: 50px;">
+            <img src="/static/logo.png" alt="Logo" style="height: 50px;">
         </a>
     </div>
     <nav class="navbar navbar-expand-lg navbar-light">
@@ -200,27 +200,28 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
+                <li class="nav-item mr-3">
                     <a class="nav-link" href="#">Sobre nosotros</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Donar</a>
+                <li class="nav-item mr-3">
+                    <a class="nav-link" href="/elegirDonacion">Donar</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Heladeras</a>
+                <li class="nav-item mr-3">
+                    <a class="nav-link" href="/mapaHeladeras">Heladeras</a>
                 </li>
+                <!-- Menú desplegable -->
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         {{nombreUsuario}}
                     </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
                         <a class="dropdown-item" href="/perfil">Mi perfil</a>
                         <a class="dropdown-item" href="/misColaboraciones">Mis colaboraciones</a>
                         <a class="dropdown-item" href="/canjearPuntos">Mi puntaje</a>
                         <a class="dropdown-item" href="/misReportes">Mis reportes</a>
                         <a class="dropdown-item" href="#">Configuración</a>
-                        <a class="dropdown-item" href="/login">Cerrar sesión</a>
+                        <a class="dropdown-item" href="/logout">Cerrar sesión</a>
                     </div>
                 </li>
             </ul>
@@ -233,7 +234,7 @@
         <h1>Reportar falla técnica</h1>
 
         <!-- Formulario -->
-        <form action="/reportarFallaTecnica" method="post">
+        <form action="/reportarFallaTecnica" method="post" enctype="multipart/form-data">
 
             <div class="form-group">
                 <label for="descripcion">Descripción</label>
@@ -243,11 +244,11 @@
             <div class="form-group">
                 <label for="foto">Foto</label>
                 <div class="upload-area" id="uploadArea">
-                    <input type="file" id="file" accept="image/*">
-                    <div>
-                        <i class="bi bi-cloud-arrow-up upload-icon"></i>
-                        <p>Arrastrá la imagen o <a href="#" id="selectLink">Seleccioná</a></p>
+                    <input type="file" id="fileInput" name="file" accept="image/*">
+                    <div id="dropZone" class="drop-zone">
+                        Arrastra y suelta el archivo aquí
                     </div>
+                    <p id="fileName" class="mt-2"></p>
                 </div>
             </div>
 
@@ -302,7 +303,38 @@
         </div>
     </div>
 </footer>
+<script>
+    const dropZone = document.getElementById('dropZone');
+    const fileInput = document.getElementById('fileInput');
+    const fileName = document.getElementById('fileName');
 
+    dropZone.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        dropZone.classList.add('drop-zone-hover');
+    });
+
+    dropZone.addEventListener('dragleave', () => {
+        dropZone.classList.remove('drop-zone-hover');
+    });
+
+    dropZone.addEventListener('drop', (e) => {
+        e.preventDefault();
+        dropZone.classList.remove('drop-zone-hover');
+        const files = e.dataTransfer.files;
+        fileInput.files = files;
+        fileName.textContent = `Archivo seleccionado: ${files[0].name}`;
+    });
+
+    dropZone.addEventListener('click', () => {
+        fileInput.click();
+    });
+
+    fileInput.addEventListener('change', () => {
+        if (fileInput.files.length > 0) {
+            fileName.textContent = `Archivo seleccionado: ${fileInput.files[0].name}`;
+        }
+    });
+</script>
 <!-- Scripts de Bootstrap y jQuery -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>

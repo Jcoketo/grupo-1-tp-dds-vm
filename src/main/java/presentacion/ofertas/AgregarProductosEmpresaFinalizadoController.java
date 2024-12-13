@@ -10,6 +10,7 @@ import org.apache.commons.io.FileUtils;
 import org.eclipse.jetty.security.authentication.AuthorizationService;
 import org.jetbrains.annotations.NotNull;
 import persistencia.RepositorioOfertas;
+import utils.GeneradorModel;
 
 import java.io.File;
 import java.util.HashMap;
@@ -20,16 +21,13 @@ import java.util.Objects;
 public class AgregarProductosEmpresaFinalizadoController implements Handler {
 
     public AgregarProductosEmpresaFinalizadoController() {
+        super();
     }
 
     @Override
     public void handle(@NotNull Context context) throws Exception {
 
-        Map<String, Object> model = context.sessionAttribute("model");
-        if (model == null) {
-            model = new HashMap<>();
-            context.sessionAttribute("model", model);
-        }
+        Map<String, Object> model = GeneradorModel.getModel(context);
 
         String nombre = Objects.requireNonNull(context.formParam("nombre"));
         String tipo = Objects.requireNonNull(context.formParam("tipo"));
