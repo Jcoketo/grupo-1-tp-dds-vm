@@ -2,6 +2,7 @@ package modelo.personas;
 
 import java.util.ArrayList;
 import lombok.Getter;
+import lombok.Setter;
 import modelo.elementos.Areas;
 import modelo.elementos.Heladera;
 import modelo.elementos.PuntoEstrategico;
@@ -19,7 +20,7 @@ public class Tecnico {
     @Getter private int id;
 
     @Column
-    @Getter private String nroCUIL;
+    @Getter @Setter private String nroCUIL;
 
     @Enumerated
     @Getter private Areas areaCobertura;
@@ -50,6 +51,7 @@ public class Tecnico {
         this.nroCUIL = cuil;
         this.areaCobertura = puntoEstrategico.getAreas();
         this.persona = persona;
+        this.puntoEstrategico = puntoEstrategico;
     }
 
     public void registrarVisita(Heladera heladera, Visita visita){

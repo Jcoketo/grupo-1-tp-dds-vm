@@ -14,9 +14,7 @@ import modelo.elementos.Heladera;
 import modelo.excepciones.ExcepcionValidacion;
 import modelo.personas.*;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
+import javax.persistence.*;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -156,5 +154,31 @@ public class RepositoriosTecnicos{
         em.getTransaction().begin();
         em.persist(tecnico);
         em.getTransaction().commit();
+    }
+
+    public Tecnico existeTecnico(String nroCuil) {
+        TypedQuery<Tecnico> query = em.createQuery(
+                "SELECT t FROM Tecnico t WHERE t.nroCUIL = :nroCuil ",
+                Tecnico.class
+        );
+        query.setParameter("nroCuil", nroCuil);
+        try {
+            return query.getSingleResult();
+        } catch (NoResultException e) {
+            return null;
+        }
+    }
+
+    public Tecnico buscarTecnicoXIdPersona(Integer idPersona) {
+        TypedQuery<Tecnico> query = em.createQuery(
+                "SELECT t FROM Tecnico t WHERE t.persona.id = :idPersona ",
+                Tecnico.class
+        );
+        query.setParameter("idPersona", idPersona);
+        try {
+            return query.getSingleResult();
+        } catch (NoResultException e) {
+            return null;
+        }
     }
 }

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence
+                                 http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd"
+             version="2.1">
+    <persistence-unit name="db" transaction-type="RESOURCE_LOCAL">
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+
+        <properties>
+            <property name="hibernate.archive.autodetection" value="class"/>
+
+            <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"/>
+            <property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/maravilla?serverTimezone=America/Buenos_Aires" />
+            <property name="hibernate.connection.username" value="root" />
+            <property name="hibernate.connection.password" value="123456" />
+
+            <property name="hibernate.show_sql" value="true" />
+            <!-- Enable the logging of all the generated SQL statements to the console -->
+
+            <property name="hibernate.format_sql" value="true" />
+            <!-- Format the generated SQL statements to make it more readable -->
+
+            <property name="user_sql_comments" value="true" />
+            
+            <property name="hibernate.hbm2ddl.auto" value="update"/>
+            <!--
+              - validate: Validate the schema, making sure it matches the mappings. No changes are made to the database.
+              - update: Update the schema. Hibernate will attempt to make changes to the database schema to match the mappings.
+              - create: Create the schema, destroying any previous data. This will drop and recreate the database schema.
+              - create-drop: Create the schema on startup and drop it on shutdown. This is similar to create, but it also drops the schema when the session factory is closed.
+              - none: No action will be performed.
+            -->
+
+        </properties>
+    </persistence-unit>
+</persistence>
