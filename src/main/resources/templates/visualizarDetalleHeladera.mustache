@@ -71,6 +71,7 @@
             white-space: nowrap; /* Evita que el texto haga salto de línea */
             color: #1e5552; /* Color de texto */
              font-size: 20px;
+
         }
 
         h7 {
@@ -136,7 +137,7 @@
             background-color: #e2e6ea;
         }
 
-          body {
+        body {
             font-family: Arial, sans-serif;
             background-color: #ffffff;
             margin: 0;
@@ -235,6 +236,7 @@
         }
 
       </style>
+
 </head>
 <body>
 
@@ -313,7 +315,7 @@
             <form id="suscripcionForm" action="/suscribirse" method="post">
                 <div style="display: inline-flex; gap: 20px">
 
-                    <h2 class="info">Suscripciones</h2>
+                    <h2 class="info">Suscribirme</h2>
                     <select class="custom-select my-1 mr-sm-2" id="filterSelect" name="tipoSuscripcion" onchange="toggleSuscripcionVianda()">
                         <option value="" disabled selected>Elegir tipo suscripción...</option>
                         <option value="1">Notificarme cuando queden pocas viandas</option>
@@ -334,10 +336,13 @@
                         {{#medios}}
                             <option value="{{tipo}}" >{{tipo}}</option>
                         {{/medios}}
+
                     </select>
-                    <button type="submit" class=" btn-primary" >Suscribirse</button>
+                    <button type="submit" class=" btn-primary">Suscribirme</button>
                 </div>
             </form>
+
+
         </div>
     </div>
 </main>

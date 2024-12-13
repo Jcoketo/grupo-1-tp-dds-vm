@@ -24,17 +24,17 @@ public class Tecnico {
     @Enumerated
     @Getter private Areas areaCobertura;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "persona_id", referencedColumnName = "id")
     @Getter private PersonaHumana persona;
 
     @OneToMany(mappedBy = "tecnico", cascade = CascadeType.PERSIST)
     private List<Visita> visitas = new ArrayList<>();
 
-    @Transient
+    @OneToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "punto_estrategico_id", referencedColumnName = "id")
     @Getter private PuntoEstrategico puntoEstrategico;
-    // TODO FALTA DEFINIR QUE HACEMOS CON ESTE PUNTO ESTRATEGICO
-    // LO NECESITAMOS PARA VER CUAL ES EL TECNICO MAS CERCANO
+
 
     public Tecnico(String nroCUIL, Areas areaCobertura, PersonaHumana persona) {
         this.nroCUIL = nroCUIL;
@@ -44,6 +44,12 @@ public class Tecnico {
 
     public Tecnico() {
 
+    }
+
+    public Tecnico (PersonaHumana persona, String cuil, PuntoEstrategico puntoEstrategico) {
+        this.nroCUIL = cuil;
+        this.areaCobertura = puntoEstrategico.getAreas();
+        this.persona = persona;
     }
 
     public void registrarVisita(Heladera heladera, Visita visita){

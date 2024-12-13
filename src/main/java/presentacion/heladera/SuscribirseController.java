@@ -1,4 +1,4 @@
-package presentacion.suscripciones;
+package presentacion.heladera;
 
 import io.javalin.http.Context;
 import io.javalin.http.Handler;
@@ -18,7 +18,7 @@ public class SuscribirseController implements Handler {
         Map<String, Object> model = GeneradorModel.getModel(context);
 
         Integer idPersona = context.sessionAttribute("idPersona");
-        String idHel = context.formParam("idHeladera");
+        String idHel = context.formParam("heladeraId");
         String tipoSuscripcion = context.formParam("tipoSuscripcion");
         String lim = context.formParam("cantidad"); // CASO 1
         String medioDeContacto = context.formParam("medioDeContacto"); //enum
@@ -46,9 +46,9 @@ public class SuscribirseController implements Handler {
 
         TipoMedioDeContacto medio;
         switch (medioDeContacto) {
-            case "1" -> medio = TipoMedioDeContacto.MAIL;
-            case "2" -> medio = TipoMedioDeContacto.WHATSAPP;
-            case "3" -> medio = TipoMedioDeContacto.TELEGRAM;
+            case "MAIL" -> medio = TipoMedioDeContacto.MAIL;
+            case "TELEFONO" -> medio = TipoMedioDeContacto.TELEFONO;
+            case "TELEGRAM" -> medio = TipoMedioDeContacto.TELEGRAM;
             default -> medio = null;
         }
 
@@ -59,12 +59,12 @@ public class SuscribirseController implements Handler {
         {
             notificacionSuscripcion.error(e.getMessage());
             model.put("notificacionSuscripcion", notificacionSuscripcion);
-            context.redirect("/visualizarFallasTecnicas?heladeraId=" + idHeladera);;
+            context.redirect("/mapaHeladeras");
             return;
         }
 
         notificacionSuscripcion.aprobada("Suscripción realizada con éxito!");
-        context.redirect("/visualizarFallasTecnicas?heladeraId=" + idHeladera);;
+        context.redirect("/mapaHeladeras");
 
     }
 }

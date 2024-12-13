@@ -141,21 +141,11 @@ public class RepositoriosTecnicos{
         return null; // En caso de no encontrar un técnico cercano
     }
 
-    public void registrarTecnico(String nombre, String apellido, TipoDocumento tipoDoc, String numeroDoc, String cuil, String mail, String telefono, Areas areaCobertura) {
-        MedioDeContacto medioMail = new MedioDeContacto(TipoMedioDeContacto.MAIL, mail);
-        PersonaHumana persona = new PersonaHumana(tipoDoc, numeroDoc, nombre, apellido, medioMail);
+    public void registrarTecnico(Tecnico tecnico) {
+        em.getTransaction().begin();
+        em.persist(tecnico);
+        em.getTransaction().commit();
 
-        MedioDeContacto medioTelefonico;
-        if (!telefono.equals("")) {
-            medioTelefonico = new MedioDeContacto(TipoMedioDeContacto.TELEFONO, telefono);
-            persona.agregarMediosDeContacto(medioTelefonico);
-        }
-
-        RepositorioColaboradores repoColab = RepositorioColaboradores.getInstancia();
-        repoColab.actualizarPersona(persona);
-
-        Tecnico tecnico = new Tecnico(cuil, areaCobertura, persona);
-        this.agregar(tecnico);
     }
 
     public Tecnico obtenerTecnico(Integer id) {
