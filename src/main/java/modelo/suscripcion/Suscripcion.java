@@ -20,7 +20,7 @@ public abstract class Suscripcion {
 
     @ManyToOne
     @JoinColumn(name="heladera_id", referencedColumnName = "id")
-    private Heladera heladera;
+    @Getter private Heladera heladera;
 
     @ManyToOne
     @JoinColumn(name="colaborador_id",referencedColumnName = "id")
@@ -28,12 +28,6 @@ public abstract class Suscripcion {
 
     @Enumerated(EnumType.STRING)
     @Getter private TipoSuscripcion tipoSuscripcion;
-
-    @Column
-    @Getter private Integer limiteViandasMinimas;
-
-    @Column
-    @Getter private Integer limiteViandasMaximas;
 
     @OneToOne(cascade = CascadeType.ALL)
     private MedioDeContacto medioDeContacto;

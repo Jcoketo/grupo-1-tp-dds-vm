@@ -1,15 +1,13 @@
 package modelo.authService;
 
+import modelo.consumosAPIs.servicioGeoLocalizacion.LatLong;
+import modelo.consumosAPIs.servicioGeoLocalizacion.LocalizadorLatLong;
 import modelo.elementos.*;
 import modelo.excepciones.ExcepcionValidacion;
-import modelo.personas.Tecnico;
-import modelo.personas.TipoDocumento;
-import modelo.personas.Visita;
-import persistencia.RepositorioColaboradores;
-import persistencia.RepositorioHeladeras;
-import persistencia.RepositorioIncidentes;
-import persistencia.RepositoriosTecnicos;
+import modelo.personas.*;
+import persistencia.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public class AuthServiceTecnico {
@@ -17,13 +15,31 @@ public class AuthServiceTecnico {
     private static RepositoriosTecnicos repoTecnicos = RepositoriosTecnicos.getInstancia();
     private static RepositorioHeladeras repoHeladeras = RepositorioHeladeras.getInstancia();
     private static RepositorioIncidentes repoIncidentes = RepositorioIncidentes.getInstancia();
+    private static RepositorioUsuarios repoUsuarios = RepositorioUsuarios.getInstancia();
 
-    public static void registrarTecnico(String nombre, String apellido, TipoDocumento tipoDoc, String numeroDoc, String cuil, String mail, String telefono, Areas areaCobertura) {
-        if(repoColab.existePersonaFisica(numeroDoc, tipoDoc) != null) {
-            throw new ExcepcionValidacion("El técnico ya existe!");
+    public static void registrarTecnico(String nombre, String apellido, TipoDocumento tipoDoc, String numeroDoc, String cuil, String mail, String telefono, String direccion, String fechaNacimiento) {
+        if (repoColab.existePersonaFisica(numeroDoc, tipoDoc) != null) {
+            throw new ExcepcionValidacion("El técnico ya existe!");}
+
+        if (repoUsuarios.existeMAIL(mail)) {
+            throw new ExcepcionValidacion("El mail ya está en uso!");}
+
+
+        Areas area = LocalizadorLatLong.obtenerArea(direccion);
+        LatLong latLong = LocalizadorLatLong.obtenerLatitudYLongitud(direccion);
+        PuntoEstrategico puntoEstrategico = new PuntoEstrategico(direccion, latLong.getLatitud(), latLong.getLongitud(), area);
+
+        MedioDeContacto medioMAIL = new MedioDeContacto(TipoMedioDeContacto.MAIL, mail);
+        PersonaHumana persona = new PersonaHumana(tipoDoc, numeroDoc, nombre, apellido, medioMAIL, direccion, fechaNacimiento);
+
+        if(!telefono.equals("")) {
+            MedioDeContacto medioTEL = new MedioDeContacto(TipoMedioDeContacto.TELEFONO, telefono);
+            persona.agregarMediosDeContacto(medioTEL);
         }
 
-        repoTecnicos.registrarTecnico(nombre, apellido, tipoDoc, numeroDoc, cuil, mail, telefono, areaCobertura);
+        Tecnico tecnico = new Tecnico(persona, cuil, puntoEstrategico);
+
+        repoTecnicos.registrarTecnico(tecnico);
     }
 
     public static void registrarVisita(Integer idTecnico, Integer idHeladera, Integer idIncidente, String descripcion,

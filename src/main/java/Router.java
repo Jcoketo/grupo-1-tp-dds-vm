@@ -22,11 +22,13 @@ import presentacion.incidentes.ReportarFallaTecnicaFinalizadaController;
 import presentacion.incidentes.VisualizarAlertasController;
 import presentacion.incidentes.VisualizarFallasTecnicasController;
 import presentacion.ofertas.*;
-import presentacion.suscripciones.SuscribirseController;
+import presentacion.heladera.SuscribirseController;
 import presentacion.vistaAdmin.CargarSCVController;
 import presentacion.vistaAdmin.SCVCargadoController;
 import presentacion.vistaAdmin.inicioADMINController;
 import presentacion.reportes.MisReportesController;
+import presentacion.vistaTecnico.RegistrarTecnicoCompletadoController;
+import presentacion.vistaTecnico.RegistrarTecnicoController;
 import servicioApiRest.ServicioApiRest;
 
 import javax.persistence.EntityManager;
@@ -145,7 +147,7 @@ public class Router {
             });
 
             path("/donarVianda", () -> {
-                //before(new AutorizacionMiddleware().setDebeSerLogueado().setDebeSerPF());
+                before(new AutorizacionMiddleware().setDebeSerLogueado().setDebeSerPF());
                 get(new DonarViandaController());
                 post(new DonarViandaRealizadaController());
             });
@@ -188,10 +190,12 @@ public class Router {
             });
 
             path("/mapaHeladerasDistribucionDestino", () -> {
+                before(new AutorizacionMiddleware().setDebeSerLogueado().setDebeSerPF());
                 get(new MapaHeladerasDistribucionDestinoController());
             });
 
             path("/mapaHeladerasDistribucionOrigen", () -> {
+                before(new AutorizacionMiddleware().setDebeSerLogueado().setDebeSerPF());
                 get(new MapaHeladerasDistribucionOrigenController());
             });
 
@@ -210,7 +214,7 @@ public class Router {
             });
 
             path("/misReportes", () -> {
-                before(new AutorizacionMiddleware().setDebeSerLogueado());
+                before(new AutorizacionMiddleware().setDebeSerLogueado().setDebeSerAdmin());
                 get(new MisReportesController());
             });
 
@@ -219,8 +223,14 @@ public class Router {
                 get(new PerfilController());
             });
 
+            path("/registrarTecnico", () -> {
+                before(new AutorizacionMiddleware().setDebeSerLogueado().setDebeSerAdmin());
+                get(new RegistrarTecnicoController());
+                post(new RegistrarTecnicoCompletadoController());
+            });
+
             path("/registroPersonaVulnerable", () -> {
-                before(new AutorizacionMiddleware().setDebeSerLogueado());
+                before(new AutorizacionMiddleware().setDebeSerLogueado().setDebeSerPF());
                 get(new RegistroPersonaVulnerableController());
                 post(new RegistroPersonaVulnerableRealizadaController());
             });
