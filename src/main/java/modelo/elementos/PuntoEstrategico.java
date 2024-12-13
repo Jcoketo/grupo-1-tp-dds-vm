@@ -36,10 +36,11 @@ public class PuntoEstrategico {
         this.direccion = direccion;
     }
 
-    public PuntoEstrategico(String direccion, Double latitud, Double longitud){
+    public PuntoEstrategico(String direccion, Double latitud, Double longitud, Areas areas){
        this.latitud = latitud;
        this.longitud = longitud;
        this.direccion = direccion;
+         this.areas = areas;
     }
 
 

@@ -7,17 +7,13 @@ import lombok.Setter;
 import modelo.personas.MedioDeContacto;
 import modelo.personas.Persona;
 import modelo.personas.TipoMedioDeContacto;
-import modelo.personas.TipoPersona;
 import org.jetbrains.annotations.NotNull;
 import persistencia.RepositorioColaboradores;
 import utils.GeneradorModel;
 
-import javax.persistence.criteria.CriteriaBuilder;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 public class VisualizarDetalleHeladeraController implements Handler{
 
@@ -30,6 +26,12 @@ public class VisualizarDetalleHeladeraController implements Handler{
         Integer idPersona = context.sessionAttribute("idPersona");
         model.put("logueado", estaLogueado != null && estaLogueado);
         model.put("nombreUsuario", context.sessionAttribute("nombreUsuario"));
+
+        NotificacionSuscripcion notificacionSuscripcion = context.sessionAttribute("notificacionSuscripcion");
+        if(notificacionSuscripcion != null){
+            model.put("notificacionSuscripcion", notificacionSuscripcion);
+        }
+        context.consumeSessionAttribute("notificacionTarjeta");
 
         Persona persona = repoColaboradores.obtenerPersona(idPersona);
 
@@ -65,8 +67,6 @@ public class VisualizarDetalleHeladeraController implements Handler{
         model.put("fecha",fecha);
         model.put("estado",estado);
         model.put("disponibilidad",disponibilidad);
-
-
 
         context.render("templates/visualizarDetalleHeladera.mustache", model);
 

@@ -2,21 +2,35 @@ package modelo.consumosAPIs.servicioGeoLocalizacion;
 
 import modelo.elementos.Areas;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
 public class LocalizadorLatLong {
 
-    public static Double obtenerLatitud(String direccion) {
-        //TODO
-        return 0.0;
+    public static LatLong obtenerLatitudYLongitud(String direccion) {
+        List<LatLong> coordenadas = generarCoordenadasCABA(10);
+        Random random = new Random();
+        int randomIndex = random.nextInt(coordenadas.size());
+        return coordenadas.get(randomIndex);
     }
 
-    public static Double obtenerLongitud(String direccion) {
-        //TODO
-        return 0.0;
+    public static Areas obtenerArea(String direccion) {
+        List<Areas> areas = List.of(Areas.values());
+        Random random = new Random();
+        int randomIndex = random.nextInt(areas.size());
+        return areas.get(randomIndex);
     }
 
-    public static Areas obtenerArea(Double latitud, Double longitud) {
-        //TODO
-        return Areas.BELGRANO;
+    public static List<LatLong> generarCoordenadasCABA(int cantidad) {
+        List<LatLong> coordenadas = new ArrayList<>();
+        Random random = new Random();
+        for (int i = 0; i < cantidad; i++) {
+            double latitud = -34.705 + (random.nextDouble() * (34.545 - 34.705));
+            double longitud = -58.505 + (random.nextDouble() * (58.345 - 58.505));
+            coordenadas.add(new LatLong(latitud, longitud));
+        }
+        return coordenadas;
     }
 }
 // TODO: consumir una API que nos devuelva esos valores!

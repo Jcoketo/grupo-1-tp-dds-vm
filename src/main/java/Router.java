@@ -22,11 +22,13 @@ import presentacion.incidentes.ReportarFallaTecnicaFinalizadaController;
 import presentacion.incidentes.VisualizarAlertasController;
 import presentacion.incidentes.VisualizarFallasTecnicasController;
 import presentacion.ofertas.*;
-import presentacion.suscripciones.SuscribirseController;
+import presentacion.heladera.SuscribirseController;
 import presentacion.vistaAdmin.CargarSCVController;
 import presentacion.vistaAdmin.SCVCargadoController;
 import presentacion.vistaAdmin.inicioADMINController;
 import presentacion.reportes.MisReportesController;
+import presentacion.vistaTecnico.RegistrarTecnicoCompletadoController;
+import presentacion.vistaTecnico.RegistrarTecnicoController;
 import servicioApiRest.ServicioApiRest;
 
 import javax.persistence.EntityManager;
@@ -219,6 +221,12 @@ public class Router {
             path("/perfil", () -> {
                 before(new AutorizacionMiddleware().setDebeSerLogueado());
                 get(new PerfilController());
+            });
+
+            path("/registrarTecnico", () -> {
+                before(new AutorizacionMiddleware().setDebeSerLogueado().setDebeSerAdmin());
+                get(new RegistrarTecnicoController());
+                post(new RegistrarTecnicoCompletadoController());
             });
 
             path("/registroPersonaVulnerable", () -> {
