@@ -202,9 +202,9 @@
 <body>
 
 <header>
-    <div>
+    <div class="p-3">
         <a href="/inicio">
-            <img src="/static/logo.png" alt="Logo" style="max-height: 50px;">
+            <img src="/static/logo.png" alt="Logo" style="height: 50px;">
         </a>
     </div>
     <nav class="navbar navbar-expand-lg navbar-light">
@@ -214,13 +214,13 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
+                <li class="nav-item mr-3">
                     <a class="nav-link" href="#">Sobre nosotros</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/elegirDonacionFisica">Donar</a>
+                <li class="nav-item mr-3">
+                    <a class="nav-link" href="/elegirDonacion">Donar</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item mr-3">
                     <a class="nav-link" href="/mapaHeladeras">Heladeras</a>
                 </li>
                 <!-- Menú desplegable -->
@@ -229,7 +229,7 @@
                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         {{nombreUsuario}}
                     </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
                         <a class="dropdown-item" href="/perfil">Mi perfil</a>
                         <a class="dropdown-item" href="/misColaboraciones">Mis colaboraciones</a>
                         <a class="dropdown-item" href="/canjearPuntos">Mi puntaje</a>
@@ -293,8 +293,8 @@
                     <div class="col-md-4">
                         <h5>Donar</h5>
                         <ul class="list-unstyled">
-                            <li><a href="#" class="footer-link">Donar vianda</a></li>
-                            <li><a href="#" class="footer-link">Ver mapa</a></li>
+                            <li><a href="/donarVianda" class="footer-link">Donar vianda</a></li>
+                            <li><a href="/mapaHeladeras" class="footer-link">Ver mapa</a></li>
                         </ul>
                     </div>
 

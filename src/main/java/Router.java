@@ -2,10 +2,10 @@ import static io.javalin.apibuilder.ApiBuilder.*;
 
 import accessManagment.AutorizacionMiddleware;
 import io.javalin.Javalin;
-import io.javalin.http.Context;
 import persistencia.*;
 import presentacion.InicioController;
 import presentacion.LogoutController;
+import presentacion.MostrarErrorPermisosController;
 import presentacion.colaboraciones.*;
 import presentacion.gestorCuentas.*;
 import presentacion.heladera.AceptarAgregarHeladeraController;
@@ -23,9 +23,9 @@ import presentacion.incidentes.VisualizarAlertasController;
 import presentacion.incidentes.VisualizarFallasTecnicasController;
 import presentacion.ofertas.*;
 import presentacion.suscripciones.SuscribirseController;
-import presentacion.vistasAdmin.CargarSCVController;
-import presentacion.vistasAdmin.SCVCargadoController;
-import presentacion.vistasAdmin.inicioADMINController;
+import presentacion.vistaAdmin.CargarSCVController;
+import presentacion.vistaAdmin.SCVCargadoController;
+import presentacion.vistaAdmin.inicioADMINController;
 import presentacion.reportes.MisReportesController;
 import servicioApiRest.ServicioApiRest;
 
@@ -55,35 +55,64 @@ public class Router {
         app.routes(() -> {
 
             path("/", () -> {
-                get(ctx -> ctx.redirect("/inicio") );
+                get(ctx -> ctx.redirect("/inicio"));
             });
 
-            path("/login", () -> {
-                get(new ShowLoginController());
-                post(new ProcessLoginController(repoColab, repoUsuarios));
+            path("/404NotFound", () -> {
+                get(new MostrarErrorPermisosController());
             });
 
-            path("/logout", () -> {
-                get(new LogoutController());
+            path("/aceptarAgregarHeladera", () -> {
+                before(new AutorizacionMiddleware().setDebeSerLogueado().setDebeSerPJ());
+                get(new AceptarAgregarHeladeraController());
             });
 
-            path("/inicio", () -> {
-                get(new InicioController());
+            path("/aceptarAgregarProducto", () -> {
+                before(new AutorizacionMiddleware().setDebeSerLogueado());
+                get(new AceptarAgregarProductoController());
             });
 
-            path("/inicioADMIN", () -> {
-                get(new inicioADMINController());
+            path("/aceptarReportarFalla", () -> {
+                before(new AutorizacionMiddleware().setDebeSerLogueado());
+                get(new AceptarReportarFallaController());
             });
 
-            path("/elegirRegistroCuenta", () -> {
-                before(new AutorizacionMiddleware());
-                get(new ElegirRegistroCuentaController());
+            path("/agregarHeladera", () -> {
+                before(new AutorizacionMiddleware().setDebeSerLogueado().setDebeSerPJ());
+                get(new AgregarHeladeraController());
+                post(new HeladeraAgregadaController());
             });
 
-            path("/crearCuentaJuridica", () -> {
-                //before(new AutorizacionMiddleware());
-                get(new CrearCuentaJuridicaController());
-                post(new CuentaJuridicaCreadaController(repoColab));
+            path("/agregarProductosEmpresa", () -> {
+                before(new AutorizacionMiddleware().setDebeSerLogueado());
+                get(new AgregarProductosEmpresaController());
+                post(new AgregarProductosEmpresaFinalizadoController());
+            });
+
+            path("/api/recomendacion/locaciones", () -> {
+                get(new ServicioApiRest());
+            });
+
+            path("/canjearPuntos", () -> {
+                before(new AutorizacionMiddleware().setDebeSerLogueado());
+                get(new CanjearPuntosController());
+                post(new CanjearPuntosFinalizadoController());
+            });
+
+            path("/catalogoProductos", () -> {
+                before(new AutorizacionMiddleware().setDebeSerLogueado());
+                get(new CatalogoProductosController());
+            });
+
+            path("/cargarCSV", () -> {
+                get(new CargarSCVController());
+                post(new SCVCargadoController());
+            });
+
+            path("/configurarPerfil", () -> {
+                before(new AutorizacionMiddleware().setDebeSerLogueado());
+                get(new ConfigurarPerfilController());
+                post(new ConfigurarPerfilFinalizadoController());
             });
 
             path("/crearCuentaFisica", () -> {
@@ -92,28 +121,15 @@ public class Router {
                 post(new CuentaFisicaCreadaController());
             });
 
+            path("/crearCuentaJuridica", () -> {
+                //before(new AutorizacionMiddleware());
+                get(new CrearCuentaJuridicaController());
+                post(new CuentaJuridicaCreadaController());
+            });
+
             path("/cuentaCreada", () -> {
                 before(new AutorizacionMiddleware());
                 get(new CuentaCreadaController());
-            });
-
-            //TODO todos los botones que redireccionen a DONAR tienen que venir a este GET
-            // TODO FALTA INSERTAR LAS IMAGENES EN LOS BOTONES DE ELEGIR DONACION (en mustache)
-            path("/elegirDonacion", () -> {
-                before(new AutorizacionMiddleware().setDebeSerLogueado());
-                get(new ElegirDonacionController());
-            });
-
-            path("/donarVianda", () -> {
-                //before(new AutorizacionMiddleware().setDebeSerLogueado().setDebeSerPF());
-                get(new DonarViandaController());
-                post(new DonarViandaRealizadaController(repoHeladeras));
-            });
-
-            path("/donarDinero", () -> {
-                before(new AutorizacionMiddleware().setDebeSerLogueado());
-                get(new DonarDineroController());
-                post(new DonarDineroRealizadaController());
             });
 
             path("/donarDistribuirViandas", () -> {
@@ -122,67 +138,91 @@ public class Router {
                 post(new DonarDistribucionViandaRealizadaController());
             });
 
+            path("/donarDinero", () -> {
+                before(new AutorizacionMiddleware().setDebeSerLogueado());
+                get(new DonarDineroController());
+                post(new DonarDineroRealizadaController());
+            });
+
+            path("/donarVianda", () -> {
+                //before(new AutorizacionMiddleware().setDebeSerLogueado().setDebeSerPF());
+                get(new DonarViandaController());
+                post(new DonarViandaRealizadaController());
+            });
+
+            path("/elegirDonacion", () -> {
+                before(new AutorizacionMiddleware().setDebeSerLogueado());
+                get(new ElegirDonacionController());
+            });
+
+            path("/elegirRegistroCuenta", () -> {
+                before(new AutorizacionMiddleware());
+                get(new ElegirRegistroCuentaController());
+            });
 
             path("/graciasPorDonar", () -> {
                 before(new AutorizacionMiddleware().setDebeSerLogueado());
                 get(new GraciasPorDonarController());
             });
 
-            path("/cargarCSV", () -> {
-                get(new CargarSCVController());
-                post(new SCVCargadoController());
+            path("/inicio", () -> {
+                get(new InicioController());
             });
 
-            path("/agregarHeladera", () -> {
-                before(new AutorizacionMiddleware().setDebeSerLogueado().setDebeSerPJ());
-                get(new AgregarHeladeraController());
-                post(new HeladeraAgregadaController(repoHeladeras));
+            path("/inicioADMIN", () -> {
+                before(new AutorizacionMiddleware().setDebeSerLogueado().setDebeSerAdmin());
+                get(new inicioADMINController());
             });
 
-            path("/aceptarAgregarHeladera", () -> {
-                before(new AutorizacionMiddleware().setDebeSerLogueado().setDebeSerPJ());
-                get(new AceptarAgregarHeladeraController());
+            path("/login", () -> {
+                get(new ShowLoginController());
+                post(new ProcessLoginController());
+            });
+
+            path("/logout", () -> {
+                get(new LogoutController());
             });
 
             path("/mapaHeladeras", () -> {
                 get(new MapaHeladeraVistaController());
             });
 
-            path("/mapaHeladerasDistribucionOrigen", () -> {
-                get(new MapaHeladerasDistribucionOrigenController());
-            });
-
             path("/mapaHeladerasDistribucionDestino", () -> {
                 get(new MapaHeladerasDistribucionDestinoController());
             });
 
+            path("/mapaHeladerasDistribucionOrigen", () -> {
+                get(new MapaHeladerasDistribucionOrigenController());
+            });
+
             path("/mapaHeladerasRequest", () -> {
-                get(new MapaHeladerasController(repoHeladeras));
+                get(new MapaHeladerasController());
             });
 
-            path("/visualizarDetalleHeladera", () -> {
-                get(new VisualizarDetalleHeladeraController());
-            });
-
-            path("/visualizarAlertas", () -> {
+            path("/misCanjes", () -> {
                 before(new AutorizacionMiddleware().setDebeSerLogueado());
-                get(new VisualizarAlertasController());
+                get(new MisCanjesController());
             });
 
-            path("/visualizarFallasTecnicas", () -> {
+            path("/misColaboraciones", () -> {
                 before(new AutorizacionMiddleware().setDebeSerLogueado());
-                get(new VisualizarFallasTecnicasController());
+                get(new MisColaboracionesController());
+            });
+
+            path("/misReportes", () -> {
+                before(new AutorizacionMiddleware().setDebeSerLogueado());
+                get(new MisReportesController());
+            });
+
+            path("/perfil", () -> {
+                before(new AutorizacionMiddleware().setDebeSerLogueado());
+                get(new PerfilController());
             });
 
             path("/registroPersonaVulnerable", () -> {
                 before(new AutorizacionMiddleware().setDebeSerLogueado());
                 get(new RegistroPersonaVulnerableController());
-                post(new RegistroPersonaVulnerableRealizadaController(repoPersonasVulnerable));
-            });
-
-            path("/solicitarTarjeta", () -> {
-                before(new AutorizacionMiddleware().setDebeSerLogueado());
-                get(new SolicitudDeTarjetasController(repoColab));
+                post(new RegistroPersonaVulnerableRealizadaController());
             });
 
             path("/registroPersonaVulnerableFinal", () -> {
@@ -196,58 +236,9 @@ public class Router {
                 post(new ReportarFallaTecnicaFinalizadaController());
             });
 
-            path("/aceptarReportarFalla", () -> {
+            path("/solicitarTarjeta", () -> {
                 before(new AutorizacionMiddleware().setDebeSerLogueado());
-                get(new AceptarReportarFallaController());
-            });
-
-            path("/canjearPuntos", () -> {
-                before(new AutorizacionMiddleware().setDebeSerLogueado());
-                get(new CanjearPuntosController(repoColab,repoOfertas));
-                post(new CanjearPuntosFinalizadoController(repoColab,repoOfertas));
-            });
-
-            path("/misCanjes", () -> {
-                before(new AutorizacionMiddleware().setDebeSerLogueado());
-                get(new MisCanjesController(repoColab,repoOfertas));
-            });
-
-
-            path("/catalogoProductos", () -> {
-                before(new AutorizacionMiddleware().setDebeSerLogueado());
-                get(new CatalogoProductosController(repoOfertas));
-            });
-
-            path("/agregarProductosEmpresa", () -> {
-                before(new AutorizacionMiddleware().setDebeSerLogueado());
-                get(new AgregarProductosEmpresaController());
-                post(new AgregarProductosEmpresaFinalizadoController(repoOfertas));
-            });
-
-            path("/aceptarAgregarProducto", () -> {
-                before(new AutorizacionMiddleware().setDebeSerLogueado());
-                get(new AceptarAgregarProductoController());
-            });
-
-            path("/misReportes", () -> {
-                before(new AutorizacionMiddleware().setDebeSerLogueado());
-                get(new MisReportesController());
-            });
-
-            path("/perfil", () -> {
-                before(new AutorizacionMiddleware().setDebeSerLogueado());
-                get(new PerfilController(repoColab));
-            });
-
-            path("/configurarPerfil", () -> {
-                before(new AutorizacionMiddleware().setDebeSerLogueado());
-                get(new ConfigurarPerfilController(repoColab));
-                post(new ConfigurarPerfilFinalizadoController(repoColab));
-            });
-
-            path("/misColaboraciones", () -> {
-                before(new AutorizacionMiddleware().setDebeSerLogueado());
-                get(new MisColaboracionesController(repoColab));
+                get(new SolicitudDeTarjetasController());
             });
 
             path("/suscribirse", () -> {
@@ -255,19 +246,25 @@ public class Router {
                 post(new SuscribirseController());
             });
 
-            path("/api/recomendacion/locaciones", () -> {
-                get(new ServicioApiRest(repoHeladeras));
+            path("/visualizarAlertas", () -> {
+                before(new AutorizacionMiddleware().setDebeSerLogueado());
+                get(new VisualizarAlertasController());
             });
 
-            path("/404Error", () -> {
-                //get(new MostrarErrorPermisosController()); //TODO
+            path("/visualizarDetalleHeladera", () -> {
+                get(new VisualizarDetalleHeladeraController());
+            });
+
+            path("/visualizarFallasTecnicas", () -> {
+                before(new AutorizacionMiddleware().setDebeSerLogueado());
+                get(new VisualizarFallasTecnicasController());
             });
 
         });
 
         // EXCEPCION
         app.exception(IllegalArgumentException.class, (e, ctx) -> {
-            ctx.status(400);
+            ctx.redirect("/404NotFound");
         });
     }
 }
@@ -285,4 +282,3 @@ public class Router {
 
 // VISTA
 //app.get("/home", new IndexHandler());
-//app.get("/info-mascota", new InfoMascotaHandler());

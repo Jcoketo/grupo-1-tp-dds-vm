@@ -10,13 +10,14 @@ import utils.GeneradorModel;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
-public class VisualizarFallasTecnicasController implements Handler{
+public class VisualizarFallasTecnicasController implements Handler {
 
     RepositorioIncidentes repoIncidentes = RepositorioIncidentes.getInstancia();
-
 
     @Override
     public void handle(@NotNull Context context) throws Exception {
@@ -24,18 +25,18 @@ public class VisualizarFallasTecnicasController implements Handler{
 
         String idHel = context.queryParam("heladeraId");
         if (idHel == null || idHel.isEmpty()) {
-            context.redirect("/visualizarFallasTecnicas?heladeraId=" + idHel);
+            context.redirect("/mapaHeladeras");
             return;
         }
         int idHeladera = Integer.parseInt(idHel);
 
         NotificacionAlerta notificacionAlerta = context.sessionAttribute("notificacionAlerta");
-        if(notificacionAlerta != null){
+        if (notificacionAlerta != null) {
             model.put("notificacionTarjeta", notificacionAlerta);
         }
         context.consumeSessionAttribute("notificacionAlerta");
 
-        List<FallasHeladera> fallasHeladera = repoIncidentes.obtenerIncidentes(idHeladera).stream().map(incidente -> {
+        Map<Boolean, List<FallasHeladera>> fallasHeladeraMap = repoIncidentes.obtenerIncidentes(idHeladera).stream().map(incidente -> {
             FallasHeladera falla = new FallasHeladera();
             falla.setId(incidente.getId());
             falla.setDescripcion(incidente.getDescripcion());
@@ -43,10 +44,20 @@ public class VisualizarFallasTecnicasController implements Handler{
             LocalDateTime fechaHoraIncidente = incidente.getFechaHoraIncidente();
             falla.setFechaHoraIncidente(falla.setFormato(fechaHoraIncidente));
             return falla;
-        }).toList();
+        }).collect(Collectors.partitioningBy(FallasHeladera::getEstaSolucionado));
+
+        List<FallasHeladera> noSolucionadas = fallasHeladeraMap.get(false).stream()
+                .sorted(Comparator.comparing(FallasHeladera::getFechaHoraIncidente).reversed())
+                .collect(Collectors.toList());
+
+        List<FallasHeladera> solucionadas = fallasHeladeraMap.get(true).stream()
+                .sorted(Comparator.comparing(FallasHeladera::getFechaHoraIncidente).reversed())
+                .toList();
+
+        noSolucionadas.addAll(solucionadas);
 
         model.put("nombreUsuario", context.sessionAttribute("nombreUsuario"));
-        model.put("detalleFallas", fallasHeladera);
+        model.put("detalleFallas", noSolucionadas);
         model.put("heladeraId", idHeladera);
         context.render("templates/visualizarFallasTecnicas.mustache", model);
     }
@@ -60,7 +71,7 @@ class FallasHeladera {
     private String fechaHoraIncidente;
     private Boolean estaSolucionado;
 
-    public String setFormato(LocalDateTime fechaHoraIncidente){
+    public String setFormato(LocalDateTime fechaHoraIncidente) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd - HH:mm");
         return fechaHoraIncidente.format(formatter);
     }

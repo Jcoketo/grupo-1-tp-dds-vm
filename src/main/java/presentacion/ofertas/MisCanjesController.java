@@ -9,6 +9,7 @@ import modelo.personas.TipoPersona;
 import org.jetbrains.annotations.NotNull;
 import persistencia.RepositorioColaboradores;
 import persistencia.RepositorioOfertas;
+import utils.GeneradorModel;
 
 import java.util.HashMap;
 import java.util.List;
@@ -17,22 +18,15 @@ import java.util.stream.Collectors;
 
 public class MisCanjesController implements Handler {
 
-    RepositorioColaboradores repoColaboradores;
-    RepositorioOfertas repoOfertas;
+    RepositorioColaboradores repoColaboradores = RepositorioColaboradores.getInstancia();
 
-    public MisCanjesController(RepositorioColaboradores repoColaboradores, RepositorioOfertas repositorioOfertas) {
+    public MisCanjesController() {
         super();
-        this.repoColaboradores = repoColaboradores;
-        this.repoOfertas = repositorioOfertas;
     }
 
     @Override
     public void handle(@NotNull Context context) throws Exception {
-        Map<String, Object> model = context.sessionAttribute("model");
-        if (model == null) {
-            model = new HashMap<>();
-            context.sessionAttribute("model", model);
-        }
+        Map<String, Object> model = GeneradorModel.getModel(context);
 
         Integer idPersona = context.sessionAttribute("idPersona");
         Colaborador colab = repoColaboradores.buscarColaboradorXIdPersona(idPersona);
