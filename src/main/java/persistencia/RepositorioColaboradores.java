@@ -201,5 +201,18 @@ public class RepositorioColaboradores {
         }
     }
 
+    public List<MedioDeContacto> obtenerMediosDeContactoXIdPersona(Integer idPersona) {
+        TypedQuery<MedioDeContacto> query = em.createQuery("SELECT m FROM MedioDeContacto m WHERE m.persona.id = :idPersona", MedioDeContacto.class);
+        query.setParameter("idPersona", idPersona);
+        try {
+            return query.getResultList();
+        } catch (NoResultException e) {
+            return null;
+        }
+    }
+
+    public Persona obtenerPersona(Integer idPersona) {
+        return em.find(Persona.class, idPersona);
+    }
 }
 

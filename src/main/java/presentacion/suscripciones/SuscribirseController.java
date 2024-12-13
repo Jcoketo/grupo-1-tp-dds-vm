@@ -2,59 +2,85 @@ package presentacion.suscripciones;
 
 import io.javalin.http.Context;
 import io.javalin.http.Handler;
+import lombok.Getter;
+import lombok.Setter;
 import modelo.authService.AuthServiceSuscripcion;
-import modelo.colaboracion.FrecuenciaDonacion;
 import modelo.excepciones.ExcepcionValidacion;
-import modelo.personas.MedioDeContacto;
 import modelo.personas.TipoMedioDeContacto;
 import modelo.suscripcion.TipoSuscripcion;
 import org.jetbrains.annotations.NotNull;
-
-import java.util.HashMap;
+import utils.GeneradorModel;
 import java.util.Map;
 
 public class SuscribirseController implements Handler {
     @Override
     public void handle(@NotNull Context context) throws Exception {
-        Map<String, Object> model = context.sessionAttribute("model");
-        if (model == null) {
-            model = new HashMap<>();
-            context.sessionAttribute("model", model);
-        }
+        Map<String, Object> model = GeneradorModel.getModel(context);
 
         Integer idPersona = context.sessionAttribute("idPersona");
-        Integer idHeladera = context.sessionAttribute("idHeladera");
-        String tipoSuscripcion = context.sessionAttribute("tipoSuscripcion");
-        String limiteMinimo = context.sessionAttribute("limiteMinimo"); // CASO 1
-        String limiteMaximo = context.sessionAttribute("limiteMaximo"); // CASO 2
-
+        String idHel = context.formParam("idHeladera");
+        String tipoSuscripcion = context.formParam("tipoSuscripcion");
+        String lim = context.formParam("cantidad"); // CASO 1
         String medioDeContacto = context.formParam("medioDeContacto"); //enum
+
+        if (idHel == null || idHel.equals("")) {
+            context.redirect("/visualizarHeladeras");
+            return;
+        }
+        Integer idHeladera = Integer.parseInt(idHel);
+
+        if (lim == null || lim.equals("")) {
+            lim = "0";
+        }
+        Integer limite = Integer.parseInt(lim);
+
+        NotificacionSuscripcion notificacionSuscripcion = new NotificacionSuscripcion();
 
         TipoSuscripcion tipo;
         switch (tipoSuscripcion) {
-            case "01" -> tipo = TipoSuscripcion.QUEDAN_POCAS;
-            case "02" -> tipo = TipoSuscripcion.POCO_ESPACIO;
-            case "03" -> tipo = TipoSuscripcion.DESPERFECTO;
+            case "1" -> tipo = TipoSuscripcion.QUEDAN_POCAS;
+            case "2" -> tipo = TipoSuscripcion.POCO_ESPACIO;
+            case "3" -> tipo = TipoSuscripcion.DESPERFECTO;
             default -> tipo = null;
         }
 
         TipoMedioDeContacto medio;
         switch (medioDeContacto) {
-            case "01" -> medio = TipoMedioDeContacto.MAIL;
-            case "02" -> medio = TipoMedioDeContacto.WHATSAPP;
-            case "03" -> medio = TipoMedioDeContacto.TELEGRAM;
+            case "1" -> medio = TipoMedioDeContacto.MAIL;
+            case "2" -> medio = TipoMedioDeContacto.WHATSAPP;
+            case "3" -> medio = TipoMedioDeContacto.TELEGRAM;
             default -> medio = null;
         }
 
         try {
-            AuthServiceSuscripcion.generarSuscripcion(idHeladera, idPersona, tipo, Integer.parseInt(limiteMinimo), Integer.parseInt(limiteMaximo), medio);
+            AuthServiceSuscripcion.generarSuscripcion(idHeladera, idPersona, tipo, limite, medio);
         }
         catch (ExcepcionValidacion e)
-        {   model.put("errorSuscribirse", e.getMessage());
-            context.redirect("/mapaHeladeras");
+        {
+            notificacionSuscripcion.error(e.getMessage());
+            model.put("notificacionSuscripcion", notificacionSuscripcion);
+            context.redirect("/visualizarFallasTecnicas?heladeraId=" + idHeladera);;
             return;
         }
 
+        notificacionSuscripcion.aprobada("Suscripción realizada con éxito!");
+        context.redirect("/visualizarFallasTecnicas?heladeraId=" + idHeladera);;
+
+    }
+}
+@Getter
+@Setter
+class NotificacionSuscripcion{
+    private String tipo;
+    private String mensaje;
+
+    public void aprobada(String mensaje){
+        this.mensaje = mensaje;
+        this.tipo = "success";
+    }
+    public void error(String mensaje){
+        this.mensaje = mensaje;
+        this.tipo = "danger";
     }
 }
 

@@ -197,7 +197,7 @@
                         <a class="dropdown-item" href="/canjearPuntos">Mi puntaje</a>
                         <a class="dropdown-item" href="/misReportes">Mis reportes</a>
                         <a class="dropdown-item" href="#">Configuración</a>
-                        <a class="dropdown-item" href="/login">Cerrar sesión</a>
+                        <a class="dropdown-item" href="/logout">Cerrar sesión</a>
                     </div>
                 </li>
             </ul>
@@ -230,13 +230,84 @@
                 {{fecha}}
             </div>
 
-            <a href="/visualizarAlertas?heladeraId={{heladeraId}}"class="action-link">Alertas</a>
+            <a href="/visualizarAlertas?heladeraId={{heladeraId}}" class="action-link">Alertas</a>
             <a href="/visualizarFallasTecnicas?heladeraId={{heladeraId}}" class="action-link">Fallas técnicas</a>
-            </ul>
+
+            <form id="suscripcionForm" action="/suscribirse" method="post">
+                <div style="display: inline-flex; gap: 20px">
+                    <p>  </p>
+                    <h2 class="header-title">Suscripciones</h2>
+                    <select class="custom-select my-1 mr-sm-2" id="filterSelect" name="tipoSuscripcion" onchange="toggleSuscripcionVianda()">
+                        <option value="" disabled selected>Elegir tipo suscripción...</option>
+                        <option value="1">Notificarme cuando queden pocas viandas</option>
+                        <option value="2">Notificarme cuando quede poco espacio en la heladera</option>
+                        <option value="3">Notificarme cuando haya un desperfecto</option>
+                    </select>
+                </div>
+
+                <div id="suscripcion-vianda" style="display: none;">
+                    <h5 class="header-title">Ingrese cantidad de viandas</h5>
+                    <input type="text" id="cantidad" name="cantidad">
+                </div>
+
+                <div id="suscribirse-container" style="display: none; margin-top: 10px;">
+                    <input type="hidden" name="heladeraId" value="{{heladeraId}}">
+                    <select class="custom-select my-1 mr-sm-2" id="medioContacto" name="medioDeContacto" ">
+                        <option value="" disabled selected>Elegir medio de contacto</option>
+                        {{#medios}}
+                            <option value="{{tipo}}" >{{tipo}}</option>
+                        {{/medios}}
+                    </select>
+                    <button type="submit" class="btn btn-primary">Suscribirse</button>
+                </div>
+            </form>
         </div>
     </div>
 </main>
 <!-- AIzaSyBb5mC9pmmrsoAdUAxHfvE4Z2iW260tlUY -->
+
+<footer class="footer-bg">
+    <div class="container">
+        <div class="row justify-content-between align-items-center">
+            <div class="col-md-3 text-center text-md-left">
+                <img src="/static/logo.png" alt="Logo" class="img-fluid mb-2" style= "max-height: 90px;"> <!-- Reemplaza con tu logo -->
+            </div>
+            <div class="col-md-9">
+                <div class="row">
+                    <!-- Más Información -->
+                    <div class="col-md-4">
+                        <h5>Más información</h5>
+                        <ul class="list-unstyled">
+                            <li><a href="#" class="footer-link">Contáctanos</a></li>
+                            <li><a href="#" class="footer-link">Sobre nosotros</a></li>
+                            <li><a href="#" class="footer-link">Sobre el proyecto</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Donar -->
+                    <div class="col-md-4">
+                        <h5>Donar</h5>
+                        <ul class="list-unstyled">
+                            <li><a href="/donarVianda" class="footer-link">Donar vianda</a></li>
+                            <li><a href="/mapaHeladeras" class="footer-link">Ver mapa</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Dónde encontrarnos -->
+                    <!-- Dónde encontrarnos -->
+                    <div class="col-md-4">
+                        <h5>Dónde encontrarnos</h5>
+                        <ul class="list-unstyled">
+                            <li><a href="#" class="footer-link"><img src="/static/facebook-icon.png" alt="Facebook" style="max-height: 20px;" ><i class="fab fa-facebook-f social-icon"></i>Facebook</a></li>
+                            <li><a href="#" class="footer-link"><img src="/static/instagram-icon.png" alt="Instagram" style="max-height: 20px;"><i class="fab fa-instagram social-icon"></i>Instagram</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBb5mC9pmmrsoAdUAxHfvE4Z2iW260tlUY"></script>
 <script>
 
@@ -279,47 +350,31 @@
         window.location.href = `/visualizarFallasTecnicas?name=${heladeraName}`;
     });
 </script>
-<footer class="footer-bg">
-    <div class="container">
-        <div class="row justify-content-between align-items-center">
-            <div class="col-md-3 text-center text-md-left">
-                <img src="/static/logo.png" alt="Logo" class="img-fluid mb-2" style= "max-height: 90px;"> <!-- Reemplaza con tu logo -->
-            </div>
-            <div class="col-md-9">
-                <div class="row">
-                    <!-- Más Información -->
-                    <div class="col-md-4">
-                        <h5>Más información</h5>
-                        <ul class="list-unstyled">
-                            <li><a href="#" class="footer-link">Contáctanos</a></li>
-                            <li><a href="#" class="footer-link">Sobre nosotros</a></li>
-                            <li><a href="#" class="footer-link">Sobre el proyecto</a></li>
-                        </ul>
-                    </div>
 
-                    <!-- Donar -->
-                    <div class="col-md-4">
-                        <h5>Donar</h5>
-                        <ul class="list-unstyled">
-                            <li><a href="/donarVianda" class="footer-link">Donar vianda</a></li>
-                            <li><a href="/mapaHeladeras" class="footer-link">Ver mapa</a></li>
-                        </ul>
-                    </div>
 
-                    <!-- Dónde encontrarnos -->
-                    <!-- Dónde encontrarnos -->
-                    <div class="col-md-4">
-                        <h5>Dónde encontrarnos</h5>
-                        <ul class="list-unstyled">
-                            <li><a href="#" class="footer-link"><img src="/static/facebook-icon.png" alt="Facebook" style="max-height: 20px;" ><i class="fab fa-facebook-f social-icon"></i>Facebook</a></li>
-                            <li><a href="#" class="footer-link"><img src="/static/instagram-icon.png" alt="Instagram" style="max-height: 20px;"><i class="fab fa-instagram social-icon"></i>Instagram</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-</footer>
+<script>
+    function toggleSuscripcionVianda() {
+        // Obtiene el valor seleccionado del desplegable
+        const selectedValue = document.getElementById('filterSelect').value;
 
+        // Referencias a las secciones
+        const suscripcionVianda = document.getElementById('suscripcion-vianda');
+        const suscribirseContainer = document.getElementById('suscribirse-container');
+
+        // Lógica para mostrar u ocultar las secciones
+        if (selectedValue === '1' || selectedValue === '2') {
+            suscripcionVianda.style.display = 'block'; // Mostrar input de viandas
+        } else {
+            suscripcionVianda.style.display = 'none'; // Ocultar input de viandas
+        }
+
+        if (selectedValue === '1' || selectedValue === '2' || selectedValue === '3') {
+            suscribirseContainer.style.display = 'block'; // Mostrar botón de suscribirse
+        } else {
+            suscribirseContainer.style.display = 'none'; // Ocultar botón de suscribirse
+        }
+    }
+</script>
 <!-- Incluye Bootstrap JS y sus dependencias -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
