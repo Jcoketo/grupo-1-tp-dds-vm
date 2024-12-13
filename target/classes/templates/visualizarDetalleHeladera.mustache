@@ -70,24 +70,25 @@
             margin: 0; /* Elimina márgenes por defecto */
             white-space: nowrap; /* Evita que el texto haga salto de línea */
             color: #1e5552; /* Color de texto */
+             font-size: 20px;
         }
 
-        h4.2 {
+        h7 {
             margin: 0; /* Elimina márgenes por defecto */
             white-space: nowrap; /* Evita que el texto haga salto de línea */
             color: black; /* Color de texto */
-            font-size: 17px;
+            font-size: 15px;
         }
 
 
         .btn-primary {
-            background-color: #1e5552;
+            background-color: #B7C9C7;
             color: white;
             border: none;
             border-radius: 10px;
-            padding: 10px 20px;
+            padding: 3px 7px;
             cursor: pointer;
-            font-size: 17px;
+            font-size: 13px;
         }
 
         h5 {
@@ -184,20 +185,54 @@
 
         /*fin dropdown*/
 
-         .no-arrow-select {
+        .no-arrow-select {
               display: block;
-              width: 100%;
-              height: calc(1.5em + 0.75rem + 2px);
-              padding: 0.375rem 0.75rem; /* Sin espacio adicional para la flecha */
-              font-size: 1rem;
-              line-height: 1.5;
+              width: 27.5%;
+              height: 1.5rem; /* Altura reducida */
+              padding: 0.1rem 0.3rem; /* Menor espacio interno */
+              font-size: 0.875rem; /* Tamaño de texto más pequeño */
+              line-height: 1.25; /* Ajusta la altura de línea */
               color: #495057;
               background-color: #fff;
               background-clip: padding-box;
               border: 1px solid #ced4da;
               border-radius: 0.25rem;
-              appearance: none; /* Quita la flecha en navegadores compatibles */
-            }
+          appearance: none; /* Quita la flecha en navegadores compatibles */
+        }
+
+        .custom-select {
+              display: block;
+              width: 100%;
+              height: 1.5rem; /* Altura reducida */
+              padding: 0.1rem 0.3rem; /* Menor espacio interno */
+              font-size: 0.875rem; /* Tamaño de texto más pequeño */
+              line-height: 1.25; /* Ajusta la altura de línea */
+              color: #495057;
+              background-color: #fff;
+              background-clip: padding-box;
+              border: 1px solid #ced4da;
+              border-radius: 0.25rem;
+        }
+
+        .custom-select2 {
+              display: block;
+              width: 60%;
+              height: 1.5rem; /* Altura reducida */
+              padding: 0.1rem 0.3rem; /* Menor espacio interno */
+              font-size: 0.875rem; /* Tamaño de texto más pequeño */
+              line-height: 1.25; /* Ajusta la altura de línea */
+              color: #495057;
+              background-color: #fff;
+              background-clip: padding-box;
+              border: 1px solid #ced4da;
+              border-radius: 0.25rem;
+        }
+
+        .header-title {
+            font-size: 15px;
+            margin-bottom: 5px;
+            color: #495057;
+        }
 
       </style>
 </head>
@@ -273,7 +308,7 @@
             <a href="/visualizarAlertas?heladeraId={{heladeraId}}" class="action-link">Alertas</a>
             <a href="/visualizarFallasTecnicas?heladeraId={{heladeraId}}" class="action-link">Fallas técnicas</a>
             <p>  </p>
-            <hr style="margin: 0; padding: 0; border: 0; border-top: 3px solid #D3D3D3;">
+            <hr style="margin: 0; padding: 0; border: 0; border-top: 2px solid #D3D3D3;">
             <p>  </p>
             <form id="suscripcionForm" action="/suscribirse" method="post">
                 <div style="display: inline-flex; gap: 20px">
@@ -288,13 +323,13 @@
                 </div>
 
                 <div id="suscripcion-vianda" style="display: none;">
-                    <h4.2 class="header-title">Ingrese cantidad de viandas</h4.2>
-                    <input class="no-arrow-select" type="text" id="cantidad" name="cantidad">
+                    <h7 class="header-title" style="display: inline-block; margin-right: 10px;">Ingrese cantidad de viandas</h7>
+                    <input class="no-arrow-select" type="text" id="cantidad" name="cantidad" style="display: inline-block;">
                 </div>
 
                 <div id="suscribirse-container" style="display: none; margin-top: 10px;">
                     <input type="hidden" name="heladeraId" value="{{heladeraId}}">
-                    <select class="custom-select my-1 mr-sm-2" id="medioContacto" name="medioDeContacto" ">
+                    <select class="custom-select2 my-1 mr-sm-2" id="medioContacto" name="medioDeContacto" ">
                         <option value="" disabled selected>Elegir medio de contacto</option>
                         {{#medios}}
                             <option value="{{tipo}}" >{{tipo}}</option>
