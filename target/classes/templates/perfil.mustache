@@ -177,6 +177,10 @@
           color: #1e5552;
       }
 
+        .text-end {
+            text-align: right;
+        }
+
     </style>
 </head>
 <body>
@@ -228,7 +232,8 @@
             <img src="/static/user-photo.png" alt="Foto del usuario" class="profile-photo">
         </div>
         <div class="col-md-9 profile-info">
-            {{#esPersonaHumana}} <!--  PERSONA HUMANA  -->
+            <!-- Información del perfil -->
+            {{#esPersonaHumana}}
                 <div class="info-group">
                     <div class="label">Nombre y Apellido</div>
                     <div class="value">{{nombre}}</div>
@@ -258,13 +263,14 @@
                     <div class="value">{{email}}</div>
                 </div>
                 <div class="info-group">
-                    <div class="label ">Puntos acumulados</div>
-                    <div class="value ">{{puntos}}</div>
+                    <div class="label">Puntos acumulados</div>
+                    <div class="value">{{puntos}}</div>
                 </div>
             {{/esPersonaHumana}}
-            {{#esPersonaJuridica}} <!--  PERSONA JURIDICA  -->
+
+            {{#esPersonaJuridica}}
                 <div class="info-group">
-                    <div class="label">Razon Social</div>
+                    <div class="label">Razón Social</div>
                     <div class="value">{{nombre}}</div>
                 </div>
                 <div class="info-group">
@@ -272,7 +278,7 @@
                     <div class="value">{{cuit}}</div>
                 </div>
                 <div class="info-group">
-                    <div class="label">Tipo Juridico</div>
+                    <div class="label">Tipo Jurídico</div>
                     <div class="value">{{tipoJuridico}}</div>
                 </div>
                 <div class="info-group">
@@ -292,23 +298,25 @@
                     <div class="value">{{email}}</div>
                 </div>
                 <div class="info-group">
-                    <div class="label ">Puntos acumulados</div>
-                    <div class="value ">{{puntos}}</div>
+                    <div class="label">Puntos acumulados</div>
+                    <div class="value">{{puntos}}</div>
                 </div>
             {{/esPersonaJuridica}}
         </div>
     </div>
+
     {{#notificacionCambio}}
         <div class="text-{{tipo}}">{{mensaje}}</div>
     {{/notificacionCambio}}
 
+    <!-- Botón alineado a la derecha -->
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-12 text-end">
             <a href="/configurarPerfil" class="btn2 btn2-submit">Editar perfil</a>
         </div>
     </div>
-
 </main>
+
 
 
 
