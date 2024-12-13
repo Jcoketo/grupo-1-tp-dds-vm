@@ -145,7 +145,7 @@ public class Router {
             });
 
             path("/donarVianda", () -> {
-                //before(new AutorizacionMiddleware().setDebeSerLogueado().setDebeSerPF());
+                before(new AutorizacionMiddleware().setDebeSerLogueado().setDebeSerPF());
                 get(new DonarViandaController());
                 post(new DonarViandaRealizadaController());
             });
@@ -188,10 +188,12 @@ public class Router {
             });
 
             path("/mapaHeladerasDistribucionDestino", () -> {
+                before(new AutorizacionMiddleware().setDebeSerLogueado().setDebeSerPF());
                 get(new MapaHeladerasDistribucionDestinoController());
             });
 
             path("/mapaHeladerasDistribucionOrigen", () -> {
+                before(new AutorizacionMiddleware().setDebeSerLogueado().setDebeSerPF());
                 get(new MapaHeladerasDistribucionOrigenController());
             });
 
@@ -210,7 +212,7 @@ public class Router {
             });
 
             path("/misReportes", () -> {
-                before(new AutorizacionMiddleware().setDebeSerLogueado());
+                before(new AutorizacionMiddleware().setDebeSerLogueado().setDebeSerAdmin());
                 get(new MisReportesController());
             });
 
@@ -220,7 +222,7 @@ public class Router {
             });
 
             path("/registroPersonaVulnerable", () -> {
-                before(new AutorizacionMiddleware().setDebeSerLogueado());
+                before(new AutorizacionMiddleware().setDebeSerLogueado().setDebeSerPF());
                 get(new RegistroPersonaVulnerableController());
                 post(new RegistroPersonaVulnerableRealizadaController());
             });
