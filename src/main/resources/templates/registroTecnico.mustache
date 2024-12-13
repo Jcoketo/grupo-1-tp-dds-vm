@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registro Persona Física</title>
+    <title>Registro Técnico</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
@@ -257,6 +257,12 @@
         <h2>Registro Técnico</h2>
         <form action="/registrarTecnico" method="post" >
 
+            <label for="nombre">Nombre</label>
+            <input type="text" id="nombre" name="nombre" required>
+
+            <label for="apellido">Apellido</label>
+            <input type="text" id="apellido" name="apellido" required>
+
             <label for="tipoDoc">Tipo de Documento</label>
             <div class="date-fields">
                 <select id="tipoDoc" name="tipoDoc" required>
@@ -267,18 +273,51 @@
                 </select>
             </div>
 
-
             <label for="numDoc">Numero de Documento</label>
             <input type="text" id="numDoc" name="numDoc" required>
 
-            <label for="nombre">Nombre</label>
-            <input type="text" id="nombre" name="nombre" required>
-
-            <label for="apellido">Apellido</label>
-            <input type="text" id="apellido" name="apellido" required>
-
             <label for="nroCuil">CIUL</label>
             <input type="text" id="nroCuil" name="nroCuil" required>
+
+            <label>Fecha de Nacimiento (opcional)</label>
+            <div class="date-fields">
+                <select id="dia" name="dia" required>
+                    <option value="" disabled selected>Día</option>
+                    <!-- Generar opciones del 1 al 31 -->
+                    <script>
+                        for (let i = 1; i <= 31; i++) {
+                            document.write(`<option value="${i}">${i}</option>`);
+                        }
+                    </script>
+                </select>
+
+                <select id="mes" name="mes" required>
+                    <option value="" disabled selected>Mes</option>
+                    <option value="01">Enero</option>
+                    <option value="02">Febrero</option>
+                    <option value="03">Marzo</option>
+                    <option value="04">Abril</option>
+                    <option value="05">Mayo</option>
+                    <option value="06">Junio</option>
+                    <option value="07">Julio</option>
+                    <option value="08">Agosto</option>
+                    <option value="09">Septiembre</option>
+                    <option value="10">Octubre</option>
+                    <option value="11">Noviembre</option>
+                    <option value="12">Diciembre</option>
+                </select>
+
+                <select id="anio" name="anio" required>
+                    <option value="" disabled selected>Año</option>
+                    <!-- Generar opciones para los últimos 100 años -->
+                    <script>
+                        const currentYear = new Date().getFullYear();
+                        for (let i = currentYear; i >= currentYear - 100; i--) {
+                            document.write(`<option value="${i}">${i}</option>`);
+                        }
+                    </script>
+                </select>
+            </div>
 
             <label for="telefono">Número de Teléfono (opcional)</label>
             <input type="text" id="telefono" name="telefono">
