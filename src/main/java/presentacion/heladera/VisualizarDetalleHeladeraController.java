@@ -2,24 +2,49 @@ package presentacion.heladera;
 
 import io.javalin.http.Context;
 import io.javalin.http.Handler;
+import lombok.Getter;
+import lombok.Setter;
+import modelo.personas.MedioDeContacto;
+import modelo.personas.Persona;
+import modelo.personas.TipoMedioDeContacto;
+import modelo.personas.TipoPersona;
 import org.jetbrains.annotations.NotNull;
+import persistencia.RepositorioColaboradores;
+import utils.GeneradorModel;
 
 import javax.persistence.criteria.CriteriaBuilder;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class VisualizarDetalleHeladeraController implements Handler{
+
+    RepositorioColaboradores repoColaboradores = RepositorioColaboradores.getInstancia();
+
     @Override
     public void handle(@NotNull Context context) throws Exception {
-        Map<String, Object> model = context.sessionAttribute("model");
-        if (model == null) {
-            model = new HashMap<>();
-            context.sessionAttribute("model", model);
-        }
+        Map<String, Object> model = GeneradorModel.getModel(context);
         Boolean estaLogueado = context.sessionAttribute("logueado");
-        //if( estaLogueado == null ){ estaLogueado = false; }
+        Integer idPersona = context.sessionAttribute("idPersona");
         model.put("logueado", estaLogueado != null && estaLogueado);
         model.put("nombreUsuario", context.sessionAttribute("nombreUsuario"));
+
+        Persona persona = repoColaboradores.obtenerPersona(idPersona);
+
+        List<TipoMedioDeContacto> mediosDeContacto = persona.getMediosDeContacto().stream().map(MedioDeContacto::getTipo).toList();
+        if (mediosDeContacto == null) {
+            mediosDeContacto = new ArrayList<>();
+        }
+
+        List<Medio> medios = new ArrayList<>();
+        for (TipoMedioDeContacto medio : mediosDeContacto) {
+                Medio m = new Medio();
+                m.setTipo(medio);
+                medios.add(m);
+        }
+        model.put("medios", medios);
 
         String id = context.queryParam("heladeraId");
         String nombre = context.queryParam("nombre");
@@ -46,4 +71,10 @@ public class VisualizarDetalleHeladeraController implements Handler{
         context.render("templates/visualizarDetalleHeladera.mustache", model);
 
     }
+}
+
+@Getter
+@Setter
+class Medio{
+    private TipoMedioDeContacto tipo;
 }

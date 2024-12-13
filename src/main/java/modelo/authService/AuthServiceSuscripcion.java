@@ -17,7 +17,7 @@ public class AuthServiceSuscripcion {
     private static RepositorioColaboradores repositorioColaboradores = RepositorioColaboradores.getInstancia();
 
 
-    public static void generarSuscripcion(Integer idHeladera, Integer idPersona, TipoSuscripcion tipoSuscripcion, Integer limiteMinimo, Integer limiteMaximo, TipoMedioDeContacto tipoMedioDeContacto) {
+    public static void generarSuscripcion(Integer idHeladera, Integer idPersona, TipoSuscripcion tipoSuscripcion, Integer limite, TipoMedioDeContacto tipoMedioDeContacto) {
 
         Heladera heladera = repositorioHeladeras.buscarHeladera(idHeladera);
         Colaborador colaborador = repositorioColaboradores.buscarColaboradorXIdPersona(idPersona);
@@ -29,12 +29,12 @@ public class AuthServiceSuscripcion {
 
         switch (tipoSuscripcion) {
             case QUEDAN_POCAS -> {
-                SuscripcionXCantidad suscripcion = new SuscripcionXCantidad(heladera, colaborador, TipoSuscripcion.QUEDAN_POCAS, limiteMinimo, medioDeContacto);
+                SuscripcionXCantidad suscripcion = new SuscripcionXCantidad(heladera, colaborador, TipoSuscripcion.QUEDAN_POCAS, limite, medioDeContacto);
                 heladera.agregarSuscriptor(suscripcion);
                 colaborador.agregarSuscripcion(suscripcion);
             }
             case POCO_ESPACIO -> {
-                SuscripcionXCantidad suscripcion = new SuscripcionXCantidad(heladera, colaborador, TipoSuscripcion.POCO_ESPACIO, limiteMaximo, medioDeContacto);
+                SuscripcionXCantidad suscripcion = new SuscripcionXCantidad(heladera, colaborador, TipoSuscripcion.POCO_ESPACIO, limite, medioDeContacto);
                 heladera.agregarSuscriptor(suscripcion);
                 colaborador.agregarSuscripcion(suscripcion);
             }

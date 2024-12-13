@@ -196,7 +196,7 @@
                             <a class="dropdown-item" href="/canjearPuntos">Mi puntaje</a>
                             <a class="dropdown-item" href="/misReportes">Mis reportes</a>
                             <a class="dropdown-item" href="#">Configuración</a>
-                            <a class="dropdown-item" href="/login">Cerrar sesión</a>
+                            <a class="dropdown-item" href="/logout">Cerrar sesión</a>
                         </div>
                     </li>
                 {{/logueado}}
@@ -322,15 +322,18 @@
                     const listItem = document.createElement('li');
                     listItem.className = "list-group-item";
                     listItem.innerHTML = `
-                        <div>
-                            <strong>${nombre || 'Ubicación desconocida'}</strong><br>
-                            <small>Direccion: ${punto.direccion || 'Ubicación desconocida'}</small><br>
-                            <small>En funcionamiento desde: ${fecha}</small><br>
-                            <small>${estado}</small><br>
+                     <div style="display: flex; flex-direction: column;">
+                        <strong>${nombre || 'Ubicación desconocida'}</strong>
+                        <small>Dirección: ${punto.direccion || 'Ubicación desconocida'}</small>
+                        <small>En funcionamiento desde: ${fecha}</small>
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <small>${estado}</small>
                             <small>
-                            <a href="/visualizarDetalleHeladera?heladeraId=${heladeraId}&nombre=${nombre}&direccion=${punto.direccion}&lat=${punto.latitud}&long=${punto.longitud}&fecha=${fecha}&estado=${estado}&disponibilidad=${disponibilidad}" class="text-primary" style="text-decoration: underline;">Detalles</a>
+                                <a href="/visualizarDetalleHeladera?heladeraId=${heladeraId}&nombre=${nombre}&direccion=${punto.direccion}&lat=${punto.latitud}&long=${punto.longitud}&fecha=${fecha}&estado=${estado}&disponibilidad=${disponibilidad}" class="text-primary" style="text-decoration: underline; margin-left: 10px;">Detalles</a>
                             </small>
                         </div>
+                     </div>
+
                     `;
 
                     listItem.addEventListener('click', () => {

@@ -24,6 +24,10 @@ public class MedioDeContacto {
         this.contacto = contacto;
     }
 
+    public TipoMedioDeContacto getTipo(){
+        return this.medio;
+    }
+
     public MedioDeContacto() {
 
     }
