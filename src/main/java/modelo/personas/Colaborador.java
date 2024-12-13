@@ -36,9 +36,6 @@ public class Colaborador {
     @JoinColumn(name= "colaborador_id",referencedColumnName = "id")
     @Getter protected List<Oferta> canjesRealizados;
 
-    @Column
-    @Getter protected Boolean validada;
-
     @OneToOne(cascade = CascadeType.PERSIST)
     @Getter protected Persona persona;
 
@@ -61,7 +58,6 @@ public class Colaborador {
         this.persona = persona;
         this.colaboracionesRealizadas = new ArrayList<>();
         this.puntaje = 0.0;
-        this.validada = Boolean.FALSE;
         this.canjesRealizados = new ArrayList<>();
         this.contadorViandasDonadasSemanal = 0;
     }
@@ -70,7 +66,6 @@ public class Colaborador {
         this.persona = persona;
         this.colaboracionesRealizadas = new ArrayList<>();
         this.puntaje = 0.0;
-        this.validada = Boolean.TRUE;
         this.canjesRealizados = new ArrayList<>();
         this.contadorViandasDonadasSemanal = 0;
     }
@@ -111,12 +106,6 @@ public class Colaborador {
             System.out.println("Esta persona no posee los puntos necesarios para canjear esa oferta!");
             throw new ExcepcionCanjear("No tiene puntos suficientes");
         }
-    }
-
-    public void validarDatos(){
-        // Este método valida que la cuenta ya tiene usuario y contraseña.
-        // En caso afirmativo, cambia el valor del atributo en TRUE.
-        this.validada = Boolean.TRUE;
     }
 
     public String getEmail(){

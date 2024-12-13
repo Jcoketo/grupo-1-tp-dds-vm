@@ -38,6 +38,11 @@ public class Usuario {
         this.username = username;
         this.rol = rol;
     }
+    public Usuario(String mail, String password, Roles rol) {
+        this.mail = mail;
+        this.hashedPassword = password;
+        this.rol = rol;
+    }
 
     public Usuario() {
 

@@ -157,6 +157,14 @@
             font-size: 1.5rem;
             color: #1e5552;
         }
+
+        .labelDesplegable {
+            font-size: 1.25rem;
+            font-weight: bold;
+            width : 310px;
+            height : 30px;
+        }
+
     </style>
 </head>
 <body>
@@ -244,7 +252,7 @@
                 </div>
                 <div class="info-group">
                     <label for="tipoJuridico" class="label">Tipo Juridico actual</label>
-                    <select id="tipo" name="tipoJuridico" required>
+                    <select class="labelDesplegable" id="tipo" name="tipoJuridico" required>
                         <option value="0">{{tipoJuridico}}</option>
                         <option value="1">Gubernamental</option>
                         <option value="2">Organización No Gubernamental</option>
@@ -254,7 +262,7 @@
                 </div>
                 <div class="info-group">
                     <label for="rubro" class="label">Rubro actual</label>
-                    <select id="rubro" name="rubro" required>
+                    <select class="labelDesplegable" id="rubro" name="rubro" required>
                         <option value="0">{{rubro}}</option>
                         <option value="1">Gastronomía</option>
                         <option value="2">Electrónica</option>

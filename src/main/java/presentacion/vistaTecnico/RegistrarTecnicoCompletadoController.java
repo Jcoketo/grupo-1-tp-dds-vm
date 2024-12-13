@@ -15,14 +15,12 @@ public class RegistrarTecnicoCompletadoController implements Handler {
     public void handle(@NotNull Context context) throws Exception {
         Map<String, Object> model = GeneradorModel.getModel(context);
 
-        model.put("nombreUsuario", context.sessionAttribute("nombreUsuario")); // Va esta línea?
-
         String nombre = context.formParam("nombre");
         String apellido = context.formParam("apellido");
         String tipoDoc = context.formParam("tipoDoc");
         String numeroDoc = context.formParam("numDoc");
-        String cuil = context.formParam("cuil");
-        String mail = context.formParam("mail"); // Medio obligatorio
+        String cuil = context.formParam("nroCuil");
+        String mail = context.formParam("email"); // Medio obligatorio
         String telefono = context.formParam("telefono"); // Medio opcional
         String direccion = context.formParam("direccion"); // Obligatorio
         String fechaNacimiento = context.formParam("fechaNacimiento"); // Obligatorio
@@ -35,8 +33,8 @@ public class RegistrarTecnicoCompletadoController implements Handler {
             return;
         }
 
-        if ( !esNumerico(numeroDoc)  ||  (!telefono.equals("") && !esNumerico(telefono)) ) {
-            model.put("error", "El número de documento o el teléfono no son numéricos");
+        if ( !esNumerico(numeroDoc)  ||  (!telefono.equals("") && !esNumerico(telefono)) || !esNumerico(cuil) ) {
+            model.put("error", "El número de documento o el teléfono o el cuil no son numéricos");
             //context.status(400);
             context.redirect("/registrarTecnico");
             return;
@@ -44,6 +42,13 @@ public class RegistrarTecnicoCompletadoController implements Handler {
 
         if ( !numeroDoc.matches("[0-9]{0,8}") )  {
             model.put("error", "El número de documento debe tener 8 dígitos");
+            //context.status(400);
+            context.redirect("/registrarTecnico");
+            return;
+        }
+
+        if ( !cuil.matches("[0-9]{11}") )  {
+            model.put("errorJuridico", "El número de CUIT debe tener 11 dígitos");
             //context.status(400);
             context.redirect("/registrarTecnico");
             return;
@@ -73,7 +78,8 @@ public class RegistrarTecnicoCompletadoController implements Handler {
             return;
         }
 
-        context.redirect("/tecnicoRegistrado");
+        model.put("nombreUsuario", context.sessionAttribute("nombreUsuario"));
+        context.render("templates/registroTecnicoFinal.mustache",model);
 
     }
 

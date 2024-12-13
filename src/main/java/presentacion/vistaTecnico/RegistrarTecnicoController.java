@@ -14,6 +14,6 @@ public class RegistrarTecnicoController implements Handler {
 
         model.put("nombreUsuario", context.sessionAttribute("nombreUsuario"));
 
-        context.render("templates/registrarTecnico.mustache", model);
+        context.render("templates/registroTecnico.mustache", model);
     }
 }

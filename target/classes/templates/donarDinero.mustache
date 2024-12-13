@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donar Dinero</title>
+    <!-- Enlace a CSS de Bootstrap -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+         body {
+            font-family: Arial, sans-serif;
+            background-color: #ffffff;
+            margin: 0;
+            padding: 0;
+            height: 100%; /* Asegura que el body y html ocupen el 100% de la altura */
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        header .navbar-nav .nav-link {
+            font-size: 17px !important; /* Ajusta el tamaño de la fuente de los enlaces de navegación en el header */
+        }
+        nav {
+            margin-top: 20px; /* Ajusta el valor según el espacio deseado */
+        }
+
+        /*Dropdown*/
+        .navbar-light .navbar-nav .nav-link,
+        .navbar-light .dropdown-menu {
+            background-color: #ffffff;
+            color: #1e5552;
+            font-size: 16px;
+            font-weight: normal;
+        }
+
+        .navbar-light .dropdown-menu {
+            width: 200px;
+        }
+        .navbar-light .dropdown-menu a.dropdown-item {
+            color: #1e5552;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 16px;
+            font-weight: normal;
+            width: 200px;
+
+        }
+
+        .navbar-light .dropdown-menu a.dropdown-item:hover {
+            background-color: #ffffff;
+            margin: 0;
+            width: 200px;
+        }
+
+        /*fin dropdown*/
+        main {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 50px 20px;
+            background-color: white;
+        }
+
+        .date-fields {
+            background-color: white;
+            color: #1e5552;
+        }
+
+        #mesExpir, #anioExpir {
+            background-color: white;
+            color: #1e5552; /* Color del texto blanco */
+            border: 1px solid #ccc;
+            font-size: 16px;
+            padding: 10px; /* Espaciado interno */
+            border-radius: 4px; /* Bordes redondeados */
+            margin-bottom: 10px;
+        }
+
+
+        #mesExpir:focus, #anioExpir:focus {        /* Para cuando el campo esté seleccionado */
+            outline: none; /* Elimina el borde de enfoque por defecto */
+            border-color: #ccc; /* El borde sigue siendo del color deseado */
+            background-color: white; /* Mantiene el fondo de color */
+        }
+
+        .btn-agregar-producto {
+            background-color: #1e5552;
+            color: white;
+        }
+
+        .card {
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .card-body {
+            text-align: center;
+        }
+
+        .placeholder-img {
+            background-color: gray;
+            height: 150px;
+        }
+
+        .form-group label {
+            font-weight: bold;
+        }
+
+        .form-group input {
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            padding: 10px;
+            width: 100%;
+        }
+
+
+        .form-group button {
+            background-color: black;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .checkbox-container {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 10px;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        h5 {
+            margin: 0; /* Elimina márgenes por defecto */
+            white-space: nowrap; /* Evita que el texto haga salto de línea */
+            color: white; /* Color de texto */
+        }
+
+
+        .footer-bg {
+            background-color: #B7C9C7; /* Color de fondo */
+            padding: 20px 0; /* Espaciado superior e inferior */
+        }
+        .social-icons a {
+            margin-right: 15px; /* Espacio entre iconos de redes sociales */
+            color: white; /* Color de texto para iconos */
+        }
+        .footer-link {
+            color: white; /* Color de texto para enlaces */
+            text-decoration: none; /* Eliminar subrayado */
+        }
+        .footer-link:hover {
+            text-decoration: underline; /* Subrayar al pasar el mouse */
+        }
+
+        .social-icon {
+            margin-right: 10px; /* Espacio entre el ícono y el texto */
+        }
+
+        @media (max-width: 768px) {
+            .card {
+                max-width: 100%;
+            }
+        }
+
+        .btn-primary {
+             background-color: #1e5552;
+             color: white;
+             font-size: 16px;
+             font-weight: normal;
+        }
+
+        .volver-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  /*  margin-bottom: 20px;
+    margin-left: 0px;
+    margin-top: 20px; */
+    position: relative;
+    top: 0;
+    left: 0;  /* Pega el contenedor al margen izquierdo */
+    padding-left: 0; /*  Asegura que no haya relleno en el lado izquierdo */
+    margin: 20px 0 20px 0; /* Solo márgenes arriba y abajo */
+    padding: 0; /* Elimina cualquier relleno extra */
+    position: relative; /* Si necesitas que se mueva relativo a su contenedor */
+    width: 100%; /* Extiende el contenedor a todo el ancho */
+}
+
+.volver-link {
+    color: #1e5552;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 5px; /* Espacio entre el ícono y el texto */
+    margin: 0; /* Elimina cualquier margen adicional */
+    padding: 0; /* Elimina relleno */
+}
+
+.volver-link i {
+    font-size: 18px;
+}
+
+        .donar-container {
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .donar-container h2 {
+            margin-bottom: 20px;
+            color: #1e5552;
+        }
+
+        .donar-container label {
+            display: block;
+            margin-bottom: 5px;
+            color: #1e5552;
+        }
+
+        .donar-container input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .donar-container button {
+            background-color: #1e5552;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+         .error-message {
+             color: red;
+             font-size: 14px;
+             margin-top: 10px;
+         }
+
+    </style>
+</head>
+
+<body>
+<header>
+    <div>
+        <a href="/inicio">
+            <img src="/static/logo.png" alt="Logo" style="max-height: 50px;">
+        </a>
+    </div>
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Sobre nosotros</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/elegirDonacion">Donar</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/mapaHeladeras">Heladeras</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        {{nombreUsuario}}
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="/perfil">Mi perfil</a>
+                        <a class="dropdown-item" href="/misColaboraciones">Mis colaboraciones</a>
+                        <a class="dropdown-item" href="/canjearPuntos">Mi puntaje</a>
+                        <a class="dropdown-item" href="/misReportes">Mis reportes</a>
+                        <a class="dropdown-item" href="#">Configuración</a>
+                        <a class="dropdown-item" href="/logout">Cerrar sesión</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>
+
+<main>
+    <div class="volver-container">
+        <a href="/elegirDonacion" class="volver-link">
+            <i class="fas fa-arrow-left"></i> Volver
+        </a>
+    </div>
+    <div class="donar-container">
+        <h2>Donar Dinero</h2>
+        <form action="/donarDinero" method="post" >
+            <label for="monto">Monto para donar</label>
+            <input type="text" id="monto" name="monto" required>
+
+            <label for="nombreTarj">Nombre Titular Tarjeta</label>
+            <input type="text" id="nombreTarj" name="nombreTarj" required>
+
+            <label for="numTarj">Numero de Tarjeta</label>
+            <input type="text" id="numTarj" name="numTarj" required>
+
+            <div class="date-fields">
+                <label>Vencimiento de Tarjeta</label>
+                <select id="mesExpir" name="mesExpir" required>
+                    <option value="" disabled selected>Mes</option>
+                    <option value="01">Enero</option>
+                    <option value="02">Febrero</option>
+                    <option value="03">Marzo</option>
+                    <option value="04">Abril</option>
+                    <option value="05">Mayo</option>
+                    <option value="06">Junio</option>
+                    <option value="07">Julio</option>
+                    <option value="08">Agosto</option>
+                    <option value="09">Septiembre</option>
+                    <option value="10">Octubre</option>
+                    <option value="11">Noviembre</option>
+                    <option value="12">Diciembre</option>
+                </select>
+
+                <select id="anioExpir" name="anioExpir" required>
+                    <option value="" disabled selected>Año</option>
+                    <!-- Generar opciones para los proximos 20 años -->
+                    <script>
+                        const currentYear = new Date().getFullYear();
+                        for (let i = currentYear; i <= currentYear + 20; i++) {
+                            document.write(`<option value="${i}">${i}</option>`);
+                        }
+                    </script>
+                </select>
+            </div>
+
+            <label for="cvv">Codigo de Seguridad</label>
+            <input type="text" id="cvv" name="cvv" required>
+
+            <label>Frecuencia de donacion</label>
+            <select id="frecuenciaDonacion" name="frecuenciaDonacion" required>
+                <option value="01">UNICA</option>
+                <option value="02">PERIODICA</option>
+            </select>
+
+            <button type="submit">Donar</button>
+            {{#errorDonacion}}
+                <div class="error-message">{{errorDonacion}}</div>
+            {{/errorDonacion}}
+        </form>
+    </div>
+</main>
+
+<footer class="footer-bg">
+    <div class="container">
+        <div class="row justify-content-between align-items-center">
+            <div class="col-md-3 text-center text-md-left">
+                <img src="/static/logo.png" alt="Logo" class="img-fluid mb-2" style= "max-height: 90px;"> <!-- Reemplaza con tu logo -->
+            </div>
+            <div class="col-md-9">
+                <div class="row">
+                    <!-- Más Información -->
+                    <div class="col-md-4">
+                        <h5>Más información</h5>
+                        <ul class="list-unstyled">
+                            <li><a href="#" class="footer-link">Contáctanos</a></li>
+                            <li><a href="#" class="footer-link">Sobre nosotros</a></li>
+                            <li><a href="#" class="footer-link">Sobre el proyecto</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Donar -->
+                    <div class="col-md-4">
+                        <h5>Donar</h5>
+                        <ul class="list-unstyled">
+                            <li><a href="/donarVianda" class="footer-link">Donar vianda</a></li>
+                            <li><a href="/mapaHeladeras" class="footer-link">Ver mapa</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Dónde encontrarnos -->
+                    <!-- Dónde encontrarnos -->
+                    <div class="col-md-4">
+                        <h5>Dónde encontrarnos</h5>
+                        <ul class="list-unstyled">
+                            <li><a href="#" class="footer-link"><img src="/static/facebook-icon.png" alt="Facebook" style="max-height: 20px;" ><i class="fab fa-facebook-f social-icon"></i>Facebook</a></li>
+                            <li><a href="#" class="footer-link"><img src="/static/instagram-icon.png" alt="Instagram" style="max-height: 20px;"><i class="fab fa-instagram social-icon"></i>Instagram</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+</footer>
+
+<!-- Scripts de Bootstrap y jQuery -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>

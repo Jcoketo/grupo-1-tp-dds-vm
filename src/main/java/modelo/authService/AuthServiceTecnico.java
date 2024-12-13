@@ -1,10 +1,14 @@
 package modelo.authService;
 
+import accessManagment.Roles;
 import modelo.consumosAPIs.servicioGeoLocalizacion.LatLong;
 import modelo.consumosAPIs.servicioGeoLocalizacion.LocalizadorLatLong;
+import modelo.contrasenia.PasswordGenerator;
 import modelo.elementos.*;
 import modelo.excepciones.ExcepcionValidacion;
+import modelo.notificador.Notificador;
 import modelo.personas.*;
+import modelo.validador.Usuario;
 import persistencia.*;
 
 import java.time.LocalDate;
@@ -24,6 +28,8 @@ public class AuthServiceTecnico {
         if (repoUsuarios.existeMAIL(mail)) {
             throw new ExcepcionValidacion("El mail ya está en uso!");}
 
+        if (repoTecnicos.existeTecnico(cuil) != null) {
+            throw new ExcepcionValidacion("El número de cuil ya está en uso!");}
 
         Areas area = LocalizadorLatLong.obtenerArea(direccion);
         LatLong latLong = LocalizadorLatLong.obtenerLatitudYLongitud(direccion);
@@ -39,6 +45,21 @@ public class AuthServiceTecnico {
 
         Tecnico tecnico = new Tecnico(persona, cuil, puntoEstrategico);
 
+        String password = PasswordGenerator.generatePassword();
+
+        String mensaje = "Bienvenido!";
+        String asunto = "Bienvenido " + nombre + " " + apellido + "!\n" +
+                "Te hemos dado de alta como Tecnico.\n" +
+                "Tu usuario es: " + mail + "\n" +
+                "Tu contraseña es: " + password + "\n" +
+                "Por favor, cambia tu contraseña en tu primer inicio de sesión y completa tu nombre de usuario.";
+
+        Notificador.notificar(asunto, mensaje, medioMAIL);
+
+        password = AuthServiceUsuario.hashPassword(password);
+        Usuario usuario = new Usuario(mail, password, Roles.TECNICO);
+
+        repoUsuarios.persistirUsuario(usuario);
         repoTecnicos.registrarTecnico(tecnico);
     }
 

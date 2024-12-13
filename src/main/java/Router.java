@@ -101,10 +101,6 @@ public class Router {
                 post(new CanjearPuntosFinalizadoController());
             });
 
-            path("/catalogoProductos", () -> {
-                before(new AutorizacionMiddleware().setDebeSerLogueado());
-                get(new CatalogoProductosController());
-            });
 
             path("/cargarCSV", () -> {
                 get(new CargarSCVController());
@@ -254,6 +250,12 @@ public class Router {
             path("/suscribirse", () -> {
                 before(new AutorizacionMiddleware().setDebeSerLogueado());
                 post(new SuscribirseController());
+            });
+
+            path("/validarDatos", () -> {
+                before(new AutorizacionMiddleware().setDebeSerLogueado());
+                get(new ValidarDatosController());
+                post(new ValidarDatosFinalizadoController());
             });
 
             path("/visualizarAlertas", () -> {
