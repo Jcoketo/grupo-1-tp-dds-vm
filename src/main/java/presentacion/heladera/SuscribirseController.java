@@ -23,6 +23,16 @@ public class SuscribirseController implements Handler {
         String lim = context.formParam("cantidad"); // CASO 1
         String medioDeContacto = context.formParam("medioDeContacto"); //enum
 
+        // ------------- DATOS DE LA HELADERA ACTUAL ---------------- //
+        String id = context.queryParam("heladeraId");
+        String nombre = context.queryParam("nombre");
+        String direccion = context.queryParam("direccion");
+        Double latitud = Double.parseDouble(context.queryParam("latitud"));
+        Double longitud = Double.parseDouble(context.queryParam("longitud"));
+        String fecha = context.queryParam("fecha");
+        String estado = context.queryParam("estado");
+        Integer disponibilidad = Integer.parseInt(context.queryParam("disponibilidad"));
+
         if (idHel == null || idHel.equals("")) {
             context.redirect("/visualizarHeladeras");
             return;
@@ -62,6 +72,7 @@ public class SuscribirseController implements Handler {
             context.redirect("/mapaHeladeras");
             return;
         }
+        ///visualizarDetalleHeladera?heladeraId=${heladeraId}&nombre=${nombre}&direccion=${punto.direccion}&lat=${punto.latitud}&long=${punto.longitud}&fecha=${fecha}&estado=${estado}&disponibilidad=${disponibilidad}"
 
         notificacionSuscripcion.aprobada("Suscripción realizada con éxito!");
         context.redirect("/mapaHeladeras");
