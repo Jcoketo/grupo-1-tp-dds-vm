@@ -232,6 +232,12 @@ public class Router {
                 post(new RegistrarTecnicoCompletadoController());
             });
 
+            path("/registrarVisita", () -> {
+                before(new AutorizacionMiddleware().setDebeSerLogueado());
+                get(new RegistrarVisitaTecnicosController());
+                post(new RegistroCompletadoVisitaController());
+            });
+
             path("/registroPersonaVulnerable", () -> {
                 before(new AutorizacionMiddleware().setDebeSerLogueado().setDebeSerPF());
                 get(new RegistroPersonaVulnerableController());
