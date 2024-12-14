@@ -154,9 +154,10 @@
 
        .alta-masiva {
            text-align: right;
-           margin-left: auto;
+           margin-left: 450px;
            margin-right: 0;
            display: block;
+           color: #adb5bd;
        }
 
 
@@ -262,10 +263,12 @@
                     <div class="collaboration-info">
                         <p><b>{{tipo}}</b></p>
                         <p><b>Fecha:</b> {{fechaDeColaboracion}}</p>
+                        <div style="display: flex; justify-content: space_between; align-items: center;">
                         <p><b>Sumaste {{puntosSumados}} puntos</b>!</p>
                         {{#xCSV}}
-                            <p class="alta-masiva"><b>Esta donación fue cargada por alta masiva.</b></p>
+                            <p class="alta-masiva"><b><i>Esta donación fue cargada por alta masiva.</i></b></p>
                         {{/xCSV}}
+                        </div>
                     </div>
                 </div>
             {{/colabs}}
