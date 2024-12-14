@@ -12,6 +12,9 @@
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <sonar.host.url>http://localhost:9000</sonar.host.url>
+        <sonar.projectKey>cande</sonar.projectKey>
+        <sonar.login>sqp_fbdb9f64261e1c524d2a002d233a81d41f57c0a0</sonar.login>
     </properties>
 
     <build>
