@@ -33,17 +33,25 @@
 
     <dependencies>
 
-        <!-- Prometheus Java Client for Application Metrics -->
+        <!-- Dependencias de Grafana -->
+
+     
+        <dependency>
+            <groupId>com.auth0</groupId>
+            <artifactId>java-jwt</artifactId>
+            <version>4.4.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.micrometer</groupId>
+            <artifactId>micrometer-core</artifactId>
+            <version>1.10.1</version>
+        </dependency>
+
+        <!-- Dependencias de Prometheus -->
         <dependency>
             <groupId>io.prometheus</groupId>
             <artifactId>simpleclient</artifactId>
-            <version>0.12.0</version>
-        </dependency>
-
-        <!-- Prometheus Java Client for HTTP Server to expose metrics -->
-        <dependency>
-            <groupId>io.prometheus</groupId>
-            <artifactId>simpleclient_httpserver</artifactId>
             <version>0.12.0</version>
         </dependency>
 
