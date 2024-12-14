@@ -1,6 +1,10 @@
 import io.javalin.Javalin;
 import io.javalin.http.Context;
 import io.javalin.http.staticfiles.Location;
+import io.micrometer.core.instrument.Metrics;
+import io.micrometer.prometheus.PrometheusMeterRegistry;
+import io.micrometer.core.instrument.Counter;
+import io.micrometer.core.instrument.Gauge;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -13,6 +17,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 public class Application {
+
     private static Javalin app = null;
     private static final String UPLOAD_DIR = "src/main/resources/uploads";
 
@@ -23,6 +28,18 @@ public class Application {
     }
 
     public static void main(String[] args) {
+        // Crear el registry de Prometheus
+        PrometheusMeterRegistry prometheusMeterRegistry = new PrometheusMeterRegistry(io.micrometer.prometheus.PrometheusConfig.DEFAULT);
+
+        // Registrar un contador de solicitudes
+        Counter counter = Counter.builder("app_requests_total")
+                .description("Total number of requests")
+                .register(prometheusMeterRegistry);
+
+        // Registrar una métrica de ejemplo (usuarios activos)
+        Gauge.builder("active_users", () -> 10) // Cambia el valor según la lógica de tu app
+                .description("Number of active users")
+                .register(prometheusMeterRegistry);
 
         app = Javalin.create(javalinConfig -> {
             javalinConfig.plugins.enableCors(cors -> {
@@ -31,7 +48,6 @@ public class Application {
 
             // Configurar recursos estáticos
             javalinConfig.staticFiles.add("/", Location.CLASSPATH);
-
         }).start(8080);
 
         // Crear el directorio de imágenes si no existe
@@ -41,6 +57,13 @@ public class Application {
         Router.init(getEntityManager());
         configureImageRoutes(app);
 
+        // Endpoint para exponer métricas a Prometheus
+        app.get("/metrics", ctx -> {
+            ctx.result(prometheusMeterRegistry.scrape()); // Exponer las métricas en formato Prometheus
+        });
+
+        // Incrementar el contador con cada solicitud
+        app.before(ctx -> counter.increment());
     }
 
     private static EntityManager getEntityManager() {
@@ -75,4 +98,3 @@ public class Application {
         });
     }
 }
-
