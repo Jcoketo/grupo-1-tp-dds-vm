@@ -2,6 +2,7 @@ package presentacion.gestorCuentas;
 
 import io.javalin.http.Context;
 import io.javalin.http.Handler;
+import utils.GeneradorModel;
 
 import javax.validation.constraints.NotNull;
 import java.util.HashMap;
@@ -10,7 +11,7 @@ import java.util.Map;
 public class CrearCuentaFisicaSSOController implements Handler {
     @Override
     public void handle(@NotNull Context context) throws Exception {
-        Map<String, Object> model = new HashMap<>();
+        Map<String, Object> model = GeneradorModel.getModel(context);
 
         String nombre = context.sessionAttribute("auth0Nombre");
         String email = context.sessionAttribute("auth0Email");

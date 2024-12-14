@@ -1,5 +1,6 @@
 package presentacion.gestorCuentas;
 
+import accessManagment.Roles;
 import io.javalin.http.Context;
 import io.javalin.http.Handler;
 import modelo.authService.AuthServiceColaborador;
@@ -29,6 +30,12 @@ public class CuentaJuridicaCreadaController implements Handler {
     public void handle(@NotNull Context context) throws Exception {
         Map<String, Object> model = GeneradorModel.getModel(context);
 
+        String esPorSSO = context.formParam("esXSSO");
+        Boolean esXSSO = Boolean.FALSE;
+        if (esPorSSO == "1") {
+            esXSSO = Boolean.TRUE;
+        }
+
         String razonSocial = context.formParam("razon-social");
         Integer tipo = Integer.valueOf(context.formParam("tipo"));
         Integer rubro = Integer.valueOf(context.formParam("rubro"));
@@ -41,30 +48,26 @@ public class CuentaJuridicaCreadaController implements Handler {
         String direccion = context.formParam("direccion");
 
         if (razonSocial.equals("") || tipo.equals("") || rubro.equals("") || cuit.equals("") || email.equals("") || username.equals("")
-            || password.equals("") || terminos.equals("")){
+            || ( password.equals("") && !esXSSO ) || terminos.equals("")){
             model.put("errorJuridico", "Debe completar todos los campos");
-            //context.status(400);
             context.redirect("/crearCuentaJuridica");
             return;
         }
 
         if ( !esNumerico(cuit)  ||  !esNumerico(telefono) )  {
             model.put("errorJuridico", "El número de CUIT o el teléfono no son numéricos");
-            //context.status(400);
             context.redirect("/crearCuentaJuridica");
             return;
         }
 
         if ( !cuit.matches("[0-9]{11}") )  {
             model.put("errorJuridico", "El número de CUIT debe tener 11 dígitos");
-            //context.status(400);
             context.redirect("/crearCuentaJuridica");
             return;
         }
 
         if ( !telefono.equals("")  &&  !telefono.matches("[0-9]{8,10}") )  {
             model.put("errorJuridico", "El teléfono debe tener entre 8 y 10 dígitos");
-            //context.status(400);
             context.redirect("/crearCuentaJuridica");
             return;
         }
@@ -99,16 +102,27 @@ public class CuentaJuridicaCreadaController implements Handler {
         }
 
         try {
-            Usuario usuario = AuthServiceUsuario.validarUsuario(email, username, password);
+            Usuario usuario = new Usuario();
+            if ( esXSSO ){
+                usuario.setMail(email);
+                usuario.setUsername(username);
+                usuario.setRol(Roles.USUARIO);
+            }else {
+                usuario = AuthServiceUsuario.validarUsuario(email, username, password);
+            }
             AuthServiceColaborador.registrarColaboradorJuridico(usuario, razonSocial, tipoJuridico, rubroJuridico, cuit, telefono, email, direccion);
 
         } catch (ExcepcionValidacion e) {
+            if(esXSSO){
+                model.put("errorJuridico", e.getMessage());
+                context.redirect("/crearCuentaJuridicaSSO");
+                return;
+            }
             model.put("errorJuridico", e.getMessage());
             context.redirect("/crearCuentaJuridica");
             return;
         }
 
-        // crear la cuenta y enviar a
         context.redirect("/cuentaCreada");
     }
 

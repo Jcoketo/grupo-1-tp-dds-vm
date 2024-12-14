@@ -1,6 +1,7 @@
 package presentacion.gestorCuentas;
 
 import accessManagment.Auth0Config;
+import accessManagment.Roles;
 import io.javalin.http.Context;
 import io.javalin.http.Handler;
 import modelo.personas.TipoPersona;
@@ -40,7 +41,7 @@ public class LoginSSOController implements Handler {
         String apellido = obtenerApellido(userInfo);
 
         // Paso 5: Verificar si el usuario existe en la base de datos
-        if (!repoUsuarios.existeMAIL(email)) {
+        if (!repoUsuarios.existeMAIL(email)) { // ES UN NUEVO REGISTRO
             // Redirigir al registro si el usuario no existe
             context.sessionAttribute("auth0Email", email);
             context.sessionAttribute("auth0Nombre", nombre);
@@ -51,8 +52,8 @@ public class LoginSSOController implements Handler {
         }
 
         // Paso 6: Configurar sesión para usuarios existentes
-        configurarSesion(context, email);
-        context.redirect("/inicio");
+        configurarYEnviar(context, email);
+
     }
 
     // Intercambiar código de autorización por un token
@@ -110,11 +111,12 @@ public class LoginSSOController implements Handler {
     }
 
     // Configurar sesión para el usuario existente
-    private void configurarSesion(Context context, String email) {
+    private void configurarYEnviar(Context context, String email) {
         context.sessionAttribute("logueado", true);
 
         TipoPersona tipoPer = repoColab.devolverTipoPersona(email);
         context.sessionAttribute("tipoPersona", tipoPer);
+
 
         Integer idPersona = repoColab.devolverIdPersona(email);
         context.sessionAttribute("idPersona", idPersona);
@@ -122,6 +124,17 @@ public class LoginSSOController implements Handler {
         Usuario usuario = repoUsuarios.traerUsuario(email);
         context.sessionAttribute("rolUsuario", usuario.getRol());
         context.sessionAttribute("nombreUsuario", usuario.getUsername());
+
+        if (usuario.getRol() == Roles.ADMIN){
+            context.redirect("/inicioADMIN");
+            return;
+        }
+        if(usuario.getRol() == Roles.TECNICO){
+            context.redirect("/inicioTecnico");
+            return;
+        }
+
+        context.redirect("/inicio");
 
     }
 }
