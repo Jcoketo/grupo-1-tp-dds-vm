@@ -12,6 +12,7 @@ public class AutorizacionMiddleware implements Handler {
     @Getter @Setter private Boolean debeEstarLogueado = false;
     @Getter @Setter private Boolean debeSerPH = false;
     @Getter @Setter private Boolean debeSerPJ = false;
+    @Getter @Setter private Boolean debeSerTecnico = false;
 
     @Override
     public void handle(@NotNull Context context) throws Exception {
@@ -28,8 +29,10 @@ public class AutorizacionMiddleware implements Handler {
         }
 
         if(debeEstarLogueado && !estaLogueado ){
-            context.redirect("/login");
-        }
+            context.redirect("/login");}
+
+        if ( !userRole.equals(Roles.TECNICO) && debeSerTecnico) {
+            context.redirect("/404NotFound");}
 
         if (userRole != null && estaLogueado) {
             if (debeSerAdmin && userRole.equals(Roles.USUARIO)) {
@@ -60,6 +63,11 @@ public class AutorizacionMiddleware implements Handler {
 
     public AutorizacionMiddleware setDebeSerPJ() {
         this.debeSerPJ = true;
+        return this;
+    }
+
+    public AutorizacionMiddleware setDebeSerTecnico() {
+        this.debeSerTecnico = true;
         return this;
     }
 
