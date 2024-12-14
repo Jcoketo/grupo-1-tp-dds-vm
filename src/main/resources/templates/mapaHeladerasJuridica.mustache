@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visualización de Heladeras</title>
+    <!-- Incluye Bootstrap -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        #main {
+            margin-bottom: 100px; /* Espaciado adicional para asegurar que el footer no se superponga */
+        }
+        .map-container, .list-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .map-container {
+            margin-bottom: 20px; /* Espaciado adicional entre el mapa y el footer */
+        }
+        #map {
+            width: 100%;
+            height: 500px; /* Set a fixed height for the map */
+            border-radius: 10px;
+        }
+        .list-group-item {
+            cursor: pointer;
+            border-radius: 10px;
+            padding: 10px;
+            background-color: #B8CCC8;
+            transition: background-color 0.3s;
+            margin-bottom: 7px;
+        }
+        .list-group-item:hover {
+            background-color: #B8CCC8;
+        }
+    </style>
+</head>
+<body>
+
+{{> header}}
+
+<main class="contenedor p-5" id="main">
+    <h1 class="mb-5" style="font-family: 'Poppins', sans-serif; font-weight: 700; color: #1e5552;">Visualización de heladeras</h1>
+    <div class="content d-flex justify-content-center" style="gap: 20px;">
+        <div class="map-container ">
+            <div id="map"></div>
+        </div>
+
+        <div class="list-container ">
+            <div>
+                <h3 style="font-family: 'Poppins'; font-weight: 600" class="mb-2">Heladeras:</h3>
+
+                {{#notificacionSuscripcion}}
+                    <div class="text-{{tipo}}">{{mensaje}}</div>
+                {{/notificacionSuscripcion}}
+            </div>
+
+            <ul id="heladeras-list" class="list-group">
+                <!-- Lista de heladeras se llenará dinámicamente -->
+            </ul>
+        </div>
+    </div>
+</main>
+
+{{> footer}}
+
+<!-- Incluye Bootstrap JS y sus dependencias -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBb5mC9pmmrsoAdUAxHfvE4Z2iW260tlUY"></script>
+<script>
+    let map;
+    let markers = [];
+
+    function fetchHeladeras() {
+        // Realiza una solicitud al endpoint de tu API que devuelve las heladeras
+        return fetch('/mapaHeladerasRequest')
+                .then(response => response.json()) // Convierte la respuesta a JSON
+                .then(data => {
+                    return data; // Devuelve los datos de las heladeras
+                })
+                .catch(error => {
+                    console.error('Error al obtener las heladeras:', error);
+                    return [];
+                });
+    }
+
+    function formatFecha(fechaArray) {
+        // Convierte el array de fecha [año, mes, día] en una cadena legible
+        return `${fechaArray[2]}/${fechaArray[1]}/${fechaArray[0]}`;
+    }
+
+    function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+            center: { lat: -34.599722, lng: -58.381944 },
+            zoom: 13
+        });
+
+        fetchHeladeras().then(heladeras => {
+            heladeras.forEach(heladera => {
+                const heladeraId = heladera.id;
+                const nombre = heladera.nombre;
+                const punto = heladera.punto;
+                const fecha = formatFecha(heladera.fechaFuncionamiento);
+                const estado = heladera.activa ? "Activa" : "Inactiva";
+                const disponibilidad = heladera.disponibilidad;
+
+                const marker = new google.maps.Marker({
+                    position: { lat: punto.latitud, lng: punto.longitud },
+                    map: map,
+                    title: `Heladera en ${punto.direccion || 'Ubicación desconocida'}`
+                });
+
+                markers.push(marker);
+
+                const listItem = document.createElement('li');
+                listItem.className = "list-group-item";
+                listItem.innerHTML = `
+                     <div style="display: flex; flex-direction: column;">
+                        <strong>${nombre || 'Ubicación desconocida'}</strong>
+                        <small>Dirección: ${punto.direccion || 'Ubicación desconocida'}</small>
+                        <small>En funcionamiento desde: ${fecha}</small>
+                        <div style="display: flex; justify-content: flex-start; align-items: center;">
+                            <small>${estado}</small>
+                            <small>
+                                <a href="/visualizarDetalleHeladera?heladeraId=${heladeraId}&nombre=${nombre}&direccion=${punto.direccion}&lat=${punto.latitud}&long=${punto.longitud}&fecha=${fecha}&estado=${estado}&disponibilidad=${disponibilidad}" class="text-primary" style="text-decoration: underline; margin-left: 10px;">Detalles</a>
+                            </small>
+                        </div>
+                     </div>
+
+                    `;
+
+                listItem.addEventListener('click', () => {
+                    map.setCenter(marker.getPosition());
+                    map.setZoom(15);
+                    marker.setAnimation(google.maps.Animation.BOUNCE);
+                    setTimeout(() => marker.setAnimation(null), 1400);
+                });
+
+                document.getElementById('heladeras-list').appendChild(listItem);
+
+            });
+        });
+    }
+
+    document.addEventListener("DOMContentLoaded", initMap);
+</script>
+
+</body>
+</html>
