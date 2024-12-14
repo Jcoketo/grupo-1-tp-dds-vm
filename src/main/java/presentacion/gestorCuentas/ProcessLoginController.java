@@ -53,13 +53,19 @@ public class ProcessLoginController implements Handler {
         context.sessionAttribute("rolUsuario", usuario.getRol());
         context.sessionAttribute("nombreUsuario", usuario.getUsername());
 
+        context.sessionAttribute("validado", false);
         if ( usuario.getUsername() == null ||  usuario.getUsername().equals("") ) {
             context.sessionAttribute("mail", email);
             context.redirect("/validarDatos");
             return;
         }
+        context.sessionAttribute("validado", true);
         if (usuario.getRol() == Roles.ADMIN){
-            context.redirect("/inicioADMIN");
+            context.redirect("/inicioAdmin");
+            return;
+        }
+        if (usuario.getRol() == Roles.TECNICO){
+            context.redirect("/inicioTecnico");
             return;
         }
         if(usuario.getRol() == Roles.TECNICO){

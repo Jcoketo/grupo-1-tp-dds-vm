@@ -5,7 +5,6 @@ import io.javalin.http.Handler;
 import modelo.authService.AuthServiceColaboracion;
 import modelo.excepciones.ExcepcionValidacion;
 import org.jetbrains.annotations.NotNull;
-import persistencia.RepositorioHeladeras;
 
 import java.time.LocalDate;
 import java.util.HashMap;
@@ -91,7 +90,7 @@ public class HeladeraAgregadaController implements Handler {
 
         LocalDate fechaInicio = LocalDate.parse(fInicio);
         if (activo && fechaInicio.isAfter(LocalDate.now())) {
-            model.put("errorHeladera", "La fecha de inicio no puede ser posterior a la fecha actual");
+            model.put("errorHeladera", "La fecha de inicio no puede ser posterior a la fecha actual si la heladera está activa");
             context.redirect("/agregarHeladera");
             return;
         }
