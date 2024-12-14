@@ -37,8 +37,6 @@ public class AuthServiceUsuario {
             throw new ExcepcionValidacion("El usuario no existe");
         }
 
-
-
         String passwordBase = repoUsuarios.traerClavexUsuario(mail);
         return checkPassword(password, passwordBase);
     }
