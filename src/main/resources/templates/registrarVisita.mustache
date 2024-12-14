@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrar Visita</title>
+    <!-- Enlace a CSS de Bootstrap -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+
+
+        main {
+            flex-grow: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 50px;
+            background-color: white;
+        }
+
+        form {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            font-weight: bold;
+        }
+
+        .form-control {
+            border-radius: 5px;
+        }
+
+        .btn-group {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .btn-registrar {
+            border: none;
+            padding: 10px 20px; /* Adjusted padding to prevent text overflow */
+            vertical-align: middle;
+            border-radius: 5px;
+            font-size: 25px;
+            margin: 15px;
+            width: auto; /* Adjusted width to auto */
+            white-space: nowrap; /* Prevent text from wrapping */
+            text-align: center; /* Center text inside the button */
+        }
+
+
+        .btn-registrar {
+            background-color: #1e5552;
+            color: white;
+        }
+
+        .btn-registrar:hover {
+            background-color: #274597;
+            color: white;
+        }
+
+        .error-message {
+            color: red;
+            font-size: 14px;
+            margin-top: 10px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+    </style>
+</head>
+
+<body>
+
+{{>header}}
+
+<main>
+    <div class="container">
+        <h1 style="font-family: 'Poppins', sans serif; font-weight:700; color: #1e5552" class="mb-5">Registrar Visita</h1>
+        <form action="/registrarVisita" method="post">
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label for="idHeladera" class="form-label">Heladera</label>
+                    <input type="text" class="form-control" id="idHeladera" name="idHeladera" placeholder="Heladera Campus UTN" required>
+                </div>
+                <div class="col-md-6">
+                    <label for="idIncidente" class="form-label">Incidente</label>
+                    <input type="text" class="form-control" id="idIncidente" name="idIncidente" placeholder="Incidente" required>
+                </div>
+            </div>
+            <div class="row mb-3">
+
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <div class="row mb-3">
+                    <label for="Descripcion Falla" class="form-label">Descripción</label>
+                    <input type="text" class="form-control" name="descripcion" id="descripcion">
+                    </div>
+                </div>
+                <div class="pl-3" style="padding-top: 35px">
+                    <input type="checkbox" id="checkBoxResolvioProblema" name="checkBoxResolvioProblema" onclick="toggleSolucionado()">
+                    <label for="checkBoxResolvioProblema" class="ml-2 mb-0">El inicidente fue solucionado.</label>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label for="idTecnico" class="form-label">Técnico</label>
+                    <input type="text" class="form-control" id="idTecnico" name="idTecnico" required>
+                </div>
+                <div class="btn-group">
+                    <button type="submit" class="btn-registrar">Registrar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</main>
+
+{{>footer}}
+
+<!-- Scripts de Bootstrap y jQuery -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script>
+
+</script>
+</body>
+
+</html>
