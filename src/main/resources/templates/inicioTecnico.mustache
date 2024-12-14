@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar sesión</title>
+    <!-- Incluye Bootstrap -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+
+        .btn-tecnico{
+            background-color: #002B80;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 10px;
+            font-weight:600;
+            margin-right: 20px;
+        }
+        .btn-tecnico:hover {
+            background-color: #00215c;
+            text-decoration: none;
+        }
+
+        #contenedor-inicio-tecnico {
+            margin-bottom: 100px !important;
+            margin-top: 100px !important;
+            font-family: 'Poppins', sans-serif !important;
+        }
+        #bienvenido-m{
+            font-weight:700;
+            color:#1e5552;
+            font-size: 80px;
+        }
+
+    </style>
+</head>
+<body>
+{{> header}}
+
+<main class="d-flex justify-content-center align-items-center">
+    <div class="container m-5 d-flex justify-content-center align-items-center" id="contenedor-inicio-tecnico">
+        <div class="main-content mr-5">
+            <h1 class="mb-3" id="bienvenido-m">Bienvenido tecnico!</h1>
+            <h3 class="mb-3">Ya estás listo para registrar visitas.</h3>
+            <button class="btn-tecnico" onclick="window.location.href='/registrarVisitas'">Registrar visitas.</button>
+        </div>
+
+        <div class="image-placeholder ml-5">
+            <img src="/static/home.png" alt="Imagen" style="max-width: 100%; max-height: 100%; border-radius: 8px;">
+
+        </div>
+    </div>
+
+</main>
+
+{{> footer}}
+
+<!-- Incluye Bootstrap JS y sus dependencias -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+</body>
+</html>
