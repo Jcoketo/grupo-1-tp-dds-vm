@@ -128,6 +128,45 @@
          margin-top: 10px;
      }
 
+
+        .btn-common {
+            width: calc(100% - 20px);
+            padding: 15px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .donar-btn {
+            background-color: #04308d;
+            color: white;
+            margin-top: 10px;
+        }
+
+        .donar-btn:hover {
+            background-color: #152855;
+        }
+
+        .agregar-btn {
+            background-color: #B7C9C7;
+            border-color: #B7C9C7;
+            color: #143c3a;
+        }
+
+        .agregar-btn:hover {
+            background-color: #A0B0AF;
+        }
+        .eliminar-btn {
+            background-color: #B7C9C7;
+            border-color: #B7C9C7;
+            color: #143c3a;
+        }
+
+        .eliminar-btn:hover {
+            background-color: #A0B0AF;
+        }
+
         
     </style>
 </head>
@@ -143,7 +182,7 @@
         <!-- Sección izquierda (Lista de heladeras) -->
         <div class="col-md-6">
             <div class="form-group">
-                <label for="heladera">Heladera</label>
+                <h4 style="font-family: 'Poppins', sans serif; font-weight:700;">Heladera</h4>
                 <div class="input-group">
                     <select onclick="setearHeladera(this)" class="form-control form-select">
                         <option value="unselected" selected>Seleccionar heladera</option>
@@ -170,7 +209,7 @@
         <div class="col-md-6">
             <form action="/donarVianda" method= "post" class="form-donation" onsubmit="return validateForm()">
                 <input type="hidden" name="heladeraId" id="heladeraId" required/>
-                <h4>Vianda a donar</h4>
+                <h4 style="font-family: 'Poppins', sans serif; font-weight:700;">Vianda a donar</h4>
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="vianda1">Contenido</label>
@@ -238,7 +277,7 @@
                     </div>
 
                     <div class="form-group">
-                        <button class="eliminar-btn btn-common" onclick="eliminarViandaFunction(); resetearVianda2();"  type="button" id="agregarVianda">+ Añadir otra vianda</button>
+                        <button class="eliminar-btn btn-common" onclick="eliminarViandaFunction(); resetearVianda2();"  type="button" id="eliminarVianda">Eliminar vianda</button>
 
                         <button onclick="" id="eliminarVianda" type="button" class="btn-add">- Eliminar Vianda</button>
                     </div>
