@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registro</title>
-    <!-- Incluye Bootstrap -->
+    <title>Registro Persona Jurídica</title>
+    <!-- Enlace a CSS de Bootstrap -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
@@ -78,26 +79,33 @@
         }
 
         /*fin dropdown*/
-
         main {
             flex-grow: 1;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            position: relative;
-            margin: 70;
-            padding: 60;
-            height: 70vh; 
-
+            padding: 20px;
+            background-color: white;
         }
 
         .register-container {
-            text-align: center;
+            max-width: 600px;
+            margin: 50px auto;
+            width: 100%;
             background-color: white;
             padding: 40px;
-            border-radius: 10px;
+            border-radius: 20px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            
+            text-align: center;
+        }
+
+        .register-container h2 {
+            margin-bottom: 20px;
+        }
+
+        .register-container input, .register-container select {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 10px;
         }
 
         .register-container button {
@@ -109,14 +117,73 @@
             border-radius: 10px;
             cursor: pointer;
             font-size: 16px;
-            margin-bottom: 20px;
+            margin-top: 10px;
+        }
+        .register-container button:hover {
+            background-color: #2e4372;
         }
 
+        .register-container label {
+            display: block;
+            text-align: left;
+            margin-bottom: 5px;
+        }
+
+        .register-container .terms {
+            margin-top: 10px;
+            text-align: left;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .register-container .terms input[type="checkbox"] {
+            margin: 0;
+        }
+
+        .volver-container {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            margin-bottom: 20px;
+            margin-left: 20px;
+            margin-top: 20px;
+        }
+
+        .volver-link {
+            color: #1e5552;
+        }
+        .navbar-light .navbar-nav .nav-link,
+        .navbar-light .dropdown-menu {
+            background-color: #ffffff;
+            color: #1e5552;
+            font-size: 16px;
+            font-weight: normal;
+        }
+
+        .navbar-light .dropdown-menu {
+            width: 200px;
+        }
+        .navbar-light .dropdown-menu a.dropdown-item {
+            color: #1e5552;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 16px;
+            font-weight: normal;
+            width: 200px;
+
+        }
+
+        .navbar-light .dropdown-menu a.dropdown-item:hover {
+            background-color: #ffffff;
+            margin: 0;
+            width: 200px;
+        }
         h5 {
             margin: 0; /* Elimina márgenes por defecto */
             white-space: nowrap; /* Evita que el texto haga salto de línea */
             color: white; /* Color de texto */
         }
+
 
         .footer-bg {
             background-color: #B7C9C7; /* Color de fondo */
@@ -137,14 +204,25 @@
         .social-icon {
             margin-right: 10px; /* Espacio entre el ícono y el texto */
         }
+        .error-message {
+            color: red;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+        .labelDesplegable {
+            font-size: 1.25rem;
+            font-weight: bold;
+            width : 70px;
+            height : 30px;
+        }
     </style>
 </head>
-
 <body>
+
 <header>
-    <div class="p-3">
+    <div>
         <a href="/inicio">
-            <img src="/static/logo.png" alt="Logo" style="height: 50px;">
+            <img src="/static/logo.png" alt="Logo" style="max-height: 50px;">
         </a>
     </div>
     <nav class="navbar navbar-expand-lg navbar-light">
@@ -154,11 +232,17 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item mr-3">
+                <li class="nav-item">
                     <a class="nav-link" href="#">Sobre nosotros</a>
                 </li>
-                <li class="nav-item mr-3">
+                <li class="nav-item">
+                    <a class="nav-link" href="/elegirDonacion">Donar</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" href="/mapaHeladeras">Heladeras</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/login" class="btn2 btn2-submit">Iniciar Sesión</a>
                 </li>
             </ul>
         </div>
@@ -166,15 +250,60 @@
 </header>
 
 <main>
+    <div class="volver-container">
+        <a href="/elegirRegistroCuenta" class="volver-link">
+            <i class="fas fa-arrow-left"></i> Volver
+        </a>
+    </div>
     <div class="register-container">
-        {{#registroSSO}}
-            <button onclick="location.href='/crearCuentaJuridicaSSO'">Registrarse como Persona Jurídica</button>
-            <button onclick="location.href='/crearCuentaFisicaSSO'">Registrarse como Persona Física</button>
-        {{/registroSSO}}
-        {{^registroSSO}}
-            <button onclick="location.href='/crearCuentaJuridica'">Registrarse como Persona Jurídica</button>
-            <button onclick="location.href='/crearCuentaFisica'">Registrarse como Persona Física</button>
-        {{/registroSSO}}
+        <h2>Registro Persona Jurídica</h2>
+        <form action="/crearCuentaJuridica" method="post">
+            <label for="razon-social">Razón Social</label>
+            <input type="text" id="razon-social" name="razon-social" required>
+
+            <label for="tipo">Tipo</label>
+            <select id="tipo" name="tipo" required>
+                <option value="" disabled selected>Selecciona un tipo</option>
+                <option value="1">Gubernamental</option>
+                <option value="2">Organización No Gubernamental</option>
+                <option value="3">Empresa</option>
+                <option value="4">Institución</option>
+            </select>
+
+            <label for="cuit">CUIT/CUIL</label>
+            <input type="text" id="cuit" name="cuit" required>
+
+            <label for="rubro">Rubro</label>
+            <select id="rubro" name="rubro" required>
+                <option value="" disabled selected>Selecciona un tipo</option>
+                <option value="1">Gastronomía</option>
+                <option value="2">Electrónica</option>
+                <option value="3">Articulos para el hogar</option>
+            </select>
+
+            <label for="telefono-representante">Número de Teléfono del Representante</label>
+            <input type="tel" id="telefono-representante" name="telefono-representante" required>
+
+            <input type="hidden" id="email" name="email" value="{{email}}" required>
+
+            <label for="username">Nombre de usuario</label>
+            <input type="text" id="username" name="username" required>
+
+            <label for="Direccion">Direccion (Opcional)</label>
+            <input type="text" id="direccion" name="direccion">
+
+            <div class="terms">
+                <input type="checkbox" id="terms" name="terms" required>
+                <label for="terms">Acepto los <a href="#">términos de política de privacidad</a> y <a href="#">términos de uso</a></label>
+            </div>
+
+            <button type="submit">Registrarse</button>
+
+            {{#errorJuridico}}
+                <div class="error-message">{{errorJuridico}}</div>
+            {{/errorJuridico}}
+
+        </form>
     </div>
 </main>
 
@@ -219,10 +348,8 @@
         </div>
 </footer>
 
-<!-- Incluye Bootstrap JS y sus dependencias -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
 </body>
 </html>

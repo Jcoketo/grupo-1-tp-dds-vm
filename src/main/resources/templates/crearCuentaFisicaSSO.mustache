@@ -3,10 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registro</title>
-    <!-- Incluye Bootstrap -->
+    <title>Registro Persona Física</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
+
         body {
             font-family: Arial, sans-serif;
             margin: 0;
@@ -77,27 +78,53 @@
             width: 200px;
         }
 
-        /*fin dropdown*/
+        .btn-donar {
+            background-color: #1e5552;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 10px;
+        }
+
+        .back-arrow {
+            display: flex;
+            align-items: center;
+            font-size: 16px;
+            text-decoration: none;
+            color: black;
+            margin: 20px;
+        }
 
         main {
             flex-grow: 1;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            position: relative;
-            margin: 70;
-            padding: 60;
-            height: 70vh; 
-
+            padding: 20px;
+            background-color: white;
         }
 
         .register-container {
-            text-align: center;
+            max-width: 600px;
+            margin: 50px auto;
+            width: 100%;
             background-color: white;
+            color: #1e5552;
             padding: 40px;
-            border-radius: 10px;
+            border-radius: 20px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            
+            text-align: center;
+        }
+
+        .register-container h2 {
+            margin-bottom: 20px;
+            color: #1e5552;
+        }
+
+        .register-container input, .register-container select {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin: 10px 0;
+            color: #1e5552;
+            border: 1px solid #ccc;
+            border-radius: 10px;
         }
 
         .register-container button {
@@ -109,9 +136,54 @@
             border-radius: 10px;
             cursor: pointer;
             font-size: 16px;
-            margin-bottom: 20px;
+            margin-top: 10px;
         }
 
+        .register-container button:hover {
+            background-color: #2e4372;
+        }
+
+        .register-container label {
+            display: block;
+            text-align: left;
+            margin-bottom: 5px;
+        }
+
+        .register-container .terms {
+            margin-top: 10px;
+            text-align: left;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .register-container .terms input[type="checkbox"] {
+            margin: 0;
+        }
+
+        .volver-container {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            margin-bottom: 20px;
+            margin-left: 20px;
+            margin-top: 20px;
+        }
+
+        .volver-link {
+            color: #1e5552;
+        }
+        .date-fields {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            margin: 10px 0;
+        }
+
+        .date-fields select {
+            width: 30%;
+            font-size: 14px;
+        }
         h5 {
             margin: 0; /* Elimina márgenes por defecto */
             white-space: nowrap; /* Evita que el texto haga salto de línea */
@@ -137,14 +209,24 @@
         .social-icon {
             margin-right: 10px; /* Espacio entre el ícono y el texto */
         }
+        .error-message {
+            color: red;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+        .labelDesplegable {
+            font-size: 1.25rem;
+            font-weight: bold;
+            width : 70px;
+            height : 30px;
+        }
     </style>
 </head>
-
 <body>
 <header>
-    <div class="p-3">
+    <div>
         <a href="/inicio">
-            <img src="/static/logo.png" alt="Logo" style="height: 50px;">
+            <img src="/static/logo.png" alt="Logo" style="max-height: 50px;">
         </a>
     </div>
     <nav class="navbar navbar-expand-lg navbar-light">
@@ -154,11 +236,17 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item mr-3">
+                <li class="nav-item">
                     <a class="nav-link" href="#">Sobre nosotros</a>
                 </li>
-                <li class="nav-item mr-3">
+                <li class="nav-item">
+                    <a class="nav-link" href="/elegirDonacion">Donar</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" href="/mapaHeladeras">Heladeras</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/login" class="btn2 btn2-submit">Iniciar Sesión</a>
                 </li>
             </ul>
         </div>
@@ -166,18 +254,99 @@
 </header>
 
 <main>
+    <div class="volver-container">
+        <a href="/elegirRegistroCuenta" class="volver-link">
+            <i class="fas fa-arrow-left"></i> Volver
+        </a>
+    </div>
     <div class="register-container">
-        {{#registroSSO}}
-            <button onclick="location.href='/crearCuentaJuridicaSSO'">Registrarse como Persona Jurídica</button>
-            <button onclick="location.href='/crearCuentaFisicaSSO'">Registrarse como Persona Física</button>
-        {{/registroSSO}}
-        {{^registroSSO}}
-            <button onclick="location.href='/crearCuentaJuridica'">Registrarse como Persona Jurídica</button>
-            <button onclick="location.href='/crearCuentaFisica'">Registrarse como Persona Física</button>
-        {{/registroSSO}}
+        <h2>Registro Persona Física</h2>
+        <form action="/crearCuentaFisica" method="post" >
+
+            <label for="tipoDoc">Tipo de Documento</label>
+            <div class="date-fields">
+                <select class="labelDesplegable" id="tipoDoc" name="tipoDoc" required>
+                    <option value="" disabled selected></option>
+                    <option value="01">DNI</option>
+                    <option value="02">LC</option>
+                    <option value="03">LE</option>
+                </select>
+            </div>
+
+
+            <label for="nroDoc">Numero de Documento</label>
+            <input type="text" id="nroDoc" name="nroDoc" required>
+
+            <label for="nombre">Nombre</label>
+            <input type="text" id="nombre" name="nombre" value="{{nombre}}" required>
+
+            <label for="apellido">Apellido</label>
+            <input type="text" id="apellido" name="apellido" value="{{apellido}}" required>
+
+            <label>Fecha de Nacimiento (opcional)</label>
+            <div class="date-fields">
+                <select id="dia" name="dia" required>
+                    <option value="" disabled selected>Día</option>
+                    <!-- Generar opciones del 1 al 31 -->
+                    <script>
+                        for (let i = 1; i <= 31; i++) {
+                            document.write(`<option value="${i}">${i}</option>`);
+                        }
+                    </script>
+                </select>
+
+                <select id="mes" name="mes" required>
+                    <option value="" disabled selected>Mes</option>
+                    <option value="01">Enero</option>
+                    <option value="02">Febrero</option>
+                    <option value="03">Marzo</option>
+                    <option value="04">Abril</option>
+                    <option value="05">Mayo</option>
+                    <option value="06">Junio</option>
+                    <option value="07">Julio</option>
+                    <option value="08">Agosto</option>
+                    <option value="09">Septiembre</option>
+                    <option value="10">Octubre</option>
+                    <option value="11">Noviembre</option>
+                    <option value="12">Diciembre</option>
+                </select>
+
+                <select id="anio" name="anio" required>
+                    <option value="" disabled selected>Año</option>
+                    <!-- Generar opciones para los últimos 100 años -->
+                    <script>
+                        const currentYear = new Date().getFullYear();
+                        for (let i = currentYear; i >= currentYear - 100; i--) {
+                            document.write(`<option value="${i}">${i}</option>`);
+                        }
+                    </script>
+                </select>
+            </div>
+
+            <label for="telefono">Número de Teléfono (opcional)</label>
+            <input type="text" id="telefono" name="telefono">
+
+            <input type="hidden" id="email" name="email" value="{{email}}" required>
+
+            <label for="username">Nombre de Usuario</label>
+            <input type="text" id="username" name="username" required>
+
+            <label for="Direccion">Direccion (Opcional)</label>
+            <input type="text" id="direccion" name="direccion">
+
+            <div class="terms">
+                <input type="checkbox" id="terms" name="terms" required>
+                <label for="terms">Acepto los <a href="#">términos de política de privacidad</a> y <a href="#">términos de uso</a></label>
+            </div>
+
+
+            <button type="submit">Registrarse</button>
+            {{#errorRegistroFisica}}
+                <div class="error-message">{{errorRegistroFisica}}</div>
+            {{/errorRegistroFisica}}
+        </form>
     </div>
 </main>
-
 <footer class="footer-bg">
     <div class="container">
         <div class="row justify-content-between align-items-center">
@@ -201,7 +370,7 @@
                         <h5>Donar</h5>
                         <ul class="list-unstyled">
                             <li><a href="/donarVianda" class="footer-link">Donar vianda</a></li>
-                            <li><a href="/mapaHeladeras" class="footer-link">Ver mapa</a></li>
+                            <li><a href="/misColaboraciones" class="footer-link">Ver mapa</a></li>
                         </ul>
                     </div>
 
@@ -219,10 +388,8 @@
         </div>
 </footer>
 
-<!-- Incluye Bootstrap JS y sus dependencias -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
 </body>
 </html>
