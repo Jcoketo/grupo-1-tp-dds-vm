@@ -21,6 +21,8 @@ import presentacion.vistaAdmin.inicioADMINController;
 import presentacion.reportes.MisReportesController;
 import presentacion.vistaTecnico.RegistrarTecnicoCompletadoController;
 import presentacion.vistaTecnico.RegistrarTecnicoController;
+import presentacion.vistaTecnico.RegistrarVisitaTecnicosController;
+import presentacion.vistaTecnico.RegistroCompletadoVisitaController;
 
 import javax.persistence.EntityManager;
 
@@ -29,6 +31,9 @@ public class Router {
 
     public static void init(EntityManager entityManager){
         /* *************************************************************************** */
+
+        // ------------------- SE INICIALIZAN LOS REPOSITORIOS   ----------------------- //
+
         RepositorioArchivos repoArchivos = RepositorioArchivos.getInstancia(entityManager);
         RepositorioColaboradores repoColab = RepositorioColaboradores.getInstancia(entityManager);
         RepositorioHeladeras repoHeladeras = RepositorioHeladeras.getInstancia(entityManager);
@@ -88,6 +93,11 @@ public class Router {
                 post(new CanjearPuntosFinalizadoController());
             });
 
+            path("/registrarVisita", () -> {
+                before(new AutorizacionMiddleware().setDebeSerLogueado().setDebeSerTecnico());
+                get(new RegistrarVisitaTecnicosController());
+                post(new RegistroCompletadoVisitaController());
+            });
 
             path("/cargarCSV", () -> {
                 get(new CargarSCVController());
