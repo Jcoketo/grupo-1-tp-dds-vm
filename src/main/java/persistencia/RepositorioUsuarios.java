@@ -63,4 +63,10 @@ public class RepositorioUsuarios {
         em.getTransaction().commit();
     }
 
+    public void persistirUsuario(Usuario usuario) {
+        em.getTransaction().begin();
+        em.persist(usuario);
+        em.getTransaction().commit();
+    }
+
 }

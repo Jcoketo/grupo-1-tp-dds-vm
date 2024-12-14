@@ -45,6 +45,7 @@ public class ProcessLoginController implements Handler {
         TipoPersona tipoPer = repoColab.devolverTipoPersona(email);
         context.sessionAttribute("tipoPersona", tipoPer);
 
+
         Integer idPersona = repoColab.devolverIdPersona(email);
         context.sessionAttribute("idPersona", idPersona);
 
@@ -54,6 +55,11 @@ public class ProcessLoginController implements Handler {
 
         model.put("nombreUsuario", usuario.getUsername());
 
+        if ( usuario.getUsername() == null ||  usuario.getUsername().equals("") ) {
+            context.sessionAttribute("mail", email);
+            context.redirect("/validarDatos");
+            return;
+        }
         if (usuario.getRol() == Roles.ADMIN){
             context.redirect("/inicioADMIN");
             return;

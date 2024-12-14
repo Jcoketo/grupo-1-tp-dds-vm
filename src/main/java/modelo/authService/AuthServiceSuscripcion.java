@@ -22,8 +22,22 @@ public class AuthServiceSuscripcion {
         Heladera heladera = repositorioHeladeras.buscarHeladera(idHeladera);
         Colaborador colaborador = repositorioColaboradores.buscarColaboradorXIdPersona(idPersona);
 
+        if (!colaborador.getSuscripciones().stream().filter(suscripcion ->
+                        suscripcion.getHeladera().getId() == idHeladera && suscripcion.getTipoSuscripcion() == tipoSuscripcion)
+                .toList().isEmpty()) {
+            throw new ExcepcionValidacion("Ya se encuentra suscripto a este tipo de alerta");
+        }
+
         if (heladera == null || colaborador == null) {
             throw new ExcepcionValidacion("Hubo un problema en el servidor. Intente mas tarde");}
+
+        if(tipoSuscripcion == TipoSuscripcion.POCO_ESPACIO && limite >= heladera.getViandasMaximas()) {
+            throw new ExcepcionValidacion("La cantidad limite de viandas elegidas para notificar excede al valor posible (máximo de la heladera).");
+        }
+
+        if(limite < 0) {
+            throw new ExcepcionValidacion("La cantidad limite de viandas debe ser mayor a 0.");
+        }
 
         MedioDeContacto medioDeContacto = colaborador.getPersona().devolerMedioDeContacto(tipoMedioDeContacto);
 
