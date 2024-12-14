@@ -29,6 +29,8 @@ import presentacion.vistaAdmin.inicioADMINController;
 import presentacion.reportes.MisReportesController;
 import presentacion.vistaTecnico.RegistrarTecnicoCompletadoController;
 import presentacion.vistaTecnico.RegistrarTecnicoController;
+import presentacion.vistaTecnico.RegistrarVisitaTecnicosController;
+import presentacion.vistaTecnico.RegistroCompletadoVisitaController;
 import servicioApiRest.ServicioApiRest;
 
 import javax.persistence.EntityManager;
@@ -223,6 +225,12 @@ public class Router {
                 before(new AutorizacionMiddleware().setDebeSerLogueado().setDebeSerAdmin());
                 get(new RegistrarTecnicoController());
                 post(new RegistrarTecnicoCompletadoController());
+            });
+
+            path("/registrarVisita", () -> {
+                before(new AutorizacionMiddleware().setDebeSerLogueado());
+                get(new RegistrarVisitaTecnicosController());
+                post(new RegistroCompletadoVisitaController());
             });
 
             path("/registroPersonaVulnerable", () -> {
