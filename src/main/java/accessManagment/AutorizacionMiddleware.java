@@ -13,17 +13,23 @@ public class AutorizacionMiddleware implements Handler {
     @Getter @Setter private Boolean debeSerPH = false;
     @Getter @Setter private Boolean debeSerPJ = false;
     @Getter @Setter private Boolean debeSerTecnico = false;
+    @Getter @Setter private Boolean debeEstarValidada = false;
 
     @Override
     public void handle(@NotNull Context context) throws Exception {
         Roles userRole = context.sessionAttribute("rolUsuario");
+        Boolean estaLogueado = context.sessionAttribute("logueado");
+        TipoPersona tipoPersona = context.sessionAttribute("tipoPersona");
+        //boolean validado = Boolean.TRUE.equals(context.sessionAttribute("validado"));
+
+        //if (debeEstarValidada && validado)
+        //    context.redirect("/validarDatos");
+
         if (userRole == null) {
             userRole = Roles.USUARIO;
         }
-        Boolean estaLogueado = context.sessionAttribute("logueado");
         if( estaLogueado == null ){ estaLogueado = false; }
 
-        TipoPersona tipoPersona = context.sessionAttribute("tipoPersona");
         if (tipoPersona == null) {
             tipoPersona = TipoPersona.PH;
         }
@@ -68,6 +74,11 @@ public class AutorizacionMiddleware implements Handler {
 
     public AutorizacionMiddleware setDebeSerTecnico() {
         this.debeSerTecnico = true;
+        return this;
+    }
+
+    public AutorizacionMiddleware setDebeEstarValidada() {
+        this.debeEstarValidada = true;
         return this;
     }
 

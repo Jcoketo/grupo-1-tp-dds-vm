@@ -55,11 +55,14 @@ public class ProcessLoginController implements Handler {
 
         model.put("nombreUsuario", usuario.getUsername());
 
+        // SIGNIFICA QUE NO LO TENEMOS VALIDADO
+        context.sessionAttribute("validado", false);
         if ( usuario.getUsername() == null ||  usuario.getUsername().equals("") ) {
             context.sessionAttribute("mail", email);
             context.redirect("/validarDatos");
             return;
         }
+        context.sessionAttribute("validado", true);
         if (usuario.getRol() == Roles.ADMIN){
             context.redirect("/inicioAdmin");
             return;
