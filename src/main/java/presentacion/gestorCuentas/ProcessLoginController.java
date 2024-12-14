@@ -53,8 +53,6 @@ public class ProcessLoginController implements Handler {
         context.sessionAttribute("rolUsuario", usuario.getRol());
         context.sessionAttribute("nombreUsuario", usuario.getUsername());
 
-        model.put("nombreUsuario", usuario.getUsername());
-
         if ( usuario.getUsername() == null ||  usuario.getUsername().equals("") ) {
             context.sessionAttribute("mail", email);
             context.redirect("/validarDatos");
@@ -62,6 +60,10 @@ public class ProcessLoginController implements Handler {
         }
         if (usuario.getRol() == Roles.ADMIN){
             context.redirect("/inicioADMIN");
+            return;
+        }
+        if(usuario.getRol() == Roles.TECNICO){
+            context.redirect("/inicioTecnico");
             return;
         }
 
