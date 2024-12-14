@@ -68,6 +68,14 @@ public class RepositorioHeladeras {
         return heladeras;
     }
 
+    public List<Heladera> obtenerHeladerasPropias(Integer personaJuridica) {
+        List<Heladera> heladeras = em.createNativeQuery(
+                        "SELECT * FROM heladera WHERE persona_juridica_id = :personaJuridica", Heladera.class)
+                .setParameter("personaJuridica", personaJuridica)
+                .getResultList();
+        return heladeras;
+    }
+
     public void actualizarHeladera(Heladera heladera) {
         em.getTransaction().begin();
         em.persist(heladera);
