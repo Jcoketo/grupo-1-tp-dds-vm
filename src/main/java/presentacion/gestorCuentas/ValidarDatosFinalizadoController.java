@@ -89,7 +89,7 @@ public class ValidarDatosFinalizadoController implements Handler {
             return;
         }
 
-        if ( repositorioUsuarios.existeMAIL(mailNuevo) )  {
+        if ( repositorioUsuarios.existeMAIL(mailNuevo) && !mailOriginal.equals(mailNuevo) ) {
             model.put("errorValidador", "El mail ya se encuentra registrado");
             context.redirect("/validarDatos");
             return;
