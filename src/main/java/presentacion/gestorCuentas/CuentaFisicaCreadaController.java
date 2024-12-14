@@ -1,5 +1,6 @@
 package presentacion.gestorCuentas;
 
+import accessManagment.Roles;
 import io.javalin.http.Context;
 import io.javalin.http.Handler;
 import modelo.authService.AuthServiceColaborador;
@@ -8,6 +9,7 @@ import modelo.authService.AuthServiceUsuario;
 import modelo.personas.TipoDocumento;
 import modelo.validador.Usuario;
 import org.jetbrains.annotations.NotNull;
+import utils.GeneradorModel;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -20,13 +22,14 @@ public class CuentaFisicaCreadaController implements Handler {
 
     @Override
     public void handle(@NotNull Context context) throws Exception {
-        Map<String, Object> model = context.sessionAttribute("model");
-        if (model == null) {
-            model = new HashMap<>();
-            context.sessionAttribute("model", model);
-        }
+        Map<String, Object> model = GeneradorModel.getModel(context);
         model.put("nombreUsuario", context.sessionAttribute("nombreUsuario"));
 
+        String esPorSSO = context.formParam("esXSSO");
+        Boolean esXSSO = Boolean.FALSE;
+        if (esPorSSO.equals("1")) {
+            esXSSO = Boolean.TRUE;
+        }
 
         String tipoDoc = context.formParam("tipoDoc");
         String nroDoc = context.formParam("nroDoc");
@@ -34,6 +37,7 @@ public class CuentaFisicaCreadaController implements Handler {
         String apellido = context.formParam("apellido");
         String email = context.formParam("email"); // Este va a ser el Medio de contacto necesario y x defecto
         String password = context.formParam("password");
+        if(password == null){ password = ""; }
         String terminos = context.formParam("terms");
         String username = context.formParam("username");
         String telefono = context.formParam("telefono"); // opcional
@@ -48,31 +52,27 @@ public class CuentaFisicaCreadaController implements Handler {
         String fechaNacimiento = anio + "-" + mes + "-" + dia; // opcional
 
         if (nombre.equals("") || apellido.equals("") || email.equals("") ||
-                password.equals("") || terminos.equals("") || username.equals("") ||
+                ( password.equals("") && !esXSSO ) || terminos.equals("") || username.equals("") ||
                 tipoDoc.equals("") || nroDoc.equals("") )  {
-            model.put("error", "Debe completar los campos obligatorios");
-            //context.status(400);
+            model.put("errorRegistroFisica", "Debe completar los campos obligatorios");
             context.redirect("/crearCuentaFisica");
             return;
         }
 
         if ( !esNumerico(nroDoc)  ||  !esNumerico(telefono) )  {
-            model.put("error", "El número de documento o el teléfono no son numéricos");
-            //context.status(400);
+            model.put("errorRegistroFisica", "El número de documento o el teléfono no son numéricos");
             context.redirect("/crearCuentaFisica");
             return;
         }
 
         if ( !nroDoc.matches("[0-9]{0,8}") )  {
-            model.put("error", "El número de documento debe tener 8 dígitos");
-            //context.status(400);
+            model.put("errorRegistroFisica", "El número de documento debe tener 8 dígitos");
             context.redirect("/crearCuentaFisica");
             return;
         }
 
         if ( !telefono.equals("")  &&  !telefono.matches("[0-9]{8,10}") )  {
-            model.put("error", "El teléfono debe tener entre 8 y 10 dígitos");
-            //context.status(400);
+            model.put("errorRegistroFisica", "El teléfono debe tener entre 8 y 10 dígitos");
             context.redirect("/crearCuentaFisica");
             return;
         }
@@ -85,10 +85,23 @@ public class CuentaFisicaCreadaController implements Handler {
         }
 
         try {
-            Usuario usuario = AuthServiceUsuario.validarUsuario(email, username, password);
+            Usuario usuario = new Usuario();
+            if ( esXSSO ){
+                usuario.setMail(email);
+                usuario.setUsername(username);
+                usuario.setRol(Roles.USUARIO);
+            }else {
+                usuario = AuthServiceUsuario.validarUsuario(email, username, password);
+            }
+
             AuthServiceColaborador.registrarColaboradorFisico(usuario, tipoDocumentoEnum, nroDoc, nombre, apellido, email, telefono, direccion, fechaNacimiento);
 
         } catch (ExcepcionValidacion e) {
+            if(esXSSO){
+                model.put("errorRegistroFisica", e.getMessage());
+                context.redirect("/crearCuentaFisicaSSO");
+                return;
+            }
             model.put("errorRegistroFisica", e.getMessage());
             context.redirect("/crearCuentaFisica");
             return;

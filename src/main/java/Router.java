@@ -1,7 +1,8 @@
 import static io.javalin.apibuilder.ApiBuilder.*;
-
+import accessManagment.Auth0Config;
 import accessManagment.AutorizacionMiddleware;
 import io.javalin.Javalin;
+import io.javalin.http.Context;
 import persistencia.*;
 import presentacion.InicioController;
 import presentacion.LogoutController;
@@ -22,6 +23,11 @@ import presentacion.reportes.MisReportesController;
 import presentacion.vistaTecnico.*;
 
 import javax.persistence.EntityManager;
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+import java.util.Base64;
 
 public class Router {
     private static Javalin app = Application.app();
@@ -113,6 +119,18 @@ public class Router {
                 post(new CuentaJuridicaCreadaController());
             });
 
+            path("/crearCuentaFisicaSSO", () -> {
+                //before(new AutorizacionMiddleware()); //TODO no tiene que estar logueado
+                get(new CrearCuentaFisicaSSOController());
+                post(new CuentaFisicaCreadaController());
+            });
+
+            path("/crearCuentaJuridicaSSO", () -> {
+                //before(new AutorizacionMiddleware());
+                get(new CrearCuentaJuridicaSSOController());
+                post(new CuentaJuridicaCreadaController());
+            });
+
             path("/cuentaCreada", () -> {
                 before(new AutorizacionMiddleware());
                 get(new CuentaCreadaController());
@@ -169,6 +187,11 @@ public class Router {
                 get(new ShowLoginController());
                 post(new ProcessLoginController());
             });
+
+            path("/loginSSO", () -> {
+                get(new LoginSSOController());
+            });
+
 
             path("/logout", () -> {
                 get(new LogoutController());
@@ -288,6 +311,8 @@ public class Router {
             ctx.redirect("/404NotFound");
         });
     }
+
+
 }
 
 // http://localhost:8080/home

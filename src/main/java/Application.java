@@ -40,6 +40,7 @@ public class Application {
         // Configurar rutas
         Router.init(getEntityManager());
         configureImageRoutes(app);
+
     }
 
     private static EntityManager getEntityManager() {
