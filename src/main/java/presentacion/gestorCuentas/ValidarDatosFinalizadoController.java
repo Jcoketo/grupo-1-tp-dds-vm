@@ -4,11 +4,13 @@ import accessManagment.Roles;
 import io.javalin.http.Context;
 import io.javalin.http.Handler;
 import modelo.authService.AuthServiceUsuario;
+import modelo.excepciones.ExcepcionValidacion;
 import modelo.personas.Persona;
 import modelo.personas.PersonaHumana;
 import modelo.personas.Tecnico;
 import modelo.personas.TipoDocumento;
 import modelo.validador.Usuario;
+import modelo.validador.ValidadorDeContrasenias;
 import org.jetbrains.annotations.NotNull;
 import persistencia.RepositorioColaboradores;
 import persistencia.RepositorioUsuarios;
@@ -95,6 +97,7 @@ public class ValidarDatosFinalizadoController implements Handler {
             return;
         }
 
+
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate fechaNacimiento = LocalDate.parse(fNac, formatter);
 
@@ -110,6 +113,13 @@ public class ValidarDatosFinalizadoController implements Handler {
                 default -> tipoDocumentoEnum = TipoDocumento.DNI;
             }
             persona.getDocumento().setTipoDoc(tipoDocumentoEnum);
+        }
+
+        Boolean esValida = ValidadorDeContrasenias.getInstancia().validarContrasenia(username, password);
+        if (!esValida) {
+            model.put("errorValidador", "La contraseña no es válida");
+            context.redirect("/validarDatos");
+            return;
         }
 
         persona.setNombre(nombre);

@@ -49,15 +49,12 @@
 
         <div class="list-container ">
             <div>
-                <h3 style="font-family: 'Poppins'; font-weight: 600" class="mb-2">Heladeras:</h3>
+                <h3 style="font-family: 'Poppins'; font-weight: 600" class="mb-2">Mis Heladeras:</h3>
 
-                {{#notificacionSuscripcion}}
-                    <div class="text-{{tipo}}">{{mensaje}}</div>
-                {{/notificacionSuscripcion}}
             </div>
 
             <ul id="heladeras-list" class="list-group">
-                <!-- Lista de heladeras se llenará dinámicamente -->
+                <!-- Aquí se agregarán los elementos de la lista de heladeras -->
             </ul>
         </div>
     </div>
@@ -77,7 +74,7 @@
 
     function fetchHeladeras() {
         // Realiza una solicitud al endpoint de tu API que devuelve las heladeras
-        return fetch('/mapaHeladerasRequest')
+        return fetch('/mapaMisHeladerasRequest')
                 .then(response => response.json()) // Convierte la respuesta a JSON
                 .then(data => {
                     return data; // Devuelve los datos de las heladeras
