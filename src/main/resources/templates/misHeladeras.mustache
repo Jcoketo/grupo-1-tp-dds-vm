@@ -49,27 +49,12 @@
 
         <div class="list-container ">
             <div>
-                <h3 style="font-family: 'Poppins'; font-weight: 600" class="mb-2">Heladeras:</h3>
+                <h3 style="font-family: 'Poppins'; font-weight: 600" class="mb-2">Mis Heladeras:</h3>
 
-                {{#notificacionSuscripcion}}
-                    <div class="text-{{tipo}}">{{mensaje}}</div>
-                {{/notificacionSuscripcion}}
             </div>
 
             <ul id="heladeras-list" class="list-group">
-                {{#heladerasLista}}
-                <div style="display: flex; flex-direction: column;">
-                    <strong>{ {{nombre}} || 'Ubicación desconocida'}</strong>
-                    <small>Dirección: { {{direccion}} || 'Ubicación desconocida'}</small>
-                    <small>En funcionamiento desde: {{fecha}}</small>
-                    <div style="display: flex; justify-content: flex-start; align-items: center;">
-                        <small>{{estado}}</small>
-                        <small>
-                            <a href="/visualizarDetalleHeladera?heladeraId={{heladeraId}}&nombre={{nombre}}&direccion={{direccion}}&lat={{latitud}}&long={{longitud}}&fecha={{fecha}}&estado={{estado}}&disponibilidad={{disponibilidad}}" class="text-primary" style="text-decoration: underline; margin-left: 10px;">Detalles</a>
-                        </small>
-                    </div>
-                </div>
-                {{/heladerasLista}}
+                <!-- Aquí se agregarán los elementos de la lista de heladeras -->
             </ul>
         </div>
     </div>

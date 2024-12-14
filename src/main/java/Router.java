@@ -21,7 +21,6 @@ import presentacion.vistaAdmin.inicioADMINController;
 import presentacion.reportes.MisReportesController;
 import presentacion.vistaTecnico.RegistrarTecnicoCompletadoController;
 import presentacion.vistaTecnico.RegistrarTecnicoController;
-import servicioApiRest.ServicioApiRest;
 
 import javax.persistence.EntityManager;
 
@@ -81,10 +80,6 @@ public class Router {
                 before(new AutorizacionMiddleware().setDebeSerLogueado());
                 get(new AgregarProductosEmpresaController());
                 post(new AgregarProductosEmpresaFinalizadoController());
-            });
-
-            path("/api/recomendacion/locaciones", () -> {
-                get(new ServicioApiRest());
             });
 
             path("/canjearPuntos", () -> {
