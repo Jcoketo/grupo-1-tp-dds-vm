@@ -19,10 +19,7 @@ import presentacion.vistaAdmin.CargarSCVController;
 import presentacion.vistaAdmin.SCVCargadoController;
 import presentacion.vistaAdmin.inicioADMINController;
 import presentacion.reportes.MisReportesController;
-import presentacion.vistaTecnico.RegistrarTecnicoCompletadoController;
-import presentacion.vistaTecnico.RegistrarTecnicoController;
-import presentacion.vistaTecnico.RegistrarVisitaTecnicosController;
-import presentacion.vistaTecnico.RegistroCompletadoVisitaController;
+import presentacion.vistaTecnico.*;
 
 import javax.persistence.EntityManager;
 
@@ -91,12 +88,6 @@ public class Router {
                 before(new AutorizacionMiddleware().setDebeSerLogueado());
                 get(new CanjearPuntosController());
                 post(new CanjearPuntosFinalizadoController());
-            });
-
-            path("/registrarVisita", () -> {
-                before(new AutorizacionMiddleware().setDebeSerLogueado().setDebeSerTecnico());
-                get(new RegistrarVisitaTecnicosController());
-                post(new RegistroCompletadoVisitaController());
             });
 
             path("/cargarCSV", () -> {
@@ -169,6 +160,11 @@ public class Router {
                 get(new inicioADMINController());
             });
 
+            path("/inicioTecnico", () -> {
+                before(new AutorizacionMiddleware().setDebeSerLogueado().setDebeSerTecnico());
+                get(new InicioTecnicoController());
+            });
+
             path("/login", () -> {
                 get(new ShowLoginController());
                 post(new ProcessLoginController());
@@ -233,7 +229,7 @@ public class Router {
             });
 
             path("/registrarVisita", () -> {
-                before(new AutorizacionMiddleware().setDebeSerLogueado());
+                before(new AutorizacionMiddleware().setDebeSerLogueado().setDebeSerTecnico());
                 get(new RegistrarVisitaTecnicosController());
                 post(new RegistroCompletadoVisitaController());
             });
