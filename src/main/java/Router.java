@@ -8,21 +8,13 @@ import presentacion.LogoutController;
 import presentacion.MostrarErrorPermisosController;
 import presentacion.colaboraciones.*;
 import presentacion.gestorCuentas.*;
-import presentacion.heladera.AceptarAgregarHeladeraController;
-import presentacion.heladera.AgregarHeladeraController;
-import presentacion.heladera.HeladeraAgregadaController;
-import presentacion.heladera.MapaHeladeraVistaController;
-import presentacion.heladera.MapaHeladerasController;
-import presentacion.heladera.MapaHeladerasDistribucionDestinoController;
-import presentacion.heladera.MapaHeladerasDistribucionOrigenController;
-import presentacion.heladera.VisualizarDetalleHeladeraController;
+import presentacion.heladera.*;
 import presentacion.incidentes.AceptarReportarFallaController;
 import presentacion.incidentes.ReportarFallaTecnicaController;
 import presentacion.incidentes.ReportarFallaTecnicaFinalizadaController;
 import presentacion.incidentes.VisualizarAlertasController;
 import presentacion.incidentes.VisualizarFallasTecnicasController;
 import presentacion.ofertas.*;
-import presentacion.heladera.SuscribirseController;
 import presentacion.vistaAdmin.CargarSCVController;
 import presentacion.vistaAdmin.SCVCargadoController;
 import presentacion.vistaAdmin.inicioADMINController;
@@ -167,7 +159,7 @@ public class Router {
                 get(new InicioController());
             });
 
-            path("/inicioADMIN", () -> {
+            path("/inicioAdmin", () -> {
                 before(new AutorizacionMiddleware().setDebeSerLogueado().setDebeSerAdmin());
                 get(new inicioADMINController());
             });
@@ -199,6 +191,11 @@ public class Router {
                 get(new MapaHeladerasController());
             });
 
+            path("/mapaMisHeladerasRequest", () -> {
+                before(new AutorizacionMiddleware().setDebeSerLogueado().setDebeSerPJ());
+                get(new MapaMisHeladerasController());
+            });
+
             path("/misCanjes", () -> {
                 before(new AutorizacionMiddleware().setDebeSerLogueado());
                 get(new MisCanjesController());
@@ -207,6 +204,11 @@ public class Router {
             path("/misColaboraciones", () -> {
                 before(new AutorizacionMiddleware().setDebeSerLogueado());
                 get(new MisColaboracionesController());
+            });
+
+            path("/misHeladeras", () -> {
+                before(new AutorizacionMiddleware().setDebeSerLogueado().setDebeSerPJ());
+                get(new MisHeladerasController());
             });
 
             path("/misReportes", () -> {

@@ -13,6 +13,7 @@ public class GeneradorModel {
         model.put("logueado", context.sessionAttribute("logueado"));
         model.put("idPersona", context.sessionAttribute("idPersona"));
         model.put("tipoPersona", context.sessionAttribute("tipoPersona"));
+        model.put("rolUsuario", context.sessionAttribute("rolUsuario"));
 
         return model;
     }
