@@ -21,18 +21,11 @@ public class MapaHeladeraVistaController implements Handler {
             model = new HashMap<>();
             context.sessionAttribute("model", model);
         }
-        TipoPersona tipoPersona = context.sessionAttribute("tipoPersona");
         model.put("logueado", context.sessionAttribute("logueado"));
         model.put("nombreUsuario", context.sessionAttribute("nombreUsuario"));
+        model.put("esPersonaJuridica", context.sessionAttribute("tipoPersona") == TipoPersona.PJ);
 
-
-        if (tipoPersona == TipoPersona.PJ) {
-            context.render("templates/mapaHeladerasJuridica.mustache", model);;
-        } else {
-            context.render("templates/mapaHeladeras.mustache",model);
-        }
-
-
+        context.render("templates/mapaHeladeras.mustache",model);
 
     }
 

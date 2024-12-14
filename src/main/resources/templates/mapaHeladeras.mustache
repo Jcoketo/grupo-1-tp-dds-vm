@@ -50,6 +50,9 @@
         <div class="list-container ">
             <div>
             <h3 style="font-family: 'Poppins'; font-weight: 600" class="mb-2">Heladeras:</h3>
+                {{#esPersonaJuridica}}
+                <button class="btn-mas mt-2" onclick="window.location.href='/misHeladeras'">Ver mis heladeras</button>
+                {{/esPersonaJuridica}}
 
             {{#notificacionSuscripcion}}
                 <div class="text-{{tipo}}">{{mensaje}}</div>

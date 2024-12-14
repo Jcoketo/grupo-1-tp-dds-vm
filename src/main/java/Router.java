@@ -8,21 +8,13 @@ import presentacion.LogoutController;
 import presentacion.MostrarErrorPermisosController;
 import presentacion.colaboraciones.*;
 import presentacion.gestorCuentas.*;
-import presentacion.heladera.AceptarAgregarHeladeraController;
-import presentacion.heladera.AgregarHeladeraController;
-import presentacion.heladera.HeladeraAgregadaController;
-import presentacion.heladera.MapaHeladeraVistaController;
-import presentacion.heladera.MapaHeladerasController;
-import presentacion.heladera.MapaHeladerasDistribucionDestinoController;
-import presentacion.heladera.MapaHeladerasDistribucionOrigenController;
-import presentacion.heladera.VisualizarDetalleHeladeraController;
+import presentacion.heladera.*;
 import presentacion.incidentes.AceptarReportarFallaController;
 import presentacion.incidentes.ReportarFallaTecnicaController;
 import presentacion.incidentes.ReportarFallaTecnicaFinalizadaController;
 import presentacion.incidentes.VisualizarAlertasController;
 import presentacion.incidentes.VisualizarFallasTecnicasController;
 import presentacion.ofertas.*;
-import presentacion.heladera.SuscribirseController;
 import presentacion.vistaAdmin.CargarSCVController;
 import presentacion.vistaAdmin.SCVCargadoController;
 import presentacion.vistaAdmin.inicioADMINController;
@@ -31,7 +23,6 @@ import presentacion.vistaTecnico.RegistrarTecnicoCompletadoController;
 import presentacion.vistaTecnico.RegistrarTecnicoController;
 import presentacion.vistaTecnico.RegistrarVisitaTecnicosController;
 import presentacion.vistaTecnico.RegistroCompletadoVisitaController;
-import servicioApiRest.ServicioApiRest;
 
 import javax.persistence.EntityManager;
 
@@ -40,6 +31,9 @@ public class Router {
 
     public static void init(EntityManager entityManager){
         /* *************************************************************************** */
+
+        // ------------------- SE INICIALIZAN LOS REPOSITORIOS   ----------------------- //
+
         RepositorioArchivos repoArchivos = RepositorioArchivos.getInstancia(entityManager);
         RepositorioColaboradores repoColab = RepositorioColaboradores.getInstancia(entityManager);
         RepositorioHeladeras repoHeladeras = RepositorioHeladeras.getInstancia(entityManager);
@@ -93,16 +87,17 @@ public class Router {
                 post(new AgregarProductosEmpresaFinalizadoController());
             });
 
-            path("/api/recomendacion/locaciones", () -> {
-                get(new ServicioApiRest());
-            });
-
             path("/canjearPuntos", () -> {
                 before(new AutorizacionMiddleware().setDebeSerLogueado());
                 get(new CanjearPuntosController());
                 post(new CanjearPuntosFinalizadoController());
             });
 
+            path("/registrarVisita", () -> {
+                before(new AutorizacionMiddleware().setDebeSerLogueado().setDebeSerTecnico());
+                get(new RegistrarVisitaTecnicosController());
+                post(new RegistroCompletadoVisitaController());
+            });
 
             path("/cargarCSV", () -> {
                 get(new CargarSCVController());
@@ -169,7 +164,7 @@ public class Router {
                 get(new InicioController());
             });
 
-            path("/inicioADMIN", () -> {
+            path("/inicioAdmin", () -> {
                 before(new AutorizacionMiddleware().setDebeSerLogueado().setDebeSerAdmin());
                 get(new inicioADMINController());
             });
@@ -201,6 +196,11 @@ public class Router {
                 get(new MapaHeladerasController());
             });
 
+            path("/mapaMisHeladerasRequest", () -> {
+                before(new AutorizacionMiddleware().setDebeSerLogueado().setDebeSerPJ());
+                get(new MapaMisHeladerasController());
+            });
+
             path("/misCanjes", () -> {
                 before(new AutorizacionMiddleware().setDebeSerLogueado());
                 get(new MisCanjesController());
@@ -209,6 +209,11 @@ public class Router {
             path("/misColaboraciones", () -> {
                 before(new AutorizacionMiddleware().setDebeSerLogueado());
                 get(new MisColaboracionesController());
+            });
+
+            path("/misHeladeras", () -> {
+                before(new AutorizacionMiddleware().setDebeSerLogueado().setDebeSerPJ());
+                get(new MisHeladerasController());
             });
 
             path("/misReportes", () -> {
