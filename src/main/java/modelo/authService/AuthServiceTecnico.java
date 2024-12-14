@@ -11,8 +11,6 @@ import modelo.personas.*;
 import modelo.validador.Usuario;
 import persistencia.*;
 
-import java.time.LocalDate;
-import java.util.List;
 
 public class AuthServiceTecnico {
     private static RepositorioColaboradores repoColab = RepositorioColaboradores.getInstancia();

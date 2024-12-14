@@ -9,7 +9,7 @@
 
     <style>
 
-        .btn-admin{
+        .btn-tecnico{
             background-color: #002B80;
             color: white;
             padding: 10px 20px;
@@ -17,12 +17,12 @@
             font-weight:600;
             margin-right: 20px;
         }
-        .btn-admin:hover {
+        .btn-tecnico:hover {
             background-color: #00215c;
             text-decoration: none;
         }
 
-        #contenedor-inicio-admin {
+        #contenedor-inicio-tecnico {
             margin-bottom: 100px !important;
             margin-top: 100px !important;
             font-family: 'Poppins', sans-serif !important;
@@ -39,12 +39,11 @@
 {{> header}}
 
 <main class="d-flex justify-content-center align-items-center">
-    <div class="container m-5 d-flex justify-content-center align-items-center" id="contenedor-inicio-admin">
+    <div class="container m-5 d-flex justify-content-center align-items-center" id="contenedor-inicio-tecnico">
         <div class="main-content mr-5">
-            <h1 class="mb-3" id="bienvenido-m">Bienvenido moderador!</h1>
-            <h3 class="mb-3">Estas en una cuenta con permisos de administrador.</h3>
-            <button class="btn-admin" onclick="window.location.href='/cargarCSV'">Cargar CSV</button>
-            <button class="btn-admin" onclick="window.location.href='/registrarTecnico'">Dar de alta Técnico</button>
+            <h1 class="mb-3" id="bienvenido-m">Bienvenido tecnico!</h1>
+            <h3 class="mb-3">Ya estás listo para registrar visitas.</h3>
+            <button class="btn-tecnico" onclick="window.location.href='/registrarVisitas'">Registrar visitas.</button>
         </div>
 
         <div class="image-placeholder ml-5">

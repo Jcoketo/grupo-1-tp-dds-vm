@@ -1,4 +1,4 @@
-package presentacion.vistaAdmin;
+package presentacion.vistaTecnico;
 
 import accessManagment.Roles;
 import io.javalin.http.Context;
@@ -8,12 +8,9 @@ import utils.GeneradorModel;
 
 import java.util.Map;
 
-public class inicioADMINController implements Handler {
-
-
+public class InicioTecnicoController implements Handler {
     @Override
     public void handle(@NotNull Context context) throws Exception {
-
         Map<String, Object> model = GeneradorModel.getModel(context);
 
         if (context.sessionAttribute("logueado") != Boolean.TRUE) {
@@ -23,7 +20,7 @@ public class inicioADMINController implements Handler {
 
         Roles rol = context.sessionAttribute("rolUsuario");
 
-        if (rol != Roles.ADMIN) {
+        if (rol != Roles.TECNICO) {
             context.redirect("/404Error");
             return;
         }
@@ -31,6 +28,6 @@ public class inicioADMINController implements Handler {
         model.put("nombreUsuario", context.sessionAttribute("nombreUsuario"));
         model.put("logueado", context.sessionAttribute("logueado"));
 
-        context.render("templates/inicioAdmin.mustache", model);
+        context.render("templates/inicioTecnico.mustache", model);
     }
 }
