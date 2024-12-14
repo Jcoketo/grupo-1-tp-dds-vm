@@ -31,8 +31,8 @@
             margin-bottom: 20px;
         }
 
-        .form-group label {
-            font-weight: bold;
+        .form-label {
+            font-weight: 500;
         }
 
         .form-control {
@@ -51,8 +51,9 @@
             border: none;
             padding: 10px 20px; /* Adjusted padding to prevent text overflow */
             vertical-align: middle;
-            border-radius: 5px;
+            border-radius: 10px;
             font-size: 16px;
+            font-weight: 500;
             margin: 15px;
             width: auto; /* Adjusted width to auto */
             white-space: nowrap; /* Prevent text from wrapping */
@@ -60,22 +61,22 @@
         }
 
         .btn-cancelar {
-            background-color: #e0e0e0;
-            color: black;
+            background-color: #B7C9C7;
+            color: #1e5552;
         }
 
         .btn-cancelar:hover {
-            background-color: #a8a8a8;
-            color: black;
+            background-color: #9aacab;
+            color: #143c3a;
         }
 
         .btn-agregar {
-            background-color: #1e5552;
+            background-color: #002B80;
             color: white;
         }
 
         .btn-agregar:hover {
-            background-color: #274597;
+            background-color: #00215c;
             color: white;
         }
 
@@ -97,7 +98,7 @@
 
 <main>
     <div class="container">
-        <h1 style="font-family: 'Poppins', sans serif; font-weight:700; color: #1e5552" class="mb-5">Agregar heladera</h1>
+        <h1 style="font-family: 'Poppins', sans serif; font-weight:700; color: #1e5552" class="mb-5 d-flex justify-content-center">Agregar heladera</h1>
         <form action="/agregarHeladera" method="post">
             <div class="row mb-3">
                 <div class="col-md-6">
@@ -160,7 +161,7 @@
                 </select>
             </div>
 
-            <div class="btn-group">
+            <div class="btn-group d-flex justify-content-center">
                 <button type="button" class="btn-cancelar" onclick="window.location.href='/mapaHeladeras'">Cancelar</button>
                 <button type="submit" class="btn-agregar">Agregar</button>
             </div>
