@@ -51,18 +51,18 @@
             <artifactId>java-jwt</artifactId>
             <version>4.4.0</version>
           </dependency>
-      
-         <dependency>
-            <groupId>io.prometheus</groupId>
-            <artifactId>simpleclient</artifactId>
-            <version>0.12.0</version>
+
+        <dependency>
+            <groupId>io.micrometer</groupId>
+            <artifactId>micrometer-core</artifactId>
+            <version>1.10.1</version>  <!-- Verifica que la versión esté actualizada -->
         </dependency>
 
-        <!-- Prometheus Java Client for HTTP Server to expose metrics -->
+        <!-- Dependencia de Micrometer para el Registry de Prometheus -->
         <dependency>
-            <groupId>io.prometheus</groupId>
-            <artifactId>simpleclient_httpserver</artifactId>
-            <version>0.12.0</version>
+            <groupId>io.micrometer</groupId>
+            <artifactId>micrometer-registry-prometheus</artifactId>
+            <version>1.10.1</version>  <!-- Verifica que la versión esté actualizada -->
         </dependency>
 
         <dependency>
