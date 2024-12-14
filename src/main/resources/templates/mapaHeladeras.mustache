@@ -32,8 +32,26 @@
             margin-bottom: 7px;
         }
         .list-group-item:hover {
-            background-color: #B8CCC8;
+            background-color: #b5c8c4;
         }
+
+        .btn-mas{
+            background-color: #B8CCC8;
+            color: #000000;
+            padding: 10px 20px;
+            border-radius: 10px;
+            border-width: 0px;
+            font-weight:600;
+        }
+        .btn-mas:hover {
+            background-color: #94a6a3;
+            text-decoration: none;
+        }
+        .btn-mas:active {
+            border-width: 0px;
+        }
+
+
     </style>
 </head>
 <body>
@@ -49,14 +67,15 @@
 
         <div class="list-container ">
             <div>
-            <h3 style="font-family: 'Poppins'; font-weight: 600" class="mb-2">Heladeras:</h3>
-                {{#esPersonaJuridica}}
-                <button class="btn-mas mt-2" onclick="window.location.href='/misHeladeras'">Ver mis heladeras</button>
-                {{/esPersonaJuridica}}
-
-            {{#notificacionSuscripcion}}
-                <div class="text-{{tipo}}">{{mensaje}}</div>
-            {{/notificacionSuscripcion}}
+                <div class="cont d-flex justify-content-between align-items-center mb-3">
+                    <h3 style="font-family: 'Poppins'; font-weight: 600" >Heladeras:</h3>
+                    {{#esPersonaJuridica}}
+                    <button class="btn-mas " onclick="window.location.href='/misHeladeras'">Ver mis heladeras</button>
+                    {{/esPersonaJuridica}}
+                </div>
+                {{#notificacionSuscripcion}}
+                    <div class="text-{{tipo}}">{{mensaje}}</div>
+                {{/notificacionSuscripcion}}
             </div>
 
             <ul id="heladeras-list" class="list-group">
