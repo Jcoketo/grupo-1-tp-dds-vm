@@ -21,7 +21,7 @@ public class inicioADMINController implements Handler {
             return;
         }
 
-        Roles rol = (Roles) context.sessionAttribute("rolUsuario");
+        Roles rol = context.sessionAttribute("rolUsuario");
 
         if (rol != Roles.ADMIN) {
             context.redirect("/404Error");

@@ -57,7 +57,19 @@
             </div>
 
             <ul id="heladeras-list" class="list-group">
-                <!-- Lista de heladeras se llenará dinámicamente -->
+                {{#heladerasLista}}
+                <div style="display: flex; flex-direction: column;">
+                    <strong>{ {{nombre}} || 'Ubicación desconocida'}</strong>
+                    <small>Dirección: { {{direccion}} || 'Ubicación desconocida'}</small>
+                    <small>En funcionamiento desde: {{fecha}}</small>
+                    <div style="display: flex; justify-content: flex-start; align-items: center;">
+                        <small>{{estado}}</small>
+                        <small>
+                            <a href="/visualizarDetalleHeladera?heladeraId={{heladeraId}}&nombre={{nombre}}&direccion={{direccion}}&lat={{latitud}}&long={{longitud}}&fecha={{fecha}}&estado={{estado}}&disponibilidad={{disponibilidad}}" class="text-primary" style="text-decoration: underline; margin-left: 10px;">Detalles</a>
+                        </small>
+                    </div>
+                </div>
+                {{/heladerasLista}}
             </ul>
         </div>
     </div>
@@ -77,7 +89,7 @@
 
     function fetchHeladeras() {
         // Realiza una solicitud al endpoint de tu API que devuelve las heladeras
-        return fetch('/mapaHeladerasRequest')
+        return fetch('/mapaMisHeladerasRequest')
                 .then(response => response.json()) // Convierte la respuesta a JSON
                 .then(data => {
                     return data; // Devuelve los datos de las heladeras
