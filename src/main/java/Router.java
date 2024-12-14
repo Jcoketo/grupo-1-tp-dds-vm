@@ -22,11 +22,13 @@ import presentacion.incidentes.ReportarFallaTecnicaFinalizadaController;
 import presentacion.incidentes.VisualizarAlertasController;
 import presentacion.incidentes.VisualizarFallasTecnicasController;
 import presentacion.ofertas.*;
-import presentacion.suscripciones.SuscribirseController;
+import presentacion.heladera.SuscribirseController;
 import presentacion.vistaAdmin.CargarSCVController;
 import presentacion.vistaAdmin.SCVCargadoController;
 import presentacion.vistaAdmin.inicioADMINController;
 import presentacion.reportes.MisReportesController;
+import presentacion.vistaTecnico.RegistrarTecnicoCompletadoController;
+import presentacion.vistaTecnico.RegistrarTecnicoController;
 import servicioApiRest.ServicioApiRest;
 
 import javax.persistence.EntityManager;
@@ -99,10 +101,6 @@ public class Router {
                 post(new CanjearPuntosFinalizadoController());
             });
 
-            path("/catalogoProductos", () -> {
-                before(new AutorizacionMiddleware().setDebeSerLogueado());
-                get(new CatalogoProductosController());
-            });
 
             path("/cargarCSV", () -> {
                 get(new CargarSCVController());
@@ -221,6 +219,12 @@ public class Router {
                 get(new PerfilController());
             });
 
+            path("/registrarTecnico", () -> {
+                before(new AutorizacionMiddleware().setDebeSerLogueado().setDebeSerAdmin());
+                get(new RegistrarTecnicoController());
+                post(new RegistrarTecnicoCompletadoController());
+            });
+
             path("/registroPersonaVulnerable", () -> {
                 before(new AutorizacionMiddleware().setDebeSerLogueado().setDebeSerPF());
                 get(new RegistroPersonaVulnerableController());
@@ -246,6 +250,12 @@ public class Router {
             path("/suscribirse", () -> {
                 before(new AutorizacionMiddleware().setDebeSerLogueado());
                 post(new SuscribirseController());
+            });
+
+            path("/validarDatos", () -> {
+                before(new AutorizacionMiddleware().setDebeSerLogueado());
+                get(new ValidarDatosController());
+                post(new ValidarDatosFinalizadoController());
             });
 
             path("/visualizarAlertas", () -> {

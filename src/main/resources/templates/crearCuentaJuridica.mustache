@@ -209,6 +209,12 @@
             font-size: 14px;
             margin-top: 10px;
         }
+        .labelDesplegable {
+            font-size: 1.25rem;
+            font-weight: bold;
+            width : 70px;
+            height : 30px;
+        }
     </style>
 </head>
 <body>
@@ -268,12 +274,12 @@
              <input type="text" id="cuit" name="cuit" required>
 
             <label for="rubro">Rubro</label>
-                        <select id="rubro" name="rubro" required>
-                            <option value="" disabled selected>Selecciona un tipo</option>
-                            <option value="1">Gastronomía</option>
-                            <option value="2">Electrónica</option>
-                            <option value="3">Articulos para el hogar</option>
-                        </select>
+            <select id="rubro" name="rubro" required>
+                <option value="" disabled selected>Selecciona un tipo</option>
+                <option value="1">Gastronomía</option>
+                <option value="2">Electrónica</option>
+                <option value="3">Articulos para el hogar</option>
+            </select>
 
             <label for="telefono-representante">Número de Teléfono del Representante</label>
             <input type="tel" id="telefono-representante" name="telefono-representante" required>

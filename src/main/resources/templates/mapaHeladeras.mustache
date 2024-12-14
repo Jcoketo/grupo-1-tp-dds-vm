@@ -46,8 +46,16 @@
         <div class="map-container ">
             <div id="map"></div>
         </div>
+
         <div class="list-container ">
+            <div>
             <h3 style="font-family: 'Poppins'; font-weight: 600" class="mb-2">Heladeras:</h3>
+
+            {{#notificacionSuscripcion}}
+                <div class="text-{{tipo}}">{{mensaje}}</div>
+            {{/notificacionSuscripcion}}
+            </div>
+
             <ul id="heladeras-list" class="list-group">
                 <!-- Lista de heladeras se llenará dinámicamente -->
             </ul>
@@ -115,7 +123,7 @@
                         <strong>${nombre || 'Ubicación desconocida'}</strong>
                         <small>Dirección: ${punto.direccion || 'Ubicación desconocida'}</small>
                         <small>En funcionamiento desde: ${fecha}</small>
-                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <div style="display: flex; justify-content: flex-start; align-items: center;">
                             <small>${estado}</small>
                             <small>
                                 <a href="/visualizarDetalleHeladera?heladeraId=${heladeraId}&nombre=${nombre}&direccion=${punto.direccion}&lat=${punto.latitud}&long=${punto.longitud}&fecha=${fecha}&estado=${estado}&disponibilidad=${disponibilidad}" class="text-primary" style="text-decoration: underline; margin-left: 10px;">Detalles</a>

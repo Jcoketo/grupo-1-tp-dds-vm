@@ -20,6 +20,7 @@ import modelo.colaboracion.Vianda;
 import modelo.excepciones.ExcepcionValidacion;
 import modelo.personas.Visita;
 import modelo.suscripcion.Suscripcion;
+import modelo.suscripcion.SuscripcionXCantidad;
 import modelo.suscripcion.TipoSuscripcion;
 
 @Entity
@@ -126,9 +127,12 @@ public class Heladera {
             // if ( ( this.viandasMaximas - this.viandas.size() ) <= 5 && this.colaboradoresSucriptos != null)
             if ( this.colaboradoresSucriptos != null) // no damos posibilidad a que el numero sea mayor ya que sino es muy poco performante
                                                                      //  si quedan 30 lugares libres va a hacer siempre este bloque de codigo
-            { this.colaboradoresSucriptos.stream().filter(colab -> colab.getTipoSuscripcion() == TipoSuscripcion.POCO_ESPACIO
-                                && colab.getLimiteViandasMaximas() == (this.viandasMaximas - this.viandas.size()))
-                                .forEach(colab -> colab.notificarmeSuscripcion());
+            { List<SuscripcionXCantidad> suscripciones = this.colaboradoresSucriptos.stream()
+                    .filter(suscripcion -> suscripcion instanceof SuscripcionXCantidad && suscripcion.getTipoSuscripcion() == TipoSuscripcion.POCO_ESPACIO)
+                    .map(suscripcion -> (SuscripcionXCantidad) suscripcion).toList();
+
+                suscripciones.stream().filter(suscripcion -> suscripcion.getLimiteViandasMaximas() == (this.viandasMaximas - this.viandas.size()))
+                    .forEach(SuscripcionXCantidad::notificarmeSuscripcion);
             }
         } else {
             throw new ExcepcionValidacion("No se pueden agregar más viandas");
@@ -140,9 +144,12 @@ public class Heladera {
             this.contadorViandasRetiradas++;
             // if ( ( this.viandas.size() ) <= 5  && this.colaboradoresSucriptos != null) {
             if ( this.colaboradoresSucriptos != null) {
-                this.colaboradoresSucriptos.stream().filter(colab -> colab.getTipoSuscripcion() == TipoSuscripcion.QUEDAN_POCAS
-                                && colab.getLimiteViandasMinimas() == this.viandas.size())
-                                .forEach(colab -> colab.notificarmeSuscripcion());
+                List<SuscripcionXCantidad> suscripciones = this.colaboradoresSucriptos.stream()
+                        .filter(suscripcion -> suscripcion instanceof SuscripcionXCantidad && suscripcion.getTipoSuscripcion() == TipoSuscripcion.QUEDAN_POCAS)
+                        .map(suscripcion -> (SuscripcionXCantidad) suscripcion).toList();
+
+                suscripciones.stream().filter(suscripcion -> suscripcion.getLimiteViandasMinimas() == this.viandas.size())
+                        .forEach(SuscripcionXCantidad::notificarmeSuscripcion);
             }
             return this.viandas.remove((int)indice);
         } else {

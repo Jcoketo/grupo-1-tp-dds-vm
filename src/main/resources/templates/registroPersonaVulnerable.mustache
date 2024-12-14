@@ -230,6 +230,12 @@
             font-size: 14px;
             margin-top: 10px;
         }
+        .labelDesplegable {
+            font-size: 1.25rem;
+            font-weight: bold;
+            width : 70px;
+            height : 30px;
+        }
 
 
     </style>
@@ -298,7 +304,7 @@
 
             <div class="form-group">
                 <label for="documento">¿Posee documento?</label>
-                <select id="documento" name="tieneDoc" required>
+                <select class = "labelDesplegable" id="documento" name="tieneDoc" required>
                     <option value="0">No</option>
                     <option value="1">Sí</option>
                 </select>
@@ -311,7 +317,7 @@
 
             <div class="date-fields">
                 <label for="tipoDoc">Tipo de Documento</label>
-                <select id="tipoDoc" name="tipoDoc" required>
+                <select class = "labelDesplegable" id="tipoDoc" name="tipoDoc" required>
                     <option value="" disabled selected></option>
                     <option value="01">DNI</option>
                     <option value="02">LC</option>
@@ -321,7 +327,7 @@
 
             <div class="form-group">
                 <label for="domicilio">¿Posee domicilio?</label>
-                <select id="domicilio" name="tieneDom" required>
+                <select class = "labelDesplegable" id="domicilio" name="tieneDom" required>
                     <option value="0">No</option>
                     <option value="1">Sí</option>
                 </select>
@@ -339,7 +345,7 @@
 
             <div class="form-group">
                 <label for="menores">¿Posee menores a cargo?</label>
-                <select id="menores" name="tieneMenores" required>
+                <select class = "labelDesplegable" id="menores" name="tieneMenores" required>
                     <option value="0">No</option>
                     <option value="1">Sí</option>
                 </select>
@@ -347,7 +353,7 @@
 
             <div class="form-group">
                 <label for="cantidad-menores">Cantidad de menores a cargo</label>
-                <select id="cantidad-menores" name="cantidadMenores">
+                <select class = "labelDesplegable" id="cantidad-menores" name="cantidadMenores">
                     <option value="0">0</option>
                     <option value="1">1</option>
                     <option value="2">2</option>

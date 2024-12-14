@@ -47,7 +47,6 @@ public class AgregarProductosEmpresaFinalizadoController implements Handler {
             tipoOferta = TipoOferta.SERVICIO;
         }
 
-
         File archivo = new File("src/main/resources/uploads/ofertas/" + file.filename());
 
 

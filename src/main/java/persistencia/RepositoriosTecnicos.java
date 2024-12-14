@@ -14,9 +14,7 @@ import modelo.elementos.Heladera;
 import modelo.excepciones.ExcepcionValidacion;
 import modelo.personas.*;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
+import javax.persistence.*;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -141,21 +139,11 @@ public class RepositoriosTecnicos{
         return null; // En caso de no encontrar un técnico cercano
     }
 
-    public void registrarTecnico(String nombre, String apellido, TipoDocumento tipoDoc, String numeroDoc, String cuil, String mail, String telefono, Areas areaCobertura) {
-        MedioDeContacto medioMail = new MedioDeContacto(TipoMedioDeContacto.MAIL, mail);
-        PersonaHumana persona = new PersonaHumana(tipoDoc, numeroDoc, nombre, apellido, medioMail);
+    public void registrarTecnico(Tecnico tecnico) {
+        em.getTransaction().begin();
+        em.persist(tecnico);
+        em.getTransaction().commit();
 
-        MedioDeContacto medioTelefonico;
-        if (!telefono.equals("")) {
-            medioTelefonico = new MedioDeContacto(TipoMedioDeContacto.TELEFONO, telefono);
-            persona.agregarMediosDeContacto(medioTelefonico);
-        }
-
-        RepositorioColaboradores repoColab = RepositorioColaboradores.getInstancia();
-        repoColab.actualizarPersona(persona);
-
-        Tecnico tecnico = new Tecnico(cuil, areaCobertura, persona);
-        this.agregar(tecnico);
     }
 
     public Tecnico obtenerTecnico(Integer id) {
@@ -166,5 +154,31 @@ public class RepositoriosTecnicos{
         em.getTransaction().begin();
         em.persist(tecnico);
         em.getTransaction().commit();
+    }
+
+    public Tecnico existeTecnico(String nroCuil) {
+        TypedQuery<Tecnico> query = em.createQuery(
+                "SELECT t FROM Tecnico t WHERE t.nroCUIL = :nroCuil ",
+                Tecnico.class
+        );
+        query.setParameter("nroCuil", nroCuil);
+        try {
+            return query.getSingleResult();
+        } catch (NoResultException e) {
+            return null;
+        }
+    }
+
+    public Tecnico buscarTecnicoXIdPersona(Integer idPersona) {
+        TypedQuery<Tecnico> query = em.createQuery(
+                "SELECT t FROM Tecnico t WHERE t.persona.id = :idPersona ",
+                Tecnico.class
+        );
+        query.setParameter("idPersona", idPersona);
+        try {
+            return query.getSingleResult();
+        } catch (NoResultException e) {
+            return null;
+        }
     }
 }

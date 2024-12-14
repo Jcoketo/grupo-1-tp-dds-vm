@@ -16,7 +16,7 @@
             background-color: #ffffff;
         }
 
-       header {
+        header {
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -120,7 +120,13 @@
         .social-icon {
             margin-right: 10px;
         }
-        h1, h2, h3, h5, h6 {
+
+        h1 {
+            font-size: 23px;
+            font-weight: bold;
+        }
+
+        h2, h3, h5, h6 {
             font-size: 19px;
             font-weight: bold;
         }
@@ -149,6 +155,12 @@
             font-size: 1.25rem;
             font-weight: bold;
         }
+        .labelTipoDoc {
+            font-size: 1.25rem;
+            font-weight: bold;
+            width : 70px;
+            height : 30px;
+        }
         .value {
             font-size: 1rem;
             font-weight: normal;
@@ -157,14 +169,6 @@
             font-size: 1.5rem;
             color: #1e5552;
         }
-
-        .labelDesplegable {
-            font-size: 1.25rem;
-            font-weight: bold;
-            width : 310px;
-            height : 30px;
-        }
-
     </style>
 </head>
 <body>
@@ -184,24 +188,7 @@
                     <a class="nav-link" href="#">Sobre nosotros</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/elegirDonacionFisica">Donar</a>
-                </li>
-                <li class="nav-item">
                     <a class="nav-link" href="/mapaHeladeras">Heladeras</a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
-                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        {{nombreUsuario}}
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <a class="dropdown-item" href="/perfil">Mi perfil</a>
-                        <a class="dropdown-item" href="/misColaboraciones">Mis colaboraciones</a>
-                        <a class="dropdown-item" href="/canjearPuntos">Mi puntaje</a>
-                        <a class="dropdown-item" href="/misReportes">Mis reportes</a>
-                        <a class="dropdown-item" href="/configurarPerfil">Configuración</a>
-                        <a class="dropdown-item" href="/logout">Cerrar sesión</a>
-                    </div>
                 </li>
             </ul>
         </div>
@@ -214,79 +201,61 @@
             <img src="/static/user-photo.png" alt="Foto del usuario" class="profile-photo">
         </div>
         <div class="col-md-9 profile-info">
-            <form action="/configurarPerfil" method="post">
-            {{#esPersonaHumana}} <!--  PERSONA HUMANA  -->
-                <div class="info-group">
-                    <label for="nombre" class="label">Nombre</label>
-                    <input type="text" class="form-control" id="nombre" name="nombre" value="{{nombre}}">
-                </div>
-                <div class="info-group">
-                    <label for="apellido" class="label">Apellido</label>
-                    <input type="text" class="form-control" id="apellido" name="apellido" value="{{apellido}}">
-                </div>
-                <div class="info-group">
-                    <label for="fechaNacimiento" class="label">Fecha De Nacimiento</label>
-                    <input type="date" class="form-control" id="fechaNacimiento" name="fechaNacimiento" value="{{fechaNacimiento}}">
-                </div>
-                <div class="info-group">
-                    <label for="direccion" class="label">Domicilio</label>
-                    <input type="text" class="form-control" id="direccion" name="direccion" value="{{direccion}}">
-                </div>
-                <div class="info-group">
-                    <label for="telefono" class="label">Teléfono</label>
-                    <input type="text" class="form-control" id="telefono" name="telefono" value="{{telefono}}">
-                </div>
-                <div class="info-group">
-                    <label for="email" class="label">Email</label>
-                    <input type="email" class="form-control" id="email" name="email" value="{{email}}">
-                </div>
-            {{/esPersonaHumana}}
-            {{#esPersonaJuridica}} <!--  PERSONA JURIDICA  -->
-                <div class="info-group">
-                    <label for="nombre" class="label">Razon Social</label>
-                    <input type="text" class="form-control" id="nombre" name="nombre" value="{{nombre}}">
-                </div>
-                <div class="info-group">
-                    <label for="cuit" class="label">CUIT</label>
-                    <input type="text" class="form-control" id="cuit" name="cuit" value="{{cuit}}">
-                </div>
-                <div class="info-group">
-                    <label for="tipoJuridico" class="label">Tipo Juridico actual</label>
-                    <select class="labelDesplegable" id="tipo" name="tipoJuridico" required>
-                        <option value="0">{{tipoJuridico}}</option>
-                        <option value="1">Gubernamental</option>
-                        <option value="2">Organización No Gubernamental</option>
-                        <option value="3">Empresa</option>
-                        <option value="4">Institución</option>
-                    </select>
-                </div>
-                <div class="info-group">
-                    <label for="rubro" class="label">Rubro actual</label>
-                    <select class="labelDesplegable" id="rubro" name="rubro" required>
-                        <option value="0">{{rubro}}</option>
-                        <option value="1">Gastronomía</option>
-                        <option value="2">Electrónica</option>
-                        <option value="3">Articulos para el hogar</option>
-                    </select>
-                </div>
-                <div class="info-group">
-                    <label for="direccion" class="label">Domicilio</label>
-                    <input type="text" class="form-control" id="direccion" name="direccion" value="{{direccion}}">
-                </div>
-                <div class="info-group">
-                    <label for="telefono" class="label">Teléfono</label>
-                    <input type="text" class="form-control" id="telefono" name="telefono" value="{{telefono}}">
-                </div>
-                <div class="info-group">
-                    <label for="email" class="label">Mail</label>
-                    <input type="email" class="form-control" id="email" name="email" value="{{email}}">
-                </div>
-            {{/esPersonaJuridica}}
 
-                {{#notificacionCambio}}
-                    <div class="text-{{tipo}}">{{mensaje}}</div>
-                {{/notificacionCambio}}
-
+            <h1>Validar Datos</h1>
+            <p> </p>
+            <form action="/validarDatos" method="post">
+                    <div class="info-group">
+                        <label for="username" class="label">Usuario</label>
+                        <input type="text" class="form-control" id="username" name="username" placeholder="Ingrese su nuevo usuario" required>
+                    </div>
+                    <div class="info-group">
+                        <label for="password" class="label">Ingrese Nueva Contraseña</label>
+                        <input type="password" class="form-control" id="password" name="password" placeholder="Ingrese su nueva contraseña" required>
+                    </div>
+                    <div class="info-group">
+                        <label for="nombre" class="label">Nombre</label>
+                        <input type="text" class="form-control" id="nombre" name="nombre" value="{{nombre}}">
+                    </div>
+                    <div class="info-group">
+                        <label for="apellido" class="label">Apellido</label>
+                        <input type="text" class="form-control" id="apellido" name="apellido" value="{{apellido}}">
+                    </div>
+                    <div class="info-group">
+                        <label for="fechaNacimiento" class="label">Fecha De Nacimiento</label>
+                        <input type="date" class="form-control" id="fechaNacimiento" name="fechaNacimiento" value="{{fechaNacimiento}}">
+                    </div>
+                    <div class="info-group">
+                        <label for="tipoDoc" class="label">Tipo de Documento actual</label>
+                        <select class="labelTipoDoc" id="tipoDoc" name="tipoDoc" required>
+                            <option value="0">{{tipoDoc}}</option>
+                            <option value="1">DNI</option>
+                            <option value="2">LC</option>
+                            <option value="3">LE</option>
+                        </select>
+                    </div>
+                    <div class="info-group">
+                        <label for="numeroDoc" class="label">Numero de Documento</label>
+                        <input type="text" class="form-control" id="numeroDoc" name="numeroDoc" value="{{numeroDoc}}">
+                    </div>
+                    <div class="info-group">
+                        <label for="direccion" class="label">Domicilio</label>
+                        <input type="text" class="form-control" id="direccion" name="direccion" value="{{direccion}}">
+                    </div>
+                    <div class="info-group">
+                        <label for="telefono" class="label">Teléfono</label>
+                        <input type="text" class="form-control" id="telefono" name="telefono" value="{{telefono}}">
+                    </div>
+                    <div class="info-group">
+                        <label for="mail" class="label">Email</label>
+                        <input type="mail" class="form-control" id="mail" name="mail" value="{{mail}}">
+                    </div>
+                    {{#esTecnico}} <!--  ES TECNICO  -->
+                        <div class="info-group">
+                            <label for="cuil" class="label">CUIL</label>
+                            <input type="text" class="form-control" id="cuil" name="cuil" value="{{cuil}}">
+                        </div>
+                    {{/esTecnico}}
                 <button type="submit" class="nav-link, btn btn-submit" href="perfil">Guardar cambios</button>
             </form>
         </div>
