@@ -67,6 +67,7 @@ public class ReportarFallaTecnicaFinalizadaController implements Handler {
 
         } catch (ExcepcionValidacion e) {
             notificacionAlerta.error(e.getMessage());
+            context.sessionAttribute("notificacionAlerta", notificacionAlerta);
             context.redirect("/visualizarFallasTecnicas?heladeraId=" + idHeladera);
             return;
         }
@@ -76,6 +77,7 @@ public class ReportarFallaTecnicaFinalizadaController implements Handler {
             tecnico.notificarFalla(heladera, falla.getDescripcion());
         } catch (Exception e) {
             notificacionAlerta.error("Hubo un error al notificar a los tecnicos, porfavor informe a sistemas.");
+            context.sessionAttribute("notificacionAlerta", notificacionAlerta);
             System.out.println("Error al notificar a los tecnicos, porfavor informe a sistemas."); //LOG
             context.redirect("/visualizarFallasTecnicas?heladeraId=" + idHeladera);
             return;
