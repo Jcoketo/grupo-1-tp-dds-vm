@@ -28,7 +28,13 @@ public class VisualizarFallasTecnicasController implements Handler {
             context.redirect("/mapaHeladeras");
             return;
         }
-        int idHeladera = Integer.parseInt(idHel);
+        int idHeladera = 0;
+        try {
+            idHeladera = Integer.parseInt(idHel);
+        } catch (NumberFormatException | NullPointerException e) {
+            context.redirect("/mapaHeladeras");
+            return;
+        }
 
         NotificacionAlerta notificacionAlerta = context.sessionAttribute("notificacionAlerta");
         if (notificacionAlerta != null) {

@@ -24,14 +24,30 @@ public class SuscribirseController implements Handler {
         String medioDeContacto = context.formParam("medioDeContacto"); //enum
 
         // ------------- DATOS DE LA HELADERA ACTUAL ---------------- //
-        String id = context.queryParam("heladeraId");
-        String nombre = context.queryParam("nombre");
-        String direccion = context.queryParam("direccion");
-        Double latitud = Double.parseDouble(context.queryParam("latitud"));
-        Double longitud = Double.parseDouble(context.queryParam("longitud"));
-        String fecha = context.queryParam("fecha");
-        String estado = context.queryParam("estado");
-        Integer disponibilidad = Integer.parseInt(context.queryParam("disponibilidad"));
+        String id = context.formParam("heladeraId");
+        String nombre = context.formParam("nombre");
+        String direccion = context.formParam("direccion");
+        String lat = context.formParam("latitud");
+        String longi = context.formParam("longitud");
+        String fecha = context.formParam("fecha");
+        String estado = context.formParam("estado");
+        String disp = context.formParam("disponibilidad");
+
+        Double latitud = 0.0;
+        Double longitud = 0.0;
+        Integer disponibilidad = 0;
+
+        try {
+            if (lat == null || longi == null) {
+                throw new NullPointerException("Latitude or Longitude is null");
+            }
+            latitud = Double.parseDouble(lat);
+            longitud = Double.parseDouble(longi);
+        } catch (NumberFormatException | NullPointerException e) {
+            latitud = 0.0;
+            longitud = 0.0;
+        }
+        if (disp != null) { disponibilidad = Integer.parseInt(disp); }
 
         if (idHel == null || idHel.equals("")) {
             context.redirect("/visualizarHeladeras");
@@ -68,14 +84,20 @@ public class SuscribirseController implements Handler {
         catch (ExcepcionValidacion e)
         {
             notificacionSuscripcion.error(e.getMessage());
-            model.put("notificacionSuscripcion", notificacionSuscripcion);
-            context.redirect("/mapaHeladeras");
+            context.sessionAttribute("notificacionSuscripcion", notificacionSuscripcion);
+
+            String redirectUrl = String.format("/visualizarDetalleHeladera?heladeraId=%s&nombre=%s&direccion=%s&lat=%s&long=%s&fecha=%s&estado=%s&disponibilidad=%s",
+                    id, nombre, direccion, latitud, longitud, fecha, estado, disponibilidad);
+            context.redirect(redirectUrl);
+
             return;
         }
-        ///visualizarDetalleHeladera?heladeraId=${heladeraId}&nombre=${nombre}&direccion=${punto.direccion}&lat=${punto.latitud}&long=${punto.longitud}&fecha=${fecha}&estado=${estado}&disponibilidad=${disponibilidad}"
 
         notificacionSuscripcion.aprobada("Suscripción realizada con éxito!");
-        context.redirect("/mapaHeladeras");
+        context.sessionAttribute("notificacionSuscripcion", notificacionSuscripcion);
+        String redirectUrl = String.format("/visualizarDetalleHeladera?heladeraId=%s&nombre=%s&direccion=%s&lat=%s&long=%s&fecha=%s&estado=%s&disponibilidad=%s",
+                id, nombre, direccion, latitud, longitud, fecha, estado, disponibilidad);
+        context.redirect(redirectUrl);
 
     }
 }
