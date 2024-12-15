@@ -44,7 +44,8 @@ public MisColaboracionesController() {
     }
 
     private List<DatosColaboracion> getDatosColaboraciones(List<Colaboracion> colaboraciones){
-        return colaboraciones.stream().map(colab -> new DatosColaboracion(colab.getClassName(), colab.getFechaColaboracion(), colab.conocerPuntaje(), colab.getPorCSV())).toList();
+        return colaboraciones.stream().map(colab ->
+                new DatosColaboracion(colab.getClassName(), colab.getFechaColaboracion(), colab.conocerPuntaje(), colab.getPorCSV())).toList();
     }
 
 
