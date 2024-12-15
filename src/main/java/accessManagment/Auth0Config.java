@@ -11,7 +11,7 @@ public class Auth0Config {
     // Genera la URL de autorización
     public static String getAuthorizationUrl() {
         return String.format(
-                "https://%s/authorize?response_type=code&client_id=%s&redirect_uri=%s&scope=openid profile email",
+                "https://%s/authorize?response_type=code&client_id=%s&redirect_uri=%s&scope=openid profile email&prompt=login",
                 DOMAIN, CLIENT_ID, REDIRECT_URI);
     }
 

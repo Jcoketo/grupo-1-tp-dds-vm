@@ -100,26 +100,23 @@
             </div>
             <div class="row mb-3">
 
-            <div class="row mb-3">
-                <div class="col-md-6">
-                    <div class="row mb-3">
-                    <label for="Descripcion Falla" class="form-label">Descripción</label>
-                    <input type="text" class="form-control" name="descripcion" id="descripcion">
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <div class="row mb-3">
+                        <label for="Descripcion Falla" class="form-label">Descripción</label>
+                        <input type="text" class="form-control" name="descripcion" id="descripcion">
+                        </div>
+                    </div>
+                    <div class="pl-3" style="padding-top: 35px">
+                        <input type="checkbox" id="checkBoxResolvioProblema" name="checkBoxResolvioProblema" onclick="toggleSolucionado()">
+                        <label for="checkBoxResolvioProblema" class="ml-2 mb-0">El inicidente fue solucionado.</label>
                     </div>
                 </div>
-                <div class="pl-3" style="padding-top: 35px">
-                    <input type="checkbox" id="checkBoxResolvioProblema" name="checkBoxResolvioProblema" onclick="toggleSolucionado()">
-                    <label for="checkBoxResolvioProblema" class="ml-2 mb-0">El inicidente fue solucionado.</label>
-                </div>
-            </div>
 
-            <div class="row mb-3">
-                <div class="col-md-6">
-                    <label for="idTecnico" class="form-label">Técnico</label>
-                    <input type="text" class="form-control" id="idTecnico" name="idTecnico" required>
-                </div>
-                <div class="btn-group">
-                    <button type="submit" class="btn-registrar">Registrar</button>
+                <div class="row mb-3">
+                    <div class="btn-group">
+                        <button type="submit" class="btn-registrar">Registrar</button>
+                    </div>
                 </div>
             </div>
         </form>
