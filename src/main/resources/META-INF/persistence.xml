@@ -9,9 +9,11 @@
 
         <properties>
             <property name="hibernate.archive.autodetection" value="class"/>
+            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL8Dialect"/>
 
-            <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"/>
-            <property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/maravilla?serverTimezone=America/Buenos_Aires" />
+            <property name="hibernate.connection.driver_class" value="com.mysql.cj.jdbc.Driver"/>
+            <property name="hibernate.connection.url" value="jdbc:mysql://dbservice:3306/maravilla?serverTimezone=America/Buenos_Aires" />
+            <!-- USAR ENVIRONMENT VARS PARA CREDENCIALES DB -->
             <property name="hibernate.connection.username" value="root" />
             <property name="hibernate.connection.password" value="123456" />
 
