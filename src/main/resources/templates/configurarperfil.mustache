@@ -86,13 +86,26 @@
             font-weight: bold;
         }
         .form-control {
-            margin-bottom: 30px;
-            border: 1px solid #1e5552;
+             color: #495057;
+              background-color: #fff;
+              background-clip: padding-box;
+              border: 1px solid #ced4da;
+              border-radius: 0.25rem;
         }
         .btn-submit {
             background-color: #1e5552;
             color: white;
         }
+
+
+       .alta-masiva {
+           text-align: right;
+           margin-left: 450px;
+           margin-right: 0;
+           display: block;
+           color: #adb5bd;
+       }
+
         h3 {
             margin: 0;
             white-space: nowrap;
@@ -144,7 +157,9 @@
         }
         .info-group {
             margin-bottom: 20px;
+
         }
+
         .label {
             font-size: 1.25rem;
             font-weight: bold;
@@ -159,10 +174,15 @@
         }
 
         .labelDesplegable {
-            font-size: 1.25rem;
+            font-size: 0.8rem;
             font-weight: bold;
             width : 310px;
             height : 30px;
+             color: #495057;
+              background-color: #fff;
+              background-clip: padding-box;
+              border: 1px solid #ced4da;
+              border-radius: 0.25rem;
         }
 
     </style>
@@ -240,6 +260,10 @@
                     <label for="email" class="label">Email</label>
                     <input type="email" class="form-control" id="email" name="email" value="{{email}}">
                 </div>
+                <div class="info-group" style="display: flex; justify-content: flex-start;">
+                    <p class="label" style="margin: 0; margin-right: 30px;">Documento</p>
+                    <p class="alta-masiva" style="margin: 0;"><b><i>Para modificar el numero o tipo de documento comunicarse a: user@gmail.com.</i></b></p>
+                </div>
             {{/esPersonaHumana}}
             {{#esPersonaJuridica}} <!--  PERSONA JURIDICA  -->
                 <div class="info-group">
@@ -284,6 +308,10 @@
                     <label for="email" class="label">Mail</label>
                     <input type="email" class="form-control" id="email" name="email" value="{{email}}">
                 </div>
+                <div class="info-group" style="display: flex; justify-content: flex-start;">
+                    <p class="label" style="margin: 0; margin-right: 30px;">CUIL</p>
+                    <p class="alta-masiva" style="margin: 0;"><b><i>Para modificar el CUIL comunicarse a: user@gmail.com.</i></b></p>
+                </div>
             {{/esPersonaJuridica}}
 
                 {{#notificacionCambio}}
@@ -291,6 +319,7 @@
                 {{/notificacionCambio}}
 
                 <button type="submit" class="nav-link, btn btn-submit" href="perfil">Guardar cambios</button>
+            <p>  </p>
             </form>
         </div>
     </div>
