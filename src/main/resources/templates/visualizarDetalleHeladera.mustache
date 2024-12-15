@@ -272,9 +272,11 @@
             <p>  </p>
             <hr style="margin: 0; padding: 0; border: 0; border-top: 2px solid #D3D3D3;">
             <p>  </p>
+            {{#notificacionSuscripcion}}
+                <div class="text-{{tipo}}">{{mensaje}}</div>
+            {{/notificacionSuscripcion}}
             <form id="suscripcionForm" action="/suscribirse" method="post">
                 <div style="display: inline-flex; gap: 20px">
-
 
                     <h2 class="info"  style="font-family: 'Poppins'; font-weight: 600; font-size: 24px; margin-top: 10px;" >Suscripciones</h2>
 
@@ -291,6 +293,14 @@
                     <input class="no-arrow-select" type="text" id="cantidad" name="cantidad" style="display: inline-block;">
                 </div>
 
+                <input type="hidden" id="nombre" name="nombre" value="{{nombre}}" >
+                <input type="hidden" id="direccion" name="direccion" value="{{direccion}}" >
+                <input type="hidden" id="latitud" name="latitud" value="{{latitud}}" >
+                <input type="hidden" id="longitud" name="longitud" value="{{longitud}}" >
+                <input type="hidden" id="fecha" name="fecha" value="{{fecha}}" >
+                <input type="hidden" id="estado" name="estado" value="{{estado}}" >
+                <input type="hidden" id="disponibilidad" name="disponibilidad" value="{{disponibilidad}}" >
+
                 <div id="suscribirse-container" style="display: none; margin-top: 10px;">
                     <input type="hidden" name="heladeraId" value="{{heladeraId}}">
                     <select class="custom-select2 my-1 mr-sm-2" id="medioContacto" name="medioDeContacto" ">
@@ -301,18 +311,9 @@
 
                     </select>
 
-                    <input type="hidden" id="nombre" name="nombre" value="{{nombre}}" >
-                    <input type="hidden" id="direccion" name="direccion" value="{{direccion}}" >
-                    <input type="hidden" id="latitud" name="latitud" value="{{latitud}}" >
-                    <input type="hidden" id="longitud" name="longitud" value="{{longitud}}" >
-                    <input type="hidden" id="fecha" name="fecha" value="{{fecha}}" >
-                    <input type="hidden" id="estado" name="estado" value="{{estado}}" >
-                    <input type="hidden" id="disponibilidad" name="disponibilidad" value="{{disponibilidad}}" >
-
                     <button type="submit" class=" btn-primary">Suscribirme</button>
                 </div>
             </form>
-
 
         </div>
     </div>

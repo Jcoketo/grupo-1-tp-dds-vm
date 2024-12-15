@@ -39,14 +39,14 @@ public class ConfigurarPerfilFinalizadoController implements Handler {
 
         if (  !telefono.equals("")  &&  !telefono.matches("[0-9]{8,10}")  )  {
             notificacionCambio.error("El teléfono debe tener entre 8 y 10 dígitos");
-            model.put("notificacionCambio", notificacionCambio);
+            context.sessionAttribute("notificacionCambio", notificacionCambio);
             context.redirect("/configurarPerfil");
             return;
         }
 
         if ( !email.matches("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$") )  {
             notificacionCambio.error("El mail no es válido");
-            model.put("notificacionCambio", notificacionCambio);
+            context.sessionAttribute("notificacionCambio", notificacionCambio);
             context.redirect("/configurarPerfil");
             return;
         }
@@ -65,7 +65,7 @@ public class ConfigurarPerfilFinalizadoController implements Handler {
 
             if (nombre.equals("") || apellido.equals("") || fNac.equals("") )  {
                 notificacionCambio.error("Los campos nombre, apellido y fecha de nacimiento son obligatorios");
-                model.put("notificacionCambio", notificacionCambio);
+                context.sessionAttribute("notificacionCambio", notificacionCambio);
                 context.redirect("/configurarPerfil");
                 return;
             }
@@ -86,16 +86,17 @@ public class ConfigurarPerfilFinalizadoController implements Handler {
         else if (tipoPer == TipoPersona.PJ) {
             PersonaJuridica personaModificada = repoColaboradores.traerPersonaPorIdJuridica(idPersona);
             String nombre = context.formParam("nombre");
-            String cuit = context.formParam("cuit");
+            //String cuit = context.formParam("cuit");
+            //String cuitViejo = context.formParam("cuitViejo");
             String tipoJuridico = context.formParam("tipoJuridico");
             String rubro = context.formParam("rubro");
 
-            if ( !cuit.matches("[0-9]{11}") )  {
+            /*if ( !cuit.matches("[0-9]{11}") )  {
                 notificacionCambio.error("El campo CUIT es obligatorio y debe tener 11 dígitos");
-                model.put("notificacionCambio", notificacionCambio);
+                context.sessionAttribute("notificacionCambio", notificacionCambio);
                 context.redirect("/configurarPerfil");
                 return;
-            }
+            }*/
 
             if ( !tipoJuridico.equals("0") ) {
                 TipoJuridico tipo;
@@ -121,7 +122,7 @@ public class ConfigurarPerfilFinalizadoController implements Handler {
             }
 
             personaModificada.setRazonSocial(nombre);
-            personaModificada.setCUIT(cuit);
+            //personaModificada.setCUIT(cuit);
             personaModificada.setTelefono(telefono);
             personaModificada.setDireccion(direccion);
             personaModificada.setEmail(email);
@@ -129,7 +130,7 @@ public class ConfigurarPerfilFinalizadoController implements Handler {
         }
 
         notificacionCambio.aprobada("Perfil actualizado correctamente");
-        model.put("notificacionCambio", notificacionCambio);
+        context.sessionAttribute("notificacionCambio", notificacionCambio);
         context.redirect("/perfil");
 
     }

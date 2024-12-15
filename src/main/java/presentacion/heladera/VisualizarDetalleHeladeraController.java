@@ -31,7 +31,7 @@ public class VisualizarDetalleHeladeraController implements Handler{
         if(notificacionSuscripcion != null){
             model.put("notificacionSuscripcion", notificacionSuscripcion);
         }
-        context.consumeSessionAttribute("notificacionTarjeta");
+        context.consumeSessionAttribute("notificacionSuscripcion");
 
         Persona persona = repoColaboradores.obtenerPersona(idPersona);
 
