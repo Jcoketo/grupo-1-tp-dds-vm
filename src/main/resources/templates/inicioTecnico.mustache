@@ -36,14 +36,47 @@
     </style>
 </head>
 <body>
-{{> header}}
+<header>
+    <div class="">
+        <a href="/inicio">
+            <img src="/static/logo.png" alt="Logo" style="max-height: 50px;" class="ml-5">
+        </a>
+    </div>
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item mr-3">
+                    <a class="nav-link" href="#">Sobre nosotros</a>
+                </li>
+                <li class="nav-item mr-3">
+                    <a class="nav-link" href="/mapaHeladeras">Heladeras</a>
+                </li>
+                <!-- Menú desplegable -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        {{nombreUsuario}}
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="/perfil">Mi perfil</a>
+                        <a class="dropdown-item" href="/logout">Cerrar sesión</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>
 
 <main class="d-flex justify-content-center align-items-center">
     <div class="container m-5 d-flex justify-content-center align-items-center" id="contenedor-inicio-tecnico">
         <div class="main-content mr-5">
             <h1 class="mb-3" id="bienvenido-m">Bienvenido tecnico!</h1>
             <h3 class="mb-3">Ya estás listo para registrar visitas.</h3>
-            <button class="btn-tecnico" onclick="window.location.href='/registrarVisitas'">Registrar visitas.</button>
+            <button class="btn-tecnico" onclick="window.location.href='/registrarVisita'">Registrar visitas</button>
         </div>
 
         <div class="image-placeholder ml-5">

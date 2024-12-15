@@ -31,8 +31,6 @@ public class PerfilController implements Handler {
         Integer idPersona = context.sessionAttribute("idPersona");
         TipoPersona tipoPer = context.sessionAttribute("tipoPersona");
         model.put("nombreUsuario", context.sessionAttribute("nombreUsuario"));
-        Colaborador colab = repoColaboradores.buscarColaboradorXIdPersona(idPersona);
-
 
         if (tipoPer == TipoPersona.PH) {
             PersonaHumana persona = repoColaboradores.traerPersonaPorIdFisica(idPersona);
@@ -45,7 +43,6 @@ public class PerfilController implements Handler {
             model.put("direccion", persona.getDireccion());
             model.put("telefono", persona.getTelefono());
             model.put("email", persona.getEmail());
-            model.put("puntos", colab.getPuntaje());
         }
         if (tipoPer == TipoPersona.PJ) {
             PersonaJuridica persona = repoColaboradores.traerPersonaPorIdJuridica(idPersona);
@@ -57,7 +54,6 @@ public class PerfilController implements Handler {
             model.put("direccion", persona.getDireccion());
             model.put("telefono", persona.getTelefono());
             model.put("email", persona.getEmail());
-            model.put("puntos", colab.getPuntaje());
         }
 
         context.render("templates/perfil.mustache", model);
