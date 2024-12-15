@@ -27,9 +27,8 @@ public class CuentaFisicaCreadaController implements Handler {
 
         String esPorSSO = context.formParam("esXSSO");
         Boolean esXSSO = Boolean.FALSE;
-        if (esPorSSO.equals("1")) {
-            esXSSO = Boolean.TRUE;
-        }
+        if ( esPorSSO == null ) { esPorSSO = "0"; }
+        if (esPorSSO.equals("1")) { esXSSO = Boolean.TRUE; }
 
         String tipoDoc = context.formParam("tipoDoc");
         String nroDoc = context.formParam("nroDoc");

@@ -1,17 +1,10 @@
 import io.javalin.Javalin;
-import io.javalin.http.Context;
 import io.javalin.http.staticfiles.Location;
-import io.micrometer.core.instrument.Metrics;
-import io.micrometer.prometheus.PrometheusMeterRegistry;
-import io.micrometer.core.instrument.Counter;
-import io.micrometer.core.instrument.Gauge;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -28,6 +21,7 @@ public class Application {
     }
 
     public static void main(String[] args) {
+        /*
         // Crear el registry de Prometheus
         PrometheusMeterRegistry prometheusMeterRegistry = new PrometheusMeterRegistry(io.micrometer.prometheus.PrometheusConfig.DEFAULT);
 
@@ -40,14 +34,15 @@ public class Application {
         Gauge.builder("active_users", () -> 10) // Cambia el valor según la lógica de tu app
                 .description("Number of active users")
                 .register(prometheusMeterRegistry);
+                */
+
 
         app = Javalin.create(javalinConfig -> {
             javalinConfig.plugins.enableCors(cors -> {
                 cors.add(it -> it.anyHost());
             });
 
-            // Configurar recursos estáticos
-            javalinConfig.staticFiles.add("/", Location.CLASSPATH);
+            javalinConfig.staticFiles.add("/app/static", Location.EXTERNAL);
         }).start(8080);
 
         // Crear el directorio de imágenes si no existe
@@ -57,6 +52,7 @@ public class Application {
         Router.init(getEntityManager());
         configureImageRoutes(app);
 
+        /*
         // Endpoint para exponer métricas a Prometheus
         app.get("/metrics", ctx -> {
             ctx.result(prometheusMeterRegistry.scrape()); // Exponer las métricas en formato Prometheus
@@ -64,6 +60,8 @@ public class Application {
 
         // Incrementar el contador con cada solicitud
         app.before(ctx -> counter.increment());
+        */
+
     }
 
     private static EntityManager getEntityManager() {
