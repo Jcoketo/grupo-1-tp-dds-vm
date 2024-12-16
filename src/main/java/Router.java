@@ -239,6 +239,11 @@ public class Router {
                 get(new MisHeladerasController());
             });
 
+            path("/misTarjetasEntregadas", () -> {
+                before(new AutorizacionMiddleware().setDebeSerLogueado());
+                get(new MisTarjetasEntregadasController());
+            });
+
             path("/misReportes", () -> {
                 before(new AutorizacionMiddleware().setDebeSerLogueado().setDebeSerAdmin());
                 get(new MisReportesController());

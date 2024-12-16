@@ -3,11 +3,10 @@ package persistencia;
 import lombok.Getter;
 import modelo.elementos.Incidente;
 import modelo.excepciones.ExcepcionValidacion;
+import modelo.personas.MedioDeContacto;
 import modelo.personas.PersonaVulnerable;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -63,4 +62,13 @@ public class RepositorioPersonasVulnerables {
         }
     }
 
+    public List<PersonaVulnerable> obtenerPersonasVulnerablesRegistradasPor(Integer idPersona){
+        TypedQuery<PersonaVulnerable> query = em.createQuery("SELECT p FROM PersonaVulnerable p WHERE p.persona_alta_id = :idPersona", PersonaVulnerable.class);
+        query.setParameter("idPersona", idPersona);
+        try {
+            return query.getResultList();
+        } catch (NoResultException e) {
+            return null;
+        }
+    }
 }
