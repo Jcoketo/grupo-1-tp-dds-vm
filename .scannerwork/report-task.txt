@@ -1,6 +1,0 @@
-projectKey=cande
-serverUrl=http://localhost:9000
-serverVersion=24.12.0.100206
-dashboardUrl=http://localhost:9000/dashboard?id=cande
-ceTaskId=9b1d7f72-3e2a-4acb-9541-d0538dd55c2c
-ceTaskUrl=http://localhost:9000/api/ce/task?id=9b1d7f72-3e2a-4acb-9541-d0538dd55c2c
