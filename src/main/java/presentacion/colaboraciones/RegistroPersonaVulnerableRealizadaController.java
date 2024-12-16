@@ -8,6 +8,7 @@ import modelo.personas.TipoDocumento;
 import org.jetbrains.annotations.NotNull;
 import persistencia.RepositorioPersonasVulnerables;
 import persistencia.RepositorioTarjetas;
+import utils.GeneradorModel;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -21,11 +22,7 @@ public class RegistroPersonaVulnerableRealizadaController implements Handler{
 
     @Override
     public void handle(@NotNull Context context) throws Exception {
-        Map<String, Object> model = context.sessionAttribute("model");
-        if (model == null) {
-            model = new HashMap<>();
-            context.sessionAttribute("model", model);
-        }
+        Map<String, Object> model = GeneradorModel.getModel(context);
 
         String nombre = Objects.requireNonNull(context.formParam("nombre"));
         Integer tieneDoc = Integer.parseInt(Objects.requireNonNull(context.formParam("tieneDoc")));

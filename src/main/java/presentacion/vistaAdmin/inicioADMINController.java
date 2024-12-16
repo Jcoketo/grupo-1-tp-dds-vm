@@ -28,8 +28,11 @@ public class inicioADMINController implements Handler {
             return;
         }
 
-        model.put("nombreUsuario", context.sessionAttribute("nombreUsuario"));
-        model.put("logueado", context.sessionAttribute("logueado"));
+        if (context.sessionAttribute("notificacionAdminMail") != null) {
+            model.put("notificacionAdminMail", context.sessionAttribute("notificacionAdminMail"));
+            context.consumeSessionAttribute("notificacionAdminMail");
+        }
+
 
         context.render("templates/inicioAdmin.mustache", model);
     }

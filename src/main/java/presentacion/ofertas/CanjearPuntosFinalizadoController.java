@@ -9,6 +9,7 @@ import modelo.personas.Colaborador;
 import org.apache.commons.io.FileUtils;
 import persistencia.RepositorioColaboradores;
 import persistencia.RepositorioOfertas;
+import utils.GeneradorModel;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -24,11 +25,7 @@ public class CanjearPuntosFinalizadoController  implements Handler {
 
     @Override
     public void handle(Context context) throws Exception {
-        Map<String, Object> model = context.sessionAttribute("model");
-        if (model == null) {
-            model = new HashMap<>();
-            context.sessionAttribute("model", model);
-        }
+        Map<String, Object> model = GeneradorModel.getModel(context);
 
         Integer idOferta = Integer.parseInt(context.formParam("ofertaId"));
         Integer idPersona = context.sessionAttribute("idPersona");

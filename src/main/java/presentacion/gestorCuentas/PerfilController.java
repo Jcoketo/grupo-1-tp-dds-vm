@@ -30,7 +30,6 @@ public class PerfilController implements Handler {
 
         Integer idPersona = context.sessionAttribute("idPersona");
         TipoPersona tipoPer = context.sessionAttribute("tipoPersona");
-        model.put("nombreUsuario", context.sessionAttribute("nombreUsuario"));
 
         if (tipoPer == TipoPersona.PH) {
             PersonaHumana persona = repoColaboradores.traerPersonaPorIdFisica(idPersona);

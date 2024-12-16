@@ -17,6 +17,7 @@ import presentacion.incidentes.VisualizarAlertasController;
 import presentacion.incidentes.VisualizarFallasTecnicasController;
 import presentacion.ofertas.*;
 import presentacion.vistaAdmin.CargarSCVController;
+import presentacion.vistaAdmin.DarAltaAdminController;
 import presentacion.vistaAdmin.SCVCargadoController;
 import presentacion.vistaAdmin.inicioADMINController;
 import presentacion.reportes.MisReportesController;
@@ -37,6 +38,7 @@ public class Router {
 
         // ------------------- SE INICIALIZAN LOS REPOSITORIOS   ----------------------- //
 
+        RepositorioSuscripciones repositorioSuscripciones = RepositorioSuscripciones.getInstancia(entityManager);
         RepositorioArchivos repoArchivos = RepositorioArchivos.getInstancia(entityManager);
         RepositorioColaboradores repoColab = RepositorioColaboradores.getInstancia(entityManager);
         RepositorioHeladeras repoHeladeras = RepositorioHeladeras.getInstancia(entityManager);
@@ -134,6 +136,11 @@ public class Router {
             path("/cuentaCreada", () -> {
                 before(new AutorizacionMiddleware());
                 get(new CuentaCreadaController());
+            });
+
+            path("/darAltaAdmin", () -> {
+                before(new AutorizacionMiddleware().setDebeSerLogueado().setDebeSerAdmin());
+                post(new DarAltaAdminController());
             });
 
             path("/darDeBajaHeladera", () -> {
@@ -237,6 +244,11 @@ public class Router {
             path("/misHeladeras", () -> {
                 before(new AutorizacionMiddleware().setDebeSerLogueado().setDebeSerPJ());
                 get(new MisHeladerasController());
+            });
+
+            path("/misSuscripciones", () -> {
+                before(new AutorizacionMiddleware().setDebeSerLogueado());
+                get(new MisSuscripcionesController());
             });
 
             path("/misTarjetasEntregadas", () -> {

@@ -49,50 +49,50 @@ public class ValidarDatosFinalizadoController implements Handler {
 
         if (nombre.equals("") || apellido.equals("") || username.equals("") || password.equals("") || numeroDoc.equals("")
                 || mailNuevo.equals("") )  {
-            model.put("errorValidador", "Los campos nombre, apellido y fecha de nacimiento son obligatorios");
+            context.sessionAttribute("errorValidarDatos", "Los campos nombre, apellido y fecha de nacimiento son obligatorios");
             context.redirect("/validarDatos");
             return;
         }
         if ( rol == Roles.TECNICO && ( cuil.equals("") || direccion.equals("") && !esNumerico(cuil) ) )  {
-            model.put("errorValidador", "El campo CUIT y direccion es obligatorio");
+            context.sessionAttribute("errorValidarDatos", "El campo CUIT y direccion es obligatorio");
             context.redirect("/validarDatos");
             return;
         }
 
         if ( !mailOriginal.equals(mailNuevo) || mailNuevo.equals("") )  {
             if ( !mailNuevo.matches("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$") )  {
-                model.put("errorValidador", "El mail nuevo ingresado no es valido");
+                context.sessionAttribute("errorValidarDatos", "El mail nuevo ingresado no es valido");
                 context.redirect("/validarDatos");
                 return;
             }
         }
 
         if ( !esNumerico(numeroDoc)  ||  (!telefono.equals("") && !esNumerico(telefono)) ) {
-            model.put("error", "El número de documento o el teléfono no son numéricos");
+            context.sessionAttribute("errorValidarDatos", "El número de documento o el teléfono no son numéricos");
             context.redirect("/validarDatos");
             return;
         }
 
         if ( !numeroDoc.matches("[0-9]{0,8}") )  {
-            model.put("error", "El número de documento debe tener 8 dígitos");
+            context.sessionAttribute("errorValidarDatos", "El número de documento debe tener 8 dígitos");
             context.redirect("/validarDatos");
             return;
         }
 
         if ( !cuil.equals("") && !cuil.matches("[0-9]{11}") )  {
-            model.put("errorValidador", "El campo CUIT es obligatorio y debe tener 11 dígitos");
+            context.sessionAttribute("errorValidarDatos", "El campo CUIT es obligatorio y debe tener 11 dígitos");
             context.redirect("/validarDatos");
             return;
         }
 
         if ( !telefono.equals("")  &&  !telefono.matches("[0-9]{8,10}") )  {
-            model.put("errorValidador", "El teléfono debe tener entre 8 y 10 dígitos");
+            context.sessionAttribute("errorValidarDatos", "El teléfono debe tener entre 8 y 10 dígitos");
             context.redirect("/validarDatos");
             return;
         }
 
         if ( repositorioUsuarios.existeMAIL(mailNuevo) && !mailOriginal.equals(mailNuevo) ) {
-            model.put("errorValidador", "El mail ya se encuentra registrado");
+            context.sessionAttribute("errorValidarDatos", "El mail ya se encuentra registrado");
             context.redirect("/validarDatos");
             return;
         }

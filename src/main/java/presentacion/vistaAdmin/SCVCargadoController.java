@@ -8,6 +8,7 @@ import modelo.importador.ProcesarCSV;
 import modelo.importador.RegistroLeido;
 import org.apache.commons.io.FileUtils;
 import org.jetbrains.annotations.NotNull;
+import utils.GeneradorModel;
 
 import java.io.File;
 import java.util.HashMap;
@@ -17,11 +18,7 @@ import java.util.Map;
 public class SCVCargadoController implements Handler {
     @Override
     public void handle(@NotNull Context context) throws Exception {
-        Map<String, Object> model = context.sessionAttribute("model");
-        if (model == null) {
-            model = new HashMap<>();
-            context.sessionAttribute("model", model);
-        }
+        Map<String, Object> model = GeneradorModel.getModel(context);
 
         List<UploadedFile> uploadedFiles = context.uploadedFiles("file");
 

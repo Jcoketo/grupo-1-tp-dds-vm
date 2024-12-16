@@ -1,5 +1,6 @@
 package modelo.suscripcion;
 
+import lombok.Setter;
 import modelo.elementos.Heladera;
 import lombok.Getter;
 import modelo.notificador.Notificador;
@@ -11,7 +12,8 @@ import javax.persistence.*;
 @Entity
 @Table
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-public abstract class Suscripcion {
+public abstract class
+Suscripcion {
 
     @Id
     @GeneratedValue
@@ -29,8 +31,12 @@ public abstract class Suscripcion {
     @Enumerated(EnumType.STRING)
     @Getter private TipoSuscripcion tipoSuscripcion;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @Getter @Setter
+    @OneToOne(cascade = CascadeType.PERSIST)
     private MedioDeContacto medioDeContacto;
+
+    @Getter @Setter
+    @Column private Boolean bajaLogica = Boolean.FALSE;
 
     public Suscripcion(Heladera heladera, Colaborador colaborador, TipoSuscripcion tipo, MedioDeContacto medio) {
         this.heladera = heladera;

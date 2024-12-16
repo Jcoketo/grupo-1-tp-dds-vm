@@ -68,6 +68,7 @@ public class AuthServiceSuscripcion {
 
         repositorioHeladeras.actualizarHeladera(heladera);
 
+
         String mensajeAux = "Te has suscripto a la heladera " + heladera.getNombre() + "." + mensaje + " Recuerda que puedes modificar tus suscripciones en cualquier momento.";
 
         Notificador.notificar(mensajeAux, "Suscripción realizada con éxito", medioDeContacto);

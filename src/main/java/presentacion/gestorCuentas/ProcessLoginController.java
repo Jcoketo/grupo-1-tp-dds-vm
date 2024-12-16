@@ -45,6 +45,8 @@ public class ProcessLoginController implements Handler {
         TipoPersona tipoPer = repoColab.devolverTipoPersona(email);
         context.sessionAttribute("tipoPersona", tipoPer);
 
+        context.sessionAttribute("mailUsuario",email);
+
 
         Integer idPersona = repoColab.devolverIdPersona(email);
         context.sessionAttribute("idPersona", idPersona);

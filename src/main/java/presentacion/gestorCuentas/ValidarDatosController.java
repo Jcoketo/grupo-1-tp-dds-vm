@@ -33,6 +33,11 @@ public class ValidarDatosController implements Handler {
             return;
         }
 
+        if(context.sessionAttribute("errorValidarDatos") != null){
+            model.put("errorValidarDatos", context.sessionAttribute("errorValidarDatos"));
+            context.consumeSessionAttribute("errorValidarDatos");
+        }
+
         Usuario usuario = repoUsuarios.traerUsuario(mail);
 
         model.put("nombre", persona.getNombre());
