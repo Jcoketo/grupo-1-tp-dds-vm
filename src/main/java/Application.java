@@ -13,6 +13,7 @@ public class Application {
 
     private static Javalin app = null;
     private static final String UPLOAD_DIR = "src/main/resources/uploads";
+    private static MetricsManager metricsManager;
 
     public static Javalin app() {
         if (app == null)
@@ -21,21 +22,8 @@ public class Application {
     }
 
     public static void main(String[] args) {
-        /*
-        // Crear el registry de Prometheus
-        PrometheusMeterRegistry prometheusMeterRegistry = new PrometheusMeterRegistry(io.micrometer.prometheus.PrometheusConfig.DEFAULT);
-
-        // Registrar un contador de solicitudes
-        Counter counter = Counter.builder("app_requests_total")
-                .description("Total number of requests")
-                .register(prometheusMeterRegistry);
-
-        // Registrar una métrica de ejemplo (usuarios activos)
-        Gauge.builder("active_users", () -> 10) // Cambia el valor según la lógica de tu app
-                .description("Number of active users")
-                .register(prometheusMeterRegistry);
-                */
-
+        // Inicializar el gestor de métricas
+        metricsManager = new MetricsManager();
 
         app = Javalin.create(javalinConfig -> {
             javalinConfig.plugins.enableCors(cors -> {
@@ -45,23 +33,18 @@ public class Application {
             javalinConfig.staticFiles.add("/app/static", Location.EXTERNAL);
         }).start(8080);
 
+        // Configurar el endpoint de métricas
+        metricsManager.configureMetricsEndpoint(app);
+
+        // Incrementar el contador de solicitudes en cada request
+        metricsManager.configureRequestCounter(app);
+
         // Crear el directorio de imágenes si no existe
         initializeUploadDirectory();
 
         // Configurar rutas
         Router.init(getEntityManager());
         configureImageRoutes(app);
-
-        /*
-        // Endpoint para exponer métricas a Prometheus
-        app.get("/metrics", ctx -> {
-            ctx.result(prometheusMeterRegistry.scrape()); // Exponer las métricas en formato Prometheus
-        });
-
-        // Incrementar el contador con cada solicitud
-        app.before(ctx -> counter.increment());
-        */
-
     }
 
     private static EntityManager getEntityManager() {
