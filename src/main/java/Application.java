@@ -13,7 +13,6 @@ public class Application {
 
     private static Javalin app = null;
     private static final String UPLOAD_DIR = "src/main/resources/uploads";
-    private static MetricsManager metricsManager;
 
     public static Javalin app() {
         if (app == null)
@@ -22,8 +21,6 @@ public class Application {
     }
 
     public static void main(String[] args) {
-        // Inicializar el gestor de métricas
-        metricsManager = new MetricsManager();
 
         app = Javalin.create(javalinConfig -> {
             javalinConfig.plugins.enableCors(cors -> {
@@ -32,12 +29,6 @@ public class Application {
 
             javalinConfig.staticFiles.add("/app/static", Location.EXTERNAL);
         }).start(8080);
-
-        // Configurar el endpoint de métricas
-        metricsManager.configureMetricsEndpoint(app);
-
-        // Incrementar el contador de solicitudes en cada request
-        metricsManager.configureRequestCounter(app);
 
         // Crear el directorio de imágenes si no existe
         initializeUploadDirectory();
