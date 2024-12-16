@@ -43,7 +43,7 @@
     </properties>
 
     <dependencies>
-        <!--
+
         <dependency>
             <groupId>io.micrometer</groupId>
             <artifactId>micrometer-core</artifactId>
@@ -55,8 +55,6 @@
             <artifactId>micrometer-registry-prometheus</artifactId>
             <version>1.10.1</version>
         </dependency>
-
-        -->
 
         <dependency>
             <groupId>io.prometheus</groupId>
