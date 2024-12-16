@@ -49,6 +49,7 @@ public class MapaMisHeladerasController implements Handler {
                     heladeraAux.setId(heladera.getId());
                     heladeraAux.setPunto(heladera.getPuntoEstrategico());
                     heladeraAux.setFechaFuncionamiento(heladera.getFechaFuncionamiento());
+                    heladeraAux.setTieneBaja(heladera.getBajaLogica());
                     return heladeraAux;
                 }).toList();
     }
@@ -66,5 +67,6 @@ class HeladerasJuridica {
     private Boolean activa;
     private PuntoEstrategico punto;
     private LocalDate fechaFuncionamiento;
+    private Boolean tieneBaja;
 
 }

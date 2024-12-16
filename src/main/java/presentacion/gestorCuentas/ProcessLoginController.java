@@ -68,10 +68,6 @@ public class ProcessLoginController implements Handler {
             context.redirect("/inicioTecnico");
             return;
         }
-        if(usuario.getRol() == Roles.TECNICO){
-            context.redirect("/inicioTecnico");
-            return;
-        }
 
         context.redirect("/inicio");
 

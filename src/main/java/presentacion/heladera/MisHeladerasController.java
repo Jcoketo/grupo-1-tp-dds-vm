@@ -15,6 +15,12 @@ public class MisHeladerasController implements Handler {
         model.put("logueado", context.sessionAttribute("logueado"));
         model.put("nombreUsuario", context.sessionAttribute("nombreUsuario"));
 
+        String mensajeBaja = context.sessionAttribute("mensajeBaja");
+        if (mensajeBaja != null) {
+            model.put("mensajeBaja", mensajeBaja);
+            context.consumeSessionAttribute("mensajeBaja");
+        }
+
 
         context.render("templates/misHeladeras.mustache",model);
 
