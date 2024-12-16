@@ -130,8 +130,14 @@
      font-weight: normal;
  }
 
+  .titulo{
+      color: #1e5552;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+  }
+
  .footer-bg {
-     background-color: #B7C9C7; /* Color de fondo */
+     background-color: #B8CCC8; /* Color de fondo */
      padding: 20px 0; /* Espaciado superior e inferior */
  }
  .social-icons a {
@@ -139,7 +145,7 @@
      color: white; /* Color de texto para iconos */
  }
  .footer-link {
-     color: white; /* Color de texto para enlaces */
+     color: black; /* Color de texto para enlaces */
      text-decoration: none; /* Eliminar subrayado */
  }
  .footer-link:hover {
@@ -149,5 +155,4 @@
  .social-icon {
      margin-right: 10px; /* Espacio entre el ícono y el texto */
  }
-
 
