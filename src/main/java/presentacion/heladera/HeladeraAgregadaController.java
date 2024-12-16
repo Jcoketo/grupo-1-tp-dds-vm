@@ -5,6 +5,7 @@ import io.javalin.http.Handler;
 import modelo.authService.AuthServiceColaboracion;
 import modelo.excepciones.ExcepcionValidacion;
 import org.jetbrains.annotations.NotNull;
+import utils.GeneradorModel;
 
 import java.time.LocalDate;
 import java.util.HashMap;
@@ -17,11 +18,7 @@ public class HeladeraAgregadaController implements Handler {
 
     @Override
     public void handle(@NotNull Context context) throws Exception {
-        Map<String, Object> model = context.sessionAttribute("model");
-        if (model == null) {
-            model = new HashMap<>();
-            context.sessionAttribute("model", model);
-        }
+        Map<String, Object> model = GeneradorModel.getModel(context);
 
         String nombre = context.formParam("nombre");
         String fInicio = context.formParam("fecha-inicio"); // falta parsear a LocalDate

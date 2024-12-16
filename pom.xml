@@ -45,24 +45,6 @@
     <dependencies>
 
         <dependency>
-            <groupId>io.micrometer</groupId>
-            <artifactId>micrometer-core</artifactId>
-            <version>1.10.1</version>
-        </dependency>
-
-        <dependency>
-            <groupId>io.micrometer</groupId>
-            <artifactId>micrometer-registry-prometheus</artifactId>
-            <version>1.10.1</version>
-        </dependency>
-
-        <dependency>
-            <groupId>io.prometheus</groupId>
-            <artifactId>simpleclient</artifactId>
-            <version>0.12.0</version>
-        </dependency>
-
-        <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
             <version>42.6.0</version>
@@ -80,11 +62,11 @@
             <version>5.4.18.Final</version>
         </dependency>
 
-        <dependency>
+        <!-- <dependency>
             <groupId> mysql </groupId>
             <artifactId> mysql-connector-java </artifactId>
             <version> 8.0.29 </version>
-        </dependency>
+        </dependency> -->
 
         <dependency>
             <groupId>org.apache.commons</groupId>
