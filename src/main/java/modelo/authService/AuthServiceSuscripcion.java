@@ -2,6 +2,7 @@ package modelo.authService;
 
 import modelo.elementos.Heladera;
 import modelo.excepciones.ExcepcionValidacion;
+import modelo.notificador.Notificador;
 import modelo.personas.Colaborador;
 import modelo.personas.MedioDeContacto;
 import modelo.personas.TipoMedioDeContacto;
@@ -41,25 +42,35 @@ public class AuthServiceSuscripcion {
 
         MedioDeContacto medioDeContacto = colaborador.getPersona().devolerMedioDeContacto(tipoMedioDeContacto);
 
+        String mensaje = "";
+
         switch (tipoSuscripcion) {
             case QUEDAN_POCAS -> {
                 SuscripcionXCantidad suscripcion = new SuscripcionXCantidad(heladera, colaborador, TipoSuscripcion.QUEDAN_POCAS, limite, medioDeContacto);
                 heladera.agregarSuscriptor(suscripcion);
                 colaborador.agregarSuscripcion(suscripcion);
+                mensaje = "Te avisaremos cuando queden " + limite + " viandas en la heladera.";
+
             }
             case POCO_ESPACIO -> {
                 SuscripcionXCantidad suscripcion = new SuscripcionXCantidad(heladera, colaborador, TipoSuscripcion.POCO_ESPACIO, limite, medioDeContacto);
                 heladera.agregarSuscriptor(suscripcion);
                 colaborador.agregarSuscripcion(suscripcion);
+                mensaje = "Te avisaremos cuando quede poco espacio en la heladera.";
             }
             case DESPERFECTO -> {
                 SuscripcionXFalla suscripcion = new SuscripcionXFalla(heladera, colaborador, TipoSuscripcion.DESPERFECTO, medioDeContacto);
                 heladera.agregarSuscriptor(suscripcion);
                 colaborador.agregarSuscripcion(suscripcion);
+                mensaje = "Te avisaremos cuando haya un desperfecto en la heladera.";
             }
         }
 
         repositorioHeladeras.actualizarHeladera(heladera);
+
+        String mensajeAux = "Te has suscripto a la heladera " + heladera.getNombre() + "." + mensaje + " Recuerda que puedes modificar tus suscripciones en cualquier momento.";
+
+        Notificador.notificar(mensajeAux, "Suscripción realizada con éxito", medioDeContacto);
     }
 }
 

@@ -13,6 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.ws.rs.DefaultValue;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -77,6 +78,11 @@ public class Heladera {
 
     @Column
     private Integer tiempoActivo;
+
+    @Column
+    @Getter @Setter
+    @DefaultValue("0")
+    private Boolean bajaLogica;
 
     public Heladera() {
 
