@@ -8,7 +8,6 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 
     <style>
-
         .btn-admin{
             background-color: #002B80;
             color: white;
@@ -33,10 +32,77 @@
             font-size: 80px;
         }
 
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgb(0,0,0);
+            background-color: rgba(0,0,0,0.4);
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            text-align: center;
+            border-radius: 20px;
+            width: 50%;
+        }
+
+        .close {
+            color: #aaa;
+            position: absolute;
+            right: 9px;
+            top: 8px;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .btn-submit {
+            background-color: #1e5552;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 20px;
+        }
+
+        .btn-submit:hover {
+            background-color: #083331;
+        }
+        .email-input {
+            border-radius: 20px;
+            padding: 7px;
+            width: 100%;
+            margin-bottom: 10px;
+        }
+
     </style>
+
 </head>
+
 <body>
-{{> header}}
+
+{{>header}}
 
 <main class="d-flex justify-content-center align-items-center">
     <div class="container m-5 d-flex justify-content-center align-items-center" id="contenedor-inicio-admin">
@@ -45,12 +111,19 @@
             <h3 class="mb-3">Estas en una cuenta con permisos de administrador.</h3>
             <button class="btn-admin" onclick="window.location.href='/cargarCSV'">Cargar CSV</button>
             <button class="btn-admin" onclick="window.location.href='/registrarTecnico'">Dar de alta Técnico</button>
-            {{#notificacionAdminMail}}
-            <div> <p> <i>{{notificacionAdminMail}}</i> </p> </div>
-            {{/notificacionAdminMail}}
+            <button class="btn-admin" onclick="openModal()">Asignar nuevo Administrador</button>
 
         </div>
 
+        <div id="myModal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal()">&times;</span>
+                <p>Correo electrónico:</p>
+                <input type="email" id="email" name="email" required class="email-input">
+                <div class="modal-spacing"></div>
+                <button class="btn-submit" onclick="submitEmail()">Asignar administrador</button>
+            </div>
+        </div>
         <div class="image-placeholder ml-5">
             <img src="/static/home.png" alt="Imagen" style="max-width: 100%; max-height: 100%; border-radius: 8px;">
 
@@ -58,14 +131,31 @@
     </div>
 
 </main>
+{{>footer}}
 
-{{> footer}}
 
 <!-- Incluye Bootstrap JS y sus dependencias -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script>
+    function openModal() {
+        document.getElementById("myModal").style.display = "block";
+    }
 
+    function closeModal() {
+        document.getElementById("myModal").style.display = "none";
+    }
+
+    function submitEmail() {
+        var email = document.getElementById("email").value;
+
+        alert("Correo electrónico asignado!");
+        closeModal();
+        window.location.href = '/registrarNuevoAdmin';
+
+    }
+</script>
 
 </body>
 </html>
