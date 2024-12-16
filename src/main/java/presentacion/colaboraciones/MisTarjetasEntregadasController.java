@@ -13,6 +13,7 @@ import persistencia.RepositorioPersonasVulnerables;
 import utils.GeneradorModel;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -31,6 +32,11 @@ public class MisTarjetasEntregadasController implements Handler {
         Integer idPersona = context.sessionAttribute("idPersona");
 
         List<PersonaVulnerable> personasVulnerables = repoPersonasVulnerables.obtenerPersonasVulnerablesRegistradasPor(idPersona);
+
+        if(personasVulnerables == null){
+            personasVulnerables = List.of();
+        }
+
         List<DatosPersonaVulnerable> personasRegistradas = this.getDatosPersonasVulnerables(personasVulnerables);
 
         model.put("tarjetas", personasRegistradas);

@@ -32,7 +32,13 @@ public MisColaboracionesController() {
 
         Integer idPersona = context.sessionAttribute("idPersona");
 
-        List<DatosColaboracion> datosColaboraciones = getDatosColaboraciones(repoColaboradores.getColaboraciones(idPersona));
+        List<Colaboracion> colaboraciones = repoColaboradores.getColaboraciones(idPersona);
+
+        if(colaboraciones == null) {
+            colaboraciones = List.of();
+        }
+
+        List<DatosColaboracion> datosColaboraciones = getDatosColaboraciones(colaboraciones);
 
         model.put("colabs", datosColaboraciones);
 
