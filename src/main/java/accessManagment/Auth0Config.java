@@ -5,7 +5,7 @@ public class Auth0Config {
     public static final String CLIENT_ID = "eWCr7VkPua7LBG6comgq7MimjwwdYcuT";
     public static final String CLIENT_SECRET = "xrMBTcwN60sGHDJJW7lOXAaMQD2c8qne4LRg6vUl4mBaoSx6raXruP5HlKaV68Jo";
     public static final String DOMAIN = "dev-qujwns514tnar8lw.us.auth0.com";
-    public static final String BASE_URL = "http://localhost:8080"; // Cambiar según el entorno
+    public static final String BASE_URL = "https://comunidades-solidarias.onrender.com"; // Cambiar según el entorno
     public static final String REDIRECT_URI = BASE_URL + "/loginSSO"; // Ajustar al endpoint que maneja el callback
 
     // Genera la URL de autorización
