@@ -14,11 +14,13 @@ public class RegistroCompletadoVisitaController implements Handler {
         Map<String, Object> model = GeneradorModel.getModel(context);
 
         Integer idTecnico = context.sessionAttribute("idTecnico");
-        String idHel = context.queryParam("idHeladera");
-        String idInc = context.queryParam("idIncidente");
-        String checkBoxResolvioProblema = context.queryParam("checkBoxResolvioProblema");
-        String descripcion = context.queryParam("descripcion");
-        String URLfoto = context.queryParam("URLfoto"); // La foto es opcional.
+        String idHel = context.formParam("id_heladera");
+        String idInc = context.formParam("id_incidente");
+        String checkBoxResolvioProblema = context.formParam("checkBoxResolvioProblema");
+        String descripcion = context.formParam("descripcion");
+        //String URLfoto = context.queryParam("URLfoto"); // La foto es opcional.
+
+        String URLfoto = "foto.jpg"; // La foto es opcional.
 
         Integer idHeladera = Integer.parseInt(idHel);
         Integer idIncidente = Integer.parseInt(idInc);

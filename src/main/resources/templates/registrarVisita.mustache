@@ -77,6 +77,33 @@
             font-weight: bold;
         }
 
+        .heladera-list {
+            background-color: white;
+            padding: 10px;
+            border-radius: 8px;
+            max-height: 200px;
+        }
+
+        .heladera-item {
+            border: 1px solid #ddd;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            max-height: 180px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .heladera-item h5 {
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .heladera-item p {
+            font-size: 16px;
+            line-height: 0.9;
+        }
+
     </style>
 </head>
 
@@ -89,13 +116,28 @@
         <h1 style="font-family: 'Poppins', sans serif; font-weight:700; color: #1e5552" class="mb-5">Registrar Visita</h1>
         <form action="/registrarVisita" method="post">
             <div class="row mb-3">
-                <div class="col-md-6">
-                    <label for="idHeladera" class="form-label">Heladera</label>
-                    <input type="text" class="form-control" id="idHeladera" name="idHeladera" placeholder="Heladera Campus UTN" required>
+                <div class="form-group">
+                    <h4 style="font-family: 'Poppins', sans-serif; font-weight: 700;">Heladera</h4>
+                    <div class="input-group">
+                        <select onclick="setearHeladera(this)" class="form-control form-select" name="id_heladera">
+                            <option value="unselected" selected>Seleccionar heladera</option>
+                            {{#heladeras}}
+                                <option value="{{id}}">{{nombre}}</option>
+                            {{/heladeras}}
+                        </select>
+                    </div>
                 </div>
-                <div class="col-md-6">
-                    <label for="idIncidente" class="form-label">Incidente</label>
-                    <input type="text" class="form-control" id="idIncidente" name="idIncidente" placeholder="Incidente" required>
+                <div class="heladera-list">
+                    {{#heladeras}}
+                        <div class="heladera-item" data-id="{{id}}" style="display: none">
+                            <select class="form-control form-select" name="id_incidente" >
+                                <option value="unselected" selected>Seleccionar incidente</option>
+                                {{#incidentes}}
+                                    <option value="{{id}}">{{descripcion}}</option>
+                                {{/incidentes}}
+                            </select>
+                        </div>
+                    {{/heladeras}}
                 </div>
             </div>
             <div class="row mb-3">
@@ -124,6 +166,38 @@
 </main>
 
 {{>footer}}
+
+<script>
+
+    document.addEventListener('DOMContentLoaded', (event) => {
+        const today = new Date().toISOString().split('T')[0];
+        document.getElementById('fechaDonacion1').value = today;
+    });
+
+    function validateForm(){
+        const heladeraId = document.getElementById('heladeraId').value;
+
+        if (!heladeraId) {
+            alert('Es necesario elegir una heladera');
+            return false;
+        }
+
+        return true;
+    }
+
+    function setearHeladera(event) {
+        let idHeladeraSeleccionada = event.value;
+        document.querySelectorAll('.heladera-item').forEach((element) => {
+            if (element.getAttribute('data-id') === idHeladeraSeleccionada) {
+                element.style.display = 'block';
+            } else {
+                element.style.display = 'none';
+            }
+        });
+    }
+
+
+</script>
 
 <!-- Scripts de Bootstrap y jQuery -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

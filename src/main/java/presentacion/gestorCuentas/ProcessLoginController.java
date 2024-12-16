@@ -14,12 +14,14 @@ import modelo.personas.TipoPersona;
 import persistencia.RepositorioColaboradores;
 import persistencia.RepositorioUsuarios;
 import modelo.authService.AuthServiceUsuario;
+import persistencia.RepositoriosTecnicos;
 import utils.GeneradorModel;
 
 public class ProcessLoginController implements Handler {
 
     private RepositorioColaboradores repoColab = RepositorioColaboradores.getInstancia();
     private RepositorioUsuarios repoUsuarios = RepositorioUsuarios.getInstancia();
+    private RepositoriosTecnicos repoTecnicos = RepositoriosTecnicos.getInstancia();
 
     public ProcessLoginController() {
         super();
@@ -66,6 +68,7 @@ public class ProcessLoginController implements Handler {
         }
         if (usuario.getRol() == Roles.TECNICO){
             context.redirect("/inicioTecnico");
+            context.sessionAttribute("idTecnico", repoTecnicos.buscarTecnicoXIdPersona(idPersona).getId());
             return;
         }
 
