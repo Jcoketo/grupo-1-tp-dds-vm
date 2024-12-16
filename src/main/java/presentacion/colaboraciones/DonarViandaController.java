@@ -8,6 +8,7 @@ import modelo.elementos.Heladera;
 import modelo.excepciones.ExcepcionValidacion;
 import org.jetbrains.annotations.NotNull;
 import persistencia.RepositorioHeladeras;
+import utils.GeneradorModel;
 
 import java.util.HashMap;
 import java.util.List;
@@ -17,17 +18,14 @@ public class DonarViandaController implements Handler {
 
     @Override
     public void handle(@NotNull Context context) throws Exception {
-        Map<String, Object> model = context.sessionAttribute("model");
-        if (model == null) {
-            model = new HashMap<>();
-            context.sessionAttribute("model", model);
-        }
+        Map<String, Object> model = GeneradorModel.getModel(context);
 
         RepositorioHeladeras repoHeladeras = RepositorioHeladeras.getInstancia();
-        List<HeladeraConDisponibilidad> heladeras = getHeladerasConDisponibilidad(repoHeladeras.obtenerHeladeras().stream().filter(Heladera::getActiva).toList());
+        List<HeladeraConDisponibilidad> heladeras = getHeladerasConDisponibilidad(repoHeladeras.obtenerHeladeras().stream().
+            filter(hel -> hel.getActiva() && !hel.getBajaLogica()).toList());
 
         if (heladeras == null)
-            throw new ExcepcionValidacion("No se pudieron obtener las heladeras");
+            heladeras = List.of();
 
 
         model.put("heladeras", heladeras);

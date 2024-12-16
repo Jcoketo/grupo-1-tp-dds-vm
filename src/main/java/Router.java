@@ -136,6 +136,11 @@ public class Router {
                 get(new CuentaCreadaController());
             });
 
+            path("/darDeBajaHeladera", () -> {
+                before(new AutorizacionMiddleware().setDebeSerLogueado().setDebeSerPJ());
+                get(new DarDeBajaMiHeladeraController());
+            });
+
             path("/donarDistribuirViandas", () -> {
                 before(new AutorizacionMiddleware().setDebeSerLogueado().setDebeSerPF());
                 get(new DonarDistribucionViandaController());
@@ -191,7 +196,6 @@ public class Router {
             path("/loginSSO", () -> {
                 get(new LoginSSOController());
             });
-
 
             path("/logout", () -> {
                 get(new LogoutController());

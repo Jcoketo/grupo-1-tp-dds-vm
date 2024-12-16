@@ -81,8 +81,7 @@ public class Heladera {
 
     @Column
     @Getter @Setter
-    @DefaultValue("0")
-    private Boolean bajaLogica;
+    private Boolean bajaLogica = Boolean.FALSE;
 
     public Heladera() {
 

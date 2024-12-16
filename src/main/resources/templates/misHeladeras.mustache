@@ -46,6 +46,10 @@
         <div class="map-container ">
             <div id="map"></div>
         </div>
+            {{#mensajeBaja}}
+                <div class="error-message">{{mensajeBaja}}</div>
+            {{/mensajeBaja}}
+
 
         <div class="list-container ">
             <div>
@@ -103,6 +107,7 @@
                 const fecha = formatFecha(heladera.fechaFuncionamiento);
                 const estado = heladera.activa ? "Activa" : "Inactiva";
                 const disponibilidad = heladera.disponibilidad;
+                const tieneBaja = heladera.tieneBaja;
 
                 const marker = new google.maps.Marker({
                     position: { lat: punto.latitud, lng: punto.longitud },
@@ -119,12 +124,16 @@
                         <strong>${nombre || 'Ubicación desconocida'}</strong>
                         <small>Dirección: ${punto.direccion || 'Ubicación desconocida'}</small>
                         <small>En funcionamiento desde: ${fecha}</small>
-                        <div style="display: flex; justify-content: flex-start; align-items: center;">
-                            <small>${estado}</small>
-                            <small>
-                                <a href="/visualizarDetalleHeladera?heladeraId=${heladeraId}&nombre=${nombre}&direccion=${punto.direccion}&lat=${punto.latitud}&long=${punto.longitud}&fecha=${fecha}&estado=${estado}&disponibilidad=${disponibilidad}" class="text-primary" style="text-decoration: underline; margin-left: 10px;">Detalles</a>
-                            </small>
+                        <div class="d-flex justify-content-between">
+                            <div style="display: flex; justify-content: flex-start; align-items: center;">
+                                <small>${estado}</small>
+                                <small>
+                                    <a href="/visualizarDetalleHeladera?heladeraId=${heladeraId}&nombre=${nombre}&direccion=${punto.direccion}&lat=${punto.latitud}&long=${punto.longitud}&fecha=${fecha}&estado=${estado}&disponibilidad=${disponibilidad}" class="text-primary" style="text-decoration: underline; margin-left: 10px;">Detalles</a>
+                                </small>
+                            </div>
+                            ${tieneBaja ? '<small><i>Heladera dada de baja</i></small>' : '<button class="btn-donar mt-2" onclick="window.location.href=\'/darDeBajaHeladera?heladeraId=${heladeraId}\'"><i>Dar de baja</i></button>'}
                         </div>
+                        ${tieneBaja ? '<small><i>Heladera dada de baja</i></small>' : ''}
                      </div>
 
                     `;
