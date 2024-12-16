@@ -73,6 +73,15 @@ public class RepositorioIncidentes {
 
     }
 
+    public List<Incidente> obtenerIncidentesNoSolucionados() {
+        TypedQuery<Incidente> query = em.createQuery("SELECT i FROM Incidente i where estaSolucionado = false" , Incidente.class);
+        try {
+            return query.getResultList();
+        } catch (Exception e){
+            return null;
+        }
+    }
+
 
     public Incidente devolverIncidente(Integer idIncidente) {
         return em.find(Incidente.class, idIncidente);

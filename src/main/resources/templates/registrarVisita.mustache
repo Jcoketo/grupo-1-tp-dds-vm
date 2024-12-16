@@ -77,6 +77,70 @@
             font-weight: bold;
         }
 
+        .heladera-list {
+            background-color: white;
+            padding: 10px;
+            border-radius: 8px;
+            max-height: 200px;
+        }
+
+        .heladera-item {
+            border: 1px solid #ddd;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            max-height: 180px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .heladera-item h5 {
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .heladera-item p {
+            font-size: 16px;
+            line-height: 0.9;
+        }
+
+        .upload-area {
+            border: 2px dashed #ced4da;
+            border-radius: 5px;
+            padding: 20px;
+            text-align: center;
+            background-color: #f8f9fa;
+            color: #6c757d;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .upload-area:hover {
+            background-color: #e9ecef;
+        }
+
+        .upload-area input[type="file"] {
+            display: none;
+        }
+
+        .upload-icon {
+            font-size: 50px;
+            color: #6c757d;
+        }
+
+        .upload-area p {
+            margin: 10px 0;
+        }
+
+        .upload-area a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        .upload-area a:hover {
+            text-decoration: underline;
+        }
+
     </style>
 </head>
 
@@ -87,15 +151,30 @@
 <main>
     <div class="container">
         <h1 style="font-family: 'Poppins', sans serif; font-weight:700; color: #1e5552" class="mb-5">Registrar Visita</h1>
-        <form action="/registrarVisita" method="post">
+        <form action="/registrarVisita" method="post" enctype="multipart/form-data">
             <div class="row mb-3">
-                <div class="col-md-6">
-                    <label for="idHeladera" class="form-label">Heladera</label>
-                    <input type="text" class="form-control" id="idHeladera" name="idHeladera" placeholder="Heladera Campus UTN" required>
+                <div class="form-group">
+                    <h4 style="font-family: 'Poppins', sans-serif; font-weight: 700;">Heladera</h4>
+                    <div class="input-group">
+                        <select onclick="setearHeladera(this)" class="form-control form-select" name="id_heladera">
+                            <option value="unselected" selected>Seleccionar heladera</option>
+                            {{#heladeras}}
+                                <option value="{{id}}">{{nombre}}</option>
+                            {{/heladeras}}
+                        </select>
+                    </div>
                 </div>
-                <div class="col-md-6">
-                    <label for="idIncidente" class="form-label">Incidente</label>
-                    <input type="text" class="form-control" id="idIncidente" name="idIncidente" placeholder="Incidente" required>
+                <div class="heladera-list">
+                    {{#heladeras}}
+                        <div class="heladera-item" data-id="{{id}}" style="display: none">
+                            <select class="form-control form-select" name="id_incidente" >
+                                <option value="unselected" selected>Seleccionar incidente</option>
+                                {{#incidentes}}
+                                    <option value="{{id}}">{{descripcion}}</option>
+                                {{/incidentes}}
+                            </select>
+                        </div>
+                    {{/heladeras}}
                 </div>
             </div>
             <div class="row mb-3">
@@ -105,6 +184,16 @@
                         <div class="row mb-3">
                         <label for="Descripcion Falla" class="form-label">Descripción</label>
                         <input type="text" class="form-control" name="descripcion" id="descripcion">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="foto">Foto</label>
+                        <div class="upload-area" id="uploadArea">
+                            <input type="file" id="fileInput" name="file" accept="image/*">
+                            <div id="dropZone" class="drop-zone">
+                                Arrastra y suelta el archivo aquí
+                            </div>
+                            <p id="fileName" class="mt-2"></p>
                         </div>
                     </div>
                     <div class="pl-3" style="padding-top: 35px">
@@ -124,6 +213,71 @@
 </main>
 
 {{>footer}}
+
+<script>
+    const dropZone = document.getElementById('dropZone');
+    const fileInput = document.getElementById('fileInput');
+    const fileName = document.getElementById('fileName');
+
+    dropZone.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        dropZone.classList.add('drop-zone-hover');
+    });
+
+    dropZone.addEventListener('dragleave', () => {
+        dropZone.classList.remove('drop-zone-hover');
+    });
+
+    dropZone.addEventListener('drop', (e) => {
+        e.preventDefault();
+        dropZone.classList.remove('drop-zone-hover');
+        const files = e.dataTransfer.files;
+        fileInput.files = files;
+        fileName.textContent = `Archivo seleccionado: ${files[0].name}`;
+    });
+
+    dropZone.addEventListener('click', () => {
+        fileInput.click();
+    });
+
+    fileInput.addEventListener('change', () => {
+        if (fileInput.files.length > 0) {
+            fileName.textContent = `Archivo seleccionado: ${fileInput.files[0].name}`;
+        }
+    });
+</script>
+
+<script>
+
+    document.addEventListener('DOMContentLoaded', (event) => {
+        const today = new Date().toISOString().split('T')[0];
+        document.getElementById('fechaDonacion1').value = today;
+    });
+
+    function validateForm(){
+        const heladeraId = document.getElementById('heladeraId').value;
+
+        if (!heladeraId) {
+            alert('Es necesario elegir una heladera');
+            return false;
+        }
+
+        return true;
+    }
+
+    function setearHeladera(event) {
+        let idHeladeraSeleccionada = event.value;
+        document.querySelectorAll('.heladera-item').forEach((element) => {
+            if (element.getAttribute('data-id') === idHeladeraSeleccionada) {
+                element.style.display = 'block';
+            } else {
+                element.style.display = 'none';
+            }
+        });
+    }
+
+
+</script>
 
 <!-- Scripts de Bootstrap y jQuery -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
