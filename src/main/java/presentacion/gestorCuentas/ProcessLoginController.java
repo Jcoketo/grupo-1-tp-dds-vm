@@ -40,8 +40,6 @@ public class ProcessLoginController implements Handler {
             return;
         }
 
-        System.out.println("Usuario logueado: " + email);
-
         context.sessionAttribute("logueado", true);
 
         TipoPersona tipoPer = repoColab.devolverTipoPersona(email);
