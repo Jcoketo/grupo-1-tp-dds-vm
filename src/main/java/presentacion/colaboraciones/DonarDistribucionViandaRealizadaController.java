@@ -6,6 +6,7 @@ import modelo.authService.AuthServiceColaboracion;
 import modelo.colaboracion.MotivoDistribucion;
 import modelo.excepciones.ExcepcionValidacion;
 import org.jetbrains.annotations.NotNull;
+import utils.GeneradorModel;
 
 import java.util.Map;
 
@@ -17,11 +18,7 @@ public class DonarDistribucionViandaRealizadaController implements Handler {
 
     @Override
     public void handle(@NotNull Context context) throws Exception {
-        Map<String, Object> model = context.sessionAttribute("model");
-        if (model == null) {
-            model = new java.util.HashMap<>();
-            context.sessionAttribute("model", model);
-        }
+        Map<String, Object> model = GeneradorModel.getModel(context);
 
         Integer idHeladeraOrigen = Integer.parseInt(model.get("idHeladeraOrigen").toString());
         Integer idHeladeraDestino = Integer.parseInt(model.get("idHeladeraDestino").toString());

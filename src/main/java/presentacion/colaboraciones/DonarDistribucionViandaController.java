@@ -7,6 +7,7 @@ import lombok.Setter;
 import modelo.elementos.Heladera;
 import org.jetbrains.annotations.NotNull;
 import persistencia.RepositorioHeladeras;
+import utils.GeneradorModel;
 
 import java.util.HashMap;
 import java.util.List;
@@ -20,11 +21,7 @@ public class DonarDistribucionViandaController implements Handler {
 
     @Override
     public void handle(@NotNull Context context) throws Exception {
-        Map<String, Object> model = context.sessionAttribute("model");
-        if (model == null) {
-            model = new HashMap<>();
-            context.sessionAttribute("model", model);
-        }
+        Map<String, Object> model = GeneradorModel.getModel(context);
 
         String idHeladeraOrigen = context.queryParam("idHeladeraOrigen");
         String heladera1 = context.queryParam("heladera1");
@@ -50,7 +47,6 @@ public class DonarDistribucionViandaController implements Handler {
         model.put("estado2", estado2);
         model.put("disponibilidad2", disponibilidad2);
 
-        model.put("nombreUsuario", context.sessionAttribute("nombreUsuario"));
         context.render("templates/donarDistribuirViandas.mustache", model);
 
     }

@@ -7,6 +7,7 @@ import modelo.colaboracion.FrecuenciaDonacion;
 import modelo.excepciones.ExcepcionValidacion;
 import modelo.personas.TipoDocumento;
 import org.jetbrains.annotations.NotNull;
+import utils.GeneradorModel;
 
 import java.util.Map;
 import java.util.Objects;
@@ -21,11 +22,7 @@ public class DonarDineroRealizadaController implements Handler {
     @Override
     public void handle(@NotNull Context context) throws Exception {
 
-        Map<String, Object> model = context.sessionAttribute("model");
-        if (model == null) {
-            model = new java.util.HashMap<>();
-            context.sessionAttribute("model", model);
-        }
+        Map<String, Object> model = GeneradorModel.getModel(context);
 
         String monto = context.formParam("monto");
         String nombreTarj = context.formParam("nombreTarj");

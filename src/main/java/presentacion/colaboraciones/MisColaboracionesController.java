@@ -9,6 +9,7 @@ import org.jetbrains.annotations.NotNull;
 import io.javalin.http.Context;
 import io.javalin.http.Handler;
 import persistencia.RepositorioColaboradores;
+import utils.GeneradorModel;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -27,19 +28,20 @@ public MisColaboracionesController() {
 
     @Override
     public void handle(@NotNull Context context) throws Exception {
-        Map<String, Object> model = context.sessionAttribute("model");
-        if (model == null) {
-            model = new HashMap<>();
-            context.sessionAttribute("model", model);
-        }
+        Map<String, Object> model = GeneradorModel.getModel(context);
 
         Integer idPersona = context.sessionAttribute("idPersona");
 
-        List<DatosColaboracion> datosColaboraciones = getDatosColaboraciones(repoColaboradores.getColaboraciones(idPersona));
+        List<Colaboracion> colaboraciones = repoColaboradores.getColaboraciones(idPersona);
+
+        if(colaboraciones == null) {
+            colaboraciones = List.of();
+        }
+
+        List<DatosColaboracion> datosColaboraciones = getDatosColaboraciones(colaboraciones);
 
         model.put("colabs", datosColaboraciones);
 
-        model.put("nombreUsuario", context.sessionAttribute("nombreUsuario"));
         context.render("templates/misColaboraciones.mustache", model);
     }
 

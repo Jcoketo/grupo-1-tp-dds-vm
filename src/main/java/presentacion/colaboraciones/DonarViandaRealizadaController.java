@@ -5,6 +5,7 @@ import io.javalin.http.Handler;
 import modelo.authService.AuthServiceColaboracion;
 import org.jetbrains.annotations.NotNull;
 import persistencia.RepositorioHeladeras;
+import utils.GeneradorModel;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -19,11 +20,7 @@ public class DonarViandaRealizadaController implements Handler {
 
     @Override
     public void handle(@NotNull Context context) throws Exception {
-        Map<String, Object> model = context.sessionAttribute("model");
-        if (model == null) {
-            model = new HashMap<>();
-            context.sessionAttribute("model", model);
-        }
+        Map<String, Object> model = GeneradorModel.getModel(context);
 
         String heladeraId = context.formParam("heladeraId");
         String comida = context.formParam("vianda1");

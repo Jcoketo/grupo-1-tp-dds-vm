@@ -25,8 +25,6 @@ public class InicioTecnicoController implements Handler {
             return;
         }
 
-        model.put("nombreUsuario", context.sessionAttribute("nombreUsuario"));
-        model.put("logueado", context.sessionAttribute("logueado"));
 
         context.render("templates/inicioTecnico.mustache", model);
     }

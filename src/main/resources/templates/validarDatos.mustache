@@ -256,6 +256,9 @@
                             <input type="text" class="form-control" id="cuil" name="cuil" value="{{cuil}}">
                         </div>
                     {{/esTecnico}}
+                {{#errorValidarDatos}}
+                    <div> <p> <i>{{errorValidarDatos}}</i> </p> </div>
+                {{/errorValidarDatos}}
                 <button type="submit" class="nav-link, btn btn-submit" href="perfil">Guardar cambios</button>
             </form>
         </div>

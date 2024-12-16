@@ -12,8 +12,6 @@ public class MisHeladerasController implements Handler {
     @Override
     public void handle(@NotNull Context context) throws Exception {
         Map<String, Object> model = GeneradorModel.getModel(context);
-        model.put("logueado", context.sessionAttribute("logueado"));
-        model.put("nombreUsuario", context.sessionAttribute("nombreUsuario"));
 
         String mensajeBaja = context.sessionAttribute("mensajeBaja");
         if (mensajeBaja != null) {

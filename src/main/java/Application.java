@@ -27,7 +27,7 @@ public class Application {
                 cors.add(it -> it.anyHost());
             });
 
-            javalinConfig.staticFiles.add("/app/static", Location.EXTERNAL);
+            javalinConfig.staticFiles.add("/", Location.CLASSPATH);
         }).start(8080);
 
         // Crear el directorio de imágenes si no existe
@@ -35,7 +35,7 @@ public class Application {
 
         // Configurar rutas
         Router.init(getEntityManager());
-        configureImageRoutes(app);
+
     }
 
     private static EntityManager getEntityManager() {
@@ -50,23 +50,4 @@ public class Application {
         }
     }
 
-    private static void configureImageRoutes(Javalin app) {
-        app.get("/images/{filename}", ctx -> {
-            String filePath = "src/main/resources/uploads/ofertas/" + ctx.pathParam("filename");
-            try {
-                // Leer el archivo completo como un arreglo de bytes
-                byte[] fileBytes = Files.readAllBytes(Paths.get(filePath));
-
-                if (fileBytes.length > 0) {
-                    ctx.contentType("image/*");
-                    ctx.result(fileBytes); // Enviar los bytes directamente
-                } else {
-                    ctx.status(404).result("Imagen vacía");
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-                ctx.status(500).result("Error al cargar la imagen");
-            }
-        });
-    }
 }
