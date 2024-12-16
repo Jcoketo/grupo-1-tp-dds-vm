@@ -19,7 +19,7 @@
             background-color: white;
         }
 
-        .collaboration-container {
+        .tarjetas-container {
             width: 100%;
             display: flex;
             justify-content: center;
@@ -36,9 +36,7 @@
             margin-bottom: 10px;
             min-height: 80px;
             width: 100%;
-
         }
-
 
         .add-button {
             background-color: #1e5552;
@@ -50,12 +48,6 @@
             text-align: center;
             white-space: nowrap;
             margin-bottom: 30px;
-        }
-
-        .alta-masiva {
-            text-align: right;
-            margin-right: 0;
-            color: #adb5bd;
         }
 
         .add-button:hover {
@@ -77,6 +69,7 @@
         .btn-tarjetas:active {
             border-width: 0px;
         }
+
     </style>
 </head>
 
@@ -86,23 +79,25 @@
 
 <main class="container mb-5 mt-3">
     <div class="cont mb-5 d-flex justify-content-between align-items-center">
-        <h1 style="font-weight:700; font-family: 'Poppins', sans-serif; color: #1e5552;">Mis colaboraciones</h1>
-        <button class="btn-tarjetas" onclick="window.location.href='/tarjetasEntregadas'">Ver mis tarjetas entregadas</button>
+        <h1 style="font-weight:700; font-family: 'Poppins', sans-serif; color: #1e5552;">Tarjetas entregadas</h1>
+        <button class="btn-tarjetas" onclick="window.location.href='/registroPersonaVulnerable'">Entregar otra tarjeta</button>
     </div>
-    <div class="collaboration-container">
+    <div class="tarjetas-container">
         <!-- Colaboraciones -->
-        {{#colabs}}
+        {{#tarjetas}}
             <div class="collaboration">
-                <h4 style="font-weight:700; font-family: 'Poppins', sans serif;">{{tipo}}</h4>
-                <p><b>Fecha:</b> {{fechaDeColaboracion}}</p>
-                <div style="display: flex; justify-content: space-between; align-items: center;" >
-                    <h5 style="color:#1e5552"><b>Sumaste {{puntosSumados}} puntos</b>!</h5>
-                    {{#xCSV}}
-                    {{/xCSV}}
-                    <p class="alta-masiva"><b><i>Esta donación fue cargada por alta masiva.</i></b></p>
-                </div>
+                <h4 style="font-weight:700; font-family: 'Poppins', sans serif;">{{nombre}}</h4>
+                <p><b>Fecha de registro:</b> {{fechaRegistro}}</p>
+                <p><b>{{tipoDocumento}}:</b> {{numeroDocumento}}</p>
+                <p><b>Menores a cargo:</b> {{menoresACargo}}</p>
+                {{^poseeDomicilio}}
+                    <p><b>Domicilio:</b> en situación de calle.</p>
+                {{/poseeDomicilio}}
+                {{#poseeDomicilio}}
+                    <p><b>Domicilio:</b> {{domicilio}}</p>
+                {{/poseeDomicilio}}
             </div>
-        {{/colabs}}
+        {{/tarjetas}}
     </div>
 
 </main>
