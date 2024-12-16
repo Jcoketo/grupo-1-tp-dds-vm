@@ -1,11 +1,13 @@
 package persistencia;
 
 import lombok.Getter;
+import modelo.elementos.FallaTecnica;
 import modelo.excepciones.ExcepcionValidacion;
 import modelo.personas.Tecnico;
 import modelo.personas.Visita;
 
 import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -62,6 +64,16 @@ public class RepositorioVisitas {
         if (managedVisita != null) {
             em.remove(managedVisita);
             em.getTransaction().commit();
+        }
+    }
+
+    public List<Visita> getVisitasPorTecnico(Integer idTecnico) {
+        TypedQuery<Visita> query = em.createQuery("SELECT v FROM Visita v WHERE v.tecnico.id = :idTecnico", Visita.class);
+        query.setParameter("idTecnico", idTecnico);
+        try {
+            return query.getResultList();
+        } catch (Exception e) {
+            return new ArrayList<>();
         }
     }
 

@@ -294,6 +294,19 @@ public class Router {
                 post(new ValidarDatosFinalizadoController());
             });
 
+            path("/verMisVisitas", () -> {
+                before(new AutorizacionMiddleware().setDebeSerLogueado().setDebeSerTecnico());
+                get(new VerMisVisitasController());
+            });
+
+            path("/visitas/{filename}", () -> {
+                get(new ImageController());
+            });
+
+            path("/images/{filename}", () -> {
+                get(new VisitaImagenesController());
+            });
+
             path("/visualizarAlertas", () -> {
                 before(new AutorizacionMiddleware().setDebeSerLogueado());
                 get(new VisualizarAlertasController());

@@ -2,10 +2,14 @@ package presentacion.vistaTecnico;
 
 import io.javalin.http.Context;
 import io.javalin.http.Handler;
+import io.javalin.http.UploadedFile;
 import modelo.authService.AuthServiceTecnico;
+import org.apache.commons.io.FileUtils;
 import org.jetbrains.annotations.NotNull;
 import utils.GeneradorModel;
 
+import java.io.File;
+import java.util.List;
 import java.util.Map;
 
 public class RegistroCompletadoVisitaController implements Handler {
@@ -18,9 +22,15 @@ public class RegistroCompletadoVisitaController implements Handler {
         String idInc = context.formParam("id_incidente");
         String checkBoxResolvioProblema = context.formParam("checkBoxResolvioProblema");
         String descripcion = context.formParam("descripcion");
+        List<UploadedFile> uploadedFiles = context.uploadedFiles("file");
         //String URLfoto = context.queryParam("URLfoto"); // La foto es opcional.
 
-        String URLfoto = "foto.jpg"; // La foto es opcional.
+        UploadedFile file = uploadedFiles.get(0);
+        String fileName = file.filename();
+        System.out.println("Received file: " + fileName);
+        String URLfoto = fileName;
+
+        File archivo = new File("src/main/resources/uploads/visitasImagenes/" + file.filename());
 
         Integer idHeladera = Integer.parseInt(idHel);
         Integer idIncidente = Integer.parseInt(idInc);
@@ -32,7 +42,7 @@ public class RegistroCompletadoVisitaController implements Handler {
 
         try {
             AuthServiceTecnico.registrarVisita(idTecnico, idHeladera, idIncidente, descripcion, URLfoto, problemaResuelto);
-
+            FileUtils.copyInputStreamToFile(file.content(), archivo);
         } catch (Exception e) {
             model.put("error", e.getMessage());
             context.render("templates/error.mustache", model);

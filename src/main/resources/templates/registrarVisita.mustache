@@ -104,6 +104,43 @@
             line-height: 0.9;
         }
 
+        .upload-area {
+            border: 2px dashed #ced4da;
+            border-radius: 5px;
+            padding: 20px;
+            text-align: center;
+            background-color: #f8f9fa;
+            color: #6c757d;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .upload-area:hover {
+            background-color: #e9ecef;
+        }
+
+        .upload-area input[type="file"] {
+            display: none;
+        }
+
+        .upload-icon {
+            font-size: 50px;
+            color: #6c757d;
+        }
+
+        .upload-area p {
+            margin: 10px 0;
+        }
+
+        .upload-area a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        .upload-area a:hover {
+            text-decoration: underline;
+        }
+
     </style>
 </head>
 
@@ -114,7 +151,7 @@
 <main>
     <div class="container">
         <h1 style="font-family: 'Poppins', sans serif; font-weight:700; color: #1e5552" class="mb-5">Registrar Visita</h1>
-        <form action="/registrarVisita" method="post">
+        <form action="/registrarVisita" method="post" enctype="multipart/form-data">
             <div class="row mb-3">
                 <div class="form-group">
                     <h4 style="font-family: 'Poppins', sans-serif; font-weight: 700;">Heladera</h4>
@@ -149,6 +186,16 @@
                         <input type="text" class="form-control" name="descripcion" id="descripcion">
                         </div>
                     </div>
+                    <div class="form-group">
+                        <label for="foto">Foto</label>
+                        <div class="upload-area" id="uploadArea">
+                            <input type="file" id="fileInput" name="file" accept="image/*">
+                            <div id="dropZone" class="drop-zone">
+                                Arrastra y suelta el archivo aquí
+                            </div>
+                            <p id="fileName" class="mt-2"></p>
+                        </div>
+                    </div>
                     <div class="pl-3" style="padding-top: 35px">
                         <input type="checkbox" id="checkBoxResolvioProblema" name="checkBoxResolvioProblema" onclick="toggleSolucionado()">
                         <label for="checkBoxResolvioProblema" class="ml-2 mb-0">El inicidente fue solucionado.</label>
@@ -166,6 +213,39 @@
 </main>
 
 {{>footer}}
+
+<script>
+    const dropZone = document.getElementById('dropZone');
+    const fileInput = document.getElementById('fileInput');
+    const fileName = document.getElementById('fileName');
+
+    dropZone.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        dropZone.classList.add('drop-zone-hover');
+    });
+
+    dropZone.addEventListener('dragleave', () => {
+        dropZone.classList.remove('drop-zone-hover');
+    });
+
+    dropZone.addEventListener('drop', (e) => {
+        e.preventDefault();
+        dropZone.classList.remove('drop-zone-hover');
+        const files = e.dataTransfer.files;
+        fileInput.files = files;
+        fileName.textContent = `Archivo seleccionado: ${files[0].name}`;
+    });
+
+    dropZone.addEventListener('click', () => {
+        fileInput.click();
+    });
+
+    fileInput.addEventListener('change', () => {
+        if (fileInput.files.length > 0) {
+            fileName.textContent = `Archivo seleccionado: ${fileInput.files[0].name}`;
+        }
+    });
+</script>
 
 <script>
 
