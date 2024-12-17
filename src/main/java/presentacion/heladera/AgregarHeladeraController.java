@@ -28,31 +28,12 @@ public class AgregarHeladeraController implements Handler {
     public void handle(@NotNull Context context) throws Exception {
         Map<String, Object> model = GeneradorModel.getModel(context);
 
-        Integer id_persona = (Integer) context.sessionAttribute("idPersona");
-
-        PersonaJuridica persona = repoColab.traerPersonaPorIdJuridica(id_persona);
-
-        String direccion = persona.getDireccion();
-
-        if ( direccion != null || !direccion.equals("")){
-            PuntoEstrategicoXdireccion servicio = PuntoEstrategicoXdireccion.getInstancia();
-
-            String direccionAux = direccion.replace(" ", "+").replace(",", "");
-
-            List<PuntoEstrategico> puntosRecomendados = new ArrayList<>();
-
-            try {
-                PuntoEstrategico punto = servicio.obtenerPuntoDeColocacion(direccionAux);
-                RecomendadorDePuntos recomendador = RecomendadorDePuntos.getInstancia();
-                puntosRecomendados = recomendador.obtenerPuntosRecomendados(punto.getLatitud(), punto.getLongitud(), 1000.0);
-                model.put("puntosRecomendados", puntosRecomendados);
-
-            }catch (ExcepcionValidacion e){
-                model.put("errorAPI", e.getMessage());
-            }
-        }
-
+        PuntoEstrategico punto = new PuntoEstrategico(0.0, 0.0);
+        RecomendadorDePuntos recomendador = RecomendadorDePuntos.getInstancia();
+        List<PuntoEstrategico> puntosRecomendados = recomendador.obtenerPuntosRecomendados(punto.getLatitud(), punto.getLongitud(), 1000.0);
+        model.put("puntosRecomendados", puntosRecomendados);
         context.render("templates/agregarHeladera.mustache", model);
+
     }
 
 }
