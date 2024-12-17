@@ -57,7 +57,7 @@ public class OfrecerRecompensa extends Colaboracion{
 
     @Override
     public String getClassName() {
-        return "Ofreciste una recompensa";
+        return "Ofrecer una Recompensa";
     }
 
 }

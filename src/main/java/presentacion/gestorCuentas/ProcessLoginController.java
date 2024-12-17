@@ -35,18 +35,18 @@ public class ProcessLoginController implements Handler {
         String email = context.formParam("email");
         String password = context.formParam("password");
 
-        /*if (email == null || email.equals("") || password == null || password.equals("")) {
-            context.sessionAttribute("errorLogin", "El mail o la contraseña no pueden estar vacíos");
+        if (email == null || email.equals("") || password == null || password.equals("")) {
+            context.sessionAttribute("errorLogin", "Faltan completar campos obligatorios");
             context.redirect("/login");
             return;
         }
 
-        if ( !email.matches("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$") )  {
+        if (!email.matches("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$")) {
             context.sessionAttribute("errorLogin", "El mail no es valido");
             context.redirect("/login");
             return;
         }
-
+        /*
         try {
             email = ESAPI.validator().getValidInput("Email", email, "Email", 200, false);
             password = ESAPI.validator().getValidInput("Password", password, "SafeString", 200, false);
@@ -74,7 +74,6 @@ public class ProcessLoginController implements Handler {
 
         Integer idPersona = repoColab.devolverIdPersona(email);
         context.sessionAttribute("idPersona", idPersona);
-
 
         Usuario usuario = repoUsuarios.traerUsuario(email);
         context.sessionAttribute("rolUsuario", usuario.getRol());
