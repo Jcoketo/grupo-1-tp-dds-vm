@@ -4,6 +4,7 @@ import io.javalin.http.Context;
 import io.javalin.http.Handler;
 import lombok.Getter;
 import lombok.Setter;
+import modelo.elementos.FallaTecnica;
 import org.jetbrains.annotations.NotNull;
 import persistencia.RepositorioIncidentes;
 import utils.GeneradorModel;
@@ -38,31 +39,37 @@ public class VisualizarFallasTecnicasController implements Handler {
 
         NotificacionAlerta notificacionAlerta = context.sessionAttribute("notificacionAlerta");
         if (notificacionAlerta != null) {
-            model.put("notificacionTarjeta", notificacionAlerta);
+            model.put("notificacionAlerta", notificacionAlerta);
+            context.consumeSessionAttribute("notificacionAlerta");
         }
-        context.consumeSessionAttribute("notificacionAlerta");
 
-        Map<Boolean, List<FallasHeladera>> fallasHeladeraMap = repoIncidentes.obtenerIncidentes(idHeladera).stream().map(incidente -> {
-            FallasHeladera falla = new FallasHeladera();
-            falla.setId(incidente.getId());
-            falla.setDescripcion(incidente.getDescripcion());
-            falla.setEstaSolucionado(incidente.getEstaSolucionado());
-            LocalDateTime fechaHoraIncidente = incidente.getFechaHoraIncidente();
-            falla.setFechaHoraIncidente(falla.setFormato(fechaHoraIncidente));
-            return falla;
-        }).collect(Collectors.partitioningBy(FallasHeladera::getEstaSolucionado));
+        List<FallaTecnica> fallasHeladera = repoIncidentes.obtenerIncidentes(idHeladera);
+        if (fallasHeladera == null )
+            fallasHeladera = List.of();
 
-        List<FallasHeladera> noSolucionadas = fallasHeladeraMap.get(false).stream()
+
+        List<FallasHeladera> fallitas = fallasHeladera.stream()
+                .map(fallaTecnica -> {
+                    FallasHeladera fallo = new FallasHeladera();
+                    fallo.setId(fallaTecnica.getId());
+                    fallo.setDescripcion(fallaTecnica.getDescripcion());
+                    fallo.setFechaHoraIncidente(fallaTecnica.getFechaHoraIncidente().format(DateTimeFormatter.ofPattern("yyyy/MM/dd - HH:mm")));
+                    fallo.setEstaSolucionado(fallaTecnica.getEstaSolucionado());
+                    return fallo;
+                }).toList();
+
+        List<FallasHeladera> noSolucionadas = fallitas.stream()
+                .filter(falla -> !falla.getEstaSolucionado())
                 .sorted(Comparator.comparing(FallasHeladera::getFechaHoraIncidente).reversed())
                 .collect(Collectors.toList());
 
-        List<FallasHeladera> solucionadas = fallasHeladeraMap.get(true).stream()
+        List<FallasHeladera> solucionadas = fallitas.stream()
+                .filter(FallasHeladera::getEstaSolucionado)
                 .sorted(Comparator.comparing(FallasHeladera::getFechaHoraIncidente).reversed())
-                .toList();
+                .collect(Collectors.toList());
 
         noSolucionadas.addAll(solucionadas);
 
-        model.put("nombreUsuario", context.sessionAttribute("nombreUsuario"));
         model.put("detalleFallas", noSolucionadas);
         model.put("heladeraId", idHeladera);
         context.render("templates/visualizarFallasTecnicas.mustache", model);

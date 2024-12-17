@@ -28,35 +28,31 @@ public class RegistrarTecnicoCompletadoController implements Handler {
         if (nombre.equals("") || apellido.equals("") || tipoDoc.equals("") ||
                 numeroDoc.equals("") || cuil.equals("") || mail.equals("") ||
                 direccion.equals("") || fechaNacimiento.equals(""))  {
-            model.put("error", "Debe completar los campos obligatorios!");
+            context.sessionAttribute("errorRegistroTecnico", "Debe completar los campos obligatorios!");
             context.redirect("/registrarTecnico");
             return;
         }
 
         if ( !esNumerico(numeroDoc)  ||  (!telefono.equals("") && !esNumerico(telefono)) || !esNumerico(cuil) ) {
-            model.put("error", "El número de documento o el teléfono o el cuil no son numéricos");
-            //context.status(400);
+            context.sessionAttribute("errorRegistroTecnico", "El número de documento o el teléfono o el cuil no son numéricos");
             context.redirect("/registrarTecnico");
             return;
         }
 
         if ( !numeroDoc.matches("[0-9]{0,8}") )  {
-            model.put("error", "El número de documento debe tener 8 dígitos");
-            //context.status(400);
+            context.sessionAttribute("errorRegistroTecnico", "El número de documento debe tener 8 dígitos");
             context.redirect("/registrarTecnico");
             return;
         }
 
         if ( !cuil.matches("[0-9]{11}") )  {
-            model.put("errorJuridico", "El número de CUIT debe tener 11 dígitos");
-            //context.status(400);
+            context.sessionAttribute("errorRegistroTecnico", "El número de CUIT debe tener 11 dígitos");
             context.redirect("/registrarTecnico");
             return;
         }
 
         if ( !telefono.equals("")  &&  !telefono.matches("[0-9]{8,10}") )  {
-            model.put("error", "El teléfono debe tener entre 8 y 10 dígitos");
-            //context.status(400);
+            context.sessionAttribute("errorRegistroTecnico", "El teléfono debe tener entre 8 y 10 dígitos");
             context.redirect("/registrarTecnico");
             return;
         }
@@ -73,12 +69,11 @@ public class RegistrarTecnicoCompletadoController implements Handler {
             AuthServiceTecnico.registrarTecnico(nombre, apellido, tipoDocumentoEnum, numeroDoc, cuil, mail, telefono, direccion, fechaNacimiento);
 
         } catch (ExcepcionValidacion e) {
-            model.put("error", e.getMessage());
+            context.sessionAttribute("errorRegistroTecnico", e.getMessage());
             context.redirect("/registrarTecnico");
             return;
         }
 
-        model.put("nombreUsuario", context.sessionAttribute("nombreUsuario"));
         context.render("templates/registroTecnicoFinal.mustache",model);
 
     }

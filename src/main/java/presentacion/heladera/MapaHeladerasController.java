@@ -26,7 +26,8 @@ public class MapaHeladerasController implements Handler {
 
         try {
             RepositorioHeladeras repoHeladeras = RepositorioHeladeras.getInstancia();
-            List<Heladera> heladeras = repoHeladeras.obtenerHeladeras().stream().filter(heladera -> !heladera.getBajaLogica()).toList();
+            List<Heladera> heladeras = repoHeladeras.obtenerHeladeras().stream()
+                    .filter(heladera -> !heladera.getBajaLogica()).toList();
 
             List<HeladeraOrigenDestino> HeladeraOrigenDestino = getHeladerasDistribucion(heladeras);
 

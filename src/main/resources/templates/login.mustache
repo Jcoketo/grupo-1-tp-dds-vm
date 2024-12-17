@@ -129,11 +129,10 @@
             <input type="password" name="password" placeholder="Ingresa tu contraseña" required>
             <button class="continuar-btn btn-common" type="submit">Continuar</button>
             <button class="sso-btn btn-common" onclick="window.location.href='/loginSSO'">Ingresar por SSO</button>
-
-            {{#errorLogin}}
-                <div class="alert alert-danger mt-3">{{errorLogin}}</div>
-            {{/errorLogin}}
         </form>
+        {{#errorLogin}}
+            <div class="alert alert-danger mt-3">{{errorLogin}}</div>
+        {{/errorLogin}}
         <p class="mt-4 mb-2" style="font-weight:500;">¿No tenés una cuenta? </p>
         <button class="crear-btn btn-common" onclick="window.location.href='/elegirRegistroCuenta'">Crear cuenta</button>
         <p>Al hacer clic en continuar, estás aceptando nuestra <a style="font-weight:500;" href="#">política de privacidad y términos de uso</a></p>
