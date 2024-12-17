@@ -61,17 +61,6 @@
             font-size: 15px;
         }
 
-
-        .btn-primary {
-            background-color: #B7C9C7;
-            color: white;
-            border: none;
-            border-radius: 10px;
-            padding: 3px 7px;
-            cursor: pointer;
-            font-size: 13px;
-        }
-
         h5 {
             margin: 0; /* Elimina márgenes por defecto */
             white-space: nowrap; /* Evita que el texto haga salto de línea */
@@ -114,34 +103,13 @@
         }
 
         .no-arrow-select {
-              display: block;
-              width: 27.5%;
-              height: 1.5rem; /* Altura reducida */
-              padding: 0.1rem 0.3rem; /* Menor espacio interno */
-              font-size: 0.875rem; /* Tamaño de texto más pequeño */
-              line-height: 1.25; /* Ajusta la altura de línea */
               color: #495057;
               background-color: #fff;
               background-clip: padding-box;
               border: 1px solid #ced4da;
               border-radius: 0.25rem;
-          appearance: none; /* Quita la flecha en navegadores compatibles */
+            appearance: none; /* Quita la flecha en navegadores compatibles */
         }
-
-        .custom-select {
-              display: block;
-              width: 100%;
-              height: 1.5rem; /* Altura reducida */
-              padding: 0.1rem 0.3rem; /* Menor espacio interno */
-              font-size: 0.875rem; /* Tamaño de texto más pequeño */
-              line-height: 1.25; /* Ajusta la altura de línea */
-              color: #495057;
-              background-color: #fff;
-              background-clip: padding-box;
-              border: 1px solid #ced4da;
-              border-radius: 0.25rem;
-        }
-
         .custom-select2 {
               display: block;
               width: 60%;
@@ -156,10 +124,63 @@
               border-radius: 0.25rem;
         }
 
-        .header-title {
-            font-size: 15px;
-            margin-bottom: 5px;
-            color: #495057;
+
+
+        .btn-suscribirse{
+            background-color: #002B80;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 10px;
+            font-weight:600;
+            margin-right: 20px;
+        }
+        .btn-suscribirse:hover {
+            background-color: #00215c;
+            text-decoration: none;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgb(0,0,0);
+            background-color: rgba(0,0,0,0.4);
+        }
+
+        .suscripcionModal {
+            padding: 20px;
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            max-width: 700px;
+            width: 30%;
+            text-align: center;
+            position: relative;
+        }
+
+        .close {
+            color: #aaa;
+            position: absolute;
+            right: 9px;
+            top: 8px;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
         }
 
       </style>
@@ -175,7 +196,11 @@
             <div id="map"></div>
         </div>
         <div class="col-md-5 mt-4 mt-md-0">
-            <h3 style="font-family: 'Poppins'; font-weight: 600; font-size: 36px">{{nombre}}</h3>
+            <div class="d-flex justify-content-between align-items-center">
+                <h3 style="font-family: 'Poppins'; font-weight: 600; font-size: 36px">{{nombre}}</h3>
+                <button class="btn-suscribirse" onclick="openModal()" >Suscribirse</button>
+            </div>
+
             <p>{{direccion}}</p>
 
             <div class="info">
@@ -195,51 +220,58 @@
 
             <a href="/visualizarAlertas?heladeraId={{heladeraId}}" class="action-link">Alertas</a>
             <a href="/visualizarFallasTecnicas?heladeraId={{heladeraId}}" class="action-link">Fallas técnicas</a>
-            <p>  </p>
-            <hr style="margin: 0; padding: 0; border: 0; border-top: 2px solid #D3D3D3;">
-            <p>  </p>
+
             {{#notificacionSuscripcion}}
-                <div class="text-{{tipo}}">{{mensaje}}</div>
+                <hr class="my-3" style="border-top: 2px solid #D3D3D3;">
+                <div class="text-{{tipo}}" style="margin-top: 10px">{{mensaje}}</div>
             {{/notificacionSuscripcion}}
-            <form id="suscripcionForm" action="/suscribirse" method="post">
-                <div style="display: inline-flex; gap: 20px">
 
-                    <h2 class="info"  style="font-family: 'Poppins'; font-weight: 600; font-size: 24px; margin-top: 10px;" >Suscripciones</h2>
+            <!-- Modal -->
+            <div id="suscripcionModal" class="modal">
+                <div class="modal-content">
+                    <span class="close" onclick="closeModal()">&times;</span>
+                    <form id="suscripcionForm" action="/suscribirse" method="post">
+                        <h2 class="info" style="font-family: 'Poppins'; font-weight: 600; font-size: 24px; margin-top: 10px;">Suscribirme a heladera</h2>
+                        <div class="mb-3 d-flex justify-content-between align-items-center">
+                            <label for="filterSelect"> <b>Tipo de suscripcion:</b></label>
+                            <select class="custom-select" style="max-width:500px" id="filterSelect" name="tipoSuscripcion" onchange="toggleSuscripcionVianda()">
+                                <option value="" disabled selected>Elegir tipo suscripción...</option>
+                                <option value="1">Notificarme cuando queden pocas viandas</option>
+                                <option value="2">Notificarme cuando quede poco espacio en la heladera</option>
+                                <option value="3">Notificarme cuando haya un desperfecto</option>
+                            </select>
+                        </div>
+                        <div id="suscripcion-vianda" style="display: none;">
+                            <div class="mb-3 d-flex justify-content-between align-items-center">
+                                <label><b>Ingrese cantidad de viandas:</b></label>
+                                <input class="form-control" type="number" id="cantidad" name="cantidad" style="max-width:430px" min="1">
+                            </div>
+                        </div>
+                        <input type="hidden" id="nombre" name="nombre" value="{{nombre}}">
+                        <input type="hidden" id="direccion" name="direccion" value="{{direccion}}">
+                        <input type="hidden" id="latitud" name="latitud" value="{{latitud}}">
+                        <input type="hidden" id="longitud" name="longitud" value="{{longitud}}">
+                        <input type="hidden" id="fecha" name="fecha" value="{{fecha}}">
+                        <input type="hidden" id="estado" name="estado" value="{{estado}}">
+                        <input type="hidden" id="disponibilidad" name="disponibilidad" value="{{disponibilidad}}">
+                        <div id="suscribirse-container" style="display: none; margin-top: 10px;">
+                            <input type="hidden" name="heladeraId" value="{{heladeraId}}">
+                            <div class="mb-3 d-flex justify-content-between align-items-center">
+                                <label><b>Medio de contacto:</b></label>
+                                <select class="custom-select" style="max-width:500px" id="medioContacto" name="medioDeContacto">
+                                    <option value="" disabled selected>Elegir medio</option>
+                                    {{#medios}}
+                                        <option value="{{tipo}}">{{tipo}}</option>
+                                    {{/medios}}
+                                </select>
+                            </div>
 
-                    <select class="custom-select my-1 mr-sm-2" id="filterSelect" name="tipoSuscripcion" onchange="toggleSuscripcionVianda()">
-                        <option value="" disabled selected>Elegir tipo suscripción...</option>
-                        <option value="1">Notificarme cuando queden pocas viandas</option>
-                        <option value="2">Notificarme cuando quede poco espacio en la heladera</option>
-                        <option value="3">Notificarme cuando haya un desperfecto</option>
-                    </select>
+
+                            <button type="submit" class="btn-suscribirse mt-3">Suscribirme</button>
+                        </div>
+                    </form>
                 </div>
-
-                <div id="suscripcion-vianda" style="display: none;">
-                    <h7 class="header-title" style="display: inline-block; margin-right: 10px;">Ingrese cantidad de viandas</h7>
-                    <input class="no-arrow-select" type="text" id="cantidad" name="cantidad" style="display: inline-block;">
-                </div>
-
-                <input type="hidden" id="nombre" name="nombre" value="{{nombre}}" >
-                <input type="hidden" id="direccion" name="direccion" value="{{direccion}}" >
-                <input type="hidden" id="latitud" name="latitud" value="{{latitud}}" >
-                <input type="hidden" id="longitud" name="longitud" value="{{longitud}}" >
-                <input type="hidden" id="fecha" name="fecha" value="{{fecha}}" >
-                <input type="hidden" id="estado" name="estado" value="{{estado}}" >
-                <input type="hidden" id="disponibilidad" name="disponibilidad" value="{{disponibilidad}}" >
-
-                <div id="suscribirse-container" style="display: none; margin-top: 10px;">
-                    <input type="hidden" name="heladeraId" value="{{heladeraId}}">
-                    <select class="custom-select2 my-1 mr-sm-2" id="medioContacto" name="medioDeContacto" ">
-                        <option value="" disabled selected>Elegir medio de contacto</option>
-                        {{#medios}}
-                            <option value="{{tipo}}" >{{tipo}}</option>
-                        {{/medios}}
-
-                    </select>
-
-                    <button type="submit" class=" btn-primary">Suscribirme</button>
-                </div>
-            </form>
+            </div>
 
         </div>
     </div>
@@ -254,17 +286,26 @@
     let map;
     let markers = [];
 
+    function openModal() {
+        document.getElementById("suscripcionModal").style.display = "block";
+    }
+
+    function closeModal() {
+        document.getElementById("suscripcionModal").style.display = "none";
+    }
+
+
     function initMap() {
         map = new google.maps.Map(document.getElementById('map'), {
             center: { lat: -34.599722, lng: -58.381944 },
             zoom: 13
         });
 
-        const marker = new google.maps.Marker({
-            position: { lat: {{latitud}}, lng: {{longitud}} },
-            map: map,
-            title: '{{nombre}}',
-        });
+          const marker = new google.maps.Marker({
+        position: { lat: parseFloat('{{latitud}}'), lng: parseFloat('{{longitud}}') },
+        map: map,
+        title: '{{nombre}}'
+});
 
         markers.push(marker);
     }
