@@ -84,7 +84,11 @@ public class RepositorioIncidentes {
 
 
     public Incidente devolverIncidente(Integer idIncidente) {
-        return em.find(Incidente.class, idIncidente);
+        try {
+            return em.find(Incidente.class, idIncidente);
+        } catch (Exception e){
+            return null;
+        }
     }
 
     public List<FallaTecnica> obtenerFallasTecnicas(Integer idHeladera) {

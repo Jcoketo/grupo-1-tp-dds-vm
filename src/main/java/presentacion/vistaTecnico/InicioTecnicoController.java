@@ -25,6 +25,10 @@ public class InicioTecnicoController implements Handler {
             return;
         }
 
+        if (context.sessionAttribute("notificacionVisita") != null) {
+            model.put("notificacionVisita", context.sessionAttribute("notificacionVisita"));
+            context.consumeSessionAttribute("notificacionVisita");
+        }
 
         context.render("templates/inicioTecnico.mustache", model);
     }

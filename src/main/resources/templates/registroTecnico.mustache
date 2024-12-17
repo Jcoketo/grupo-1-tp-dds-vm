@@ -312,6 +312,9 @@
 
             <button type="submit">Registrarse</button>
         </form>
+        {{#errorRegistroTecnico}}
+            <div class="alert alert-danger mt-3">{{errorRegistroTecnico}}</div>
+        {{/errorRegistroTecnico}}
     </div>
 </main>
 <footer class="footer-bg">

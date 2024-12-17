@@ -177,12 +177,11 @@
 
                 <div id="mensaje-tarjeta" style="display: none; color: green; margin-top: 10px;"></div>
                 <!-- <button type="button" class="register-button" onclick="submitForm()">Registrar</button> -->
-
-                {{#errorRegistroVulnerable}}
-                    <div class="error-message">{{errorRegistroVulnerable}}</div>
-                {{/errorRegistroVulnerable}}
             </div>
         </form>
+        {{#errorRegistroVulnerable}}
+            <div class="error-message">{{errorRegistroVulnerable}}</div>
+        {{/errorRegistroVulnerable}}
     </div>
 </main>
 
