@@ -4,10 +4,8 @@ import io.javalin.http.Context;
 import io.javalin.http.Handler;
 import lombok.Getter;
 import lombok.Setter;
-import modelo.elementos.Heladera;
 import modelo.elementos.Incidente;
 import org.jetbrains.annotations.NotNull;
-import persistencia.RepositorioHeladeras;
 import persistencia.RepositorioIncidentes;
 import persistencia.RepositorioVisitas;
 import utils.GeneradorModel;
@@ -17,37 +15,46 @@ import java.util.Map;
 
 public class RegistrarVisitaTecnicosController implements Handler {
 
-    private RepositorioIncidentes repoIncidentes = RepositorioIncidentes.getInstancia();
-    private RepositorioVisitas repoVisitas = RepositorioVisitas.getInstancia();
+    private final RepositorioIncidentes repoIncidentes = RepositorioIncidentes.getInstancia();
 
     @Override
     public void handle(@NotNull Context context) throws Exception {
         Map<String, Object> model = GeneradorModel.getModel(context);
 
-
+        // Obtener los incidentes no solucionados
         List<Incidente> incidentes = repoIncidentes.obtenerIncidentesNoSolucionados();
 
-        List<Heladera> heladera = incidentes.stream().map(Incidente::getHeladera).toList();
+        // Crear el listado de heladeras con sus incidentes correspondientes
+        List<HeladeraIncidentes> heladerasConIncidentes = incidentes.stream()
+                .map(Incidente::getHeladera) // Obtener heladeras de incidentes
+                .distinct() // Evitar duplicados
+                .map(heladera -> {
+                    // Crear objeto HeladeraIncidentes
+                    HeladeraIncidentes heladeraIncidentes = new HeladeraIncidentes();
+                    heladeraIncidentes.setId(heladera.getId());
+                    heladeraIncidentes.setNombre(heladera.getNombre());
+                    heladeraIncidentes.setIncidentes(
+                            incidentes.stream()
+                                    .filter(i -> i.getHeladera().getId() == heladera.getId()) // Filtrar incidentes por heladera
+                                    .toList()
+                    );
+                    return heladeraIncidentes;
+                })
+                .toList();
 
-        List<HeladeraIncidentes> heladeraIncidentes = heladera.stream().map(h -> {
-            HeladeraIncidentes heladeraIncidentes1 = new HeladeraIncidentes();
-            heladeraIncidentes1.setId(h.getId());
-            heladeraIncidentes1.setNombre(h.getNombre());
-            heladeraIncidentes1.setIncidentes(incidentes.stream().filter(i -> i.getHeladera().getId() == h.getId()).toList());
-            return heladeraIncidentes1;
-        }).toList();
-
+        // Agregar notificaciÃ³n si existe
         if (context.sessionAttribute("notificacionVisita") != null) {
             model.put("notificacionVisita", context.sessionAttribute("notificacionVisita"));
             context.consumeSessionAttribute("notificacionVisita");
         }
 
-        model.put("heladeras", heladeraIncidentes);
+        // Agregar heladeras al modelo
+        model.put("heladeras", heladerasConIncidentes);
 
+        // Renderizar la plantilla
         context.render("templates/registrarVisita.mustache", model);
     }
 }
-
 
 @Getter
 @Setter
@@ -55,5 +62,4 @@ class HeladeraIncidentes {
     private int id;
     private String nombre;
     private List<Incidente> incidentes;
-
 }
