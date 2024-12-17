@@ -7,6 +7,7 @@ import lombok.Setter;
 import modelo.authService.AuthServiceColaboracion;
 import modelo.excepciones.ExcepcionValidacion;
 import modelo.personas.PersonaHumana;
+import modelo.personas.TipoMedioDeContacto;
 import org.jetbrains.annotations.NotNull;
 import persistencia.RepositorioColaboradores;
 import utils.GeneradorModel;
@@ -45,8 +46,9 @@ public class SolicitudDeTarjetasController implements Handler {
         }
 
         try {
-            AuthServiceColaboracion.registrarPersonasVulnerables(IdPersona);
+            AuthServiceColaboracion.registrarPersonasVulnerables(IdPersona, persona.devolerMedioDeContacto(TipoMedioDeContacto.MAIL));
             notificacionTarjeta.aprobada("Tu pedido de tarjetas esta en camino!");
+
         } catch (ExcepcionValidacion e) {
             notificacionTarjeta.error(e.getMessage());
         }
