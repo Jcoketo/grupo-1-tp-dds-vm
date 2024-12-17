@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 import modelo.authService.AuthServiceColaboracion;
 import modelo.excepciones.ExcepcionValidacion;
+import modelo.personas.PersonaHumana;
 import org.jetbrains.annotations.NotNull;
 import persistencia.RepositorioColaboradores;
 import utils.GeneradorModel;
@@ -13,6 +14,8 @@ import utils.GeneradorModel;
 import java.util.Map;
 
 public class SolicitudDeTarjetasController implements Handler {
+
+    private RepositorioColaboradores repositorioColaboradores = RepositorioColaboradores.getInstancia();
 
     public SolicitudDeTarjetasController() {
         super();
@@ -23,8 +26,23 @@ public class SolicitudDeTarjetasController implements Handler {
         Map<String, Object> model = GeneradorModel.getModel(context);
 
         Integer IdPersona = context.sessionAttribute("idPersona");
-
         NotificacionTarjeta notificacionTarjeta = new NotificacionTarjeta();
+
+        PersonaHumana persona = repositorioColaboradores.buscarPersonaPorId(IdPersona);
+
+        if ( persona == null) {
+            notificacionTarjeta.error("No se encontro la persona");
+            context.sessionAttribute("notificacionTarjeta", notificacionTarjeta);
+            context.redirect("/elegirDonacion");
+            return;
+        }
+
+        if ( persona.getDireccion() == null || persona.getDireccion().equals("")) {
+            notificacionTarjeta.error("Debes tener una direccion cargada para solicitar tarjetas");
+            context.sessionAttribute("notificacionTarjeta", notificacionTarjeta);
+            context.redirect("/elegirDonacion");
+            return;
+        }
 
         try {
             AuthServiceColaboracion.registrarPersonasVulnerables(IdPersona);
@@ -34,8 +52,6 @@ public class SolicitudDeTarjetasController implements Handler {
         }
 
         context.sessionAttribute("notificacionTarjeta", notificacionTarjeta);
-
-        //context.render("templates/elegirDonacionFisica.mustache", model);
         context.redirect("/elegirDonacion");
     }
 }

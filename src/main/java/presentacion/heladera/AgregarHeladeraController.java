@@ -32,22 +32,26 @@ public class AgregarHeladeraController implements Handler {
 
         PersonaJuridica persona = repoColab.traerPersonaPorIdJuridica(id_persona);
 
-        PuntoEstrategicoXdireccion servicio = PuntoEstrategicoXdireccion.getInstancia();
+        String direccion = persona.getDireccion();
 
-        String direccion = persona.getDireccion().replace(" ", "+").replace(",", "");
+        if ( direccion != null || !direccion.equals("")){
+            PuntoEstrategicoXdireccion servicio = PuntoEstrategicoXdireccion.getInstancia();
 
-        List<PuntoEstrategico> puntosRecomendados = new ArrayList<>();
+            String direccionAux = direccion.replace(" ", "+").replace(",", "");
 
-        try {
-            PuntoEstrategico punto = servicio.obtenerPuntoDeColocacion(direccion);
-            RecomendadorDePuntos recomendador = RecomendadorDePuntos.getInstancia();
-            puntosRecomendados = recomendador.obtenerPuntosRecomendados(punto.getLatitud(), punto.getLongitud(), 1000.0);
+            List<PuntoEstrategico> puntosRecomendados = new ArrayList<>();
 
-        }catch (ExcepcionValidacion e){
-            model.put("errorAPI", e.getMessage());
+            try {
+                PuntoEstrategico punto = servicio.obtenerPuntoDeColocacion(direccionAux);
+                RecomendadorDePuntos recomendador = RecomendadorDePuntos.getInstancia();
+                puntosRecomendados = recomendador.obtenerPuntosRecomendados(punto.getLatitud(), punto.getLongitud(), 1000.0);
+                model.put("puntosRecomendados", puntosRecomendados);
+
+            }catch (ExcepcionValidacion e){
+                model.put("errorAPI", e.getMessage());
+            }
         }
 
-        model.put("puntosRecomendados", puntosRecomendados);
         context.render("templates/agregarHeladera.mustache", model);
     }
 
