@@ -52,25 +52,25 @@ public class CuentaFisicaCreadaController implements Handler {
         if (nombre.equals("") || apellido.equals("") || email.equals("") ||
                 ( password.equals("") && !esXSSO ) || terminos.equals("") || username.equals("") ||
                 tipoDoc.equals("") || nroDoc.equals("") )  {
-            model.put("errorRegistroFisica", "Debe completar los campos obligatorios");
+            context.sessionAttribute("errorRegistroFisica", "Debe completar los campos obligatorios");
             context.redirect("/crearCuentaFisica");
             return;
         }
 
         if ( !esNumerico(nroDoc)  ||  !esNumerico(telefono) )  {
-            model.put("errorRegistroFisica", "El número de documento o el teléfono no son numéricos");
+            context.sessionAttribute("errorRegistroFisica", "El número de documento o el teléfono no son numéricos");
             context.redirect("/crearCuentaFisica");
             return;
         }
 
         if ( !nroDoc.matches("[0-9]{0,8}") )  {
-            model.put("errorRegistroFisica", "El número de documento debe tener 8 dígitos");
+            context.sessionAttribute("errorRegistroFisica", "El número de documento debe tener 8 dígitos");
             context.redirect("/crearCuentaFisica");
             return;
         }
 
         if ( !telefono.equals("")  &&  !telefono.matches("[0-9]{8,10}") )  {
-            model.put("errorRegistroFisica", "El teléfono debe tener entre 8 y 10 dígitos");
+            context.sessionAttribute("errorRegistroFisica", "El teléfono debe tener entre 8 y 10 dígitos");
             context.redirect("/crearCuentaFisica");
             return;
         }
@@ -80,6 +80,12 @@ public class CuentaFisicaCreadaController implements Handler {
             case "02" -> tipoDocumentoEnum = TipoDocumento.LC;
             case "03" -> tipoDocumentoEnum = TipoDocumento.LE;
             default -> throw new ExcepcionValidacion("Unexpected value: " + tipoDoc);
+        }
+
+        if ( username.length() < 6 || username.length() > 12 ) {
+            context.sessionAttribute("errorRegistroFisica", "El usuario debe tener entre 6 y 12 caracteres");
+            context.redirect("/crearCuentaFisica");
+            return;
         }
 
         try {
@@ -96,11 +102,11 @@ public class CuentaFisicaCreadaController implements Handler {
 
         } catch (ExcepcionValidacion e) {
             if(esXSSO){
-                model.put("errorRegistroFisica", e.getMessage());
+                context.sessionAttribute("errorRegistroFisica", e.getMessage());
                 context.redirect("/crearCuentaFisicaSSO");
                 return;
             }
-            model.put("errorRegistroFisica", e.getMessage());
+            context.sessionAttribute("errorRegistroFisica", e.getMessage());
             context.redirect("/crearCuentaFisica");
             return;
         }

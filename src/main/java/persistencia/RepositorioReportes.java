@@ -6,6 +6,7 @@ import java.util.List;
 import lombok.Getter;
 import modelo.elementos.Incidente;
 import modelo.excepciones.ExcepcionValidacion;
+import modelo.reportador.GrupoReporte;
 import modelo.reportador.Reporte;
 
 import javax.persistence.EntityManager;
@@ -33,22 +34,22 @@ public class RepositorioReportes {
         return instancia;
     }
 
-    public void agregarReporte(Reporte reporte){
+    public void agregarReporte(GrupoReporte reporte){
         validarInsertReporte(reporte);
         em.getTransaction().begin();
         em.persist(reporte);
         em.getTransaction().commit();
     }
 
-    public void validarInsertReporte(Reporte reporte) {
-        if (reporte.getPath() == null) {
+    public void validarInsertReporte(GrupoReporte reporte) {
+        if (reporte.getReportes() == null) {
             throw new RuntimeException("El reporte no tiene un link asociado");
         }
     }
 
-    public void eliminar(Reporte reporte) {
+    public void eliminar(GrupoReporte reporte) {
         em.getTransaction().begin();
-        Reporte managedReporte = em.find(Reporte.class, reporte.getId());
+        GrupoReporte managedReporte = em.find(GrupoReporte.class, reporte.getId());
         if (managedReporte != null) {
             em.remove(managedReporte);
             em.getTransaction().commit();

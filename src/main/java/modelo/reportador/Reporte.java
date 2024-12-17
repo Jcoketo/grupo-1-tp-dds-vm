@@ -4,7 +4,7 @@ import lombok.Getter;
 import net.bytebuddy.asm.Advice;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 @Entity
@@ -15,8 +15,17 @@ public abstract class Reporte {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
+    @Getter
+    @Column
     protected String path;
-    private LocalDateTime fechaCreacion;
+
+    @Column
+    private LocalDate fechaCreacion;
+
+    public Reporte(){
+        this.fechaCreacion = LocalDate.now();
+    }
 
     public String getFecha(){
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");

@@ -1,8 +1,12 @@
 package modelo.reportador;
 
+import lombok.NoArgsConstructor;
 import modelo.personas.Colaborador;
 import modelo.personas.PersonaHumana;
 
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+import javax.persistence.Transient;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -11,8 +15,11 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Map;
 
-
+@Entity
+@DiscriminatorValue("COLABORADOR")
+@NoArgsConstructor
 public class ReporteColaborador extends Reporte {
+    @Transient
     private Map<Colaborador, Integer> datos;
 
     public ReporteColaborador(Map<Colaborador, Integer> datos){

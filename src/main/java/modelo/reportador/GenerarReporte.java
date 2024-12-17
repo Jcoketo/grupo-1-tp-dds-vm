@@ -5,9 +5,7 @@ import modelo.personas.Colaborador;
 import persistencia.RepositorioColaboradores;
 import persistencia.RepositorioHeladeras;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -60,3 +58,9 @@ public class GenerarReporte{
     }
 
 }
+/*
+1.BOTON "GENERAR REPORTES" Y CRON TASK SEMANAL -> LLAMAN A GenerarReporte.generarReporte().
+2.CAMBIAR RepositorioReportes A RepositorioGrupoReportes.
+3.BOTONES "DESCARGAR REPORTE X" -> DEBEN SER DEL TIPO <a> CON href="URL/PATH DEL REPORTE" y download="NOMBRE DEL ARCHIVO PARA DESCARGARSE".
+Ejemplo: <a href="/path/to/file.pdf" download="CustomFileName.pdf">Download PDF</a>
+*/

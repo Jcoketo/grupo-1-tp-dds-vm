@@ -14,6 +14,11 @@ public class CrearCuentaFisicaController implements Handler {
     public void handle(@NotNull Context context) throws Exception {
         Map<String, Object> model = GeneradorModel.getModel(context);
 
+        if ( context.sessionAttribute("errorRegistroFisica") != null ) {
+            model.put("errorRegistroFisica", context.sessionAttribute("errorRegistroFisica"));
+            context.consumeSessionAttribute("errorRegistroFisica");
+        }
+
         context.render("templates/crearCuentaFisica.mustache", model);
 //        context.sessionAttribute("model", null);
 
