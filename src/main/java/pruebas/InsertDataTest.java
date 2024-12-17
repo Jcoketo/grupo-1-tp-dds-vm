@@ -2,6 +2,10 @@ package pruebas;
 
 import modelo.colaboracion.Oferta;
 import modelo.colaboracion.TipoOferta;
+import modelo.consumosAPIs.api_direccion.PuntoEstrategicoXdireccion;
+import modelo.consumosAPIs.recomendadorDePuntos.apiMock.ApiMockCall;
+import modelo.consumosAPIs.recomendadorDePuntos.apiMock.dtos.PuntoDeColocacion;
+import modelo.consumosAPIs.recomendadorDePuntos.apiMock.dtos.PuntoDireccion;
 import modelo.elementos.*;
 import modelo.personas.*;
 import modelo.suscripcion.SuscripcionXCantidad;
@@ -15,6 +19,12 @@ import javax.persistence.Persistence;
 
 public class InsertDataTest {
     public static void main(String[] args) {
+
+        String direccion = "viamonte 2070, balvanera";
+
+        String direccionParseada = direccion.replace(" ", "+").replace(",", "");
+
+        System.out.println(direccionParseada);
 
         /*
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("db");

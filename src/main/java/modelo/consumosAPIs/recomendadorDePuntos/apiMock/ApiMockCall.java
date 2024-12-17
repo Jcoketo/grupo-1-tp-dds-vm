@@ -1,9 +1,11 @@
 package modelo.consumosAPIs.recomendadorDePuntos.apiMock;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import modelo.consumosAPIs.recomendadorDePuntos.apiMock.dtos.PuntoDeColocacion;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import modelo.consumosAPIs.recomendadorDePuntos.apiMock.dtos.PuntoDireccion;
 import org.apache.cxf.jaxrs.client.WebClient;
 
 import javax.ws.rs.core.Response;
@@ -37,4 +39,29 @@ public class ApiMockCall {
             throw new Exception("Error en la llamada a /api/user");
         }
     }
+
+    public PuntoDireccion[] obtenerPuntosXdireccion(String direccion) {
+        WebClient clientUsers = WebClient.create("https://nominatim.openstreetmap.org/search.php?q=" + direccion + "&format=jsonv2");
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+        Response response = clientUsers
+                .header("Content-Type", "application/json")
+                .get();
+        int status = response.getStatus();
+        String responseBody = response.readEntity(String.class);
+        if (status == 200) {
+            try {
+                PuntoDireccion[] puntosDeColocacion = objectMapper.readValue(responseBody, PuntoDireccion[].class);
+                return puntosDeColocacion;
+            } catch (JsonProcessingException e) {
+                e.printStackTrace();
+                return null;
+            }
+        } else {
+            System.out.println("Error response = " + responseBody);
+            return null;
+        }
+    }
+
 }
