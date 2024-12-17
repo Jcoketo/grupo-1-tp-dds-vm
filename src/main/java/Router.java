@@ -286,7 +286,7 @@ public class Router {
             });
 
             path("/registroPersonaVulnerableFinal", () -> {
-                //(new AutorizacionMiddleware().setDebeSerLogueado());
+                before(new AutorizacionMiddleware().setDebeSerLogueado().setDebeSerPF());
                 get(new RegistroPersonaVulnerableFinalController());
             });
 

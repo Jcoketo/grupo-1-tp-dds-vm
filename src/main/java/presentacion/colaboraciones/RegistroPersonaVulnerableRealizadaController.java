@@ -35,31 +35,31 @@ public class RegistroPersonaVulnerableRealizadaController implements Handler{
         Integer cantidadMenores = Integer.parseInt((context.formParam("cantidadMenores")));
 
         if ( nombre.equals("") || ( numeroDocumento.equals("") && tieneDoc.equals(1) ) || ( tieneDom.equals(1) && domicilio.equals("")) ){
-            model.put("errorRegistroVulnerable", "Debe completar los campos obligatorios");
+            context.sessionAttribute("errorRegistroVulnerable", "Debe completar todos los campos obligatorios.");
             context.redirect("/registroPersonaVulnerable");
             return;
         }
 
         if (  ( !esNumerico(numeroDocumento) && tieneDoc.equals(1) ) || !esNumerico(nroTarjeta) )  {
-            model.put("errorRegistroVulnerable", "El número de documento o el numero de tarjeta no son numéricos");
+            context.sessionAttribute("errorRegistroVulnerable", "El número de documento o el numero de tarjeta no son numéricos");
             context.redirect("/registroPersonaVulnerable");
             return;
         }
 
         if ( !numeroDocumento.matches("[0-9]{0,8}") && tieneDoc.equals(1) )  {
-            model.put("errorRegistroVulnerable", "El número de documento debe tener 8 dígitos");
+            context.sessionAttribute("errorRegistroVulnerable", "El número de documento debe tener 8 dígitos");
             context.redirect("/registroPersonaVulnerable");
             return;
         }
 
         if (tieneMenores.equals(1) && cantidadMenores.equals(0)){
-            model.put("errorRegistroVulnerable", "Debe elegir la cantidad de menores a cargo distinta de 0.");
+            context.sessionAttribute("errorRegistroVulnerable", "Debe elegir la cantidad de menores a cargo distinta de 0.");
             context.redirect("/registroPersonaVulnerable");
             return;
         }
 
         if ( !nroTarjeta.matches("[0-9]{11}"))  {
-            model.put("errorRegistroVulnerable", "El número de la tarjeta debe tener 11 dígitos");
+            context.sessionAttribute("errorRegistroVulnerable", "El número de la tarjeta debe tener 11 dígitos");
             context.redirect("/registroPersonaVulnerable");
             return;
         }
