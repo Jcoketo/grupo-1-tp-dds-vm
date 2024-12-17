@@ -1,7 +1,11 @@
 package modelo.reportador;
 
+import lombok.NoArgsConstructor;
 import modelo.elementos.Heladera;
 
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+import javax.persistence.Transient;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -10,8 +14,13 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Map;
 
+@Entity
+@DiscriminatorValue("HELADERA_VIANDAS")
+@NoArgsConstructor
 public class ReporteHeladeraViandas extends Reporte {
+    @Transient
     private Map<Heladera, Integer> colocadas;
+    @Transient
     private Map<Heladera, Integer> retiradas;
 
     public ReporteHeladeraViandas(Map<Heladera, Integer> colocadas, Map<Heladera, Integer> retiradas){

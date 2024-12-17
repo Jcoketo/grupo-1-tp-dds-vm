@@ -11,6 +11,8 @@ import accessManagment.Roles;
 import io.javalin.http.Context;
 import io.javalin.http.Handler;
 import modelo.personas.TipoPersona;
+import org.owasp.esapi.ESAPI;
+import org.owasp.esapi.errors.ValidationException;
 import persistencia.RepositorioColaboradores;
 import persistencia.RepositorioUsuarios;
 import modelo.authService.AuthServiceUsuario;
@@ -45,10 +47,18 @@ public class ProcessLoginController implements Handler {
             return;
         }
 
+        try { /* CHEQ DE SQL INJECTION */
+            email = ESAPI.validator().getValidInput("Email", email, "Email", 200, false);
+            password = ESAPI.validator().getValidInput("Password", password, "SafeString", 200, false);
+        } catch (ValidationException e) {
+            context.sessionAttribute("errorLogin", "El mail o la contraseña no son válidos");
+            context.redirect("/login");
+            return;
+        }
+
         try {
             AuthServiceUsuario.autenticarUsuario(email, password);
         } catch (ExcepcionValidacion e) {
-            model.put("errorLogin", "El mail o la contraseña son incorrectos");
             context.sessionAttribute("errorLogin", "El mail o la contraseña son incorrectos");
             context.redirect("/login");
             return;

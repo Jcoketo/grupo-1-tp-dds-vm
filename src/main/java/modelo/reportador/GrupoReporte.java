@@ -2,10 +2,8 @@ package modelo.reportador;
 
 import lombok.Getter;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import java.time.LocalDateTime;
+import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -16,17 +14,25 @@ public class GrupoReporte {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private LocalDateTime fechaCreacion;
+
+    @Column
+    private LocalDate fechaCreacion;
+
+    @Getter
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "grupo_reporte_id", referencedColumnName = "id")
     private List<Reporte> reportes;
 
     public GrupoReporte() {
-        this.fechaCreacion = LocalDateTime.now();
+        this.fechaCreacion = LocalDate.now();
         this.reportes = new ArrayList<Reporte>();
     }
 
     public String getPath(int id){
         Optional<Reporte> reporte = reportes.stream().filter(r -> r.getId() == id).findFirst();
-        if(reporte.isPresent()) return reporte.get().getPath();
+        if(reporte.isPresent()) {
+            return reporte.get().getPath();
+        }
         return "";
     }
 

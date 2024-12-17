@@ -340,6 +340,7 @@ public class Router {
             // TODO
             // FALTA PATH PARA RECIBIR EL POST DEL BOTON DE GENERAR REPORTES
             // FALTA POST PARA RECIBIR FALLAS EN LAS HELADERAS
+            // flata validacion de username en juridico
 
         });
 

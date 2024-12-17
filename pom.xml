@@ -68,12 +68,6 @@
             <version>5.4.18.Final</version>
         </dependency>
 
-        <!-- <dependency>
-            <groupId> mysql </groupId>
-            <artifactId> mysql-connector-java </artifactId>
-            <version> 8.0.29 </version>
-        </dependency> -->
-
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
