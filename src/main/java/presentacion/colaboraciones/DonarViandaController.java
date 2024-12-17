@@ -27,6 +27,10 @@ public class DonarViandaController implements Handler {
         if (heladeras == null)
             heladeras = List.of();
 
+        if ( context.sessionAttribute("errorVianda") != null ) {
+            model.put("errorVianda", context.sessionAttribute("errorVianda"));
+            context.consumeSessionAttribute("errorVianda");
+        }
 
         model.put("heladeras", heladeras);
 
