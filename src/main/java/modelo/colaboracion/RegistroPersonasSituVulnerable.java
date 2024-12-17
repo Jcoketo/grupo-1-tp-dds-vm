@@ -61,6 +61,7 @@ public class RegistroPersonasSituVulnerable extends Colaboracion{
         this.tarjetas = tarjetas;
         this.cantidadTarjetas = cantidadTarjetas;
         this.cantidadRepartida = 0;
+        this.fechaColaboracion = fechaDonacion;
 
     }
 

@@ -181,6 +181,6 @@ public class DistribucionDeViandas extends Colaboracion {
 
     @Override
     public String getClassName() {
-        return "Donacion de Dinero";
+        return "Distribucion de Viandas";
     }
 }

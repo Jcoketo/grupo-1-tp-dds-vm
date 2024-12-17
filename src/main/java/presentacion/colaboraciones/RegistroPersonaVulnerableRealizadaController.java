@@ -53,8 +53,8 @@ public class RegistroPersonaVulnerableRealizadaController implements Handler{
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate fechaNacimiento = LocalDate.parse(fechaNac, formatter);
 
-        if ( fechaNacimiento.isBefore(LocalDate.now()) ){
-            context.sessionAttribute("errorRegistroVulnerable", "La persona debe ser mayor de edad.");
+        if ( fechaNacimiento.isAfter(LocalDate.now()) ){
+            context.sessionAttribute("errorRegistroVulnerable", "La fecha de nacimiento no puede ser posterior al dia de hoy.");
             context.redirect("/registroPersonaVulnerable");
             return;
         }

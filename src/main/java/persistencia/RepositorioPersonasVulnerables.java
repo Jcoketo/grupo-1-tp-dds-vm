@@ -63,7 +63,7 @@ public class RepositorioPersonasVulnerables {
     }
 
     public List<PersonaVulnerable> obtenerPersonasVulnerablesRegistradasPor(Integer idPersona){
-        TypedQuery<PersonaVulnerable> query = em.createQuery("SELECT p FROM PersonaVulnerable p WHERE p.persona_alta_id = :idPersona", PersonaVulnerable.class);
+        TypedQuery<PersonaVulnerable> query = em.createQuery("SELECT p FROM PersonaVulnerable p WHERE p.dioAlta = :idPersona", PersonaVulnerable.class);
         query.setParameter("idPersona", idPersona);
         try {
             return query.getResultList();
