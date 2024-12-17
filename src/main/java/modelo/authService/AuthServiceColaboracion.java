@@ -16,6 +16,7 @@ import persistencia.RepositorioHeladeras;
 import persistencia.RepositorioOfertas;
 import persistencia.RepositorioTarjetas;
 
+import java.net.DatagramPacket;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -135,10 +136,11 @@ public class AuthServiceColaboracion {
 
 
         }else if ( esRecomendada ){
+            Double lat = Double.parseDouble(latRecomendada);
+            Double lon = Double.parseDouble(longRecomendada);
             puntoEstrategico.setDireccion(direcRecomendada);
-            LatLong latLong = LocalizadorLatLong.obtenerLatitudYLongitud(direcRecomendada);
-            puntoEstrategico.setLatitud(latLong.getLatitud());
-            puntoEstrategico.setLongitud(latLong.getLongitud());
+            puntoEstrategico.setLatitud(lat);
+            puntoEstrategico.setLongitud(lon);
             puntoEstrategico.setAreas(LocalizadorLatLong.obtenerArea(direcRecomendada));
         } else {
             String direccionLimpia = direccion.replace(" ", "+").replace(",", "");

@@ -63,11 +63,13 @@ public class HeladeraAgregadaController implements Handler {
             return;
         }
 
-        if ((CheckBoxDireccion && esRecomendada) || (CheckBoxDireccion && !direccion.equals("")) || (esRecomendada && !direccion.equals(""))) {
+
+        if ((CheckBoxDireccion && esRecomendada) || (CheckBoxDireccion && !direccion.isEmpty())) {
             model.put("errorHeladera", "No puede ingresar una heladera con dos direcciones");
             context.redirect("/agregarHeladera");
             return;
         }
+
 
         Boolean activo = Boolean.TRUE;
         if (activa.equals("1")) {

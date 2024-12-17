@@ -159,8 +159,7 @@
                                 data-direccion="{{direccion}}"
                                 data-latitud="{{latitud}}"
                                 data-longitud="{{longitud}}"
-                                data-area="{{area}}"
-                                data-activo="{{activo}}">
+                                data-area="{{area}}">
                             {{direccion}}
                         </option>
                     {{/puntosRecomendados}}
@@ -193,19 +192,21 @@
     document.getElementById('ubicacion').addEventListener('change', function () {
         const selectedOption = this.options[this.selectedIndex];
 
-        // Extraer los valores del atributo data-* de la opción seleccionada
+        // Extraer valores de la opción seleccionada
         const direccion = selectedOption.dataset.direccion;
         const latitud = selectedOption.dataset.latitud;
         const longitud = selectedOption.dataset.longitud;
         const area = selectedOption.dataset.area;
-        const activo = selectedOption.dataset.activo === "true" ? true : false;
+
+        // Setear activo en true
+        selectedOption.dataset.activo = "true"; // Seteamos el atributo data-activo a "true"
 
         // Asignar los valores a los campos ocultos
         document.getElementById('direccion').value = direccion;
         document.getElementById('latitud').value = latitud;
         document.getElementById('longitud').value = longitud;
         document.getElementById('area').value = area;
-        document.getElementById('activo').value = activo;
+        document.getElementById('activo').value = true; // Aquí directamente seteamos el input oculto
     });
 </script>
 
