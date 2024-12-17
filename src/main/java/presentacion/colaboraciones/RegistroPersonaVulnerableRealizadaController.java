@@ -25,22 +25,26 @@ public class RegistroPersonaVulnerableRealizadaController implements Handler{
         Map<String, Object> model = GeneradorModel.getModel(context);
 
         String nombre = context.formParam("nombre");
-        Integer tieneDoc = Integer.parseInt(Objects.requireNonNull(context.formParam("tieneDoc")));
+        String tieneDoc = context.formParam("tieneDoc");
         String tipoDoc = context.formParam("tipoDoc");
         String numeroDocumento = context.formParam("numDoc");
-        Integer tieneDom = Integer.parseInt((context.formParam("tieneDom")));
+        String tieneDom = context.formParam("tieneDom");
         String domicilio = context.formParam("domicilio");
         String nroTarjeta = context.formParam("numTarjeta");
         Integer tieneMenores = Integer.parseInt((context.formParam("tieneMenores")));
         Integer cantidadMenores = Integer.parseInt((context.formParam("cantidadMenores")));
 
-        if ( nombre.equals("") || ( numeroDocumento.equals("") && tieneDoc.equals(1) ) || ( tieneDom.equals(1) && domicilio.equals("")) ){
+        if (tieneDoc == null){
+            tieneDoc = "0";
+        }
+
+        if ( nombre.equals("") || ( numeroDocumento.equals("") && tieneDoc.equals("1") ) || ( tieneDom.equals(1) && domicilio.equals("")) ){
             context.sessionAttribute("errorRegistroVulnerable", "Debe completar todos los campos obligatorios.");
             context.redirect("/registroPersonaVulnerable");
             return;
         }
 
-        if (  ( !esNumerico(numeroDocumento) && tieneDoc.equals(1) ) || !esNumerico(nroTarjeta) )  {
+        if (  ( !esNumerico(numeroDocumento) && tieneDoc.equals("1") ) || !esNumerico(nroTarjeta) )  {
             context.sessionAttribute("errorRegistroVulnerable", "El número de documento o el numero de tarjeta no son numéricos");
             context.redirect("/registroPersonaVulnerable");
             return;

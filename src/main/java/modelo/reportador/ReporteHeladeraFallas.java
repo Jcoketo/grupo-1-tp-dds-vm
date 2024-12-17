@@ -1,7 +1,6 @@
 package modelo.reportador;
 
-import modelo.personas.Colaborador;
-import modelo.personas.PersonaHumana;
+import modelo.elementos.Heladera;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -11,11 +10,10 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Map;
 
+public class ReporteHeladeraFallas extends Reporte {
+    private Map<Heladera, Integer> datos;
 
-public class ReporteColaborador extends Reporte {
-    private Map<Colaborador, Integer> datos;
-
-    public ReporteColaborador(Map<Colaborador, Integer> datos){
+    public ReporteHeladeraFallas(Map<Heladera, Integer> datos){
         this.datos = datos;
         try {
             this.path = saveToCSV("/archivos/reportes/");
@@ -31,17 +29,16 @@ public class ReporteColaborador extends Reporte {
             Files.createDirectories(dirPath);
         }
 
-        path = dirPath.resolve("reporte_colaborador_"+this.getFecha()+".csv").toString();
+        path = dirPath.resolve("reporte_heladera_fallas_"+this.getFecha()+".csv").toString();
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(path))) {
-            writer.write("ID_COLABORADOR;NOMBRE_COLABORADOR;VIANDAS_DONADAS\n");
-            for (Map.Entry<Colaborador, Integer> entry : datos.entrySet()) {
-                Colaborador colab = entry.getKey();
+            writer.write("ID_HELADERA;NOMBRE_HELADERA;ESTADO;CANTIDAD_FALLAS\n");
+            for (Map.Entry<Heladera, Integer> entry : datos.entrySet()) {
+                Heladera heladera = entry.getKey();
                 Integer contador = entry.getValue();
-                writer.write(colab.getId() + ";" + ((PersonaHumana)colab.getPersona()).getNombre() + ";" + contador + "\n");
+                writer.write(heladera.getId() + ";" + heladera.getNombre() + ";" + heladera.getActiva() + ";" + contador + "\n");
             }
         }
         return path;
     }
-
 
 }
