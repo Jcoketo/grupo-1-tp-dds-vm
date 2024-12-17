@@ -76,7 +76,7 @@ public class RegistroPersonaVulnerableRealizadaController implements Handler{
             Integer idPersona = context.sessionAttribute("idPersona");
             AuthServicePersonaVulnerable.procesarAltaPersonaVulnerable(idPersona, nombre, tipoDocumentoEnum, numeroDocumento, domicilio, nroTarjeta, cantidadMenores);
         } catch (ExcepcionValidacion e) {
-            model.put("errorRegistroVulnerable", e.getMessage());
+            context.sessionAttribute("errorRegistroVulnerable", e.getMessage());
             context.redirect("/registroPersonaVulnerable");
             return;
         }

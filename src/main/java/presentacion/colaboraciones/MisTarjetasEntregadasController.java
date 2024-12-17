@@ -34,8 +34,7 @@ public class MisTarjetasEntregadasController implements Handler {
         List<PersonaVulnerable> personasVulnerables = repoPersonasVulnerables.obtenerPersonasVulnerablesRegistradasPor(idPersona);
 
         if(personasVulnerables == null){
-            personasVulnerables = List.of();
-        }
+            personasVulnerables = List.of();}
 
         List<DatosPersonaVulnerable> personasRegistradas = this.getDatosPersonasVulnerables(personasVulnerables);
 
