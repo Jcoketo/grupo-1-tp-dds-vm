@@ -89,6 +89,7 @@ public class AuthServiceTecnico {
 
         repoTecnicos.registrarVisita(tecnico); // <--- persiste la visita tambien
         repoIncidentes.actualizarIncidente(incidente);
+        repoHeladeras.actualizarHeladera(heladera);
     }
 
 }
