@@ -7,24 +7,6 @@
     <!-- Incluye Bootstrap -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        .social-icons {
-            display: flex;
-            gap: 10px;
-        }
-
-        .social-icons img {
-            width: 24px;
-            height: 24px;
-        }
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            min-height: 100vh;
-            background-color: white;
-            display: flex;
-            flex-direction: column;
-        }
 
         h1 {
             font-size: 24px;
@@ -60,10 +42,8 @@
             padding-left: 5px;
         }
 
-        main {
-            flex-grow: 1;
-            padding: 20px;
-            background-color: white;
+        #main {
+            margin-bottom: 100px; /* Espaciado adicional para asegurar que el footer no se superponga */
         }
 
         h2 {
@@ -97,30 +77,18 @@
             white-space: nowrap; /* Evita que el texto haga salto de línea */
             color: white; /* Color de texto */
         }
-
-        .footer-bg {
-            background-color: #B7C9C7; /* Color de fondo */
-            padding: 20px 0; /* Espaciado superior e inferior */
+        .map-container, .list-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
         }
-        .social-icons a {
-            margin-right: 15px; /* Espacio entre iconos de redes sociales */
-            color: white; /* Color de texto para iconos */
-        }
-        .footer-link {
-            color: white; /* Color de texto para enlaces */
-            text-decoration: none; /* Eliminar subrayado */
-        }
-        .footer-link:hover {
-            text-decoration: underline; /* Subrayar al pasar el mouse */
-        }
-
-        .social-icon {
-            margin-right: 10px; /* Espacio entre el ícono y el texto */
+        .map-container {
+            margin-bottom: 20px; /* Espaciado adicional entre el mapa y el footer */
         }
 
         #map {
             width: 100%;
-            height: 600px;
+            height: 500px;
             border-radius: 10px;
         }
 
@@ -144,47 +112,6 @@
             padding: 0;
             height: 100%; /* Asegura que el body y html ocupen el 100% de la altura */
         }
-
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        header .navbar-nav .nav-link {
-            font-size: 17px !important; /* Ajusta el tamaño de la fuente de los enlaces de navegación en el header */
-        }
-        nav {
-            margin-top: 20px; /* Ajusta el valor según el espacio deseado */
-        }
-
-        /*Dropdown*/
-        .navbar-light .navbar-nav .nav-link,
-        .navbar-light .dropdown-menu {
-            background-color: #ffffff;
-            color: #1e5552;
-            font-size: 16px;
-            font-weight: normal;
-        }
-
-        .navbar-light .dropdown-menu {
-            width: 200px;
-        }
-        .navbar-light .dropdown-menu a.dropdown-item {
-            color: #1e5552;
-            font-family: Arial, Helvetica, sans-serif;
-            font-size: 16px;
-            font-weight: normal;
-            width: 200px;
-
-        }
-
-        .navbar-light .dropdown-menu a.dropdown-item:hover {
-            background-color: #ffffff;
-            margin: 0;
-            width: 200px;
-        }
-
-        /*fin dropdown*/
 
         .no-arrow-select {
               display: block;
@@ -241,11 +168,10 @@
 <body>
 
 {{>header}}
-
-<main class="container-fluid">
+<main class="contenedor p-5" id="main">
     <h1 class="mb-5" style="font-family: 'Poppins', sans-serif; font-weight: 700; color: #1e5552;">Visualización de heladeras</h1>
     <div class="row">
-        <div class="col-md-7">
+        <div class="col-md-7 map-container">
             <div id="map"></div>
         </div>
         <div class="col-md-5 mt-4 mt-md-0">

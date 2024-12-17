@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mis suscripciones</title>
+    <!-- Enlace a CSS de Bootstrap -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        main {
+            flex-grow: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 50px;
+            background-color: white;
+        }
+
+        .btn-ver-canjes {
+            background-color: #1e5552;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+        }
+
+        .catalog-item {
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            padding: 10px;
+            text-align: center;
+            border-radius: 20px;
+            margin-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: auto;
+            max-width: 200px;
+            min-height: 250px;
+        }
+
+        .catalog-item img {
+            width: 90%;
+            height: auto;
+            margin-bottom: 10px;
+            border-radius: 8px;
+        }
+
+        .sub-header {
+            margin: 0;
+            font-weight: 600;
+        }
+
+        .catalog-row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .form-canjear {
+            margin-top: 10px;
+        }
+
+        .puntos {
+            padding: 10px;
+            border-radius: 5px;
+            background-color: #b5c8c4;
+            text-align: right;
+            color: #1e5552;
+            font-weight: 700;
+        }
+
+        .btn-seleccionar, .btn-canjear, .btn-agregar {
+            border: none;
+            padding: 10px 20px;
+            vertical-align: middle;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 500;
+            margin: 15px;
+            width: auto;
+            white-space: nowrap;
+            text-align: center;
+        }
+
+        .btn-canjear {
+            background-color: #1e5552;
+            color: white;
+        }
+
+        .btn-canjear:hover {
+            background-color: #143c3a;
+            color: white;
+        }
+
+        .btn-seleccionar {
+            background-color: #b5c8c4;
+            color: #1e5552;
+        }
+
+        .btn-seleccionar:hover {
+            background-color: #9eaeaa;
+            color: #1e5552;
+        }
+
+        .btn-agregar {
+            background-color: #152855;
+            color: white;
+        }
+
+        .btn-agregar:hover {
+            background-color: #00215c;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+{{> header}}
+
+<main>
+    <div class="container mb-5 mt-3">
+        <div class="row d-flex align-items-center">
+            <div class="col-md-8">
+                <h1 style="font-family: 'Poppins', sans serif; font-weight:700; color: #1e5552">Mis suscripciones</h1>
+            </div>
+        </div>
+
+        <div class="row d-flex justify-content-center">
+            <div class="container mt-5">
+                <div class="row justify-content-center">
+                    <div class="col-md-9">
+                        <div class="catalog-row">
+                            {{#suscripciones}}
+                                <div class="col-md-3">
+                                    <div class="catalog-item">
+                                        <p><b>Nombre: </b>{{nombreHeladera}}</p>
+                                        <p><b>Tipo de suscripcion: </b>{{tipoSuscripcion}}</p>
+                                        <p><b>Medio de contacto: </b>{{medioDeContacto}}</p>
+                                        ${bajaLogica? '<small><i>Suscripcion dada de baja</i></small>' : ' Suscripcion Activa'}
+                                    </div>
+                                </div>
+                            {{/suscripciones}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</main>
+
+{{> footer}}
+
+<script>
+    function mostrarBotonCanjear(btn) {
+        const form = btn.nextElementSibling;
+        if (form && form.classList.contains('form-canjear')) {
+            if (form.style.display === "none" || form.style.display === "") {
+                form.style.display = "block";
+            } else {
+                form.style.display = "none";
+            }
+        }
+    }
+
+    function filterOffers() {
+        const filterSelect = document.getElementById('filterSelect');
+        const selectedValue = filterSelect.value;
+        let url = '/canjearPuntos';
+        if (selectedValue) {
+            url += `?tipoOferta=${selectedValue}`;
+        }
+        window.location.href = url;
+    }
+</script>
+
+<!-- Scripts de Bootstrap y jQuery -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
