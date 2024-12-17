@@ -18,7 +18,7 @@ public abstract class Incidente {
     @GeneratedValue
     @Getter private int id;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne()
     @JoinColumn(name = "heladera_id", nullable = false)
     @Getter protected Heladera heladera;
 
