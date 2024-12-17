@@ -122,19 +122,11 @@ public class AuthServiceColaboracion {
             if ( direcAux == null || direcAux.equals("") ){
                 throw new ExcepcionValidacion("La dirección de la persona jurídica no fue cargada!");
             }
-            /*
             puntoEstrategico.setDireccion(direcAux);
             LatLong latLong = LocalizadorLatLong.obtenerLatitudYLongitud(direcAux);
             puntoEstrategico.setLatitud(latLong.getLatitud());
             puntoEstrategico.setLongitud(latLong.getLongitud());
-            */
-
-            PuntoEstrategicoXdireccion servicio = PuntoEstrategicoXdireccion.getInstancia();
-            PuntoEstrategico punto = servicio.obtenerPuntoDeColocacion(direcAux);
-            puntoEstrategico = punto;
             puntoEstrategico.setAreas(LocalizadorLatLong.obtenerArea(direcAux));
-
-
         }else if ( esRecomendada ){
             Double lat = Double.parseDouble(latRecomendada);
             Double lon = Double.parseDouble(longRecomendada);
@@ -143,12 +135,11 @@ public class AuthServiceColaboracion {
             puntoEstrategico.setLongitud(lon);
             puntoEstrategico.setAreas(LocalizadorLatLong.obtenerArea(direcRecomendada));
         } else {
-            String direccionLimpia = direccion.replace(" ", "+").replace(",", "");
-            PuntoEstrategicoXdireccion servicio = PuntoEstrategicoXdireccion.getInstancia();
-            PuntoEstrategico punto = servicio.obtenerPuntoDeColocacion(direccionLimpia);
-            puntoEstrategico = punto;
-            puntoEstrategico.setAreas(LocalizadorLatLong.obtenerArea(direccionLimpia));
-
+            puntoEstrategico.setDireccion(direccion);
+            LatLong latLong = LocalizadorLatLong.obtenerLatitudYLongitud(direccion);
+            puntoEstrategico.setLatitud(latLong.getLatitud());
+            puntoEstrategico.setLongitud(latLong.getLongitud());
+            puntoEstrategico.setAreas(LocalizadorLatLong.obtenerArea(direccion));
         }
 
         Heladera heladera = new Heladera(nombre, Integer.parseInt(capacidad), puntoEstrategico, activo, fechaInicio, tempMax, tempMin);

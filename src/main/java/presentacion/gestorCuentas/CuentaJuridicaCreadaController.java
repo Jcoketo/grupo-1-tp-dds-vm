@@ -37,9 +37,10 @@ public class CuentaJuridicaCreadaController implements Handler {
         Integer rubro = Integer.valueOf(context.formParam("rubro"));
         String cuit = context.formParam("cuit");
         String telefono = context.formParam("telefono-representante");
-        String email = context.formParam("email");
+        String email = "ad@gmail.com";
         String username = context.formParam("username");
         String password = context.formParam("password");
+        if(password == null){ password = ""; }
         String terminos = context.formParam("terms");
         String direccion = context.formParam("direccion");
 
