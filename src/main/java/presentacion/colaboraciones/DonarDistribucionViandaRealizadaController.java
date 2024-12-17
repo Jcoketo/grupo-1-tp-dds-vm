@@ -20,8 +20,19 @@ public class DonarDistribucionViandaRealizadaController implements Handler {
     public void handle(@NotNull Context context) throws Exception {
         Map<String, Object> model = GeneradorModel.getModel(context);
 
-        Integer idHeladeraOrigen = Integer.parseInt(model.get("idHeladeraOrigen").toString());
-        Integer idHeladeraDestino = Integer.parseInt(model.get("idHeladeraDestino").toString());
+        Integer idHeladeraOrigen = null;
+        Integer idHeladeraDestino = null;
+
+        try {
+            idHeladeraOrigen = Integer.parseInt(context.sessionAttribute("id_heladera_origen"));
+            idHeladeraDestino = Integer.parseInt(context.sessionAttribute("id_heladera_destino"));
+        }catch (ExcepcionValidacion e){
+            model.put("errorDistribuir", e.getMessage());
+            //context.status(400);
+            context.redirect("/donarDistribuirViandas");
+            return;
+        }
+
 
         Integer motivoDistribucion = Integer.parseInt(context.formParam("motivoDistribucion"));
         Integer cantidadViandas = Integer.parseInt(context.formParam("cantidadViandas")); // --> por defecto es 1

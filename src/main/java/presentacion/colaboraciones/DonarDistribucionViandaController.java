@@ -35,13 +35,19 @@ public class DonarDistribucionViandaController implements Handler {
         String estado2 = context.queryParam("estado2");
         String disponibilidad2 = context.queryParam("disponibilidad2");
 
-        model.put("idHeladeraOrigen", context.queryParam("idHeladeraOrigen"));
+        if(!esNatural(context.sessionAttribute("id_heladera_origen"))){
+            context.sessionAttribute("id_heladera_origen",idHeladeraOrigen);
+        }
+
         model.put("heladera1", heladera1);
         model.put("direccion1", direccion1);
         model.put("estado1", estado1);
         model.put("disponibilidad1", disponibilidad1);
 
-        model.put("idHeladeraDestino", context.queryParam("idHeladeraDestino"));
+        if(!esNatural(context.sessionAttribute("id_heladera_destino"))){
+            context.sessionAttribute("id_heladera_destino",idHeladeraDestino);
+        }
+
         model.put("heladera2", heladera2);
         model.put("direccion2", direccion2);
         model.put("estado2", estado2);
@@ -49,6 +55,13 @@ public class DonarDistribucionViandaController implements Handler {
 
         context.render("templates/donarDistribuirViandas.mustache", model);
 
+    }
+
+    public boolean esNatural(String numero){
+        if (numero == null ){
+            return false;
+        }
+        return numero.matches("\\d+");
     }
 
 }
