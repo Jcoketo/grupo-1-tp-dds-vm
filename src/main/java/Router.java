@@ -3,10 +3,7 @@ import static io.javalin.apibuilder.ApiBuilder.*;
 import accessManagment.AutorizacionMiddleware;
 import io.javalin.Javalin;
 import persistencia.*;
-import presentacion.InicioController;
-import presentacion.LogoutController;
-import presentacion.MostrarErrorPermisosController;
-import presentacion.VieneUsoController;
+import presentacion.*;
 import presentacion.colaboraciones.*;
 import presentacion.gestorCuentas.*;
 import presentacion.heladera.*;
@@ -288,6 +285,10 @@ public class Router {
                 before(new AutorizacionMiddleware().setDebeSerLogueado());
                 get(new ReportarFallaTecnicaController());
                 post(new ReportarFallaTecnicaFinalizadaController());
+            });
+
+            path("/sobreNosotros", () -> {
+                get(new SobreNosotrosController());
             });
 
             path("/solicitarTarjeta", () -> {
