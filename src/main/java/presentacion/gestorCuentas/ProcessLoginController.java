@@ -35,7 +35,7 @@ public class ProcessLoginController implements Handler {
         String email = context.formParam("email");
         String password = context.formParam("password");
 
-        if (email == null || email.equals("") || password == null || password.equals("")) {
+        /*if (email == null || email.equals("") || password == null || password.equals("")) {
             context.sessionAttribute("errorLogin", "El mail o la contraseña no pueden estar vacíos");
             context.redirect("/login");
             return;
@@ -47,14 +47,14 @@ public class ProcessLoginController implements Handler {
             return;
         }
 
-        try { /* CHEQ DE SQL INJECTION */
+        try {
             email = ESAPI.validator().getValidInput("Email", email, "Email", 200, false);
             password = ESAPI.validator().getValidInput("Password", password, "SafeString", 200, false);
         } catch (ValidationException e) {
             context.sessionAttribute("errorLogin", "El mail o la contraseña no son válidos");
             context.redirect("/login");
             return;
-        }
+        }*/
 
         try {
             AuthServiceUsuario.autenticarUsuario(email, password);
