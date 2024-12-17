@@ -95,6 +95,14 @@
             width: 100%;
             margin-bottom: 10px;
         }
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
 
     </style>
 
@@ -112,6 +120,17 @@
             <button class="btn-admin" onclick="window.location.href='/cargarCSV'">Cargar CSV</button>
             <button class="btn-admin" onclick="window.location.href='/registrarTecnico'">Dar de alta Técnico</button>
             <button class="btn-admin mt-3" onclick="openModal()">Asignar nuevo Administrador</button>
+        <!--
+            <div class="mt-3" style="display: none;">
+                <button class="btn-admin" onclick="input()">Dar de baja colaborador</button>
+                <div id="darBaja">
+                    <label>Ingresar (dato) del colaborador</label>
+                    <input type="text">
+                    <button>Cancelar</button>
+                    <button>Dar de baja</button>
+                </div>
+
+            </div> -->
 
         </div>
 
@@ -155,6 +174,7 @@
         window.location.href = '/registrarNuevoAdmin';
 
     }
+
 </script>
 
 </body>

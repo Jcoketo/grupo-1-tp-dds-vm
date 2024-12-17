@@ -79,6 +79,8 @@ public class ProcessLoginController implements Handler {
         context.sessionAttribute("rolUsuario", usuario.getRol());
         context.sessionAttribute("nombreUsuario", usuario.getUsername());
 
+        System.out.println("LOG: Inicio de Sesion: " + usuario.getMail());
+
         context.sessionAttribute("validado", false);
         if ( usuario.getUsername() == null ||  usuario.getUsername().equals("") ) {
             context.sessionAttribute("mail", email);
@@ -86,14 +88,16 @@ public class ProcessLoginController implements Handler {
             return;
         }
         context.sessionAttribute("validado", true);
+
         if (usuario.getRol() == Roles.ADMIN){
             context.sessionAttribute("esAdmin", true);
             context.redirect("/inicioAdmin");
             return;
         }
+
         if (usuario.getRol() == Roles.TECNICO){
-            context.redirect("/inicioTecnico");
             context.sessionAttribute("idTecnico", repoTecnicos.buscarTecnicoXIdPersona(idPersona).getId());
+            context.redirect("/inicioTecnico");
             return;
         }
 

@@ -32,8 +32,8 @@ public class OfrecerRecompensa extends Colaboracion{
             colaborador.agregarColaboracion(this);
         }
         else {
-            System.out.println("Error!!!");
-            System.out.println(text);
+            //System.out.println("Error!!!");
+            //System.out.println(text);
         }
     }
 

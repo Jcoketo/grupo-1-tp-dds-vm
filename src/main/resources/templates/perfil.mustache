@@ -89,13 +89,32 @@
         .text-end {
             text-align: right;
         }
+      .btn2 {
+          border-radius: 10px; /* Bordes redondeados */
+          padding: 10px 10px; /* Espaciado interno para que se vean mejor */
+          width: 150px; /* Ancho fijo, ajusta según tus necesidades */
+          margin-bottom: 10px; /* Espacio entre los botones */
+          border: none; /* Eliminar borde predeterminado */
+          cursor: pointer; /* Cambiar cursor al pasar sobre el botón */
+          font-size: 16px; /* Tamaño de fuente */
+          display: inline-block; /* Asegura que el botón se comporte como un elemento en línea */
+          vertical-align: middle; /* Alinea verticalmente con otros elementos en línea */
+          margin-right: 10px; /* Espacio a la derecha para alinearlo con otros elementos */
+          text-align: center; /* Alinea el texto al centro */
+      }
+      .btn2-submit {
+          background-color: #1e5552;
+          color: white;
+          font-size: 16px;
+          font-weight: normal;
+      }
 
     </style>
 </head>
 <body>
 {{> header}}
 
-<main class="container profile-container">
+<main class="container profile-container my-5">
     <div class="row">
         <div class="col-md-3">
             <img src="/static/user-photo.png" alt="Foto del usuario" class="profile-photo">
@@ -173,7 +192,7 @@
     <!-- Botón alineado a la derecha -->
     <div class="row">
         <div class="col-md-12 text-end">
-            <a href="/configurarPerfil" class="btn2 btn2-submit">Editar perfil</a>
+            <button class="btn2 btn2-submit" onclick="window.location.href='/configurarPerfil'">Editar perfil</button>
         </div>
     </div>
 </main>

@@ -73,7 +73,7 @@ public class CuentaJuridicaCreadaController implements Handler {
         }
         if ( username.length() < 6 || username.length() > 12 ) {
             context.sessionAttribute("errorJuridico", "El usuario debe tener entre 6 y 12 caracteres");
-            context.redirect("/crearCuentaFisica");
+            context.redirect("/crearCuentaJuridica");
             return;
         }
 
