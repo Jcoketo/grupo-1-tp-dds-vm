@@ -10,6 +10,9 @@ import persistencia.RepositorioPersonasVulnerables;
 import persistencia.RepositorioTarjetas;
 import utils.GeneradorModel;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -25,6 +28,7 @@ public class RegistroPersonaVulnerableRealizadaController implements Handler{
         Map<String, Object> model = GeneradorModel.getModel(context);
 
         String nombre = context.formParam("nombre");
+        String fechaNac = context.formParam("fecha");
         String tieneDoc = context.formParam("tieneDoc");
         String tipoDoc = context.formParam("tipoDoc");
         String numeroDocumento = context.formParam("numDoc");
@@ -39,6 +43,20 @@ public class RegistroPersonaVulnerableRealizadaController implements Handler{
         }
         if ( tieneDom == null){
             tieneDom = "0";
+        }
+        if ( fechaNac == null || fechaNac.equals("") ){
+            context.sessionAttribute("errorRegistroVulnerable", "Debe completar la fecha de nacimiento!");
+            context.redirect("/registroPersonaVulnerable");
+            return;
+        }
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate fechaNacimiento = LocalDate.parse(fechaNac, formatter);
+
+        if ( fechaNacimiento.isBefore(LocalDate.now()) ){
+            context.sessionAttribute("errorRegistroVulnerable", "La persona debe ser mayor de edad.");
+            context.redirect("/registroPersonaVulnerable");
+            return;
         }
 
         if ( nombre.equals("") || ( numeroDocumento.equals("") && tieneDoc.equals("1") ) || ( tieneDom.equals("1") && domicilio.equals("")) ){
@@ -76,12 +94,13 @@ public class RegistroPersonaVulnerableRealizadaController implements Handler{
             case "01" -> tipoDocumentoEnum = TipoDocumento.DNI;
             case "02" -> tipoDocumentoEnum = TipoDocumento.LC;
             case "03" -> tipoDocumentoEnum = TipoDocumento.LE;
-            default -> tipoDocumentoEnum = TipoDocumento.DNI;
+            default -> tipoDocumentoEnum = null;
        }
 
         try {
             Integer idPersona = context.sessionAttribute("idPersona");
-            AuthServicePersonaVulnerable.procesarAltaPersonaVulnerable(idPersona, nombre, tipoDocumentoEnum, numeroDocumento, domicilio, nroTarjeta, cantidadMenores);
+            AuthServicePersonaVulnerable.procesarAltaPersonaVulnerable(idPersona, nombre, tipoDocumentoEnum, numeroDocumento,
+                                                                        domicilio, nroTarjeta, cantidadMenores, fechaNacimiento);
         } catch (ExcepcionValidacion e) {
             context.sessionAttribute("errorRegistroVulnerable", e.getMessage());
             context.redirect("/registroPersonaVulnerable");

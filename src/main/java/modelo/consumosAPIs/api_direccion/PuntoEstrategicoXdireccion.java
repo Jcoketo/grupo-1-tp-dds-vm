@@ -6,6 +6,7 @@ import modelo.consumosAPIs.recomendadorDePuntos.apiMock.ApiMockCall;
 import modelo.consumosAPIs.recomendadorDePuntos.apiMock.dtos.PuntoDeColocacion;
 import modelo.consumosAPIs.recomendadorDePuntos.apiMock.dtos.PuntoDireccion;
 import modelo.elementos.PuntoEstrategico;
+import modelo.excepciones.ExcepcionValidacion;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -29,6 +30,10 @@ public class PuntoEstrategicoXdireccion {
     @SneakyThrows // Esto es para catchear la Exception.
     public PuntoEstrategico obtenerPuntoDeColocacion(String direccion) {
         PuntoDireccion[] puntos = servicio.obtenerPuntosXdireccion(direccion);
+
+        if ( puntos.length == 0 ) {
+            throw new ExcepcionValidacion("La direccion ingresada no es una direccion valida."); }
+
         PuntoDireccion puntoDeColocacion = Arrays.stream(puntos).toList().get(0);
 
         return this.convertirEnPuntoEstrategico(puntoDeColocacion);

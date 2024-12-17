@@ -5,11 +5,13 @@ import io.javalin.http.Handler;
 import modelo.consumosAPIs.api_direccion.PuntoEstrategicoXdireccion;
 import modelo.consumosAPIs.recomendadorDePuntos.RecomendadorDePuntos;
 import modelo.elementos.PuntoEstrategico;
+import modelo.excepciones.ExcepcionValidacion;
 import modelo.personas.PersonaJuridica;
 import org.jetbrains.annotations.NotNull;
 import persistencia.RepositorioColaboradores;
 import utils.GeneradorModel;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -34,14 +36,18 @@ public class AgregarHeladeraController implements Handler {
 
         String direccion = persona.getDireccion().replace(" ", "+").replace(",", "");
 
-        PuntoEstrategico punto = servicio.obtenerPuntoDeColocacion(direccion);
+        List<PuntoEstrategico> puntosRecomendados = new ArrayList<>();
 
-        RecomendadorDePuntos recomendador = RecomendadorDePuntos.getInstancia();
+        try {
+            PuntoEstrategico punto = servicio.obtenerPuntoDeColocacion(direccion);
+            RecomendadorDePuntos recomendador = RecomendadorDePuntos.getInstancia();
+            puntosRecomendados = recomendador.obtenerPuntosRecomendados(punto.getLatitud(), punto.getLongitud(), 1000.0);
 
-        List<PuntoEstrategico> puntosRecomendados = recomendador.obtenerPuntosRecomendados(punto.getLatitud(), punto.getLongitud(), 1000.0);
+        }catch (ExcepcionValidacion e){
+            model.put("errorAPI", e.getMessage());
+        }
 
         model.put("puntosRecomendados", puntosRecomendados);
-        model.put("nombreUsuario", context.sessionAttribute("nombreUsuario"));
         context.render("templates/agregarHeladera.mustache", model);
     }
 

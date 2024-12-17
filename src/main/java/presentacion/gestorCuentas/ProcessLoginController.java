@@ -75,7 +75,6 @@ public class ProcessLoginController implements Handler {
         Integer idPersona = repoColab.devolverIdPersona(email);
         context.sessionAttribute("idPersona", idPersona);
 
-        Integer idTecnico = repoTecnicos.buscarTecnicoXIdPersona(idPersona).getId();
 
         Usuario usuario = repoUsuarios.traerUsuario(email);
         context.sessionAttribute("rolUsuario", usuario.getRol());
@@ -98,6 +97,11 @@ public class ProcessLoginController implements Handler {
         }
 
         if (usuario.getRol() == Roles.TECNICO){
+            Integer idTecnico = repoTecnicos.buscarTecnicoXIdPersona(idPersona).getId();
+            if ( idTecnico == null ) {
+                context.sessionAttribute("errorLogin", "No se encontro el tecnico");
+                context.redirect("/login");
+                return; }
             context.redirect("/inicioTecnico");
             context.sessionAttribute("idTecnico", idTecnico);
 
