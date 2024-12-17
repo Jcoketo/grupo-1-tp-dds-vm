@@ -28,6 +28,9 @@ public class AuthServicePersonaVulnerable {
 
         RegistroPersonasSituVulnerable colaboracion = repoColab.traerColaboradoresXColaboradorPersonaSitu(colaborador);
 
+        if ( colaboracion == null )
+            throw new ExcepcionValidacion("No tiene ninguna tarjeta disponible para repartir!");
+
         if (colaboracion.getTarjetas().isEmpty())
             throw new ExcepcionValidacion("No hay tarjetas disponibles");
 

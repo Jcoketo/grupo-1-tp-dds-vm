@@ -1,27 +1,17 @@
-package presentacion.reportes;
+package presentacion;
 
 import io.javalin.http.Context;
 import io.javalin.http.Handler;
 import org.jetbrains.annotations.NotNull;
 import utils.GeneradorModel;
 
-import java.util.HashMap;
 import java.util.Map;
 
-public class MisReportesController implements Handler {
-
-    public MisReportesController() {
-        super();
-    }
-
+public class VieneUsoController implements Handler {
     @Override
     public void handle(@NotNull Context context) throws Exception {
         Map<String, Object> model = GeneradorModel.getModel(context);
 
-
-
-
-        context.render("templates/misReportes.mustache", model);
+        // QUERY PARAMS ID
     }
 }
-

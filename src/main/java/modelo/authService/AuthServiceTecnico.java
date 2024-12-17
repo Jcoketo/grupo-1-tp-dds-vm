@@ -65,13 +65,22 @@ public class AuthServiceTecnico {
                                        String URLfoto, Boolean problemaResuelto) {
 
         Heladera heladera = repoHeladeras.buscarHeladera(idHeladera);
+        if ( heladera == null) {
+            System.out.println("Registrar visita: Falla en la busqueda de la heladera. Heladera: " + idHeladera + " - Tecnico: " + idTecnico);
+            throw new ExcepcionValidacion("Eror en el sistema. Avise a sistemas!");}
         Tecnico tecnico = repoTecnicos.obtenerTecnico(idTecnico);
+        if ( tecnico == null) {
+            System.out.println("Registrar visita: Falla en la busqueda de la tecnico. Heladera: " + idHeladera + " - Tecnico: " + idTecnico);
+            throw new ExcepcionValidacion("Eror en el sistema. Avise a sistemas!");}
 
         Visita visita = new Visita(heladera, tecnico, descripcion, URLfoto, problemaResuelto);
 
         tecnico.registrarVisita(heladera, visita);
 
         Incidente incidente = repoIncidentes.devolverIncidente(idIncidente);
+        if ( incidente == null) {
+            System.out.println("Registrar visita: Falla en la busqueda del incidente. Heladera: " + idHeladera + " - Incidente: " + idIncidente);
+            throw new ExcepcionValidacion("Eror en el sistema. Avise a sistemas!");}
 
         if (problemaResuelto) {
             incidente.fueResuelto();

@@ -295,10 +295,10 @@
             <label for="numDoc">Numero de Documento</label>
             <input type="text" id="numDoc" name="numDoc" required>
 
-            <label for="nroCuil">CIUL</label>
+            <label for="nroCuil">CUIL</label>
             <input type="text" id="nroCuil" name="nroCuil" required>
 
-            <label for="fechaNacimiento">CUIL</label>
+            <label for="fechaNacimiento">Fecha de nacimiento</label>
             <input type="date" id="fechaNacimiento" name="fechaNacimiento" required>
 
             <label for="telefono">Número de Teléfono (opcional)</label>
@@ -312,6 +312,9 @@
 
             <button type="submit">Registrarse</button>
         </form>
+        {{#errorRegistroTecnico}}
+            <div class="alert alert-danger mt-3">{{errorRegistroTecnico}}</div>
+        {{/errorRegistroTecnico}}
     </div>
 </main>
 <footer class="footer-bg">

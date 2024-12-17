@@ -4,11 +4,13 @@ import io.javalin.http.Context;
 import io.javalin.http.Handler;
 import io.javalin.http.UploadedFile;
 import modelo.authService.AuthServiceTecnico;
+import modelo.excepciones.ExcepcionValidacion;
 import org.apache.commons.io.FileUtils;
 import org.jetbrains.annotations.NotNull;
 import utils.GeneradorModel;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -43,9 +45,9 @@ public class RegistroCompletadoVisitaController implements Handler {
         try {
             AuthServiceTecnico.registrarVisita(idTecnico, idHeladera, idIncidente, descripcion, URLfoto, problemaResuelto);
             FileUtils.copyInputStreamToFile(file.content(), archivo);
-        } catch (Exception e) {
-            model.put("error", e.getMessage());
-            context.render("templates/error.mustache", model);
+        } catch (ExcepcionValidacion | IOException e) {
+            context.sessionAttribute("notificacionVisita", e.getMessage());
+            context.redirect("/registrarVisita");
         }
 
     }

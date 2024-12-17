@@ -207,13 +207,11 @@
                     <button type="button" class="btn-cancelar" onclick="window.history.back()">Cancelar</button>
                     <button type="submit" class="btn-distribuir" onclick="submitForm()">Distribuir</button>
                 </div>
-
-                {{#errorDistribuir}}
-                    <div class="error-message">{{errorDistribuir}}</div>
-                {{/errorDistribuir}}
-
             </div>
         </form>
+        {{#errorDistribuir}}
+            <div class="error-message">{{errorDistribuir}}</div>
+        {{/errorDistribuir}}
         <script>
         function submitForm() {
         var form = document.getElementById('distribuirForm');

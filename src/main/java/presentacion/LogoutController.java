@@ -12,6 +12,7 @@ public class LogoutController implements Handler {
         context.consumeSessionAttribute("logueado");
         context.consumeSessionAttribute("rolUsuario");
         context.consumeSessionAttribute("tipoPersona");
+        context.consumeSessionAttribute("esAdmin");
         context.redirect("/inicio");
 
 

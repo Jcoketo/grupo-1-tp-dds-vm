@@ -18,7 +18,11 @@ public class RegistroPersonaVulnerableController implements Handler {
     public void handle(@NotNull Context context) throws Exception {
         Map<String, Object> model = GeneradorModel.getModel(context);
 
-        model.put("nombreUsuario", context.sessionAttribute("nombreUsuario"));
+        if (context.sessionAttribute("errorRegistroVulnerable") != null) {
+            model.put("errorRegistroVulnerable", context.sessionAttribute("errorRegistroVulnerable"));
+            context.consumeSessionAttribute("errorRegistroVulnerable");
+        }
+
         context.render("templates/registroPersonaVulnerable.mustache", model);
     }
-    }
+}

@@ -15,6 +15,7 @@ public class GeneradorModel {
         model.put("tipoPersona", context.sessionAttribute("tipoPersona"));
         model.put("rolUsuario", context.sessionAttribute("rolUsuario"));
         model.put("validado", context.sessionAttribute("validado"));
+        model.put("esAdmin", context.sessionAttribute("esAdmin"));
 
         return model;
     }

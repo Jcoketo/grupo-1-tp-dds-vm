@@ -41,7 +41,7 @@ public class RepositorioReportes {
     }
 
     public void validarInsertReporte(Reporte reporte) {
-        if (reporte.getLink() == null) {
+        if (reporte.getPath() == null) {
             throw new RuntimeException("El reporte no tiene un link asociado");
         }
     }

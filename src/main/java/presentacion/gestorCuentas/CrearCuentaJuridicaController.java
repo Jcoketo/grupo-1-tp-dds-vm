@@ -14,6 +14,11 @@ public class CrearCuentaJuridicaController implements Handler {
     public void handle(@NotNull Context context) throws Exception {
         Map<String, Object> model = GeneradorModel.getModel(context);
 
+        if (context.sessionAttribute("errorJuridico") != null) {
+            model.put("errorJuridico", context.sessionAttribute("errorJuridico"));
+            context.consumeSessionAttribute("errorJuridico");
+        }
+
         context.render("templates/crearCuentaJuridica.mustache", model);
 
     }

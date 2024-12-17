@@ -49,25 +49,25 @@ public class CuentaJuridicaCreadaController implements Handler {
 
         if (razonSocial.equals("") || tipo.equals("") || rubro.equals("") || cuit.equals("") || email.equals("") || username.equals("")
             || ( password.equals("") && !esXSSO ) || terminos.equals("")){
-            model.put("errorJuridico", "Debe completar todos los campos");
+            context.sessionAttribute("errorJuridico", "Debe completar todos los campos");
             context.redirect("/crearCuentaJuridica");
             return;
         }
 
         if ( !esNumerico(cuit)  ||  !esNumerico(telefono) )  {
-            model.put("errorJuridico", "El número de CUIT o el teléfono no son numéricos");
+            context.sessionAttribute("errorJuridico", "El número de CUIT o el teléfono no son numéricos");
             context.redirect("/crearCuentaJuridica");
             return;
         }
 
         if ( !cuit.matches("[0-9]{11}") )  {
-            model.put("errorJuridico", "El número de CUIT debe tener 11 dígitos");
+            context.sessionAttribute("errorJuridico", "El número de CUIT debe tener 11 dígitos");
             context.redirect("/crearCuentaJuridica");
             return;
         }
 
         if ( !telefono.equals("")  &&  !telefono.matches("[0-9]{8,10}") )  {
-            model.put("errorJuridico", "El teléfono debe tener entre 8 y 10 dígitos");
+            context.sessionAttribute("errorJuridico", "El teléfono debe tener entre 8 y 10 dígitos");
             context.redirect("/crearCuentaJuridica");
             return;
         }
@@ -114,11 +114,11 @@ public class CuentaJuridicaCreadaController implements Handler {
 
         } catch (ExcepcionValidacion e) {
             if(esXSSO){
-                model.put("errorJuridico", e.getMessage());
+                context.sessionAttribute("errorJuridico", e.getMessage());
                 context.redirect("/crearCuentaJuridicaSSO");
                 return;
             }
-            model.put("errorJuridico", e.getMessage());
+            context.sessionAttribute("errorJuridico", e.getMessage());
             context.redirect("/crearCuentaJuridica");
             return;
         }

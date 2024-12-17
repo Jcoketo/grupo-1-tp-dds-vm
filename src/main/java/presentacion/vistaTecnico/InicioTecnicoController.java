@@ -25,7 +25,6 @@ public class InicioTecnicoController implements Handler {
             return;
         }
 
-
         context.render("templates/inicioTecnico.mustache", model);
     }
 }

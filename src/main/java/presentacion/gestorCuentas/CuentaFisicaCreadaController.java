@@ -23,7 +23,6 @@ public class CuentaFisicaCreadaController implements Handler {
     @Override
     public void handle(@NotNull Context context) throws Exception {
         Map<String, Object> model = GeneradorModel.getModel(context);
-        model.put("nombreUsuario", context.sessionAttribute("nombreUsuario"));
 
         String esPorSSO = context.formParam("esXSSO");
         Boolean esXSSO = Boolean.FALSE;
