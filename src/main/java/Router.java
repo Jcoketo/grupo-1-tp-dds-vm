@@ -132,7 +132,7 @@ public class Router {
 
             path("/darAltaAdmin", () -> {
                 before(new AutorizacionMiddleware().setDebeSerLogueado().setDebeSerAdmin());
-                post(new DarAltaAdminController());
+                get(new DarAltaAdminController());
             });
 
             path("/darDeBajaHeladera", () -> {
