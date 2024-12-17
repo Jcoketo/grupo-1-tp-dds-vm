@@ -33,8 +33,8 @@ public class HacerseCargoHeladera extends Colaboracion{
 
     @Override
     public void hacerColaboracion(Colaborador colaborador) {
-        this.validar(colaborador);
-        //incrementarPuntos(colaborador);
+        //this.validar(colaborador);
+        //incrementarPuntos(colaborador); // LO HACE LA CRONE TASK
         colaborador.agregarColaboracion(this);
     }
 

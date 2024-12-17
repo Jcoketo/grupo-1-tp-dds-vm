@@ -32,7 +32,7 @@ public class VisualizarFallasTecnicasController implements Handler {
         int idHeladera = 0;
         try {
             idHeladera = Integer.parseInt(idHel);
-        } catch (NumberFormatException | NullPointerException e) {
+        } catch (NumberFormatException e) {
             context.redirect("/mapaHeladeras");
             return;
         }

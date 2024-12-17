@@ -19,9 +19,6 @@ import java.util.Map;
 
 public class CuentaJuridicaCreadaController implements Handler {
 
-    private RepositorioColaboradores repoColab = RepositorioColaboradores.getInstancia();
-
-
     public CuentaJuridicaCreadaController() {
         super();
     }

@@ -8,19 +8,10 @@ import utils.GeneradorModel;
 
 import java.util.Map;
 
-public class CargarSCVController implements Handler {
+public class CargarCSVController implements Handler {
     @Override
     public void handle(@NotNull Context context) throws Exception {
         Map<String, Object> model = GeneradorModel.getModel(context);
-
-        if (context.sessionAttribute("logueado") != Boolean.TRUE) {
-            context.redirect("/login");
-            return;
-        }
-        if (context.sessionAttribute("rolUsuario") != Roles.ADMIN) {
-            context.redirect("/404Error");
-            return;
-        }
 
         if ( context.sessionAttribute("errorCargaMasiva") != null) {
             model.put("errorCargaMasiva", context.sessionAttribute("errorCargaMasiva"));
