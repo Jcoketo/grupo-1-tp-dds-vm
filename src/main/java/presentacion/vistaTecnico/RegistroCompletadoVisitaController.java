@@ -55,6 +55,9 @@ public class RegistroCompletadoVisitaController implements Handler {
             context.redirect("/registrarVisita");
         }
 
+        context.sessionAttribute("notificacionVisita", "Tu visita ha sido registrada con exito!");
+        context.redirect("/registrarVisita");
+
     }
 
 }
