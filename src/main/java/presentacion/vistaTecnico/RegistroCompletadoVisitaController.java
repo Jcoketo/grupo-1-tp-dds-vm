@@ -25,14 +25,18 @@ public class RegistroCompletadoVisitaController implements Handler {
         String checkBoxResolvioProblema = context.formParam("checkBoxResolvioProblema");
         String descripcion = context.formParam("descripcion");
         List<UploadedFile> uploadedFiles = context.uploadedFiles("file");
-        //String URLfoto = context.queryParam("URLfoto"); // La foto es opcional.
 
-        UploadedFile file = uploadedFiles.get(0);
-        String fileName = file.filename();
-        System.out.println("Received file: " + fileName);
-        String URLfoto = fileName;
+        UploadedFile file = null;
+        File archivo = null;
+        String fileName = "";
+        if ( uploadedFiles != null ) {
 
-        File archivo = new File("src/main/resources/uploads/visitasImagenes/" + file.filename());
+            file = uploadedFiles.get(0);
+            fileName = file.filename();
+            System.out.println("Received file: " + fileName);
+
+            archivo = new File("src/main/resources/uploads/visitasImagenes/" + file.filename());
+        }
 
         Integer idHeladera = Integer.parseInt(idHel);
         Integer idIncidente = Integer.parseInt(idInc);
@@ -43,8 +47,11 @@ public class RegistroCompletadoVisitaController implements Handler {
         }
 
         try {
-            AuthServiceTecnico.registrarVisita(idTecnico, idHeladera, idIncidente, descripcion, URLfoto, problemaResuelto);
-            FileUtils.copyInputStreamToFile(file.content(), archivo);
+            AuthServiceTecnico.registrarVisita(idTecnico, idHeladera, idIncidente, descripcion, fileName, problemaResuelto);
+
+            if ( file != null ){
+            FileUtils.copyInputStreamToFile(file.content(), archivo); }
+
         } catch (ExcepcionValidacion | IOException e) {
             context.sessionAttribute("notificacionVisita", e.getMessage());
             context.redirect("/registrarVisita");

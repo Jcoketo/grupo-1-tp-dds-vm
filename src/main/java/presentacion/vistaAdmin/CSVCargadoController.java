@@ -21,9 +21,8 @@ public class CSVCargadoController implements Handler {
 
         List<UploadedFile> uploadedFiles = context.uploadedFiles("file");
 
-        if (uploadedFiles.isEmpty()) {
-            model.put("errorLogin", "No se ha cargado ningun archivo");
-            context.sessionAttribute("model", model);
+        if (uploadedFiles.isEmpty() || uploadedFiles == null) {
+            context.sessionAttribute("errorCargaMasiva", "No se ha cargado ningun archivo");
             context.redirect("/cargarCSV");
             return;
         }
