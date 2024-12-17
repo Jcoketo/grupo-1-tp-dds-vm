@@ -17,7 +17,10 @@ public class MisReportesController implements Handler {
     @Override
     public void handle(@NotNull Context context) throws Exception {
         Map<String, Object> model = GeneradorModel.getModel(context);
-        model.put("nombreUsuario", context.sessionAttribute("nombreUsuario"));
+
+
+
+
         context.render("templates/misReportes.mustache", model);
     }
 }

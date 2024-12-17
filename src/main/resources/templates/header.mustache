@@ -45,6 +45,10 @@
                             <a class="dropdown-item" href="/misColaboraciones">Mis colaboraciones</a>
                             <a class="dropdown-item" href="/canjearPuntos">Mi puntaje</a>
                             <a class="dropdown-item" href="/misReportes">Mis reportes</a>
+                            {{#esAdmin}}
+                                <a class="dropdown-item" href="/misReportes">Mis reportes</a>
+                            {{/esAdmin}}
+                            <a class="dropdown-item" href="/misSuscripciones">Mis suscripciones</a>
                             <a class="dropdown-item" href="/logout">Cerrar sesión</a>
                         </div>
                     </li>

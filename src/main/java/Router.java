@@ -1,8 +1,7 @@
 import static io.javalin.apibuilder.ApiBuilder.*;
-import accessManagment.Auth0Config;
+
 import accessManagment.AutorizacionMiddleware;
 import io.javalin.Javalin;
-import io.javalin.http.Context;
 import persistencia.*;
 import presentacion.InicioController;
 import presentacion.LogoutController;
@@ -19,17 +18,12 @@ import presentacion.incidentes.VisualizarFallasTecnicasController;
 import presentacion.ofertas.*;
 import presentacion.vistaAdmin.CargarSCVController;
 import presentacion.vistaAdmin.DarAltaAdminController;
-import presentacion.vistaAdmin.SCVCargadoController;
+import presentacion.vistaAdmin.CSVCargadoController;
 import presentacion.vistaAdmin.inicioADMINController;
 import presentacion.reportes.MisReportesController;
 import presentacion.vistaTecnico.*;
 
 import javax.persistence.EntityManager;
-import java.net.URI;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
-import java.util.Base64; // TODO adri que onda con estos imports
 
 public class Router {
     private static Javalin app = Application.app();
@@ -101,7 +95,7 @@ public class Router {
 
             path("/cargarCSV", () -> {
                 get(new CargarSCVController());
-                post(new SCVCargadoController());
+                post(new CSVCargadoController());
             });
 
             path("/configurarPerfil", () -> {
@@ -342,6 +336,10 @@ public class Router {
             path("/vieneUso", () -> { //TODO
                 get(new VieneUsoController());
             });
+
+            // TODO
+            // FALTA PATH PARA RECIBIR EL POST DEL BOTON DE GENERAR REPORTES
+            // FALTA POST PARA RECIBIR FALLAS EN LAS HELADERAS
 
         });
 

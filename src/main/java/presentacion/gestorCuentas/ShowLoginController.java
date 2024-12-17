@@ -17,9 +17,8 @@ public class ShowLoginController implements Handler {
     public void handle(@NotNull Context context) throws Exception {
         Map<String, Object> model = GeneradorModel.getModel(context);
 
-        String mensaje = context.sessionAttribute("errorLogin");
-        if (mensaje != null) {
-            model.put("errorLogin", mensaje);
+        if (context.sessionAttribute("errorLogin") != null) {
+            model.put("errorLogin", context.sessionAttribute("errorLogin"));
             context.consumeSessionAttribute("errorLogin");
         }
 

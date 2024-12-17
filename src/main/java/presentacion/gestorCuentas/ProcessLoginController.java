@@ -33,6 +33,18 @@ public class ProcessLoginController implements Handler {
         String email = context.formParam("email");
         String password = context.formParam("password");
 
+        if (email == null || email.equals("") || password == null || password.equals("")) {
+            context.sessionAttribute("errorLogin", "El mail o la contraseña no pueden estar vacíos");
+            context.redirect("/login");
+            return;
+        }
+
+        if ( !email.matches("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$") )  {
+            context.sessionAttribute("errorLogin", "El mail no es valido");
+            context.redirect("/login");
+            return;
+        }
+
         try {
             AuthServiceUsuario.autenticarUsuario(email, password);
         } catch (ExcepcionValidacion e) {
@@ -65,6 +77,7 @@ public class ProcessLoginController implements Handler {
         }
         context.sessionAttribute("validado", true);
         if (usuario.getRol() == Roles.ADMIN){
+            context.sessionAttribute("esAdmin", true);
             context.redirect("/inicioAdmin");
             return;
         }

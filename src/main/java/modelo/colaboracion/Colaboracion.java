@@ -30,8 +30,7 @@ public abstract class Colaboracion {
 
     @Column
     @Getter @Setter
-    @DefaultValue("0")
-    protected Boolean porCSV;
+    protected Boolean porCSV = Boolean.FALSE;
 
     public abstract void hacerColaboracion(Colaborador colaborador);
 

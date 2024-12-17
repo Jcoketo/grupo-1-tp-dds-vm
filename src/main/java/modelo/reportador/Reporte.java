@@ -1,53 +1,25 @@
 package modelo.reportador;
 
 import lombok.Getter;
+import net.bytebuddy.asm.Advice;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.List;
+import java.time.format.DateTimeFormatter;
 
 @Entity
 @Table(name = "reporte")
-public class Reporte {
-
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@Getter
+public abstract class Reporte {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Getter private int id;
+    private int id;
+    protected String path;
+    private LocalDateTime fechaCreacion;
 
-    @Getter
-    @Column(name = "link", nullable = false)
-    public String link;
-
-    private LocalDateTime fechaReporte;
-
-    private String cantidadFallasXHeladera;
-
-    private String viandasXColaborador;
-
-    private String cantidadViandasColocadas;
-
-    private String cantidadViandasRetiradas;
-
-
-    public Reporte( String cantidadFallasXHeladera, String viandasXColaborador, String cantidadViandasColocadas, String cantidadViandasRetiradas) {
-
-        this.cantidadFallasXHeladera = cantidadFallasXHeladera;
-        this.viandasXColaborador = viandasXColaborador;
-        this.cantidadViandasColocadas = cantidadViandasColocadas;
-        this.cantidadViandasRetiradas = cantidadViandasRetiradas;
-    }
-
-    public Reporte() {
-
-    }
-
-    public void generarTXT(){
-        //TODO
-        /*hacer la proxima entrega!!!! */
-    }
-
-    public void generarLink(){
-        //TODO
+    public String getFecha(){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        return fechaCreacion.format(formatter);
     }
 }

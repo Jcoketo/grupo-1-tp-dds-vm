@@ -23,7 +23,7 @@ public class Sugerencia {
     public String devolerMensajeSugerencia(){
         String mensaje = "La heladera " + heladeraAfectada.getNombre() + " ubicada en " + this.heladeraAfectada.getPuntoEstrategico().getDireccion() + " tiene un desperfecto.\n Te recomendamos que visites las siguientes heladeras cercanas: \n";
         for (Heladera heladera : this.heladerasCercanas) {
-            mensaje += "Heladera: "+ heladera.getNombre() + " ubicada en: " + heladera.getPuntoEstrategico().getDireccion() + "\n";
+            mensaje += "\nHeladera: "+ heladera.getNombre() + " ubicada en: " + heladera.getPuntoEstrategico().getDireccion();
         }
         return mensaje;
     }
