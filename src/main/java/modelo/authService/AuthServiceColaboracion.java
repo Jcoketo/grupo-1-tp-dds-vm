@@ -1,6 +1,7 @@
 package modelo.authService;
 
 import modelo.colaboracion.*;
+import modelo.consumosAPIs.api_direccion.PuntoEstrategicoXdireccion;
 import modelo.consumosAPIs.servicioGeoLocalizacion.LatLong;
 import modelo.consumosAPIs.servicioGeoLocalizacion.LocalizadorLatLong;
 import modelo.elementos.Heladera;
@@ -120,11 +121,19 @@ public class AuthServiceColaboracion {
             if ( direcAux == null || direcAux.equals("") ){
                 throw new ExcepcionValidacion("La dirección de la persona jurídica no fue cargada!");
             }
+            /*
             puntoEstrategico.setDireccion(direcAux);
             LatLong latLong = LocalizadorLatLong.obtenerLatitudYLongitud(direcAux);
             puntoEstrategico.setLatitud(latLong.getLatitud());
             puntoEstrategico.setLongitud(latLong.getLongitud());
+            */
+
+            PuntoEstrategicoXdireccion servicio = PuntoEstrategicoXdireccion.getInstancia();
+            PuntoEstrategico punto = servicio.obtenerPuntoDeColocacion(direcAux);
+            puntoEstrategico = punto;
             puntoEstrategico.setAreas(LocalizadorLatLong.obtenerArea(direcAux));
+
+
         }else if ( esRecomendada ){
             puntoEstrategico.setDireccion(direcRecomendada);
             LatLong latLong = LocalizadorLatLong.obtenerLatitudYLongitud(direcRecomendada);
@@ -132,11 +141,11 @@ public class AuthServiceColaboracion {
             puntoEstrategico.setLongitud(latLong.getLongitud());
             puntoEstrategico.setAreas(LocalizadorLatLong.obtenerArea(direcRecomendada));
         } else {
-            puntoEstrategico.setDireccion(direccion);
-            LatLong latLong = LocalizadorLatLong.obtenerLatitudYLongitud(direccion);
-            puntoEstrategico.setLatitud(latLong.getLatitud());
-            puntoEstrategico.setLongitud(latLong.getLongitud());
-            puntoEstrategico.setAreas(LocalizadorLatLong.obtenerArea(direccion));
+            String direccionLimpia = direccion.replace(" ", "+").replace(",", "");
+            PuntoEstrategicoXdireccion servicio = PuntoEstrategicoXdireccion.getInstancia();
+            PuntoEstrategico punto = servicio.obtenerPuntoDeColocacion(direccionLimpia);
+            puntoEstrategico = punto;
+            puntoEstrategico.setAreas(LocalizadorLatLong.obtenerArea(direccionLimpia));
 
         }
 

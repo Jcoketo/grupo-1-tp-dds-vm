@@ -156,19 +156,22 @@
                     <option selected disabled>Seleccione una ubicación</option>
                     {{#puntosRecomendados}}
                         <option
-                                value="{{id}}"
+                                data-direccion="{{direccion}}"
                                 data-latitud="{{latitud}}"
                                 data-longitud="{{longitud}}"
-                                data-area="{{area}}">
+                                data-area="{{area}}"
+                                data-activo="{{activo}}">
                             {{direccion}}
                         </option>
                     {{/puntosRecomendados}}
                 </select>
 
-                <!-- Campos ocultos para enviar latitud, longitud y área -->
+                <!-- Campos ocultos para enviar al servidor -->
+                <input type="hidden" id="direccion" name="direccion">
                 <input type="hidden" id="latitud" name="latitud">
                 <input type="hidden" id="longitud" name="longitud">
                 <input type="hidden" id="area" name="area">
+                <input type="hidden" id="activo" name="activo" value="false"> <!-- Inicialmente false -->
             </div>
 
             <div class="btn-group d-flex justify-content-center">
@@ -189,14 +192,20 @@
 <script>
     document.getElementById('ubicacion').addEventListener('change', function () {
         const selectedOption = this.options[this.selectedIndex];
+
+        // Extraer los valores del atributo data-* de la opción seleccionada
+        const direccion = selectedOption.dataset.direccion;
         const latitud = selectedOption.dataset.latitud;
         const longitud = selectedOption.dataset.longitud;
         const area = selectedOption.dataset.area;
+        const activo = selectedOption.dataset.activo === "true" ? true : false;
 
         // Asignar los valores a los campos ocultos
+        document.getElementById('direccion').value = direccion;
         document.getElementById('latitud').value = latitud;
         document.getElementById('longitud').value = longitud;
         document.getElementById('area').value = area;
+        document.getElementById('activo').value = activo;
     });
 </script>
 
