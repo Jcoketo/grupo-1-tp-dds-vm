@@ -31,14 +31,17 @@ public class RegistroPersonaVulnerableRealizadaController implements Handler{
         String tieneDom = context.formParam("tieneDom");
         String domicilio = context.formParam("domicilio");
         String nroTarjeta = context.formParam("numTarjeta");
-        Integer tieneMenores = Integer.parseInt((context.formParam("tieneMenores")));
+        String tieneMenores = context.formParam("tieneMenores");
         Integer cantidadMenores = Integer.parseInt((context.formParam("cantidadMenores")));
 
         if (tieneDoc == null){
             tieneDoc = "0";
         }
+        if ( tieneDom == null){
+            tieneDom = "0";
+        }
 
-        if ( nombre.equals("") || ( numeroDocumento.equals("") && tieneDoc.equals("1") ) || ( tieneDom.equals(1) && domicilio.equals("")) ){
+        if ( nombre.equals("") || ( numeroDocumento.equals("") && tieneDoc.equals("1") ) || ( tieneDom.equals("1") && domicilio.equals("")) ){
             context.sessionAttribute("errorRegistroVulnerable", "Debe completar todos los campos obligatorios.");
             context.redirect("/registroPersonaVulnerable");
             return;
@@ -50,14 +53,14 @@ public class RegistroPersonaVulnerableRealizadaController implements Handler{
             return;
         }
 
-        if ( !numeroDocumento.matches("[0-9]{0,8}") && tieneDoc.equals(1) )  {
+        if ( !numeroDocumento.matches("[0-9]{0,8}") && tieneDoc.equals("1") )  {
             context.sessionAttribute("errorRegistroVulnerable", "El número de documento debe tener 8 dígitos");
             context.redirect("/registroPersonaVulnerable");
             return;
         }
 
-        if (tieneMenores.equals(1) && cantidadMenores.equals(0)){
-            context.sessionAttribute("errorRegistroVulnerable", "Debe elegir la cantidad de menores a cargo distinta de 0.");
+        if (tieneMenores.equals("1") && cantidadMenores == 0 ){
+            context.sessionAttribute("errorRegistroVulnerable", "Debe elegir la cantidad de menores a cargo.");
             context.redirect("/registroPersonaVulnerable");
             return;
         }

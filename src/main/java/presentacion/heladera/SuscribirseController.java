@@ -31,15 +31,15 @@ public class SuscribirseController implements Handler {
         String longi = context.formParam("longitud");
         String fecha = context.formParam("fecha");
         String estado = context.formParam("estado");
-        String disp = context.formParam("disponibilidad");
+        String disponibilidad = context.formParam("disponibilidad");
 
         Double latitud = 0.0;
         Double longitud = 0.0;
-        Integer disponibilidad = 0;
 
         try {
             if (lat == null || longi == null) {
-                throw new NullPointerException("Latitude or Longitude is null");
+                lat = "0.0";
+                longi = "0.0";
             }
             latitud = Double.parseDouble(lat);
             longitud = Double.parseDouble(longi);
@@ -47,7 +47,6 @@ public class SuscribirseController implements Handler {
             latitud = 0.0;
             longitud = 0.0;
         }
-        if (disp != null) { disponibilidad = Integer.parseInt(disp); }
 
         if (idHel == null || idHel.equals("")) {
             context.redirect("/visualizarHeladeras");
@@ -75,7 +74,7 @@ public class SuscribirseController implements Handler {
             case "MAIL" -> medio = TipoMedioDeContacto.MAIL;
             case "TELEFONO" -> medio = TipoMedioDeContacto.TELEFONO;
             case "TELEGRAM" -> medio = TipoMedioDeContacto.TELEGRAM;
-            default -> medio = null;
+            default -> medio = TipoMedioDeContacto.MAIL;
         }
 
         try {
@@ -87,7 +86,7 @@ public class SuscribirseController implements Handler {
             context.sessionAttribute("notificacionSuscripcion", notificacionSuscripcion);
 
             String redirectUrl = String.format("/visualizarDetalleHeladera?heladeraId=%s&nombre=%s&direccion=%s&lat=%s&long=%s&fecha=%s&estado=%s&disponibilidad=%s",
-                    id, nombre, direccion, latitud, longitud, fecha, estado, disponibilidad);
+                    id, nombre, direccion, lat, longi, fecha, estado, disponibilidad);
             context.redirect(redirectUrl);
 
             return;
