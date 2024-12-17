@@ -19,7 +19,7 @@ public class DarAltaAdminController implements Handler {
         Map<String, Object> model = GeneradorModel.getModel(context);
 
         Roles rol = context.sessionAttribute("rolUsuario");
-        String mailAdmin = context.sessionAttribute("mailUsuario");
+        String mailAdmin = context.sessionAttribute("email");
 
         if (rol != Roles.ADMIN) {
             context.redirect("/inicio");

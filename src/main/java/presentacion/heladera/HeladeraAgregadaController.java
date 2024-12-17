@@ -30,10 +30,11 @@ public class HeladeraAgregadaController implements Handler {
         String usarMiDireccion = context.formParam("checkDireccion");
 
         /* Estos datos van a ser opcional si envia direccion o marca checkbox */
-        String esXRecomendacion = context.formParam("esXRecomendacion");
-        String direcRecomendada = context.formParam("direccionRecomendada");
-        String latRecomendada = context.formParam("latitudRecomendada");
-        String longRecomendada = context.formParam("longitudRecomendada");
+        String esXRecomendacion = context.formParam("activo");
+        String direcRecomendada = context.formParam("direccion");
+        String latRecomendada = context.formParam("latitud");
+        String longRecomendada = context.formParam("longitud");
+        String areaRecomendad = context.formParam("area");
 
         if (nombre.equals("") || activa == null) {
             model.put("errorHeladera", "Debe completar los campos obligatorios");
@@ -52,7 +53,7 @@ public class HeladeraAgregadaController implements Handler {
             CheckBoxDireccion = Boolean.TRUE;
         }
         Boolean esRecomendada = Boolean.FALSE;
-        if (esXRecomendacion != null && esXRecomendacion.equals("on")) {
+        if (esXRecomendacion != null && esXRecomendacion.equals("true")) {
             esRecomendada = Boolean.TRUE;
         }
 
@@ -62,11 +63,13 @@ public class HeladeraAgregadaController implements Handler {
             return;
         }
 
-        if ((CheckBoxDireccion && esRecomendada) || (CheckBoxDireccion && !direccion.equals("")) || (esRecomendada && !direccion.equals(""))) {
+
+        if ((CheckBoxDireccion && esRecomendada) || (CheckBoxDireccion && !direccion.isEmpty())) {
             model.put("errorHeladera", "No puede ingresar una heladera con dos direcciones");
             context.redirect("/agregarHeladera");
             return;
         }
+
 
         Boolean activo = Boolean.TRUE;
         if (activa.equals("1")) {

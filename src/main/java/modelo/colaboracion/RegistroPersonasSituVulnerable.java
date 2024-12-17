@@ -58,7 +58,6 @@ public class RegistroPersonasSituVulnerable extends Colaboracion{
 
     public RegistroPersonasSituVulnerable(Integer cantidadTarjetas, List<TarjetaPlastica> tarjetas, LocalDate fechaDonacion) {
         this.tiposPersonasHabilitadas = Arrays.asList(TipoPersona.PH);
-        this.tarjetas = new ArrayList<TarjetaPlastica>();
         this.tarjetas = tarjetas;
         this.cantidadTarjetas = cantidadTarjetas;
         this.cantidadRepartida = 0;

@@ -13,10 +13,10 @@ import presentacion.incidentes.ReportarFallaTecnicaFinalizadaController;
 import presentacion.incidentes.VisualizarAlertasController;
 import presentacion.incidentes.VisualizarFallasTecnicasController;
 import presentacion.ofertas.*;
-import presentacion.vistaAdmin.CargarSCVController;
+import presentacion.vistaAdmin.CargarCSVController;
 import presentacion.vistaAdmin.DarAltaAdminController;
 import presentacion.vistaAdmin.CSVCargadoController;
-import presentacion.vistaAdmin.inicioADMINController;
+import presentacion.vistaAdmin.InicioAdminController;
 import presentacion.reportes.MisReportesController;
 import presentacion.vistaTecnico.*;
 
@@ -91,7 +91,8 @@ public class Router {
             });
 
             path("/cargarCSV", () -> {
-                get(new CargarSCVController());
+                before(new AutorizacionMiddleware().setDebeSerLogueado().setDebeSerAdmin());
+                get(new CargarCSVController());
                 post(new CSVCargadoController());
             });
 
@@ -132,7 +133,7 @@ public class Router {
 
             path("/darAltaAdmin", () -> {
                 before(new AutorizacionMiddleware().setDebeSerLogueado().setDebeSerAdmin());
-                post(new DarAltaAdminController());
+                get(new DarAltaAdminController());
             });
 
             path("/darDeBajaHeladera", () -> {
@@ -179,7 +180,7 @@ public class Router {
 
             path("/inicioAdmin", () -> {
                 before(new AutorizacionMiddleware().setDebeSerLogueado().setDebeSerAdmin());
-                get(new inicioADMINController());
+                get(new InicioAdminController());
             });
 
             path("/inicioTecnico", () -> {

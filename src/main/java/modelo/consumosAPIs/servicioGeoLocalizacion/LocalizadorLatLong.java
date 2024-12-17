@@ -8,6 +8,8 @@ import java.util.Random;
 
 public class LocalizadorLatLong {
 
+    /* MOCKEO DE API */
+
     public static LatLong obtenerLatitudYLongitud(String direccion) {
         List<LatLong> coordenadas = generarCoordenadasCABA(10);
         Random random = new Random();

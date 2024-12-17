@@ -13,18 +13,6 @@ public class InicioTecnicoController implements Handler {
     public void handle(@NotNull Context context) throws Exception {
         Map<String, Object> model = GeneradorModel.getModel(context);
 
-        if (context.sessionAttribute("logueado") != Boolean.TRUE) {
-            context.redirect("/login");
-            return;
-        }
-
-        Roles rol = context.sessionAttribute("rolUsuario");
-
-        if (rol != Roles.TECNICO) {
-            context.redirect("/404Error");
-            return;
-        }
-
         context.render("templates/inicioTecnico.mustache", model);
     }
 }

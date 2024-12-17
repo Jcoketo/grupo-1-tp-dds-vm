@@ -32,8 +32,8 @@ public class PruebasManuales {
 //        RepositorioColaboradores repoColab = RepositorioColaboradores.getInstancia(emf.createEntityManager());
 //        RepositorioUsuarios repoUsuarios = RepositorioUsuarios.getInstancia(emf.createEntityManager());
 //
-//        List<RegistroLeido> registrosLeidos = CargarCSV.CargarSCV();
-//        ProcesarCSV.ProcesarCSV(registrosLeidos);
+//        List<RegistroLeido> registrosLeidos = CargarCSV.cargarCSV();
+//        procesarCSV.procesarCSV(registrosLeidos);
 //
 
 
@@ -66,7 +66,7 @@ public class PruebasManuales {
         /* ----------- PROBAR CSV ----------- */
 
 
-        //CargarCSV.CargarSCV();
+        //CargarCSV.cargarCSV();
 
         // en caso de enviarle por parametro el path
         //CargarCSV.cargarCSV("src/main/resources/cargaMasivaNuevosUsuarios.csv");
@@ -75,7 +75,7 @@ public class PruebasManuales {
 
         //List<RegistroLeido> registros = repositorio.tomarPorIndice(0);
 
-        //ProcesarCSV.ProcesarCSV(registros);
+        //procesarCSV.procesarCSV(registros);
 
         ///repositorio.cambiarEstadoAProcesado(registros);
 

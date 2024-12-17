@@ -52,6 +52,7 @@
             padding: 20px;
             border: 1px solid #888;
             max-width: 500px;
+
             width: 30%;
             text-align: center;
             position: relative;
@@ -141,7 +142,7 @@
                 <p>Correo electrónico:</p>
                 <input type="email" id="email" name="email" required class="email-input">
                 <div class="modal-spacing"></div>
-                <button class="btn-submit" onclick="submitEmail()">Asignar administrador</button>
+                <button class="btn-submit" onclick="window.location.href='/darAltaAdmin'">Asignar administrador</button>
             </div>
         </div>
         <div class="image-placeholder ml-5">
@@ -165,15 +166,6 @@
 
     function closeModal() {
         document.getElementById("myModal").style.display = "none";
-    }
-
-    function submitEmail() {
-        var email = document.getElementById("email").value;
-
-        alert("Correo electrónico asignado!");
-        closeModal();
-        window.location.href = '/registrarNuevoAdmin';
-
     }
 
 </script>
