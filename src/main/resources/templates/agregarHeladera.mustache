@@ -154,11 +154,23 @@
                 </div>
                 <select class="form-select form-control" id="ubicacion" name="ubicacion">
                     <option selected disabled>Seleccione una ubicación</option>
-                    <option value="Mozart 2300, CABA">Mozart 2300, CABA</option>
-                    <option value="Av. Rivadavia 3456, CABA">Av. Rivadavia 3456, CABA</option>
-                    <option value="Parque Centenario, CABA">Parque Centenario, CABA</option>
-                    <option value="Campus UTN, CABA">Campus UTN, CABA</option>
+                    {{#puntosRecomendados}}
+                        <option
+                                data-direccion="{{direccion}}"
+                                data-latitud="{{latitud}}"
+                                data-longitud="{{longitud}}"
+                                data-area="{{area}}">
+                            {{direccion}}
+                        </option>
+                    {{/puntosRecomendados}}
                 </select>
+
+                <!-- Campos ocultos para enviar al servidor -->
+                <input type="hidden" id="direccion" name="direccion">
+                <input type="hidden" id="latitud" name="latitud">
+                <input type="hidden" id="longitud" name="longitud">
+                <input type="hidden" id="area" name="area">
+                <input type="hidden" id="activo" name="activo" value="false"> <!-- Inicialmente false -->
             </div>
 
             <div class="btn-group d-flex justify-content-center">
@@ -175,6 +187,28 @@
 </main>
 
 {{>footer}}
+
+<script>
+    document.getElementById('ubicacion').addEventListener('change', function () {
+        const selectedOption = this.options[this.selectedIndex];
+
+        // Extraer valores de la opción seleccionada
+        const direccion = selectedOption.dataset.direccion;
+        const latitud = selectedOption.dataset.latitud;
+        const longitud = selectedOption.dataset.longitud;
+        const area = selectedOption.dataset.area;
+
+        // Setear activo en true
+        selectedOption.dataset.activo = "true"; // Seteamos el atributo data-activo a "true"
+
+        // Asignar los valores a los campos ocultos
+        document.getElementById('direccion').value = direccion;
+        document.getElementById('latitud').value = latitud;
+        document.getElementById('longitud').value = longitud;
+        document.getElementById('area').value = area;
+        document.getElementById('activo').value = true; // Aquí directamente seteamos el input oculto
+    });
+</script>
 
 <!-- Scripts de Bootstrap y jQuery -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
