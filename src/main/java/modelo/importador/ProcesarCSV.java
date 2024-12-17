@@ -20,7 +20,7 @@ import java.util.List;
 public class ProcesarCSV {
     private static RepositorioColaboradores repoColab = RepositorioColaboradores.getInstancia();
 
-    public static void ProcesarCSV(List<RegistroLeido> registrosLeidos) {
+    public static void procesarCSV(List<RegistroLeido> registrosLeidos) {
 
         LocalDateTime now = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH_mm");

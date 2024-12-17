@@ -3,16 +3,14 @@ package modelo.importador;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
-import persistencia.RepositorioArchivos;
 
 import java.io.FileReader;
-import java.io.IOException;
 import java.io.Reader;
 import java.util.ArrayList;
 import java.util.List;
 
 public class CargarCSV {
-    public static List<RegistroLeido> CargarSCV(String filename) throws Exception {
+    public static List<RegistroLeido> cargarCSV(String filename) throws Exception {
 
         List<RegistroLeido> registrosLeidos = new ArrayList<>();
 

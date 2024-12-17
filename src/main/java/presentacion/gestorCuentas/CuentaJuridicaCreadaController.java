@@ -19,9 +19,6 @@ import java.util.Map;
 
 public class CuentaJuridicaCreadaController implements Handler {
 
-    private RepositorioColaboradores repoColab = RepositorioColaboradores.getInstancia();
-
-
     public CuentaJuridicaCreadaController() {
         super();
     }
@@ -32,9 +29,8 @@ public class CuentaJuridicaCreadaController implements Handler {
 
         String esPorSSO = context.formParam("esXSSO");
         Boolean esXSSO = Boolean.FALSE;
-        if (esPorSSO == "1") {
-            esXSSO = Boolean.TRUE;
-        }
+        if ( esPorSSO == null ) { esPorSSO = "0"; }
+        if (esPorSSO.equals("1")) { esXSSO = Boolean.TRUE; }
 
         String razonSocial = context.formParam("razon-social");
         Integer tipo = Integer.valueOf(context.formParam("tipo"));

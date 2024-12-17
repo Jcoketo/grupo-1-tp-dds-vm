@@ -33,8 +33,8 @@ public class CSVCargadoController implements Handler {
         File archivo = new File("main/resources/archivos/CSVs/" + file.filename());
         try {
             FileUtils.copyInputStreamToFile(file.content(), archivo);
-            List<RegistroLeido> registrosLeidos = CargarCSV.CargarSCV(fileName);
-            ProcesarCSV.ProcesarCSV(registrosLeidos);
+            List<RegistroLeido> registrosLeidos = CargarCSV.cargarCSV(fileName);
+            ProcesarCSV.procesarCSV(registrosLeidos);
             context.redirect("/cargarCSV");
             //Hasta este punto esta cargado el archivp, quedaria cargarlo a la base de datos
 
