@@ -45,7 +45,6 @@ public class DonarDistribucionViandaRealizadaController implements Handler {
         }
         catch (ExcepcionValidacion e){
             model.put("errorDistribuir", e.getMessage());
-            //context.status(400);
             context.redirect("/donarDistribuirViandas");
             return;
         }

@@ -82,9 +82,19 @@ public class RepositoriosTecnicos{
     }
 
     public Tecnico obtenerTecnicoCercano(Areas area, Heladera heladera) throws Exception {
-        List<Tecnico> tecnicos = em.createQuery("SELECT u FROM Tecnico u WHERE u.areaCobertura = :area", Tecnico.class)
-                .setParameter("area", area)
-                .getResultList();
+        TypedQuery<Tecnico> query = em.createQuery("SELECT u FROM Tecnico u WHERE u.areaCobertura = :area", Tecnico.class)
+                .setParameter("area", area);
+        List<Tecnico> tecnicos;
+        try {
+            tecnicos = query.getResultList();
+        } catch (NoResultException e) {
+            tecnicos = new ArrayList<>();
+        }
+
+        if (tecnicos.isEmpty()) {
+            throw new Exception("No hay técnicos disponibles en el área de cobertura");
+        }
+
 
         // Serializar las latitudes y longitudes de los técnicos y la heladera en un JSON
         Map<String, Object> requestBody = new HashMap<>();
@@ -120,7 +130,7 @@ public class RepositoriosTecnicos{
 
         int code = conn.getResponseCode();
         if (code != 200) {
-            throw new RuntimeException("Failed : HTTP error code : " + code);
+            throw new Exception("Failed : HTTP error code : " + code);
         }
 
         try (InputStreamReader reader = new InputStreamReader(conn.getInputStream(), "UTF-8")) {
