@@ -21,6 +21,12 @@ public class RegistrarVisitaTecnicosController implements Handler {
     public void handle(@NotNull Context context) throws Exception {
         Map<String, Object> model = GeneradorModel.getModel(context);
 
+        if ( context.sessionAttribute("notificacionVisita") != null ) {
+            model.put("notificacionVisita", context.sessionAttribute("notificacionVisita"));
+            context.consumeSessionAttribute("notificacionVisita");
+        }
+
+
         // Obtener los incidentes no solucionados
         List<Incidente> incidentes = repoIncidentes.obtenerIncidentesNoSolucionados();
 
