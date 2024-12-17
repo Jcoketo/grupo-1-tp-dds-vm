@@ -22,8 +22,10 @@ public class CargarSCVController implements Handler {
             return;
         }
 
-        model.put("nombreUsuario", context.sessionAttribute("nombreUsuario"));
-        model.put("logueado", context.sessionAttribute("logueado"));
+        if ( context.sessionAttribute("errorCargaMasiva") != null) {
+            model.put("errorCargaMasiva", context.sessionAttribute("errorCargaMasiva"));
+            context.consumeSessionAttribute("errorCargaMasiva");
+        }
 
         context.render("templates/cargarCSV.mustache", model);
     }

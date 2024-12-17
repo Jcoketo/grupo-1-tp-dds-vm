@@ -27,30 +27,14 @@ public class SuscribirseController implements Handler {
         String id = context.formParam("heladeraId");
         String nombre = context.formParam("nombre");
         String direccion = context.formParam("direccion");
-        String lat = context.formParam("latitud");
-        String longi = context.formParam("longitud");
+        String latitud = context.formParam("latitud");
+        String longitud = context.formParam("longitud");
         String fecha = context.formParam("fecha");
         String estado = context.formParam("estado");
-        String disp = context.formParam("disponibilidad");
-
-        Double latitud = 0.0;
-        Double longitud = 0.0;
-        Integer disponibilidad = 0;
-
-        try {
-            if (lat == null || longi == null) {
-                throw new NullPointerException("Latitude or Longitude is null");
-            }
-            latitud = Double.parseDouble(lat);
-            longitud = Double.parseDouble(longi);
-        } catch (NumberFormatException | NullPointerException e) {
-            latitud = 0.0;
-            longitud = 0.0;
-        }
-        if (disp != null) { disponibilidad = Integer.parseInt(disp); }
+        String disponibilidad = context.formParam("disponibilidad");
 
         if (idHel == null || idHel.equals("")) {
-            context.redirect("/visualizarHeladeras");
+            context.redirect("/mapaHeladeras");
             return;
         }
         Integer idHeladera = Integer.parseInt(idHel);
@@ -70,6 +54,27 @@ public class SuscribirseController implements Handler {
             default -> tipo = null;
         }
 
+        if ( tipo == null ) {
+            notificacionSuscripcion.error("No ha seleccionado un tipo de suscripcion!");
+            context.sessionAttribute("notificacionSuscripcion", notificacionSuscripcion);
+
+            String redirectUrl = String.format("/visualizarDetalleHeladera?heladeraId=%s&nombre=%s&direccion=%s&lat=%s&long=%s&fecha=%s&estado=%s&disponibilidad=%s",
+                    id, nombre, direccion, latitud, longitud, fecha, estado, disponibilidad);
+            context.redirect(redirectUrl);
+            return;
+        }
+
+        if ( ( tipo == TipoSuscripcion.QUEDAN_POCAS || tipo == TipoSuscripcion.POCO_ESPACIO ) && limite == 0) {
+
+            notificacionSuscripcion.error("Debe ingresar un límite de viandas para esa suscripcion");
+            context.sessionAttribute("notificacionSuscripcion", notificacionSuscripcion);
+
+            String redirectUrl = String.format("/visualizarDetalleHeladera?heladeraId=%s&nombre=%s&direccion=%s&lat=%s&long=%s&fecha=%s&estado=%s&disponibilidad=%s",
+                    id, nombre, direccion, latitud, longitud, fecha, estado, disponibilidad);
+            context.redirect(redirectUrl);
+            return;
+        }
+
         TipoMedioDeContacto medio;
         switch (medioDeContacto) {
             case "MAIL" -> medio = TipoMedioDeContacto.MAIL;
@@ -78,18 +83,26 @@ public class SuscribirseController implements Handler {
             default -> medio = null;
         }
 
-        try {
-            AuthServiceSuscripcion.generarSuscripcion(idHeladera, idPersona, tipo, limite, medio);
-        }
-        catch (ExcepcionValidacion e)
-        {
-            notificacionSuscripcion.error(e.getMessage());
+        if ( medio == null ) {
+            notificacionSuscripcion.error("No ha seleccionado un medio de contacto!");
             context.sessionAttribute("notificacionSuscripcion", notificacionSuscripcion);
 
             String redirectUrl = String.format("/visualizarDetalleHeladera?heladeraId=%s&nombre=%s&direccion=%s&lat=%s&long=%s&fecha=%s&estado=%s&disponibilidad=%s",
                     id, nombre, direccion, latitud, longitud, fecha, estado, disponibilidad);
             context.redirect(redirectUrl);
+            return;
+        }
 
+        try {
+            AuthServiceSuscripcion.generarSuscripcion(idHeladera, idPersona, tipo, limite, medio);
+        }
+        catch (ExcepcionValidacion e)
+        {   notificacionSuscripcion.error(e.getMessage());
+            context.sessionAttribute("notificacionSuscripcion", notificacionSuscripcion);
+
+            String redirectUrl = String.format("/visualizarDetalleHeladera?heladeraId=%s&nombre=%s&direccion=%s&lat=%s&long=%s&fecha=%s&estado=%s&disponibilidad=%s",
+                    id, nombre, direccion, latitud, longitud, fecha, estado, disponibilidad);
+            context.redirect(redirectUrl);
             return;
         }
 

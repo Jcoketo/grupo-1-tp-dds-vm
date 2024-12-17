@@ -62,14 +62,14 @@ Suscripcion {
         switch (this.tipoSuscripcion) {
             case POCO_ESPACIO:
                 texto = "La heladera " + heladera.getNombre() + " ubicada en " + heladera.getPuntoEstrategico().getDireccion() + " tiene poco espacio!" +
-                        "Corre a distribuir sus viandas y suma puntos!";
-                asunto = "Poco espacio en heladera";
+                        "\n\nCorre a distribuir sus viandas y suma mas puntos!";
+                asunto = "Queda poco espacio en " + heladera.getNombre() + "!";
                 Notificador.notificar(texto, asunto, medioDeContacto);
                 break;
             case QUEDAN_POCAS:
                 texto = "La heladera " + heladera.getNombre()  + " ubicada en " + heladera.getPuntoEstrategico().getDireccion() + " tiene pocas viandas!" +
-                        "Ve a rellenarla con mas viandas y consigue puntos!";
-                asunto = "Quedan pocas viandas!";
+                        "\n\nVe a rellenarla con mas viandas y consigue mas puntos!";
+                asunto = "Quedan pocas viandas en " + heladera.getNombre() + "!";
                 Notificador.notificar(texto, asunto, medioDeContacto);
                 break;
             case DESPERFECTO:

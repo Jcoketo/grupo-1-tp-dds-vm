@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Iniciar sesión</title>
+    <title>Inicio Administrador</title>
     <!-- Incluye Bootstrap -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 
@@ -50,7 +50,7 @@
             margin: 15% auto;
             padding: 20px;
             border: 1px solid #888;
-            width: 80%;
+            width: 30%;
             text-align: center;
             border-radius: 20px;
             width: 50%;
@@ -95,6 +95,14 @@
             width: 100%;
             margin-bottom: 10px;
         }
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
 
     </style>
 
@@ -111,7 +119,18 @@
             <h3 class="mb-3">Estas en una cuenta con permisos de administrador.</h3>
             <button class="btn-admin" onclick="window.location.href='/cargarCSV'">Cargar CSV</button>
             <button class="btn-admin" onclick="window.location.href='/registrarTecnico'">Dar de alta Técnico</button>
-            <button class="btn-admin" onclick="openModal()">Asignar nuevo Administrador</button>
+            <button class="btn-admin mt-3" onclick="openModal()">Asignar nuevo Administrador</button>
+        <!--
+            <div class="mt-3" style="display: none;">
+                <button class="btn-admin" onclick="input()">Dar de baja colaborador</button>
+                <div id="darBaja">
+                    <label>Ingresar (dato) del colaborador</label>
+                    <input type="text">
+                    <button>Cancelar</button>
+                    <button>Dar de baja</button>
+                </div>
+
+            </div> -->
 
         </div>
 
@@ -121,7 +140,7 @@
                 <p>Correo electrónico:</p>
                 <input type="email" id="email" name="email" required class="email-input">
                 <div class="modal-spacing"></div>
-                <button class="btn-submit" onclick="submitEmail()">Asignar administrador</button>
+                <button class="btn-submit" onclick="window.location.href='/darAltaAdmin'">Asignar administrador</button>
             </div>
         </div>
         <div class="image-placeholder ml-5">
@@ -147,14 +166,6 @@
         document.getElementById("myModal").style.display = "none";
     }
 
-    function submitEmail() {
-        var email = document.getElementById("email").value;
-
-        alert("Correo electrónico asignado!");
-        closeModal();
-        window.location.href = '/registrarNuevoAdmin';
-
-    }
 </script>
 
 </body>

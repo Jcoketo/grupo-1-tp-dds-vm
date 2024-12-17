@@ -45,6 +45,12 @@
     <dependencies>
 
         <dependency>
+            <groupId>org.owasp.esapi</groupId>
+            <artifactId>esapi</artifactId>
+            <version>2.2.3.1</version>
+        </dependency>
+
+        <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
             <version>42.6.0</version>
@@ -61,12 +67,6 @@
             <artifactId>hibernate-entitymanager</artifactId>
             <version>5.4.18.Final</version>
         </dependency>
-
-        <!-- <dependency>
-            <groupId> mysql </groupId>
-            <artifactId> mysql-connector-java </artifactId>
-            <version> 8.0.29 </version>
-        </dependency> -->
 
         <dependency>
             <groupId>org.apache.commons</groupId>
@@ -92,11 +92,11 @@
             <version>0.9.7</version>
         </dependency>
 
-        <dependency>
+        <!-- <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-simple</artifactId>
             <version>2.0.7</version>
-        </dependency>
+        </dependency> -->
 
         <dependency>
             <groupId>junit</groupId>

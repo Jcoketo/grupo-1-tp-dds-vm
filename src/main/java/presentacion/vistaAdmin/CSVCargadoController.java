@@ -11,20 +11,18 @@ import org.jetbrains.annotations.NotNull;
 import utils.GeneradorModel;
 
 import java.io.File;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class SCVCargadoController implements Handler {
+public class CSVCargadoController implements Handler {
     @Override
     public void handle(@NotNull Context context) throws Exception {
         Map<String, Object> model = GeneradorModel.getModel(context);
 
         List<UploadedFile> uploadedFiles = context.uploadedFiles("file");
 
-        if (uploadedFiles.isEmpty()) {
-            model.put("errorLogin", "No se ha cargado ningun archivo");
-            context.sessionAttribute("model", model);
+        if (uploadedFiles.isEmpty() || uploadedFiles == null) {
+            context.sessionAttribute("errorCargaMasiva", "No se ha cargado ningun archivo");
             context.redirect("/cargarCSV");
             return;
         }
@@ -41,8 +39,7 @@ public class SCVCargadoController implements Handler {
             //Hasta este punto esta cargado el archivp, quedaria cargarlo a la base de datos
 
         } catch (Exception e) {
-            model.put("errorLogin", "Error en el CSV");
-            context.sessionAttribute("model", model);
+            context.sessionAttribute("errorCargaMasiva", "Hubo un error al cargar y/o procesar el archivo. Por favor, intente nuevamente.");
             context.redirect("/cargarCSV");
         }
     }
