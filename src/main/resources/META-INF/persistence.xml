@@ -12,18 +12,18 @@
             <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/>
 
             <property name="hibernate.connection.driver_class" value="org.postgresql.Driver"/>
-            <property name="hibernate.connection.url" value="jdbc:postgresql://localhost:5432/maravilla?serverTimezone=America/Buenos_Aires" />
+            <property name="hibernate.connection.url" value="jdbc:postgresql://dpg-ctfm33jgbbvc73df0q30-a:5432/maravilla_08w4?serverTimezone=America/Buenos_Aires" />
             <!-- USAR ENVIRONMENT VARS PARA CREDENCIALES DB -->
-            <property name="hibernate.connection.username" value="postgres" />
+            <property name="hibernate.connection.username" value="root" />
             <property name="hibernate.connection.password" value="M6TJDAajFaV9gubgmNqZgyb11JSrFv7I" />
 
-            <property name="hibernate.show_sql" value="true" />
+            <property name="hibernate.show_sql" value="false" />
             <!-- Enable the logging of all the generated SQL statements to the console -->
 
-            <property name="hibernate.format_sql" value="true" />
+            <property name="hibernate.format_sql" value="false" />
             <!-- Format the generated SQL statements to make it more readable -->
 
-            <property name="user_sql_comments" value="true" />
+            <property name="user_sql_comments" value="false" />
             
             <property name="hibernate.hbm2ddl.auto" value="update"/>
             <!--
