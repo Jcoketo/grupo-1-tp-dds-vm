@@ -26,12 +26,10 @@ public class RegistroCompletadoVisitaController implements Handler {
         String descripcion = context.formParam("descripcion");
         List<UploadedFile> uploadedFiles = context.uploadedFiles("file");
 
-        UploadedFile file = null;
+        UploadedFile file = uploadedFiles.get(0);
         File archivo = null;
         String fileName = "";
-        if ( uploadedFiles != null ) {
-
-            file = uploadedFiles.get(0);
+        if (  file.size() != 0 ) {
             fileName = file.filename();
             System.out.println("Received file: " + fileName);
 
@@ -49,8 +47,8 @@ public class RegistroCompletadoVisitaController implements Handler {
         try {
             AuthServiceTecnico.registrarVisita(idTecnico, idHeladera, idIncidente, descripcion, fileName, problemaResuelto);
 
-            if ( file != null ){
-            FileUtils.copyInputStreamToFile(file.content(), archivo); }
+            if ( file.size() != 0 ){
+                FileUtils.copyInputStreamToFile(file.content(), archivo); }
 
         } catch (ExcepcionValidacion | IOException e) {
             context.sessionAttribute("notificacionVisita", e.getMessage());
@@ -58,4 +56,6 @@ public class RegistroCompletadoVisitaController implements Handler {
         }
 
     }
+
 }
+
