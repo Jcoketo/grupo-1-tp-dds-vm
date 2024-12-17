@@ -54,7 +54,11 @@ public class RepositorioTarjetas {
 
 
     public String generarIdTarjeta() {
-        return IdGenerator.generateNextId(ultimoID);
+        Integer idAux = Integer.parseInt(ultimoID);
+        idAux++;
+        String nuevoUltimoID = idAux.toString();
+        return nuevoUltimoID;
+        //return IdGenerator.generateNextId(ultimoID);
     }
 
     public void agregarTarjeta(TarjetaPlastica tarjeta){
