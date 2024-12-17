@@ -24,7 +24,7 @@ public class RegistroPersonaVulnerableRealizadaController implements Handler{
     public void handle(@NotNull Context context) throws Exception {
         Map<String, Object> model = GeneradorModel.getModel(context);
 
-        String nombre = Objects.requireNonNull(context.formParam("nombre"));
+        String nombre = context.formParam("nombre");
         Integer tieneDoc = Integer.parseInt(Objects.requireNonNull(context.formParam("tieneDoc")));
         String tipoDoc = context.formParam("tipoDoc");
         String numeroDocumento = context.formParam("numDoc");

@@ -7,6 +7,7 @@ import persistencia.*;
 import presentacion.InicioController;
 import presentacion.LogoutController;
 import presentacion.MostrarErrorPermisosController;
+import presentacion.VieneUsoController;
 import presentacion.colaboraciones.*;
 import presentacion.gestorCuentas.*;
 import presentacion.heladera.*;
@@ -336,6 +337,10 @@ public class Router {
             path("/visualizarFallasTecnicas", () -> {
                 before(new AutorizacionMiddleware().setDebeSerLogueado());
                 get(new VisualizarFallasTecnicasController());
+            });
+
+            path("/vieneUso", () -> { //TODO
+                get(new VieneUsoController());
             });
 
         });
