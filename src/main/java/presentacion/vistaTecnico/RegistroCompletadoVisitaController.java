@@ -47,7 +47,7 @@ public class RegistroCompletadoVisitaController implements Handler {
             FileUtils.copyInputStreamToFile(file.content(), archivo);
         } catch (ExcepcionValidacion | IOException e) {
             context.sessionAttribute("notificacionVisita", e.getMessage());
-            context.redirect("/inicioTecnico");
+            context.redirect("/registrarVisita");
         }
 
     }

@@ -37,6 +37,11 @@ public class RegistrarVisitaTecnicosController implements Handler {
             return heladeraIncidentes1;
         }).toList();
 
+        if (context.sessionAttribute("notificacionVisita") != null) {
+            model.put("notificacionVisita", context.sessionAttribute("notificacionVisita"));
+            context.consumeSessionAttribute("notificacionVisita");
+        }
+
         model.put("heladeras", heladeraIncidentes);
 
         context.render("templates/registrarVisita.mustache", model);
