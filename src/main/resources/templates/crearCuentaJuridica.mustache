@@ -23,53 +23,36 @@
             padding: 40px;
             border-radius: 20px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            text-align: center;
         }
 
         .register-container h2 {
             margin-bottom: 20px;
         }
 
-        .register-container input, .register-container select {
-            width: calc(100% - 20px);
-            padding: 10px;
-            margin: 10px 0;
-            border: 1px solid #ccc;
-            border-radius: 10px;
-        }
-
         .register-container button {
             width: 100%;
             padding: 15px;
-            background-color: #1e5552;
+            background-color: #152855;
             color: white;
             border: none;
             border-radius: 10px;
             cursor: pointer;
-            font-size: 16px;
+            font-size: 18px;
             margin-top: 10px;
+            font-weight:500;
         }
         .register-container button:hover {
-            background-color: #2e4372;
+            background-color: #13244a;
         }
 
-        .register-container label {
-            display: block;
-            text-align: left;
-            margin-bottom: 5px;
-        }
 
         .register-container .terms {
             margin-top: 10px;
-            text-align: left;
             display: flex;
-            align-items: center;
+            justify-content: center;
             gap: 10px;
         }
 
-        .register-container .terms input[type="checkbox"] {
-            margin: 0;
-        }
 
         .volver-container {
             display: flex;
@@ -83,38 +66,6 @@
         .volver-link {
             color: #1e5552;
         }
-        .navbar-light .navbar-nav .nav-link,
-        .navbar-light .dropdown-menu {
-            background-color: #ffffff;
-            color: #1e5552;
-            font-size: 16px;
-            font-weight: normal;
-        }
-
-        .navbar-light .dropdown-menu {
-            width: 200px;
-        }
-        .navbar-light .dropdown-menu a.dropdown-item {
-            color: #1e5552;
-            font-family: Arial, Helvetica, sans-serif;
-            font-size: 16px;
-            font-weight: normal;
-            width: 200px;
-
-        }
-
-        .navbar-light .dropdown-menu a.dropdown-item:hover {
-            background-color: #ffffff;
-            margin: 0;
-            width: 200px;
-        }
-        h5 {
-            margin: 0; /* Elimina márgenes por defecto */
-            white-space: nowrap; /* Evita que el texto haga salto de línea */
-            color: white; /* Color de texto */
-        }
-
-
 
         .error-message {
             color: red;
@@ -127,7 +78,24 @@
             width : 70px;
             height : 30px;
         }
-    </style>
+
+        input[type="text"],
+        input[type="tel"],
+        input[type="email"],
+        input[type="password"],
+        select {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        label{
+            font-weight: 500;
+            margin-top: 10px;
+
+        }</style>
 </head>
 <body>
 
@@ -140,8 +108,10 @@
         </a>
     </div>
     <div class="register-container">
-        <h2>Registro Persona Jurídica</h2>
+        <h2 style="font-weight:700; font-family: 'Poppins', sans serif; color:#1e5552; text-align:center;" >Registro Persona Jurídica</h2>
         <form action="/crearCuentaJuridica" method="post">
+
+
             <label for="razon-social">Razón Social</label>
             <input type="text" id="razon-social" name="razon-social" required>
 

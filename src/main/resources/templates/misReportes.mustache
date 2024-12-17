@@ -67,6 +67,22 @@
             color: white; /* Color de texto */
         }
 
+        .btn-generar{
+            background-color: #B8CCC8;
+            color: #1e5552;
+            padding: 10px 20px;
+            border-radius: 10px;
+            border-width: 0px;
+            font-weight:500;
+        }
+        .btn-generar:hover {
+            background-color: #94a6a3;
+            text-decoration: none;
+        }
+        .btn-generar:active {
+            border-width: 0px;
+        }
+
 
 
     </style>
@@ -78,7 +94,10 @@
 <main>
 
     <div class="reportes-container">
-        <h1 class="mb-5" style="font-family: 'Poppins', sans serif; font-weight:700; color: #1e5552">Mis reportes</h1>
+        <div class="mb-5 d-flex justify-content-between align-items-center">
+            <h1 style="font-family: 'Poppins', sans serif; font-weight:700; color: #1e5552">Mis reportes</h1>
+            <button class="btn-generar" onclick="window.location.href='/generarReporte'" >Generar reporte</button>
+        </div>
 
         <div class="reporte">
             <div class="reporte-info">
