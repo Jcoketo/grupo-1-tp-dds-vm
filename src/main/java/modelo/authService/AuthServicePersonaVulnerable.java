@@ -11,13 +11,16 @@ import modelo.personas.TipoDocumento;
 import persistencia.RepositorioColaboradores;
 import persistencia.RepositorioPersonasVulnerables;
 
+import java.time.LocalDate;
+
 
 public class AuthServicePersonaVulnerable {
 
     private static RepositorioColaboradores repoColab = RepositorioColaboradores.getInstancia();
     private static RepositorioPersonasVulnerables repoPersVuln = RepositorioPersonasVulnerables.getInstancia();
 
-    public static void procesarAltaPersonaVulnerable(Integer idPersona, String nombre, TipoDocumento tipoDoc, String numeroDocumento, String domicilio, String nroTarj, Integer cantidadMenores) {
+    public static void procesarAltaPersonaVulnerable(Integer idPersona, String nombre, TipoDocumento tipoDoc, String numeroDocumento,
+                                                            String domicilio, String nroTarj, Integer cantidadMenores, LocalDate fechaNacimiento) {
 
         //Con esto sacamos los 0s del id autogenerado
         Integer nroTarj2 = Integer.parseInt(nroTarj);
@@ -45,7 +48,8 @@ public class AuthServicePersonaVulnerable {
 
         tarjetaPlasticaxAsignar.setRecibida(true);
 
-        PersonaVulnerable personaVulnerable = new PersonaVulnerable(persona, nombre, tipoDoc, numeroDocumento, domicilio, tarjetaPlasticaxAsignar, cantidadMenores);
+        PersonaVulnerable personaVulnerable = new PersonaVulnerable(persona, nombre, tipoDoc, numeroDocumento, domicilio,
+                                                                    tarjetaPlasticaxAsignar, cantidadMenores, fechaNacimiento);
 
         colaboracion.setCantidadRepartida(colaboracion.getCantidadRepartida() + 1);
         colaboracion.hacerColaboracion(colaborador);

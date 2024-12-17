@@ -46,19 +46,25 @@ public class PersonaVulnerable {
     @Column
     @Getter protected String direccion;
 
+    @Column
+    @Getter private LocalDate fechaNacimiento;
+
 //    @OneToOne(cascade = CascadeType.ALL)
 //    @JoinColumn(name = "persona_humana_id", referencedColumnName = "id")
 //    @Getter private PersonaHumana persona;
 // persona, nombre, tipoDoc, numeroDocumento, domicilio, nroTarjeta, cantidadMenores
 
-    public PersonaVulnerable(PersonaHumana persona, String nombreApellido,TipoDocumento tipoDocumento, String numeroDocumento, String domicilio, TarjetaPlastica tarjeta, Integer menoresACargo) {
+    public PersonaVulnerable(PersonaHumana persona, String nombreApellido,TipoDocumento tipoDocumento, String numeroDocumento, String domicilio, TarjetaPlastica tarjeta, Integer menoresACargo, LocalDate fechaNacimiento) {
         this.dioAlta = persona;
         this.nombreApellido = nombreApellido;
-        this.documento = new Documento(numeroDocumento, tipoDocumento);
+        if ( !(tipoDocumento == null) && !(numeroDocumento == null) ) {
+            this.documento = new Documento(numeroDocumento, tipoDocumento);
+        }
         this.direccion = domicilio;
         this.menoresACargo = menoresACargo;
         this.tarjeta = tarjeta;
         this.fechaRegistro = LocalDate.now();
+        this.fechaNacimiento = fechaNacimiento;
     }
 
     public PersonaVulnerable() {
