@@ -1,4 +1,4 @@
-# Grupo 1 - Diseño de Sistemas
+# Grupo 1 - Diseño de Sistemas - VM
 
 ## Integrantes:
 
@@ -9,3 +9,4 @@ Augusto Adrian Gil Tolentino
 Sofía Marques  
 Gianlucca Santucho  
 Candela Bergé
+
