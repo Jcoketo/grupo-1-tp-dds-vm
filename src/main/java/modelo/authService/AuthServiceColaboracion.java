@@ -8,7 +8,9 @@ import modelo.elementos.Heladera;
 import modelo.elementos.PuntoEstrategico;
 import modelo.elementos.TarjetaPlastica;
 import modelo.excepciones.ExcepcionValidacion;
+import modelo.notificador.Notificador;
 import modelo.personas.Colaborador;
+import modelo.personas.MedioDeContacto;
 import modelo.personas.Persona;
 import modelo.personas.PersonaJuridica;
 import persistencia.RepositorioColaboradores;
@@ -75,7 +77,7 @@ public class AuthServiceColaboracion {
         repoColab.nuevaColaboracion(colab, distribucion);
     }
 
-    public static void registrarPersonasVulnerables(Integer idPersona){
+    public static void registrarPersonasVulnerables(Integer idPersona, MedioDeContacto medioDeContacto) {
         Colaborador colab = repoColab.buscarColaboradorXIdPersona(idPersona);
 
         RegistroPersonasSituVulnerable colaboracion = repoColab.traerColaboradoresXColaboradorPersonaSitu(colab);
@@ -92,6 +94,12 @@ public class AuthServiceColaboracion {
         colab.agregarColaboracion(registroPersonasSituVulnerable);
 
         repoColab.nuevaColaboracion(colab, registroPersonasSituVulnerable);
+
+        Notificador.notificar("Has solicitado tarjetas para repartir .\n" +
+                "Te las estaremos enviado en las proximas 72hs habiles. \n\n" +
+                "Los numeros de tarjeta entregados son: \n" +
+                "Nro. tarjeta: " + tarjetas.get(0).getNro_tarjeta() + "\n" +
+                "Nro. tarjeta: "+ tarjetas.get(1).getNro_tarjeta(), "Tarjetas repartidas" ,medioDeContacto);
     }
 
     public static void registrarColaboracionRecompensa(Integer idPersona, String nombre,String descripcion,TipoOferta tipoOferta,Double puntos,String imagen) {
