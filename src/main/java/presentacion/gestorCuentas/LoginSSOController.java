@@ -114,16 +114,15 @@ public class LoginSSOController implements Handler {
     private void configurarYEnviar(Context context, String email) {
         context.sessionAttribute("logueado", true);
 
-        TipoPersona tipoPer = repoColab.devolverTipoPersona(email);
-        context.sessionAttribute("tipoPersona", tipoPer);
-
-
-        Integer idPersona = repoColab.devolverIdPersona(email);
-        context.sessionAttribute("idPersona", idPersona);
-
         Usuario usuario = repoUsuarios.traerUsuario(email);
         context.sessionAttribute("rolUsuario", usuario.getRol());
         context.sessionAttribute("nombreUsuario", usuario.getUsername());
+
+        TipoPersona tipoPer = repoColab.devolverTipoPersona(usuario.getPersona().getId());
+        context.sessionAttribute("tipoPersona", tipoPer);
+
+        context.sessionAttribute("idPersona", usuario.getPersona().getId());
+
 
         if (usuario.getRol() == Roles.ADMIN){
             context.redirect("/inicioADMIN");

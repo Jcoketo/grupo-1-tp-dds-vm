@@ -71,14 +71,14 @@ public class RepositorioColaboradores {
         em.getTransaction().commit();
     }
 
-    public TipoPersona devolverTipoPersona(String email) {
-        List<Persona> personas = em.createQuery("SELECT p FROM Persona p JOIN p.mediosDeContacto m WHERE m.contacto = :email", Persona.class)
-                .setParameter("email", email)
-                .getResultList();
-        if (!personas.isEmpty()) {
-            return personas.get(0).getTipoPersona();
+    public TipoPersona devolverTipoPersona(Integer idPersona) {
+        TypedQuery<TipoPersona> query = em.createQuery("SELECT p.tipoPersona FROM Persona p WHERE p.id = :idPersona", TipoPersona.class);
+        query.setParameter("idPersona", idPersona);
+        try {
+            return query.getSingleResult();
+        } catch (NoResultException e) {
+            return null;
         }
-        return null;
     }
 
     public static List<Colaborador> obtenerColaboradores() {
@@ -119,15 +119,6 @@ public class RepositorioColaboradores {
         return em.find(PersonaHumana.class, idPersona);
     }
 
-    public Integer devolverIdPersona(String email) {
-        List<Persona> personas = em.createQuery("SELECT p FROM Persona p JOIN p.mediosDeContacto m WHERE m.contacto = :email", Persona.class)
-                .setParameter("email", email)
-                .getResultList();
-        if (!personas.isEmpty()) {
-            return personas.get(0).getId();
-        }
-        return null;
-    }
 
     public void nuevaColaboracion(Colaborador colab, Colaboracion colaboracion) {
         em.getTransaction().begin();

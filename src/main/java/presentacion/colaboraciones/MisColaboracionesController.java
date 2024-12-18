@@ -1,5 +1,6 @@
 package presentacion.colaboraciones;
 
+import accessManagment.Roles;
 import lombok.Getter;
 import lombok.Setter;
 import modelo.colaboracion.Colaboracion;
@@ -31,6 +32,11 @@ public MisColaboracionesController() {
         Map<String, Object> model = GeneradorModel.getModel(context);
 
         Integer idPersona = context.sessionAttribute("idPersona");
+
+        if ( context.sessionAttribute("rolUsuario") == Roles.TECNICO ) {
+            context.redirect("/inicio");
+            return;
+        }
 
         List<Colaboracion> colaboraciones = repoColaboradores.getColaboraciones(idPersona);
 

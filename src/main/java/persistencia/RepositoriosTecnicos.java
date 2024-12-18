@@ -81,6 +81,16 @@ public class RepositoriosTecnicos{
         }
     }
 
+    public Tecnico obtenerUnTecnicoXArea(Areas area) {
+        TypedQuery<Tecnico> query = em.createQuery("SELECT t FROM Tecnico t WHERE t.areaCobertura = :area", Tecnico.class)
+                .setParameter("area", area);
+        try {
+            return query.getSingleResult();
+        } catch (NoResultException e) {
+            return null;
+        }
+    }
+
     public Tecnico obtenerTecnicoCercano(Areas area, Heladera heladera) throws Exception {
         TypedQuery<Tecnico> query = em.createQuery("SELECT u FROM Tecnico u WHERE u.areaCobertura = :area", Tecnico.class)
                 .setParameter("area", area);

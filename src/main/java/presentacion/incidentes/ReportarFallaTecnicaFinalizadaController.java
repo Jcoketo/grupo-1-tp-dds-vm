@@ -46,24 +46,37 @@ public class ReportarFallaTecnicaFinalizadaController implements Handler {
 
         String descripcionFalla = context.formParam("descripcion");
 
+        if ( descripcionFalla == null || descripcionFalla.equals("") ) {
+            context.sessionAttribute("errorReporteFalla", "Debe completar la descripción de la falla!");
+            context.redirect("/visualizarFallasTecnicas?heladeraId=" + idHeladera);
+            return;
+        }
+
         List<UploadedFile> uploadedFiles = context.uploadedFiles("file");
 
         UploadedFile file = uploadedFiles.get(0);
-        String fileName = file.filename();
-        System.out.println("Received file: " + fileName);
+        String fileName = "";
+        File archivo = null;
+
+        if ( file.size() != 0){
+            fileName = file.filename();
+            System.out.println("Received file: " + fileName);
+            archivo = new File("src/main/resources/uploads/incidentes/" + file.filename());
+        }
 
         Heladera heladera = repoHeladeras.buscarHeladera(idHeladera);
         Colaborador colaborador = repoColaboradores.buscarColaboradorXIdPersona(idPersona);
 
         FallaTecnica falla = new FallaTecnica(heladera, colaborador, descripcionFalla, fileName);
 
-        File archivo = new File("src/main/resources/uploads/incidentes/" + file.filename());
-
         NotificacionAlerta notificacionAlerta = new NotificacionAlerta();
 
         try {
             repoIncidentes.agregarIncidente(falla);
-            FileUtils.copyInputStreamToFile(file.content(), archivo);
+            heladera.marcarComoInactiva();
+            repoHeladeras.actualizarHeladera(heladera);
+            if ( archivo != null){
+            FileUtils.copyInputStreamToFile(file.content(), archivo); }
 
         } catch (ExcepcionValidacion e) {
             notificacionAlerta.error(e.getMessage());
@@ -73,7 +86,7 @@ public class ReportarFallaTecnicaFinalizadaController implements Handler {
         }
 
         try {
-            Tecnico tecnico = repoTecnicos.obtenerTecnicoCercano(heladera.getPuntoEstrategico().getAreas(), heladera);
+            Tecnico tecnico = repoTecnicos.obtenerUnTecnicoXArea(heladera.getPuntoEstrategico().getAreas());
             tecnico.notificarFalla(heladera, falla.getDescripcion());
         } catch (Exception e) {
             if (e.getMessage() != null) {

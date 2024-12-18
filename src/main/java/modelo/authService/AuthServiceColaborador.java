@@ -31,6 +31,8 @@ public class AuthServiceColaborador {
         }
         Colaborador colaborador = new Colaborador(persona);
 
+        usuario.setPersona(persona);
+
         repoColab.registrarColaboradorFisico(usuario, persona, colaborador);
 
         String mensajeBienvenida = "Bienvenido a la plataforma " + nombre + ". Ojala que te diviertas!";
@@ -53,6 +55,8 @@ public class AuthServiceColaborador {
 
         Colaborador colaborador = new Colaborador(persona);
 
+        usuario.setPersona(persona);
+
         repoColab.registrarColaboradorJuridico(usuario, persona, colaborador);
 
         String mensajeBienvenida = "Bienvenido a la plataforma " + razonSocial + ". Ojala que te diviertas!";
@@ -74,6 +78,8 @@ public class AuthServiceColaborador {
             String passwordAux = AuthServiceUsuario.hashPassword(password);
 
             Usuario usuario = new Usuario(mail, passwordAux, Roles.USUARIO);
+
+            usuario.setPersona(persona);
 
             repoUsuarios.persistirUsuario(usuario);
             repoColab.actualizarColaborador(colaborador);

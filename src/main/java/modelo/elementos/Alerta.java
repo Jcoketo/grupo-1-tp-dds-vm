@@ -6,7 +6,7 @@ import lombok.Getter;
 
 @Entity
 @DiscriminatorValue("ALERTA")
-public class Alerta extends Incidente{
+public class Alerta extends Incidente {
     @Enumerated(EnumType.STRING)
     @Getter private TipoAlerta tipoAlerta;
 

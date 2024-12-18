@@ -183,7 +183,7 @@ public class Heladera {
         this.contadorFallasSemanal++;
     }
 
-    void marcarComoInactiva(){
+    public void marcarComoInactiva(){
         this.activa = false;
         if(this.colaboradoresSucriptos != null)
             this.colaboradoresSucriptos.stream().filter(colab -> colab.getTipoSuscripcion() == TipoSuscripcion.DESPERFECTO).forEach(colab -> colab.notificarmeSuscripcion());

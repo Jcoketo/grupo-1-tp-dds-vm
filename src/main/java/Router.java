@@ -349,9 +349,14 @@ public class Router {
                 get(new VieneUsoController());
             });
 
+            // ESTE PATH FUNCIONA COMO ENDPOINT PARA RECIBIR LLAMADOS DESDE LOS
+            // SW DE LAS HELADERAS ANTE LA GENERACION DE UNA ALERTA
+            path("/recibirAlerta", () -> {
+                get(new RecibirAlertaController());
+            });
+
             // TODO
             // FALTA PATH PARA RECIBIR EL POST DEL BOTON DE GENERAR REPORTES
-            // FALTA POST PARA RECIBIR FALLAS EN LAS HELADERAS
             // FALTA ENDPOINT PARA EXPONER EL USO TARJETA
 
         });

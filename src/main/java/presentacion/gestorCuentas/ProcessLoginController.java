@@ -29,7 +29,6 @@ public class ProcessLoginController implements Handler {
 
     @Override
     public void handle(@NotNull Context context) throws Exception {
-        Map<String, Object> model = GeneradorModel.getModel(context);
         String email = context.formParam("email");
         String password = context.formParam("password");
 
@@ -64,18 +63,23 @@ public class ProcessLoginController implements Handler {
 
         context.sessionAttribute("logueado", true);
 
-        TipoPersona tipoPer = repoColab.devolverTipoPersona(email);
-        context.sessionAttribute("tipoPersona", tipoPer);
 
         context.sessionAttribute("mailUsuario",email);
 
-
-        Integer idPersona = repoColab.devolverIdPersona(email);
-        context.sessionAttribute("idPersona", idPersona);
-
         Usuario usuario = repoUsuarios.traerUsuario(email);
+
+        if ( usuario == null ) { // no deberia suceder
+            context.sessionAttribute("errorLogin", "No se encontro el usuario");
+            context.redirect("/login");
+            return;
+        }
+        context.sessionAttribute("idPersona", usuario.getPersona().getId());
         context.sessionAttribute("rolUsuario", usuario.getRol());
         context.sessionAttribute("nombreUsuario", usuario.getUsername());
+
+
+        TipoPersona tipoPer = repoColab.devolverTipoPersona(usuario.getPersona().getId());
+        context.sessionAttribute("tipoPersona", tipoPer);
 
         context.sessionAttribute("validado", false);
         if ( usuario.getUsername() == null ||  usuario.getUsername().equals("") ) {
@@ -92,7 +96,7 @@ public class ProcessLoginController implements Handler {
         }
 
         if (usuario.getRol() == Roles.TECNICO){
-            Integer idTecnico = repoTecnicos.buscarTecnicoXIdPersona(idPersona).getId();
+            Integer idTecnico = repoTecnicos.buscarTecnicoXIdPersona(usuario.getPersona().getId()).getId();
             if ( idTecnico == null ) {
                 context.sessionAttribute("errorLogin", "No se encontro el tecnico");
                 context.redirect("/login");

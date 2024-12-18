@@ -14,7 +14,7 @@ public class MedioDeContacto {
     private int id;
 
     @Enumerated(EnumType.STRING)
-    @Getter private TipoMedioDeContacto medio;
+    @Getter @Setter private TipoMedioDeContacto medio;
 
     @Column
     @Getter @Setter private String contacto;
