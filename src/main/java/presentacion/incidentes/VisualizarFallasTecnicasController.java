@@ -43,7 +43,7 @@ public class VisualizarFallasTecnicasController implements Handler {
             context.consumeSessionAttribute("notificacionAlerta");
         }
 
-        List<FallaTecnica> fallasHeladera = repoIncidentes.obtenerIncidentes(idHeladera);
+        List<FallaTecnica> fallasHeladera = repoIncidentes.obtenerFallasXHeladera(idHeladera);
         if (fallasHeladera == null )
             fallasHeladera = List.of();
 

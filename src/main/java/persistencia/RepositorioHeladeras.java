@@ -2,6 +2,7 @@ package persistencia;
 
 import lombok.Getter;
 import modelo.colaboracion.Vianda;
+import modelo.elementos.Alerta;
 import modelo.elementos.Heladera;
 import modelo.excepciones.ExcepcionValidacion;
 import modelo.suscripcion.Suscripcion;
@@ -146,5 +147,6 @@ public class RepositorioHeladeras {
         em.persist(suscripcion);
         em.getTransaction().commit();
     }
+
 
 }

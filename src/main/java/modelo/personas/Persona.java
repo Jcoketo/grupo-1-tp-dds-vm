@@ -30,14 +30,14 @@ public abstract class Persona {
     @Enumerated(EnumType.STRING)
     @Getter protected TipoPersona tipoPersona;
 
+    @Column
+    @Getter @Setter
+    private Boolean bajaLogica = Boolean.FALSE;
+
     /*public Persona(MedioDeContacto medioDeContacto) {
         this.mediosDeContacto = new ArrayList<MedioDeContacto>();
         this.mediosDeContacto.add(medioDeContacto);
     }*/
-
-    public TipoPersona getTipoPersona() {
-        return tipoPersona;
-    }
 
     public void agregarMediosDeContacto(MedioDeContacto ... medioDeContactos) {
         Collections.addAll(this.mediosDeContacto, medioDeContactos);

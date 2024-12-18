@@ -1,5 +1,6 @@
 package modelo.personas;
 
+import lombok.Setter;
 import modelo.colaboracion.Colaboracion;
 import modelo.colaboracion.Oferta;
 
@@ -47,6 +48,10 @@ public class Colaborador {
 
     @Column
     @Getter protected Integer contadorViandasDonadasSemanal;
+
+    @Column
+    @Getter @Setter
+    private Boolean bajaLogica = Boolean.FALSE;
 
     public Colaborador() {
         this.colaboracionesRealizadas = new ArrayList<>();

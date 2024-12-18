@@ -57,8 +57,13 @@ public class DonarDistribucionViandaRealizadaController implements Handler {
         catch (ExcepcionValidacion e){
             model.put("errorDistribuir", e.getMessage());
             context.redirect("/donarDistribuirViandas");
+            context.consumeSessionAttribute("id_heladera_origen");
+            context.consumeSessionAttribute("id_heladera_destino");
             return;
         }
+
+        context.consumeSessionAttribute("id_heladera_origen");
+        context.consumeSessionAttribute("id_heladera_destino");
 
         context.redirect("/graciasPorDonar");
     }

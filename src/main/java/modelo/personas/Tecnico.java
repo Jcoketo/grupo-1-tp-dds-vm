@@ -22,7 +22,7 @@ public class Tecnico {
     @Column
     @Getter @Setter private String nroCUIL;
 
-    @Enumerated
+    @Enumerated(EnumType.STRING)
     @Getter private Areas areaCobertura;
 
     @OneToOne(cascade = CascadeType.PERSIST)
@@ -35,6 +35,10 @@ public class Tecnico {
     @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "punto_estrategico_id", referencedColumnName = "id")
     @Getter private PuntoEstrategico puntoEstrategico;
+
+    @Column
+    @Getter @Setter
+    private Boolean bajaLogica = Boolean.FALSE;
 
 
     public Tecnico(String nroCUIL, Areas areaCobertura, PersonaHumana persona) {
@@ -69,8 +73,10 @@ public class Tecnico {
     }
 
     public void notificarAlerta(Heladera heladera, TipoAlerta alerta){
+        String alertaAux = alerta.toString().replace("_", " ");
         String texto = "Se ha reportado una alerta en la heladera " + heladera.getNombre() + " en " + heladera.getPuntoEstrategico().getDireccion() + ". " +
-                "Tipo de alerta: " + alerta;
+                "\n Tipo de alerta: " + alertaAux +
+                "\n Por favor, atender la alerta a la brevedad posible.";
         String asunto = "Alerta reportada";
 
         MedioDeContacto medio = persona.devolerMedioDeContacto(TipoMedioDeContacto.MAIL);

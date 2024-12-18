@@ -108,22 +108,13 @@
         </a>
     </div>
     <h1>Alertas</h1>
-
-    <div class="alerta">
-        <h2>Fraude</h2>
-        <p>Fecha: 12/10/2023</p>
-    </div>
-
-    <div class="alerta">
-        <h2>Temperatura anormal</h2>
-        <p>Fecha: 12/10/2023</p>
-        <p>Temperatura detectada: 20°C</p>
-    </div>
-
-    <div class="alerta">
-        <h2>Sin detección de temperatura</h2>
-        <p>Fecha: 05/10/2023</p>
-    </div>
+    {{#alertas}}
+        <div class="alerta">
+            <p>Tipo: {{tipo}}</p>
+            <p>Fecha: {{fecha}}</p>
+            <p>Estado: {{estado}}</p>
+        </div>
+    {{/alertas}}
 </div>
 
 {{> footer}}

@@ -220,7 +220,6 @@
                         <label for="fechaCaducidad1">Fecha de caducidad</label>
                         <input type="date" name="fechaCaducidad1" class="form-control" id="fechaCaducidad1" value="" required>
                     </div>
-
                 </div>
 
                 <div class="form-row">
@@ -240,8 +239,8 @@
                         <input type="date" name="fechaDonacion1" class="form-control" id="fechaDonacion1">
                     </div>
                     <div class="form-group col-md-6">
-                        <label for="fechaElaboracion1">Fecha de elaboración</label>
-                        <input type="date" name="fechaElaboracion1" class="form-control" id="fechaElaboracion1" value="" required>
+                        <label for="fechaElaboracion1">Fecha de elaboracion</label>
+                        <input type="date" name="fechaElaboracion1" class="form-control" id="fechaElaboracion1">
                     </div>
                 </div>
 
@@ -276,25 +275,25 @@
                             <input type="date" name="fechaDonacion2" class="form-control" id="fechaDonacion2" value="2024-10-06">
                         </div>
                         <div class="form-group col-md-6">
-                            <label for="fechaElaboracion2">Fecha de elaboración</label>
-                            <input type="date" name="fechaElaboracion2" class="form-control" id="fechaElaboracion2" value="" required>
+                            <label for="fechaElaboracion2">Fecha de elaboracion</label>
+                            <input type="date" name="fechaElaboracion2" class="form-control" id="fechaElaboracion2">
                         </div>
                     </div>
-                    </div>
+                </div>
 
-                    <div class="form-group">
-                        <button class="agregar-btn btn-common" onclick="agregarViandaFunction();"  type="button" id="agregarVianda">+ Añadir otra vianda</button>
-                    </div>
+                <div class="form-group">
+                    <button class="agregar-btn btn-common" onclick="agregarViandaFunction();"  type="button" id="agregarVianda">+ Añadir otra vianda</button>
+                </div>
 
-                    <div class="form-group">
-                        <button class="eliminar-btn btn-common" onclick="eliminarViandaFunction(); resetearVianda2();"  type="button" id="eliminarVianda">Eliminar vianda</button>
+                <div class="form-group">
+                    <button class="eliminar-btn btn-common" onclick="eliminarViandaFunction(); resetearVianda2();"  type="button" id="eliminarVianda">Eliminar vianda</button>
 
-                        <button onclick="" id="eliminarVianda" type="button" class="btn-add">- Eliminar Vianda</button>
-                    </div>
+                    <button onclick="" id="eliminarVianda" type="button" class="btn-add">- Eliminar Vianda</button>
+                </div>
 
-                    <div class="form-group">
-                        <button class="donar-btn btn-common" type="submit">Donar viandas</button>
-                    </div>
+                <div class="form-group">
+                    <button class="donar-btn btn-common" type="submit">Donar viandas</button>
+                </div>
 
             </form>
             {{#errorVianda}}

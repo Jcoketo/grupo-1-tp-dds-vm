@@ -38,10 +38,19 @@ public class AuthServiceColaboracion {
         repoColab.nuevaColaboracion(colab, donacion);
     }
 
-    public static void registrarColaboracionVianda(Integer idPersona, Integer heladeraId, String comida, String fechaCaducidad, Integer pesoVianda, Integer calorias, LocalDateTime fechaDonacion) {
+    public static void registrarColaboracionVianda(Integer idPersona, Integer heladeraId, String comida, String fechaCaducidad, String pesoVianda, String calorias, LocalDateTime fechaDonacion) {
         Colaborador colab = repoColab.buscarColaboradorXIdPersona(idPersona);
         Heladera heladera = repoHeladeras.buscarHeladera(heladeraId);
-        Vianda vianda = new Vianda(comida, LocalDate.parse(fechaCaducidad), LocalDate.now(), colab, heladera, calorias, pesoVianda);
+
+        Integer caloriasAux = null;
+        Integer pesoAux = null;
+        if ( pesoVianda == null || pesoVianda.equals("") ){
+            pesoAux = 0; }
+        if ( calorias == null || calorias.equals("") ){
+            caloriasAux = 0; }
+
+        Vianda vianda = new Vianda(comida, LocalDate.parse(fechaCaducidad), LocalDate.now(), colab, heladera, caloriasAux, pesoAux);
+
         DonarVianda donacion = new DonarVianda(vianda, heladera, fechaDonacion.toLocalDate());
         donacion.hacerColaboracion(colab);
         repoHeladeras.actualizarHeladera(heladera);

@@ -183,7 +183,7 @@ public class Heladera {
         this.contadorFallasSemanal++;
     }
 
-    void marcarComoInactiva(){
+    public void marcarComoInactiva(){
         this.activa = false;
         if(this.colaboradoresSucriptos != null)
             this.colaboradoresSucriptos.stream().filter(colab -> colab.getTipoSuscripcion() == TipoSuscripcion.DESPERFECTO).forEach(colab -> colab.notificarmeSuscripcion());
@@ -253,5 +253,14 @@ public class Heladera {
 
     public Vianda conocerVianda(int i) {
         return this.viandas.get(i);
+    }
+
+    public void darmeDeBaja() {
+        this.setBajaLogica(Boolean.TRUE);
+        this.setActiva(Boolean.FALSE);
+        this.getColaboradoresSucriptos().forEach(s -> {
+            s.darDeBaja();
+            s.notificarBaja();
+        });
     }
 }

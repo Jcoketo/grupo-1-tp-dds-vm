@@ -1,7 +1,6 @@
 package persistencia;
 
 import lombok.Getter;
-import modelo.colaboracion.Oferta;
 import modelo.elementos.Alerta;
 import modelo.elementos.FallaTecnica;
 import modelo.elementos.Incidente;
@@ -9,10 +8,7 @@ import modelo.elementos.TipoAlerta;
 import modelo.excepciones.ExcepcionValidacion;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
-import java.util.ArrayList;
 import java.util.List;
 
 public class RepositorioIncidentes {
@@ -62,7 +58,7 @@ public class RepositorioIncidentes {
         }
     }
 
-    public List<FallaTecnica> obtenerIncidentes(int idHeladera) {
+    public List<FallaTecnica> obtenerFallasXHeladera(int idHeladera) {
         TypedQuery<FallaTecnica> query = em.createQuery("SELECT i FROM FallaTecnica i WHERE i.heladera.id = :idHeladera" , FallaTecnica.class);
         query.setParameter("idHeladera", idHeladera);
         try {
@@ -70,7 +66,16 @@ public class RepositorioIncidentes {
         } catch (Exception e){
             return null;
         }
+    }
 
+    public List<Alerta> traerAlertasPorHeladera(int idHeladera) {
+        TypedQuery<Alerta> query = em.createQuery("SELECT i FROM Alerta i WHERE i.heladera.id = :idHeladera" , Alerta.class);
+        query.setParameter("idHeladera", idHeladera);
+        try {
+            return query.getResultList();
+        } catch (Exception e){
+            return null;
+        }
     }
 
     public List<Incidente> obtenerIncidentesNoSolucionados() {

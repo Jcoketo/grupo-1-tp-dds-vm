@@ -56,7 +56,9 @@ public class AuthServiceTecnico {
 
         password = AuthServiceUsuario.hashPassword(password);
         Usuario usuario = new Usuario(mail, password, Roles.TECNICO);
+        usuario.setPersona(persona);
 
+        repoColab.actualizarPersona(persona);
         repoUsuarios.persistirUsuario(usuario);
         repoTecnicos.registrarTecnico(tecnico);
     }

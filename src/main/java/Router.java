@@ -146,6 +146,11 @@ public class Router {
                 get(new DarDeBajaSuscripcion());
             });
 
+            path("/darmeDeBaja", () -> {
+                before(new AutorizacionMiddleware().setDebeSerLogueado());
+                get(new DarmeDeBajaController());
+            });
+
             path("/donarDistribuirViandas", () -> {
                 before(new AutorizacionMiddleware().setDebeSerLogueado().setDebeSerPF());
                 get(new DonarDistribucionViandaController());
@@ -340,14 +345,21 @@ public class Router {
                 get(new VisualizarFallasTecnicasController());
             });
 
+            // TODO
+
+            // FALTA ENDPOINT PARA EXPONER EL USO TARJETA
             path("/vieneUso", () -> { //TODO
                 get(new VieneUsoController());
             });
 
-            // TODO
+            // ESTE PATH FUNCIONA COMO ENDPOINT PARA RECIBIR LLAMADOS DESDE LOS
+            // SW DE LAS HELADERAS ANTE LA GENERACION DE UNA ALERTA
+            path("/recibirAlerta", () -> {
+                get(new RecibirAlertaController());
+            });
+
             // FALTA PATH PARA RECIBIR EL POST DEL BOTON DE GENERAR REPORTES
-            // FALTA POST PARA RECIBIR FALLAS EN LAS HELADERAS
-            // FALTA ENDPOINT PARA EXPONER EL USO TARJETA
+
 
         });
 
@@ -357,19 +369,4 @@ public class Router {
         });
     }
 
-
 }
-
-// http://localhost:8080/home
-
-// API REST
-//app.get("/api/mascotas", new GetMascotasHandler());
-//app.get("/api/mascotas/{id}", new GetMascotaIdHandler());
-//app.get("/api/mascotas/{id}/imagen", new GetMascotaImgHandler());
-//app.post("/api/mascotas", new PostMascotaHandler());
-//app.get("/api/mis-datos", new GetPerfilSesionHandler());
-
-//app.post("/api/login", new LoginHandler());
-
-// VISTA
-//app.get("/home", new IndexHandler());

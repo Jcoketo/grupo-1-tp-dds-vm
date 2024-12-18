@@ -5,6 +5,7 @@ import modelo.validador.Usuario;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
+import java.util.List;
 
 
 public class RepositorioUsuarios {
@@ -45,6 +46,17 @@ public class RepositorioUsuarios {
                 .getSingleResult();
         return usuario;
     }
+
+    public List<Usuario> traerAdmins() {
+        TypedQuery<Usuario> query = em.createQuery("SELECT u FROM Usuario u WHERE u.rol = :rol", Usuario.class);
+        query.setParameter("rol", Roles.ADMIN);
+        query.setMaxResults(5);
+        try {
+            return query.getResultList();
+        } catch (NoResultException e) {
+            return null;
+        }
+    }
     
     public Boolean existeMAIL(String mail) {
         TypedQuery<Usuario> query = em.createQuery("SELECT u FROM Usuario u WHERE u.mail = :mail", Usuario.class);
@@ -69,4 +81,13 @@ public class RepositorioUsuarios {
         em.getTransaction().commit();
     }
 
+    public Integer devolverIdPersona(String email) {
+        TypedQuery<Integer> query = em.createQuery("SELECT u.persona.id FROM Usuario u WHERE u.mail = :email", Integer.class);
+        query.setParameter("email", email);
+        try {
+            return query.getSingleResult();
+        } catch (NoResultException e) {
+            return null;
+        }
+    }
 }
