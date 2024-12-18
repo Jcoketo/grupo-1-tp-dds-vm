@@ -202,6 +202,8 @@ public class Heladera {
         this.colaboradoresSucriptos.add(suscripcion);
     }
 
+    public void retirarSuscriptor(Suscripcion suscripcion) { this.colaboradoresSucriptos.remove(suscripcion); }
+
     public Boolean permitirIngreso() {
         if (this.activa) {
             /*

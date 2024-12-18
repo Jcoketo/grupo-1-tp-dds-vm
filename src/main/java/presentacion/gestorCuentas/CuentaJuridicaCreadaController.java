@@ -37,7 +37,7 @@ public class CuentaJuridicaCreadaController implements Handler {
         Integer rubro = Integer.valueOf(context.formParam("rubro"));
         String cuit = context.formParam("cuit");
         String telefono = context.formParam("telefono-representante");
-        String email = "ad@gmail.com";
+        String email = context.formParam("email");
         String username = context.formParam("username");
         String password = context.formParam("password");
         if(password == null){ password = ""; }
@@ -68,8 +68,8 @@ public class CuentaJuridicaCreadaController implements Handler {
             context.redirect("/crearCuentaJuridica");
             return;
         }
-        if ( username.length() < 6 || username.length() > 12 ) {
-            context.sessionAttribute("errorJuridico", "El usuario debe tener entre 6 y 12 caracteres");
+        if ( username.length() < 2 || username.length() > 10 ) {
+            context.sessionAttribute("errorJuridico", "El usuario debe tener entre 2 y 10 caracteres");
             context.redirect("/crearCuentaJuridica");
             return;
         }

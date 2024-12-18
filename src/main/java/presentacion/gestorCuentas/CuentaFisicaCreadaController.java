@@ -82,8 +82,8 @@ public class CuentaFisicaCreadaController implements Handler {
             default -> throw new ExcepcionValidacion("Unexpected value: " + tipoDoc);
         }
 
-        if ( username.length() < 6 || username.length() > 12 ) {
-            context.sessionAttribute("errorRegistroFisica", "El usuario debe tener entre 6 y 12 caracteres");
+        if ( username.length() < 2 || username.length() > 10 ) {
+            context.sessionAttribute("errorRegistroFisica", "El usuario debe tener entre 2 y 10 caracteres");
             context.redirect("/crearCuentaFisica");
             return;
         }

@@ -18,11 +18,11 @@ Suscripcion {
     @Id
     @GeneratedValue
     @Getter
-    private Long id;
+    private int id;
 
     @ManyToOne
     @JoinColumn(name="heladera_id", referencedColumnName = "id")
-    @Getter private Heladera heladera;
+    @Getter @Setter private Heladera heladera;
 
     @ManyToOne
     @JoinColumn(name="colaborador_id",referencedColumnName = "id")

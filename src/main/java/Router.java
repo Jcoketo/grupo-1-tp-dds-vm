@@ -141,6 +141,11 @@ public class Router {
                 get(new DarDeBajaMiHeladeraController());
             });
 
+            path("/darDeBajaSuscripcion", () -> {
+                before(new AutorizacionMiddleware().setDebeSerLogueado());
+                get(new DarDeBajaSuscripcion());
+            });
+
             path("/donarDistribuirViandas", () -> {
                 before(new AutorizacionMiddleware().setDebeSerLogueado().setDebeSerPF());
                 get(new DonarDistribucionViandaController());

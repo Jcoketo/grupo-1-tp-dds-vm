@@ -23,10 +23,13 @@ public class AuthServiceSuscripcion {
         Heladera heladera = repositorioHeladeras.buscarHeladera(idHeladera);
         Colaborador colaborador = repositorioColaboradores.buscarColaboradorXIdPersona(idPersona);
 
-        if (!colaborador.getSuscripciones().stream().filter(suscripcion ->
-                        suscripcion.getHeladera().getId() == idHeladera && suscripcion.getTipoSuscripcion() == tipoSuscripcion)
-                .toList().isEmpty()) {
-            throw new ExcepcionValidacion("Ya se encuentra suscripto a este tipo de alerta");
+
+        if ( colaborador.getSuscripciones() != null ){
+            if (!colaborador.getSuscripciones().stream().filter(suscripcion ->
+                            suscripcion.getHeladera().getId() == idHeladera && suscripcion.getTipoSuscripcion() == tipoSuscripcion)
+                    .toList().isEmpty()) {
+                throw new ExcepcionValidacion("Ya se encuentra suscripto a este tipo de alerta");
+            }
         }
 
         if (heladera == null || colaborador == null) {
