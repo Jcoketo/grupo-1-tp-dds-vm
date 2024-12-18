@@ -22,7 +22,7 @@ public class CSVCargadoController implements Handler {
         List<UploadedFile> uploadedFiles = context.uploadedFiles("file");
 
         if (uploadedFiles.isEmpty() || uploadedFiles == null) {
-            context.sessionAttribute("errorCargaMasiva", "No se ha cargado ningun archivo");
+            context.sessionAttribute("cargaMasiva", "No se ha cargado ningun archivo");
             context.redirect("/cargarCSV");
             return;
         }
@@ -30,17 +30,16 @@ public class CSVCargadoController implements Handler {
         UploadedFile file = uploadedFiles.get(0);
         String fileName = file.filename();
         System.out.println("Received file: " + fileName);
-        File archivo = new File("main/resources/archivos/CSVs/" + file.filename());
+        File archivo = new File("src/main/resources/archivos/CSVs/" + fileName);
         try {
             FileUtils.copyInputStreamToFile(file.content(), archivo);
-            List<RegistroLeido> registrosLeidos = CargarCSV.cargarCSV(fileName);
-            ProcesarCSV.procesarCSV(registrosLeidos);
-            context.redirect("/cargarCSV");
-            //Hasta este punto esta cargado el archivp, quedaria cargarlo a la base de datos
-
         } catch (Exception e) {
-            context.sessionAttribute("errorCargaMasiva", "Hubo un error al cargar y/o procesar el archivo. Por favor, intente nuevamente.");
+            context.sessionAttribute("cargaMasiva", "Hubo un error al cargar y/o procesar el archivo. Por favor, intente nuevamente.");
             context.redirect("/cargarCSV");
         }
+
+        context.sessionAttribute("fileName", fileName);
+        context.redirect("/leerCSV");
     }
+
 }

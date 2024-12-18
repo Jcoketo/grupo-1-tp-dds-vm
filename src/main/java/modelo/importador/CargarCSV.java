@@ -1,5 +1,6 @@
 package modelo.importador;
 
+import modelo.importador.RegistroLeido;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
@@ -11,13 +12,21 @@ import java.util.List;
 
 public class CargarCSV {
     public static List<RegistroLeido> cargarCSV(String filename) throws Exception {
-
         List<RegistroLeido> registrosLeidos = new ArrayList<>();
+        Reader reader = null;
 
-        try (Reader reader = new FileReader("src/main/resources/archivos/CSVs/"+ filename )) {
-            CSVParser csvParser = CSVFormat.DEFAULT
-                    .withDelimiter(';') // el delimitador entre columna y columna es el ;
-                    .parse(reader);
+        while (reader == null) {
+            try {
+                reader = new FileReader("src/main/resources/archivos/CSVs/" + filename);
+            } catch (Exception e) {
+                System.out.println("File not found, waiting for 5 seconds...");
+                Thread.sleep(5000);
+            }
+        }
+
+        try (CSVParser csvParser = CSVFormat.DEFAULT
+                .withDelimiter(';') // el delimitador entre columna y columna es el ;
+                .parse(reader)) {
             for (CSVRecord record : csvParser) {
                 String tipoDoc = record.get(0);
                 String nroDocumento = record.get(1);
@@ -30,12 +39,9 @@ public class CargarCSV {
 
                 RegistroLeido registro = new RegistroLeido(tipoDoc, nroDocumento, nombre, apellido, mail, fecha, formaColaboracion, cantidad, record.getRecordNumber());
                 registrosLeidos.add(registro);
-
             }
-//            RepositorioArchivos repositorio = RepositorioArchivos.getInstancia();
-//            repositorio.agregarCSVNoProcesado(registrosLeidos);
-
         }
+
         return registrosLeidos;
     }
 }

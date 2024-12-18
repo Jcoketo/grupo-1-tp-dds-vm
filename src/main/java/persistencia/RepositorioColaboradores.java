@@ -205,5 +205,6 @@ public class RepositorioColaboradores {
     public Persona obtenerPersona(Integer idPersona) {
         return em.find(Persona.class, idPersona);
     }
+
 }
 

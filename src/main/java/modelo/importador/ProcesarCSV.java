@@ -42,34 +42,34 @@ public class ProcesarCSV {
 
             if (tipoDoc.equals("") || nroDocumento.equals("") || nombre.equals("") || apellido.equals("") || mail.equals("") || fecha.equals("") || formaColaboracion.equals("") || cantidad.equals("")) {
                 String mensajeError = "Error en Sintaxis.         Linea: " + record;
-                EscribirLogError.escribirMensajeError(mensajeError, formattedDateTime);
+                EscribirLogError.escribirMensajeError(mensajeError, formattedDateTime + " Log errores CSV");
                 continue; // busca el siguiente registro
             }
 
             if (!esNumerico(nroDocumento) || !esNumerico(cantidad)) {
                 String mensajeError = "Error en Sintaxis.         Linea: " + record;
-                EscribirLogError.escribirMensajeError(mensajeError, formattedDateTime);
+                EscribirLogError.escribirMensajeError(mensajeError, formattedDateTime + " Log errores CSV");
                 continue; // busca el siguiente registro
             }
 
             boolean errorEnLongitud = ValidarLongitudes.validarLongitudes(tipoDoc, nroDocumento, nombre, apellido, mail, fecha, formaColaboracion, cantidad);
             if (errorEnLongitud) {
                 String mensajeError = "Error en Sintaxis.         Linea: " + record;
-                EscribirLogError.escribirMensajeError(mensajeError, formattedDateTime);
+                EscribirLogError.escribirMensajeError(mensajeError, formattedDateTime + " Log errores CSV");
                 continue; // busca el siguiente registro
             }
 
             boolean errorEnTipoDonacion = VerificarTipoDonacion.verificarTipoDonacion(formaColaboracion);
             if (errorEnTipoDonacion) {
                 String mensajeError = "Tipo de Donacion Invalida. Linea: " + record;
-                EscribirLogError.escribirMensajeError(mensajeError, formattedDateTime);
+                EscribirLogError.escribirMensajeError(mensajeError, formattedDateTime + " Log errores CSV");
                 continue; // busca el siguiente registro
             }
 
             if ( !fecha.equals("") ){
                 if( !fecha.matches("\\d{4}/\\d{2}/\\d{2}") ){ // FORMATO YYYY/MM/DD
                     String mensajeError = "Fecha de Donacion Invalida. Linea: " + record;
-                    EscribirLogError.escribirMensajeError(mensajeError, formattedDateTime);
+                    EscribirLogError.escribirMensajeError(mensajeError, formattedDateTime + " Log errores CSV");
                     continue; // busca el siguiente registro
                 }
             }
@@ -77,7 +77,7 @@ public class ProcesarCSV {
             TipoDocumento tipoDocumento = ValidarTipoDoc.validarTipoDocumento(tipoDoc);
             if (tipoDocumento == null) {
                 String mensajeError = "Tipo de Documento Invalido. Linea: " + record;
-                EscribirLogError.escribirMensajeError(mensajeError, formattedDateTime);
+                EscribirLogError.escribirMensajeError(mensajeError, formattedDateTime + " Log errores CSV");
                 continue; // busca el siguiente registro
             }
 
@@ -118,11 +118,9 @@ public class ProcesarCSV {
                     break;
                 default:
                     String mensajeError = "El campo 'formaColaboracion' no es valido. Linea: " + record;
-                    EscribirLogError.escribirMensajeError(mensajeError, formattedDateTime);
+                    EscribirLogError.escribirMensajeError(mensajeError, formattedDateTime + " Log errores CSV");
                     continue; // busca el siguiente registro
             }
-
-
 
         }
     }
