@@ -17,13 +17,13 @@
             <property name="hibernate.connection.username" value="root" />
             <property name="hibernate.connection.password" value="M6TJDAajFaV9gubgmNqZgyb11JSrFv7I" />
 
-            <property name="hibernate.show_sql" value="false" />
+            <property name="hibernate.show_sql" value="true" />
             <!-- Enable the logging of all the generated SQL statements to the console -->
 
-            <property name="hibernate.format_sql" value="false" />
+            <property name="hibernate.format_sql" value="true" />
             <!-- Format the generated SQL statements to make it more readable -->
 
-            <property name="user_sql_comments" value="false" />
+            <property name="user_sql_comments" value="true" />
             
             <property name="hibernate.hbm2ddl.auto" value="update"/>
             <!--
