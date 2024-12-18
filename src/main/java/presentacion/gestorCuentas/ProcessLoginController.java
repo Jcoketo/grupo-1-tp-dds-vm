@@ -27,7 +27,6 @@ public class ProcessLoginController implements Handler {
     private RepositorioUsuarios repoUsuarios = RepositorioUsuarios.getInstancia();
     private RepositoriosTecnicos repoTecnicos = RepositoriosTecnicos.getInstancia();
 
-    private static final Logger logger = LoggerFactory.getLogger(ProcessLoginController.class);
 
     public ProcessLoginController() {
         super();
@@ -82,8 +81,6 @@ public class ProcessLoginController implements Handler {
         Usuario usuario = repoUsuarios.traerUsuario(email);
         context.sessionAttribute("rolUsuario", usuario.getRol());
         context.sessionAttribute("nombreUsuario", usuario.getUsername());
-
-        logger.info("LOG: Inicio de Sesion: " + usuario.getMail());
 
         context.sessionAttribute("validado", false);
         if ( usuario.getUsername() == null ||  usuario.getUsername().equals("") ) {

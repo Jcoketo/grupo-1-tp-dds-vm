@@ -1,9 +1,12 @@
 package presentacion.heladera;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+
 import io.javalin.http.Context;
 import io.javalin.http.Handler;
 import modelo.consumosAPIs.api_direccion.PuntoEstrategicoXdireccion;
 import modelo.consumosAPIs.recomendadorDePuntos.RecomendadorDePuntos;
+import modelo.consumosAPIs.recomendadorDePuntos.apiMock.dtos.PuntoDeColocacion;
 import modelo.elementos.PuntoEstrategico;
 import modelo.excepciones.ExcepcionValidacion;
 import modelo.personas.PersonaJuridica;
@@ -18,7 +21,6 @@ import java.util.Map;
 
 public class AgregarHeladeraController implements Handler {
 
-    private RepositorioColaboradores repoColab = RepositorioColaboradores.getInstancia();
 
     public AgregarHeladeraController() {
         super();
@@ -30,7 +32,19 @@ public class AgregarHeladeraController implements Handler {
 
         PuntoEstrategico punto = new PuntoEstrategico(0.0, 0.0);
         RecomendadorDePuntos recomendador = RecomendadorDePuntos.getInstancia();
-        List<PuntoEstrategico> puntosRecomendados = recomendador.obtenerPuntosRecomendados(punto.getLatitud(), punto.getLongitud(), 1000.0);
+
+        List<PuntoEstrategico> puntosRecomendados = new ArrayList<>();
+
+        try {
+            puntosRecomendados = recomendador.obtenerPuntosRecomendados(punto.getLatitud(), punto.getLongitud(), 1000.0);
+
+        } catch (Exception e) {
+            context.sessionAttribute("errorDonacion", e.getMessage());
+            context.redirect("/donarDinero");
+        }
+
+
+
         model.put("puntosRecomendados", puntosRecomendados);
         context.render("templates/agregarHeladera.mustache", model);
 
