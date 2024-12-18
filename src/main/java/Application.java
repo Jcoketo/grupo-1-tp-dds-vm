@@ -28,7 +28,7 @@ public class Application {
             });
 
             javalinConfig.staticFiles.add("/app/static", Location.EXTERNAL);
-        }).start(8080);
+        }).start(8085);
 
         // Crear el directorio de imágenes si no existe
         initializeUploadDirectory();

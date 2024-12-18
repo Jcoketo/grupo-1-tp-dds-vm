@@ -7,11 +7,15 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import modelo.consumosAPIs.recomendadorDePuntos.apiMock.dtos.PuntoDireccion;
 import org.apache.cxf.jaxrs.client.WebClient;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.ws.rs.core.Response;
 
 public class ApiMockCall {
     private static ApiMockCall instancia = null;
+    private static final Logger logger = LoggerFactory.getLogger(ApiMockCall.class);
+
 
     public static ApiMockCall getInstancia(){
         if(instancia == null){
@@ -38,16 +42,16 @@ public class ApiMockCall {
                 PuntoDeColocacion[] puntosDeColocacion = objectMapper.readValue(responseBody, PuntoDeColocacion[].class);
                 return puntosDeColocacion;
             } else {
-                System.out.println("Error response = " + responseBody);
+                logger.info("Error response = " + responseBody);
                 throw new Exception("Error en la llamada a /api/puntosEstrategicos con estado: " + status);
             }
         } catch (JsonProcessingException e) {
             // Captura errores de deserialización JSON
-            System.err.println("Error al deserializar la respuesta JSON: " + e.getMessage());
+            logger.info("Error al deserializar la respuesta JSON: " + e.getMessage());
             throw new Exception("Error de deserialización JSON", e);
         } catch (Exception e) {
             // Captura cualquier otro error
-            System.err.println("Error general en la llamada a la API: " + e.getMessage());
+            logger.info("Error general en la llamada a la API: " + e.getMessage());
             throw e; // Relanza la excepción para propagarla
         }
 

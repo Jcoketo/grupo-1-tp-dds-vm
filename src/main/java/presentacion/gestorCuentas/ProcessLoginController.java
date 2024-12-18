@@ -13,6 +13,8 @@ import io.javalin.http.Handler;
 import modelo.personas.TipoPersona;
 import org.owasp.esapi.ESAPI;
 import org.owasp.esapi.errors.ValidationException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import persistencia.RepositorioColaboradores;
 import persistencia.RepositorioUsuarios;
 import modelo.authService.AuthServiceUsuario;
@@ -24,6 +26,8 @@ public class ProcessLoginController implements Handler {
     private RepositorioColaboradores repoColab = RepositorioColaboradores.getInstancia();
     private RepositorioUsuarios repoUsuarios = RepositorioUsuarios.getInstancia();
     private RepositoriosTecnicos repoTecnicos = RepositoriosTecnicos.getInstancia();
+
+    private static final Logger logger = LoggerFactory.getLogger(ProcessLoginController.class);
 
     public ProcessLoginController() {
         super();
@@ -79,7 +83,7 @@ public class ProcessLoginController implements Handler {
         context.sessionAttribute("rolUsuario", usuario.getRol());
         context.sessionAttribute("nombreUsuario", usuario.getUsername());
 
-        System.out.println("LOG: Inicio de Sesion: " + usuario.getMail());
+        logger.info("LOG: Inicio de Sesion: " + usuario.getMail());
 
         context.sessionAttribute("validado", false);
         if ( usuario.getUsername() == null ||  usuario.getUsername().equals("") ) {
