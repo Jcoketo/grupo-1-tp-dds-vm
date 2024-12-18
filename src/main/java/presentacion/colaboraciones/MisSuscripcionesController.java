@@ -11,6 +11,7 @@ import persistencia.RepositorioColaboradores;
 import persistencia.RepositorioSuscripciones;
 import utils.GeneradorModel;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
@@ -47,14 +48,17 @@ public class MisSuscripcionesController implements Handler {
     }
 
     public List<DatosSuscripcion> getDatosSuscripciones(List<Suscripcion> suscripciones) {
-        return suscripciones.stream().map(suscripcion -> {
-            String nombreHeladera = suscripcion.getHeladera() != null ? suscripcion.getHeladera().getNombre() : "";
-            return new DatosSuscripcion(suscripcion.getId(),
-                    nombreHeladera,
-                    suscripcion.getTipoSuscripcion().toString(),
-                    suscripcion.getMedioDeContacto().getTipo().toString(),
-                    suscripcion.getBajaLogica());
-        }).toList();
+        return suscripciones.stream()
+                .map(suscripcion -> {
+                    String nombreHeladera = suscripcion.getHeladera() != null ? suscripcion.getHeladera().getNombre() : "";
+                    return new DatosSuscripcion(suscripcion.getId(),
+                            nombreHeladera,
+                            suscripcion.getTipoSuscripcion().toString(),
+                            suscripcion.getMedioDeContacto().getTipo().toString(),
+                            suscripcion.getBajaLogica());
+                })
+                .sorted(Comparator.comparing(DatosSuscripcion::getBajaLogica))
+                .toList();
     }
 }
 

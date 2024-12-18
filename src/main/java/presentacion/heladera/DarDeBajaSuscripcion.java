@@ -2,10 +2,12 @@ package presentacion.heladera;
 
 import io.javalin.http.Context;
 import io.javalin.http.Handler;
+import modelo.elementos.Heladera;
 import modelo.personas.Colaborador;
 import modelo.suscripcion.Suscripcion;
 import org.jetbrains.annotations.NotNull;
 import persistencia.RepositorioColaboradores;
+import persistencia.RepositorioHeladeras;
 import persistencia.RepositorioSuscripciones;
 import utils.GeneradorModel;
 
@@ -14,6 +16,7 @@ import java.util.Map;
 public class DarDeBajaSuscripcion implements Handler {
     private static RepositorioColaboradores repoPersonas = RepositorioColaboradores.getInstancia();
     private static RepositorioSuscripciones repoSuscripciones = RepositorioSuscripciones.getInstancia();
+    private static RepositorioHeladeras repoHeladeras = RepositorioHeladeras.getInstancia();
 
     @Override
     public void handle(@NotNull Context context) throws Exception {
@@ -44,6 +47,7 @@ public class DarDeBajaSuscripcion implements Handler {
         }
 
         Suscripcion suscripcion = repoSuscripciones.buscarSuscripcionXId(idSuscripcion);
+        Heladera heladera = suscripcion.getHeladera();
 
         if ( suscripcion == null || colaborador.getSuscripciones().stream().noneMatch(s -> s.getId() == idSuscripcion) ) {
             context.redirect("/misSuscripciones");
@@ -53,6 +57,9 @@ public class DarDeBajaSuscripcion implements Handler {
         suscripcion.setBajaLogica(Boolean.TRUE);
         suscripcion.setHeladera(null);
         repoSuscripciones.actualizarSuscripcion(suscripcion);
+
+        heladera.retirarSuscriptor(suscripcion);
+        repoHeladeras.actualizarHeladera(heladera);
 
         context.sessionAttribute("notificacionBajaSuscripcion", "Se ha dado de baja la suscripción correctamente.");
         context.redirect("/misSuscripciones");
