@@ -7,14 +7,11 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import modelo.consumosAPIs.recomendadorDePuntos.apiMock.dtos.PuntoDireccion;
 import org.apache.cxf.jaxrs.client.WebClient;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import javax.ws.rs.core.Response;
 
 public class ApiMockCall {
     private static ApiMockCall instancia = null;
-    private static final Logger logger = LoggerFactory.getLogger(ApiMockCall.class);
 
 
     public static ApiMockCall getInstancia(){
@@ -42,7 +39,6 @@ public class ApiMockCall {
                 PuntoDeColocacion[] puntosDeColocacion = objectMapper.readValue(responseBody, PuntoDeColocacion[].class);
                 return puntosDeColocacion;
             } else {
-                logger.info("Error response = " + responseBody);
                 throw new Exception("Error en la llamada a /api/puntosEstrategicos con estado: " + status);
             }
         /*} catch (JsonProcessingException e) {
