@@ -156,9 +156,9 @@
 <main>
     <div class="container">
         <h1>Cargar Archivo CSV</h1>
-        {{#errorCargaMasiva}}
-            <div class="error-message">{{errorCargaMasiva}}</div>
-        {{/errorCargaMasiva}}
+        {{#cargaMasiva}}
+            <div> <b> <i> {{cargaMasiva}} </i> </b> </div>
+        {{/cargaMasiva}}
         <form id="uploadForm" action="/cargarCSV" method="post" enctype="multipart/form-data">
             <input type="file" class="form-control-file" id="fileInput" name="file" style="display: none;">
             <div id="dropZone" class="drop-zone">

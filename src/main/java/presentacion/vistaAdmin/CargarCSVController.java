@@ -13,9 +13,9 @@ public class CargarCSVController implements Handler {
     public void handle(@NotNull Context context) throws Exception {
         Map<String, Object> model = GeneradorModel.getModel(context);
 
-        if ( context.sessionAttribute("errorCargaMasiva") != null) {
-            model.put("errorCargaMasiva", context.sessionAttribute("errorCargaMasiva"));
-            context.consumeSessionAttribute("errorCargaMasiva");
+        if ( context.sessionAttribute("cargaMasiva") != null) {
+            model.put("cargaMasiva", context.sessionAttribute("cargaMasiva"));
+            context.consumeSessionAttribute("cargaMasiva");
         }
 
         context.render("templates/cargarCSV.mustache", model);

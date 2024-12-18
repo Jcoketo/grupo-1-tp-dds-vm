@@ -13,10 +13,7 @@ import presentacion.incidentes.ReportarFallaTecnicaFinalizadaController;
 import presentacion.incidentes.VisualizarAlertasController;
 import presentacion.incidentes.VisualizarFallasTecnicasController;
 import presentacion.ofertas.*;
-import presentacion.vistaAdmin.CargarCSVController;
-import presentacion.vistaAdmin.DarAltaAdminController;
-import presentacion.vistaAdmin.CSVCargadoController;
-import presentacion.vistaAdmin.InicioAdminController;
+import presentacion.vistaAdmin.*;
 import presentacion.reportes.MisReportesController;
 import presentacion.vistaTecnico.*;
 
@@ -343,6 +340,11 @@ public class Router {
             path("/visualizarFallasTecnicas", () -> {
                 before(new AutorizacionMiddleware().setDebeSerLogueado());
                 get(new VisualizarFallasTecnicasController());
+            });
+
+            path("/leerCSV", () -> {
+                //before(new AutorizacionMiddleware().setDebeSerLogueado());
+                get(new LeerCSV());
             });
 
             // TODO

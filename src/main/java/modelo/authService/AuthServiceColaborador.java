@@ -81,6 +81,7 @@ public class AuthServiceColaborador {
 
             usuario.setPersona(persona);
 
+            repoColab.actualizarPersona(persona);
             repoUsuarios.persistirUsuario(usuario);
             repoColab.actualizarColaborador(colaborador);
 
