@@ -63,7 +63,7 @@ public class RepositorioPersonasVulnerables {
     }
 
     public List<PersonaVulnerable> obtenerPersonasVulnerablesRegistradasPor(Integer idPersona){
-        TypedQuery<PersonaVulnerable> query = em.createQuery("SELECT p FROM PersonaVulnerable p WHERE p.dioAlta = :idPersona", PersonaVulnerable.class);
+        TypedQuery<PersonaVulnerable> query = em.createQuery("SELECT p FROM PersonaVulnerable p WHERE p.dioAlta.id = :idPersona", PersonaVulnerable.class);
         query.setParameter("idPersona", idPersona);
         try {
             return query.getResultList();
@@ -71,4 +71,16 @@ public class RepositorioPersonasVulnerables {
             return null;
         }
     }
+
+    /*
+    public Colaborador buscarColaboradorXIdPersona(Integer idPersona) {
+        TypedQuery<Colaborador> query = em.createQuery("SELECT c FROM Colaborador c WHERE c.persona.id = :idPersona", Colaborador.class);
+        query.setParameter("idPersona", idPersona);
+        try {
+            return query.getSingleResult();
+        } catch (NoResultException e) {
+            return null;
+        }
+    }
+     */
 }

@@ -27,34 +27,29 @@
             border: 1px solid #ccc;
             border-radius: 4px;
             padding: 10px;
-            text-align: center;
-            border-radius: 20px;
+            text-align: left;
             margin-bottom: 20px;
             display: flex;
             flex-direction: column;
             justify-content: center;
-            align-items: center;
-            height: auto;
-            max-width: 200px;
-            min-height: 250px;
-        }
-
-        .catalog-item img {
-            width: 90%;
-            height: auto;
-            margin-bottom: 10px;
-            border-radius: 8px;
-        }
-
-        .sub-header {
-            margin: 0;
-            font-weight: 600;
+            align-items: flex-start;
+            width: 100%;
         }
 
         .catalog-row {
             display: flex;
             flex-wrap: wrap;
-            justify-content: center;
+        }
+
+        .catalog-col {
+            flex: 0 0 50%;
+            max-width: 50%;
+            padding: 10px;
+        }
+
+        .sub-header {
+            margin: 0;
+            font-weight: 600;
         }
 
         .form-canjear {
@@ -112,6 +107,16 @@
             background-color: #00215c;
             color: white;
         }
+
+        .btn-darBaja {
+            background-color: #1e5552;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            font-size: 12px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -126,28 +131,37 @@
             </div>
         </div>
 
-        <div class="row d-flex justify-content-center">
-            <div class="container mt-5">
-                <div class="row justify-content-center">
-                    <div class="col-md-9">
-                        <div class="catalog-row">
-                            {{#suscripciones}}
-                                <div class="col-md-3">
-                                    <div class="catalog-item">
-                                        <p><b>Nombre: </b>{{nombreHeladera}}</p>
-                                        <p><b>Tipo de suscripcion: </b>{{tipoSuscripcion}}</p>
-                                        <p><b>Medio de contacto: </b>{{medioDeContacto}}</p>
-                                        ${bajaLogica? '<small><i>Suscripcion dada de baja</i></small>' : ' Suscripcion Activa'}
+        <div class="container mt-5">
+            <div class="row justify-content-center">
+                <div class="catalog-row">
+                    {{#suscripciones}}
+                        <div class="catalog-col">
+                            <div class="catalog-item">
+                                <input type="hidden" name="idSuscripcion" value="{{idSuscripcion}}">
+                                <p><b>Nombre: </b>{{nombreHeladera}}</p>
+                                <p><b>Tipo de suscripcion: </b>{{tipoSuscripcion}}</p>
+                                <p><b>Medio de contacto: </b>{{medioDeContacto}}</p>
+                                {{#bajaLogica}}
+                                    <small><i>Suscripcion dada de baja</i></small>
+                                {{/bajaLogica}}
+                                {{^bajaLogica}}
+                                    <div class="">
+                                        <small><i>Suscripcion Activa</i></small>
+                                        <button class="btn-darBaja ml-3" onclick="window.location.href='/darDeBajaSuscripcion?id={{idSuscripcion}}'">Dar de baja</button>
                                     </div>
-                                </div>
-                            {{/suscripciones}}
+                                {{/bajaLogica}}
+                            </div>
                         </div>
-                    </div>
+                    {{/suscripciones}}
                 </div>
             </div>
         </div>
-
     </div>
+
+    {{#notificacionBajaSuscripcion}}
+        <div class="text-success" style="margin-top: 10px">{{notificacionBajaSuscripcion}}</div>
+    {{/notificacionBajaSuscripcion}}
+
 </main>
 
 {{> footer}}

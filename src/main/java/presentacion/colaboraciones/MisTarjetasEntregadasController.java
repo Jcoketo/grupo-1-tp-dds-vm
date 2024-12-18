@@ -5,6 +5,7 @@ import io.javalin.http.Handler;
 import lombok.Getter;
 import lombok.Setter;
 import modelo.colaboracion.Colaboracion;
+import modelo.personas.PersonaHumana;
 import modelo.personas.PersonaVulnerable;
 import modelo.personas.TipoDocumento;
 import org.jetbrains.annotations.NotNull;
@@ -19,7 +20,8 @@ import java.util.List;
 import java.util.Map;
 
 public class MisTarjetasEntregadasController implements Handler {
-    private RepositorioPersonasVulnerables repoPersonasVulnerables = RepositorioPersonasVulnerables.getInstancia();
+    private static RepositorioPersonasVulnerables repoPersonasVulnerables = RepositorioPersonasVulnerables.getInstancia();
+    private static RepositorioColaboradores repoColaboradores = RepositorioColaboradores.getInstancia();
 
     public MisTarjetasEntregadasController() {
         super();

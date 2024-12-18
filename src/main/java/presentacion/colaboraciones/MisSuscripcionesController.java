@@ -26,10 +26,15 @@ public class MisSuscripcionesController implements Handler {
     public void handle(@NotNull Context context) throws Exception {
         Map<String, Object> model = GeneradorModel.getModel(context);
 
+        if ( context.sessionAttribute("notificacionBajaSuscripcion") != null ) {
+            model.put("notificacionBajaSuscripcion", context.sessionAttribute("notificacionBajaSuscripcion"));
+            context.consumeSessionAttribute("notificacionBajaSuscripcion");
+        }
+
         Integer idPersona = context.sessionAttribute("idPersona");
         Colaborador colaborador = repositorioColaboradores.buscarColaboradorXIdPersona(idPersona);
 
-        List<Suscripcion> suscripciones = repositorioSuscripciones.obtenerSuscripciones(colaborador);
+        List<Suscripcion> suscripciones = repositorioSuscripciones.obtenerSuscripciones(colaborador.getId());
         if(suscripciones == null){
             suscripciones = List.of();
         }
@@ -42,27 +47,31 @@ public class MisSuscripcionesController implements Handler {
     }
 
     public List<DatosSuscripcion> getDatosSuscripciones(List<Suscripcion> suscripciones) {
-        return suscripciones.stream().map(suscripcion ->
-            new DatosSuscripcion(suscripcion.getHeladera().getNombre(),
+        return suscripciones.stream().map(suscripcion -> {
+            String nombreHeladera = suscripcion.getHeladera() != null ? suscripcion.getHeladera().getNombre() : "";
+            return new DatosSuscripcion(suscripcion.getId(),
+                    nombreHeladera,
                     suscripcion.getTipoSuscripcion().toString(),
                     suscripcion.getMedioDeContacto().getTipo().toString(),
-                    suscripcion.getBajaLogica())
-        ).toList();
+                    suscripcion.getBajaLogica());
+        }).toList();
     }
 }
 
 @Getter
 @Setter
 class DatosSuscripcion {
+    private int idSuscripcion;
     private String nombreHeladera;
     private String tipoSuscripcion;
     private String medioDeContacto;
     private Boolean bajaLogica;
 
-    public DatosSuscripcion(String nombreHeladera, String tipoSuscripcion, String medioDeContacto, Boolean bajaLogica) {
+    public DatosSuscripcion(int idSuscripcion, String nombreHeladera, String tipoSuscripcion, String medioDeContacto, Boolean bajaLogica) {
         this.nombreHeladera = nombreHeladera;
         this.tipoSuscripcion = tipoSuscripcion.replace("_", " ");
         this.medioDeContacto = medioDeContacto;
         this.bajaLogica = bajaLogica;
+        this.idSuscripcion = idSuscripcion;
     }
 }

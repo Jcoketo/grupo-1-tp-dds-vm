@@ -183,6 +183,10 @@
                 </div>
             </div>
 
+            {{#errorRegistroVulnerable}}
+                <div class="error-message">{{errorRegistroVulnerable}}</div>
+            {{/errorRegistroVulnerable}}
+
             <div class="buttons">
                 <div class="btn-group d-flex justify-content-center">
                     <button type="button" class="btn-cancelar" onclick="window.location.href='/elegirDonacionFisica'">Cancelar</button>
@@ -193,9 +197,6 @@
                 <!-- <button type="button" class="register-button" onclick="submitForm()">Registrar</button> -->
             </div>
         </form>
-        {{#errorRegistroVulnerable}}
-            <div class="error-message">{{errorRegistroVulnerable}}</div>
-        {{/errorRegistroVulnerable}}
     </div>
 </main>
 

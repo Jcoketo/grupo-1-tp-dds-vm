@@ -25,19 +25,32 @@ public class ApiMockCall {
 
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+
         Response response = clientUsers
                 .header("Content-Type", "application/json")
                 .get();
+
         int status = response.getStatus();
         String responseBody = response.readEntity(String.class);
-        if (status == 200) {
-            PuntoDeColocacion[] puntosDeColocacion = objectMapper.readValue(responseBody, PuntoDeColocacion[].class);
-            return puntosDeColocacion;
 
-        } else {
-            System.out.println("Error response = " + responseBody);
-            throw new Exception("Error en la llamada a /api/user");
+        try {
+            if (status == 200) {
+                PuntoDeColocacion[] puntosDeColocacion = objectMapper.readValue(responseBody, PuntoDeColocacion[].class);
+                return puntosDeColocacion;
+            } else {
+                System.out.println("Error response = " + responseBody);
+                throw new Exception("Error en la llamada a /api/puntosEstrategicos con estado: " + status);
+            }
+        } catch (JsonProcessingException e) {
+            // Captura errores de deserialización JSON
+            System.err.println("Error al deserializar la respuesta JSON: " + e.getMessage());
+            throw new Exception("Error de deserialización JSON", e);
+        } catch (Exception e) {
+            // Captura cualquier otro error
+            System.err.println("Error general en la llamada a la API: " + e.getMessage());
+            throw e; // Relanza la excepción para propagarla
         }
+
     }
 
     public PuntoDireccion[] obtenerPuntosXdireccion(String direccion) {
