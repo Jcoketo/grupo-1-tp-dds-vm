@@ -19,6 +19,11 @@ public class DonarDineroController implements Handler {
 
         Map<String, Object> model = GeneradorModel.getModel(context);
 
+        if ( context.sessionAttribute("errorDonacion") != null) {
+            model.put("errorDonacion", context.sessionAttribute("errorDonacion"));
+            context.consumeSessionAttribute("errorDonacion");
+        }
+
         context.render("templates/donarDinero.mustache", model);
 
     }

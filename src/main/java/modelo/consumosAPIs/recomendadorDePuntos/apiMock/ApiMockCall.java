@@ -37,7 +37,7 @@ public class ApiMockCall {
         int status = response.getStatus();
         String responseBody = response.readEntity(String.class);
 
-        try {
+        //try {
             if (status == 200) {
                 PuntoDeColocacion[] puntosDeColocacion = objectMapper.readValue(responseBody, PuntoDeColocacion[].class);
                 return puntosDeColocacion;
@@ -45,7 +45,7 @@ public class ApiMockCall {
                 logger.info("Error response = " + responseBody);
                 throw new Exception("Error en la llamada a /api/puntosEstrategicos con estado: " + status);
             }
-        } catch (JsonProcessingException e) {
+        /*} catch (JsonProcessingException e) {
             // Captura errores de deserialización JSON
             logger.info("Error al deserializar la respuesta JSON: " + e.getMessage());
             throw new Exception("Error de deserialización JSON", e);
@@ -53,7 +53,7 @@ public class ApiMockCall {
             // Captura cualquier otro error
             logger.info("Error general en la llamada a la API: " + e.getMessage());
             throw e; // Relanza la excepción para propagarla
-        }
+        }*/
 
     }
 

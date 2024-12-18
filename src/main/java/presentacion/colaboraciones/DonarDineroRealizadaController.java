@@ -35,25 +35,23 @@ public class DonarDineroRealizadaController implements Handler {
         String fechaExpir = mesExpir + "/" + anioExpir;
 
         if ( !esNumerico(monto) || !esNumerico(numTarj) || !esNumerico(codigoSeguridad) )   {
-            model.put("errorDonacion", "Los datos ingresados no son correctos");
-            //context.status(400);
+            context.sessionAttribute("errorDonacion", "Los datos ingresados no son correctos");
             context.redirect("/donarDinero");
             return;
         }
         if ( nombreTarj.isEmpty()) {
-            model.put("errorDonacion", "El nombre del titular debe estar completo");
-            //context.status(400);
+            context.sessionAttribute("errorDonacion", "El nombre del titular debe estar completo");
             context.redirect("/donarDinero");
             return;
         }
         if ( numTarj.length() != 16) {
-            model.put("errorDonacion", "El número de tarjeta es erroneo");
+            context.sessionAttribute("errorDonacion", "El número de tarjeta es erroneo");
             //context.status(400);
             context.redirect("/donarDinero");
             return;
         }
         if ( codigoSeguridad.length() != 3) {
-            model.put("errorDonacion", "El código de seguridad es erroneo");
+            context.sessionAttribute("errorDonacion", "El código de seguridad es erroneo");
             //context.status(400);
             context.redirect("/donarDinero");
             return;
@@ -71,8 +69,7 @@ public class DonarDineroRealizadaController implements Handler {
             Integer idPersona = context.sessionAttribute("idPersona");
             AuthServiceColaboracion.registrarColaboracionDinero(idPersona, monto, frecuencia);
         } catch (ExcepcionValidacion e) {
-            model.put("errorDonacion", "No se pudo realizar la donación");
-            //context.status(400);
+            context.sessionAttribute("errorDonacion", "No se pudo realizar la donación");
             context.redirect("/donarDinero");
             return;
         }
