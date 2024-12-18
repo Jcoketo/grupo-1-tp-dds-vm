@@ -345,6 +345,9 @@ public class Router {
                 get(new VisualizarFallasTecnicasController());
             });
 
+            // TODO
+
+            // FALTA ENDPOINT PARA EXPONER EL USO TARJETA
             path("/vieneUso", () -> { //TODO
                 get(new VieneUsoController());
             });
@@ -355,9 +358,8 @@ public class Router {
                 get(new RecibirAlertaController());
             });
 
-            // TODO
             // FALTA PATH PARA RECIBIR EL POST DEL BOTON DE GENERAR REPORTES
-            // FALTA ENDPOINT PARA EXPONER EL USO TARJETA
+
 
         });
 
@@ -367,19 +369,4 @@ public class Router {
         });
     }
 
-
 }
-
-// http://localhost:8080/home
-
-// API REST
-//app.get("/api/mascotas", new GetMascotasHandler());
-//app.get("/api/mascotas/{id}", new GetMascotaIdHandler());
-//app.get("/api/mascotas/{id}/imagen", new GetMascotaImgHandler());
-//app.post("/api/mascotas", new PostMascotaHandler());
-//app.get("/api/mis-datos", new GetPerfilSesionHandler());
-
-//app.post("/api/login", new LoginHandler());
-
-// VISTA
-//app.get("/home", new IndexHandler());
