@@ -137,6 +137,9 @@ public class Colaborador {
     }
 
     public void agregarSuscripcion(Suscripcion suscripcion) {
+        if ( this.getSuscripciones() == null ) {
+            this.suscripciones = new ArrayList<>();
+        }
         this.getSuscripciones().add(suscripcion);
     }
 }

@@ -23,15 +23,6 @@ public class AuthServiceSuscripcion {
         Heladera heladera = repositorioHeladeras.buscarHeladera(idHeladera);
         Colaborador colaborador = repositorioColaboradores.buscarColaboradorXIdPersona(idPersona);
 
-
-        if ( colaborador.getSuscripciones() != null ){
-            if (!colaborador.getSuscripciones().stream().filter(suscripcion ->
-                            suscripcion.getHeladera().getId() == idHeladera && suscripcion.getTipoSuscripcion() == tipoSuscripcion)
-                    .toList().isEmpty()) {
-                throw new ExcepcionValidacion("Ya se encuentra suscripto a este tipo de alerta");
-            }
-        }
-
         if (heladera == null || colaborador == null) {
             throw new ExcepcionValidacion("Hubo un problema en el servidor. Intente mas tarde");}
 
@@ -41,6 +32,16 @@ public class AuthServiceSuscripcion {
 
         if(limite < 0) {
             throw new ExcepcionValidacion("La cantidad limite de viandas debe ser mayor a 0.");
+        }
+
+        if ( colaborador.getSuscripciones() != null ){
+            if ( colaborador.getSuscripciones().stream().anyMatch(suscripcion ->
+                                        suscripcion.getHeladera() != null && // Si no tiene id -> fue dada de baja
+                                            suscripcion.getHeladera().getId() == heladera.getId() &&
+                                                    suscripcion.getTipoSuscripcion() == tipoSuscripcion &&
+                                                        !suscripcion.getBajaLogica() ) ){
+                throw new ExcepcionValidacion("Ya te encuentras suscripto a este tipo de alertas.");
+            }
         }
 
         MedioDeContacto medioDeContacto = colaborador.getPersona().devolerMedioDeContacto(tipoMedioDeContacto);
@@ -70,6 +71,7 @@ public class AuthServiceSuscripcion {
         }
 
         repositorioHeladeras.actualizarHeladera(heladera);
+        repositorioColaboradores.actualizarColaborador(colaborador);
 
 
         String mensajeAux = "Te has suscripto a la heladera " + heladera.getNombre() + "." + mensaje + " \n\nRecuerda que puedes modificar tus suscripciones en cualquier momento.";

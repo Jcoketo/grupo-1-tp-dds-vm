@@ -26,7 +26,7 @@ Suscripcion {
 
     @ManyToOne
     @JoinColumn(name="colaborador_id",referencedColumnName = "id")
-    private Colaborador colaborador;
+    @Getter @Setter private Colaborador colaborador;
 
     @Enumerated(EnumType.STRING)
     @Getter private TipoSuscripcion tipoSuscripcion;
