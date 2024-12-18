@@ -110,8 +110,4 @@ public class RegistroPersonasSituVulnerable extends Colaboracion{
         RepositorioPersonasVulnerables.getInstancia().agregarPersonaVulnerable(persona);
     }*/
 
-    public void entregarTarjeta(List<PersonaVulnerable> personas){
-        //TODO
-    }
-
 }

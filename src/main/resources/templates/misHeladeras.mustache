@@ -46,9 +46,10 @@
         <div class="map-container ">
             <div id="map"></div>
         </div>
-            {{#mensajeBaja}}
-                <div class="error-message">{{mensajeBaja}}</div>
-            {{/mensajeBaja}}
+        {{#mensajeBaja}}
+            <hr class="my-3" style="border-top: 2px solid #D3D3D3;">
+            <div class="text-danger" style="margin-top: 10px">{{mensajeBaja}}</div>
+        {{/mensajeBaja}}
 
 
         <div class="list-container ">
@@ -131,9 +132,8 @@
                                     <a href="/visualizarDetalleHeladera?heladeraId=${heladeraId}&nombre=${nombre}&direccion=${punto.direccion}&lat=${punto.latitud}&long=${punto.longitud}&fecha=${fecha}&estado=${estado}&disponibilidad=${disponibilidad}" class="text-primary" style="text-decoration: underline; margin-left: 10px;">Detalles</a>
                                 </small>
                             </div>
-                            ${tieneBaja ? '<small><i>Heladera dada de baja</i></small>' : '<button class="btn-donar mt-2" onclick="window.location.href=\'/darDeBajaHeladera?heladeraId=${heladeraId}\'"><i>Dar de baja</i></button>'}
+                            ${tieneBaja ? '<small><i>Heladera dada de baja</i></small>' : '<button class="btn-donar mt-2" onclick="window.location.href=\'/darDeBajaHeladera?heladeraId=' + heladeraId + '\'"><i>Dar de baja</i></button>'}
                         </div>
-                        ${tieneBaja ? '<small><i>Heladera dada de baja</i></small>' : ''}
                      </div>
 
                     `;

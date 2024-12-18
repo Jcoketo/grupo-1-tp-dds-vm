@@ -1,7 +1,7 @@
 package persistencia;
 
 import lombok.Getter;
-import modelo.elementos.SolicitudApertura;
+import modelo.colaboracion.SolicitudApertura;
 import modelo.excepciones.ExcepcionValidacion;
 
 import javax.persistence.EntityManager;

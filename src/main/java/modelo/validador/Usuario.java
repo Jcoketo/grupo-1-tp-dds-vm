@@ -32,6 +32,10 @@ public class Usuario {
     @Enumerated(EnumType.STRING)
     private Roles rol;
 
+    @Column
+    @Getter @Setter
+    private Boolean bajaLogica = Boolean.FALSE;
+
     public Usuario(String mail, String username, String password, Roles rol) {
         this.mail = mail;
         this.hashedPassword = password;

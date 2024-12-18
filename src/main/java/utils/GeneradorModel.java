@@ -1,6 +1,7 @@
 package utils;
 
 import io.javalin.http.Context;
+import modelo.personas.TipoPersona;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -16,6 +17,7 @@ public class GeneradorModel {
         model.put("rolUsuario", context.sessionAttribute("rolUsuario"));
         model.put("validado", context.sessionAttribute("validado"));
         model.put("esAdmin", context.sessionAttribute("esAdmin"));
+        model.put("esPersonaJuridica", context.sessionAttribute("tipoPersona") == TipoPersona.PJ);
 
         return model;
     }

@@ -1,6 +1,5 @@
 package modelo.colaboracion;
 
-import modelo.elementos.SolicitudApertura;
 import lombok.Setter;
 import modelo.elementos.Heladera;
 import modelo.personas.Colaborador;
@@ -8,7 +7,6 @@ import modelo.personas.TipoPersona;
 import persistencia.RepositorioSolicitudes;
 
 import javax.persistence.*;
-import java.time.Duration;
 import java.time.LocalDate;
 import java.util.Arrays;
 

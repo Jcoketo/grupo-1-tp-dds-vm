@@ -84,4 +84,24 @@ Suscripcion {
         }
 
     }
+
+    public void darDeBaja() {
+        this.bajaLogica = Boolean.TRUE;
+        this.setHeladera(null);
+    }
+
+    public void notificarBaja() {
+        String tipo;
+        switch (tipoSuscripcion) {
+            case POCO_ESPACIO -> tipo = "haya poco espacio";
+            case QUEDAN_POCAS -> tipo = "quedan pocas viandas";
+            case DESPERFECTO -> tipo = "haya un desperfecto";
+            default -> tipo = "desconocido";
+        }
+
+        String texto = "Se ha dado de baja la suscripcion de notificarte cuando " + tipo + " en la heladera " + heladera.getNombre() + ", ya que la heladera fue dada de baja." +
+                "\n\n Si cree que esto es un error, contactece con comunidadessolidarias@gmail.com";
+        String asunto = "Baja de suscripcion en " + heladera.getNombre();
+        Notificador.notificar(texto, asunto, medioDeContacto);
+    }
 }

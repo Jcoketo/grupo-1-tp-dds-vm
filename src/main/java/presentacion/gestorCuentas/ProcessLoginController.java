@@ -1,6 +1,5 @@
 package presentacion.gestorCuentas;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import modelo.excepciones.ExcepcionValidacion;
@@ -11,10 +10,6 @@ import accessManagment.Roles;
 import io.javalin.http.Context;
 import io.javalin.http.Handler;
 import modelo.personas.TipoPersona;
-import org.owasp.esapi.ESAPI;
-import org.owasp.esapi.errors.ValidationException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import persistencia.RepositorioColaboradores;
 import persistencia.RepositorioUsuarios;
 import modelo.authService.AuthServiceUsuario;

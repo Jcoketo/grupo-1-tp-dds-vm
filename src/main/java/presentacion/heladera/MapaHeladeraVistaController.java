@@ -19,11 +19,6 @@ public class MapaHeladeraVistaController implements Handler {
     public void handle(@NotNull Context context) throws Exception {
         Map<String, Object> model = GeneradorModel.getModel(context);
 
-
-        model.put("logueado", context.sessionAttribute("logueado"));
-        model.put("nombreUsuario", context.sessionAttribute("nombreUsuario"));
-        model.put("esPersonaJuridica", context.sessionAttribute("tipoPersona") == TipoPersona.PJ);
-
         context.render("templates/mapaHeladeras.mustache",model);
 
     }

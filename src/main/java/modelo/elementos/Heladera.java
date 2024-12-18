@@ -254,4 +254,13 @@ public class Heladera {
     public Vianda conocerVianda(int i) {
         return this.viandas.get(i);
     }
+
+    public void darmeDeBaja() {
+        this.setBajaLogica(Boolean.TRUE);
+        this.setActiva(Boolean.FALSE);
+        this.getColaboradoresSucriptos().forEach(s -> {
+            s.darDeBaja();
+            s.notificarBaja();
+        });
+    }
 }

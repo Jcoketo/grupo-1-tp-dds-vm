@@ -33,7 +33,7 @@ public class AuthServiceColaborador {
 
         repoColab.registrarColaboradorFisico(usuario, persona, colaborador);
 
-        String mensajeBienvenida = "Bienvenido a la plataforma " + nombre + ". Ojala que te diviertas";
+        String mensajeBienvenida = "Bienvenido a la plataforma " + nombre + ". Ojala que te diviertas!";
         Notificador.notificarXNuevoUsuario(mensajeBienvenida, medioContactoMail);
 
     }
@@ -55,7 +55,7 @@ public class AuthServiceColaborador {
 
         repoColab.registrarColaboradorJuridico(usuario, persona, colaborador);
 
-        String mensajeBienvenida = "Bienvenido a la plataforma " + razonSocial + ". Ojala que te diviertas";
+        String mensajeBienvenida = "Bienvenido a la plataforma " + razonSocial + ". Ojala que te diviertas!";
         Notificador.notificarXNuevoUsuario(mensajeBienvenida, medioContactoMail);
     }
 

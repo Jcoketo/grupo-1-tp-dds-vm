@@ -32,7 +32,8 @@ public class DonarViandaRealizadaController implements Handler {
 
         //TODO falto hacerlo con la segunda vianda
 
-        if (heladeraId.equals("") || comida.equals("") || fechaCadu.equals("") ) {
+        if (heladeraId.equals("") || heladeraId == null || comida.equals("")  ) {
+        //if (heladeraId.equals("") || heladeraId == null || comida.equals("") || fechaCadu.equals("") ) {
             context.sessionAttribute("errorVianda", "Debe completar todos los campos");
             context.redirect("/donarVianda");
             return;
@@ -43,7 +44,7 @@ public class DonarViandaRealizadaController implements Handler {
             context.redirect("/donarVianda");
             return;
         }
-
+            /*
         LocalDate fechaElaboracion;
         LocalDate fechaCaducidad;
 
@@ -54,9 +55,9 @@ public class DonarViandaRealizadaController implements Handler {
             context.sessionAttribute("errorVianda", "Error en fecha de elaboracion / caducidad. Completela correctamente");
             context.redirect("/donarVianda");
             return;
-        }
+        }*/
 
-        if ( fechaElaboracion.isAfter(LocalDate.now()) ) {
+        /*if ( fechaElaboracion.isAfter(LocalDate.now()) ) {
             context.sessionAttribute("errorVianda", "La fecha de elaboración no puede ser posterior a la fecha actual");
             context.redirect("/donarVianda");
             return;
@@ -78,7 +79,7 @@ public class DonarViandaRealizadaController implements Handler {
             context.sessionAttribute("errorVianda", "La fecha de caducidad no puede ser anterior a hoy");
             context.redirect("/donarVianda");
             return;
-        }
+        }*/
 
         try {
             Integer idPersona = context.sessionAttribute("idPersona");

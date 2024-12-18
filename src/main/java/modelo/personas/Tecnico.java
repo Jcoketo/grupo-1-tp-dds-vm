@@ -36,6 +36,10 @@ public class Tecnico {
     @JoinColumn(name = "punto_estrategico_id", referencedColumnName = "id")
     @Getter private PuntoEstrategico puntoEstrategico;
 
+    @Column
+    @Getter @Setter
+    private Boolean bajaLogica = Boolean.FALSE;
+
 
     public Tecnico(String nroCUIL, Areas areaCobertura, PersonaHumana persona) {
         this.nroCUIL = nroCUIL;

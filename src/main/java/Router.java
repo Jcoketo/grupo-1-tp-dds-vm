@@ -146,6 +146,11 @@ public class Router {
                 get(new DarDeBajaSuscripcion());
             });
 
+            path("/darmeDeBaja", () -> {
+                before(new AutorizacionMiddleware().setDebeSerLogueado());
+                get(new DarmeDeBajaController());
+            });
+
             path("/donarDistribuirViandas", () -> {
                 before(new AutorizacionMiddleware().setDebeSerLogueado().setDebeSerPF());
                 get(new DonarDistribucionViandaController());

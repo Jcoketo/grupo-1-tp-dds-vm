@@ -14,14 +14,14 @@ public class FallaTecnica extends Incidente{
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "colaborador_id", referencedColumnName = "id")
-    Colaborador colaborador;
+    private Colaborador colaborador;
 
     @Column
     @Getter
-    String descripcion;
+    private String descripcion;
 
     @Column
-    String URLfoto;
+    private String URLfoto;
 
     public FallaTecnica(Heladera heladera, Colaborador colaborador, String descripcion, String URLfoto) {
         super(heladera);
