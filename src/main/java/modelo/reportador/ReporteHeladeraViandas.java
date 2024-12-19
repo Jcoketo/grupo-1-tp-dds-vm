@@ -27,7 +27,7 @@ public class ReporteHeladeraViandas extends Reporte {
         this.colocadas = colocadas;
         this.retiradas = retiradas;
         try {
-            this.path = saveToCSV("/app/static/archivos/reportes/");
+            this.path = saveToCSV("/static/archivos/reportes/");
         } catch (IOException e){
             this.path = "";
             e.printStackTrace();
