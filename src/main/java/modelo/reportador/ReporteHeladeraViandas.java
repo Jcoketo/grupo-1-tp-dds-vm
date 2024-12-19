@@ -35,13 +35,8 @@ public class ReporteHeladeraViandas extends Reporte {
     }
 
     public String saveToCSV(String directory) throws IOException {
-        Path dirPath = Paths.get(directory);
-        if (!Files.exists(dirPath)) {
-            Files.createDirectories(dirPath);
-        }
-
-        path = dirPath.resolve("reporte_heladera_viandas_"+this.getFecha()+".csv").toString();
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(path))) {
+        String createdPath = directory + "reporte_heladera_viandas_"+this.getFecha()+".csv";
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(createdPath))) {
             writer.write("ID_HELADERA;NOMBRE_HELADERA;CANTIDAD_COLOCADAS;CANTIDAD_RETIRADAS\n");
             for (Map.Entry<Heladera, Integer> entry : colocadas.entrySet()) {
                 Heladera heladera = entry.getKey();
@@ -50,7 +45,7 @@ public class ReporteHeladeraViandas extends Reporte {
                 writer.write(heladera.getId() + ";" + heladera.getNombre() + ";" + cantColocadas + ";" + cantRetiradas + "\n");
             }
         }
-        return path;
+        return createdPath;
     }
 
 }
