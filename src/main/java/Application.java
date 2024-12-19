@@ -28,8 +28,8 @@ public class Application {
                 cors.add(it -> it.anyHost());
             });
 
-            javalinConfig.staticFiles.add("/", Location.CLASSPATH);
-        }).start(8085);
+            javalinConfig.staticFiles.add("/app/static", Location.EXTERNAL);
+        }).start(8080);
 
         // Crear el directorio de imágenes si no existe
         initializeUploadDirectory();
