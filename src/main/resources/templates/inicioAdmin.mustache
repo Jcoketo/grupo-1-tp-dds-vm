@@ -136,13 +136,21 @@
 
         </div>
 
+        {{#notificacionAdminMail}}
+        <p class="text-center"> <i> {{notificacionAdminMail}} </i> </p>
+        {{/notificacionAdminMail}}
+
+
+
         <div id="myModal" class="modal">
             <div class="modal-content">
                 <span class="close" onclick="closeModal()">&times;</span>
                 <p>Correo electrónico:</p>
-                <input type="email" id="email" name="email" required class="email-input">
-                <div class="modal-spacing"></div>
-                <button class="btn-submit" onclick="window.location.href='/darAltaAdmin'">Asignar administrador</button>
+                    <form action="/darAltaAdmin" method="post">
+                    <input type="text" id="mailNuevoAdmin" name="mailNuevoAdmin" required class="email-input">
+                    <div class="modal-spacing"></div>
+                    <button class="btn-submit">Asignar administrador</button>
+                </form>
             </div>
         </div>
         <div class="image-placeholder ml-5">

@@ -6,9 +6,6 @@ import io.javalin.http.Handler;
 import modelo.validador.Usuario;
 import org.jetbrains.annotations.NotNull;
 import persistencia.RepositorioUsuarios;
-import utils.GeneradorModel;
-
-import java.util.Map;
 
 public class DarAltaAdminController implements Handler {
 
@@ -16,7 +13,6 @@ public class DarAltaAdminController implements Handler {
 
     @Override
     public void handle(@NotNull Context context) throws Exception {
-        Map<String, Object> model = GeneradorModel.getModel(context);
 
         Roles rol = context.sessionAttribute("rolUsuario");
         String mailAdmin = context.sessionAttribute("mailUsuario");
