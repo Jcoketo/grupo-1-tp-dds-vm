@@ -50,6 +50,7 @@ public class RepositorioGrupoReportes {
         TypedQuery<GrupoReporte> query = em.createQuery(
                 "SELECT r FROM GrupoReporte r ORDER BY r.fechaCreacion DESC", //revisar que este bien
                 GrupoReporte.class);
+        query.setMaxResults(1);
         try {
             return query.getSingleResult();
         } catch (NoResultException e) {
