@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-
+@Entity
 @Getter
 public class GrupoReporte {
     @Id
@@ -47,4 +47,30 @@ public class GrupoReporte {
         }
         return paths;
     }
+
+    public ReporteColaborador obtenerReporteColaborador() {
+
+        if  ( reportes.stream().filter(r -> r instanceof ReporteColaborador).findFirst().isPresent() ) {
+            return (ReporteColaborador) reportes.stream().filter(r -> r instanceof ReporteColaborador).findFirst().get();
+        }
+        return null;
+    }
+
+    public ReporteHeladeraFallas obtenerReporteHeladeraFallas() {
+
+        if ( reportes.stream().filter(r -> r instanceof ReporteHeladeraFallas).findFirst().isPresent() ) {
+            return (ReporteHeladeraFallas) reportes.stream().filter(r -> r instanceof ReporteHeladeraFallas).findFirst().get();
+        }
+        return null;
+    }
+    public ReporteHeladeraViandas obtenerReporteHeladeraViandas() {
+        if ( reportes.stream().filter(r -> r instanceof ReporteHeladeraViandas).findFirst().isPresent() ) {
+            return (ReporteHeladeraViandas) reportes.stream().filter(r -> r instanceof ReporteHeladeraViandas).findFirst().get();
+        }
+        return null;
+    }
+
+
+
+
 }

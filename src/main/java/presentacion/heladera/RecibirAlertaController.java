@@ -28,7 +28,6 @@ public class RecibirAlertaController implements Handler {
     @Override
     public void handle(@NotNull Context context) throws Exception {
 
-
         String idHeladera = context.queryParam("heladeraId");
         String tipoAlerta = context.queryParam("tipoAlerta");
 

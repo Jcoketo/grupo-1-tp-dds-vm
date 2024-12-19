@@ -15,6 +15,7 @@ public class GenerarReporte{
 
     private final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
 
+
     public GrupoReporte generarReporte(){
         GrupoReporte grupoReporte = new GrupoReporte();
         grupoReporte.agregarReporte(generarReporteColaborador());
@@ -46,7 +47,7 @@ public class GenerarReporte{
 
     public ReporteColaborador generarReporteColaborador() {
         Map<Colaborador, Integer> datos = new HashMap<>();
-        for (Colaborador colab : RepositorioColaboradores.obtenerColaboradores()) {
+        for (Colaborador colab : RepositorioColaboradores.obtenerColaboradoresHumanos()) {
             datos.put(colab, colab.getContadorViandasDonadasSemanal());
             colab.resetearContadorViandasSemanales();
         }
@@ -60,7 +61,7 @@ public class GenerarReporte{
 }
 /*
 1.BOTON "GENERAR REPORTES" Y CRON TASK SEMANAL -> LLAMAN A GenerarReporte.generarReporte().
-2.CAMBIAR RepositorioReportes A RepositorioGrupoReportes.
+2.CAMBIAR RepositorioGrupoReportes A RepositorioGrupoReportes.
 3.BOTONES "DESCARGAR REPORTE X" -> DEBEN SER DEL TIPO <a> CON href="URL/PATH DEL REPORTE" y download="NOMBRE DEL ARCHIVO PARA DESCARGARSE".
 Ejemplo: <a href="/path/to/file.pdf" download="CustomFileName.pdf">Download PDF</a>
 */

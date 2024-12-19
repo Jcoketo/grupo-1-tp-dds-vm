@@ -80,9 +80,11 @@ public class RepositorioColaboradores {
             return null;
         }
     }
-
-    public static List<Colaborador> obtenerColaboradores() {
-        return em.createQuery("SELECT c FROM Colaborador c", Colaborador.class).getResultList();
+    
+    public static List<Colaborador> obtenerColaboradoresHumanos() {
+        return em.createQuery("SELECT c FROM Colaborador c WHERE c.persona.tipoPersona = :tipoPersona", Colaborador.class)
+                .setParameter("tipoPersona", TipoPersona.PH)
+                .getResultList();
     }
 
     public void registrarColaboradorFisico(Usuario usuario, PersonaHumana persona, Colaborador colaborador) {
@@ -191,16 +193,16 @@ public class RepositorioColaboradores {
             return null;
         }
     }
-
+/*
     public List<MedioDeContacto> obtenerMediosDeContactoXIdPersona(Integer idPersona) {
-        TypedQuery<MedioDeContacto> query = em.createQuery("SELECT m FROM MedioDeContacto m WHERE m.persona.id = :idPersona", MedioDeContacto.class);
+        TypedQuery<MedioDeContacto> query = em.createQuery("SELECT m FROM MedioDeContacto m WHERE m. = :idPersona", MedioDeContacto.class);
         query.setParameter("idPersona", idPersona);
         try {
             return query.getResultList();
         } catch (NoResultException e) {
             return null;
         }
-    }
+    }*/
 
     public Persona obtenerPersona(Integer idPersona) {
         return em.find(Persona.class, idPersona);

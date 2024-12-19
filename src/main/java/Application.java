@@ -1,5 +1,6 @@
 import io.javalin.Javalin;
 import io.javalin.http.staticfiles.Location;
+import modelo.reportador.GenerarReporte;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -27,14 +28,19 @@ public class Application {
                 cors.add(it -> it.anyHost());
             });
 
-            javalinConfig.staticFiles.add("/app/static", Location.EXTERNAL);
-        }).start(8080);
+            javalinConfig.staticFiles.add("/", Location.CLASSPATH);
+        }).start(8085);
 
         // Crear el directorio de imágenes si no existe
         initializeUploadDirectory();
 
+        GenerarReporte generador = new GenerarReporte();
+        generador.iniciarProgramacion();
+
         // Configurar rutas
         Router.init(getEntityManager());
+
+
 
     }
 

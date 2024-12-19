@@ -1,7 +1,6 @@
 package modelo.reportador;
 
 import lombok.Getter;
-import net.bytebuddy.asm.Advice;
 
 import javax.persistence.*;
 import java.time.LocalDate;

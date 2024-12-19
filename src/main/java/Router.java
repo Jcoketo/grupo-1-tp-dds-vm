@@ -2,11 +2,15 @@ import static io.javalin.apibuilder.ApiBuilder.*;
 
 import accessManagment.AutorizacionMiddleware;
 import io.javalin.Javalin;
+import modelo.reportador.GenerarReporte;
 import persistencia.*;
 import presentacion.*;
 import presentacion.colaboraciones.*;
 import presentacion.gestorCuentas.*;
 import presentacion.heladera.*;
+import presentacion.importador.CSVCargadoController;
+import presentacion.importador.CargarCSVController;
+import presentacion.importador.LeerCSV;
 import presentacion.incidentes.AceptarReportarFallaController;
 import presentacion.incidentes.ReportarFallaTecnicaController;
 import presentacion.incidentes.ReportarFallaTecnicaFinalizadaController;
@@ -34,7 +38,7 @@ public class Router {
         RepositorioIncidentes repoIncidentes = RepositorioIncidentes.getInstancia(entityManager);
         RepositorioOfertas repoOfertas = RepositorioOfertas.getInstancia(entityManager);
         RepositorioPersonasVulnerables repoPersonasVulnerable = RepositorioPersonasVulnerables.getInstancia(entityManager);
-        RepositorioReportes repoReportes = RepositorioReportes.getInstancia(entityManager);
+        RepositorioGrupoReportes repoReportes = RepositorioGrupoReportes.getInstancia(entityManager);
         RepositorioSolicitudes repoSolicitudes = RepositorioSolicitudes.getInstancia(entityManager);
         RepositoriosTecnicos repoTecnicos = RepositoriosTecnicos.getInstancia(entityManager);
         RepositorioTarjetas repoTarjetas = RepositorioTarjetas.getInstancia(entityManager);
@@ -174,6 +178,15 @@ public class Router {
             path("/elegirRegistroCuenta", () -> {
                 before(new AutorizacionMiddleware());
                 get(new ElegirRegistroCuentaController());
+            });
+
+            path("/generarReportes", () -> {
+                before(new AutorizacionMiddleware().setDebeSerLogueado().setDebeSerAdmin());
+                get(ctx -> {
+                    GenerarReporte generador = new GenerarReporte();
+                    generador.generarReporte();
+                    ctx.redirect("/misReportes");
+                });
             });
 
             path("/graciasPorDonar", () -> {
@@ -334,6 +347,7 @@ public class Router {
             });
 
             path("/visualizarDetalleHeladera", () -> {
+                before(new AutorizacionMiddleware().setDebeSerLogueado());
                 get(new VisualizarDetalleHeladeraController());
             });
 
