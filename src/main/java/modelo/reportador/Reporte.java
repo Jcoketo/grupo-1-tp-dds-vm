@@ -12,7 +12,7 @@ import java.time.format.DateTimeFormatter;
 @Getter
 public abstract class Reporte {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     private int id;
 
     @Getter

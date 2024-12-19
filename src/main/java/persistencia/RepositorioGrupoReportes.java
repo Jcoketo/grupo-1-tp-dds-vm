@@ -32,16 +32,9 @@ public class RepositorioGrupoReportes {
     }
 
     public void agregarReporte(GrupoReporte reporte){
-        validarInsertReporte(reporte);
         em.getTransaction().begin();
         em.persist(reporte);
         em.getTransaction().commit();
-    }
-
-    public void validarInsertReporte(GrupoReporte reporte) {
-        if (reporte.getReportes() == null) {
-            throw new RuntimeException("El reporte no tiene un link asociado");
-        }
     }
 
     public void eliminar(GrupoReporte reporte) {

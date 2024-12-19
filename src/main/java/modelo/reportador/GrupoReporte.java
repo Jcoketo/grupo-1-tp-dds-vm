@@ -19,7 +19,7 @@ public class GrupoReporte {
     private LocalDate fechaCreacion;
 
     @Getter
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "grupo_reporte_id", referencedColumnName = "id")
     private List<Reporte> reportes;
 
