@@ -33,13 +33,8 @@ public class ReporteColaborador extends Reporte {
     }
 
     public String saveToCSV(String directory) throws IOException {
-        Path dirPath = Paths.get(directory);
-        if (!Files.exists(dirPath)) {
-            Files.createDirectories(dirPath);
-        }
-
-        path = dirPath.resolve("reporte_colaborador_"+this.getFecha()+".csv").toString();
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(path))) {
+        String createdPath = directory + "reporte_colaborador_"+this.getFecha()+".csv";
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(createdPath))) {
             writer.write("ID_COLABORADOR;NOMBRE_COLABORADOR;VIANDAS_DONADAS\n");
             for (Map.Entry<Colaborador, Integer> entry : datos.entrySet()) {
                 Colaborador colab = entry.getKey();
@@ -47,7 +42,7 @@ public class ReporteColaborador extends Reporte {
                 writer.write(colab.getId() + ";" + ((PersonaHumana)colab.getPersona()).getNombre() + ";" + contador + "\n");
             }
         }
-        return path;
+        return createdPath;
     }
 
 

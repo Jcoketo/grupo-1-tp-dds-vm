@@ -9,9 +9,6 @@ import javax.persistence.Transient;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Map;
 
 @Entity
@@ -32,13 +29,8 @@ public class ReporteHeladeraFallas extends Reporte {
     }
 
     public String saveToCSV(String directory) throws IOException {
-        Path dirPath = Paths.get(directory);
-        if (!Files.exists(dirPath)) {
-            Files.createDirectories(dirPath);
-        }
-
-        path = dirPath.resolve("reporte_heladera_fallas_"+this.getFecha()+".csv").toString();
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(path))) {
+        String createdPath = directory + "reporte_heladera_fallas_"+this.getFecha()+".csv";
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(createdPath))) {
             writer.write("ID_HELADERA;NOMBRE_HELADERA;ESTADO;CANTIDAD_FALLAS\n");
             for (Map.Entry<Heladera, Integer> entry : datos.entrySet()) {
                 Heladera heladera = entry.getKey();
@@ -46,7 +38,7 @@ public class ReporteHeladeraFallas extends Reporte {
                 writer.write(heladera.getId() + ";" + heladera.getNombre() + ";" + heladera.getActiva() + ";" + contador + "\n");
             }
         }
-        return path;
+        return createdPath;
     }
 
 }
