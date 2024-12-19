@@ -1,33 +1,30 @@
 package persistencia;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import lombok.Getter;
-import modelo.elementos.Incidente;
 import modelo.excepciones.ExcepcionValidacion;
 import modelo.reportador.GrupoReporte;
-import modelo.reportador.Reporte;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
+import javax.persistence.TypedQuery;
 
-public class RepositorioReportes {
+public class RepositorioGrupoReportes {
     @Getter
-    private static RepositorioReportes instancia = null;
+    private static RepositorioGrupoReportes instancia = null;
 
     private static EntityManager em;
 
-    private RepositorioReportes(EntityManager entityManager) {
+    private RepositorioGrupoReportes(EntityManager entityManager) {
         em = entityManager;
     }
 
-    public static RepositorioReportes getInstancia(EntityManager entityManager) {
+    public static RepositorioGrupoReportes getInstancia(EntityManager entityManager) {
         if(instancia == null) {
-            instancia = new RepositorioReportes(entityManager);
+            instancia = new RepositorioGrupoReportes(entityManager);
         }
         return instancia;
     }
-    public static RepositorioReportes getInstancia() {
+    public static RepositorioGrupoReportes getInstancia() {
         if(instancia == null) {
             throw new ExcepcionValidacion("No fue instanciado en el repositorio!");
         }
@@ -53,6 +50,17 @@ public class RepositorioReportes {
         if (managedReporte != null) {
             em.remove(managedReporte);
             em.getTransaction().commit();
+        }
+    }
+
+    public GrupoReporte obtenerUltimoGrupoReporte() {
+        TypedQuery<GrupoReporte> query = em.createQuery(
+                "SELECT r FROM GrupoReporte r ORDER BY r.fechaCreacion DESC", //revisar que este bien
+                GrupoReporte.class);
+        try {
+            return query.getSingleResult();
+        } catch (NoResultException e) {
+            return null;
         }
     }
 }

@@ -22,6 +22,9 @@ public class VisualizarDetalleHeladeraController implements Handler{
     @Override
     public void handle(@NotNull Context context) throws Exception {
         Map<String, Object> model = GeneradorModel.getModel(context);
+
+
+
         Boolean estaLogueado = context.sessionAttribute("logueado");
         Integer idPersona = context.sessionAttribute("idPersona");
         model.put("logueado", estaLogueado != null && estaLogueado);

@@ -7,7 +7,6 @@
     <!-- Enlace a CSS de Bootstrap -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
-
         main {
             flex-grow: 1;
             padding: 20px;
@@ -60,31 +59,29 @@
             margin-right: 15px;
         }
 
-
         h5 {
             margin: 0; /* Elimina márgenes por defecto */
             white-space: nowrap; /* Evita que el texto haga salto de línea */
             color: white; /* Color de texto */
         }
 
-        .btn-generar{
+        .btn-generar {
             background-color: #B8CCC8;
             color: #1e5552;
             padding: 10px 20px;
             border-radius: 10px;
             border-width: 0px;
-            font-weight:500;
+            font-weight: 500;
         }
+
         .btn-generar:hover {
             background-color: #94a6a3;
             text-decoration: none;
         }
+
         .btn-generar:active {
             border-width: 0px;
         }
-
-
-
     </style>
 </head>
 <body>
@@ -95,43 +92,41 @@
 
     <div class="reportes-container">
         <div class="mb-5 d-flex justify-content-between align-items-center">
-            <h1 style="font-family: 'Poppins', sans serif; font-weight:700; color: #1e5552">Mis reportes</h1>
-            <button class="btn-generar" onclick="window.location.href='/generarReporte'" >Generar reporte</button>
+            <h1 style="font-family: 'Poppins', sans-serif; font-weight: 700; color: #1e5552">Mis reportes</h1>
+            <button class="btn-generar" onclick="window.location.href='/generarReportes'">Generar reporte</button>
         </div>
 
-        <div class="reporte">
-            <div class="reporte-info">
-                <h2>Reporte 12/11/2023</h2>
-                <p>Info</p>
-            </div>
-            <i class="fas fa-download download-icon"></i>
-        </div>
+        <div id="reportes">
 
-        <div class="reporte">
-            <div class="reporte-info">
-                <h2>Reporte 2/11/2023</h2>
-                <p>Info</p>
+            <!-- Reporte 1 -->
+            {{#hayDatos}}
+                <h4 style="font-weight:700; font-family: 'Poppins', sans serif;">{{tipo}}</h4>
+                <p><b>Fecha: </b> {{fechaCreacion}}</p>
+            <div class="reporte">
+                <div class="reporte-info">
+                    <h3>Cantidad de Viandas por colaborador</h3>
+                </div>
+                <a href="{{pathReporteColaborador}}" download="ReporteColaborador.csv">Descargar CSV</a>
             </div>
-            <i class="fas fa-download download-icon"></i>
-        </div>
 
-        <div class="reporte">
-            <div class="reporte-info">
-                <h2>Reporte 26/10/2023</h2>
-                <p>Info</p>
+            <!-- Reporte 2 -->
+            <div class="reporte">
+                <div class="reporte-info">
+                    <h3>Cantidad de Fallas por Heladera</h3>
+                </div>
+                <a href="{{pathReporteHeladeraFallas}}" download="ReporteHeladeraFallas.csv">Descargar CSV</a>
             </div>
-            <i class="fas fa-download download-icon"></i>
-        </div>
 
-        <div class="reporte">
-            <div class="reporte-info">
-                <h2>Reporte 16/10/2023</h2>
-                <p>Info</p>
+            <!-- Reporte 3 -->
+            <div class="reporte">
+                <div class="reporte-info">
+                    <h3>Cantidad de Viandas Retiradas/Colocadas por Heladera</h3>
+                </div>
+                <a href="{{pathReporteHeladeraViandas}}" download="ReporteHeladeraViandas.csv">Descargar CSV</a>
             </div>
-            <i class="fas fa-download download-icon"></i>
+            {{/hayDatos}}
         </div>
     </div>
-
 </main>
 
 {{> footer}}

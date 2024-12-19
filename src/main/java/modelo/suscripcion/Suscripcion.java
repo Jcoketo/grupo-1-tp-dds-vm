@@ -22,21 +22,21 @@ Suscripcion {
 
     @ManyToOne
     @JoinColumn(name="heladera_id", referencedColumnName = "id")
-    @Getter @Setter private Heladera heladera;
+    @Getter @Setter protected Heladera heladera;
 
     @ManyToOne
     @JoinColumn(name="colaborador_id",referencedColumnName = "id")
-    @Getter @Setter private Colaborador colaborador;
+    @Getter @Setter protected Colaborador colaborador;
 
     @Enumerated(EnumType.STRING)
-    @Getter private TipoSuscripcion tipoSuscripcion;
+    @Getter protected TipoSuscripcion tipoSuscripcion;
 
     @Getter @Setter
     @OneToOne(cascade = CascadeType.PERSIST)
-    private MedioDeContacto medioDeContacto;
+    protected MedioDeContacto medioDeContacto;
 
     @Getter @Setter
-    @Column private Boolean bajaLogica = Boolean.FALSE;
+    @Column protected Boolean bajaLogica = Boolean.FALSE;
 
     public Suscripcion(Heladera heladera, Colaborador colaborador, TipoSuscripcion tipo, MedioDeContacto medio) {
         this.heladera = heladera;
