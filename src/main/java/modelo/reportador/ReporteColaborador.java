@@ -25,7 +25,7 @@ public class ReporteColaborador extends Reporte {
     public ReporteColaborador(Map<Colaborador, Integer> datos){
         this.datos = datos;
         try {
-            this.path = saveToCSV("/app/static/archivos/reportes/");
+            this.path = saveToCSV("/archivos/reportes/");
         } catch (IOException e){
             this.path = "";
             e.printStackTrace();
@@ -34,7 +34,8 @@ public class ReporteColaborador extends Reporte {
 
     public String saveToCSV(String directory) throws IOException {
         String createdPath = directory + "reporte_colaborador_"+this.getFecha()+".csv";
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(createdPath))) {
+        String savePath = "/app/static" + createdPath;
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(savePath))) {
             writer.write("ID_COLABORADOR;NOMBRE_COLABORADOR;VIANDAS_DONADAS\n");
             for (Map.Entry<Colaborador, Integer> entry : datos.entrySet()) {
                 Colaborador colab = entry.getKey();

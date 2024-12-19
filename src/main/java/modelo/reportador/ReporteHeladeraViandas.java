@@ -27,7 +27,7 @@ public class ReporteHeladeraViandas extends Reporte {
         this.colocadas = colocadas;
         this.retiradas = retiradas;
         try {
-            this.path = saveToCSV("/app/static/archivos/reportes/");
+            this.path = saveToCSV("/archivos/reportes/");
         } catch (IOException e){
             this.path = "";
             e.printStackTrace();
@@ -36,7 +36,8 @@ public class ReporteHeladeraViandas extends Reporte {
 
     public String saveToCSV(String directory) throws IOException {
         String createdPath = directory + "reporte_heladera_viandas_"+this.getFecha()+".csv";
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(createdPath))) {
+        String savePath = "/app/static" + createdPath;
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(savePath))) {
             writer.write("ID_HELADERA;NOMBRE_HELADERA;CANTIDAD_COLOCADAS;CANTIDAD_RETIRADAS\n");
             for (Map.Entry<Heladera, Integer> entry : colocadas.entrySet()) {
                 Heladera heladera = entry.getKey();

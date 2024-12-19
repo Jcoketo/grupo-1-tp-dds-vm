@@ -30,8 +30,8 @@ public class Router {
     public static void init(EntityManager entityManager){
         /* *************************************************************************** */
 
-        // ------------------- SE INICIALIZAN LOS REPOSITORIOS   ----------------------- //
-
+        // ------------------- SE INICIALIZAN LOS REPOSITORIOS   ----------------------- // }
+        RepositorioUsuarios repoUsuarios = RepositorioUsuarios.getInstancia(entityManager);
         RepositorioSuscripciones repositorioSuscripciones = RepositorioSuscripciones.getInstancia(entityManager);
         RepositorioArchivos repoArchivos = RepositorioArchivos.getInstancia(entityManager);
         RepositorioColaboradores repoColab = RepositorioColaboradores.getInstancia(entityManager);
