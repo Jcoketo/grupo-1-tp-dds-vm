@@ -42,13 +42,6 @@ public class Application {
 
         EntityManager em = getEntityManager();
 
-        RepositorioUsuarios repo = RepositorioUsuarios.getInstancia(em);
-        if(repo.existeMAIL("joaquinmenazzi@hotmail.com")){
-            Usuario admin = repo.traerUsuario("joaquinmenazzi@hotmail.com") ;
-            admin.setRol(Roles.ADMIN);
-            repo.persistirUsuario(admin);
-        }
-
         // Configurar rutas
         Router.init(em);
 
