@@ -3,6 +3,7 @@ import static io.javalin.apibuilder.ApiBuilder.*;
 import accessManagment.AutorizacionMiddleware;
 import io.javalin.Javalin;
 import modelo.reportador.GenerarReporte;
+import modelo.reportador.GrupoReporte;
 import persistencia.*;
 import presentacion.*;
 import presentacion.colaboraciones.*;
@@ -184,7 +185,8 @@ public class Router {
                 before(new AutorizacionMiddleware().setDebeSerLogueado().setDebeSerAdmin());
                 get(ctx -> {
                     GenerarReporte generador = new GenerarReporte();
-                    generador.generarReporte();
+                    GrupoReporte grupoReporte = generador.generarReporte();
+                    repoReportes.agregarReporte(grupoReporte);
                     ctx.redirect("/misReportes");
                 });
             });

@@ -21,7 +21,7 @@ public class ReporteHeladeraFallas extends Reporte {
     public ReporteHeladeraFallas(Map<Heladera, Integer> datos){
         this.datos = datos;
         try {
-            this.path = saveToCSV("/static/archivos/reportes/");
+            this.path = saveToCSV("/app/static/archivos/reportes/");
         } catch (IOException e){
             this.path = "";
             e.printStackTrace();

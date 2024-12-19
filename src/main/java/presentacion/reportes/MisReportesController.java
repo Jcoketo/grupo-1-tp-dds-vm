@@ -48,15 +48,15 @@ public class MisReportesController implements Handler {
 
         if ( reporteColaborador != null ) {
             reportes.setPathReporteColaborador(reporteColaborador.getPath());
-            reportes.setHayDatos(true);}
+            reportes.setHayDatos(true); }
 
         if ( reporteHeladeraFallas != null ){
             reportes.setPathReporteHeladeraFallas(reporteHeladeraFallas.getPath());
-            reportes.setHayDatos(true);}
+            reportes.setHayDatos(true); }
 
         if ( reporteHeladeraViandas != null ){
             reportes.setPathReporteHeladeraViandas(reporteHeladeraViandas.getPath());
-            reportes.setHayDatos(true);}
+            reportes.setHayDatos(true); }
 
         return reportes;
     }

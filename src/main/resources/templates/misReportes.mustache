@@ -99,32 +99,33 @@
         <div id="reportes">
 
             <!-- Reporte 1 -->
-            {{#hayDatos}}
-                <h4 style="font-weight:700; font-family: 'Poppins', sans serif;">{{tipo}}</h4>
-                <p><b>Fecha: </b> {{fechaCreacion}}</p>
-            <div class="reporte">
-                <div class="reporte-info">
-                    <h3>Cantidad de Viandas por colaborador</h3>
-                </div>
-                <a href="{{pathReporteColaborador}}" download="ReporteColaborador.csv">Descargar CSV</a>
-            </div>
+            {{#grupoReportes}}
+                {{#hayDatos}}
+                    <p><b>Fecha: </b> {{fechaCreacion}}</p>
+                    <div class="reporte">
+                        <div class="reporte-info">
+                            <h3>Cantidad de Viandas por colaborador</h3>
+                        </div>
+                        <a href="{{pathReporteColaborador}}" download="ReporteColaborador.csv">Descargar CSV</a>
+                    </div>
 
-            <!-- Reporte 2 -->
-            <div class="reporte">
-                <div class="reporte-info">
-                    <h3>Cantidad de Fallas por Heladera</h3>
-                </div>
-                <a href="{{pathReporteHeladeraFallas}}" download="ReporteHeladeraFallas.csv">Descargar CSV</a>
-            </div>
+                    <!-- Reporte 2 -->
+                    <div class="reporte">
+                        <div class="reporte-info">
+                            <h3>Cantidad de Fallas por Heladera</h3>
+                        </div>
+                        <a href="{{pathReporteHeladeraFallas}}" download="ReporteHeladeraFallas.csv">Descargar CSV</a>
+                    </div>
 
-            <!-- Reporte 3 -->
-            <div class="reporte">
-                <div class="reporte-info">
-                    <h3>Cantidad de Viandas Retiradas/Colocadas por Heladera</h3>
-                </div>
-                <a href="{{pathReporteHeladeraViandas}}" download="ReporteHeladeraViandas.csv">Descargar CSV</a>
-            </div>
-            {{/hayDatos}}
+                    <!-- Reporte 3 -->
+                    <div class="reporte">
+                        <div class="reporte-info">
+                            <h3>Cantidad de Viandas Retiradas/Colocadas por Heladera</h3>
+                        </div>
+                        <a href="{{pathReporteHeladeraViandas}}" download="ReporteHeladeraViandas.csv">Descargar CSV</a>
+                    </div>
+                {{/hayDatos}}
+            {{/grupoReportes}}
         </div>
     </div>
 </main>

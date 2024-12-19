@@ -25,7 +25,7 @@ public class ReporteColaborador extends Reporte {
     public ReporteColaborador(Map<Colaborador, Integer> datos){
         this.datos = datos;
         try {
-            this.path = saveToCSV("/static/archivos/reportes/");
+            this.path = saveToCSV("/app/static/archivos/reportes/");
         } catch (IOException e){
             this.path = "";
             e.printStackTrace();
