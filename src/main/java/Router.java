@@ -44,7 +44,6 @@ public class Router {
         RepositoriosTecnicos repoTecnicos = RepositoriosTecnicos.getInstancia(entityManager);
         RepositorioTarjetas repoTarjetas = RepositorioTarjetas.getInstancia(entityManager);
         RepositorioVisitas repoVisitas = RepositorioVisitas.getInstancia(entityManager);
-        RepositorioUsuarios repoUsuarios = RepositorioUsuarios.getInstancia(entityManager);
 
         /* *************************************************************************** */
 

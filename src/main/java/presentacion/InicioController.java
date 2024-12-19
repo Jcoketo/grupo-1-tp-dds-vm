@@ -15,7 +15,6 @@ public class InicioController implements Handler {
     public void handle(@NotNull Context context) throws Exception {
         Map<String, Object> model = GeneradorModel.getModel(context);
 
-
         Roles rol = context.sessionAttribute("rolUsuario");
 
         if (rol == Roles.ADMIN) {

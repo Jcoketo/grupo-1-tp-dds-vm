@@ -1,6 +1,9 @@
+import accessManagment.Roles;
 import io.javalin.Javalin;
 import io.javalin.http.staticfiles.Location;
 import modelo.reportador.GenerarReporte;
+import modelo.validador.Usuario;
+import persistencia.RepositorioUsuarios;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -37,10 +40,17 @@ public class Application {
         GenerarReporte generador = new GenerarReporte();
         generador.iniciarProgramacion();
 
+        EntityManager em = getEntityManager();
+
+        RepositorioUsuarios repo = RepositorioUsuarios.getInstancia(em);
+        if(repo.existeMAIL("joaquinmenazzi@hotmail.com")){
+            Usuario admin = repo.traerUsuario("joaquinmenazzi@hotmail.com") ;
+            admin.setRol(Roles.ADMIN);
+            repo.persistirUsuario(admin);
+        }
+
         // Configurar rutas
-        Router.init(getEntityManager());
-
-
+        Router.init(em);
 
     }
 
